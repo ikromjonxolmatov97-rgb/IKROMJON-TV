@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IKROMJON TV</title>
+    <title>IKROMJON TV - Full HD</title>
     <style>
         * {
             box-sizing: border-box;
@@ -22,281 +22,298 @@
             overflow-x: hidden;
         }
 
-        /* Header */
+        /* Header Banner */
         header {
             background: linear-gradient(180deg, #0d1527 0%, #080b13 100%);
             padding: 12px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            text-align: center;
             border-bottom: 1px solid #1a263d;
             position: sticky;
             top: 0;
             z-index: 200;
         }
 
-        .logo-area { display: flex; align-items: center; gap: 8px; }
-        .logo-badge {
-            background: #0088ff; color: #fff; font-weight: bold;
-            padding: 3px 8px; border-radius: 6px; font-size: 14px;
-            box-shadow: 0 0 10px rgba(0, 136, 255, 0.5);
-        }
-        .logo-title { font-size: 16px; font-weight: 700; }
+        .header-title { font-size: 18px; font-weight: 800; color: #00d2ff; text-shadow: 0 0 10px rgba(0, 210, 255, 0.5); }
+        .header-subtitle { font-size: 10px; color: #e2e8f0; font-weight: 600; margin-top: 2px; tracking: 1px; }
 
-        .header-actions { display: flex; align-items: center; gap: 8px; }
-        .music-btn {
-            background: #1e293b; color: #00d2ff; border: 1px solid #0088ff;
-            padding: 4px 8px; border-radius: 20px; font-size: 11px; cursor: pointer;
+        /* Welcome & Clock Bar */
+        .welcome-bar {
+            background: #111a2e;
+            margin: 10px 15px 5px 15px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #1e2d4a;
+            font-size: 11px;
+            color: #00d2ff;
         }
 
-        /* 10x Graphic Auto-Slider (5s) */
-        .slider-section { padding: 12px 15px; position: relative; overflow: hidden; }
-        .slider-wrapper { display: flex; transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
-        .slide-card {
-            min-width: 100%; height: 170px; background-size: cover; background-position: center;
-            border-radius: 14px; position: relative; border: 1.5px solid #0088ff;
-            box-shadow: 0 6px 20px rgba(0, 136, 255, 0.3); cursor: pointer; flex-shrink: 0;
+        /* Harry Potter 10x Anons Slider */
+        .anons-container { padding: 10px 15px; }
+        .section-title { font-size: 12px; color: #94a3b8; margin-bottom: 8px; font-weight: 700; text-transform: uppercase; }
+
+        .slider-wrapper {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 5px;
         }
-        .slide-overlay {
+        .slider-wrapper::-webkit-scrollbar { display: none; }
+
+        .anons-card {
+            min-width: 140px;
+            height: 90px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            border: 1.5px solid #0088ff;
+            position: relative;
+            flex-shrink: 0;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 136, 255, 0.3);
+        }
+        .anons-overlay {
             position: absolute; inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(8,11,19,0.95) 100%);
-            border-radius: 14px; display: flex; flex-direction: column; justify-content: flex-end; padding: 12px;
+            background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+            border-radius: 10px;
+            padding: 6px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
         }
-        .slide-badge { background: #00d2ff; color: #000; font-size: 9px; font-weight: bold; padding: 2px 6px; border-radius: 4px; width: fit-content; margin-bottom: 4px; }
-        .slide-title { font-size: 13px; font-weight: 700; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-
-        /* Slider Indicators */
-        .dots-container { display: flex; justify-content: center; gap: 5px; margin-top: 8px; }
-        .dot { width: 6px; height: 6px; background: #1e2d4a; border-radius: 50%; transition: 0.3s; }
-        .dot.active { background: #00d2ff; width: 16px; border-radius: 10px; }
+        .anons-num { font-size: 8px; background: #00d2ff; color: #000; padding: 1px 4px; border-radius: 3px; font-weight: bold; width: fit-content; }
+        .anons-text { font-size: 10px; font-weight: bold; color: #fff; margin-top: 2px; }
 
         /* Player Box */
-        .player-box { width: 100%; background-color: #000; aspect-ratio: 16 / 9; position: sticky; top: 48px; z-index: 150; }
+        .player-box { width: 100%; background-color: #000; aspect-ratio: 16 / 9; position: sticky; top: 60px; z-index: 150; }
         iframe { width: 100%; height: 100%; border: none; }
-        .now-playing { padding: 8px 15px; background: #0f172a; font-size: 12px; color: #00d2ff; border-bottom: 1px solid #1e293b; }
+        .now-playing { padding: 8px 15px; background: #0f172a; font-size: 11px; color: #00d2ff; border-bottom: 1px solid #1e293b; display: flex; align-items: center; justify-content: space-between; }
 
-        /* 10 Categories Section */
-        .categories-section { padding: 12px 15px; }
-        .section-label { font-size: 11px; color: #94a3b8; margin-bottom: 8px; font-weight: 600; text-transform: uppercase; }
+        /* Categories Section */
+        .categories-section { padding: 12px 15px 5px 15px; }
         .category-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
         .cat-btn { background: #111a2e; border: 1px solid #1e2d4a; border-radius: 8px; padding: 8px 2px; text-align: center; cursor: pointer; }
         .cat-btn.active { background: #0088ff; border-color: #00d2ff; }
-        .cat-icon { font-size: 15px; display: block; margin-bottom: 2px; }
+        .cat-icon { font-size: 16px; display: block; margin-bottom: 2px; }
         .cat-name { font-size: 8px; color: #fff; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
         /* Video List */
-        .content-list { padding: 0 15px; display: flex; flex-direction: column; gap: 8px; }
+        .content-list { padding: 5px 15px 15px 15px; display: flex; flex-direction: column; gap: 8px; }
         .video-card { background: #111a2e; border: 1px solid #1a2942; border-radius: 8px; display: flex; overflow: hidden; cursor: pointer; }
         .video-thumb { width: 100px; height: 62px; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #00d2ff; flex-shrink: 0; }
         .video-info { padding: 6px 10px; display: flex; flex-direction: column; justify-content: center; }
         .video-title { font-size: 11px; font-weight: 600; color: #f1f5f9; }
         .video-meta { font-size: 9px; color: #64748b; margin-top: 2px; }
 
-        /* MP3 Songs Section */
-        .mp3-section { padding: 15px; background: #0d1424; margin-top: 15px; border-top: 1px solid #1e293b; }
-        .mp3-card { background: #131d31; border: 1px solid #1e2d4a; border-radius: 8px; padding: 8px; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between; }
-        .mp3-info { display: flex; align-items: center; gap: 8px; }
-        .mp3-icon { background: #0088ff; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; }
-        .mp3-title { font-size: 11px; font-weight: bold; }
-        .mp3-artist { font-size: 9px; color: #94a3b8; }
+        /* Rating Stars Section */
+        .rating-box {
+            background: #0d1424; margin: 15px; padding: 15px; border-radius: 12px; border: 1px solid #1e2d4a; text-align: center;
+        }
+        .stars { display: flex; justify-content: center; gap: 8px; margin: 8px 0; cursor: pointer; font-size: 22px; color: #475569; }
+        .stars span.active { color: #ffc107; text-shadow: 0 0 10px rgba(255, 193, 7, 0.5); }
 
-        /* AI Chat Modal */
+        /* AI Chat Window */
         .ai-chat-window { display: none; position: fixed; inset: 0; background: #080b13; z-index: 500; flex-direction: column; }
         .ai-chat-header { background: #0d1527; padding: 12px; border-bottom: 1px solid #1a263d; display: flex; justify-content: space-between; align-items: center; }
         .ai-chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
         .chat-msg { max-width: 80%; padding: 8px 12px; border-radius: 10px; font-size: 12px; }
-        .chat-user { background: #0088ff; align-self: flex-end; border-bottom-right-radius: 0; }
-        .chat-ai { background: #1e2d4a; align-self: flex-start; border-bottom-left-radius: 0; color: #00d2ff; }
+        .chat-user { background: #0088ff; align-self: flex-end; }
+        .chat-ai { background: #1e2d4a; align-self: flex-start; color: #00d2ff; }
         .ai-chat-input { padding: 10px; background: #0d1527; display: flex; gap: 8px; border-top: 1px solid #1a263d; }
-        .ai-chat-input input { flex: 1; background: #121c2e; border: 1px solid #0088ff; color: #fff; padding: 8px 12px; border-radius: 20px; outline: none; font-size: 12px; }
-        .ai-chat-input button { background: #0088ff; color: #fff; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; }
+        .ai-chat-input input { flex: 1; background: #121c2e; border: 1px solid #0088ff; color: #fff; padding: 8px 12px; border-radius: 20px; outline: none; }
+        .ai-chat-input button { background: #0088ff; color: #fff; border: none; padding: 8px 15px; border-radius: 20px; font-weight: bold; }
 
-        /* 8-Function Bottom Nav */
-        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: #0b1120; border-top: 1px solid #1e293b; display: grid; grid-template-columns: repeat(8, 1fr); align-items: center; z-index: 300; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; color: #64748b; font-size: 7px; cursor: pointer; text-align: center; }
+        /* Bottom Navigation */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 55px; background: #0b1120; border-top: 1px solid #1e293b; display: grid; grid-template-columns: repeat(8, 1fr); align-items: center; z-index: 300; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; color: #64748b; font-size: 7px; cursor: pointer; }
         .nav-item.active { color: #0088ff; }
         .nav-icon { font-size: 14px; margin-bottom: 2px; }
     </style>
 </head>
 <body>
 
-    <!-- Sokin Fon Musiqasi -->
-    <audio id="bgMusic" loop><source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg"></audio>
+    <!-- Home Alone Sokin Saundtrek Musiqasi -->
+    <audio id="homeAloneAudio" loop autoplay>
+        <source src="https://cdn.pixabay.com/download/audio/2020/11/10/audio_5a9d821ff4.mp3" type="audio/mpeg">
+    </audio>
 
     <!-- Header -->
     <header>
-        <div class="logo-area">
-            <span class="logo-badge">IK</span>
-            <span class="logo-title">IKROMJON <span style="color:#0088ff">TV</span></span>
-        </div>
-        <div class="header-actions">
-            <button class="music-btn" onclick="toggleMusic()">🔊 Sokin Sado</button>
-        </div>
+        <div class="header-title">IKROMJON TV - XUSH KELIBSIZ!</div>
+        <div class="header-subtitle">ENG SIFATLI FULL HD FORMATDA TOMOSHA QILING</div>
     </header>
 
-    <!-- 10x Graphic Auto-Slider (5 sec) -->
-    <div class="slider-section">
-        <div class="slider-wrapper" id="sliderWrapper">
-            <!-- 10 Anons Slaydlari -->
-            <div class="slide-card" style="background-image: url('Munisa_Rizayeva.png');" onclick="playVideo('https://www.youtube.com/embed/5D_1mGz1p6E')">
-                <div class="slide-overlay"><span class="slide-badge">ANONS 1</span><div class="slide-title">Munisa Rizayeva - O'ylama Premyera</div></div>
+    <!-- Welcome & Real Time Bar -->
+    <div class="welcome-bar">
+        <span>📅 <span id="dateDisplay">--.--.----</span></span>
+        <button onclick="toggleHomeMusic()" style="background:#0088ff; border:none; color:#fff; padding:2px 8px; border-radius:10px; font-size:9px; cursor:pointer;">🎵 Home Alone Musiqa</button>
+        <span>⏰ <span id="timeDisplay">--:--:--</span></span>
+    </div>
+
+    <!-- Harry Potter 10x Anons Slayderi -->
+    <div class="anons-container">
+        <div class="section-title">⚡ Harry Potter Filmlar To'plami (10x Anons)</div>
+        <div class="slider-wrapper">
+            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/VyHV0BRMYEA/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/VyHV0BRMYEA')">
+                <div class="anons-overlay"><span class="anons-num">1-qism</span><div class="anons-text">Hikmatlar Tosh</div></div>
             </div>
-            <div class="slide-card" style="background-image: url('AI_and_Man.png');" onclick="playVideo('https://www.youtube.com/embed/8A-J30j1Mpo')">
-                <div class="slide-overlay"><span class="slide-badge">ANONS 2</span><div class="slide-title">AI & Man - Sun'iy Intellekt Kelajagi</div></div>
+            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/1bq0qff4iSU/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/1bq0qff4iSU')">
+                <div class="anons-overlay"><span class="anons-num">2-qism</span><div class="anons-text">Sirlar Xonasi</div></div>
             </div>
-            <div class="slide-card" style="background-image: url('Ikromjon_TV_Jonli.png');" onclick="playVideo('https://www.youtube.com/embed/jfKfPfyJRdk')">
-                <div class="slide-overlay"><span class="slide-badge">ANONS 3</span><div class="slide-title">IKROMJON TV - Jonli Efir 24/7</div></div>
+            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/lAxgztbYDbs/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/lAxgztbYDbs')">
+                <div class="anons-overlay"><span class="anons-num">3-qism</span><div class="anons-text">Azkaban Mahbusi</div></div>
             </div>
-            <div class="slide-card" style="background-image: url('Ikromjon_FM.png');" onclick="playVideo('https://www.youtube.com/embed/Htaj3o3JD8I')">
-                <div class="slide-overlay"><span class="slide-badge">ANONS 4</span><div class="slide-title">IKROMJON FM - Onlayn Radio</div></div>
+            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/3EGojp4Hh6I/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/3EGojp4Hh6I')">
+                <div class="anons-overlay"><span class="anons-num">4-qism</span><div class="anons-text">Alov Qadahi</div></div>
             </div>
-            <div class="slide-card" style="background-image: url('https://img.youtube.com/vi/2g81116hA68/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/2g81116hA68')">
-                <div class="slide-overlay"><span class="slide-badge">ANONS 5</span><div class="slide-title">Jaloliddin Ahmadaliyev - Yangi Klip</div></div>
+            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/y6ZwRzp8FCU/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/y6ZwRzp8FCU')">
+                <div class="anons-overlay"><span class="anons-num">5-qism</span><div class="anons-text">Feniks Jamiyati</div></div>
             </div>
-            <div class="slide-card" style="background-image: url('https://img.youtube.com/vi/5qap5aO4i9A/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/5qap5aO4i9A')">
-                <div class="slide-overlay"><span class="slide-badge">ANONS 6</span><div class="slide-title">Abdullajon - Klassik Kino HD</div></div>
+            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/sg81Lts5kYG/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/sg81Lts5kYG')">
+                <div class="anons-overlay"><span class="anons-num">6-qism</span><div class="anons-text">Yarim Qon Shahzoda</div></div>
             </div>
-            <div class="slide-card" style="background-image: url('https://img.youtube.com/vi/d9MyW72ELq0/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/d9MyW72ELq0')">
-                <div class="slide-overlay"><span class="slide-badge">ANONS 7</span><div class="slide-title">Avatar 2: Suv Yo'li (Fantastika)</div></div>
+            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/MxqsmsA8y5k/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/MxqsmsA8y5k')">
+                <div class="anons-overlay"><span class="anons-num">7-qism</span><div class="anons-text">Ajal Tuhfalari 1</div></div>
             </div>
-            <div class="slide-card" style="background-image: url('https://img.youtube.com/vi/aSiDu3Ywi8E/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/aSiDu3Ywi8E')">
-                <div class="slide-overlay"><span class="slide-badge">ANONS 8</span><div class="slide-title">Top Gear Uzbek - Poyga & Avto</div></div>
+            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/mObK5XD8fGE/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/mObK5XD8fGE')">
+                <div class="anons-overlay"><span class="anons-num">8-qism</span><div class="anons-text">Ajal Tuhfalari 2</div></div>
             </div>
-            <div class="slide-card" style="background-image: url('https://img.youtube.com/vi/U22vM1S2F_Q/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/U22vM1S2F_Q')">
-                <div class="slide-overlay"><span class="slide-badge">ANONS 9</span><div class="slide-title">Dildora Niyozova - Yana hammasi yaxshi bo'ladi</div></div>
+            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/8A-J30j1Mpo/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/8A-J30j1Mpo')">
+                <div class="anons-overlay"><span class="anons-num">9-qism</span><div class="anons-text">Sehrli Maxluqlar</div></div>
             </div>
-            <div class="slide-card" style="background-image: url('https://img.youtube.com/vi/3JZ_D3ELwOQ/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/3JZ_D3ELwOQ')">
-                <div class="slide-overlay"><span class="slide-badge">ANONS 10</span><div class="slide-title">O'zbekiston Yangiliklar 24</div></div>
+            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/jfKfPfyJRdk/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/jfKfPfyJRdk')">
+                <div class="anons-overlay"><span class="anons-num">10-qism</span><div class="anons-text">Hogwarts Tarixi</div></div>
             </div>
         </div>
-        <div class="dots-container" id="dotsContainer"></div>
     </div>
 
     <!-- Video Player -->
     <div class="player-box">
-        <iframe id="main-player" src="https://www.youtube.com/embed/5D_1mGz1p6E" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe id="main-player" src="https://www.youtube.com/embed/rR1L9_i95Jk" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
-    <div class="now-playing">🔴 <span id="playingTitle">Munisa Rizayeva - O'ylama (Official Music Video)</span></div>
+    <div class="now-playing">
+        <span>🔴 FULL HD: <span id="playingTitle">Uyda Yolg'iz (Home Alone) - Klassik Film</span></span>
+    </div>
 
-    <!-- 10 ta Kategoriya Bo'limi -->
+    <!-- 10 Categories -->
     <div class="categories-section">
-        <div class="section-label"> Bo'limlar (10x)</div>
+        <div class="section-title">Kategoriyalar</div>
         <div class="category-grid">
-            <div class="cat-btn active" onclick="loadCat('uz_klip', this)"><span class="cat-icon">🎵</span><span class="cat-name">Kliplar</span></div>
-            <div class="cat-btn" onclick="loadCat('tv', this)"><span class="cat-icon">📺</span><span class="cat-name">TV Kanallar</span></div>
-            <div class="cat-btn" onclick="loadCat('uzbek', this)"><span class="cat-icon">🎬</span><span class="cat-name">O'zbek Kino</span></div>
+            <div class="cat-btn active" onclick="loadCat('tv', this)"><span class="cat-icon">📺</span><span class="cat-name">TV Kanallar</span></div>
+            <div class="cat-btn" onclick="loadCat('retro', this)"><span class="cat-icon">🎞️</span><span class="cat-name">Retro Filmlar</span></div>
+            <div class="cat-btn" onclick="loadCat('uz_klip', this)"><span class="cat-icon">🎵</span><span class="cat-name">Uzbek Kliplar</span></div>
+            <div class="cat-btn" onclick="loadCat('harry', this)"><span class="cat-icon">🧙‍♂️</span><span class="cat-name">Harry Potter</span></div>
             <div class="cat-btn" onclick="loadCat('foreign', this)"><span class="cat-icon">🍿</span><span class="cat-name">Xorij Kino</span></div>
             <div class="cat-btn" onclick="loadCat('cartoons', this)"><span class="cat-icon">🧸</span><span class="cat-name">Multfilm</span></div>
             <div class="cat-btn" onclick="loadCat('edu', this)"><span class="cat-icon">📚</span><span class="cat-name">Fan & IT</span></div>
             <div class="cat-btn" onclick="loadCat('auto', this)"><span class="cat-icon">🏎️</span><span class="cat-name">Avto Poyga</span></div>
-            <div class="cat-btn" onclick="loadCat('sport', this)"><span class="cat-icon">⚽</span><span class="cat-name">Sport</span></div>
             <div class="cat-btn" onclick="loadCat('news', this)"><span class="cat-icon">📰</span><span class="cat-name">Yangiliklar</span></div>
             <div class="cat-btn" onclick="loadCat('concert', this)"><span class="cat-icon">🎤</span><span class="cat-name">Konsertlar</span></div>
         </div>
     </div>
 
-    <!-- Video Ro'yxat -->
+    <!-- Video List -->
     <div class="content-list" id="videoList"></div>
 
-    <!-- MP3 Qo'shiqlar Bo'limi (Eng Pasida) -->
-    <div class="mp3-section">
-        <div class="section-label" style="color: #00d2ff;">🎧 MP3 Qo'shiqlar (Audio)</div>
-        <div class="mp3-card">
-            <div class="mp3-info">
-                <div class="mp3-icon">🎵</div>
-                <div><div class="mp3-title">Sokin Lofi Beats</div><div class="mp3-artist">IKROMJON Music</div></div>
-            </div>
-            <audio controls style="height: 30px; width: 140px;"><source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg"></audio>
+    <!-- Stars Rating System -->
+    <div class="rating-box">
+        <div class="section-title" style="color:#00d2ff;">⭐ IKROMJON TV-ni baholang</div>
+        <div class="stars" id="starContainer">
+            <span onclick="rateApp(1)">★</span>
+            <span onclick="rateApp(2)">★</span>
+            <span onclick="rateApp(3)">★</span>
+            <span onclick="rateApp(4)">★</span>
+            <span onclick="rateApp(5)" class="active">★</span>
         </div>
-        <div class="mp3-card">
-            <div class="mp3-info">
-                <div class="mp3-icon">🎸</div>
-                <div><div class="mp3-title">Acoustic Chill Guitar</div><div class="mp3-artist">Relax Sound</div></div>
-            </div>
-            <audio controls style="height: 30px; width: 140px;"><source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3" type="audio/mpeg"></audio>
-        </div>
+        <div id="ratingMessage" style="font-size:10px; color:#94a3b8;">Tashakkur! Bahongiz saqlandi (5/5).</div>
     </div>
 
-    <!-- AI Chat Bot Oynasi -->
+    <!-- AI Chat Window -->
     <div class="ai-chat-window" id="aiChatWindow">
         <div class="ai-chat-header">
-            <span style="font-weight: bold; color: #00d2ff;">🤖 IKROMJON AI Yordamchi</span>
-            <button onclick="toggleAIChat()" style="background: none; border: none; color: #fff; font-size: 18px;">✖</button>
+            <span style="font-weight: bold; color: #00d2ff;">🤖 IKROMJON TV AI</span>
+            <button onclick="toggleAIChat()" style="background:none; border:none; color:#fff; font-size:18px;">✖</button>
         </div>
         <div class="ai-chat-body" id="chatBody">
-            <div class="chat-msg chat-ai">Assalomu alaykum! Men IKROMJON TV AI chat-botiman. Qanday yordam bera olaman?</div>
+            <div class="chat-msg chat-ai">Assalomu alaykum! IKROMJON TV sun'iy intellekt xizmatiga xush kelibsiz! Qanday film yoki telekanal qidiryapsiz?</div>
         </div>
         <div class="ai-chat-input">
-            <input type="text" id="chatInput" placeholder="Xabar yozing...">
+            <input type="text" id="chatInput" placeholder="Savolingizni yozing...">
             <button onclick="sendAIMessage()">Yuborish</button>
         </div>
     </div>
 
-    <!-- 8 ta Funksiyali Bottom Nav -->
+    <!-- 8 Function Nav -->
     <div class="bottom-nav">
         <div class="nav-item active"><span class="nav-icon">🏠</span><span>Bosh sahifa</span></div>
-        <div class="nav-item" onclick="loadCat('tv', null)"><span class="nav-icon">📡</span><span>Jonli</span></div>
-        <div class="nav-item" onclick="window.scrollTo({top: 400, behavior:'smooth'})"><span class="nav-icon">🎥</span><span>Videolar</span></div>
-        <div class="nav-item" onclick="window.scrollTo({top: 1000, behavior:'smooth'})"><span class="nav-icon">🎧</span><span>MP3</span></div>
+        <div class="nav-item" onclick="loadCat('tv', null)"><span class="nav-icon">📡</span><span>TV</span></div>
+        <div class="nav-item" onclick="loadCat('retro', null)"><span class="nav-icon">🎥</span><span>Retro</span></div>
+        <div class="nav-item" onclick="toggleHomeMusic()"><span class="nav-icon">🎧</span><span>Musiqa</span></div>
         <div class="nav-item" onclick="toggleAIChat()"><span class="nav-icon">🤖</span><span>AI Chat</span></div>
         <div class="nav-item" onclick="alert('Saqlanganlar ro\'yxati bo\'sh')"><span class="nav-icon">🔖</span><span>Saqlangan</span></div>
-        <div class="nav-item" onclick="alert('Yangi bildirishnomalar yo\'q')"><span class="nav-icon">🔔</span><span>Xabar</span></div>
-        <div class="nav-item" onclick="alert('IKROMJON TV Profil Sozlamalari')"><span class="nav-icon">👤</span><span>Profil</span></div>
+        <div class="nav-item" onclick="alert('Yangi bildirishnoma yo\'q')"><span class="nav-icon">🔔</span><span>Xabar</span></div>
+        <div class="nav-item" onclick="alert('IKROMJON TV Profil')"><span class="nav-icon">👤</span><span>Profil</span></div>
     </div>
 
     <script>
-        // Background Music
-        const audio = document.getElementById('bgMusic');
-        function toggleMusic() {
-            if (audio.paused) { audio.play(); } else { audio.pause(); }
+        // Real-Time Date & Clock Engine
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('dateDisplay').innerText = now.toLocaleDateString('uz-UZ');
+            document.getElementById('timeDisplay').innerText = now.toLocaleTimeString('uz-UZ');
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Home Alone Audio Control
+        const audio = document.getElementById('homeAloneAudio');
+        let musicPlaying = false;
+        document.body.addEventListener('click', () => {
+            if(!musicPlaying) {
+                audio.volume = 0.4;
+                audio.play().catch(() => {});
+                musicPlaying = true;
+            }
+        }, { once: true });
+
+        function toggleHomeMusic() {
+            if(audio.paused) { audio.play(); } else { audio.pause(); }
         }
 
-        // 10x Slide Engine (Har 5 soniyada avto-o'tish)
-        let currentSlide = 0;
-        const wrapper = document.getElementById('sliderWrapper');
-        const dotsContainer = document.getElementById('dotsContainer');
-        const totalSlides = 10;
-
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('div');
-            dot.className = `dot ${i === 0 ? 'active' : ''}`;
-            dotsContainer.appendChild(dot);
-        }
-
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
-            document.querySelectorAll('.dot').forEach((d, idx) => {
-                d.classList.toggle('active', idx === currentSlide);
-            });
-        }, 5000); // 5 Sekunda
-
-        // 10 Categories Database
+        // Database (TV Kanallar, Retro Filmlar va boshqalar)
         const data = {
-            uz_klip: [{ title: "Munisa Rizayeva - O'ylama", url: "https://www.youtube.com/embed/5D_1mGz1p6E", meta: "Musiqa • Klip", thumb: "Munisa_Rizayeva.png" }],
-            tv: [{ title: "IKROMJON TV Jonli", url: "https://www.youtube.com/embed/jfKfPfyJRdk", meta: "TV • Live 24/7", thumb: "Ikromjon_TV_Jonli.png" }],
-            uzbek: [{ title: "Abdullajon Film", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Kino • Komediya", thumb: "https://img.youtube.com/vi/5qap5aO4i9A/hqdefault.jpg" }],
-            foreign: [{ title: "Avatar 2 Premyera", url: "https://www.youtube.com/embed/d9MyW72ELq0", meta: "Xorij • Fantastika", thumb: "https://img.youtube.com/vi/d9MyW72ELq0/hqdefault.jpg" }],
-            cartoons: [{ title: "Bolalar uchun Multfilm", url: "https://www.youtube.com/embed/jfKfPfyJRdk", meta: "Animation", thumb: "Ikromjon_TV_Jonli.png" }],
-            edu: [{ title: "AI & Man Texnologiya", url: "https://www.youtube.com/embed/8A-J30j1Mpo", meta: "IT • Fan", thumb: "AI_and_Man.png" }],
-            auto: [{ title: "Avto Poyga Top Gear", url: "https://www.youtube.com/embed/aSiDu3Ywi8E", meta: "Avto • Poyga", thumb: "https://img.youtube.com/vi/aSiDu3Ywi8E/hqdefault.jpg" }],
-            sport: [{ title: "Futbol Gol Highlights", url: "https://www.youtube.com/embed/jfKfPfyJRdk", meta: "Sport • Futbol", thumb: "Ikromjon_TV_Jonli.png" }],
-            news: [{ title: "O'zbekiston Yangiliklar", url: "https://www.youtube.com/embed/3JZ_D3ELwOQ", meta: "Yangiliklar 24", thumb: "https://img.youtube.com/vi/3JZ_D3ELwOQ/hqdefault.jpg" }],
-            concert: [{ title: "Jonli Konsert Dasturi", url: "https://www.youtube.com/embed/5D_1mGz1p6E", meta: "Konsert", thumb: "Munisa_Rizayeva.png" }]
+            tv: [
+                { title: "MY5 Telekanali (Milliy Teleradio)", url: "https://www.youtube.com/embed/jfKfPfyJRdk", meta: "TV • MY5 HD", thumb: "https://img.youtube.com/vi/jfKfPfyJRdk/hqdefault.jpg" },
+                { title: "Sevimli TV - Jonli Efir", url: "https://www.youtube.com/embed/jfKfPfyJRdk", meta: "TV • Sevimli HD", thumb: "https://img.youtube.com/vi/jfKfPfyJRdk/hqdefault.jpg" },
+                { title: "Milliy TV Onlayn Stream", url: "https://www.youtube.com/embed/jfKfPfyJRdk", meta: "TV • Milliy TV", thumb: "https://img.youtube.com/vi/jfKfPfyJRdk/hqdefault.jpg" },
+                { title: "IKROMJON TV Premium Live", url: "https://www.youtube.com/embed/jfKfPfyJRdk", meta: "TV • IKROMJON TV 24/7", thumb: "Ikromjon_TV_Jonli.png" }
+            ],
+            retro: [
+                { title: "Uyda Yolg'iz 1 (Home Alone 1) Full HD", url: "https://www.youtube.com/embed/rR1L9_i95Jk", meta: "Retro Film • Komediya", thumb: "https://img.youtube.com/vi/rR1L9_i95Jk/hqdefault.jpg" },
+                { title: "Kavkaz Asirasi (Klassik Komediya)", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Retro Film • O'zbekcha Tarjima", thumb: "https://img.youtube.com/vi/5qap5aO4i9A/hqdefault.jpg" },
+                { title: "Uyda Yolg'iz 2: Nyu-Yorkdagi Sarguzasht", url: "https://www.youtube.com/embed/k093R3Y3GzM", meta: "Retro Film • Komediya", thumb: "https://img.youtube.com/vi/k093R3Y3GzM/hqdefault.jpg" },
+                { title: "Abdullajon (Klassik O'zbek Film)", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Retro Film • Komediya", thumb: "https://img.youtube.com/vi/5qap5aO4i9A/hqdefault.jpg" }
+            ],
+            uz_klip: [
+                { title: "Munisa Rizayeva - O'ylama (Music Video)", url: "https://www.youtube.com/embed/5D_1mGz1p6E", meta: "Uzbek Klip • Premyera", thumb: "Munisa_Rizayeva.png" },
+                { title: "Jaloliddin Ahmadaliyev - Yomon ekan", url: "https://www.youtube.com/embed/2g81116hA68", meta: "Uzbek Klip • Premyera", thumb: "https://img.youtube.com/vi/2g81116hA68/hqdefault.jpg" }
+            ],
+            harry: [
+                { title: "Harry Potter va Hikmatlar Tosh", url: "https://www.youtube.com/embed/VyHV0BRMYEA", meta: "Harry Potter • 1-qism", thumb: "https://img.youtube.com/vi/VyHV0BRMYEA/hqdefault.jpg" },
+                { title: "Harry Potter va Sirlar Xonasi", url: "https://www.youtube.com/embed/1bq0qff4iSU", meta: "Harry Potter • 2-qism", thumb: "https://img.youtube.com/vi/1bq0qff4iSU/hqdefault.jpg" }
+            ],
+            foreign: [{ title: "Avatar 2: Suv Yo'li", url: "https://www.youtube.com/embed/d9MyW72ELq0", meta: "Xorij Film", thumb: "https://img.youtube.com/vi/d9MyW72ELq0/hqdefault.jpg" }],
+            edu: [{ title: "AI & Man - Sun'iy Intellekt", url: "https://www.youtube.com/embed/8A-J30j1Mpo", meta: "IT • Fan", thumb: "AI_and_Man.png" }]
         };
 
         function playVideo(url) {
             document.getElementById('main-player').src = url + "?autoplay=1";
-            window.scrollTo({ top: 180, behavior: 'smooth' });
+            window.scrollTo({ top: 120, behavior: 'smooth' });
         }
 
         function loadCat(key, elem) {
             if(elem) {
-                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-                elem.classList.add('active');
-            }
-            const container = document.getElementById('videoList');
-            container.innerHTML = '';
-            (data[key] || []).forEach(item => {
-                const card = document.c
-        
+                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('a
