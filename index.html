@@ -6,637 +6,580 @@
     <title>IKROMJON TV</title>
     <style>
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            user-select: none;
         }
+
         body {
-            background: linear-gradient(135deg, #0a0a2e, #1a1a4e);
-            color: #fff;
+            background-color: #080b13;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
             min-height: 100vh;
+            padding-bottom: 70px;
         }
 
-        /* ================ MAIN APP ================ */
-        #mainApp {
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 15px;
+        /* 1. LOADING SCREEN */
+        #appLoaderScreen {
+            position: fixed;
+            inset: 0;
+            background: #05070d;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
 
-        .header {
-            text-align: center;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .header h1 {
+        .loader-logo {
             font-size: 26px;
-            background: linear-gradient(45deg, #f7971e, #ffd200);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: glow 2s ease-in-out infinite;
-        }
-        @keyframes glow {
-            0%, 100% { filter: drop-shadow(0 0 10px rgba(255,215,0,0.2)); }
-            50% { filter: drop-shadow(0 0 30px rgba(255,215,0,0.6)); }
-        }
-        .header p {
-            color: #ffd700;
-            font-size: 12px;
-            opacity: 0.7;
+            font-weight: 900;
+            color: #00d2ff;
+            text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
         }
 
-        /* ================ ABOUT SECTION ================ */
-        .about-section {
-            background: linear-gradient(135deg, rgba(255,215,0,0.05), rgba(255,215,0,0.01));
-            border: 1px solid rgba(255,215,0,0.12);
-            border-radius: 16px;
-            padding: 20px 18px;
-            margin: 12px 0 15px 0;
-            text-align: center;
-            position: relative;
+        .loader-progress-box {
+            width: 80%;
+            max-width: 300px;
+            background: #111a2e;
+            height: 10px;
+            border-radius: 20px;
+            border: 1px solid #1e2d4a;
             overflow: hidden;
         }
-        .about-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 30% 50%, rgba(255,215,0,0.03) 0%, transparent 60%);
-            animation: shimmer 8s ease-in-out infinite;
+
+        .loader-progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #0088ff, #00d2ff);
+            border-radius: 20px;
+            transition: width 0.05s linear;
         }
-        @keyframes shimmer {
-            0%, 100% { transform: translateX(-20%) rotate(0deg); }
-            50% { transform: translateX(20%) rotate(5deg); }
-        }
-        .about-section .logo-icon {
-            font-size: 48px;
-            display: block;
-            margin-bottom: 8px;
-            position: relative;
-            z-index: 1;
-        }
-        .about-section .title {
-            font-size: 20px;
-            font-weight: bold;
-            color: #ffd700;
-            position: relative;
-            z-index: 1;
-        }
-        .about-section .subtitle {
-            font-size: 13px;
-            color: #ccc;
-            margin: 5px 0 10px 0;
-            position: relative;
-            z-index: 1;
-        }
-        .about-section .desc {
-            font-size: 13px;
-            color: #aaa;
-            line-height: 1.7;
-            max-width: 350px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        .about-section .desc span {
-            color: #ffd700;
-        }
-        .about-section .stats {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
+
+        .loader-status-text {
             margin-top: 12px;
-            position: relative;
-            z-index: 1;
-        }
-        .about-section .stats div {
-            text-align: center;
-        }
-        .about-section .stats .num {
-            font-size: 20px;
+            font-size: 13px;
+            color: #00d2ff;
             font-weight: bold;
-            color: #ffd700;
-        }
-        .about-section .stats .label {
-            font-size: 10px;
-            color: #777;
-            text-transform: uppercase;
-        }
-        .about-divider {
-            width: 60px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ffd700, transparent);
-            margin: 8px auto;
-            position: relative;
-            z-index: 1;
         }
 
-        .welcome {
-            text-align: center;
-            padding: 10px 0 5px 0;
-            font-size: 18px;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .wheel-banner {
-            background: rgba(255,215,0,0.08);
-            border: 1px solid rgba(255,215,0,0.2);
-            border-radius: 12px;
-            padding: 12px;
-            text-align: center;
-            margin: 8px 0 12px 0;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .wheel-banner:hover {
-            background: rgba(255,215,0,0.15);
-        }
-        .wheel-banner .icon {
-            font-size: 30px;
-        }
-        .wheel-banner .text {
-            color: #ffd700;
-            font-size: 14px;
-        }
-        .wheel-banner .sub {
-            font-size: 12px;
-            color: #aaa;
-        }
-
-        .stars {
-            text-align: center;
-            padding: 5px 0;
-        }
-        .stars span {
-            font-size: 30px;
-            cursor: pointer;
-            color: #444;
-            transition: 0.2s;
-        }
-        .stars span.active {
-            color: #ffd700;
-        }
-
-        .date-time {
-            text-align: center;
-            padding: 10px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 10px;
-            margin: 8px 0;
-            font-size: 14px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .date-time span {
-            color: #ffd700;
-        }
-
-        .annos {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 5px;
-            margin: 10px 0;
-        }
-        .anno-item {
-            background: rgba(255,215,0,0.05);
-            border: 1px solid rgba(255,215,0,0.08);
-            border-radius: 8px;
-            padding: 6px;
-            text-align: center;
-            font-size: 11px;
-        }
-        .anno-item .num {
-            font-size: 16px;
-            font-weight: bold;
-            color: #ffd700;
-        }
-
-        .sections {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin: 10px 0;
-        }
-        .section-card {
-            background: rgba(255,255,255,0.03);
-            border-radius: 10px;
-            padding: 12px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.05);
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .section-card:hover {
-            background: rgba(255,215,0,0.08);
-            border-color: rgba(255,215,0,0.3);
-        }
-        .section-card .icon {
-            font-size: 24px;
-        }
-        .section-card .label {
-            font-size: 12px;
-            color: #aaa;
-        }
-
-        .horoscope {
-            background: rgba(255,215,0,0.04);
-            border-radius: 10px;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid rgba(255,215,0,0.06);
-        }
-        .horoscope h3 {
-            color: #ffd700;
-            text-align: center;
-            font-size: 15px;
-            margin-bottom: 8px;
-        }
-        .h-item {
+        /* Top Header */
+        header {
+            background: linear-gradient(180deg, #0d1527 0%, #080b13 100%);
+            padding: 12px 15px;
             display: flex;
             justify-content: space-between;
-            padding: 4px 0;
-            font-size: 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
-        }
-        .h-item .sign {
-            color: #ffd700;
+            align-items: center;
+            border-bottom: 1px solid #1a263d;
+            position: sticky;
+            top: 0;
+            z-index: 200;
         }
 
-        .video-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 6px;
-            margin: 8px 0;
-        }
-        .video-card {
-            background: rgba(255,255,255,0.03);
-            border-radius: 8px;
-            padding: 8px 4px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.04);
-        }
-        .video-card .thumb {
-            height: 45px;
-            background: linear-gradient(45deg, #f7971e, #ffd200);
-            border-radius: 6px;
+        .logo-area {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-        .video-card .title {
-            font-size: 10px;
-            color: #aaa;
-            margin-top: 3px;
+            gap: 8px;
         }
 
-        .lang-select {
-            text-align: center;
-            margin: 8px 0;
-        }
-        .lang-select button {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+        .logo-badge {
+            background: #0088ff;
             color: #fff;
-            padding: 4px 12px;
-            margin: 2px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 11px;
-            transition: 0.3s;
-        }
-        .lang-select button:hover {
-            background: rgba(255,215,0,0.15);
-        }
-        .lang-select button.active {
-            background: #ffd700;
-            color: #000;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 14px;
+            box-shadow: 0 0 10px rgba(0, 136, 255, 0.5);
         }
 
-        .footer {
+        .logo-title {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* Language Selector */
+        .lang-select {
+            background: #121c2e;
+            color: #00d2ff;
+            border: 1px solid #0088ff;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            outline: none;
+        }
+
+        /* Banner & Greeting */
+        .welcome-banner {
+            background: linear-gradient(135deg, #09203f 0%, #537895 100%);
+            margin: 10px 15px;
+            padding: 12px;
+            border-radius: 12px;
             text-align: center;
-            padding: 10px 0;
-            font-size: 10px;
-            color: #444;
-            border-top: 1px solid rgba(255,255,255,0.03);
-            margin-top: 5px;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
-        /* ================ TOAST ================ */
-        #toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.9);
-            color: #ffd700;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-size: 13px;
-            z-index: 999999;
-            display: none;
-            border: 1px solid rgba(255,215,0,0.15);
-            max-width: 90%;
-            text-align: center;
-        }
-        #toast.show {
-            display: block;
-            animation: fadeUp 0.3s ease;
-        }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .welcome-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #00d2ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
         }
 
-        /* ================ WHEEL ================ */
-        #wheelOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .clock-widget {
+            font-size: 12px;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Player Container */
+        .player-box {
+            width: 100%;
+            background-color: #000;
+            aspect-ratio: 16 / 9;
+            position: sticky;
+            top: 48px;
+            z-index: 150;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+        }
+
+        iframe {
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.85);
-            display: none;
+            border: none;
+        }
+
+        .now-playing {
+            padding: 8px 15px;
+            background: #0f172a;
+            font-size: 13px;
+            color: #00d2ff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-bottom: somewhere 1px solid #1e293b;
+        }
+
+        /* Categories Horizon Scroll */
+        .categories-section {
+            padding: 12px 15px 5px 15px;
+        }
+
+        .section-label {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .cat-btn {
+            background: #111a2e;
+            border: 1px solid #1e2d4a;
+            border-radius: 10px;
+            padding: 10px 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .cat-btn:active, .cat-btn.active {
+            background: #0088ff;
+            border-color: #00d2ff;
+            box-shadow: 0 0 10px rgba(0, 136, 255, 0.4);
+        }
+
+        .cat-icon {
+            font-size: 18px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .cat-name {
+            font-size: 10px;
+            color: #fff;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Content Video List */
+        .content-list {
+            padding: 0 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .video-card {
+            background: #111a2e;
+            border: 1px solid #1a2942;
+            border-radius: 10px;
+            display: flex;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .video-card:active {
+            border-color: #0088ff;
+            background: #16243f;
+        }
+
+        .video-thumb {
+            width: 110px;
+            height: 70px;
+            background-color: #1e293b;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .play-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 99999;
-            backdrop-filter: blur(8px);
+            font-size: 18px;
+            color: #00d2ff;
         }
-        #wheelOverlay.show {
+
+        .video-info {
+            padding: 8px 10px;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-        .wheel-box {
-            background: linear-gradient(145deg, #1a1a3e, #2a2a5e);
-            border-radius: 20px;
-            padding: 20px;
-            max-width: 380px;
-            width: 92%;
-            border: 1px solid rgba(255,215,0,0.2);
+
+        .video-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .video-meta {
+            font-size: 10px;
+            color: #64748b;
+        }
+
+        /* SUPPORT SECTION */
+        .support-box {
+            margin: 15px 15px 25px 15px;
+            background: #111a2e;
+            border: 1px solid #0088ff;
+            border-radius: 12px;
+            padding: 15px;
             text-align: center;
-            box-shadow: 0 0 60px rgba(255,215,0,0.05);
+            box-shadow: 0 4px 15px rgba(0, 136, 255, 0.15);
         }
-        .wheel-box h2 {
-            color: #ffd700;
-            font-size: 20px;
-        }
-        .wheel-box p {
-            color: #aaa;
+        .support-title {
             font-size: 13px;
-        }
-        .wheel-wrap {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            margin: 10px auto;
-        }
-        #wheelCanvas {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-        }
-        .pointer {
-            position: absolute;
-            top: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 24px;
-            color: #ffd700;
-            text-shadow: 0 0 20px rgba(255,215,0,0.5);
-        }
-        .wheel-info {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 12px;
-            background: rgba(255,255,255,0.04);
-            border-radius: 8px;
-            margin: 10px 0;
-            font-size: 13px;
-        }
-        .wheel-info .hl {
-            color: #ffd700;
             font-weight: bold;
+            color: #00d2ff;
+            margin-bottom: 6px;
         }
-        .wheel-btn {
-            background: linear-gradient(45deg, #f7971e, #ffd200);
-            color: #000;
+        .support-desc {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-bottom: 12px;
+        }
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: linear-gradient(90deg, #0088ff, #00d2ff);
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
             border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 15px;
-            font-weight: bold;
             cursor: pointer;
-            width: 100%;
-            margin: 3px 0;
-            transition: 0.3s;
         }
-        .wheel-btn:hover:not(:disabled) {
-            transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(255,215,0,0.2);
+
+        /* Bottom Nav Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 55px;
+            background: #0b1120;
+            border-top: 1px solid #1e293b;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            align-items: center;
+            z-index: 300;
         }
-        .wheel-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-        .wheel-btn.buy {
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
-            color: #fff;
-        }
-        .wheel-btn.buy:hover:not(:disabled) {
-            box-shadow: 0 0 30px rgba(231,76,60,0.3);
-        }
-        .wheel-close {
-            background: rgba(255,255,255,0.06);
-            color: #fff;
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 6px 20px;
-            border-radius: 15px;
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 8px;
+            text-decoration: none;
             cursor: pointer;
-            font-size: 12px;
-            margin-top: 5px;
-            transition: 0.3s;
         }
-        .wheel-close:hover {
-            background: rgba(255,255,255,0.1);
+
+        .nav-item.active {
+            color: #0088ff;
         }
-        audio {
-            display: none;
+
+        .nav-icon {
+            font-size: 16px;
+            margin-bottom: 2px;
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== TOAST ===== -->
-    <div id="toast"></div>
+    <!-- LOADING SCREEN -->
+    <div id="appLoaderScreen">
+        <div class="loader-logo">IKROMJON TV</div>
+        <div class="loader-progress-box">
+            <div class="loader-progress-bar" id="loaderBar"></div>
+        </div>
+        <div class="loader-status-text"><span id="loaderPercent">0</span>%</div>
+    </div>
 
-    <!-- ===== WHEEL ===== -->
-    <div id="wheelOverlay">
-        <div class="wheel-box">
-            <h2>🎁 SOVG'A BARABANI</h2>
-            <p>Barabanni aylantir va sovg'a yutib ol!</p>
-            <div class="wheel-wrap">
-                <div class="pointer">▼</div>
-                <canvas id="wheelCanvas" width="400" height="400"></canvas>
-            </div>
-            <div class="wheel-info">
-                <span>🎯 Qolgan: <span class="hl" id="freeSpins">3</span></span>
-                <span>💰 Narx: <span class="hl">1,500,000 so'm</span></span>
-            </div>
-            <button class="wheel-btn" id="spinBtn">🔄 AYLANTIRISH</button>
-            <button class="wheel-btn buy" id="buySpinBtn">💳 1,500,000 so'm</button>
-            <button class="wheel-close" id="closeWheel">✖ Yopish</button>
+    <!-- Header -->
+    <header>
+        <div class="logo-area">
+            <span class="logo-badge">IK</span>
+            <span class="logo-title">IKROMJON <span style="color:#0088ff">TV</span></span>
+        </div>
+        <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
+            <option value="uz">UZ</option>
+            <option value="ru">RU</option>
+            <option value="en">ENG</option>
+        </select>
+    </header>
+
+    <!-- Kirish va Soat / Kalendar -->
+    <div class="welcome-banner">
+        <div class="welcome-title" id="welcomeText">IKROMJON TV-GA XUSH KELIBSIZ!</div>
+        <div class="clock-widget">
+            <span id="dateDisplay">📅 --.--.----</span>
+            <span>|</span>
+            <span id="clockDisplay">⏰ --:--:--</span>
         </div>
     </div>
 
-    <!-- ===== MAIN APP ===== -->
-    <div id="mainApp">
-        <audio id="bgMusic" loop>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        </audio>
+    <!-- Video Pleyer (Home Alone Soundtrack bilan boshlanadi) -->
+    <div class="player-box">
+        <iframe id="main-player" src="https://www.youtube.com/embed/m5w1823x55U?autoplay=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    
+    <div class="now-playing">
+        <span>🔴</span> <span id="playingTitle">Home Alone - Somewhere in My Memory (Soundtrack)</span>
+    </div>
 
-        <div class="header">
-            <h1>⭐ IKROMJON TV ⭐</h1>
-            <p>📱 Mobil ilova</p>
-        </div>
-
-        <!-- ===== ABOUT SECTION ===== -->
-        <div class="about-section">
-            <span class="logo-icon">📺</span>
-            <div class="title">IKROMJON TV</div>
-            <div class="subtitle">⭐ Eng zo'r mobil ilova ⭐</div>
-            <div class="about-divider"></div>
-            <div class="desc">
-                <span>🌟</span> IKROMJON TV - bu <span>zamonaviy</span> va <span>qulay</span> mobil ilova! 
-                <span>🎬</span> Kinolar, <span>📺</span> telekanallar, <span>🎞️</span> multfilmlar va 
-                <span>🎵</span> musiqalar bir joyda! 
-                <span>🔮</span> Kunlik munajjimlar bashorati va <span>🎰</span> sovg'alar barabani sizni kutmoqda!
+    <!-- Kategoriyalar -->
+    <div class="categories-section">
+        <div class="section-label" id="catLabel">Kategoriyalar</div>
+        <div class="category-grid">
+            <div class="cat-btn active" onclick="loadCategory('tv', this)">
+                <span class="cat-icon">📺</span>
+                <span class="cat-name" id="c1">Telekanallar</span>
             </div>
-            <div class="stats">
-                <div>
-                    <div class="num">10+</div>
-                    <div class="label">Bo'limlar</div>
-                </div>
-                <div>
-                    <div class="num">5</div>
-                    <div class="label">Tillarda</div>
-                </div>
-                <div>
-                    <div class="num">🎰</div>
-                    <div class="label">Sovg'alar</div>
-                </div>
+            <div class="cat-btn" onclick="loadCategory('uzbek', this)">
+                <span class="cat-icon">🎬</span>
+                <span class="cat-name" id="c2">O'zbek kinolar</span>
+            </div>
+            <div class="cat-btn" onclick="loadCategory('harry', this)">
+                <span class="cat-icon">🧙‍♂️</span>
+                <span class="cat-name" id="c3">Harry Potter</span>
+            </div>
+            <div class="cat-btn" onclick="loadCategory('foreign', this)">
+                <span class="cat-icon">🍿</span>
+                <span class="cat-name" id="c4">Xorijiy kinolar</span>
+            </div>
+            <div class="cat-btn" onclick="loadCategory('radio', this)">
+                <span class="cat-icon">📻</span>
+                <span class="cat-name" id="c5">Radiolar</span>
+            </div>
+            <div class="cat-btn" onclick="loadCategory('cartoons', this)">
+                <span class="cat-icon">🧸</span>
+                <span class="cat-name" id="c6">Multfilmlar</span>
+            </div>
+            <div class="cat-btn" onclick="loadCategory('edu', this)">
+                <span class="cat-icon">📚</span>
+                <span class="cat-name" id="c7">Fan va IT</span>
+            </div>
+            <div class="cat-btn" onclick="loadCategory('sport', this)">
+                <span class="cat-icon">⚽</span>
+                <span class="cat-name" id="c8">Sport</span>
             </div>
         </div>
+    </div>
 
-        <div class="welcome" id="welcomeText">👋 Xush kelibsiz, aziz foydalanuvchi!</div>
+    <!-- Video Ro'yxat -->
+    <div class="content-list" id="videoList"></div>
 
-        <div class="wheel-banner" id="wheelBanner">
-            <div class="icon">🎰</div>
-            <div class="text">🎁 SOVG'A BARABANINI AYLANTIRING!</div>
-            <div class="sub">⭐ 3 ta bepul urinish</div>
+    <!-- Qo'llab-quvvatlash bo'limi -->
+    <div class="support-box" id="supportArea">
+        <div class="support-title" id="supTitle">🎧 Qo‘llab-quvvatlash mutaxassisi</div>
+        <div class="support-desc" id="supDesc">Ilovada biror muammo yoki taklifingiz bormi? Mutaxassis bilan bog‘laning.</div>
+        <a href="https://t.me/telegram" target="_blank" class="support-btn" id="supBtn">
+            💬 Telegram orqali yozish
+        </a>
+    </div>
+
+    <!-- Bottom Nav -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+            <span class="nav-icon">🏠</span>
+            <span id="n1">Bosh sahifa</span>
         </div>
-
-        <div class="stars" id="starsContainer">
-            <span data-v="1">☆</span>
-            <span data-v="2">☆</span>
-            <span data-v="3">☆</span>
-            <span data-v="4">☆</span>
-            <span data-v="5">☆</span>
+        <div class="nav-item" onclick="loadCategory('tv', null)">
+            <span class="nav-icon">📡</span>
+            <span id="n2">Jonli efir</span>
         </div>
-
-        <div class="date-time">
-            📅 <span id="dateDisplay"></span> &nbsp;|&nbsp; ⏰ <span id="timeDisplay"></span>
+        <div class="nav-item" onclick="promptSearch()">
+            <span class="nav-icon">🔍</span>
+            <span id="n3">Qidiruv</span>
         </div>
-
-        <div class="annos" id="annosContainer"></div>
-
-        <div class="lang-select">
-            <button class="active" data-l="uz">🇺🇿 UZ</button>
-            <button data-l="ru">🇷🇺 RU</button>
-            <button data-l="tj">🇹🇯 TJ</button>
-            <button data-l="en">🇬🇧 EN</button>
-            <button data-l="kz">🇰🇿 KZ</button>
+        <div class="nav-item" onclick="loadCategory('uzbek', null)">
+            <span class="nav-icon">🎥</span>
+            <span id="n4">Videolar</span>
         </div>
-
-        <div class="sections">
-            <div class="section-card"><div class="icon">📺</div><div class="label">TV</div></div>
-            <div class="section-card"><div class="icon">📻</div><div class="label">Radio</div></div>
-            <div class="section-card"><div class="icon">🎬</div><div class="label">Kinolar</div></div>
-            <div class="section-card"><div class="icon">🎞️</div><div class="label">Multfilmlar</div></div>
+        <div class="nav-item" onclick="scrollToSupport()">
+            <span class="nav-icon">🎧</span>
+            <span id="n5">Yordam</span>
         </div>
-
-        <div class="horoscope">
-            <h3>🔮 MUNAJJIMLAR BASHORATI</h3>
-            <div id="horoscopeContainer"></div>
+        <div class="nav-item" onclick="alert('IKROMJON TV Profil Bo\'limi')">
+            <span class="nav-icon">👤</span>
+            <span id="n6">Profil</span>
         </div>
-
-        <div class="video-grid" id="videoContainer"></div>
-
-        <div class="footer">© 2026 IKROMJON TV | Barcha huquqlar himoyalangan</div>
     </div>
 
     <script>
-        // ============================================================
-        // 1. TOAST
-        // ============================================================
-        function showToast(msg) {
-            var t = document.getElementById('toast');
-            t.textContent = msg;
-            t.className = 'show';
-            clearTimeout(t._timer);
-            t._timer = setTimeout(function() {
-                t.className = '';
-            }, 3000);
+        // Loading Ekran
+        window.addEventListener('load', () => {
+            let count = 0;
+            const loaderBar = document.getElementById('loaderBar');
+            const loaderPercent = document.getElementById('loaderPercent');
+            const loaderScreen = document.getElementById('appLoaderScreen');
+
+            const interval = setInterval(() => {
+                count += 5;
+                if (count >= 100) {
+                    count = 100;
+                    loaderBar.style.width = '100%';
+                    loaderPercent.innerText = '100';
+                    clearInterval(interval);
+
+                    setTimeout(() => {
+                        loaderScreen.style.opacity = '0';
+                        loaderScreen.style.visibility = 'hidden';
+                    }, 300);
+                } else {
+                    loaderBar.style.width = count + '%';
+                    loaderPercent.innerText = count;
+                }
+            }, 25);
+        });
+
+        // Vaqt va Kalendar
+        function updateClock() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('uz-UZ', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            const timeStr = now.toLocaleTimeString('uz-UZ');
+            document.getElementById('dateDisplay').innerText = "📅 " + dateStr;
+            document.getElementById('clockDisplay').innerText = "⏰ " + timeStr;
         }
+        setInterval(updateClock, 1000);
+        updateClock();
 
-        // ============================================================
-        // 2. STARS
-        // ============================================================
-        (function() {
-            var stars = document.querySelectorAll('#starsContainer span');
-            var rating = 0;
+        // Ma'lumotlar bazasi
+        const data = {
+            tv: [
+                { title: "Uzbekistan 24 - Jonli Efir", url: "https://www.youtube.com/embed/jfKfPfyJRdk", meta: "TV • Jonli" },
+                { title: "Euronews Uzbek", url: "https://www.youtube.com/embed/21X5lGlDOfg", meta: "TV • Yangiliklar" }
+            ],
+            uzbek: [
+                { title: "Abdullajon (O'zbek Klassik)", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Kino • Komediya" },
+                { title: "Sumbula (Milliy Drama)", url: "https://www.youtube.com/embed/2g81116hA68", meta: "Kino • Drama" }
+            ],
+            harry: [
+                { title: "Harry Potter va Hikmatlar Tosh Treyleri", url: "https://www.youtube.com/embed/VyHV0BRMYEA", meta: "Fantasy • Film" },
+                { title: "Harry Potter - Soundtrack", url: "https://www.youtube.com/embed/1bq0qff4iSU", meta: "Musiqa • Soundtrack" }
+            ],
+            foreign: [
+                { title: "Home Alone - Main Theme (Somewhere in My Memory)", url: "https://www.youtube.com/embed/m5w1823x55U", meta: "Soundtrack • Classic" },
+                { title: "Interstellar (Koinot haqida)", url: "https://www.youtube.com/embed/zSWdZVtXT7E", meta: "Xorij • Sci-Fi" }
+            ],
+            radio: [
+                { title: "Lofi Chill Radio 24/7", url: "https://www.youtube.com/embed/jfKfPfyJRdk", meta: "Radio • Musiqa" },
+                { title: "Relaxing Piano Radio", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Radio • Sokin" }
+            ],
+            cartoons: [
+                { title: "Masha va Ayiq (Barcha qismlar)", url: "https://www.youtube.com/embed/LXb3EKWsInQ", meta: "Multfilm • Bolalar" },
+                { title: "Tom va Jerri (Klassik)", url: "https://www.youtube.com/embed/t06RUxPbp_c", meta: "Multfilm • Komediya" }
+            ],
+            edu: [
+                { title: "Python dasturlash tili darslari", url: "https://www.youtube.com/embed/d56mG7DezGs", meta: "Fan • Dasturlash" },
+                { title: "Web sayt yaratish to'liq kursi", url: "https://www.youtube.com/embed/8A-J30j1Mpo", meta: "Fan • Web Dev" }
+            ],
+            sport: [
+                { title: "Futbol gollari va eng zo'r vaziyatlar", url: "https://www.youtube.com/embed/2g81116hA68", meta: "Sport • Futbol" }
+            ]
+        };
 
-            stars.forEach(function(s) {
-                s.onclick = function() {
-                    rating = parseInt(this.dataset.v);
-                    stars.forEach(function(st, i) {
-                        if (i < rating) {
-                            st.textContent = '★';
-                            st.className = 'active';
-                        } else {
-                            st.textContent = '☆';
-                            st.className = '';
-                        }
-                    });
-                    showToast('⭐ ' + rating + ' yulduzcha baholadingiz!');
-                };
-                s.onmouseenter = function() {
-                    var v = parseInt(this.dataset.v);
-                    stars.forEach(function(st, i) {
-                        if (i < v) {
-                            st.textContent = '★';
-                            st.className = 'active';
-                        } else {
-                            st.textContent = '☆';
-                            st.className = '';
-                        }
-                    });
-                };
-                s.onmouseleave = function() {
-                    stars.forEach(function(st, i) {
-                        if (i < rating) {
-                            st.textContent = '★';
-                            st.className = 'active';
-                        } else {
-                            st.textContent = '☆';
-                            st.className = '';
-                        }
-                    });
-                };
-            });
-        })();
-
-        // ============================================================
-        // 3. DATE & TIME
-   
+        // Til Lug'ati
+        const translations = {
+            uz: {
+                welcome: "IKROMJON TV-GA XUSH KELIBSIZ!",
+                catLabel: "Kategoriyalar",
+                c1: "Telekanallar", c2: "O'zbek kinolar", c3: "Harry Potter", c4: "Xorijiy kinolar",
+                c5: "Radiolar", c6: "Multfilmlar", c7: "Fan va IT", c8: "Sport",
+                supTitle: "🎧 Qo‘llab-quvvatlash mutaxassisi",
+                supDesc: "Ilovada biror muammo yoki taklifingiz bormi? Mutaxassis bilan bog‘laning.",
+                supBtn: "💬 Telegram orqali yozish",
+                n1: "Bosh sahifa", n2: "Jonli efir", n3: "Qidiruv", n4: "Videolar", n5: "Yordam", n6: "Profil"
+            },
+            ru: {
+                welcome: "ДОБРО ПОЖАЛОВАТЬ В IKROMJON TV!",
+                catLabel: "Категории",
+                c1: "Телеканалы", c2: "Узбекские фильмы", c3: "Гарри Поттер", c4: "Зарубежные",
+                c5: "Радиостанции", c6: "Мультфильмы", c7: "Наука и IT", c8: "Спорт",
+                supTitle: "🎧 Специалист поддержки",
+                supDesc: "Есть проблемы или предложения по приложению? Свяжитесь со специалистом.",
+                supBtn: "💬 Написать в Telegram",
+                n1: "Главная", n2: "Прямой эфир", n3: "Поиск", n4: "Видео", n5: "Помощь", n6: "Профиль"
+            },
+            en: {
+                welcome: "WELCOME TO IKROMJON TV!",
+                catLabel: "Categories",
+                c1: "TV Channels", c2: "Uzbek Movies", c3: "Harry Potter", c4: "Foreign Movies",
+                c5: "Radio Stations", c6: "Cartoons", c7: "Science & IT", c8: "Sports",
+                supTitle: "🎧 Support Specialist",
+                supDesc: "Have any issues or sugges
