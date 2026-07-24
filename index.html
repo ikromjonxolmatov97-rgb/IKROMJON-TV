@@ -4,26 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>IKROMJON TV</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #070913;
-            --surface-color: rgba(18, 26, 48, 0.7);
-            --surface-solid: #111827;
+            --bg-color: #0b0f19;
+            --card-bg: #161e2e;
             --primary: #6366f1;
-            --primary-glow: rgba(99, 102, 241, 0.4);
             --accent: #38bdf8;
-            --text-main: #f8fafc;
+            --text-main: #ffffff;
             --text-muted: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.08);
+            --danger: #ef4444;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             -webkit-tap-highlight-color: transparent;
             user-select: none;
         }
@@ -31,547 +27,468 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            padding-bottom: 80px;
-            background-image: 
-                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(56, 189, 248, 0.1) 0%, transparent 40%);
-            background-attachment: fixed;
+            padding-bottom: 70px;
         }
 
         /* Top Header */
         header {
-            background: rgba(7, 9, 19, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 14px 20px;
+            background: #0f172a;
+            padding: 12px 16px;
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 200;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo-badge {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: #fff;
-            font-weight: 800;
-            padding: 6px 10px;
-            border-radius: 10px;
-            font-size: 15px;
-            box-shadow: 0 4px 15px var(--primary-glow);
-        }
-
-        .logo-title {
-            font-size: 18px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            background: linear-gradient(to right, #fff, var(--text-muted));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .lang-select {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--accent);
-            border: 1px solid var(--border-color);
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 600;
-            outline: none;
-            cursor: pointer;
-            backdrop-filter: blur(5px);
-        }
-
-        /* Welcome Banner */
-        .welcome-banner {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(56, 189, 248, 0.1));
-            margin: 16px;
-            padding: 16px;
-            border-radius: 16px;
-            text-align: center;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        .welcome-title {
-            font-size: 13px;
+        .logo {
+            font-size: 16px;
             font-weight: 700;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 6px;
-        }
-
-        .clock-widget {
-            font-size: 12px;
-            color: var(--text-muted);
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            font-weight: 500;
-        }
-
-        /* Player Box */
-        .player-wrapper {
-            position: sticky;
-            top: 61px;
-            z-index: 150;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-        }
-
-        .player-box {
-            width: 100%;
-            background-color: #000;
-            aspect-ratio: 16 / 9;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .now-playing {
-            padding: 10px 16px;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            font-size: 13px;
             color: var(--accent);
             display: flex;
             align-items: center;
             gap: 8px;
-            border-bottom: 1px solid var(--border-color);
+        }
+
+        .badge {
+            background: var(--primary);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        /* Sticky Player Container */
+        .player-container {
+            width: 100%;
+            background: #000;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+        }
+
+        video {
+            width: 100%;
+            max-height: 220px;
+            display: block;
+            background: #000;
+            outline: none;
+        }
+
+        .video-title-bar {
+            padding: 10px 16px;
+            background: #111827;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Search Input Bar */
+        .search-box {
+            padding: 10px 16px;
+            display: none;
+            background: #111827;
+        }
+
+        .search-box.active {
+            display: block;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: var(--card-bg);
+            color: #fff;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: var(--accent);
+        }
+
+        /* Section Titles */
+        .section-title {
+            padding: 14px 16px 6px 16px;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.8px;
             font-weight: 600;
         }
 
-        .pulse-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #ef4444;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #ef4444;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 15px #ef4444; }
-            100% { transform: scale(0.95); opacity: 0.8; }
-        }
-
-        /* Categories Section */
-        .categories-section {
-            padding: 16px;
-        }
-
-        .section-label {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .category-grid {
+        /* Categories */
+        .categories {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            gap: 8px;
+            padding: 8px 16px;
         }
 
         .cat-btn {
-            background: var(--surface-color);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 12px 6px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 8px 4px;
             text-align: center;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .cat-btn:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        .cat-btn:active, .cat-btn.active {
-            background: linear-gradient(135deg, var(--primary), #4f46e5);
-            border-color: var(--accent);
-            box-shadow: 0 5px 20px var(--primary-glow);
-            transform: scale(0.96);
-        }
-
-        .cat-icon {
-            font-size: 20px;
-            display: block;
-            margin-bottom: 6px;
-        }
-
-        .cat-name {
-            font-size: 11px;
-            font-weight: 600;
             color: var(--text-main);
-            display: block;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-size: 11px;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
         }
 
-        /* Content Video List */
-        .content-list {
-            padding: 0 16px;
+        .cat-btn.active {
+            background: var(--primary);
+            border-color: var(--accent);
+            font-weight: 600;
+        }
+
+        .cat-btn span {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+
+        /* Playlist UI */
+        .playlist {
+            padding: 8px 16px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
 
-        .video-card {
-            background: var(--surface-color);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
+        .item-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 10px 14px;
             display: flex;
-            overflow: hidden;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid rgba(255,255,255,0.05);
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: background 0.15s;
         }
 
-        .video-card:active {
-            border-color: var(--primary);
-            background: rgba(30, 41, 59, 0.8);
-            transform: scale(0.98);
+        .item-card:active {
+            background: rgba(99, 102, 241, 0.25);
         }
 
-        .video-thumb {
-            width: 120px;
-            height: 75px;
-            background-color: #1e293b;
-            background-size: cover;
-            background-position: center;
-            position: relative;
+        .item-card.playing {
+            border-color: var(--accent);
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        .item-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .item-title {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .item-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .play-icon {
+            width: 28px;
+            height: 28px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 11px;
             flex-shrink: 0;
         }
 
-        .play-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            color: #fff;
-            backdrop-filter: blur(2px);
-            opacity: 0.8;
-            transition: opacity 0.2s;
-        }
-
-        .video-card:hover .play-overlay {
-            opacity: 1;
-            color: var(--accent);
-        }
-
-        .video-info {
-            padding: 10px 12px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            flex-grow: 1;
-        }
-
-        .video-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 6px;
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .video-meta {
-            font-size: 11px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        /* Support Section */
-        .support-box {
-            margin: 20px 16px;
-            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(15, 23, 42, 0.9));
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 16px;
-            padding: 20px;
+        .empty-msg {
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-        }
-        
-        .support-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 6px;
-        }
-        
-        .support-desc {
-            font-size: 12px;
+            padding: 20px;
+            font-size: 13px;
             color: var(--text-muted);
-            margin-bottom: 16px;
-            line-height: 1.5;
-        }
-        
-        .support-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 15px var(--primary-glow);
-            transition: transform 0.2s;
         }
 
-        .support-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Bottom Nav Bar */
-        .bottom-nav {
+        /* Bottom Navbar */
+        .navbar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 65px;
-            background: rgba(7, 9, 19, 0.9);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-top: 1px solid var(--border-color);
+            height: 56px;
+            background: #0f172a;
+            border-top: 1px solid rgba(255,255,255,0.1);
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             align-items: center;
-            z-index: 300;
-            padding-bottom: env(safe-area-inset-bottom);
+            z-index: 200;
         }
 
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        .nav-btn {
             color: var(--text-muted);
-            font-size: 9px;
-            font-weight: 600;
-            text-decoration: none;
+            font-size: 10px;
+            text-align: center;
             cursor: pointer;
-            transition: color 0.2s;
+            padding: 4px 0;
         }
 
-        .nav-item.active {
+        .nav-btn.active {
             color: var(--accent);
+            font-weight: 600;
         }
 
-        .nav-icon {
-            font-size: 18px;
-            margin-bottom: 3px;
+        .nav-btn div {
+            font-size: 16px;
+            margin-bottom: 2px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header>
-        <div class="logo-area">
-            <span class="logo-badge">IK</span>
-            <span class="logo-title">IKROMJON TV</span>
+        <div class="logo">
+            <span class="badge">IK</span> IKROMJON TV
         </div>
-        <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
-            <option value="uz">UZ</option>
-            <option value="ru">RU</option>
-            <option value="en">ENG</option>
-        </select>
+        <div id="clock" style="font-size: 11px; color: var(--text-muted); font-weight: 500;">00:00</div>
     </header>
 
-    <!-- Welcome & Clock Banner -->
-    <div class="welcome-banner">
-        <div class="welcome-title" id="welcomeText">IKROMJON TV-GA XUSH KELIBSIZ!</div>
-        <div class="clock-widget">
-            <span id="dateDisplay">📅 --.--.----</span>
-            <span>•</span>
-            <span id="clockDisplay">⏰ --:--:--</span>
+    <!-- Video Player Area -->
+    <div class="player-container">
+        <video id="appPlayer" controls playsinline poster="https://via.placeholder.com/600x340/161e2e/ffffff?text=IKROMJON+TV">
+            <source id="videoSource" src="" type="video/mp4">
+            Brauzeringiz videoni qo'llab-quvvatlamaydi.
+        </video>
+        <div class="video-title-bar">
+            <span id="currentTitle">Media tanlanmagan</span>
+            <span id="statusBadge" style="font-size: 10px; color: var(--text-muted);">TAYYOR</span>
+        </div>
+        <div class="search-box" id="searchBox">
+            <input type="text" id="searchInput" placeholder="Nomi bo'yicha qidiring..." oninput="filterMedia(this.value)">
         </div>
     </div>
 
-    <!-- Player Container -->
-    <div class="player-wrapper">
-        <div class="player-box">
-            <iframe id="main-player" src="https://www.youtube.com/embed/m5w1823x55U?autoplay=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="now-playing">
-            <div class="pulse-dot"></div> <span id="playingTitle">Home Alone - Somewhere in My Memory (Soundtrack)</span>
-        </div>
+    <!-- Category Selector -->
+    <div class="section-title">Bo'limlar</div>
+    <div class="categories">
+        <button class="cat-btn active" data-cat="tv">
+            <span>📺</span>TV
+        </button>
+        <button class="cat-btn" data-cat="kinolar">
+            <span>🎬</span>Kinolar
+        </button>
+        <button class="cat-btn" data-cat="musiqa">
+            <span>🎵</span>Musiqa
+        </button>
+        <button class="cat-btn" data-cat="sport">
+            <span>⚽</span>Sport
+        </button>
     </div>
 
-    <!-- Categories Grid -->
-    <div class="categories-section">
-        <div class="section-label" id="catLabel">Kategoriyalar</div>
-        <div class="category-grid">
-            <div class="cat-btn active" onclick="loadCategory('tv', this)">
-                <span class="cat-icon">📺</span>
-                <span class="cat-name" id="c1">Telekanallar</span>
-            </div>
-            <div class="cat-btn" onclick="loadCategory('uzbek', this)">
-                <span class="cat-icon">🎬</span>
-                <span class="cat-name" id="c2">O'zbek kinolar</span>
-            </div>
-            <div class="cat-btn" onclick="loadCategory('harry', this)">
-                <span class="cat-icon">🧙‍♂️</span>
-                <span class="cat-name" id="c3">Harry Potter</span>
-            </div>
-            <div class="cat-btn" onclick="loadCategory('foreign', this)">
-                <span class="cat-icon">🍿</span>
-                <span class="cat-name" id="c4">Xorijiy kinolar</span>
-            </div>
-            <div class="cat-btn" onclick="loadCategory('radio', this)">
-                <span class="cat-icon">📻</span>
-                <span class="cat-name" id="c5">Radiolar</span>
-            </div>
-            <div class="cat-btn" onclick="loadCategory('cartoons', this)">
-                <span class="cat-icon">🧸</span>
-                <span class="cat-name" id="c6">Multfilmlar</span>
-            </div>
-            <div class="cat-btn" onclick="loadCategory('edu', this)">
-                <span class="cat-icon">📚</span>
-                <span class="cat-name" id="c7">Fan va IT</span>
-            </div>
-            <div class="cat-btn" onclick="loadCategory('sport', this)">
-                <span class="cat-icon">⚽</span>
-                <span class="cat-name" id="c8">Sport</span>
-            </div>
-        </div>
-    </div>
+    <!-- Playlist Container -->
+    <div class="section-title" id="listTitle">Mavjud Efirlar</div>
+    <div class="playlist" id="playlist"></div>
 
-    <!-- Content List -->
-    <div class="content-list" id="videoList"></div>
-
-    <!-- Support Section -->
-    <div class="support-box" id="supportArea">
-        <div class="support-title" id="supTitle">🎧 Qo‘llab-quvvatlash mutaxassisi</div>
-        <div class="support-desc" id="supDesc">Ilovada biror muammo yoki taklifingiz bormi? Mutaxassis bilan bog‘laning.</div>
-        <a href="https://t.me/telegram" target="_blank" class="support-btn" id="supBtn">
-            💬 Telegram orqali yozish
-        </a>
-    </div>
-
-    <!-- Bottom Nav -->
-    <div class="bottom-nav">
-        <div class="nav-item active" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-            <span class="nav-icon">🏠</span>
-            <span id="n1">Bosh sahifa</span>
+    <!-- Bottom Navigation -->
+    <nav class="navbar">
+        <div class="nav-btn active" data-nav="tv" onclick="switchCategory('tv')">
+            <div>📺</div>Asosiy
         </div>
-        <div class="nav-item" onclick="loadCategory('tv', null)">
-            <span class="nav-icon">📡</span>
-            <span id="n2">Jonli efir</span>
+        <div class="nav-btn" data-nav="kinolar" onclick="switchCategory('kinolar')">
+            <div>🎥</div>Kinolar
         </div>
-        <div class="nav-item" onclick="promptSearch()">
-            <span class="nav-icon">🔍</span>
-            <span id="n3">Qidiruv</span>
+        <div class="nav-btn" id="searchNavBtn" onclick="toggleSearch()">
+            <div>🔍</div>Qidiruv
         </div>
-        <div class="nav-item" onclick="loadCategory('uzbek', null)">
-            <span class="nav-icon">🎥</span>
-            <span id="n4">Videolar</span>
+        <div class="nav-btn" onclick="showSettings()">
+            <div>⚙️</div>Sozlama
         </div>
-        <div class="nav-item" onclick="scrollToSupport()">
-            <span class="nav-icon">🎧</span>
-            <span id="n5">Yordam</span>
-        </div>
-        <div class="nav-item" onclick="alert('IKROMJON TV Profil Bo\'limi')">
-            <span class="nav-icon">👤</span>
-            <span id="n6">Profil</span>
-        </div>
-    </div>
+    </nav>
 
     <script>
+        // Media BAZASI (Doimiy ishlaydigan xavfsiz MP4 manbalar)
+        const mediaDatabase = {
+            tv: [
+                { id: 1, title: "Big Buck Bunny (Demo TV)", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", type: "HD • Jonli Efir" },
+                { id: 2, title: "Elephants Dream (Kanal 2)", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4", type: "Full HD • Efir" }
+            ],
+            kinolar: [
+                { id: 3, title: "For Bigger Blazes", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", type: "Kino • 1080p" },
+                { id: 4, title: "For Bigger Escapes", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", type: "Kino • Action" }
+            ],
+            musiqa: [
+                { id: 5, title: "Tears of Steel (Musiqiy Klip)", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4", type: "Music • HD" }
+            ],
+            sport: [
+                { id: 6, title: "Subaru OutBack Sport", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackToys.mp4", type: "Sport • Auto" }
+            ]
+        };
+
+        // DOM Elementlari
+        const player = document.getElementById('appPlayer');
+        const videoSource = document.getElementById('videoSource');
+        const currentTitle = document.getElementById('currentTitle');
+        const statusBadge = document.getElementById('statusBadge');
+        const playlistContainer = document.getElementById('playlist');
+        const searchBox = document.getElementById('searchBox');
+        const searchInput = document.getElementById('searchInput');
+
+        let currentCategory = 'tv';
+        let activeMediaId = null;
+
+        // Soatni yangilash
         function updateClock() {
             const now = new Date();
-            const dateStr = now.toLocaleDateString('uz-UZ', { day: '2-digit', month: '2-digit', year: 'numeric' });
-            const timeStr = now.toLocaleTimeString('uz-UZ');
-            document.getElementById('dateDisplay').innerText = "📅 " + dateStr;
-            document.getElementById('clockDisplay').innerText = "⏰ " + timeStr;
+            document.getElementById('clock').innerText = now.toLocaleTimeString('uz-UZ', {hour: '2-digit', minute:'2-digit'});
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        const data = {
-            tv: [
-                { title: "Uzbekistan 24 - Jonli Efir", url: "https://www.youtube.com/embed/jfKfPfyJRdk", meta: "TV • Jonli" },
-                { title: "Euronews Uzbek", url: "https://www.youtube.com/embed/21X5lGlDOfg", meta: "TV • Yangiliklar" }
-            ],
-            uzbek: [
-                { title: "Abdullajon (O'zbek Klassik)", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Kino • Komediya" },
-                { title: "Sumbula (Milliy Drama)", url: "https://www.youtube.com/embed/2g81116hA68", meta: "Kino • Drama" }
-            ],
-            harry: [
-                { title: "Harry Potter va Hikmatlar Tosh Treyleri", url: "https://www.youtube.com/embed/VyHV0BRMYEA", meta: "Fantasy • Film" },
-                { title: "Harry Potter - Soundtrack", url: "https://www.youtube.com/embed/1bq0qff4iSU", meta: "Musiqa • Soundtrack" }
-            ],
-            foreign: [
-                { title: "Home Alone - Main Theme (Somewhere in My Memory)", url: "https://www.youtube.com/embed/m5w1823x55U", meta: "Soundtrack • Classic" },
-                { title: "Interstellar (Koinot haqida)", url: "https://www.youtube.com/embed/zSWdZVtXT7E", meta: "Xorij • Sci-Fi" }
-            ],
-            radio: [
-                { title: "Lofi Chill Radio 24/7", url: "https://www.youtube.com/embed/jfKfPfyJRdk", meta: "Radio • Musiqa" },
-                { title: "Relaxing Piano Radio", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Radio • Sokin" }
-            ],
-            cartoons: [
-                { title: "Masha va Ayiq (Barcha qismlar)", url: "https://www.youtube.com/embed/LXb3EKWsInQ", meta: "Multfilm • Bolalar" },
-                { title: "Tom va Jerri (Klassik)", url: "https://www.youtube.com/embed/t06RUxPbp_c", meta: "Multfilm • Komediya" }
-            ],
-            edu: [
-                { title: "Python dasturlash tili darslari", url: "https://www.youtube.com/embed/d56mG7DezGs", meta: "Fan • Dasturlash" },
-                { title: "Web sayt yaratish to'liq kursi", url: "https://www.youtube.com/embed/8A-J30j1Mpo", meta: "Fan • Web Dev" }
-            ],
-            sport: [
-                { title: "Futbol gollari va eng zo'r vaziyatlar", url: "https://www.youtube.com/embed/2g81116hA68", meta: "Sport • Futbol" }
-            ]
-        };
+        // Safe Video Playback (Promise Handling)
+        async function playMedia(item) {
+            try {
+                statusBadge.innerText = "YUKLANMOQDA...";
+                statusBadge.style.color = "var(--accent)";
+                
+                player.pause();
+                videoSource.src = item.url;
+                player.load();
 
-        const translations = {
-            uz: {
-                welcome: "IKROMJON TV-GA XUSH KELIBSIZ!",
-                catLabel: "Kategoriyalar",
-                c1: "Telekanallar", c2: "O'zbek kinolar", c3: "Harry Potter", c4: "Xorijiy kinolar",
-                c5: "Radiolar", c6: "Multfilmlar", c7: "Fan va IT", c8: "Sport",
-                supTitle: "🎧 Qo‘llab-quvvatlash mutaxassisi",
-                supDesc: "Ilovada biror muammo yoki taklifingiz bormi? Mutaxassis bilan bog‘laning.",
-                supBtn: "💬 Telegram orqali yozish",
-                n1: "Bosh sahifa", n2: "Jonli efir", n3: "Qidiruv", n4: "Videolar", n5: "Yordam", n6: "Profil"
-            },
-            ru: {
-                welcome: "ДОБРО ПОЖАЛОВАТЬ В IKROMJON TV!",
-                catLabel: "Категории",
-                c1: "Телеканалы", c2: "Узбекские фильмы", c3: "Гарри Поттер", c4: "Зарубежные",
-                c5: "Радиостанции", c6: "
+                currentTitle.innerText = "▶ " + item.title;
+                activeMediaId = item.id;
+                
+                // Ro'yxatdagi aktiv element stilini yangilash
+                renderPlaylist(getCategoryItems(currentCategory));
+
+                await player.play();
+                statusBadge.innerText = "IJRO ETILMOQDA";
+                statusBadge.style.color = "#4ade80"; // green
+            } catch (err) {
+                console.warn("Autoplay / Network Error:", err);
+                statusBadge.innerText = "TAYYOR (BOSING)";
+                statusBadge.style.color = "var(--text-muted)";
+            }
+        }
+
+        // Kategoriya bo'yicha elementlarni olish
+        function getCategoryItems(cat) {
+            return mediaDatabase[cat] || [];
+        }
+
+        // Pleylistni chiqarish
+        function renderPlaylist(items) {
+            playlistContainer.innerHTML = '';
+
+            if (items.length === 0) {
+                playlistContainer.innerHTML = `<div class="empty-msg">Hech narsa topilmadi 😕</div>`;
+                return;
+            }
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                const isPlaying = item.id === activeMediaId;
+                card.className = `item-card ${isPlaying ? 'playing' : ''}`;
+                
+                card.onclick = () => playMedia(item);
+
+                card.innerHTML = `
+                    <div class="item-info">
+                        <div class="item-title">${item.title}</div>
+                        <div class="item-meta">${item.type}</div>
+                    </div>
+                    <div class="play-icon">${isPlaying ? '⏸' : '▶'}</div>
+                `;
+                playlistContainer.appendChild(card);
+            });
+        }
+
+        // Kategoriyani almashtirish funksiyasi
+        function switchCategory(catKey) {
+            currentCategory = catKey;
+
+            // Kategoriya tugmalarining aktivligini yangilash
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-cat') === catKey);
+            });
+
+            // Pastki navigatsiya aktivligini yangilash
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-nav') === catKey);
+            });
+
+            // Qidiruvni yopish
+            if (searchBox.classList.contains('active')) {
+                toggleSearch(false);
+            }
+
+            document.getElementById('listTitle').innerText = `Mavjud ${catKey.toUpperCase()}lar`;
+            renderPlaylist(getCategoryItems(catKey));
+        }
+
+        // Qidiruv funksionalligi
+        function toggleSearch(forceState) {
+            const show = forceState !== undefined ? forceState : !searchBox.classList.contains('active');
+            
+            if (show) {
+                searchBox.classList.add('active');
+                document.getElementById('searchNavBtn').classList.add('active');
+                searchInput.focus();
+            } else {
+                searchBox.classList.remove('active');
+                document.getElementById('searchNavBtn').classList.remove('active');
+                searchInput.value = '';
+                renderPlaylist(getCategoryItems(currentCategory));
+            }
+        }
+
+        function filterMedia(query) {
+            const cleanQuery = query.toLowerCase().trim();
+            if (!cleanQuery) {
+                renderPlaylist(getCategoryItems(currentCategory));
+                return;
+            }
+
+            // Barcha kategoriyalar bo'ylab qidirish
+            const allItems = Object.values(mediaDatabase).flat();
+            const filtered = allItems.filter(item => item.title.toLowerCase().includes(cleanQuery));
+            
+            document.getElementById('listTitle').innerText = `Qidiruv natijalari (${filtered.length})`;
+            renderPlaylist(filtered);
+        }
+
+        function showSettings() {
+            alert("⚙️ IKROMJON TV v2.0\nBarcha modullar barqaror ishlayapti.");
+        }
+
+        // Kategoriya tugmalariga Event Listeners biriktirish
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const cat = this.getAttribute('data-cat');
+                switchCategory(cat);
+            });
+        });
+
+        // Boshlang'ich yuklanish
+        switchCategory('tv');
+        // Birinchi elementni pleyerga yuklab qo'yish (ijro etmasdan)
+        if (mediaDatabase.tv.length > 0) {
+            const first = mediaDatabase.tv[0];
+            videoSource.src = first.url;
+            currentTitle.innerText = first.title;
+            activeMediaId = first.id;
+            renderPlaylist(mediaDatabase.tv);
+        }
+    </script>
+</body>
+</html>
