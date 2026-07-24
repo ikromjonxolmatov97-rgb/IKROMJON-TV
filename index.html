@@ -4,22 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>IKROMJON TV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: #161e2e;
-            --primary: #6366f1;
-            --accent: #38bdf8;
+            --bg-color: #0d0914;
+            --surface: #171226;
+            --surface-hover: #221b38;
+            --primary-green: #22c55e;
+            --primary-green-glow: rgba(34, 197, 94, 0.4);
+            --accent-purple: #8b5cf6;
             --text-main: #ffffff;
-            --text-muted: #94a3b8;
-            --danger: #ef4444;
+            --text-muted: #a1a1aa;
+            --border-color: rgba(255, 255, 255, 0.08);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-tap-highlight-color: transparent;
             user-select: none;
         }
@@ -27,467 +30,538 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            padding-bottom: 70px;
+            padding-bottom: 75px;
+            overflow-x: hidden;
         }
 
-        /* Top Header */
+        /* Top Bar Header */
         header {
-            background: #0f172a;
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .logo {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .badge {
-            background: var(--primary);
-            color: #fff;
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 800;
-        }
-
-        /* Sticky Player Container */
-        .player-container {
-            width: 100%;
-            background: #000;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            background: rgba(13, 9, 20, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #22c55e, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 18px;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* Main Hero Banner (Featured Film) */
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            background: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1000&auto=format&fit=crop') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--bg-color) 10%, rgba(13, 9, 20, 0.4) 60%, rgba(13, 9, 20, 0.8) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge-prem {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--primary-green);
+            border: 1px solid var(--primary-green);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+
+        .hero-title {
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 6px;
+        }
+
+        .hero-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .btn-watch {
+            width: 100%;
+            background: var(--primary-green);
+            color: #000;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px var(--primary-green-glow);
+            transition: transform 0.15s;
+        }
+
+        .btn-watch:active {
+            transform: scale(0.98);
+        }
+
+        /* Top Category Pills Nav */
+        .category-tabs {
+            display: flex;
+            gap: 8px;
+            padding: 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .category-tabs::-webkit-scrollbar { display: none; }
+
+        .tab-btn {
+            background: var(--surface);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--text-main);
+            color: #000;
+            border-color: var(--text-main);
+            font-weight: 700;
+        }
+
+        /* Section Title Header */
+        .section-header {
+            padding: 16px 16px 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .see-all {
+            font-size: 12px;
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Horizontal Scroll Media Rows */
+        .horizontal-row {
+            display: flex;
+            gap: 12px;
+            padding: 0 16px 10px 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .horizontal-row::-webkit-scrollbar { display: none; }
+
+        .movie-card {
+            min-width: 125px;
+            max-width: 125px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .poster-wrapper {
+            position: relative;
+            width: 100%;
+            height: 175px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--surface);
+            margin-bottom: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .poster-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .poster-badge {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(4px);
+            color: var(--primary-green);
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .movie-name {
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .movie-sub {
+            font-size: 10px;
+            color: var(--primary-green);
+            margin-top: 2px;
+        }
+
+        /* Channel Grid (190+ TV Channels Section) */
+        .tv-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 0 16px 10px 16px;
+        }
+
+        .channel-card {
+            background: #ffffff;
+            height: 80px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .channel-card:active {
+            transform: scale(0.95);
+        }
+
+        .channel-card img {
+            max-width: 85%;
+            max-height: 85%;
+            object-fit: contain;
+        }
+
+        /* Video Player Modal Overlay */
+        .player-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .player-modal.active {
+            display: flex;
+        }
+
+        .player-header {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #000;
+        }
+
+        .video-box {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
         }
 
         video {
             width: 100%;
-            max-height: 220px;
-            display: block;
-            background: #000;
-            outline: none;
+            height: 100%;
         }
 
-        .video-title-bar {
-            padding: 10px 16px;
-            background: #111827;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--accent);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        /* Search Input Bar */
-        .search-box {
-            padding: 10px 16px;
-            display: none;
-            background: #111827;
-        }
-
-        .search-box.active {
-            display: block;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 8px 12px;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.15);
-            background: var(--card-bg);
-            color: #fff;
-            font-size: 13px;
-            outline: none;
-        }
-
-        .search-box input:focus {
-            border-color: var(--accent);
-        }
-
-        /* Section Titles */
-        .section-title {
-            padding: 14px 16px 6px 16px;
-            font-size: 11px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            letter-spacing: 0.8px;
-            font-weight: 600;
-        }
-
-        /* Categories */
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            padding: 8px 16px;
-        }
-
-        .cat-btn {
-            background: var(--card-bg);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 8px;
-            padding: 8px 4px;
-            text-align: center;
-            color: var(--text-main);
-            font-size: 11px;
-            cursor: pointer;
-            transition: background 0.2s, border-color 0.2s;
-        }
-
-        .cat-btn.active {
-            background: var(--primary);
-            border-color: var(--accent);
-            font-weight: 600;
-        }
-
-        .cat-btn span {
-            display: block;
-            font-size: 16px;
-            margin-bottom: 2px;
-        }
-
-        /* Playlist UI */
-        .playlist {
-            padding: 8px 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .item-card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            padding: 10px 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border: 1px solid rgba(255,255,255,0.05);
-            cursor: pointer;
-            transition: background 0.15s;
-        }
-
-        .item-card:active {
-            background: rgba(99, 102, 241, 0.25);
-        }
-
-        .item-card.playing {
-            border-color: var(--accent);
-            background: rgba(56, 189, 248, 0.1);
-        }
-
-        .item-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .item-title {
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .item-meta {
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        .play-icon {
-            width: 28px;
-            height: 28px;
-            background: rgba(255,255,255,0.08);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent);
-            font-size: 11px;
-            flex-shrink: 0;
-        }
-
-        .empty-msg {
-            text-align: center;
+        .player-details {
             padding: 20px;
-            font-size: 13px;
-            color: var(--text-muted);
+            flex-grow: 1;
+            overflow-y: auto;
         }
 
-        /* Bottom Navbar */
-        .navbar {
+        /* Bottom Fixed Navigation */
+        .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 56px;
-            background: #0f172a;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            height: 60px;
+            background: rgba(15, 11, 25, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border-color);
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             align-items: center;
             z-index: 200;
         }
 
-        .nav-btn {
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             color: var(--text-muted);
             font-size: 10px;
-            text-align: center;
+            font-weight: 500;
+            text-decoration: none;
             cursor: pointer;
-            padding: 4px 0;
+            gap: 4px;
         }
 
-        .nav-btn.active {
-            color: var(--accent);
-            font-weight: 600;
+        .nav-item.active {
+            color: var(--primary-green);
         }
 
-        .nav-btn div {
-            font-size: 16px;
-            margin-bottom: 2px;
+        .nav-icon {
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
 
+    <!-- Top Header Bar -->
     <header>
-        <div class="logo">
-            <span class="badge">IK</span> IKROMJON TV
+        <div class="logo-box">
+            <span class="logo-text">IKROMJON TV</span>
         </div>
-        <div id="clock" style="font-size: 11px; color: var(--text-muted); font-weight: 500;">00:00</div>
+        <div class="header-actions">
+            <button class="icon-btn" onclick="openSearch()">🔍</button>
+            <button class="icon-btn" onclick="alert('Xabarnomalar yo\'q')">🔔</button>
+            <button class="icon-btn" onclick="alert('Sozlamalar oynasi')">⚙️</button>
+        </div>
     </header>
 
-    <!-- Video Player Area -->
-    <div class="player-container">
-        <video id="appPlayer" controls playsinline poster="https://via.placeholder.com/600x340/161e2e/ffffff?text=IKROMJON+TV">
-            <source id="videoSource" src="" type="video/mp4">
-            Brauzeringiz videoni qo'llab-quvvatlamaydi.
-        </video>
-        <div class="video-title-bar">
-            <span id="currentTitle">Media tanlanmagan</span>
-            <span id="statusBadge" style="font-size: 10px; color: var(--text-muted);">TAYYOR</span>
-        </div>
-        <div class="search-box" id="searchBox">
-            <input type="text" id="searchInput" placeholder="Nomi bo'yicha qidiring..." oninput="filterMedia(this.value)">
+    <!-- Top Category Tabs -->
+    <div class="category-tabs">
+        <button class="tab-btn active" onclick="filterTab(this, 'all')">Barchasi</button>
+        <button class="tab-btn" onclick="filterTab(this, 'tv')">TV Kanallar</button>
+        <button class="tab-btn" onclick="filterTab(this, 'subtitle')">AI Subtitrli</button>
+        <button class="tab-btn" onclick="filterTab(this, 'kids')">Multfilmlar</button>
+        <button class="tab-btn" onclick="filterTab(this, 'series')">Seriallar</button>
+    </div>
+
+    <!-- Hero Banner (Premyera) -->
+    <div class="hero-banner" id="heroArea">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="badge-prem">Premyera 2026</span>
+            <h1 class="hero-title">OLOV</h1>
+            <p class="hero-meta">Triller, 2024, 18+ • O'zbek tilida</p>
+            <button class="btn-watch" onclick="playVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', 'OLOV (Premyera)')">
+                ▶ Tomosha qilish
+            </button>
         </div>
     </div>
 
-    <!-- Category Selector -->
-    <div class="section-title">Bo'limlar</div>
-    <div class="categories">
-        <button class="cat-btn active" data-cat="tv">
-            <span>📺</span>TV
-        </button>
-        <button class="cat-btn" data-cat="kinolar">
-            <span>🎬</span>Kinolar
-        </button>
-        <button class="cat-btn" data-cat="musiqa">
-            <span>🎵</span>Musiqa
-        </button>
-        <button class="cat-btn" data-cat="sport">
-            <span>⚽</span>Sport
-        </button>
+    <!-- Section: 190+ TV Kanallar -->
+    <div class="section-header">
+        <div class="section-title">190+ Jonli TV Kanallar</div>
+        <a href="#" class="see-all">Barchasi ›</a>
+    </div>
+    <div class="tv-grid">
+        <div class="channel-card" onclick="playVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4', '1 TV HD')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Pervy_Kanal_logo.svg/320px-Pervy_Kanal_logo.svg.png" alt="1 TV">
+        </div>
+        <div class="channel-card" onclick="playVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', 'Rossiya 1')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Russia-1_logo.svg" alt="Rossiya 1">
+        </div>
+        <div class="channel-card" onclick="playVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4', 'Euronews')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Euronews_logo_2016.svg/320px-Euronews_logo_2016.svg.png" alt="Euronews">
+        </div>
     </div>
 
-    <!-- Playlist Container -->
-    <div class="section-title" id="listTitle">Mavjud Efirlar</div>
-    <div class="playlist" id="playlist"></div>
+    <!-- Section: O'zbek tilidagi subtitrli filmlar (AI) -->
+    <div class="section-header">
+        <div class="section-title">AI Subtitrli Filmlar 🤖</div>
+        <a href="#" class="see-all">Barchasi ›</a>
+    </div>
+    <div class="horizontal-row">
+        <div class="movie-card" onclick="playVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4', '100 Yardov')">
+            <div class="poster-wrapper">
+                <span class="poster-badge">AI UZ</span>
+                <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=400&auto=format&fit=crop" alt="Film">
+            </div>
+            <div class="movie-name">100 Yardov</div>
+            <div class="movie-sub">Subtitrli</div>
+        </div>
+        <div class="movie-card" onclick="playVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4', 'Zavedi Menya')">
+            <div class="poster-wrapper">
+                <span class="poster-badge">AI UZ</span>
+                <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=400&auto=format&fit=crop" alt="Film">
+            </div>
+            <div class="movie-name">Zavedi Menya</div>
+            <div class="movie-sub">Subtitrli</div>
+        </div>
+        <div class="movie-card" onclick="playVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4', 'Sinkansene')">
+            <div class="poster-wrapper">
+                <span class="poster-badge">AI UZ</span>
+                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=400&auto=format&fit=crop" alt="Film">
+            </div>
+            <div class="movie-name">Sinkansene</div>
+            <div class="movie-sub">Subtitrli</div>
+        </div>
+    </div>
 
-    <!-- Bottom Navigation -->
-    <nav class="navbar">
-        <div class="nav-btn active" data-nav="tv" onclick="switchCategory('tv')">
-            <div>📺</div>Asosiy
+    <!-- Section: Multfilmlar (IKROMJON KIDS) -->
+    <div class="section-header">
+        <div class="section-title">O'zbek dublyajidagi multfilmlar 🧸</div>
+        <a href="#" class="see-all">Barchasi ›</a>
+    </div>
+    <div class="horizontal-row">
+        <div class="movie-card" onclick="playVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4', 'Masha va Maymoq')">
+            <div class="poster-wrapper">
+                <span class="poster-badge">0+</span>
+                <img src="https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=400&auto=format&fit=crop" alt="Masha">
+            </div>
+            <div class="movie-name">Masha va Maymoq</div>
+            <div class="movie-sub">Bepul</div>
         </div>
-        <div class="nav-btn" data-nav="kinolar" onclick="switchCategory('kinolar')">
-            <div>🎥</div>Kinolar
+        <div class="movie-card" onclick="playVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackToys.mp4', 'Bek va Lola')">
+            <div class="poster-wrapper">
+                <span class="poster-badge">6+</span>
+                <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=400&auto=format&fit=crop" alt="Bek">
+            </div>
+            <div class="movie-name">Bek va Lola</div>
+            <div class="movie-sub">Bepul</div>
         </div>
-        <div class="nav-btn" id="searchNavBtn" onclick="toggleSearch()">
-            <div>🔍</div>Qidiruv
+        <div class="movie-card" onclick="playVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4', 'Yuxu Do\'stlari')">
+            <div class="poster-wrapper">
+                <span class="poster-badge">6+</span>
+                <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=400&auto=format&fit=crop" alt="Yuxu">
+            </div>
+            <div class="movie-name">Yuxu va Do'stlari</div>
+            <div class="movie-sub">Bepul</div>
         </div>
-        <div class="nav-btn" onclick="showSettings()">
-            <div>⚙️</div>Sozlama
+    </div>
+
+    <!-- Player Modal Overlay -->
+    <div class="player-modal" id="playerModal">
+        <div class="player-header">
+            <span id="playerMediaTitle" style="font-weight: 700; font-size: 14px;">Media</span>
+            <button class="icon-btn" style="font-size: 22px;" onclick="closePlayer()">✕</button>
+        </div>
+        <div class="video-box">
+            <video id="modalVideo" controls playsinline></video>
+        </div>
+        <div class="player-details">
+            <h2 id="modalMediaName" style="font-size: 20px; margin-bottom: 8px;">Nomi</h2>
+            <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">
+                IKROMJON TV yuqori sifatli HD pleyeri orqali maroq bilan tomosha qiling. Onlayn translatsiya barqaror va tezkor ishlaydi.
+            </p>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="switchNav(this)">
+            <span class="nav-icon">🏠</span>
+            <span>Bosh sahifa</span>
+        </div>
+        <div class="nav-item" onclick="switchNav(this)">
+            <span class="nav-icon">📺</span>
+            <span>TV</span>
+        </div>
+        <div class="nav-item" onclick="openSearch()">
+            <span class="nav-icon">🔍</span>
+            <span>Qidiruv</span>
+        </div>
+        <div class="nav-item" onclick="switchNav(this)">
+            <span class="nav-icon">⭐</span>
+            <span>Mening TV</span>
+        </div>
+        <div class="nav-item" onclick="switchNav(this)">
+            <span class="nav-icon">👤</span>
+            <span>Profil</span>
         </div>
     </nav>
 
     <script>
-        // Media BAZASI (Doimiy ishlaydigan xavfsiz MP4 manbalar)
-        const mediaDatabase = {
-            tv: [
-                { id: 1, title: "Big Buck Bunny (Demo TV)", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", type: "HD • Jonli Efir" },
-                { id: 2, title: "Elephants Dream (Kanal 2)", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4", type: "Full HD • Efir" }
-            ],
-            kinolar: [
-                { id: 3, title: "For Bigger Blazes", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", type: "Kino • 1080p" },
-                { id: 4, title: "For Bigger Escapes", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", type: "Kino • Action" }
-            ],
-            musiqa: [
-                { id: 5, title: "Tears of Steel (Musiqiy Klip)", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4", type: "Music • HD" }
-            ],
-            sport: [
-                { id: 6, title: "Subaru OutBack Sport", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackToys.mp4", type: "Sport • Auto" }
-            ]
-        };
+        const modal = document.getElementById('playerModal');
+        const modalVideo = document.getElementById('modalVideo');
+        const playerMediaTitle = document.getElementById('playerMediaTitle');
+        const modalMediaName = document.getElementById('modalMediaName');
 
-        // DOM Elementlari
-        const player = document.getElementById('appPlayer');
-        const videoSource = document.getElementById('videoSource');
-        const currentTitle = document.getElementById('currentTitle');
-        const statusBadge = document.getElementById('statusBadge');
-        const playlistContainer = document.getElementById('playlist');
-        const searchBox = document.getElementById('searchBox');
-        const searchInput = document.getElementById('searchInput');
-
-        let currentCategory = 'tv';
-        let activeMediaId = null;
-
-        // Soatni yangilash
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('clock').innerText = now.toLocaleTimeString('uz-UZ', {hour: '2-digit', minute:'2-digit'});
+        function playVideo(url, name) {
+            modalVideo.src = url;
+            playerMediaTitle.innerText = name;
+            modalMediaName.innerText = name;
+            modal.classList.add('active');
+            modalVideo.play().catch(e => console.log('Autoplay handled'));
         }
-        setInterval(updateClock, 1000);
-        updateClock();
 
-        // Safe Video Playback (Promise Handling)
-        async function playMedia(item) {
-            try {
-                statusBadge.innerText = "YUKLANMOQDA...";
-                statusBadge.style.color = "var(--accent)";
-                
-                player.pause();
-                videoSource.src = item.url;
-                player.load();
+        function closePlayer() {
+            modalVideo.pause();
+            modalVideo.src = '';
+            modal.classList.remove('active');
+        }
 
-                currentTitle.innerText = "▶ " + item.title;
-                activeMediaId = item.id;
-                
-                // Ro'yxatdagi aktiv element stilini yangilash
-                renderPlaylist(getCategoryItems(currentCategory));
+        function filterTab(btn, category) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
 
-                await player.play();
-                statusBadge.innerText = "IJRO ETILMOQDA";
-                statusBadge.style.color = "#4ade80"; // green
-            } catch (err) {
-                console.warn("Autoplay / Network Error:", err);
-                statusBadge.innerText = "TAYYOR (BOSING)";
-                statusBadge.style.color = "var(--text-muted)";
+        function switchNav(element) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function openSearch() {
+            let q = prompt("Qaysi kino yoki TV kanalni qidirmoqchisiz?");
+            if(q) {
+                alert("'" + q + "' bo'yicha ma'lumotlar yuklanmoqda...");
             }
-        }
-
-        // Kategoriya bo'yicha elementlarni olish
-        function getCategoryItems(cat) {
-            return mediaDatabase[cat] || [];
-        }
-
-        // Pleylistni chiqarish
-        function renderPlaylist(items) {
-            playlistContainer.innerHTML = '';
-
-            if (items.length === 0) {
-                playlistContainer.innerHTML = `<div class="empty-msg">Hech narsa topilmadi 😕</div>`;
-                return;
-            }
-
-            items.forEach(item => {
-                const card = document.createElement('div');
-                const isPlaying = item.id === activeMediaId;
-                card.className = `item-card ${isPlaying ? 'playing' : ''}`;
-                
-                card.onclick = () => playMedia(item);
-
-                card.innerHTML = `
-                    <div class="item-info">
-                        <div class="item-title">${item.title}</div>
-                        <div class="item-meta">${item.type}</div>
-                    </div>
-                    <div class="play-icon">${isPlaying ? '⏸' : '▶'}</div>
-                `;
-                playlistContainer.appendChild(card);
-            });
-        }
-
-        // Kategoriyani almashtirish funksiyasi
-        function switchCategory(catKey) {
-            currentCategory = catKey;
-
-            // Kategoriya tugmalarining aktivligini yangilash
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-cat') === catKey);
-            });
-
-            // Pastki navigatsiya aktivligini yangilash
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-nav') === catKey);
-            });
-
-            // Qidiruvni yopish
-            if (searchBox.classList.contains('active')) {
-                toggleSearch(false);
-            }
-
-            document.getElementById('listTitle').innerText = `Mavjud ${catKey.toUpperCase()}lar`;
-            renderPlaylist(getCategoryItems(catKey));
-        }
-
-        // Qidiruv funksionalligi
-        function toggleSearch(forceState) {
-            const show = forceState !== undefined ? forceState : !searchBox.classList.contains('active');
-            
-            if (show) {
-                searchBox.classList.add('active');
-                document.getElementById('searchNavBtn').classList.add('active');
-                searchInput.focus();
-            } else {
-                searchBox.classList.remove('active');
-                document.getElementById('searchNavBtn').classList.remove('active');
-                searchInput.value = '';
-                renderPlaylist(getCategoryItems(currentCategory));
-            }
-        }
-
-        function filterMedia(query) {
-            const cleanQuery = query.toLowerCase().trim();
-            if (!cleanQuery) {
-                renderPlaylist(getCategoryItems(currentCategory));
-                return;
-            }
-
-            // Barcha kategoriyalar bo'ylab qidirish
-            const allItems = Object.values(mediaDatabase).flat();
-            const filtered = allItems.filter(item => item.title.toLowerCase().includes(cleanQuery));
-            
-            document.getElementById('listTitle').innerText = `Qidiruv natijalari (${filtered.length})`;
-            renderPlaylist(filtered);
-        }
-
-        function showSettings() {
-            alert("⚙️ IKROMJON TV v2.0\nBarcha modullar barqaror ishlayapti.");
-        }
-
-        // Kategoriya tugmalariga Event Listeners biriktirish
-        document.querySelectorAll('.cat-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const cat = this.getAttribute('data-cat');
-                switchCategory(cat);
-            });
-        });
-
-        // Boshlang'ich yuklanish
-        switchCategory('tv');
-        // Birinchi elementni pleyerga yuklab qo'yish (ijro etmasdan)
-        if (mediaDatabase.tv.length > 0) {
-            const first = mediaDatabase.tv[0];
-            videoSource.src = first.url;
-            currentTitle.innerText = first.title;
-            activeMediaId = first.id;
-            renderPlaylist(mediaDatabase.tv);
         }
     </script>
 </body>
