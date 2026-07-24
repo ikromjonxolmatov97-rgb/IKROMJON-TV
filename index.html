@@ -6,342 +6,640 @@
     <title>IKROMJON TV</title>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            user-select: none;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         body {
-            background-color: #080b13;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
+            background: linear-gradient(135deg, #0a0a2e, #1a1a4e);
+            color: #fff;
             min-height: 100vh;
-            padding-bottom: 70px;
+            overflow-x: hidden;
         }
 
-        /* 1. LOADING SCREEN */
-        #appLoaderScreen {
+        /* ==================== LOADING SCREEN ==================== */
+        #loadingScreen {
             position: fixed;
-            inset: 0;
-            background: #05070d;
-            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a2e, #1a1a4e, #2a1a5e);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
+            z-index: 9999;
+            transition: opacity 0.8s ease;
         }
-
+        #loadingScreen.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
         .loader-logo {
-            font-size: 26px;
-            font-weight: 900;
-            color: #00d2ff;
-            text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
-            margin-bottom: 20px;
-            letter-spacing: 1px;
+            font-size: 48px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #f7971e, #ffd200);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            animation: pulse 1.5s infinite;
         }
-
-        .loader-progress-box {
-            width: 80%;
-            max-width: 300px;
-            background: #111a2e;
-            height: 10px;
-            border-radius: 20px;
-            border: 1px solid #1e2d4a;
+        .loader-spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(255,215,0,0.1);
+            border-top: 4px solid #ffd700;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 30px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loader-bar {
+            width: 280px;
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
             overflow: hidden;
+            margin-bottom: 15px;
         }
-
-        .loader-progress-bar {
-            width: 0%;
+        .loader-bar-fill {
             height: 100%;
-            background: linear-gradient(90deg, #0088ff, #00d2ff);
-            border-radius: 20px;
-            transition: width 0.05s linear;
+            width: 0%;
+            background: linear-gradient(90deg, #f7971e, #ffd200);
+            border-radius: 3px;
+            transition: width 0.3s ease;
         }
-
-        .loader-status-text {
-            margin-top: 12px;
-            font-size: 13px;
-            color: #00d2ff;
+        .loader-text {
+            font-size: 18px;
+            color: #ffd700;
             font-weight: bold;
         }
 
-        /* 2. HEADER & PLAYER */
-        header {
-            background: #0d1527;
-            padding: 12px;
-            text-align: center;
-            border-bottom: 1px solid #1a263d;
-        }
-
-        .header-title { font-size: 16px; font-weight: 800; color: #00d2ff; }
-
-        .player-box {
-            width: 100%;
-            background-color: #000;
-            aspect-ratio: 16 / 9;
-            position: sticky;
+        /* ==================== WHEEL / BARABAN ==================== */
+        #wheelOverlay {
+            position: fixed;
             top: 0;
-            z-index: 100;
-        }
-
-        iframe { width: 100%; height: 100%; border: none; }
-
-        .now-playing {
-            padding: 10px 15px;
-            background: #0f172a;
-            font-size: 12px;
-            color: #00d2ff;
-            border-bottom: 1px solid #1e293b;
-        }
-
-        /* 3. CATEGORIES & CARDS */
-        .categories-section { padding: 12px; }
-        .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-        .cat-btn {
-            background: #111a2e;
-            border: 1px solid #1e2d4a;
-            border-radius: 8px;
-            padding: 8px;
-            text-align: center;
-            font-size: 10px;
-            color: #fff;
-            cursor: pointer;
-        }
-        .cat-btn.active { background: #0088ff; border-color: #00d2ff; }
-
-        .content-list { padding: 0 12px 12px 12px; display: flex; flex-direction: column; gap: 8px; }
-        .video-card {
-            background: #111a2e;
-            border: 1px solid #1a2942;
-            border-radius: 8px;
-            display: flex;
-            padding: 8px;
-            gap: 10px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: none;
             align-items: center;
-            cursor: pointer;
+            justify-content: center;
+            z-index: 9998;
+            backdrop-filter: blur(10px);
         }
-        .video-card:active { background: #1a2744; }
-        .play-icon { font-size: 18px; color: #00d2ff; }
-        .video-info { flex: 1; }
-        .video-title { font-size: 12px; font-weight: bold; color: #fff; }
-        .video-meta { font-size: 10px; color: #94a3b8; margin-top: 2px; }
+        #wheelOverlay.show {
+            display: flex;
+        }
+        .wheel-container {
+            background: linear-gradient(145deg, #1a1a3e, #2a2a5e);
+            border-radius: 30px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            border: 2px solid rgba(255,215,0,0.3);
+            box-shadow: 0 0 60px rgba(255,215,0,0.1);
+            text-align: center;
+        }
+        .wheel-title {
+            font-size: 24px;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+        .wheel-subtitle {
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+        .wheel-outer {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 20px;
+        }
+        canvas#wheelCanvas {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            box-shadow: 0 0 40px rgba(255,215,0,0.2);
+        }
+        .wheel-pointer {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255,215,0,0.8);
+        }
+        .wheel-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            margin: 15px 0;
+        }
+        .wheel-info span {
+            font-size: 14px;
+            color: #ccc;
+        }
+        .wheel-info .highlight {
+            color: #ffd700;
+            font-weight: bold;
+        }
+        .wheel-btn {
+            background: linear-gradient(45deg, #f7971e, #ffd200);
+            color: #000;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            margin: 5px 0;
+        }
+        .wheel-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .wheel-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255,215,0,0.3);
+        }
+        .wheel-btn.buy {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: #fff;
+        }
+        .wheel-close {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 10px 30px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+        }
 
-        /* 4. SUPPORT SECTION */
-        .support-box {
-            margin: 10px 12px 20px 12px;
-            background: #111a2e;
-            border: 1px solid #0088ff;
+        /* ==================== MAIN APP ==================== */
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 15px;
+            display: none;
+        }
+        .container.show {
+            display: block;
+        }
+
+        .header {
+            text-align: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .header h1 {
+            font-size: 26px;
+            background: linear-gradient(45deg, #f7971e, #ffd200);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header p {
+            color: #ffd700;
+            font-size: 13px;
+            margin-top: 3px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .welcome {
+            text-align: center;
+            padding: 20px 0 10px 0;
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255,215,0,0.3);
+        }
+
+        .wheel-banner {
+            background: linear-gradient(135deg, rgba(247,151,30,0.15), rgba(255,210,0,0.05));
+            border: 1px solid rgba(255,215,0,0.2);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            margin: 10px 0 20px 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .wheel-banner:hover {
+            background: rgba(247,151,30,0.2);
+        }
+        .wheel-banner .icon {
+            font-size: 35px;
+            display: block;
+        }
+        .wheel-banner .text {
+            font-size: 14px;
+            color: #ffd700;
+            margin-top: 5px;
+        }
+        .wheel-banner .free-spins {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .stars {
+            text-align: center;
+            padding: 5px 0 15px 0;
+        }
+        .stars span {
+            font-size: 35px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: #555;
+        }
+        .stars span.active {
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255,215,0,0.8);
+        }
+
+        .date-time {
+            text-align: center;
+            padding: 12px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            margin: 10px 0;
+            font-size: 15px;
+            border: 1px solid rgba(255,215,0,0.15);
+        }
+        .date-time span {
+            color: #ffd700;
+        }
+
+        .annos {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .anno-item {
+            background: rgba(255,215,0,0.08);
+            border: 1px solid rgba(255,215,0,0.15);
+            border-radius: 10px;
+            padding: 8px 4px;
+            text-align: center;
+            font-size: 11px;
+        }
+        .anno-item .number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .section-card {
+            background: rgba(255,255,255,0.05);
             border-radius: 12px;
             padding: 15px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 136, 255, 0.15);
-        }
-        .support-title {
-            font-size: 13px;
-            font-weight: bold;
-            color: #00d2ff;
-            margin-bottom: 6px;
-        }
-        .support-desc {
-            font-size: 11px;
-            color: #94a3b8;
-            margin-bottom: 12px;
-        }
-        .support-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            background: linear-gradient(90deg, #0088ff, #00d2ff);
-            color: #fff;
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: bold;
-            border: none;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: 0.3s;
             cursor: pointer;
         }
-
-        /* 5. BOTTOM NAV (6 TA FUNKSIYA) */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            height: 55px;
-            background: #0b1120;
-            border-top: 1px solid #1e293b;
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            align-items: center;
-            z-index: 200;
+        .section-card:hover {
+            background: rgba(255,215,0,0.1);
+            border-color: #ffd700;
+            transform: translateY(-2px);
         }
-        .nav-item { 
-            text-align: center; 
-            color: #94a3b8; 
-            font-size: 8px; 
-            cursor: pointer; 
+        .section-card .icon {
+            font-size: 28px;
+        }
+        .section-card .label {
+            font-size: 12px;
+            color: #ccc;
+            margin-top: 3px;
+        }
+
+        .horoscope {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,215,0,0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255,215,0,0.1);
+        }
+        .horoscope h3 {
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .horoscope-item {
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 13px;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+        }
+        .horoscope-item .sign {
+            color: #ffd700;
+        }
+
+        .video-section {
+            margin: 15px 0;
+        }
+        .video-section h3 {
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+        }
+        .video-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 10px 5px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .video-card .thumb {
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(45deg, #f7971e, #ffd200);
+            border-radius: 8px;
+            display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 24px;
         }
-        .nav-item.active { color: #0088ff; }
-        .nav-icon { font-size: 14px; margin-bottom: 2px; }
+        .video-card .title {
+            font-size: 10px;
+            margin-top: 4px;
+            color: #ccc;
+        }
+
+        .lang-select {
+            text-align: center;
+            margin: 10px 0;
+        }
+        .lang-select button {
+            background: rgba(255,215,0,0.08);
+            border: 1px solid rgba(255,215,0,0.2);
+            color: #fff;
+            padding: 6px 14px;
+            margin: 3px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: 0.3s;
+        }
+        .lang-select button:hover {
+            background: rgba(255,215,0,0.2);
+        }
+        .lang-select button.active {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px 0 5px 0;
+            font-size: 11px;
+            color: #555;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        audio {
+            display: none;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 400px) {
+            .wheel-outer {
+                width: 200px;
+                height: 200px;
+            }
+            canvas#wheelCanvas {
+                width: 200px;
+                height: 200px;
+            }
+            .wheel-container {
+                padding: 20px;
+            }
+            .annos {
+                gap: 5px;
+            }
+            .anno-item {
+                font-size: 10px;
+                padding: 6px 3px;
+            }
+            .anno-item .number {
+                font-size: 15px;
+            }
+            .video-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* ==================== TOAST ==================== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.9);
+            color: #ffd700;
+            padding: 15px 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,215,0,0.3);
+            font-size: 16px;
+            z-index: 10000;
+            display: none;
+            text-align: center;
+            max-width: 90%;
+            backdrop-filter: blur(10px);
+        }
+        .toast.show {
+            display: block;
+            animation: slideUp 0.5s ease;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateX(-50%) translateY(30px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
     </style>
 </head>
 <body>
 
-    <!-- LOADING SCREEN -->
-    <div id="appLoaderScreen">
-        <div class="loader-logo">IKROMJON TV</div>
-        <div class="loader-progress-box">
-            <div class="loader-progress-bar" id="loaderBar"></div>
+    <!-- ==================== LOADING SCREEN ==================== -->
+    <div id="loadingScreen">
+        <div class="loader-logo">⭐ IKROMJON TV</div>
+        <div class="loader-spinner"></div>
+        <div class="loader-bar">
+            <div class="loader-bar-fill" id="loaderFill"></div>
         </div>
-        <div class="loader-status-text"><span id="loaderPercent">0</span>%</div>
+        <div class="loader-text" id="loaderText">0%</div>
     </div>
 
-    <!-- HEADER -->
-    <header>
-        <div class="header-title">IKROMJON TV</div>
-    </header>
+    <!-- ==================== WHEEL / BARABAN ==================== -->
+    <div id="wheelOverlay">
+        <div class="wheel-container">
+            <div class="wheel-title">🎁 SOVG'A BARABANI</div>
+            <div class="wheel-subtitle">Barabanni aylantiring va sovg'a yutib oling!</div>
+            
+            <div class="wheel-outer">
+                <div class="wheel-pointer">▼</div>
+                <canvas id="wheelCanvas" width="500" height="500"></canvas>
+            </div>
 
-    <!-- PLAYER -->
-    <div class="player-box">
-        <iframe id="main-player" src="https://www.youtube.com/embed/VyHV0BRMYEA" allowfullscreen></iframe>
-    </div>
-    <div class="now-playing">
-        🔴 <span id="playingTitle">Harry Potter va Hikmatlar Tosh</span>
-    </div>
+            <div class="wheel-info">
+                <span>🎯 Qolgan urinishlar: <span class="highlight" id="freeSpins">3</span></span>
+                <span>💰 Narx: <span class="highlight">1,500,000 so'm</span></span>
+            </div>
 
-    <!-- KATEGORIYALAR -->
-    <div class="categories-section">
-        <div class="category-grid">
-            <div class="cat-btn active" onclick="loadCat('tv', this)">📺 TV</div>
-            <div class="cat-btn" onclick="loadCat('harry', this)">🧙‍♂️ Potter</div>
-            <div class="cat-btn" onclick="loadCat('retro', this)">🎞️ Retro</div>
-            <div class="cat-btn" onclick="loadCat('uz_klip', this)">🎵 Kliplar</div>
+            <button class="wheel-btn" id="spinBtn">🔄 AYLANTIRISH (BEPUL)</button>
+            <button class="wheel-btn buy" id="buySpinBtn">💳 1,500,000 so'mga aylantirish</button>
+            <button class="wheel-close" id="closeWheelBtn">✖ Yopish</button>
         </div>
     </div>
 
-    <!-- VIDEO RO'YXATI -->
-    <div class="content-list" id="videoList"></div>
+    <!-- ==================== TOAST ==================== -->
+    <div class="toast" id="toast"></div>
 
-    <!-- QO'LLAB-QUVVATLASH BO'LIMI -->
-    <div class="support-box" id="supportArea">
-        <div class="support-title">🎧 Qo‘llab-quvvatlash mutaxassisi</div>
-        <div class="support-desc">Ilovada biror muammo yoki taklifingiz bormi? Mutaxassis bilan bog‘laning.</div>
-        <a href="https://t.me/telegram" target="_blank" class="support-btn">
-            💬 Telegram orqali yozish
-        </a>
-    </div>
+    <!-- ==================== MAIN APP ==================== -->
+    <div class="container" id="mainApp">
 
-    <!-- NAVIGATSIYA (6 TA TUGMA) -->
-    <div class="bottom-nav">
-        <div class="nav-item active" onclick="window.scrollTo({top:0, behavior:'smooth'})"><span class="nav-icon">🏠</span>Asosiy</div>
-        <div class="nav-item" onclick="loadCat('tv', null)"><span class="nav-icon">📡</span>TV</div>
-        <div class="nav-item" onclick="promptSearch()"><span class="nav-icon">🔍</span>Qidiruv</div>
-        <div class="nav-item" onclick="loadCat('harry', null)"><span class="nav-icon">⚡</span>Potter</div>
-        <div class="nav-item" onclick="scrollToSupport()"><span class="nav-icon">🎧</span>Yordam</div>
-        <div class="nav-item" onclick="alert('IKROMJON TV Profil Bo\'limi')"><span class="nav-icon">👤</span>Profil</div>
+        <!-- Audio -->
+        <audio id="bgMusic" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- Header -->
+        <div class="header">
+            <h1>⭐ IKROMJON TV ⭐</h1>
+            <p>📱 Mobil ilova</p>
+        </div>
+
+        <!-- Welcome -->
+        <div class="welcome" id="welcomeText">👋 IKROMJON TV GA XUSH KELIBSIZ!</div>
+
+        <!-- Wheel Banner -->
+        <div class="wheel-banner" id="wheelBanner">
+            <span class="icon">🎰</span>
+            <span class="text">🎁 SOVG'A BARABANINI AYLANTIRING!</span>
+            <span class="free-spins">⭐ 3 ta bepul urinish qoldi</span>
+        </div>
+
+        <!-- Stars Rating -->
+        <div class="stars" id="starsContainer">
+            <span data-value="1">☆</span>
+            <span data-value="2">☆</span>
+            <span data-value="3">☆</span>
+            <span data-value="4">☆</span>
+            <span data-value="5">☆</span>
+        </div>
+
+        <!-- Date & Time -->
+        <div class="date-time">
+            📅 <span id="dateDisplay"></span> &nbsp;|&nbsp; ⏰ <span id="timeDisplay"></span>
+        </div>
+
+        <!-- Annos (10 ta) -->
+        <div class="annos" id="annosContainer"></div>
+
+        <!-- Language -->
+        <div class="lang-select">
+            <button class="active" data-lang="uz">🇺🇿 UZ</button>
+            <button data-lang="ru">🇷🇺 RU</button>
+            <button data-lang="tj">🇹🇯 TJ</button>
+            <button data-lang="en">🇬🇧 EN</button>
+            <button data-lang="kz">🇰🇿 KZ</button>
+        </div>
+
+        <!-- Sections -->
+        <div class="sections">
+            <div class="section-card"><div class="icon">📺</div><div class="label">TV</div></div>
+            <div class="section-card"><div class="icon">📻</div><div class="label">Radio</div></div>
+            <div class="section-card"><div class="icon">🎬</div><div class="label">Kinolar</div></div>
+            <div class="section-card"><div class="icon">🎞️</div><div class="label">Multfilmlar</div></div>
+        </div>
+
+        <!-- Horoscope -->
+        <div class="horoscope">
+            <h3>🔮 MUNAJJIMLAR BASHORATI</h3>
+            <div id="horoscopeContainer"></div>
+        </div>
+
+        <!-- Videos -->
+        <div class="video-section">
+            <h3>📹 VIDEOLAR</h3>
+            <div class="video-grid" id="videoContainer"></div>
+        </div>
+
+        <div class="footer">© 2026 IKROMJON TV | Barcha huquqlar himoyalangan</div>
     </div>
 
     <script>
-        // 1. Loading Controller
-        window.addEventListener('load', () => {
-            let count = 0;
-            const loaderBar = document.getElementById('loaderBar');
-            const loaderPercent = document.getElementById('loaderPercent');
-            const loaderScreen = document.getElementById('appLoaderScreen');
+        // ============================================================
+        // 1. LOADING SCREEN (0% dan 100% gacha tez to'lish)
+        // ============================================================
+        let progress = 0;
+        const loaderFill = document.getElementById('loaderFill');
+        const loaderText = document.getElementById('loaderText');
+        const loadingScreen = document.getElementById('loadingScreen');
+        const mainApp = document.getElementById('mainApp');
 
-            const interval = setInterval(() => {
-                count += 5;
-                if (count >= 100) {
-                    count = 100;
-                    loaderBar.style.width = '100%';
-                    loaderPercent.innerText = '100';
-                    clearInterval(interval);
+        function updateLoader() {
+            progress += Math.random() * 15 + 5;
+            if (progress > 100) progress = 100;
+            loaderFill.style.width = progress + '%';
+            loaderText.textContent = Math.round(progress) + '%';
 
-                    setTimeout(() => {
-                        loaderScreen.style.opacity = '0';
-                        loaderScreen.style.visibility = 'hidden';
-                    }, 300);
-                } else {
-                    loaderBar.style.width = count + '%';
-                    loaderPercent.innerText = count;
-                }
-            }, 30);
-        });
-
-        // 2. Data
-        const data = {
-            tv: [
-                { title: "MY5 TV Jonli", url: "https://www.youtube.com/embed/jfKfPfyJRdk", meta: "TV Kanal" },
-                { title: "Sevimli TV Onlayn", url: "https://www.youtube.com/embed/VyHV0BRMYEA", meta: "TV Kanal" },
-                { title: "Milliy TV Stream", url: "https://www.youtube.com/embed/1bq0qff4iSU", meta: "TV Kanal" }
-            ],
-            harry: [
-                { title: "Harry Potter 1-qism", url: "https://www.youtube.com/embed/VyHV0BRMYEA", meta: "Hikmatlar Tosh" },
-                { title: "Harry Potter 2-qism", url: "https://www.youtube.com/embed/1bq0qff4iSU", meta: "Sirlar Xonasi" },
-                { title: "Harry Potter 3-qism", url: "https://www.youtube.com/embed/lAxgztbYDbs", meta: "Azkaban Mahbusi" }
-            ],
-            retro: [
-                { title: "Kavkaz Asirasi", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Retro Film" },
-                { title: "Abdullajon", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "O'zbek Kino" }
-            ],
-            uz_klip: [
-                { title: "Munisa Rizayeva - O'ylama", url: "https://www.youtube.com/embed/5D_1mGz1p6E", meta: "Premyera" },
-                { title: "Jaloliddin A. - Yomon ekan", url: "https://www.youtube.com/embed/2g81116hA68", meta: "Musiqa" }
-            ]
-        };
-
-        // 3. Actions
-        function playVideo(url, title) {
-            document.getElementById('main-player').src = url + "?autoplay=1";
-            document.getElementById('playingTitle').innerText = title;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function loadCat(key, elem) {
-            if(elem) {
-                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-                elem.classList.add('active');
-            }
-            const container = document.getElementById('videoList');
-            container.innerHTML = '';
-            
-            (data[key] || data['tv']).forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'video-card';
-                card.onclick = () => playVideo(item.url, item.title);
-                card.innerHTML = `
-                    <div class="play-icon">▶</div>
-                    <div class="video-info">
-                        <div class="video-title">${item.title}</div>
-                        <div class="video-meta">${item.meta}</div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function scrollToSupport() {
-            document.getElementById('supportArea').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function promptSearch() {
-            let query = prompt("Qidirayotgan kinoyingiz yoki kanalingiz nomini kiriting:");
-            if(query) {
-                alert("'" + query + "' bo'yicha qidiruv natijalari tayyorlanmoqda...");
+            if (progress < 100) {
+                setTimeout(updateLoader, 100 + Math.random() * 200);
+            } else {
+                setTimeout(() => {
+                    loadingScreen.classList.add('hide');
+                    mainApp.classList.add('show');
+                    // Musiqani ishga tushirish
+                    document.getElementById('bgMusic').play().catch(() => {});
+                    // Barabanni ko'rsatish
+                    showToast('🎉 Xush kelibsiz! Sovg\'a barabanini aylantiring!');
+                }, 300);
             }
         }
+        updateLoader();
 
-        // Init
-        loadCat('tv', null);
-    </script>
-</body>
-</html>
+        // ============================================================
+        // 2. WHEEL / BARABAN (3 ta bepul, keyingisi 1,500,000 so'm)
+        // ============================================================
+        const prizes = [
+            '🎁 100,000 so\'m', '📱 Telefon', '🎧 Naushnik', '💰 50,000 so\'m',
+            '🎮 O\'yin', '📺 TV', '🧧 20,000 so\'m', '🎁 Sovg\'a'
+        ];
+        const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#F38181', '#AA96DA', '#A8E6CF', '#FFD3B4'];
+
+        let freeSpins = 3;
+        let isSpinning = false;
+        let currentAngle = 0;
+
+        const canvas 
