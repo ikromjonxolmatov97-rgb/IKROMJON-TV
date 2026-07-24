@@ -9,71 +9,12 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background: #0a0a2e;
+            background: linear-gradient(135deg, #0a0a2e, #1a1a4e);
             color: #fff;
             min-height: 100vh;
-        }
-
-        /* ================ LOADING ================ */
-        #loadingScreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0a0a2e, #1a1a4e);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 999999;
-            transition: opacity 0.5s;
-        }
-        #loadingScreen.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        #loadingScreen h1 {
-            font-size: 36px;
-            background: linear-gradient(45deg, #f7971e, #ffd200);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 30px;
-        }
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 5px solid rgba(255,215,0,0.1);
-            border-top: 5px solid #ffd700;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-            margin-bottom: 20px;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .progress-wrap {
-            width: 280px;
-            height: 8px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
-        .progress-bar {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, #f7971e, #ffd200);
-            border-radius: 4px;
-        }
-        .progress-text {
-            font-size: 22px;
-            color: #ffd700;
-            font-weight: bold;
         }
 
         /* ================ MAIN APP ================ */
@@ -81,10 +22,6 @@
             max-width: 480px;
             margin: 0 auto;
             padding: 15px;
-            display: none;
-        }
-        #mainApp.active {
-            display: block;
         }
 
         .header {
@@ -93,10 +30,15 @@
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .header h1 {
-            font-size: 24px;
+            font-size: 26px;
             background: linear-gradient(45deg, #f7971e, #ffd200);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite;
+        }
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(255,215,0,0.2)); }
+            50% { filter: drop-shadow(0 0 30px rgba(255,215,0,0.6)); }
         }
         .header p {
             color: #ffd700;
@@ -104,9 +46,97 @@
             opacity: 0.7;
         }
 
+        /* ================ ABOUT SECTION ================ */
+        .about-section {
+            background: linear-gradient(135deg, rgba(255,215,0,0.05), rgba(255,215,0,0.01));
+            border: 1px solid rgba(255,215,0,0.12);
+            border-radius: 16px;
+            padding: 20px 18px;
+            margin: 12px 0 15px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(255,215,0,0.03) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-20%) rotate(0deg); }
+            50% { transform: translateX(20%) rotate(5deg); }
+        }
+        .about-section .logo-icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .about-section .title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffd700;
+            position: relative;
+            z-index: 1;
+        }
+        .about-section .subtitle {
+            font-size: 13px;
+            color: #ccc;
+            margin: 5px 0 10px 0;
+            position: relative;
+            z-index: 1;
+        }
+        .about-section .desc {
+            font-size: 13px;
+            color: #aaa;
+            line-height: 1.7;
+            max-width: 350px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .about-section .desc span {
+            color: #ffd700;
+        }
+        .about-section .stats {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        .about-section .stats div {
+            text-align: center;
+        }
+        .about-section .stats .num {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+        .about-section .stats .label {
+            font-size: 10px;
+            color: #777;
+            text-transform: uppercase;
+        }
+        .about-divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            margin: 8px auto;
+            position: relative;
+            z-index: 1;
+        }
+
         .welcome {
             text-align: center;
-            padding: 15px 0;
+            padding: 10px 0 5px 0;
             font-size: 18px;
             font-weight: bold;
             color: #fff;
@@ -120,6 +150,10 @@
             text-align: center;
             margin: 8px 0 12px 0;
             cursor: pointer;
+            transition: 0.3s;
+        }
+        .wheel-banner:hover {
+            background: rgba(255,215,0,0.15);
         }
         .wheel-banner .icon {
             font-size: 30px;
@@ -193,6 +227,11 @@
             text-align: center;
             border: 1px solid rgba(255,255,255,0.05);
             cursor: pointer;
+            transition: 0.3s;
+        }
+        .section-card:hover {
+            background: rgba(255,215,0,0.08);
+            border-color: rgba(255,215,0,0.3);
         }
         .section-card .icon {
             font-size: 24px;
@@ -267,6 +306,10 @@
             border-radius: 15px;
             cursor: pointer;
             font-size: 11px;
+            transition: 0.3s;
+        }
+        .lang-select button:hover {
+            background: rgba(255,215,0,0.15);
         }
         .lang-select button.active {
             background: #ffd700;
@@ -320,18 +363,20 @@
             align-items: center;
             justify-content: center;
             z-index: 99999;
+            backdrop-filter: blur(8px);
         }
         #wheelOverlay.show {
             display: flex;
         }
         .wheel-box {
-            background: #1a1a3e;
+            background: linear-gradient(145deg, #1a1a3e, #2a2a5e);
             border-radius: 20px;
             padding: 20px;
             max-width: 380px;
             width: 92%;
             border: 1px solid rgba(255,215,0,0.2);
             text-align: center;
+            box-shadow: 0 0 60px rgba(255,215,0,0.05);
         }
         .wheel-box h2 {
             color: #ffd700;
@@ -359,6 +404,7 @@
             transform: translateX(-50%);
             font-size: 24px;
             color: #ffd700;
+            text-shadow: 0 0 20px rgba(255,215,0,0.5);
         }
         .wheel-info {
             display: flex;
@@ -384,6 +430,11 @@
             cursor: pointer;
             width: 100%;
             margin: 3px 0;
+            transition: 0.3s;
+        }
+        .wheel-btn:hover:not(:disabled) {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(255,215,0,0.2);
         }
         .wheel-btn:disabled {
             opacity: 0.4;
@@ -392,6 +443,9 @@
         .wheel-btn.buy {
             background: linear-gradient(45deg, #e74c3c, #c0392b);
             color: #fff;
+        }
+        .wheel-btn.buy:hover:not(:disabled) {
+            box-shadow: 0 0 30px rgba(231,76,60,0.3);
         }
         .wheel-close {
             background: rgba(255,255,255,0.06);
@@ -402,6 +456,10 @@
             cursor: pointer;
             font-size: 12px;
             margin-top: 5px;
+            transition: 0.3s;
+        }
+        .wheel-close:hover {
+            background: rgba(255,255,255,0.1);
         }
         audio {
             display: none;
@@ -409,16 +467,6 @@
     </style>
 </head>
 <body>
-
-    <!-- ===== LOADING ===== -->
-    <div id="loadingScreen">
-        <h1>⭐ IKROMJON TV</h1>
-        <div class="spinner"></div>
-        <div class="progress-wrap">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-        <div class="progress-text" id="progressText">0%</div>
-    </div>
 
     <!-- ===== TOAST ===== -->
     <div id="toast"></div>
@@ -453,7 +501,35 @@
             <p>📱 Mobil ilova</p>
         </div>
 
-        <div class="welcome" id="welcomeText">👋 IKROMJON TV GA XUSH KELIBSIZ!</div>
+        <!-- ===== ABOUT SECTION ===== -->
+        <div class="about-section">
+            <span class="logo-icon">📺</span>
+            <div class="title">IKROMJON TV</div>
+            <div class="subtitle">⭐ Eng zo'r mobil ilova ⭐</div>
+            <div class="about-divider"></div>
+            <div class="desc">
+                <span>🌟</span> IKROMJON TV - bu <span>zamonaviy</span> va <span>qulay</span> mobil ilova! 
+                <span>🎬</span> Kinolar, <span>📺</span> telekanallar, <span>🎞️</span> multfilmlar va 
+                <span>🎵</span> musiqalar bir joyda! 
+                <span>🔮</span> Kunlik munajjimlar bashorati va <span>🎰</span> sovg'alar barabani sizni kutmoqda!
+            </div>
+            <div class="stats">
+                <div>
+                    <div class="num">10+</div>
+                    <div class="label">Bo'limlar</div>
+                </div>
+                <div>
+                    <div class="num">5</div>
+                    <div class="label">Tillarda</div>
+                </div>
+                <div>
+                    <div class="num">🎰</div>
+                    <div class="label">Sovg'alar</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="welcome" id="welcomeText">👋 Xush kelibsiz, aziz foydalanuvchi!</div>
 
         <div class="wheel-banner" id="wheelBanner">
             <div class="icon">🎰</div>
@@ -497,50 +573,12 @@
 
         <div class="video-grid" id="videoContainer"></div>
 
-        <div class="footer">© 2026 IKROMJON TV</div>
+        <div class="footer">© 2026 IKROMJON TV | Barcha huquqlar himoyalangan</div>
     </div>
 
     <script>
         // ============================================================
-        // 1. LOADING - SODDA VA ISHONCHLI
-        // ============================================================
-        (function() {
-            var bar = document.getElementById('progressBar');
-            var text = document.getElementById('progressText');
-            var loading = document.getElementById('loadingScreen');
-            var main = document.getElementById('mainApp');
-
-            var p = 0;
-
-            function step() {
-                p += Math.floor(Math.random() * 6) + 2;
-                if (p > 100) p = 100;
-                bar.style.width = p + '%';
-                text.textContent = p + '%';
-
-                if (p < 100) {
-                    setTimeout(step, 60 + Math.random() * 80);
-                } else {
-                    // 100% bo'lganda
-                    setTimeout(function() {
-                        loading.className = 'hidden';
-                        main.className = 'active';
-                        // Musiqa
-                        document.getElementById('bgMusic').play().catch(function() {});
-                        // Toast
-                        showToast('🎉 Xush kelibsiz!');
-                        // Barabanni yangilash
-                        updateSpins();
-                    }, 300);
-                }
-            }
-
-            // 0.5 soniyadan keyin boshlaymiz
-            setTimeout(step, 400);
-        })();
-
-        // ============================================================
-        // 2. TOAST
+        // 1. TOAST
         // ============================================================
         function showToast(msg) {
             var t = document.getElementById('toast');
@@ -553,7 +591,7 @@
         }
 
         // ============================================================
-        // 3. STARS
+        // 2. STARS
         // ============================================================
         (function() {
             var stars = document.querySelectorAll('#starsContainer span');
@@ -571,7 +609,7 @@
                             st.className = '';
                         }
                     });
-                    showToast('⭐ ' + rating + ' yulduzcha');
+                    showToast('⭐ ' + rating + ' yulduzcha baholadingiz!');
                 };
                 s.onmouseenter = function() {
                     var v = parseInt(this.dataset.v);
@@ -600,36 +638,5 @@
         })();
 
         // ============================================================
-        // 4. DATE & TIME
-        // ============================================================
-        function updateDT() {
-            var n = new Date();
-            document.getElementById('dateDisplay').textContent =
-                n.toLocaleDateString('uz-UZ', { day: '2-digit', month: '2-digit', year: 'numeric' });
-            document.getElementById('timeDisplay').textContent =
-                n.toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        }
-        updateDT();
-        setInterval(updateDT, 1000);
-
-        // ============================================================
-        // 5. ANNOS
-        // ============================================================
-        (function() {
-            var c = document.getElementById('annosContainer');
-            var a = ['⭐', '🌟', '✨', '💫', '⭐', '🌟', '✨', '💫', '⭐', '🌟'];
-            a.forEach(function(x, i) {
-                var d = document.createElement('div');
-                d.className = 'anno-item';
-                d.innerHTML = '<div class="num">' + (i + 1) + '</div><div>' + x + '</div>';
-                c.appendChild(d);
-            });
-        })();
-
-        // ============================================================
-        // 6. HOROSCOPE
-        // ============================================================
-        (function() {
-            var c = document.getElementById('horoscopeContainer');
-            var signs = ['♈ Qo\'y', '♉ Toros', '♊ Egizaklar', '♋ Qisqichbaqa', '♌ Arslon',
-                '♍ Parizod', '♎ Tarozi', '♏ Chayon', '♐ Oʻqota
+        // 3. DATE & TIME
+   
