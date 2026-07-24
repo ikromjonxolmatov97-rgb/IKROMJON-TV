@@ -19,6 +19,7 @@
             flex-direction: column;
             min-height: 100vh;
             padding-bottom: 70px;
+            overflow-x: hidden;
         }
 
         /* Header */
@@ -42,50 +43,73 @@
         }
         .logo-title { font-size: 16px; font-weight: 700; }
 
+        .header-actions { display: flex; align-items: center; gap: 10px; }
+        
+        .music-btn {
+            background: #1e293b; color: #00d2ff; border: 1px solid #0088ff;
+            padding: 4px 10px; border-radius: 20px; font-size: 11px;
+            cursor: pointer; display: flex; align-items: center; gap: 4px;
+        }
+
         .lang-select {
             background: #121c2e; color: #00d2ff;
             border: 1px solid #0088ff; padding: 4px 8px;
             border-radius: 6px; font-size: 12px; outline: none;
         }
 
-        /* Welcome Banner */
-        .welcome-banner {
-            background: linear-gradient(135deg, #09203f 0%, #537895 100%);
-            margin: 10px 15px; padding: 10px; border-radius: 12px;
-            text-align: center; border: 1px solid rgba(0, 210, 255, 0.3);
-        }
-        .welcome-title { font-size: 13px; font-weight: bold; color: #00d2ff; text-transform: uppercase; margin-bottom: 4px; }
-        .clock-widget { font-size: 11px; color: #e0e0e0; display: flex; justify-content: center; gap: 10px; }
-
-        /* Slider / Carousel section */
+        /* Auto Carousel Slider Section */
         .slider-section {
-            padding: 0 15px 10px 15px;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
         }
-        .slider-container {
+        .slider-wrapper {
             display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding-bottom: 5px;
+            transition: transform 0.6s ease-in-out;
+            width: 100%;
         }
-        .slider-container::-webkit-scrollbar { display: none; }
         .slide-card {
-            min-width: 140px;
-            height: 80px;
+            min-width: 100%;
+            height: 160px;
             background-size: cover;
             background-position: center;
-            border-radius: 10px;
+            border-radius: 12px;
             position: relative;
-            flex-shrink: 0;
             border: 1px solid #0088ff;
+            box-shadow: 0 4px 15px rgba(0, 136, 255, 0.3);
             cursor: pointer;
         }
         .slide-title {
             position: absolute; bottom: 0; inset-x: 0;
-            background: rgba(0,0,0,0.7); font-size: 10px;
-            padding: 4px; text-align: center; border-radius: 0 0 10px 10px;
-            font-weight: 600; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
+            background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            font-size: 13px; padding: 10px; text-align: center;
+            border-radius: 0 0 12px 12px; font-weight: 600; color: #00d2ff;
         }
+
+        /* 30x Anons Grid */
+        .anons-section { padding: 0 15px 10px 15px; }
+        .section-label { font-size: 11px; color: #94a3b8; margin-bottom: 6px; font-weight: 600; text-transform: uppercase; }
+        
+        .anons-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 4px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+        .anons-grid::-webkit-scrollbar { display: none; }
+        .anons-item {
+            min-width: 38px;
+            background: #111a2e;
+            border: 1px solid #1e2d4a;
+            border-radius: 6px;
+            padding: 6px 0;
+            text-align: center;
+            cursor: pointer;
+            font-size: 10px;
+        }
+        .anons-item.active { background: #0088ff; border-color: #00d2ff; color: #fff; font-weight: bold; }
+        .anons-badge { font-size: 7px; display: block; color: #00d2ff; }
 
         /* Player Box */
         .player-box {
@@ -101,29 +125,8 @@
             border-bottom: 1px solid #1e293b;
         }
 
-        /* Reklama Bo'limlari */
-        .ads-section {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .ad-banner {
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 2px solid #00d2ff;
-            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
-            transition: transform 0.2s;
-        }
-        .ad-banner:hover { transform: scale(1.02); }
-        .ad-banner img { width: 100%; height: auto; display: block; }
-        .ads-label { font-size: 12px; color: #ff0055; margin-bottom: 8px; font-weight: 600; text-transform: uppercase; text-align: center; }
-
         /* Category Grid */
         .categories-section { padding: 12px 15px 5px 15px; }
-        .section-label { font-size: 12px; color: #94a3b8; margin-bottom: 8px; font-weight: 600; text-transform: uppercase; }
-        
         .category-grid {
             display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 15px;
         }
@@ -142,7 +145,7 @@
             border-radius: 10px; display: flex; overflow: hidden; cursor: pointer;
         }
         .video-thumb {
-            width: 100px; height: 65px; background-color: #1e293b;
+            width: 110px; height: 68px; background-color: #1e293b;
             display: flex; align-items: center; justify-content: center;
             font-size: 18px; color: #00d2ff; flex-shrink: 0;
             background-size: cover; background-position: center;
@@ -151,18 +154,36 @@
         .video-title { font-size: 12px; font-weight: 600; color: #f1f5f9; margin-bottom: 2px; }
         .video-meta { font-size: 10px; color: #64748b; }
 
+        /* Reklama Bo'limlari */
+        .ads-section {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .ad-banner {
+            width: 100%; border-radius: 10px; overflow: hidden;
+            border: 1px solid #00d2ff; box-shadow: 0 4px 10px rgba(0, 210, 255, 0.2);
+        }
+        .ad-banner img { width: 100%; height: auto; display: block; }
+
         /* Bottom Nav */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0; height: 55px;
             background: #0b1120; border-top: 1px solid #1e293b;
             display: flex; justify-content: space-around; align-items: center; z-index: 300;
         }
-        .nav-item { display: flex; flex-direction: column; align-items: center; color: #64748b; font-size: 9px; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; color: #64748b; font-size: 9px; cursor: pointer; }
         .nav-item.active { color: #0088ff; }
         .nav-icon { font-size: 16px; margin-bottom: 2px; }
     </style>
 </head>
 <body>
+
+    <!-- Background Sokin Musiqa -->
+    <audio id="bgMusic" loop autoplay>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
+    </audio>
 
     <!-- Header -->
     <header>
@@ -170,67 +191,64 @@
             <span class="logo-badge">IK</span>
             <span class="logo-title">IKROMJON <span style="color:#0088ff">TV</span></span>
         </div>
-        <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
-            <option value="uz">UZ</option>
-            <option value="ru">RU</option>
-            <option value="en">ENG</option>
-        </select>
+        <div class="header-actions">
+            <button class="music-btn" id="musicToggle" onclick="toggleMusic()">🔊 Musiqa</button>
+            <select class="lang-select">
+                <option value="uz">UZ</option>
+                <option value="ru">RU</option>
+            </select>
+        </div>
     </header>
 
-    <!-- Welcome -->
-    <div class="welcome-banner">
-        <div class="welcome-title" id="welcomeText">IKROMJON TV-GA XUSH KELIBSIZ!</div>
-        <div class="clock-widget">
-            <span id="dateDisplay">📅 --.--.----</span>
-            <span>|</span>
-            <span id="clockDisplay">⏰ --:--:--</span>
+    <!-- Auto Slider (Anonslar) -->
+    <div class="slider-section">
+        <div class="slider-wrapper" id="sliderWrapper">
+            <div class="slide-card" style="background-image: url('Munisa_Rizayeva.png');" onclick="playVideo('https://www.youtube.com/embed/5D_1mGz1p6E', 'Munisa Rizayeva - O\'ylama')">
+                <div class="slide-title">🔥 PREMYERA: Munisa Rizayeva - O'ylama</div>
+            </div>
+            <div class="slide-card" style="background-image: url('AI_and_Man.png');" onclick="playVideo('https://www.youtube.com/embed/8A-J30j1Mpo', 'AI & Man - Sun\'iy Intellekt')">
+                <div class="slide-title">🧠 AI & MAN: Kelajak Texnologiyalari</div>
+            </div>
+            <div class="slide-card" style="background-image: url('Ikromjon_TV_Jonli.png');" onclick="playVideo('https://www.youtube.com/embed/jfKfPfyJRdk', 'IKROMJON TV Jonli')">
+                <div class="slide-title">📡 IKROMJON TV - Jonli Efir 24/7</div>
+            </div>
         </div>
+    </div>
+
+    <!-- 30x Anonslar Paneli -->
+    <div class="anons-section">
+        <div class="section-label">Premyera Kinolar Anons (30x)</div>
+        <div class="anons-grid" id="anonsGrid"></div>
     </div>
 
     <!-- Video Player -->
     <div class="player-box">
-        <iframe id="main-player" src="https://www.youtube.com/embed/jfKfPfyJRdk" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        <iframe id="main-player" src="https://www.youtube.com/embed/5D_1mGz1p6E?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
     
     <div class="now-playing">
-        <span>🔴</span> <span id="playingTitle">Lofi Chill Beats - 24/7 Live Stream</span>
+        <span>🔴</span> <span id="playingTitle">Munisa Rizayeva - O'ylama (Official Video)</span>
     </div>
 
     <!-- Kategoriyalar -->
     <div class="categories-section">
-        <div class="section-label" id="catLabel">Kategoriyalar</div>
+        <div class="section-label">Kategoriyalar</div>
         <div class="category-grid">
             <div class="cat-btn active" onclick="loadCategory('uz_klip', this)">
                 <span class="cat-icon">🎵</span>
-                <span class="cat-name" id="c1">O'zbek Kliplar</span>
+                <span class="cat-name">O'zbek Kliplar</span>
             </div>
             <div class="cat-btn" onclick="loadCategory('tv', this)">
                 <span class="cat-icon">📺</span>
-                <span class="cat-name" id="c2">Telekanallar</span>
+                <span class="cat-name">Telekanallar</span>
             </div>
             <div class="cat-btn" onclick="loadCategory('uzbek', this)">
                 <span class="cat-icon">🎬</span>
-                <span class="cat-name" id="c3">O'zbek Kinolar</span>
-            </div>
-            <div class="cat-btn" onclick="loadCategory('harry', this)">
-                <span class="cat-icon">🧙‍♂️</span>
-                <span class="cat-name" id="c4">Harry Potter</span>
+                <span class="cat-name">O'zbek Kinolar</span>
             </div>
             <div class="cat-btn" onclick="loadCategory('foreign', this)">
                 <span class="cat-icon">🍿</span>
-                <span class="cat-name" id="c5">Xorijiy Kinolar</span>
-            </div>
-            <div class="cat-btn" onclick="loadCategory('cartoons', this)">
-                <span class="cat-icon">🧸</span>
-                <span class="cat-name" id="c7">Multfilmlar</span>
-            </div>
-            <div class="cat-btn" onclick="loadCategory('edu', this)">
-                <span class="cat-icon">📚</span>
-                <span class="cat-name" id="c8">Fan va IT</span>
-            </div>
-            <div class="cat-btn" onclick="loadCategory('auto', this)">
-                <span class="cat-icon">🏎️</span>
-                <span class="cat-name" id="c12">Poyga / Avto</span>
+                <span class="cat-name">Xorijiy Kinolar</span>
             </div>
         </div>
     </div>
@@ -238,82 +256,92 @@
     <!-- Video Ro'yxat -->
     <div class="content-list" id="videoList"></div>
 
-    <!-- Reklama Bo'limi -->
+    <!-- Reklamalar -->
     <div class="ads-section">
-        <div class="ads-label">Homiylarimiz Reklamasi</div>
-        
-        <!-- Beeline Reklama -->
-        <a href="https://beeline.uz" target="_blank" class="ad-banner">
-            <img src="Beeline.png" alt="Beeline Reklama">
-        </a>
-        
-        <!-- Coca-Cola Reklama -->
-        <a href="https://coca-cola.uz" target="_blank" class="ad-banner">
-            <img src="Coca-Cola.png" alt="Coca-Cola Reklama">
-        </a>
-        
-        <!-- Colgate Reklama (Kun) -->
-        <a href="https://colgate.uz" target="_blank" class="ad-banner">
-            <img src="Colgate_Kun.png" alt="Colgate Reklama">
-        </a>
-        
-        <!-- iPhone Reklama -->
-        <a href="https://apple.com/uz" target="_blank" class="ad-banner">
-            <img src="iPhone.png" alt="iPhone Reklama">
-        </a>
-        
-        <!-- Colgate Reklama (Dengiz) -->
-        <a href="https://colgate.uz" target="_blank" class="ad-banner">
-            <img src="Colgate_Dengiz.png" alt="Colgate Reklama">
-        </a>
+        <div class="section-label" style="text-align:center; color:#ff0055;">Homiylarimiz</div>
+        <a href="https://beeline.uz" target="_blank" class="ad-banner"><img src="Beeline.png" alt="Beeline"></a>
+        <a href="https://coca-cola.uz" target="_blank" class="ad-banner"><img src="Coca-Cola.png" alt="Coca-Cola"></a>
+        <a href="https://colgate.uz" target="_blank" class="ad-banner"><img src="Colgate_Kun.png" alt="Colgate"></a>
     </div>
 
     <!-- Bottom Nav -->
     <div class="bottom-nav">
-        <div class="nav-item active"><span class="nav-icon">🏠</span><span id="n1">Bosh sahifa</span></div>
-        <div class="nav-item"><span class="nav-icon">📡</span><span id="n2">Jonli efir</span></div>
-        <div class="nav-item"><span class="nav-icon">🎥</span><span id="n3">Videolar</span></div>
-        <div class="nav-item"><span class="nav-icon">👤</span><span id="n4">Profil</span></div>
+        <div class="nav-item active"><span class="nav-icon">🏠</span><span>Bosh sahifa</span></div>
+        <div class="nav-item"><span class="nav-icon">📡</span><span>Jonli efir</span></div>
+        <div class="nav-item"><span class="nav-icon">🎥</span><span>Videolar</span></div>
+        <div class="nav-item"><span class="nav-icon">👤</span><span>Profil</span></div>
     </div>
 
     <script>
-        // Real vaqt soat
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('dateDisplay').innerText = "📅 " + now.toLocaleDateString('uz-UZ');
-            document.getElementById('clockDisplay').innerText = "⏰ " + now.toLocaleTimeString('uz-UZ');
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
+        // Background Music Control
+        const audio = document.getElementById('bgMusic');
+        let isPlaying = false;
 
-        // Barcha Kategoriyalar Baza
+        document.body.addEventListener('click', () => {
+            if(!isPlaying) {
+                audio.volume = 0.3;
+                audio.play().catch(() => {});
+                isPlaying = true;
+            }
+        }, { once: true });
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                document.getElementById('musicToggle').innerText = "🔊 Musiqa";
+            } else {
+                audio.pause();
+                document.getElementById('musicToggle').innerText = "🔇 O'chirilgan";
+            }
+        }
+
+        // Auto Carousel Slider Logic
+        let currentSlide = 0;
+        const wrapper = document.getElementById('sliderWrapper');
+        const totalSlides = wrapper.children.length;
+
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }, 3000);
+
+        // Render 30 Anons Items
+        const anonsGrid = document.getElementById('anonsGrid');
+        for (let i = 1; i <= 30; i++) {
+            const btn = document.createElement('div');
+            btn.className = `anons-item ${i === 1 ? 'active' : ''}`;
+            btn.innerHTML = `${i}<span class="anons-badge">${i % 2 === 0 ? 'Premyera' : 'Live'}</span>`;
+            btn.onclick = () => {
+                document.querySelectorAll('.anons-item').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                playVideo('https://www.youtube.com/embed/5D_1mGz1p6E', `Premyera Anons #${i}`);
+            };
+            anonsGrid.appendChild(btn);
+        }
+
+        // Data Base (YouTube Embed URLlar bilan)
         const data = {
             uz_klip: [
-                { title: "Munisa Rizayeva - O'ylama (Offical Music Video)", url: "https://www.youtube.com/embed/5D_1mGz1p6E", meta: "Musiqa • O'zbek Klip", thumb: "Munisa_Rizayeva.png" },
-                { title: "Jaloliddin Ahmadaliyev - Yomon ekan", url: "https://www.youtube.com/embed/2g81116hA68", meta: "Musiqa • Premyera", thumb: "https://img.youtube.com/vi/2g81116hA68/hqdefault.jpg" }
+                { title: "Munisa Rizayeva - O'ylama (Official Music Video)", url: "https://www.youtube.com/embed/5D_1mGz1p6E", meta: "Musiqa • O'zbek Klip", thumb: "Munisa_Rizayeva.png" },
+                { title: "Jaloliddin Ahmadaliyev - Yomon ekan", url: "https://www.youtube.com/embed/2g81116hA68", meta: "Musiqa • Premyera", thumb: "https://img.youtube.com/vi/2g81116hA68/hqdefault.jpg" },
+                { title: "Dildora Niyozova - Yana hammasi yaxshi bo'ladi", url: "https://www.youtube.com/embed/U22vM1S2F_Q", meta: "Musiqa • Klip", thumb: "https://img.youtube.com/vi/U22vM1S2F_Q/hqdefault.jpg" }
             ],
             tv: [
-                { title: "Uzbekistan 24 Live Stream", url: "https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig", meta: "TV • Yangiliklar 24/7", thumb: "Ikromjon_TV_Jonli.png" },
-                { title: "Ikromjon FM Radio - Mobil Ilova", url: "https://www.youtube.com/embed/Htaj3o3JD8I", meta: "TV • Yangiliklar 24/7", thumb: "Ikromjon_FM.png" }
+                { title: "IKROMJON TV Live Streaming", url: "https://www.youtube.com/embed/jfKfPfyJRdk", meta: "TV • Jonli Efir", thumb: "Ikromjon_TV_Jonli.png" },
+                { title: "IKROMJON FM Radio", url: "https://www.youtube.com/embed/Htaj3o3JD8I", meta: "Radio • Onlayn", thumb: "Ikromjon_FM.png" }
             ],
             uzbek: [
-                { title: "Abdullajon (O'zbek Klassik Film)", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Kino • Komediya", thumb: "https://img.youtube.com/vi/5qap5aO4i9A/hqdefault.jpg" }
+                { title: "Abdullajon (Klassik O'zbek Kino)", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Kino • Komediya", thumb: "https://img.youtube.com/vi/5qap5aO4i9A/hqdefault.jpg" }
             ],
             foreign: [
-                { title: "Avatar 2: Suv Yo'li (Premyera)", url: "https://www.youtube.com/embed/d9MyW72ELq0", meta: "Xorij • Fantastika", thumb: "https://img.youtube.com/vi/d9MyW72ELq0/hqdefault.jpg" }
-            ],
-            edu: [
-                { title: "AI and Man - Kelajak Texnologiyalari", url: "https://www.youtube.com/embed/8A-J30j1Mpo", meta: "Fan • IT", thumb: "AI_and_Man.png" }
-            ],
-            auto: [
-                { title: "Top Gear Uzbek / Avto Sinov", url: "https://www.youtube.com/embed/aSiDu3Ywi8E", meta: "Avto • Poyga", thumb: "https://img.youtube.com/vi/aSiDu3Ywi8E/hqdefault.jpg" }
+                { title: "AI & Man - Sun'iy Intellekt Film", url: "https://www.youtube.com/embed/8A-J30j1Mpo", meta: "Xorij • IT & Fan", thumb: "AI_and_Man.png" }
             ]
         };
 
         function playVideo(url, title) {
-            document.getElementById('main-player').src = url;
+            document.getElementById('main-player').src = url + "?autoplay=1";
             document.getElementById('playingTitle').innerText = title;
-            window.scrollTo({ top: 120, behavior: 'smooth' });
+            window.scrollTo({ top: 220, behavior: 'smooth' });
         }
 
         function loadCategory(catKey, element) {
@@ -331,13 +359,8 @@
                 card.className = 'video-card';
                 card.onclick = () => playVideo(item.url, item.title);
                 
-                let thumbStyle = "";
-                if (item.thumb) {
-                    thumbStyle = `background-image: url('${item.thumb}')`;
-                }
-
                 card.innerHTML = `
-                    <div class="video-thumb" style="${thumbStyle}">▶</div>
+                    <div class="video-thumb" style="background-image: url('${item.thumb}')">▶</div>
                     <div class="video-info">
                         <div class="video-title">${item.title}</div>
                         <div class="video-meta">${item.meta}</div>
@@ -347,8 +370,9 @@
             });
         }
 
-        // Boshlang'ich yuklanish
+        // Boshlang'ich yuklash
         loadCategory('uz_klip', null);
     </script>
 </body>
 </html>
+
