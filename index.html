@@ -9,211 +9,88 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
         }
         body {
-            background: linear-gradient(135deg, #0a0a2e, #1a1a4e);
+            background: #0a0a2e;
             color: #fff;
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
-        /* ==================== LOADING SCREEN ==================== */
+        /* ================ LOADING ================ */
         #loadingScreen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #0a0a2e, #1a1a4e, #2a1a5e);
-            display: flex !important;
+            background: linear-gradient(135deg, #0a0a2e, #1a1a4e);
+            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            z-index: 99999;
-            transition: opacity 0.6s ease;
+            z-index: 999999;
+            transition: opacity 0.5s;
         }
-        #loadingScreen.hide {
+        #loadingScreen.hidden {
             opacity: 0;
             pointer-events: none;
         }
-        .loader-logo {
-            font-size: 42px;
-            font-weight: bold;
+        #loadingScreen h1 {
+            font-size: 36px;
             background: linear-gradient(45deg, #f7971e, #ffd200);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 25px;
-            animation: pulse 1.5s infinite;
+            margin-bottom: 30px;
         }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        .loader-spinner {
-            width: 70px;
-            height: 70px;
-            border: 4px solid rgba(255,215,0,0.1);
-            border-top: 4px solid #ffd700;
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255,215,0,0.1);
+            border-top: 5px solid #ffd700;
             border-radius: 50%;
-            animation: spin 0.7s linear infinite;
-            margin-bottom: 25px;
+            animation: spin 0.6s linear infinite;
+            margin-bottom: 20px;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        .loader-bar {
+        .progress-wrap {
             width: 280px;
             height: 8px;
             background: rgba(255,255,255,0.1);
             border-radius: 4px;
             overflow: hidden;
-            margin-bottom: 12px;
-            border: 1px solid rgba(255,215,0,0.1);
+            margin-bottom: 10px;
         }
-        .loader-bar-fill {
-            height: 100%;
+        .progress-bar {
             width: 0%;
+            height: 100%;
             background: linear-gradient(90deg, #f7971e, #ffd200);
             border-radius: 4px;
-            transition: width 0.2s ease;
         }
-        .loader-text {
-            font-size: 20px;
-            color: #ffd700;
-            font-weight: bold;
-            font-family: monospace;
-        }
-
-        /* ==================== WHEEL / BARABAN ==================== */
-        #wheelOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9998;
-            backdrop-filter: blur(10px);
-        }
-        #wheelOverlay.show {
-            display: flex;
-        }
-        .wheel-container {
-            background: linear-gradient(145deg, #1a1a3e, #2a2a5e);
-            border-radius: 30px;
-            padding: 25px;
-            max-width: 400px;
-            width: 92%;
-            border: 2px solid rgba(255,215,0,0.3);
-            box-shadow: 0 0 60px rgba(255,215,0,0.1);
-            text-align: center;
-            max-height: 95vh;
-            overflow-y: auto;
-        }
-        .wheel-title {
+        .progress-text {
             font-size: 22px;
             color: #ffd700;
-            margin-bottom: 8px;
-        }
-        .wheel-subtitle {
-            font-size: 13px;
-            color: #aaa;
-            margin-bottom: 15px;
-        }
-        .wheel-outer {
-            position: relative;
-            width: 220px;
-            height: 220px;
-            margin: 0 auto 15px;
-        }
-        canvas#wheelCanvas {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            box-shadow: 0 0 40px rgba(255,215,0,0.2);
-        }
-        .wheel-pointer {
-            position: absolute;
-            top: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 28px;
-            color: #ffd700;
-            text-shadow: 0 0 20px rgba(255,215,0,0.8);
-            z-index: 10;
-        }
-        .wheel-info {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 15px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            margin: 12px 0;
-            font-size: 13px;
-        }
-        .wheel-info span {
-            color: #ccc;
-        }
-        .wheel-info .highlight {
-            color: #ffd700;
             font-weight: bold;
-        }
-        .wheel-btn {
-            background: linear-gradient(45deg, #f7971e, #ffd200);
-            color: #000;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 100%;
-            margin: 4px 0;
-        }
-        .wheel-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-        .wheel-btn:hover:not(:disabled) {
-            transform: scale(1.03);
-            box-shadow: 0 0 30px rgba(255,215,0,0.3);
-        }
-        .wheel-btn.buy {
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
-            color: #fff;
-        }
-        .wheel-close {
-            background: rgba(255,255,255,0.08);
-            color: #fff;
-            border: 1px solid rgba(255,255,255,0.15);
-            padding: 8px 25px;
-            border-radius: 20px;
-            cursor: pointer;
-            margin-top: 8px;
-            font-size: 13px;
         }
 
-        /* ==================== MAIN APP ==================== */
-        .container {
+        /* ================ MAIN APP ================ */
+        #mainApp {
             max-width: 480px;
             margin: 0 auto;
             padding: 15px;
             display: none;
         }
-        .container.show {
+        #mainApp.active {
             display: block;
         }
 
         .header {
             text-align: center;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .header h1 {
             font-size: 24px;
@@ -224,73 +101,60 @@
         .header p {
             color: #ffd700;
             font-size: 12px;
-            margin-top: 2px;
             opacity: 0.7;
         }
 
         .welcome {
             text-align: center;
-            padding: 18px 0 8px 0;
-            font-size: 19px;
+            padding: 15px 0;
+            font-size: 18px;
             font-weight: bold;
             color: #fff;
-            text-shadow: 0 0 20px rgba(255,215,0,0.2);
         }
 
         .wheel-banner {
-            background: linear-gradient(135deg, rgba(247,151,30,0.15), rgba(255,210,0,0.05));
+            background: rgba(255,215,0,0.08);
             border: 1px solid rgba(255,215,0,0.2);
-            border-radius: 15px;
-            padding: 14px;
+            border-radius: 12px;
+            padding: 12px;
             text-align: center;
-            margin: 8px 0 15px 0;
+            margin: 8px 0 12px 0;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .wheel-banner:hover {
-            background: rgba(247,151,30,0.2);
         }
         .wheel-banner .icon {
-            font-size: 32px;
-            display: block;
+            font-size: 30px;
         }
         .wheel-banner .text {
-            font-size: 14px;
             color: #ffd700;
-            margin-top: 3px;
+            font-size: 14px;
         }
-        .wheel-banner .free-spins {
+        .wheel-banner .sub {
             font-size: 12px;
             color: #aaa;
         }
 
         .stars {
             text-align: center;
-            padding: 5px 0 12px 0;
+            padding: 5px 0;
         }
         .stars span {
-            font-size: 32px;
+            font-size: 30px;
             cursor: pointer;
-            transition: 0.3s;
             color: #444;
-            user-select: none;
+            transition: 0.2s;
         }
         .stars span.active {
             color: #ffd700;
-            text-shadow: 0 0 20px rgba(255,215,0,0.6);
-        }
-        .stars span:hover {
-            transform: scale(1.15);
         }
 
         .date-time {
             text-align: center;
             padding: 10px;
-            background: rgba(255,255,255,0.04);
-            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
             margin: 8px 0;
             font-size: 14px;
-            border: 1px solid rgba(255,215,0,0.1);
+            border: 1px solid rgba(255,255,255,0.05);
         }
         .date-time span {
             color: #ffd700;
@@ -299,21 +163,95 @@
         .annos {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 6px;
+            gap: 5px;
             margin: 10px 0;
         }
         .anno-item {
-            background: rgba(255,215,0,0.06);
-            border: 1px solid rgba(255,215,0,0.1);
-            border-radius: 10px;
-            padding: 6px 3px;
+            background: rgba(255,215,0,0.05);
+            border: 1px solid rgba(255,215,0,0.08);
+            border-radius: 8px;
+            padding: 6px;
             text-align: center;
             font-size: 11px;
         }
-        .anno-item .number {
+        .anno-item .num {
             font-size: 16px;
             font-weight: bold;
             color: #ffd700;
+        }
+
+        .sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin: 10px 0;
+        }
+        .section-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
+        }
+        .section-card .icon {
+            font-size: 24px;
+        }
+        .section-card .label {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .horoscope {
+            background: rgba(255,215,0,0.04);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid rgba(255,215,0,0.06);
+        }
+        .horoscope h3 {
+            color: #ffd700;
+            text-align: center;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+        .h-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            font-size: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        .h-item .sign {
+            color: #ffd700;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 6px;
+            margin: 8px 0;
+        }
+        .video-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            padding: 8px 4px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .video-card .thumb {
+            height: 45px;
+            background: linear-gradient(45deg, #f7971e, #ffd200);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .video-card .title {
+            font-size: 10px;
+            color: #aaa;
+            margin-top: 3px;
         }
 
         .lang-select {
@@ -321,215 +259,191 @@
             margin: 8px 0;
         }
         .lang-select button {
-            background: rgba(255,215,0,0.06);
-            border: 1px solid rgba(255,215,0,0.15);
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
             color: #fff;
-            padding: 5px 12px;
+            padding: 4px 12px;
             margin: 2px;
-            border-radius: 20px;
+            border-radius: 15px;
             cursor: pointer;
             font-size: 11px;
-            transition: 0.3s;
-        }
-        .lang-select button:hover {
-            background: rgba(255,215,0,0.15);
         }
         .lang-select button.active {
             background: #ffd700;
             color: #000;
         }
 
-        .sections {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin: 12px 0;
-        }
-        .section-card {
-            background: rgba(255,255,255,0.04);
-            border-radius: 12px;
-            padding: 14px 10px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.06);
-            transition: 0.3s;
-            cursor: pointer;
-        }
-        .section-card:hover {
-            background: rgba(255,215,0,0.08);
-            border-color: rgba(255,215,0,0.3);
-            transform: translateY(-2px);
-        }
-        .section-card .icon {
-            font-size: 26px;
-        }
-        .section-card .label {
-            font-size: 12px;
-            color: #ccc;
-            margin-top: 2px;
-        }
-
-        .horoscope {
-            margin: 12px 0;
-            padding: 12px 15px;
-            background: rgba(255,215,0,0.04);
-            border-radius: 12px;
-            border: 1px solid rgba(255,215,0,0.08);
-        }
-        .horoscope h3 {
-            color: #ffd700;
-            text-align: center;
-            margin-bottom: 8px;
-            font-size: 15px;
-        }
-        .horoscope-item {
-            padding: 5px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            font-size: 12px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .horoscope-item .sign {
-            color: #ffd700;
-        }
-
-        .video-section {
-            margin: 12px 0;
-        }
-        .video-section h3 {
-            color: #ffd700;
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 15px;
-        }
-        .video-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 6px;
-        }
-        .video-card {
-            background: rgba(255,255,255,0.04);
-            border-radius: 10px;
-            padding: 8px 4px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.04);
-        }
-        .video-card .thumb {
-            width: 100%;
-            height: 50px;
-            background: linear-gradient(45deg, #f7971e, #ffd200);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-        }
-        .video-card .title {
-            font-size: 10px;
-            margin-top: 3px;
-            color: #aaa;
-        }
-
         .footer {
             text-align: center;
-            padding: 12px 0 5px 0;
+            padding: 10px 0;
             font-size: 10px;
             color: #444;
-            border-top: 1px solid rgba(255,255,255,0.04);
+            border-top: 1px solid rgba(255,255,255,0.03);
+            margin-top: 5px;
         }
 
-        audio {
-            display: none;
-        }
-
-        /* ==================== TOAST ==================== */
-        .toast {
+        /* ================ TOAST ================ */
+        #toast {
             position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0,0,0,0.92);
+            background: rgba(0,0,0,0.9);
             color: #ffd700;
-            padding: 12px 24px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,215,0,0.2);
-            font-size: 14px;
-            z-index: 100000;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            z-index: 999999;
             display: none;
-            text-align: center;
+            border: 1px solid rgba(255,215,0,0.15);
             max-width: 90%;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+            text-align: center;
         }
-        .toast.show {
+        #toast.show {
             display: block;
-            animation: slideUp 0.4s ease;
+            animation: fadeUp 0.3s ease;
         }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateX(-50%) translateY(30px); }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
 
-        @media (max-width: 400px) {
-            .wheel-outer {
-                width: 180px;
-                height: 180px;
-            }
-            canvas#wheelCanvas {
-                width: 180px;
-                height: 180px;
-            }
-            .wheel-container {
-                padding: 18px;
-            }
-            .loader-bar {
-                width: 220px;
-            }
-            .video-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+        /* ================ WHEEL ================ */
+        #wheelOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+        }
+        #wheelOverlay.show {
+            display: flex;
+        }
+        .wheel-box {
+            background: #1a1a3e;
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 380px;
+            width: 92%;
+            border: 1px solid rgba(255,215,0,0.2);
+            text-align: center;
+        }
+        .wheel-box h2 {
+            color: #ffd700;
+            font-size: 20px;
+        }
+        .wheel-box p {
+            color: #aaa;
+            font-size: 13px;
+        }
+        .wheel-wrap {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 10px auto;
+        }
+        #wheelCanvas {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+        .pointer {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: #ffd700;
+        }
+        .wheel-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .wheel-info .hl {
+            color: #ffd700;
+            font-weight: bold;
+        }
+        .wheel-btn {
+            background: linear-gradient(45deg, #f7971e, #ffd200);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin: 3px 0;
+        }
+        .wheel-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .wheel-btn.buy {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: #fff;
+        }
+        .wheel-close {
+            background: rgba(255,255,255,0.06);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 6px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        audio {
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <!-- ==================== LOADING SCREEN ==================== -->
+    <!-- ===== LOADING ===== -->
     <div id="loadingScreen">
-        <div class="loader-logo">⭐ IKROMJON TV</div>
-        <div class="loader-spinner"></div>
-        <div class="loader-bar">
-            <div class="loader-bar-fill" id="loaderFill"></div>
+        <h1>⭐ IKROMJON TV</h1>
+        <div class="spinner"></div>
+        <div class="progress-wrap">
+            <div class="progress-bar" id="progressBar"></div>
         </div>
-        <div class="loader-text" id="loaderText">0%</div>
+        <div class="progress-text" id="progressText">0%</div>
     </div>
 
-    <!-- ==================== TOAST ==================== -->
-    <div class="toast" id="toast"></div>
+    <!-- ===== TOAST ===== -->
+    <div id="toast"></div>
 
-    <!-- ==================== WHEEL OVERLAY ==================== -->
+    <!-- ===== WHEEL ===== -->
     <div id="wheelOverlay">
-        <div class="wheel-container">
-            <div class="wheel-title">🎁 SOVG'A BARABANI</div>
-            <div class="wheel-subtitle">Barabanni aylantiring va sovg'a yutib oling!</div>
-            
-            <div class="wheel-outer">
-                <div class="wheel-pointer">▼</div>
-                <canvas id="wheelCanvas" width="500" height="500"></canvas>
+        <div class="wheel-box">
+            <h2>🎁 SOVG'A BARABANI</h2>
+            <p>Barabanni aylantir va sovg'a yutib ol!</p>
+            <div class="wheel-wrap">
+                <div class="pointer">▼</div>
+                <canvas id="wheelCanvas" width="400" height="400"></canvas>
             </div>
-
             <div class="wheel-info">
-                <span>🎯 Qolgan: <span class="highlight" id="freeSpins">3</span></span>
-                <span>💰 Narx: <span class="highlight">1,500,000 so'm</span></span>
+                <span>🎯 Qolgan: <span class="hl" id="freeSpins">3</span></span>
+                <span>💰 Narx: <span class="hl">1,500,000 so'm</span></span>
             </div>
-
             <button class="wheel-btn" id="spinBtn">🔄 AYLANTIRISH</button>
-            <button class="wheel-btn buy" id="buySpinBtn">💳 1,500,000 so'mga aylantirish</button>
-            <button class="wheel-close" id="closeWheelBtn">✖ Yopish</button>
+            <button class="wheel-btn buy" id="buySpinBtn">💳 1,500,000 so'm</button>
+            <button class="wheel-close" id="closeWheel">✖ Yopish</button>
         </div>
     </div>
 
-    <!-- ==================== MAIN APP ==================== -->
-    <div class="container" id="mainApp">
-
+    <!-- ===== MAIN APP ===== -->
+    <div id="mainApp">
         <audio id="bgMusic" loop>
             <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
         </audio>
@@ -542,17 +456,17 @@
         <div class="welcome" id="welcomeText">👋 IKROMJON TV GA XUSH KELIBSIZ!</div>
 
         <div class="wheel-banner" id="wheelBanner">
-            <span class="icon">🎰</span>
-            <span class="text">🎁 SOVG'A BARABANINI AYLANTIRING!</span>
-            <span class="free-spins">⭐ 3 ta bepul urinish</span>
+            <div class="icon">🎰</div>
+            <div class="text">🎁 SOVG'A BARABANINI AYLANTIRING!</div>
+            <div class="sub">⭐ 3 ta bepul urinish</div>
         </div>
 
         <div class="stars" id="starsContainer">
-            <span data-value="1">☆</span>
-            <span data-value="2">☆</span>
-            <span data-value="3">☆</span>
-            <span data-value="4">☆</span>
-            <span data-value="5">☆</span>
+            <span data-v="1">☆</span>
+            <span data-v="2">☆</span>
+            <span data-v="3">☆</span>
+            <span data-v="4">☆</span>
+            <span data-v="5">☆</span>
         </div>
 
         <div class="date-time">
@@ -562,11 +476,11 @@
         <div class="annos" id="annosContainer"></div>
 
         <div class="lang-select">
-            <button class="active" data-lang="uz">🇺🇿 UZ</button>
-            <button data-lang="ru">🇷🇺 RU</button>
-            <button data-lang="tj">🇹🇯 TJ</button>
-            <button data-lang="en">🇬🇧 EN</button>
-            <button data-lang="kz">🇰🇿 KZ</button>
+            <button class="active" data-l="uz">🇺🇿 UZ</button>
+            <button data-l="ru">🇷🇺 RU</button>
+            <button data-l="tj">🇹🇯 TJ</button>
+            <button data-l="en">🇬🇧 EN</button>
+            <button data-l="kz">🇰🇿 KZ</button>
         </div>
 
         <div class="sections">
@@ -581,61 +495,141 @@
             <div id="horoscopeContainer"></div>
         </div>
 
-        <div class="video-section">
-            <h3>📹 VIDEOLAR</h3>
-            <div class="video-grid" id="videoContainer"></div>
-        </div>
+        <div class="video-grid" id="videoContainer"></div>
 
-        <div class="footer">© 2026 IKROMJON TV | Barcha huquqlar himoyalangan</div>
+        <div class="footer">© 2026 IKROMJON TV</div>
     </div>
 
     <script>
         // ============================================================
-        // 1. LOADING SCREEN - ISHLAYDI!
+        // 1. LOADING - SODDA VA ISHONCHLI
         // ============================================================
-        (function startLoading() {
-            let progress = 0;
-            const fill = document.getElementById('loaderFill');
-            const text = document.getElementById('loaderText');
-            const loadingScreen = document.getElementById('loadingScreen');
-            const mainApp = document.getElementById('mainApp');
+        (function() {
+            var bar = document.getElementById('progressBar');
+            var text = document.getElementById('progressText');
+            var loading = document.getElementById('loadingScreen');
+            var main = document.getElementById('mainApp');
 
-            function updateLoader() {
-                // Tez ortib boradi
-                progress += Math.floor(Math.random() * 8) + 3;
-                if (progress > 100) progress = 100;
+            var p = 0;
 
-                fill.style.width = progress + '%';
-                text.textContent = progress + '%';
+            function step() {
+                p += Math.floor(Math.random() * 6) + 2;
+                if (p > 100) p = 100;
+                bar.style.width = p + '%';
+                text.textContent = p + '%';
 
-                if (progress < 100) {
-                    // Har bir qadamda tezlik o'zgaradi
-                    const delay = Math.floor(Math.random() * 80) + 40;
-                    setTimeout(updateLoader, delay);
+                if (p < 100) {
+                    setTimeout(step, 60 + Math.random() * 80);
                 } else {
-                    // 100% bo'lganda yashirish
+                    // 100% bo'lganda
                     setTimeout(function() {
-                        loadingScreen.classList.add('hide');
-                        mainApp.classList.add('show');
+                        loading.className = 'hidden';
+                        main.className = 'active';
                         // Musiqa
                         document.getElementById('bgMusic').play().catch(function() {});
                         // Toast
-                        showToast('🎉 Xush kelibsiz! Sovg\'a barabanini aylantiring!');
+                        showToast('🎉 Xush kelibsiz!');
                         // Barabanni yangilash
-                        updateFreeSpins();
-                    }, 400);
+                        updateSpins();
+                    }, 300);
                 }
             }
 
-            // 0.5 soniyadan keyin boshlaymiz (aniq ko'rinishi uchun)
-            setTimeout(updateLoader, 300);
+            // 0.5 soniyadan keyin boshlaymiz
+            setTimeout(step, 400);
         })();
 
         // ============================================================
-        // 2. WHEEL / BARABAN
+        // 2. TOAST
         // ============================================================
-        const prizes = [
-            '🎁 100,000 so\'m', '📱 Telefon', '🎧 Naushnik', '💰 50,000 so\'m',
-            '🎮 O\'yin', '📺 TV', '🧧 20,000 so\'m', '🎁 Sovg\'a'
-        ];
-        const colors = ['
+        function showToast(msg) {
+            var t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = 'show';
+            clearTimeout(t._timer);
+            t._timer = setTimeout(function() {
+                t.className = '';
+            }, 3000);
+        }
+
+        // ============================================================
+        // 3. STARS
+        // ============================================================
+        (function() {
+            var stars = document.querySelectorAll('#starsContainer span');
+            var rating = 0;
+
+            stars.forEach(function(s) {
+                s.onclick = function() {
+                    rating = parseInt(this.dataset.v);
+                    stars.forEach(function(st, i) {
+                        if (i < rating) {
+                            st.textContent = '★';
+                            st.className = 'active';
+                        } else {
+                            st.textContent = '☆';
+                            st.className = '';
+                        }
+                    });
+                    showToast('⭐ ' + rating + ' yulduzcha');
+                };
+                s.onmouseenter = function() {
+                    var v = parseInt(this.dataset.v);
+                    stars.forEach(function(st, i) {
+                        if (i < v) {
+                            st.textContent = '★';
+                            st.className = 'active';
+                        } else {
+                            st.textContent = '☆';
+                            st.className = '';
+                        }
+                    });
+                };
+                s.onmouseleave = function() {
+                    stars.forEach(function(st, i) {
+                        if (i < rating) {
+                            st.textContent = '★';
+                            st.className = 'active';
+                        } else {
+                            st.textContent = '☆';
+                            st.className = '';
+                        }
+                    });
+                };
+            });
+        })();
+
+        // ============================================================
+        // 4. DATE & TIME
+        // ============================================================
+        function updateDT() {
+            var n = new Date();
+            document.getElementById('dateDisplay').textContent =
+                n.toLocaleDateString('uz-UZ', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            document.getElementById('timeDisplay').textContent =
+                n.toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        }
+        updateDT();
+        setInterval(updateDT, 1000);
+
+        // ============================================================
+        // 5. ANNOS
+        // ============================================================
+        (function() {
+            var c = document.getElementById('annosContainer');
+            var a = ['⭐', '🌟', '✨', '💫', '⭐', '🌟', '✨', '💫', '⭐', '🌟'];
+            a.forEach(function(x, i) {
+                var d = document.createElement('div');
+                d.className = 'anno-item';
+                d.innerHTML = '<div class="num">' + (i + 1) + '</div><div>' + x + '</div>';
+                c.appendChild(d);
+            });
+        })();
+
+        // ============================================================
+        // 6. HOROSCOPE
+        // ============================================================
+        (function() {
+            var c = document.getElementById('horoscopeContainer');
+            var signs = ['♈ Qo\'y', '♉ Toros', '♊ Egizaklar', '♋ Qisqichbaqa', '♌ Arslon',
+                '♍ Parizod', '♎ Tarozi', '♏ Chayon', '♐ Oʻqota
