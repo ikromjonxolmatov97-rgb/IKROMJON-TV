@@ -101,6 +101,25 @@
             border-bottom: 1px solid #1e293b;
         }
 
+        /* Reklama Bo'limlari */
+        .ads-section {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .ad-banner {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #00d2ff;
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+            transition: transform 0.2s;
+        }
+        .ad-banner:hover { transform: scale(1.02); }
+        .ad-banner img { width: 100%; height: auto; display: block; }
+        .ads-label { font-size: 12px; color: #ff0055; margin-bottom: 8px; font-weight: 600; text-transform: uppercase; text-align: center; }
+
         /* Category Grid */
         .categories-section { padding: 12px 15px 5px 15px; }
         .section-label { font-size: 12px; color: #94a3b8; margin-bottom: 8px; font-weight: 600; text-transform: uppercase; }
@@ -126,6 +145,7 @@
             width: 100px; height: 65px; background-color: #1e293b;
             display: flex; align-items: center; justify-content: center;
             font-size: 18px; color: #00d2ff; flex-shrink: 0;
+            background-size: cover; background-position: center;
         }
         .video-info { padding: 8px; display: flex; flex-direction: column; justify-content: center; }
         .video-title { font-size: 12px; font-weight: 600; color: #f1f5f9; margin-bottom: 2px; }
@@ -167,14 +187,6 @@
         </div>
     </div>
 
-    <!-- 10 ta Aylanuvchi Kinolar Anonsi Slider -->
-    <div class="slider-section">
-        <div class="section-label" id="anonsLabel">🔥 Premyera Kinolar Anonsi</div>
-        <div class="slider-container" id="sliderBox">
-            <!-- JavaScript orqali to'ldiriladi -->
-        </div>
-    </div>
-
     <!-- Video Player -->
     <div class="player-box">
         <iframe id="main-player" src="https://www.youtube.com/embed/jfKfPfyJRdk" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
@@ -208,10 +220,6 @@
                 <span class="cat-icon">🍿</span>
                 <span class="cat-name" id="c5">Xorijiy Kinolar</span>
             </div>
-            <div class="cat-btn" onclick="loadCategory('comedy', this)">
-                <span class="cat-icon">🎭</span>
-                <span class="cat-name" id="c6">Komediyalar</span>
-            </div>
             <div class="cat-btn" onclick="loadCategory('cartoons', this)">
                 <span class="cat-icon">🧸</span>
                 <span class="cat-name" id="c7">Multfilmlar</span>
@@ -219,18 +227,6 @@
             <div class="cat-btn" onclick="loadCategory('edu', this)">
                 <span class="cat-icon">📚</span>
                 <span class="cat-name" id="c8">Fan va IT</span>
-            </div>
-            <div class="cat-btn" onclick="loadCategory('doc', this)">
-                <span class="cat-icon">🌌</span>
-                <span class="cat-name" id="c9">Hujjatli Film</span>
-            </div>
-            <div class="cat-btn" onclick="loadCategory('radio', this)">
-                <span class="cat-icon">📻</span>
-                <span class="cat-name" id="c10">Radiolar</span>
-            </div>
-            <div class="cat-btn" onclick="loadCategory('sport', this)">
-                <span class="cat-icon">⚽</span>
-                <span class="cat-name" id="c11">Sport</span>
             </div>
             <div class="cat-btn" onclick="loadCategory('auto', this)">
                 <span class="cat-icon">🏎️</span>
@@ -241,6 +237,36 @@
 
     <!-- Video Ro'yxat -->
     <div class="content-list" id="videoList"></div>
+
+    <!-- Reklama Bo'limi -->
+    <div class="ads-section">
+        <div class="ads-label">Homiylarimiz Reklamasi</div>
+        
+        <!-- Beeline Reklama -->
+        <a href="https://beeline.uz" target="_blank" class="ad-banner">
+            <img src="Beeline.png" alt="Beeline Reklama">
+        </a>
+        
+        <!-- Coca-Cola Reklama -->
+        <a href="https://coca-cola.uz" target="_blank" class="ad-banner">
+            <img src="Coca-Cola.png" alt="Coca-Cola Reklama">
+        </a>
+        
+        <!-- Colgate Reklama (Kun) -->
+        <a href="https://colgate.uz" target="_blank" class="ad-banner">
+            <img src="Colgate_Kun.png" alt="Colgate Reklama">
+        </a>
+        
+        <!-- iPhone Reklama -->
+        <a href="https://apple.com/uz" target="_blank" class="ad-banner">
+            <img src="iPhone.png" alt="iPhone Reklama">
+        </a>
+        
+        <!-- Colgate Reklama (Dengiz) -->
+        <a href="https://colgate.uz" target="_blank" class="ad-banner">
+            <img src="Colgate_Dengiz.png" alt="Colgate Reklama">
+        </a>
+    </div>
 
     <!-- Bottom Nav -->
     <div class="bottom-nav">
@@ -260,97 +286,29 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // 10 ta Film Anonsi Slider Ma'lumoti
-        const sliderData = [
-            { title: "Avatar 3: Olov O'lkasi", url: "https://www.youtube.com/embed/d9MyW72ELq0", bg: "https://img.youtube.com/vi/d9MyW72ELq0/hqdefault.jpg" },
-            { title: "Mening Qallig'im - O'zbek Kino", url: "https://www.youtube.com/embed/2g81116hA68", bg: "https://img.youtube.com/vi/2g81116hA68/hqdefault.jpg" },
-            { title: "Harry Potter & Azkaban", url: "https://www.youtube.com/embed/VyHV0BRtdxo", bg: "https://img.youtube.com/vi/VyHV0BRtdxo/hqdefault.jpg" },
-            { title: "Spider-Man Beyond", url: "https://www.youtube.com/embed/shW9i6k8cB0", bg: "https://img.youtube.com/vi/shW9i6k8cB0/hqdefault.jpg" },
-            { title: "Abdullajon 2", url: "https://www.youtube.com/embed/5qap5aO4i9A", bg: "https://img.youtube.com/vi/5qap5aO4i9A/hqdefault.jpg" },
-            { title: "Forsaj 11 Anons", url: "https://www.youtube.com/embed/aSiDu3Ywi8E", bg: "https://img.youtube.com/vi/aSiDu3Ywi8E/hqdefault.jpg" },
-            { title: "Masha va Ayiq Yangi", url: "https://www.youtube.com/embed/LXb3EKWsInQ", bg: "https://img.youtube.com/vi/LXb3EKWsInQ/hqdefault.jpg" },
-            { title: "Interstellar 2", url: "https://www.youtube.com/embed/zSWdZVtXT7E", bg: "https://img.youtube.com/vi/zSWdZVtXT7E/hqdefault.jpg" },
-            { title: "Kung Fu Panda 4", url: "https://www.youtube.com/embed/_inKs4eeHiI", bg: "https://img.youtube.com/vi/_inKs4eeHiI/hqdefault.jpg" },
-            { title: "Gladiator 2", url: "https://www.youtube.com/embed/4rgYUipGJNo", bg: "https://img.youtube.com/vi/4rgYUipGJNo/hqdefault.jpg" }
-        ];
-
-        // Anonslarni chiqarish
-        const sliderBox = document.getElementById('sliderBox');
-        sliderData.forEach(item => {
-            const slide = document.createElement('div');
-            slide.className = 'slide-card';
-            slide.style.backgroundImage = `url('${item.bg}')`;
-            slide.onclick = () => playVideo(item.url, item.title);
-            slide.innerHTML = `<div class="slide-title">${item.title}</div>`;
-            sliderBox.appendChild(slide);
-        });
-
-        // Avto-surilish
-        setInterval(() => {
-            sliderBox.scrollLeft += 150;
-            if(sliderBox.scrollLeft >= sliderBox.scrollWidth - sliderBox.clientWidth) {
-                sliderBox.scrollLeft = 0;
-            }
-        }, 3000);
-
         // Barcha Kategoriyalar Baza
         const data = {
             uz_klip: [
-                { title: "Munisa Rizayeva - O'ylama (Official Music Video)", url: "https://www.youtube.com/embed/5D_1mGz1p6E", meta: "Musiqa • O'zbek Klip" },
-                { title: "Jaloliddin Ahmadaliyev - Yomon ekan", url: "https://www.youtube.com/embed/2g81116hA68", meta: "Musiqa • Premyera" },
-                { title: "Rayhon va Hamdam Sobirov - Ko'zlarimda", url: "https://www.youtube.com/embed/LXb3EKWsInQ", meta: "Musiqa • Xit" }
+                { title: "Munisa Rizayeva - O'ylama (Offical Music Video)", url: "https://www.youtube.com/embed/5D_1mGz1p6E", meta: "Musiqa • O'zbek Klip", thumb: "Munisa_Rizayeva.png" },
+                { title: "Jaloliddin Ahmadaliyev - Yomon ekan", url: "https://www.youtube.com/embed/2g81116hA68", meta: "Musiqa • Premyera", thumb: "https://img.youtube.com/vi/2g81116hA68/hqdefault.jpg" }
             ],
             tv: [
-                { title: "Euronews Uzbek Live Stream", url: "https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig", meta: "TV • Yangiliklar 24/7" },
-                { title: "NASA TV 24/7 - Fazodan Jonli Efir", url: "https://www.youtube.com/embed/21X5lGlDOfg", meta: "TV • Koinot va Fan" }
+                { title: "Uzbekistan 24 Live Stream", url: "https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig", meta: "TV • Yangiliklar 24/7", thumb: "Ikromjon_TV_Jonli.png" },
+                { title: "Ikromjon FM Radio - Mobil Ilova", url: "https://www.youtube.com/embed/Htaj3o3JD8I", meta: "TV • Yangiliklar 24/7", thumb: "Ikromjon_FM.png" }
             ],
             uzbek: [
-                { title: "Abdullajon (O'zbek Klassik Film)", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Kino • Komediya" },
-                { title: "Sumbula (Milliy Drama)", url: "https://www.youtube.com/embed/2g81116hA68", meta: "Kino • Drama" }
-            ],
-            harry: [
-                { title: "Harry Potter va Hikmatlar Tosh Treyleri", url: "https://www.youtube.com/embed/VyHV0BRtdxo", meta: "Fantasy • Film" },
-                { title: "Harry Potter - Barcha Soundtracklar", url: "https://www.youtube.com/embed/Htaj3o3JD8I", meta: "Musiqa • Soundtrack" }
+                { title: "Abdullajon (O'zbek Klassik Film)", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Kino • Komediya", thumb: "https://img.youtube.com/vi/5qap5aO4i9A/hqdefault.jpg" }
             ],
             foreign: [
-                { title: "Avatar 2: Suv Yo'li (Premyera)", url: "https://www.youtube.com/embed/d9MyW72ELq0", meta: "Xorij • Fantastika" },
-                { title: "Interstellar (Koinot haqida)", url: "https://www.youtube.com/embed/zSWdZVtXT7E", meta: "Xorij • Sci-Fi" }
-            ],
-            comedy: [
-                { title: "Mahiya & Komediya Shou 2026", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Shou • Kulgu" }
-            ],
-            cartoons: [
-                { title: "Masha va Ayiq (Yangi fasl)", url: "https://www.youtube.com/embed/LXb3EKWsInQ", meta: "Multfilm • Bolalar" }
+                { title: "Avatar 2: Suv Yo'li (Premyera)", url: "https://www.youtube.com/embed/d9MyW72ELq0", meta: "Xorij • Fantastika", thumb: "https://img.youtube.com/vi/d9MyW72ELq0/hqdefault.jpg" }
             ],
             edu: [
-                { title: "Python dasturlash kursi", url: "https://www.youtube.com/embed/d56mG7DezGs", meta: "Fan • IT" }
-            ],
-            doc: [
-                { title: "Sirli Okean Hujjatli Filmi", url: "https://www.youtube.com/embed/21X5lGlDOfg", meta: "Hujjatli • Tabiat" }
-            ],
-            radio: [
-                { title: "Lofi Beats Chill Radio 24/7", url: "https://www.youtube.com/embed/jfKfPfyJRdk", meta: "Radio • Sokin" }
-            ],
-            sport: [
-                { title: "UFC va Futbol Xit moments", url: "https://www.youtube.com/embed/2g81116hA68", meta: "Sport • Efir" }
+                { title: "AI and Man - Kelajak Texnologiyalari", url: "https://www.youtube.com/embed/8A-J30j1Mpo", meta: "Fan • IT", thumb: "AI_and_Man.png" }
             ],
             auto: [
-                { title: "Top Gear Uzbek / Avto Sinov", url: "https://www.youtube.com/embed/aSiDu3Ywi8E", meta: "Avto • Poyga" }
+                { title: "Top Gear Uzbek / Avto Sinov", url: "https://www.youtube.com/embed/aSiDu3Ywi8E", meta: "Avto • Poyga", thumb: "https://img.youtube.com/vi/aSiDu3Ywi8E/hqdefault.jpg" }
             ]
         };
-
-        // Til o'zgartirish
-        const translations = {
-            uz: { welcome: "IKROMJON TV-GA XUSH KELIBSIZ!", anons: "🔥 Premyera Kinolar Anonsi", catLabel: "Kategoriyalar" },
-            ru: { welcome: "ДОБРО ПОЖАЛОВАТЬ В IKROMJON TV!", anons: "🔥 Анонсы Премьер Фильмов", catLabel: "Категории" },
-            en: { welcome: "WELCOME TO IKROMJON TV!", anons: "🔥 Movie Trailers & Teasers", catLabel: "Categories" }
-        };
-
-        function changeLanguage(lang) {
-            document.getElementById('welcomeText').innerText = translations[lang].welcome;
-            document.getElementById('anonsLabel').innerText = translations[lang].anons;
-            document.getElementById('catLabel').innerText = translations[lang].catLabel;
-        }
 
         function playVideo(url, title) {
             document.getElementById('main-player').src = url;
@@ -372,8 +330,14 @@
                 const card = document.createElement('div');
                 card.className = 'video-card';
                 card.onclick = () => playVideo(item.url, item.title);
+                
+                let thumbStyle = "";
+                if (item.thumb) {
+                    thumbStyle = `background-image: url('${item.thumb}')`;
+                }
+
                 card.innerHTML = `
-                    <div class="video-thumb">▶</div>
+                    <div class="video-thumb" style="${thumbStyle}">▶</div>
                     <div class="video-info">
                         <div class="video-title">${item.title}</div>
                         <div class="video-meta">${item.meta}</div>
