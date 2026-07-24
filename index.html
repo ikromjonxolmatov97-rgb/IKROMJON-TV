@@ -26,34 +26,38 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg, #0a0a2e, #1a1a4e, #2a1a5e);
-            display: flex;
+            display: flex !important;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease;
+            z-index: 99999;
+            transition: opacity 0.6s ease;
         }
         #loadingScreen.hide {
             opacity: 0;
             pointer-events: none;
         }
         .loader-logo {
-            font-size: 48px;
+            font-size: 42px;
             font-weight: bold;
             background: linear-gradient(45deg, #f7971e, #ffd200);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             animation: pulse 1.5s infinite;
         }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
         .loader-spinner {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             border: 4px solid rgba(255,215,0,0.1);
             border-top: 4px solid #ffd700;
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-bottom: 30px;
+            animation: spin 0.7s linear infinite;
+            margin-bottom: 25px;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -61,23 +65,25 @@
         }
         .loader-bar {
             width: 280px;
-            height: 6px;
+            height: 8px;
             background: rgba(255,255,255,0.1);
-            border-radius: 3px;
+            border-radius: 4px;
             overflow: hidden;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255,215,0,0.1);
         }
         .loader-bar-fill {
             height: 100%;
             width: 0%;
             background: linear-gradient(90deg, #f7971e, #ffd200);
-            border-radius: 3px;
-            transition: width 0.3s ease;
+            border-radius: 4px;
+            transition: width 0.2s ease;
         }
         .loader-text {
-            font-size: 18px;
+            font-size: 20px;
             color: #ffd700;
             font-weight: bold;
+            font-family: monospace;
         }
 
         /* ==================== WHEEL / BARABAN ==================== */
@@ -100,54 +106,57 @@
         .wheel-container {
             background: linear-gradient(145deg, #1a1a3e, #2a2a5e);
             border-radius: 30px;
-            padding: 30px;
+            padding: 25px;
             max-width: 400px;
-            width: 90%;
+            width: 92%;
             border: 2px solid rgba(255,215,0,0.3);
             box-shadow: 0 0 60px rgba(255,215,0,0.1);
             text-align: center;
+            max-height: 95vh;
+            overflow-y: auto;
         }
         .wheel-title {
-            font-size: 24px;
+            font-size: 22px;
             color: #ffd700;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         .wheel-subtitle {
-            font-size: 14px;
+            font-size: 13px;
             color: #aaa;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .wheel-outer {
             position: relative;
-            width: 250px;
-            height: 250px;
-            margin: 0 auto 20px;
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 15px;
         }
         canvas#wheelCanvas {
-            width: 250px;
-            height: 250px;
+            width: 220px;
+            height: 220px;
             border-radius: 50%;
             box-shadow: 0 0 40px rgba(255,215,0,0.2);
         }
         .wheel-pointer {
             position: absolute;
-            top: -10px;
+            top: -8px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 30px;
+            font-size: 28px;
             color: #ffd700;
             text-shadow: 0 0 20px rgba(255,215,0,0.8);
+            z-index: 10;
         }
         .wheel-info {
             display: flex;
             justify-content: space-between;
-            padding: 10px 20px;
+            padding: 10px 15px;
             background: rgba(255,255,255,0.05);
             border-radius: 12px;
-            margin: 15px 0;
+            margin: 12px 0;
+            font-size: 13px;
         }
         .wheel-info span {
-            font-size: 14px;
             color: #ccc;
         }
         .wheel-info .highlight {
@@ -158,21 +167,21 @@
             background: linear-gradient(45deg, #f7971e, #ffd200);
             color: #000;
             border: none;
-            padding: 14px 40px;
+            padding: 12px 30px;
             border-radius: 30px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
             width: 100%;
-            margin: 5px 0;
+            margin: 4px 0;
         }
         .wheel-btn:disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
         }
         .wheel-btn:hover:not(:disabled) {
-            transform: scale(1.05);
+            transform: scale(1.03);
             box-shadow: 0 0 30px rgba(255,215,0,0.3);
         }
         .wheel-btn.buy {
@@ -180,14 +189,14 @@
             color: #fff;
         }
         .wheel-close {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.08);
             color: #fff;
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 10px 30px;
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 8px 25px;
             border-radius: 20px;
             cursor: pointer;
-            margin-top: 10px;
-            font-size: 14px;
+            margin-top: 8px;
+            font-size: 13px;
         }
 
         /* ==================== MAIN APP ==================== */
@@ -203,42 +212,38 @@
 
         .header {
             text-align: center;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
         .header h1 {
-            font-size: 26px;
+            font-size: 24px;
             background: linear-gradient(45deg, #f7971e, #ffd200);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .header p {
             color: #ffd700;
-            font-size: 13px;
-            margin-top: 3px;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            font-size: 12px;
+            margin-top: 2px;
+            opacity: 0.7;
         }
 
         .welcome {
             text-align: center;
-            padding: 20px 0 10px 0;
-            font-size: 20px;
+            padding: 18px 0 8px 0;
+            font-size: 19px;
             font-weight: bold;
             color: #fff;
-            text-shadow: 0 0 20px rgba(255,215,0,0.3);
+            text-shadow: 0 0 20px rgba(255,215,0,0.2);
         }
 
         .wheel-banner {
             background: linear-gradient(135deg, rgba(247,151,30,0.15), rgba(255,210,0,0.05));
             border: 1px solid rgba(255,215,0,0.2);
             border-radius: 15px;
-            padding: 15px;
+            padding: 14px;
             text-align: center;
-            margin: 10px 0 20px 0;
+            margin: 8px 0 15px 0;
             cursor: pointer;
             transition: 0.3s;
         }
@@ -246,13 +251,13 @@
             background: rgba(247,151,30,0.2);
         }
         .wheel-banner .icon {
-            font-size: 35px;
+            font-size: 32px;
             display: block;
         }
         .wheel-banner .text {
             font-size: 14px;
             color: #ffd700;
-            margin-top: 5px;
+            margin-top: 3px;
         }
         .wheel-banner .free-spins {
             font-size: 12px;
@@ -261,27 +266,31 @@
 
         .stars {
             text-align: center;
-            padding: 5px 0 15px 0;
+            padding: 5px 0 12px 0;
         }
         .stars span {
-            font-size: 35px;
+            font-size: 32px;
             cursor: pointer;
             transition: 0.3s;
-            color: #555;
+            color: #444;
+            user-select: none;
         }
         .stars span.active {
             color: #ffd700;
-            text-shadow: 0 0 20px rgba(255,215,0,0.8);
+            text-shadow: 0 0 20px rgba(255,215,0,0.6);
+        }
+        .stars span:hover {
+            transform: scale(1.15);
         }
 
         .date-time {
             text-align: center;
-            padding: 12px;
-            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            background: rgba(255,255,255,0.04);
             border-radius: 12px;
-            margin: 10px 0;
-            font-size: 15px;
-            border: 1px solid rgba(255,215,0,0.15);
+            margin: 8px 0;
+            font-size: 14px;
+            border: 1px solid rgba(255,215,0,0.1);
         }
         .date-time span {
             color: #ffd700;
@@ -290,69 +299,92 @@
         .annos {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 8px;
-            margin: 12px 0;
+            gap: 6px;
+            margin: 10px 0;
         }
         .anno-item {
-            background: rgba(255,215,0,0.08);
-            border: 1px solid rgba(255,215,0,0.15);
+            background: rgba(255,215,0,0.06);
+            border: 1px solid rgba(255,215,0,0.1);
             border-radius: 10px;
-            padding: 8px 4px;
+            padding: 6px 3px;
             text-align: center;
             font-size: 11px;
         }
         .anno-item .number {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             color: #ffd700;
+        }
+
+        .lang-select {
+            text-align: center;
+            margin: 8px 0;
+        }
+        .lang-select button {
+            background: rgba(255,215,0,0.06);
+            border: 1px solid rgba(255,215,0,0.15);
+            color: #fff;
+            padding: 5px 12px;
+            margin: 2px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: 0.3s;
+        }
+        .lang-select button:hover {
+            background: rgba(255,215,0,0.15);
+        }
+        .lang-select button.active {
+            background: #ffd700;
+            color: #000;
         }
 
         .sections {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 15px 0;
+            gap: 8px;
+            margin: 12px 0;
         }
         .section-card {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.04);
             border-radius: 12px;
-            padding: 15px;
+            padding: 14px 10px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.06);
             transition: 0.3s;
             cursor: pointer;
         }
         .section-card:hover {
-            background: rgba(255,215,0,0.1);
-            border-color: #ffd700;
+            background: rgba(255,215,0,0.08);
+            border-color: rgba(255,215,0,0.3);
             transform: translateY(-2px);
         }
         .section-card .icon {
-            font-size: 28px;
+            font-size: 26px;
         }
         .section-card .label {
             font-size: 12px;
             color: #ccc;
-            margin-top: 3px;
+            margin-top: 2px;
         }
 
         .horoscope {
-            margin: 15px 0;
-            padding: 15px;
-            background: rgba(255,215,0,0.05);
+            margin: 12px 0;
+            padding: 12px 15px;
+            background: rgba(255,215,0,0.04);
             border-radius: 12px;
-            border: 1px solid rgba(255,215,0,0.1);
+            border: 1px solid rgba(255,215,0,0.08);
         }
         .horoscope h3 {
             color: #ffd700;
             text-align: center;
-            margin-bottom: 10px;
-            font-size: 16px;
+            margin-bottom: 8px;
+            font-size: 15px;
         }
         .horoscope-item {
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 13px;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            font-size: 12px;
             display: flex;
             justify-content: space-between;
         }
@@ -361,130 +393,100 @@
         }
 
         .video-section {
-            margin: 15px 0;
+            margin: 12px 0;
         }
         .video-section h3 {
             color: #ffd700;
             text-align: center;
-            margin-bottom: 12px;
-            font-size: 16px;
+            margin-bottom: 10px;
+            font-size: 15px;
         }
         .video-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 8px;
+            gap: 6px;
         }
         .video-card {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.04);
             border-radius: 10px;
-            padding: 10px 5px;
+            padding: 8px 4px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.04);
         }
         .video-card .thumb {
             width: 100%;
-            height: 60px;
+            height: 50px;
             background: linear-gradient(45deg, #f7971e, #ffd200);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 22px;
         }
         .video-card .title {
             font-size: 10px;
-            margin-top: 4px;
-            color: #ccc;
-        }
-
-        .lang-select {
-            text-align: center;
-            margin: 10px 0;
-        }
-        .lang-select button {
-            background: rgba(255,215,0,0.08);
-            border: 1px solid rgba(255,215,0,0.2);
-            color: #fff;
-            padding: 6px 14px;
-            margin: 3px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: 0.3s;
-        }
-        .lang-select button:hover {
-            background: rgba(255,215,0,0.2);
-        }
-        .lang-select button.active {
-            background: #ffd700;
-            color: #000;
+            margin-top: 3px;
+            color: #aaa;
         }
 
         .footer {
             text-align: center;
-            padding: 15px 0 5px 0;
-            font-size: 11px;
-            color: #555;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 12px 0 5px 0;
+            font-size: 10px;
+            color: #444;
+            border-top: 1px solid rgba(255,255,255,0.04);
         }
 
         audio {
             display: none;
         }
 
-        /* ==================== RESPONSIVE ==================== */
-        @media (max-width: 400px) {
-            .wheel-outer {
-                width: 200px;
-                height: 200px;
-            }
-            canvas#wheelCanvas {
-                width: 200px;
-                height: 200px;
-            }
-            .wheel-container {
-                padding: 20px;
-            }
-            .annos {
-                gap: 5px;
-            }
-            .anno-item {
-                font-size: 10px;
-                padding: 6px 3px;
-            }
-            .anno-item .number {
-                font-size: 15px;
-            }
-            .video-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
         /* ==================== TOAST ==================== */
         .toast {
             position: fixed;
-            bottom: 30px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.92);
             color: #ffd700;
-            padding: 15px 30px;
-            border-radius: 15px;
-            border: 1px solid rgba(255,215,0,0.3);
-            font-size: 16px;
-            z-index: 10000;
+            padding: 12px 24px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,215,0,0.2);
+            font-size: 14px;
+            z-index: 100000;
             display: none;
             text-align: center;
             max-width: 90%;
             backdrop-filter: blur(10px);
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
         }
         .toast.show {
             display: block;
-            animation: slideUp 0.5s ease;
+            animation: slideUp 0.4s ease;
         }
         @keyframes slideUp {
             from { opacity: 0; transform: translateX(-50%) translateY(30px); }
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        @media (max-width: 400px) {
+            .wheel-outer {
+                width: 180px;
+                height: 180px;
+            }
+            canvas#wheelCanvas {
+                width: 180px;
+                height: 180px;
+            }
+            .wheel-container {
+                padding: 18px;
+            }
+            .loader-bar {
+                width: 220px;
+            }
+            .video-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
     </style>
 </head>
@@ -500,7 +502,10 @@
         <div class="loader-text" id="loaderText">0%</div>
     </div>
 
-    <!-- ==================== WHEEL / BARABAN ==================== -->
+    <!-- ==================== TOAST ==================== -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ==================== WHEEL OVERLAY ==================== -->
     <div id="wheelOverlay">
         <div class="wheel-container">
             <div class="wheel-title">🎁 SOVG'A BARABANI</div>
@@ -512,44 +517,36 @@
             </div>
 
             <div class="wheel-info">
-                <span>🎯 Qolgan urinishlar: <span class="highlight" id="freeSpins">3</span></span>
+                <span>🎯 Qolgan: <span class="highlight" id="freeSpins">3</span></span>
                 <span>💰 Narx: <span class="highlight">1,500,000 so'm</span></span>
             </div>
 
-            <button class="wheel-btn" id="spinBtn">🔄 AYLANTIRISH (BEPUL)</button>
+            <button class="wheel-btn" id="spinBtn">🔄 AYLANTIRISH</button>
             <button class="wheel-btn buy" id="buySpinBtn">💳 1,500,000 so'mga aylantirish</button>
             <button class="wheel-close" id="closeWheelBtn">✖ Yopish</button>
         </div>
     </div>
 
-    <!-- ==================== TOAST ==================== -->
-    <div class="toast" id="toast"></div>
-
     <!-- ==================== MAIN APP ==================== -->
     <div class="container" id="mainApp">
 
-        <!-- Audio -->
         <audio id="bgMusic" loop>
             <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
         </audio>
 
-        <!-- Header -->
         <div class="header">
             <h1>⭐ IKROMJON TV ⭐</h1>
             <p>📱 Mobil ilova</p>
         </div>
 
-        <!-- Welcome -->
         <div class="welcome" id="welcomeText">👋 IKROMJON TV GA XUSH KELIBSIZ!</div>
 
-        <!-- Wheel Banner -->
         <div class="wheel-banner" id="wheelBanner">
             <span class="icon">🎰</span>
             <span class="text">🎁 SOVG'A BARABANINI AYLANTIRING!</span>
-            <span class="free-spins">⭐ 3 ta bepul urinish qoldi</span>
+            <span class="free-spins">⭐ 3 ta bepul urinish</span>
         </div>
 
-        <!-- Stars Rating -->
         <div class="stars" id="starsContainer">
             <span data-value="1">☆</span>
             <span data-value="2">☆</span>
@@ -558,15 +555,12 @@
             <span data-value="5">☆</span>
         </div>
 
-        <!-- Date & Time -->
         <div class="date-time">
             📅 <span id="dateDisplay"></span> &nbsp;|&nbsp; ⏰ <span id="timeDisplay"></span>
         </div>
 
-        <!-- Annos (10 ta) -->
         <div class="annos" id="annosContainer"></div>
 
-        <!-- Language -->
         <div class="lang-select">
             <button class="active" data-lang="uz">🇺🇿 UZ</button>
             <button data-lang="ru">🇷🇺 RU</button>
@@ -575,7 +569,6 @@
             <button data-lang="kz">🇰🇿 KZ</button>
         </div>
 
-        <!-- Sections -->
         <div class="sections">
             <div class="section-card"><div class="icon">📺</div><div class="label">TV</div></div>
             <div class="section-card"><div class="icon">📻</div><div class="label">Radio</div></div>
@@ -583,13 +576,11 @@
             <div class="section-card"><div class="icon">🎞️</div><div class="label">Multfilmlar</div></div>
         </div>
 
-        <!-- Horoscope -->
         <div class="horoscope">
             <h3>🔮 MUNAJJIMLAR BASHORATI</h3>
             <div id="horoscopeContainer"></div>
         </div>
 
-        <!-- Videos -->
         <div class="video-section">
             <h3>📹 VIDEOLAR</h3>
             <div class="video-grid" id="videoContainer"></div>
@@ -600,46 +591,51 @@
 
     <script>
         // ============================================================
-        // 1. LOADING SCREEN (0% dan 100% gacha tez to'lish)
+        // 1. LOADING SCREEN - ISHLAYDI!
         // ============================================================
-        let progress = 0;
-        const loaderFill = document.getElementById('loaderFill');
-        const loaderText = document.getElementById('loaderText');
-        const loadingScreen = document.getElementById('loadingScreen');
-        const mainApp = document.getElementById('mainApp');
+        (function startLoading() {
+            let progress = 0;
+            const fill = document.getElementById('loaderFill');
+            const text = document.getElementById('loaderText');
+            const loadingScreen = document.getElementById('loadingScreen');
+            const mainApp = document.getElementById('mainApp');
 
-        function updateLoader() {
-            progress += Math.random() * 15 + 5;
-            if (progress > 100) progress = 100;
-            loaderFill.style.width = progress + '%';
-            loaderText.textContent = Math.round(progress) + '%';
+            function updateLoader() {
+                // Tez ortib boradi
+                progress += Math.floor(Math.random() * 8) + 3;
+                if (progress > 100) progress = 100;
 
-            if (progress < 100) {
-                setTimeout(updateLoader, 100 + Math.random() * 200);
-            } else {
-                setTimeout(() => {
-                    loadingScreen.classList.add('hide');
-                    mainApp.classList.add('show');
-                    // Musiqani ishga tushirish
-                    document.getElementById('bgMusic').play().catch(() => {});
-                    // Barabanni ko'rsatish
-                    showToast('🎉 Xush kelibsiz! Sovg\'a barabanini aylantiring!');
-                }, 300);
+                fill.style.width = progress + '%';
+                text.textContent = progress + '%';
+
+                if (progress < 100) {
+                    // Har bir qadamda tezlik o'zgaradi
+                    const delay = Math.floor(Math.random() * 80) + 40;
+                    setTimeout(updateLoader, delay);
+                } else {
+                    // 100% bo'lganda yashirish
+                    setTimeout(function() {
+                        loadingScreen.classList.add('hide');
+                        mainApp.classList.add('show');
+                        // Musiqa
+                        document.getElementById('bgMusic').play().catch(function() {});
+                        // Toast
+                        showToast('🎉 Xush kelibsiz! Sovg\'a barabanini aylantiring!');
+                        // Barabanni yangilash
+                        updateFreeSpins();
+                    }, 400);
+                }
             }
-        }
-        updateLoader();
+
+            // 0.5 soniyadan keyin boshlaymiz (aniq ko'rinishi uchun)
+            setTimeout(updateLoader, 300);
+        })();
 
         // ============================================================
-        // 2. WHEEL / BARABAN (3 ta bepul, keyingisi 1,500,000 so'm)
+        // 2. WHEEL / BARABAN
         // ============================================================
         const prizes = [
             '🎁 100,000 so\'m', '📱 Telefon', '🎧 Naushnik', '💰 50,000 so\'m',
             '🎮 O\'yin', '📺 TV', '🧧 20,000 so\'m', '🎁 Sovg\'a'
         ];
-        const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#F38181', '#AA96DA', '#A8E6CF', '#FFD3B4'];
-
-        let freeSpins = 3;
-        let isSpinning = false;
-        let currentAngle = 0;
-
-        const canvas 
+        const colors = ['
