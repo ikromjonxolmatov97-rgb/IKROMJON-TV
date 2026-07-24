@@ -21,7 +21,7 @@
             padding-bottom: 70px;
         }
 
-        /* Top Header */
+        /* Header */
         header {
             background: linear-gradient(180deg, #0d1527 0%, #080b13 100%);
             padding: 12px 15px;
@@ -34,241 +34,112 @@
             z-index: 200;
         }
 
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
+        .logo-area { display: flex; align-items: center; gap: 8px; }
         .logo-badge {
-            background: #0088ff;
-            color: #fff;
-            font-weight: bold;
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 14px;
+            background: #0088ff; color: #fff; font-weight: bold;
+            padding: 3px 8px; border-radius: 6px; font-size: 14px;
             box-shadow: 0 0 10px rgba(0, 136, 255, 0.5);
         }
+        .logo-title { font-size: 16px; font-weight: 700; }
 
-        .logo-title {
-            font-size: 16px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        /* Language Selector */
         .lang-select {
-            background: #121c2e;
-            color: #00d2ff;
-            border: 1px solid #0088ff;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 12px;
-            outline: none;
+            background: #121c2e; color: #00d2ff;
+            border: 1px solid #0088ff; padding: 4px 8px;
+            border-radius: 6px; font-size: 12px; outline: none;
         }
 
-        /* Banner & Greeting */
+        /* Welcome Banner */
         .welcome-banner {
             background: linear-gradient(135deg, #09203f 0%, #537895 100%);
-            margin: 10px 15px;
-            padding: 12px;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid rgba(0, 210, 255, 0.3);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            margin: 10px 15px; padding: 10px; border-radius: 12px;
+            text-align: center; border: 1px solid rgba(0, 210, 255, 0.3);
         }
+        .welcome-title { font-size: 13px; font-weight: bold; color: #00d2ff; text-transform: uppercase; margin-bottom: 4px; }
+        .clock-widget { font-size: 11px; color: #e0e0e0; display: flex; justify-content: center; gap: 10px; }
 
-        .welcome-title {
-            font-size: 14px;
-            font-weight: bold;
-            color: #00d2ff;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
+        /* Slider / Carousel section */
+        .slider-section {
+            padding: 0 15px 10px 15px;
         }
-
-        .clock-widget {
-            font-size: 12px;
-            color: #e0e0e0;
+        .slider-container {
             display: flex;
-            justify-content: center;
             gap: 10px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 5px;
+        }
+        .slider-container::-webkit-scrollbar { display: none; }
+        .slide-card {
+            min-width: 140px;
+            height: 80px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            position: relative;
+            flex-shrink: 0;
+            border: 1px solid #0088ff;
+            cursor: pointer;
+        }
+        .slide-title {
+            position: absolute; bottom: 0; inset-x: 0;
+            background: rgba(0,0,0,0.7); font-size: 10px;
+            padding: 4px; text-align: center; border-radius: 0 0 10px 10px;
+            font-weight: 600; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
         }
 
-        /* Player Container */
+        /* Player Box */
         .player-box {
-            width: 100%;
-            background-color: #000;
-            aspect-ratio: 16 / 9;
-            position: sticky;
-            top: 48px;
-            z-index: 150;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+            width: 100%; background-color: #000;
+            aspect-ratio: 16 / 9; position: sticky; top: 48px;
+            z-index: 150; box-shadow: 0 5px 20px rgba(0,0,0,0.8);
         }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        iframe { width: 100%; height: 100%; border: none; }
 
         .now-playing {
-            padding: 8px 15px;
-            background: #0f172a;
-            font-size: 13px;
-            color: #00d2ff;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            padding: 8px 15px; background: #0f172a;
+            font-size: 12px; color: #00d2ff; display: flex; align-items: center; gap: 6px;
             border-bottom: 1px solid #1e293b;
         }
 
-        /* Categories Horizon Scroll */
-        .categories-section {
-            padding: 12px 15px 5px 15px;
-        }
-
-        .section-label {
-            font-size: 13px;
-            color: #94a3b8;
-            margin-bottom: 8px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
+        /* Category Grid */
+        .categories-section { padding: 12px 15px 5px 15px; }
+        .section-label { font-size: 12px; color: #94a3b8; margin-bottom: 8px; font-weight: 600; text-transform: uppercase; }
+        
         .category-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-bottom: 15px;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 15px;
         }
-
         .cat-btn {
-            background: #111a2e;
-            border: 1px solid #1e2d4a;
-            border-radius: 10px;
-            padding: 10px 4px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
+            background: #111a2e; border: 1px solid #1e2d4a;
+            border-radius: 10px; padding: 8px 2px; text-align: center; cursor: pointer;
         }
+        .cat-btn.active { background: #0088ff; border-color: #00d2ff; }
+        .cat-icon { font-size: 16px; display: block; margin-bottom: 2px; }
+        .cat-name { font-size: 9px; color: #fff; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        .cat-btn:active, .cat-btn.active {
-            background: #0088ff;
-            border-color: #00d2ff;
-            box-shadow: 0 0 10px rgba(0, 136, 255, 0.4);
-        }
-
-        .cat-icon {
-            font-size: 18px;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .cat-name {
-            font-size: 10px;
-            color: #fff;
-            display: block;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* Content Video List */
-        .content-list {
-            padding: 0 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
+        /* Video List */
+        .content-list { padding: 0 15px; display: flex; flex-direction: column; gap: 10px; }
         .video-card {
-            background: #111a2e;
-            border: 1px solid #1a2942;
-            border-radius: 10px;
-            display: flex;
-            overflow: hidden;
-            cursor: pointer;
+            background: #111a2e; border: 1px solid #1a2942;
+            border-radius: 10px; display: flex; overflow: hidden; cursor: pointer;
         }
-
-        .video-card:active {
-            border-color: #0088ff;
-            background: #16243f;
-        }
-
         .video-thumb {
-            width: 110px;
-            height: 70px;
-            background-color: #1e293b;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            flex-shrink: 0;
+            width: 100px; height: 65px; background-color: #1e293b;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; color: #00d2ff; flex-shrink: 0;
         }
+        .video-info { padding: 8px; display: flex; flex-direction: column; justify-content: center; }
+        .video-title { font-size: 12px; font-weight: 600; color: #f1f5f9; margin-bottom: 2px; }
+        .video-meta { font-size: 10px; color: #64748b; }
 
-        .play-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0,0,0,0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .video-info {
-            padding: 8px 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .video-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: #f1f5f9;
-            margin-bottom: 4px;
-            line-height: 1.3;
-        }
-
-        .video-meta {
-            font-size: 10px;
-            color: #64748b;
-        }
-
-        /* Bottom Nav Bar */
+        /* Bottom Nav */
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 55px;
-            background: #0b1120;
-            border-top: 1px solid #1e293b;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            z-index: 300;
+            position: fixed; bottom: 0; left: 0; right: 0; height: 55px;
+            background: #0b1120; border-top: 1px solid #1e293b;
+            display: flex; justify-content: space-around; align-items: center; z-index: 300;
         }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #64748b;
-            font-size: 10px;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .nav-item.active {
-            color: #0088ff;
-        }
-
-        .nav-icon {
-            font-size: 18px;
-            margin-bottom: 2px;
-        }
+        .nav-item { display: flex; flex-direction: column; align-items: center; color: #64748b; font-size: 9px; }
+        .nav-item.active { color: #0088ff; }
+        .nav-icon { font-size: 16px; margin-bottom: 2px; }
     </style>
 </head>
 <body>
@@ -286,7 +157,7 @@
         </select>
     </header>
 
-    <!-- Kirish va Soat / Kalendar -->
+    <!-- Welcome -->
     <div class="welcome-banner">
         <div class="welcome-title" id="welcomeText">IKROMJON TV-GA XUSH KELIBSIZ!</div>
         <div class="clock-widget">
@@ -296,7 +167,15 @@
         </div>
     </div>
 
-    <!-- Video Pleyer -->
+    <!-- 10 ta Aylanuvchi Kinolar Anonsi Slider -->
+    <div class="slider-section">
+        <div class="section-label" id="anonsLabel">🔥 Premyera Kinolar Anonsi</div>
+        <div class="slider-container" id="sliderBox">
+            <!-- JavaScript orqali to'ldiriladi -->
+        </div>
+    </div>
+
+    <!-- Video Player -->
     <div class="player-box">
         <iframe id="main-player" src="https://www.youtube.com/embed/jfKfPfyJRdk" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
     </div>
@@ -309,160 +188,174 @@
     <div class="categories-section">
         <div class="section-label" id="catLabel">Kategoriyalar</div>
         <div class="category-grid">
-            <div class="cat-btn active" onclick="loadCategory('tv', this)">
+            <div class="cat-btn active" onclick="loadCategory('uz_klip', this)">
+                <span class="cat-icon">🎵</span>
+                <span class="cat-name" id="c1">O'zbek Kliplar</span>
+            </div>
+            <div class="cat-btn" onclick="loadCategory('tv', this)">
                 <span class="cat-icon">📺</span>
-                <span class="cat-name" id="c1">Telekanallar</span>
+                <span class="cat-name" id="c2">Telekanallar</span>
             </div>
             <div class="cat-btn" onclick="loadCategory('uzbek', this)">
                 <span class="cat-icon">🎬</span>
-                <span class="cat-name" id="c2">O'zbek kinolar</span>
+                <span class="cat-name" id="c3">O'zbek Kinolar</span>
             </div>
             <div class="cat-btn" onclick="loadCategory('harry', this)">
                 <span class="cat-icon">🧙‍♂️</span>
-                <span class="cat-name" id="c3">Harry Potter</span>
+                <span class="cat-name" id="c4">Harry Potter</span>
             </div>
             <div class="cat-btn" onclick="loadCategory('foreign', this)">
                 <span class="cat-icon">🍿</span>
-                <span class="cat-name" id="c4">Xorijiy kinolar</span>
+                <span class="cat-name" id="c5">Xorijiy Kinolar</span>
             </div>
-            <div class="cat-btn" onclick="loadCategory('radio', this)">
-                <span class="cat-icon">📻</span>
-                <span class="cat-name" id="c5">Radiolar</span>
+            <div class="cat-btn" onclick="loadCategory('comedy', this)">
+                <span class="cat-icon">🎭</span>
+                <span class="cat-name" id="c6">Komediyalar</span>
             </div>
             <div class="cat-btn" onclick="loadCategory('cartoons', this)">
                 <span class="cat-icon">🧸</span>
-                <span class="cat-name" id="c6">Multfilmlar</span>
+                <span class="cat-name" id="c7">Multfilmlar</span>
             </div>
             <div class="cat-btn" onclick="loadCategory('edu', this)">
                 <span class="cat-icon">📚</span>
-                <span class="cat-name" id="c7">Fan va IT</span>
+                <span class="cat-name" id="c8">Fan va IT</span>
+            </div>
+            <div class="cat-btn" onclick="loadCategory('doc', this)">
+                <span class="cat-icon">🌌</span>
+                <span class="cat-name" id="c9">Hujjatli Film</span>
+            </div>
+            <div class="cat-btn" onclick="loadCategory('radio', this)">
+                <span class="cat-icon">📻</span>
+                <span class="cat-name" id="c10">Radiolar</span>
             </div>
             <div class="cat-btn" onclick="loadCategory('sport', this)">
                 <span class="cat-icon">⚽</span>
-                <span class="cat-name" id="c8">Sport</span>
+                <span class="cat-name" id="c11">Sport</span>
+            </div>
+            <div class="cat-btn" onclick="loadCategory('auto', this)">
+                <span class="cat-icon">🏎️</span>
+                <span class="cat-name" id="c12">Poyga / Avto</span>
             </div>
         </div>
     </div>
 
     <!-- Video Ro'yxat -->
-    <div class="content-list" id="videoList">
-        <!-- Javascript orqali to'ldiriladi -->
-    </div>
+    <div class="content-list" id="videoList"></div>
 
     <!-- Bottom Nav -->
     <div class="bottom-nav">
-        <div class="nav-item active">
-            <span class="nav-icon">🏠</span>
-            <span id="n1">Bosh sahifa</span>
-        </div>
-        <div class="nav-item">
-            <span class="nav-icon">📡</span>
-            <span id="n2">Jonli efir</span>
-        </div>
-        <div class="nav-item">
-            <span class="nav-icon">🎥</span>
-            <span id="n3">Videolar</span>
-        </div>
-        <div class="nav-item">
-            <span class="nav-icon">👤</span>
-            <span id="n4">Profil</span>
-        </div>
+        <div class="nav-item active"><span class="nav-icon">🏠</span><span id="n1">Bosh sahifa</span></div>
+        <div class="nav-item"><span class="nav-icon">📡</span><span id="n2">Jonli efir</span></div>
+        <div class="nav-item"><span class="nav-icon">🎥</span><span id="n3">Videolar</span></div>
+        <div class="nav-item"><span class="nav-icon">👤</span><span id="n4">Profil</span></div>
     </div>
 
     <script>
-        // Vaqt va Kalendar
+        // Real vaqt soat
         function updateClock() {
             const now = new Date();
-            const dateStr = now.toLocaleDateString('uz-UZ', { day: '2-digit', month: '2-digit', year: 'numeric' });
-            const timeStr = now.toLocaleTimeString('uz-UZ');
-            document.getElementById('dateDisplay').innerText = "📅 " + dateStr;
-            document.getElementById('clockDisplay').innerText = "⏰ " + timeStr;
+            document.getElementById('dateDisplay').innerText = "📅 " + now.toLocaleDateString('uz-UZ');
+            document.getElementById('clockDisplay').innerText = "⏰ " + now.toLocaleTimeString('uz-UZ');
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Ma'lumotlar bazasi
+        // 10 ta Film Anonsi Slider Ma'lumoti
+        const sliderData = [
+            { title: "Avatar 3: Olov O'lkasi", url: "https://www.youtube.com/embed/d9MyW72ELq0", bg: "https://img.youtube.com/vi/d9MyW72ELq0/hqdefault.jpg" },
+            { title: "Mening Qallig'im - O'zbek Kino", url: "https://www.youtube.com/embed/2g81116hA68", bg: "https://img.youtube.com/vi/2g81116hA68/hqdefault.jpg" },
+            { title: "Harry Potter & Azkaban", url: "https://www.youtube.com/embed/VyHV0BRtdxo", bg: "https://img.youtube.com/vi/VyHV0BRtdxo/hqdefault.jpg" },
+            { title: "Spider-Man Beyond", url: "https://www.youtube.com/embed/shW9i6k8cB0", bg: "https://img.youtube.com/vi/shW9i6k8cB0/hqdefault.jpg" },
+            { title: "Abdullajon 2", url: "https://www.youtube.com/embed/5qap5aO4i9A", bg: "https://img.youtube.com/vi/5qap5aO4i9A/hqdefault.jpg" },
+            { title: "Forsaj 11 Anons", url: "https://www.youtube.com/embed/aSiDu3Ywi8E", bg: "https://img.youtube.com/vi/aSiDu3Ywi8E/hqdefault.jpg" },
+            { title: "Masha va Ayiq Yangi", url: "https://www.youtube.com/embed/LXb3EKWsInQ", bg: "https://img.youtube.com/vi/LXb3EKWsInQ/hqdefault.jpg" },
+            { title: "Interstellar 2", url: "https://www.youtube.com/embed/zSWdZVtXT7E", bg: "https://img.youtube.com/vi/zSWdZVtXT7E/hqdefault.jpg" },
+            { title: "Kung Fu Panda 4", url: "https://www.youtube.com/embed/_inKs4eeHiI", bg: "https://img.youtube.com/vi/_inKs4eeHiI/hqdefault.jpg" },
+            { title: "Gladiator 2", url: "https://www.youtube.com/embed/4rgYUipGJNo", bg: "https://img.youtube.com/vi/4rgYUipGJNo/hqdefault.jpg" }
+        ];
+
+        // Anonslarni chiqarish
+        const sliderBox = document.getElementById('sliderBox');
+        sliderData.forEach(item => {
+            const slide = document.createElement('div');
+            slide.className = 'slide-card';
+            slide.style.backgroundImage = `url('${item.bg}')`;
+            slide.onclick = () => playVideo(item.url, item.title);
+            slide.innerHTML = `<div class="slide-title">${item.title}</div>`;
+            sliderBox.appendChild(slide);
+        });
+
+        // Avto-surilish
+        setInterval(() => {
+            sliderBox.scrollLeft += 150;
+            if(sliderBox.scrollLeft >= sliderBox.scrollWidth - sliderBox.clientWidth) {
+                sliderBox.scrollLeft = 0;
+            }
+        }, 3000);
+
+        // Barcha Kategoriyalar Baza
         const data = {
+            uz_klip: [
+                { title: "Munisa Rizayeva - O'ylama (Official Music Video)", url: "https://www.youtube.com/embed/5D_1mGz1p6E", meta: "Musiqa • O'zbek Klip" },
+                { title: "Jaloliddin Ahmadaliyev - Yomon ekan", url: "https://www.youtube.com/embed/2g81116hA68", meta: "Musiqa • Premyera" },
+                { title: "Rayhon va Hamdam Sobirov - Ko'zlarimda", url: "https://www.youtube.com/embed/LXb3EKWsInQ", meta: "Musiqa • Xit" }
+            ],
             tv: [
-                { title: "Uzbekistan 24 - Jonli Efir", url: "https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig", meta: "TV • Jonli" },
-                { title: "Euronews Uzbek", url: "https://www.youtube.com/embed/21X5lGlDOfg", meta: "TV • Yangiliklar" }
+                { title: "Euronews Uzbek Live Stream", url: "https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CAwX8_LjQHig", meta: "TV • Yangiliklar 24/7" },
+                { title: "NASA TV 24/7 - Fazodan Jonli Efir", url: "https://www.youtube.com/embed/21X5lGlDOfg", meta: "TV • Koinot va Fan" }
             ],
             uzbek: [
-                { title: "Abdullajon (O'zbek Klassik)", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Kino • Komediya" },
+                { title: "Abdullajon (O'zbek Klassik Film)", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Kino • Komediya" },
                 { title: "Sumbula (Milliy Drama)", url: "https://www.youtube.com/embed/2g81116hA68", meta: "Kino • Drama" }
             ],
             harry: [
                 { title: "Harry Potter va Hikmatlar Tosh Treyleri", url: "https://www.youtube.com/embed/VyHV0BRtdxo", meta: "Fantasy • Film" },
-                { title: "Harry Potter - Soundtrack Soundtrack", url: "https://www.youtube.com/embed/Htaj3o3JD8I", meta: "Musiqa • Soundtrack" }
+                { title: "Harry Potter - Barcha Soundtracklar", url: "https://www.youtube.com/embed/Htaj3o3JD8I", meta: "Musiqa • Soundtrack" }
             ],
             foreign: [
-                { title: "Avatar 2: Suv Yo'li (Treyler)", url: "https://www.youtube.com/embed/d9MyW72ELq0", meta: "Xorij • Fantastika" },
+                { title: "Avatar 2: Suv Yo'li (Premyera)", url: "https://www.youtube.com/embed/d9MyW72ELq0", meta: "Xorij • Fantastika" },
                 { title: "Interstellar (Koinot haqida)", url: "https://www.youtube.com/embed/zSWdZVtXT7E", meta: "Xorij • Sci-Fi" }
             ],
-            radio: [
-                { title: "Lofi Chill Radio 24/7", url: "https://www.youtube.com/embed/jfKfPfyJRdk", meta: "Radio • Musiqa" },
-                { title: "Relaxing Piano Radio", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Radio • Sokin" }
+            comedy: [
+                { title: "Mahiya & Komediya Shou 2026", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Shou • Kulgu" }
             ],
             cartoons: [
-                { title: "Masha va Ayiq (Barcha qismlar)", url: "https://www.youtube.com/embed/LXb3EKWsInQ", meta: "Multfilm • Bolalar" },
-                { title: "Tom va Jerri (Klassik)", url: "https://www.youtube.com/embed/t06RUxPbp_c", meta: "Multfilm • Komediya" }
+                { title: "Masha va Ayiq (Yangi fasl)", url: "https://www.youtube.com/embed/LXb3EKWsInQ", meta: "Multfilm • Bolalar" }
             ],
             edu: [
-                { title: "Python dasturlash tili darslari", url: "https://www.youtube.com/embed/d56mG7DezGs", meta: "Fan • Dasturlash" },
-                { title: "Web sayt yaratish to'liq kursi", url: "https://www.youtube.com/embed/8A-J30j1Mpo", meta: "Fan • Web Dev" }
+                { title: "Python dasturlash kursi", url: "https://www.youtube.com/embed/d56mG7DezGs", meta: "Fan • IT" }
+            ],
+            doc: [
+                { title: "Sirli Okean Hujjatli Filmi", url: "https://www.youtube.com/embed/21X5lGlDOfg", meta: "Hujjatli • Tabiat" }
+            ],
+            radio: [
+                { title: "Lofi Beats Chill Radio 24/7", url: "https://www.youtube.com/embed/jfKfPfyJRdk", meta: "Radio • Sokin" }
             ],
             sport: [
-                { title: "Futbol gollari va eng zo'r vaziyatlar", url: "https://www.youtube.com/embed/2g81116hA68", meta: "Sport • Futbol" }
+                { title: "UFC va Futbol Xit moments", url: "https://www.youtube.com/embed/2g81116hA68", meta: "Sport • Efir" }
+            ],
+            auto: [
+                { title: "Top Gear Uzbek / Avto Sinov", url: "https://www.youtube.com/embed/aSiDu3Ywi8E", meta: "Avto • Poyga" }
             ]
         };
 
-        // Til Lug'ati
+        // Til o'zgartirish
         const translations = {
-            uz: {
-                welcome: "IKROMJON TV-GA XUSH KELIBSIZ!",
-                catLabel: "Kategoriyalar",
-                c1: "Telekanallar", c2: "O'zbek kinolar", c3: "Harry Potter", c4: "Xorijiy kinolar",
-                c5: "Radiolar", c6: "Multfilmlar", c7: "Fan va IT", c8: "Sport",
-                n1: "Bosh sahifa", n2: "Jonli efir", n3: "Videolar", n4: "Profil"
-            },
-            ru: {
-                welcome: "ДОБРО ПОЖАЛОВАТЬ В IKROMJON TV!",
-                catLabel: "Категории",
-                c1: "Телеканалы", c2: "Узбекские фильмы", c3: "Гарри Поттер", c4: "Зарубежные",
-                c5: "Радиостанции", c6: "Мультфильмы", c7: "Наука и IT", c8: "Спорт",
-                n1: "Главная", n2: "Прямой эфир", n3: "Видео", n4: "Профиль"
-            },
-            en: {
-                welcome: "WELCOME TO IKROMJON TV!",
-                catLabel: "Categories",
-                c1: "TV Channels", c2: "Uzbek Movies", c3: "Harry Potter", c4: "Foreign Movies",
-                c5: "Radio Stations", c6: "Cartoons", c7: "Science & IT", c8: "Sports",
-                n1: "Home", n2: "Live TV", n3: "Videos", n4: "Profile"
-            }
+            uz: { welcome: "IKROMJON TV-GA XUSH KELIBSIZ!", anons: "🔥 Premyera Kinolar Anonsi", catLabel: "Kategoriyalar" },
+            ru: { welcome: "ДОБРО ПОЖАЛОВАТЬ В IKROMJON TV!", anons: "🔥 Анонсы Премьер Фильмов", catLabel: "Категории" },
+            en: { welcome: "WELCOME TO IKROMJON TV!", anons: "🔥 Movie Trailers & Teasers", catLabel: "Categories" }
         };
 
         function changeLanguage(lang) {
-            const t = translations[lang];
-            document.getElementById('welcomeText').innerText = t.welcome;
-            document.getElementById('catLabel').innerText = t.catLabel;
-            document.getElementById('c1').innerText = t.c1;
-            document.getElementById('c2').innerText = t.c2;
-            document.getElementById('c3').innerText = t.c3;
-            document.getElementById('c4').innerText = t.c4;
-            document.getElementById('c5').innerText = t.c5;
-            document.getElementById('c6').innerText = t.c6;
-            document.getElementById('c7').innerText = t.c7;
-            document.getElementById('c8').innerText = t.c8;
-            document.getElementById('n1').innerText = t.n1;
-            document.getElementById('n2').innerText = t.n2;
-            document.getElementById('n3').innerText = t.n3;
-            document.getElementById('n4').innerText = t.n4;
+            document.getElementById('welcomeText').innerText = translations[lang].welcome;
+            document.getElementById('anonsLabel').innerText = translations[lang].anons;
+            document.getElementById('catLabel').innerText = translations[lang].catLabel;
         }
 
         function playVideo(url, title) {
             document.getElementById('main-player').src = url;
             document.getElementById('playingTitle').innerText = title;
-            window.scrollTo({ top: 100, behavior: 'smooth' });
+            window.scrollTo({ top: 120, behavior: 'smooth' });
         }
 
         function loadCategory(catKey, element) {
@@ -480,9 +373,7 @@
                 card.className = 'video-card';
                 card.onclick = () => playVideo(item.url, item.title);
                 card.innerHTML = `
-                    <div class="video-thumb">
-                        <div class="play-overlay">▶</div>
-                    </div>
+                    <div class="video-thumb">▶</div>
                     <div class="video-info">
                         <div class="video-title">${item.title}</div>
                         <div class="video-meta">${item.meta}</div>
@@ -492,8 +383,8 @@
             });
         }
 
-        // Boshlang'ich yuklash
-        loadCategory('tv', null);
+        // Boshlang'ich yuklanish
+        loadCategory('uz_klip', null);
     </script>
 </body>
 </html>
