@@ -3,46 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IKROMJON TV - Full HD Platforma</title>
+    <title>IKROMJON TV</title>
     <style>
-        /* ==========================================================================
-           1. CORE RESET & BASE STYLES
-           ========================================================================== */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             user-select: none;
         }
 
-        :root {
-            --bg-main: #080b13;
-            --bg-card: #111a2e;
-            --bg-header: #0d1527;
-            --primary: #0088ff;
-            --accent: #00d2ff;
-            --text-main: #ffffff;
-            --text-sub: #94a3b8;
-            --border-color: #1e2d4a;
-            --danger: #ff0055;
-            --warning: #ffc107;
-        }
-
         body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
+            background-color: #080b13;
+            color: #ffffff;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
             padding-bottom: 70px;
-            overflow-x: hidden;
         }
 
-        /* ==========================================================================
-           2. APP LOADING SCREEN (0% TO 100%)
-           ========================================================================== */
+        /* 1. LOADING SCREEN */
         #appLoaderScreen {
             position: fixed;
             inset: 0;
@@ -57,431 +37,311 @@
         }
 
         .loader-logo {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 900;
-            color: var(--accent);
-            text-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
-            margin-bottom: 25px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
+            color: #00d2ff;
+            text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
         }
 
         .loader-progress-box {
             width: 80%;
-            max-width: 320px;
+            max-width: 300px;
             background: #111a2e;
-            height: 12px;
+            height: 10px;
             border-radius: 20px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #1e2d4a;
             overflow: hidden;
-            position: relative;
-            box-shadow: 0 0 15px rgba(0, 136, 255, 0.2);
         }
 
         .loader-progress-bar {
             width: 0%;
             height: 100%;
-            background: linear-gradient(90deg, #0088ff 0%, #00d2ff 100%);
+            background: linear-gradient(90deg, #0088ff, #00d2ff);
             border-radius: 20px;
             transition: width 0.05s linear;
         }
 
         .loader-status-text {
-            margin-top: 15px;
+            margin-top: 12px;
             font-size: 13px;
-            color: var(--accent);
-            font-weight: 700;
-            letter-spacing: 0.5px;
+            color: #00d2ff;
+            font-weight: bold;
         }
 
-        .loader-sub-info {
-            margin-top: 5px;
-            font-size: 10px;
-            color: var(--text-sub);
-        }
-
-        /* ==========================================================================
-           3. HEADER & TOP BANNER
-           ========================================================================== */
+        /* 2. HEADER & PLAYER */
         header {
-            background: linear-gradient(180deg, var(--bg-header) 0%, var(--bg-main) 100%);
-            padding: 12px 15px;
+            background: #0d1527;
+            padding: 12px;
             text-align: center;
             border-bottom: 1px solid #1a263d;
+        }
+
+        .header-title { font-size: 16px; font-weight: 800; color: #00d2ff; }
+
+        .player-box {
+            width: 100%;
+            background-color: #000;
+            aspect-ratio: 16 / 9;
             position: sticky;
             top: 0;
-            z-index: 200;
-            backdrop-filter: blur(10px);
+            z-index: 100;
         }
 
-        .header-title { 
-            font-size: 16px; 
-            font-weight: 800; 
-            color: var(--accent); 
-            text-shadow: 0 0 10px rgba(0, 210, 255, 0.5); 
-            letter-spacing: 0.5px;
-        }
-        .header-subtitle { 
-            font-size: 10px; 
-            color: var(--text-sub); 
-            font-weight: 600; 
-            margin-top: 2px; 
-        }
-
-        /* ==========================================================================
-           4. WELCOME & CLOCK BAR
-           ========================================================================== */
-        .welcome-bar {
-            background: var(--bg-card);
-            margin: 10px 15px 5px 15px;
-            padding: 8px 12px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid var(--border-color);
-            font-size: 11px;
-            color: var(--accent);
-        }
-
-        .music-btn {
-            background: var(--primary);
-            border: none;
-            color: #fff;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s, background 0.2s;
-        }
-
-        .music-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* ==========================================================================
-           5. HARRY POTTER SLIDER (10X ANONS)
-           ========================================================================== */
-        .anons-container { padding: 10px 15px; }
-        .section-title { 
-            font-size: 12px; 
-            color: var(--text-sub); 
-            margin-bottom: 8px; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            letter-spacing: 0.5px;
-        }
-
-        .slider-wrapper {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding-bottom: 5px;
-        }
-        .slider-wrapper::-webkit-scrollbar { display: none; }
-
-        .anons-card {
-            min-width: 130px;
-            height: 85px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 10px;
-            border: 1.5px solid var(--primary);
-            position: relative;
-            flex-shrink: 0;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 136, 255, 0.2);
-            transition: transform 0.2s;
-        }
-        .anons-card:active { transform: scale(0.96); }
-
-        .anons-overlay {
-            position: absolute; 
-            inset: 0;
-            background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
-            border-radius: 9px;
-            padding: 6px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-        .anons-num { 
-            font-size: 8px; 
-            background: var(--accent); 
-            color: #000; 
-            padding: 2px 5px; 
-            border-radius: 3px; 
-            font-weight: bold; 
-            width: fit-content; 
-        }
-        .anons-text { 
-            font-size: 10px; 
-            font-weight: bold; 
-            color: #fff; 
-            margin-top: 3px; 
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* ==========================================================================
-           6. MAIN PLAYER AREA
-           ========================================================================== */
-        .player-box { 
-            width: 100%; 
-            background-color: #000; 
-            aspect-ratio: 16 / 9; 
-            position: sticky; 
-            top: 57px; 
-            z-index: 150; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
         iframe { width: 100%; height: 100%; border: none; }
 
-        .now-playing { 
-            padding: 8px 15px; 
-            background: #0f172a; 
-            font-size: 11px; 
-            color: var(--accent); 
-            border-bottom: 1px solid #1e293b; 
+        .now-playing {
+            padding: 10px 15px;
+            background: #0f172a;
+            font-size: 12px;
+            color: #00d2ff;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        /* 3. CATEGORIES & CARDS */
+        .categories-section { padding: 12px; }
+        .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+        .cat-btn {
+            background: #111a2e;
+            border: 1px solid #1e2d4a;
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+            font-size: 10px;
+            color: #fff;
+            cursor: pointer;
+        }
+        .cat-btn.active { background: #0088ff; border-color: #00d2ff; }
+
+        .content-list { padding: 0 12px 12px 12px; display: flex; flex-direction: column; gap: 8px; }
+        .video-card {
+            background: #111a2e;
+            border: 1px solid #1a2942;
+            border-radius: 8px;
             display: flex;
+            padding: 8px;
+            gap: 10px;
             align-items: center;
-            gap: 6px;
+            cursor: pointer;
         }
+        .video-card:active { background: #1a2744; }
+        .play-icon { font-size: 18px; color: #00d2ff; }
+        .video-info { flex: 1; }
+        .video-title { font-size: 12px; font-weight: bold; color: #fff; }
+        .video-meta { font-size: 10px; color: #94a3b8; margin-top: 2px; }
 
-        /* ==========================================================================
-           7. CATEGORIES GRID
-           ========================================================================== */
-        .categories-section { padding: 12px 15px 5px 15px; }
-        .category-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
-        .cat-btn { 
-            background: var(--bg-card); 
-            border: 1px solid var(--border-color); 
-            border-radius: 8px; 
-            padding: 8px 2px; 
-            text-align: center; 
-            cursor: pointer; 
-            transition: 0.2s;
+        /* 4. SUPPORT SECTION */
+        .support-box {
+            margin: 10px 12px 20px 12px;
+            background: #111a2e;
+            border: 1px solid #0088ff;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 136, 255, 0.15);
         }
-        .cat-btn.active { background: var(--primary); border-color: var(--accent); }
-        .cat-icon { font-size: 16px; display: block; margin-bottom: 2px; }
-        .cat-name { font-size: 8px; color: #fff; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-        /* ==========================================================================
-           8. CONTENT LIST & CARDS
-           ========================================================================== */
-        .content-list { padding: 8px 15px 15px 15px; display: flex; flex-direction: column; gap: 8px; }
-        .video-card { 
-            background: var(--bg-card); 
-            border: 1px solid #1a2942; 
-            border-radius: 8px; 
-            display: flex; 
-            overflow: hidden; 
-            cursor: pointer; 
-            transition: background 0.2s, transform 0.2s;
+        .support-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #00d2ff;
+            margin-bottom: 6px;
         }
-        .video-card:active { background: #1a2744; transform: scale(0.98); }
-        .video-thumb { 
-            width: 110px; 
-            height: 65px; 
-            background-size: cover; 
-            background-position: center; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 18px; 
-            color: var(--accent); 
-            flex-shrink: 0; 
-            position: relative;
+        .support-desc {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-bottom: 12px;
         }
-        .video-thumb::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(0,0,0,0.3);
-        }
-        .video-thumb-play {
-            position: relative;
-            z-index: 2;
-            background: rgba(0,0,0,0.6);
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            display: flex;
+        .support-btn {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--accent);
-        }
-        .video-info { padding: 8px 10px; display: flex; flex-direction: column; justify-content: center; }
-        .video-title { font-size: 11px; font-weight: 600; color: #f1f5f9; line-height: 1.3; }
-        .video-meta { font-size: 9px; color: var(--text-sub); margin-top: 4px; }
-
-        /* ==========================================================================
-           9. RATING SYSTEM
-           ========================================================================== */
-        .rating-box {
-            background: #0d1424; 
-            margin: 10px 15px 15px 15px; 
-            padding: 12px; 
-            border-radius: 10px; 
-            border: 1px solid var(--border-color); 
-            text-align: center;
-        }
-        .stars { display: flex; justify-content: center; gap: 8px; margin: 6px 0; cursor: pointer; font-size: 20px; color: #475569; }
-        .stars span.active { color: var(--warning); text-shadow: 0 0 8px rgba(255, 193, 7, 0.5); }
-
-        /* ==========================================================================
-           10. AI CHAT MODAL
-           ========================================================================== */
-        .ai-chat-window { 
-            display: none; 
-            position: fixed; 
-            inset: 0; 
-            background: var(--bg-main); 
-            z-index: 500; 
-            flex-direction: column; 
-        }
-        .ai-chat-header { 
-            background: var(--bg-header); 
-            padding: 12px 15px; 
-            border-bottom: 1px solid #1a263d; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-        }
-        .ai-chat-body { 
-            flex: 1; 
-            padding: 15px; 
-            overflow-y: auto; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 10px; 
-        }
-        .chat-msg { max-width: 80%; padding: 8px 12px; border-radius: 10px; font-size: 12px; line-height: 1.4; }
-        .chat-user { background: var(--primary); align-self: flex-end; color: #fff; }
-        .chat-ai { background: var(--border-color); align-self: flex-start; color: var(--accent); border: 1px solid #2a3f66; }
-        .ai-chat-input { padding: 10px; background: var(--bg-header); display: flex; gap: 8px; border-top: 1px solid #1a263d; }
-        .ai-chat-input input { 
-            flex: 1; 
-            background: #121c2e; 
-            border: 1px solid var(--primary); 
-            color: #fff; 
-            padding: 8px 12px; 
-            border-radius: 20px; 
-            outline: none; 
-            font-size: 12px;
-        }
-        .ai-chat-input button { 
-            background: var(--primary); 
-            color: #fff; 
-            border: none; 
-            padding: 8px 15px; 
-            border-radius: 20px; 
-            font-weight: bold; 
-            font-size: 12px;
+            gap: 6px;
+            background: linear-gradient(90deg, #0088ff, #00d2ff);
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            border: none;
             cursor: pointer;
         }
 
-        /* ==========================================================================
-           11. BOTTOM NAVIGATION BAR
-           ========================================================================== */
-        .bottom-nav { 
-            position: fixed; 
-            bottom: 0; 
-            left: 0; 
-            right: 0; 
-            height: 55px; 
-            background: #0b1120; 
-            border-top: 1px solid #1e293b; 
-            display: grid; 
-            grid-template-columns: repeat(8, 1fr); 
-            align-items: center; 
-            z-index: 300; 
+        /* 5. BOTTOM NAV (6 TA FUNKSIYA) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            height: 55px;
+            background: #0b1120;
+            border-top: 1px solid #1e293b;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            align-items: center;
+            z-index: 200;
         }
         .nav-item { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            color: var(--text-sub); 
-            font-size: 7px; 
+            text-align: center; 
+            color: #94a3b8; 
+            font-size: 8px; 
             cursor: pointer; 
-            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        .nav-item.active { color: var(--primary); }
-        .nav-icon { font-size: 15px; margin-bottom: 2px; }
+        .nav-item.active { color: #0088ff; }
+        .nav-icon { font-size: 14px; margin-bottom: 2px; }
     </style>
 </head>
 <body>
 
-    <!-- ==========================================================================
-       12. APP LOADING SCREEN UI
-       ========================================================================== -->
+    <!-- LOADING SCREEN -->
     <div id="appLoaderScreen">
         <div class="loader-logo">IKROMJON TV</div>
         <div class="loader-progress-box">
             <div class="loader-progress-bar" id="loaderBar"></div>
         </div>
         <div class="loader-status-text"><span id="loaderPercent">0</span>%</div>
-        <div class="loader-sub-info">Platforma yuklanmoqda, iltimos kuting...</div>
     </div>
 
-    <!-- Background Audio Engine -->
-    <audio id="homeAloneAudio" loop preload="auto">
-        <source src="https://cdn.pixabay.com/download/audio/2020/11/10/audio_5a9d821ff4.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- Header Section -->
+    <!-- HEADER -->
     <header>
-        <div class="header-title">IKROMJON TV - XUSH KELIBSIZ!</div>
-        <div class="header-subtitle">ENG SIFATLI FULL HD FORMATDA TOMOSHA QILING</div>
+        <div class="header-title">IKROMJON TV</div>
     </header>
 
-    <!-- Date & Real-Time Bar -->
-    <div class="welcome-bar">
-        <span>📅 <span id="dateDisplay">--.--.----</span></span>
-        <button id="musicBtn" class="music-btn" onclick="toggleHomeMusic()">▶ Fon Musiqa</button>
-        <span>⏰ <span id="timeDisplay">--:--:--</span></span>
+    <!-- PLAYER -->
+    <div class="player-box">
+        <iframe id="main-player" src="https://www.youtube.com/embed/VyHV0BRMYEA" allowfullscreen></iframe>
+    </div>
+    <div class="now-playing">
+        🔴 <span id="playingTitle">Harry Potter va Hikmatlar Tosh</span>
     </div>
 
-    <!-- Harry Potter 10x Anons Slider -->
-    <div class="anons-container">
-        <div class="section-title">⚡ Harry Potter Filmlar To'plami (10x Anons)</div>
-        <div class="slider-wrapper">
-            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/VyHV0BRMYEA/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/VyHV0BRMYEA', 'Harry Potter va Hikmatlar Tosh')">
-                <div class="anons-overlay"><span class="anons-num">1-qism</span><div class="anons-text">Hikmatlar Tosh</div></div>
-            </div>
-            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/1bq0qff4iSU/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/1bq0qff4iSU', 'Harry Potter va Sirlar Xonasi')">
-                <div class="anons-overlay"><span class="anons-num">2-qism</span><div class="anons-text">Sirlar Xonasi</div></div>
-            </div>
-            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/lAxgztbYDbs/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/lAxgztbYDbs', 'Harry Potter va Azkaban Mahbusi')">
-                <div class="anons-overlay"><span class="anons-num">3-qism</span><div class="anons-text">Azkaban Mahbusi</div></div>
-            </div>
-            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/3EGojp4Hh6I/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/3EGojp4Hh6I', 'Harry Potter va Alov Qadahi')">
-                <div class="anons-overlay"><span class="anons-num">4-qism</span><div class="anons-text">Alov Qadahi</div></div>
-            </div>
-            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/y6ZwRzp8FCU/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/y6ZwRzp8FCU', 'Harry Potter va Feniks Jamiyati')">
-                <div class="anons-overlay"><span class="anons-num">5-qism</span><div class="anons-text">Feniks Jamiyati</div></div>
-            </div>
-            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/sg81Lts5kYG/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/sg81Lts5kYG', 'Harry Potter va Yarim Qon Shahzoda')">
-                <div class="anons-overlay"><span class="anons-num">6-qism</span><div class="anons-text">Yarim Qon Shahzoda</div></div>
-            </div>
-            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/MxqsmsA8y5k/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/MxqsmsA8y5k', 'Harry Potter va Ajal Tuhfalari 1')">
-                <div class="anons-overlay"><span class="anons-num">7-qism</span><div class="anons-text">Ajal Tuhfalari 1</div></div>
-            </div>
-            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/mObK5XD8fGE/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/mObK5XD8fGE', 'Harry Potter va Ajal Tuhfalari 2')">
-                <div class="anons-overlay"><span class="anons-num">8-qism</span><div class="anons-text">Ajal Tuhfalari 2</div></div>
-            </div>
-            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/8A-J30j1Mpo/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/8A-J30j1Mpo', 'Sehrli Maxluqlar')">
-                <div class="anons-overlay"><span class="anons-num">9-qism</span><div class="anons-text">Sehrli Maxluqlar</div></div>
-            </div>
-            <div class="anons-card" style="background-image: url('https://img.youtube.com/vi/jfKfPfyJRdk/hqdefault.jpg');" onclick="playVideo('https://www.youtube.com/embed/jfKfPfyJRdk', 'Hogwarts Tarixi')">
-                <div class="anons-overlay"><span class="anons-num">10-qism</span><div class="anons-text">Hogwarts Tarixi</div></div>
-            </div>
+    <!-- KATEGORIYALAR -->
+    <div class="categories-section">
+        <div class="category-grid">
+            <div class="cat-btn active" onclick="loadCat('tv', this)">📺 TV</div>
+            <div class="cat-btn" onclick="loadCat('harry', this)">🧙‍♂️ Potter</div>
+            <div class="cat-btn" onclick="loadCat('retro', this)">🎞️ Retro</div>
+            <div class="cat-btn" onclick="loadCat('uz_klip', this)">🎵 Kliplar</div>
         </div>
     </div>
 
-    <!-- Main Player Frame -->
-    <div class="player-box">
-        <iframe id="main-player" src="https://www.youtube.com/embed/VyHV0BRMYEA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-pictu
+    <!-- VIDEO RO'YXATI -->
+    <div class="content-list" id="videoList"></div>
+
+    <!-- QO'LLAB-QUVVATLASH BO'LIMI -->
+    <div class="support-box" id="supportArea">
+        <div class="support-title">🎧 Qo‘llab-quvvatlash mutaxassisi</div>
+        <div class="support-desc">Ilovada biror muammo yoki taklifingiz bormi? Mutaxassis bilan bog‘laning.</div>
+        <a href="https://t.me/telegram" target="_blank" class="support-btn">
+            💬 Telegram orqali yozish
+        </a>
+    </div>
+
+    <!-- NAVIGATSIYA (6 TA TUGMA) -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="window.scrollTo({top:0, behavior:'smooth'})"><span class="nav-icon">🏠</span>Asosiy</div>
+        <div class="nav-item" onclick="loadCat('tv', null)"><span class="nav-icon">📡</span>TV</div>
+        <div class="nav-item" onclick="promptSearch()"><span class="nav-icon">🔍</span>Qidiruv</div>
+        <div class="nav-item" onclick="loadCat('harry', null)"><span class="nav-icon">⚡</span>Potter</div>
+        <div class="nav-item" onclick="scrollToSupport()"><span class="nav-icon">🎧</span>Yordam</div>
+        <div class="nav-item" onclick="alert('IKROMJON TV Profil Bo\'limi')"><span class="nav-icon">👤</span>Profil</div>
+    </div>
+
+    <script>
+        // 1. Loading Controller
+        window.addEventListener('load', () => {
+            let count = 0;
+            const loaderBar = document.getElementById('loaderBar');
+            const loaderPercent = document.getElementById('loaderPercent');
+            const loaderScreen = document.getElementById('appLoaderScreen');
+
+            const interval = setInterval(() => {
+                count += 5;
+                if (count >= 100) {
+                    count = 100;
+                    loaderBar.style.width = '100%';
+                    loaderPercent.innerText = '100';
+                    clearInterval(interval);
+
+                    setTimeout(() => {
+                        loaderScreen.style.opacity = '0';
+                        loaderScreen.style.visibility = 'hidden';
+                    }, 300);
+                } else {
+                    loaderBar.style.width = count + '%';
+                    loaderPercent.innerText = count;
+                }
+            }, 30);
+        });
+
+        // 2. Data
+        const data = {
+            tv: [
+                { title: "MY5 TV Jonli", url: "https://www.youtube.com/embed/jfKfPfyJRdk", meta: "TV Kanal" },
+                { title: "Sevimli TV Onlayn", url: "https://www.youtube.com/embed/VyHV0BRMYEA", meta: "TV Kanal" },
+                { title: "Milliy TV Stream", url: "https://www.youtube.com/embed/1bq0qff4iSU", meta: "TV Kanal" }
+            ],
+            harry: [
+                { title: "Harry Potter 1-qism", url: "https://www.youtube.com/embed/VyHV0BRMYEA", meta: "Hikmatlar Tosh" },
+                { title: "Harry Potter 2-qism", url: "https://www.youtube.com/embed/1bq0qff4iSU", meta: "Sirlar Xonasi" },
+                { title: "Harry Potter 3-qism", url: "https://www.youtube.com/embed/lAxgztbYDbs", meta: "Azkaban Mahbusi" }
+            ],
+            retro: [
+                { title: "Kavkaz Asirasi", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "Retro Film" },
+                { title: "Abdullajon", url: "https://www.youtube.com/embed/5qap5aO4i9A", meta: "O'zbek Kino" }
+            ],
+            uz_klip: [
+                { title: "Munisa Rizayeva - O'ylama", url: "https://www.youtube.com/embed/5D_1mGz1p6E", meta: "Premyera" },
+                { title: "Jaloliddin A. - Yomon ekan", url: "https://www.youtube.com/embed/2g81116hA68", meta: "Musiqa" }
+            ]
+        };
+
+        // 3. Actions
+        function playVideo(url, title) {
+            document.getElementById('main-player').src = url + "?autoplay=1";
+            document.getElementById('playingTitle').innerText = title;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function loadCat(key, elem) {
+            if(elem) {
+                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+                elem.classList.add('active');
+            }
+            const container = document.getElementById('videoList');
+            container.innerHTML = '';
+            
+            (data[key] || data['tv']).forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.onclick = () => playVideo(item.url, item.title);
+                card.innerHTML = `
+                    <div class="play-icon">▶</div>
+                    <div class="video-info">
+                        <div class="video-title">${item.title}</div>
+                        <div class="video-meta">${item.meta}</div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function scrollToSupport() {
+            document.getElementById('supportArea').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function promptSearch() {
+            let query = prompt("Qidirayotgan kinoyingiz yoki kanalingiz nomini kiriting:");
+            if(query) {
+                alert("'" + query + "' bo'yicha qidiruv natijalari tayyorlanmoqda...");
+            }
+        }
+
+        // Init
+        loadCat('tv', null);
+    </script>
+</body>
+</html>
