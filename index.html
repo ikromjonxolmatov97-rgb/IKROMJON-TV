@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IKROMJON TV — HD Badge & Large DB</title>
+    <title>IKROMJON TV — World Live Channels</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -60,9 +60,8 @@
             font-size: 12px; font-weight: 700; color: var(--accent-light);
         }
 
-        /* Carousel */
+        /* Hero Banner */
         .hero-section { padding: 12px 16px; }
-
         .hero-carousel {
             display: flex; gap: 12px; overflow-x: auto;
             scroll-snap-type: x mandatory; scrollbar-width: none;
@@ -106,7 +105,7 @@
             padding: 6px 10px; border-radius: 6px; font-size: 11px; cursor: pointer;
         }
 
-        /* Sections */
+        /* Sections Grid */
         .section-header {
             padding: 14px 16px 6px 16px;
             display: flex; align-items: center; justify-content: space-between;
@@ -128,11 +127,11 @@
 
         .channel-img-wrapper {
             width: 60px; height: 45px; border-radius: 6px;
-            background: rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;
-            margin-bottom: 6px; padding: 2px;
+            background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center;
+            margin-bottom: 6px; padding: 4px;
         }
         .channel-img { width: 100%; height: 100%; object-fit: contain; }
-        .channel-name { font-size: 11px; font-weight: 600; }
+        .channel-name { font-size: 10px; font-weight: 600; line-height: 1.2; }
 
         .movies-grid {
             display: grid; grid-template-columns: repeat(3, 1fr);
@@ -147,12 +146,12 @@
         .movie-info { padding: 6px; }
         .movie-title { font-size: 10px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* HD BADGE DESIGN */
+        /* HD BADGE */
         .hd-badge {
             position: absolute; top: 5px; right: 5px;
             background: var(--accent-color); color: #fff;
             padding: 2px 5px; border-radius: 4px;
-            font-size: 9px; font-weight: 800;
+            font-size: 8px; font-weight: 800;
             letter-spacing: 0.5px; z-index: 10;
             box-shadow: 0 2px 6px rgba(0,0,0,0.5);
         }
@@ -234,12 +233,11 @@
         <div class="digital-clock" id="liveClock">00:00:00</div>
     </header>
 
-    <!-- MAIN VIEWS -->
     <main id="mainView">
-        <div class="section-header"><div class="section-title">🔥 Yangi Premyeralar</div></div>
+        <div class="section-header"><div class="section-title">🔥 Premyeralar</div></div>
         <section class="hero-section"><div class="hero-carousel" id="premieresRow"></div></section>
 
-        <div class="section-header"><div class="section-title">📡 Jonli Telekanallar</div></div>
+        <div class="section-header"><div class="section-title">📡 Xalqaro Live Telekanallar</div></div>
         <div class="horizontal-grid" id="tvChannelsRow"></div>
 
         <div class="section-header"><div class="section-title">🎬 Kinolar va Seriallar</div></div>
@@ -248,17 +246,17 @@
         <div class="section-header"><div class="section-title">⚽ Sport Live</div></div>
         <div class="horizontal-grid" id="sportsRow"></div>
 
-        <div class="section-header"><div class="section-title">👶 Multfilmlar va Bolalar</div></div>
+        <div class="section-header"><div class="section-title">👶 Multfilmlar</div></div>
         <div class="movies-grid" id="cartoonsRow"></div>
 
-        <div class="section-header"><div class="section-title">🎵 Kliplar va Konsertlar</div></div>
+        <div class="section-header"><div class="section-title">🎵 Kliplar & Konsertlar</div></div>
         <div class="horizontal-grid" id="musicRow"></div>
 
-        <div class="section-header"><div class="section-title">📚 Hujjatli va Ilmiy</div></div>
+        <div class="section-header"><div class="section-title">📚 Hujjatli & Ilmiy</div></div>
         <div class="movies-grid" id="docsRow"></div>
     </main>
 
-    <!-- UPLOAD MODAL -->
+    <!-- KONTENT QO'SHISH -->
     <div class="settings-modal" id="addContentView">
         <div class="modal-header">
             <h2>📁 Galereyadan Yuklash</h2>
@@ -281,11 +279,11 @@
 
             <div>
                 <label>Nomi / Sarlavha:</label>
-                <input type="text" id="newTitle" placeholder="Masalan: Mening Videom" required>
+                <input type="text" id="newTitle" placeholder="Masalan: TRT 1 / RTR Planeta" required>
             </div>
 
             <div class="file-upload-box" onclick="document.getElementById('imageFile').click()">
-                <div class="file-label" id="imgFileLabel">🖼️ Galereyadan Rasm / Poster tanlash</div>
+                <div class="file-label" id="imgFileLabel">🖼️ Galereyadan Rasm / Logo tanlash</div>
                 <input type="file" id="imageFile" accept="image/*" onchange="previewImageName(this)">
             </div>
 
@@ -298,18 +296,19 @@
         </form>
     </div>
 
-    <!-- SETTINGS MODAL -->
+    <!-- SOZLAMALAR -->
     <div class="settings-modal" id="settingsView">
         <div class="modal-header">
             <h2>⚙️ Sozlamalar</h2>
             <button onclick="switchTab('main')" style="background:none; border:none; color:var(--text-primary); font-size:22px;">✕</button>
         </div>
         <div class="input-form">
-            <button onclick="resetDatabase()" class="btn-submit" style="background:var(--danger-color);">🔄 Xotirani Tozalash (Reset DB)</button>
+            <button onclick="loadDefaultWorldChannels()" class="btn-submit" style="background:var(--accent-color);">📡 Xalqaro Kanallarni Qayta Yuklash</button>
+            <button onclick="resetDatabase()" class="btn-submit" style="background:var(--danger-color);">🔄 Bazani Butunlay Tozalash</button>
         </div>
     </div>
 
-    <!-- PLAYER -->
+    <!-- PLEYER -->
     <div class="modal-player" id="modalPlayer">
         <div class="player-bar">
             <span id="playerTitle" style="font-size:12px; font-weight:700;">Video...</span>
@@ -320,7 +319,7 @@
         </div>
     </div>
 
-    <!-- BOTTOM NAV -->
+    <!-- PASTKI NAVIGATSIYA -->
     <nav class="bottom-nav">
         <div class="nav-item active" onclick="switchTab('main')"><span class="nav-icon">🏠</span><span>Asosiy</span></div>
         <div class="nav-item" onclick="switchTab('main')"><span class="nav-icon">📺</span><span>Kanallar</span></div>
@@ -330,7 +329,20 @@
     </nav>
 
     <script>
-        // INDEXEDDB DATABASE SYSTEM
+        // PRESET CHANNELS (RUS, ENG, TURK, TAJIK, INDIA, ARAB)
+        const defaultChannels = [
+            { id: 101, category: "tvChannels", title: "🇷🇺 RTR Planeta", img: "https://upload.wikimedia.org/wikipedia/commons/e/e0/RTR_Planeta.png", stream: "https://lhlsrtrplaneta.beeline.tv/hls/rtr_planeta/index.m3u8" },
+            { id: 102, category: "tvChannels", title: "🇷🇺 Россия 24", img: "https://upload.wikimedia.org/wikipedia/commons/9/9f/Russia-24.svg", stream: "https://lhlsrussia24.beeline.tv/hls/russia24/index.m3u8" },
+            { id: 103, category: "tvChannels", title: "🇺🇸 BBC News HD", img: "https://upload.wikimedia.org/wikipedia/commons/6/62/BBC_News_2019.svg", stream: "https://vs-hls-push-uk-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_news_channel_hd/t=3600/v=pv14/b=5070000/main.m3u8" },
+            { id: 104, category: "tvChannels", title: "🇹🇷 TRT World HD", img: "https://upload.wikimedia.org/wikipedia/commons/3/30/TRT_World_logo.svg", stream: "https://tv-trtworld.medya.trt.com.tr/master.m3u8" },
+            { id: 105, category: "tvChannels", title: "🇹🇷 HaberTürk HD", img: "https://upload.wikimedia.org/wikipedia/commons/7/74/Habert%C3%BCrk_TV.png", stream: "https://ciner-live.da35df9d.cdn.ciner.com.tr/haberturk/haberturk.m3u8" },
+            { id: 106, category: "tvChannels", title: "🇹🇯 TV Safina", img: "https://upload.wikimedia.org/wikipedia/commons/a/a2/TV_Safina.png", stream: "https://live.tvt.tj/safina/index.m3u8" },
+            { id: 107, category: "tvChannels", title: "🇮🇳 India Today HD", img: "https://upload.wikimedia.org/wikipedia/en/e/e5/India_Today_logo.svg", stream: "https://indiatodaylive.akamaized.net/hls/live/2014320/indiatoday/master.m3u8" },
+            { id: 108, category: "tvChannels", title: "🇦🇪 Al Jazeera Arabic", img: "https://upload.wikimedia.org/wikipedia/commons/7/77/Al_Jazeera_Logo.svg", stream: "https://live-hls-web-aja.getaj.net/AJA/index.m3u8" },
+            { id: 109, category: "tvChannels", title: "🇸🇦 Al Arabiya HD", img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Al_Arabiya_Logo.svg", stream: "https://alarabiya-live.akamaized.net/hls/live/2013898/alarabiya/master.m3u8" }
+        ];
+
+        // INDEXEDDB MANAGEMENT
         let db;
         const request = indexedDB.open("IkromjonTV_DB", 1);
 
@@ -343,8 +355,28 @@
 
         request.onsuccess = function(e) {
             db = e.target.result;
-            renderAllContent();
+            checkAndInitDefaultData();
         };
+
+        function checkAndInitDefaultData() {
+            getAllMedia((items) => {
+                if (items.length === 0) {
+                    loadDefaultWorldChannels();
+                } else {
+                    renderAllContent();
+                }
+            });
+        }
+
+        function loadDefaultWorldChannels() {
+            const tx = db.transaction("mediaStore", "readwrite");
+            const store = tx.objectStore("mediaStore");
+            defaultChannels.forEach(item => store.put(item));
+            tx.oncomplete = () => {
+                alert("Xalqaro telekanallar (Rus, Turk, Tojik, Hind, Arab) yuklandi!");
+                renderAllContent();
+            };
+        }
 
         function getAllMedia(callback) {
             if (!db) return;
@@ -369,18 +401,18 @@
         }
 
         function resetDatabase() {
-            if (confirm("Barcha saqlangan ma'lumotlar o'chiriladi. Rozimisiz?")) {
+            if (confirm("Barcha saqlangan ma'lumotlar tozalanadi. Rozimisiz?")) {
                 const tx = db.transaction("mediaStore", "readwrite");
                 const store = tx.objectStore("mediaStore");
                 store.clear();
                 tx.oncomplete = () => {
-                    alert("Xotira tozalandi!");
+                    alert("Tozalandi!");
                     renderAllContent();
                 };
             }
         }
 
-        // RENDER FUNCTIONS
+        // RENDER METHOD
         function renderAllContent() {
             getAllMedia((items) => {
                 const categories = ['premieres', 'tvChannels', 'movies', 'sports', 'cartoons', 'music', 'docs'];
@@ -414,12 +446,11 @@
                             const card = document.createElement('div');
                             card.className = isHorizontal ? 'channel-card' : 'movie-card';
 
-                            // Long press to delete option, and HD label on top right
                             if (isHorizontal) {
                                 card.innerHTML = `
                                     <span class="hd-badge">HD</span>
                                     <div class="channel-img-wrapper" onclick="playStream('${item.title}', '${item.stream}')">
-                                        <img src="${item.img}" class="channel-img">
+                                        <img src="${item.img}" class="channel-img" onerror="this.src='https://picsum.photos/100/100'">
                                     </div>
                                     <div class="channel-name">${item.title}</div>
                                 `;
@@ -427,13 +458,13 @@
                                 card.innerHTML = `
                                     <span class="hd-badge">HD</span>
                                     <div onclick="playStream('${item.title}', '${item.stream}')">
-                                        <img src="${item.img}" class="movie-poster">
+                                        <img src="${item.img}" class="movie-poster" onerror="this.src='https://picsum.photos/200/300'">
                                         <div class="movie-info"><div class="movie-title">${item.title}</div></div>
                                     </div>
                                 `;
                             }
 
-                            // Context menu to allow deletion without 'X' button
+                            // O'chirish uchun kartani uzoqroq bosish (contextmenu)
                             card.oncontextmenu = (e) => {
                                 e.preventDefault();
                                 removeItem(item.id);
@@ -446,7 +477,7 @@
             });
         }
 
-        // FILE HANDLING & SAVE
+        // FILE & ADD CONTROL
         let selectedImageBase64 = "";
         let selectedVideoBase64 = "";
 
@@ -479,7 +510,7 @@
             const title = document.getElementById('newTitle').value;
 
             if (!selectedImageBase64 || !selectedVideoBase64) {
-                alert("Iltimos, galereyadan Rasm va Videoni to'liq tanlang!");
+                alert("Iltimos, galereyadan Rasm va Videoni tanlang!");
                 return;
             }
 
@@ -502,7 +533,7 @@
                 e.target.reset();
                 selectedImageBase64 = "";
                 selectedVideoBase64 = "";
-                document.getElementById('imgFileLabel').innerText = "🖼️ Galereyadan Rasm / Poster tanlash";
+                document.getElementById('imgFileLabel').innerText = "🖼️ Galereyadan Rasm / Logo tanlash";
                 document.getElementById('videoFileLabel').innerText = "🎥 Xotiradan Video tanlash (.mp4)";
                 switchTab('main');
                 renderAllContent();
@@ -510,32 +541,49 @@
         }
 
         function removeItem(id) {
-            if (confirm("Ushbu videoni ilovadan o'chirmoqchimisiz?")) {
+            if (confirm("Ushbu kanal/videoni ilovadan o'chirmoqchimisiz?")) {
                 deleteMediaItem(id, () => {
                     renderAllContent();
                 });
             }
         }
 
-        // PLAYER CONTROL
+        // PLAYER ENGINE
+        let hlsPlayer = null;
+
         function playStream(title, url) {
             document.getElementById('playerTitle').innerText = title;
             const video = document.getElementById('activeVideo');
             document.getElementById('modalPlayer').classList.add('active');
             
+            if (hlsPlayer) {
+                hlsPlayer.destroy();
+            }
+
             if (url.includes('.m3u8') && Hls.isSupported()) {
-                const hls = new Hls();
-                hls.loadSource(url);
-                hls.attachMedia(video);
+                hlsPlayer = new Hls({
+                    enableWorker: true,
+                    lowLatencyMode: true
+                });
+                hlsPlayer.loadSource(url);
+                hlsPlayer.attachMedia(video);
+                hlsPlayer.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play().catch(() => {});
+                });
             } else {
                 video.src = url;
+                video.play().catch(() => {});
             }
-            video.play().catch(() => {});
         }
 
         function closePlayer() {
             const video = document.getElementById('activeVideo');
-            video.pause(); video.src = "";
+            video.pause(); 
+            video.src = "";
+            if (hlsPlayer) {
+                hlsPlayer.destroy();
+                hlsPlayer = null;
+            }
             document.getElementById('modalPlayer').classList.remove('active');
         }
 
