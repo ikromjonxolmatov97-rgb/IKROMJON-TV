@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IKROMJON TV — Official App Edition</title>
+    <title>IKROMJON TV — Ultimate Edition</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root[data-theme="dark"] {
             --bg-main: #050b14;
-            --bg-card: rgba(13, 22, 38, 0.85);
+            --bg-card: rgba(13, 22, 38, 0.88);
             --accent-blue: #0066ff;
             --accent-cyan: #00f0ff;
             --border-glow: rgba(0, 102, 255, 0.3);
-            --border-glow-active: rgba(0, 240, 255, 0.8);
             --text-main: #ffffff;
             --text-sub: #8a99ad;
             --danger-color: #ff3366;
@@ -22,23 +21,17 @@
 
         :root[data-theme="light"] {
             --bg-main: #f0f4f8;
-            --bg-card: rgba(255, 255, 255, 0.9);
+            --bg-card: rgba(255, 255, 255, 0.92);
             --accent-blue: #0051cc;
             --accent-cyan: #00a8ff;
             --border-glow: rgba(0, 81, 204, 0.2);
-            --border-glow-active: rgba(0, 168, 255, 0.6);
             --text-main: #111827;
             --text-sub: #4b5563;
             --danger-color: #dc2626;
             --success-color: #16a34a;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0; padding: 0;
-            font-family: 'Inter', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
 
         body {
             background-color: var(--bg-main);
@@ -51,7 +44,7 @@
             transition: background 0.3s, color 0.3s;
         }
 
-        /* HEADER DESIGN */
+        /* HEADER */
         .app-header {
             position: sticky; top: 0; z-index: 100;
             background: var(--bg-card);
@@ -59,134 +52,128 @@
             border-bottom: 1px solid var(--border-glow);
             padding: 12px 16px;
             display: flex; align-items: center; justify-content: space-between;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .brand-logo {
-            display: flex; align-items: center; gap: 8px;
-            font-size: 18px; font-weight: 900; color: var(--text-main);
-            letter-spacing: -0.5px;
+            display: flex; align-items: center; gap: 6px;
+            font-size: 17px; font-weight: 900; color: var(--text-main);
         }
-
         .brand-logo span {
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-            padding: 2px 8px; border-radius: 6px; font-size: 11px; color: #fff;
-            box-shadow: 0 0 10px rgba(0, 102, 255, 0.5);
+            padding: 2px 7px; border-radius: 6px; font-size: 10px; color: #fff;
+            box-shadow: 0 0 10px rgba(0, 102, 255, 0.4);
         }
 
-        .header-widgets { display: flex; align-items: center; gap: 8px; }
+        .header-controls { display: flex; align-items: center; gap: 8px; }
 
-        .weather-box, .digital-clock {
-            font-size: 11px; font-weight: 700; background: var(--bg-card);
-            border: 1px solid var(--border-glow); padding: 5px 10px; border-radius: 20px;
-            color: var(--accent-cyan); backdrop-filter: blur(8px);
+        .lang-select {
+            background: var(--bg-main); color: var(--accent-cyan);
+            border: 1px solid var(--border-glow); font-size: 11px; font-weight: 700;
+            padding: 4px 8px; border-radius: 8px; outline: none; cursor: pointer;
         }
-        .digital-clock { color: var(--text-main); font-family: monospace; }
 
-        /* HERO BANNER */
+        .lock-btn {
+            background: rgba(0,102,255,0.15); border: 1px solid var(--border-glow);
+            color: var(--accent-cyan); padding: 5px 10px; border-radius: 8px;
+            font-size: 12px; cursor: pointer; font-weight: 700;
+        }
+
+        /* HERO SECTION */
         .hero-section { padding: 14px 16px; }
-        
         .hero-card {
-            width: 100%; height: 220px; border-radius: 18px; padding: 18px;
+            width: 100%; height: 210px; border-radius: 18px; padding: 16px;
             display: flex; flex-direction: column; justify-content: flex-end;
             border: 1px solid var(--border-glow);
-            box-shadow: 0 8px 30px rgba(0, 102, 255, 0.2);
-            background-image: url('1000007641.png');
-            background-size: cover;
-            background-position: center 25%;
+            background: linear-gradient(180deg, rgba(5,11,20,0.2) 0%, rgba(5,11,20,0.95) 100%),
+                        url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1000&q=80');
+            background-size: cover; background-position: center;
             position: relative; overflow: hidden;
         }
-
-        .hero-card::before {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(180deg, rgba(5, 11, 20, 0.1) 0%, rgba(5, 11, 20, 0.95) 100%);
-        }
-
-        .hero-content { position: relative; z-index: 2; }
         .hero-tag {
             background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
             color: #fff; font-size: 9px; font-weight: 800; padding: 3px 8px;
             border-radius: 4px; width: max-content; margin-bottom: 6px;
         }
-        .hero-title { font-size: 18px; font-weight: 900; color: #fff; text-shadow: 0 2px 6px rgba(0,0,0,0.9); }
-
+        .hero-title { font-size: 17px; font-weight: 900; color: #fff; text-shadow: 0 2px 6px rgba(0,0,0,0.9); }
         .play-btn {
             background: linear-gradient(135deg, #ffffff, #d9e6ff); color: #000; border: none;
-            padding: 8px 18px; border-radius: 8px; font-weight: 800;
+            padding: 8px 16px; border-radius: 8px; font-weight: 800;
             font-size: 11px; cursor: pointer; margin-top: 8px;
-            display: inline-flex; align-items: center; gap: 6px;
+            display: inline-flex; align-items: center; gap: 6px; width: max-content;
         }
 
         /* CATEGORY GRID */
         .category-container {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
             padding: 0 16px 14px 16px;
         }
-
         .cat-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border-glow);
-            border-radius: 12px; padding: 10px 4px;
-            display: flex; flex-direction: column; align-items: center; gap: 6px;
-            cursor: pointer; transition: all 0.2s ease;
+            background: var(--bg-card); border: 1px solid var(--border-glow);
+            border-radius: 12px; padding: 8px 4px;
+            display: flex; flex-direction: column; align-items: center; gap: 4px;
+            cursor: pointer; transition: transform 0.2s;
         }
-
-        .cat-icon {
-            width: 36px; height: 36px; border-radius: 10px;
-            background: linear-gradient(135deg, rgba(0, 102, 255, 0.2), rgba(0, 240, 255, 0.1));
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 16px; color: var(--accent-cyan);
-        }
-
+        .cat-box:active { transform: scale(0.95); }
+        .cat-icon { font-size: 18px; }
         .cat-title { font-size: 9px; font-weight: 700; color: var(--text-main); text-align: center; }
 
-        /* SECTIONS & GRIDS */
-        .section-header {
-            padding: 12px 16px 8px 16px;
-            display: flex; align-items: center; justify-content: space-between;
-        }
-        .section-title { font-size: 13px; font-weight: 800; color: var(--text-main); letter-spacing: 0.3px; }
+        /* SECTIONS & CARDS */
+        .section-header { padding: 12px 16px 6px 16px; display: flex; align-items: center; justify-content: space-between; }
+        .section-title { font-size: 13px; font-weight: 800; color: var(--text-main); }
         .section-title::before {
-            content: ''; display: inline-block; width: 3px; height: 12px;
+            content: ''; display: inline-block; width: 4px; height: 12px;
             background: var(--accent-cyan); margin-right: 6px; border-radius: 2px;
         }
 
         .horizontal-grid {
-            display: flex; gap: 12px; padding: 0 16px 10px 16px;
-            overflow-x: auto; scroll-behavior: smooth;
-            scrollbar-width: none; -webkit-overflow-scrolling: touch;
-            min-height: 50px;
+            display: flex; gap: 10px; padding: 0 16px 10px 16px;
+            overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
         }
         .horizontal-grid::-webkit-scrollbar { display: none; }
 
-        .channel-card, .movie-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-glow); border-radius: 12px;
-            cursor: pointer; position: relative; flex-shrink: 0;
-            backdrop-filter: blur(10px);
+        .media-card {
+            background: var(--bg-card); border: 1px solid var(--border-glow);
+            border-radius: 12px; cursor: pointer; position: relative; flex-shrink: 0;
+            overflow: hidden;
         }
-        .channel-card { min-width: 110px; padding: 10px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .movie-card { min-width: 130px; width: 130px; overflow: hidden; }
 
-        .channel-img-wrapper {
-            width: 60px; height: 45px; border-radius: 8px;
-            background: rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: center;
-            margin-bottom: 6px; padding: 4px; border: 1px solid var(--border-glow);
-        }
-        .channel-img { width: 100%; height: 100%; object-fit: contain; }
-        .channel-name { font-size: 10px; font-weight: 700; color: var(--text-main); line-height: 1.2; }
+        .tv-card { width: 110px; padding: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        .tv-img { width: 65px; height: 45px; object-fit: contain; margin-bottom: 6px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
+        
+        .radio-card { width: 120px; padding: 10px; text-align: center; background: rgba(0, 102, 255, 0.08); }
+        .radio-icon { font-size: 32px; margin-bottom: 4px; }
 
-        .movie-poster { width: 100%; height: 170px; object-fit: cover; }
-        .movie-info { padding: 8px; }
+        .movie-card { width: 125px; }
+        .movie-poster { width: 100%; height: 165px; object-fit: cover; }
+        .movie-info { padding: 6px 8px; }
         .movie-title { font-size: 10px; font-weight: 700; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        .hd-badge {
+        .live-badge {
             position: absolute; top: 6px; right: 6px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-            color: #fff; padding: 2px 6px; border-radius: 4px;
-            font-size: 8px; font-weight: 900; z-index: 10;
+            background: #ff0055; color: #fff; padding: 2px 5px;
+            border-radius: 4px; font-size: 8px; font-weight: 900; z-index: 5;
         }
+
+        /* PIN LOCK OVERLAY */
+        .pin-overlay {
+            position: fixed; inset: 0; background: #050b14; z-index: 2000;
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            padding: 20px;
+        }
+        .pin-overlay.active { display: flex; }
+        .pin-title { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+        .pin-sub { font-size: 12px; color: var(--text-sub); margin-bottom: 20px; }
+        .pin-dots { display: flex; gap: 12px; margin-bottom: 30px; }
+        .dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--accent-cyan); }
+        .dot.filled { background: var(--accent-cyan); box-shadow: 0 0 10px var(--accent-cyan); }
+        .pin-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; width: 220px; }
+        .key-btn {
+            width: 60px; height: 60px; border-radius: 50%;
+            background: rgba(255,255,255,0.08); border: 1px solid var(--border-glow);
+            color: #fff; font-size: 20px; font-weight: 700;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+        }
+        .key-btn:active { background: var(--accent-blue); }
 
         /* BOTTOM NAV */
         .bottom-nav {
@@ -196,189 +183,167 @@
             display: grid; grid-template-columns: repeat(4, 1fr);
             align-items: center; z-index: 200;
         }
-
         .nav-item {
             display: flex; flex-direction: column; align-items: center; gap: 3px;
             color: var(--text-sub); font-size: 9px; font-weight: 700; cursor: pointer;
         }
         .nav-item.active { color: var(--accent-cyan); }
-        .nav-icon { font-size: 18px; }
 
-        /* MODALS & SETTINGS */
+        /* MODALS */
         .settings-modal {
             position: fixed; inset: 0; background: var(--bg-main);
             z-index: 900; display: none; flex-direction: column; overflow-y: auto;
             padding: 20px 16px 80px 16px;
         }
         .settings-modal.active { display: flex; }
-
-        .modal-header {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border-glow);
-        }
-        .modal-header h2 { color: var(--text-main); font-size: 16px; }
-
-        .setting-group {
-            background: var(--bg-card); border: 1px solid var(--border-glow);
-            border-radius: 12px; padding: 14px; margin-bottom: 12px;
-            display: flex; flex-direction: column; gap: 8px;
-        }
-
+        .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border-glow); }
+        .setting-group { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 12px; padding: 12px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 8px; }
         .setting-group label { font-size: 11px; font-weight: 700; color: var(--accent-cyan); }
-
-        .setting-group select, .setting-group input, .setting-group range {
-            background: var(--bg-main); color: var(--text-main);
-            border: 1px solid var(--border-glow); padding: 10px;
-            border-radius: 8px; font-size: 12px; outline: none; width: 100%;
-        }
-
-        .file-custom-btn {
-            background: rgba(0, 102, 255, 0.15); border: 1px dashed var(--accent-cyan);
-            color: var(--text-main); padding: 10px; border-radius: 8px; font-size: 11px;
-            text-align: center; cursor: pointer; display: block;
-        }
-        .file-input-wrapper input[type="file"] { display: none; }
-
-        .btn-submit {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-            color: #fff; border: none; padding: 12px; border-radius: 8px;
-            font-weight: 800; font-size: 12px; cursor: pointer; margin-top: 6px;
-        }
-
-        /* PERFORMANCE TEST BOX */
-        .perf-box {
-            background: var(--bg-main); padding: 10px; border-radius: 8px;
-            border: 1px solid var(--border-glow); font-size: 11px; color: var(--text-sub);
-            display: flex; flex-direction: column; gap: 4px;
-        }
-        .perf-success { color: var(--success-color); font-weight: 700; }
+        .setting-group input, .setting-group select { background: var(--bg-main); color: var(--text-main); border: 1px solid var(--border-glow); padding: 8px; border-radius: 8px; font-size: 12px; }
+        .btn-submit { background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); color: #fff; border: none; padding: 10px; border-radius: 8px; font-weight: 800; font-size: 12px; cursor: pointer; }
 
         /* PLAYER */
-        .modal-player {
-            position: fixed; inset: 0; background: #000;
-            z-index: 1000; display: none; flex-direction: column;
-        }
+        .modal-player { position: fixed; inset: 0; background: #000; z-index: 1000; display: none; flex-direction: column; }
         .modal-player.active { display: flex; }
-        .player-bar {
-            padding: 12px 16px; background: rgba(5, 11, 20, 0.9);
-            display: flex; justify-content: space-between; align-items: center; color: #fff;
-        }
+        .player-bar { padding: 12px 16px; background: rgba(5, 11, 20, 0.9); display: flex; justify-content: space-between; align-items: center; color: #fff; }
         .player-viewport { flex: 1; display: flex; align-items: center; justify-content: center; }
-        video { width: 100%; max-height: 85vh; }
+        video, audio { width: 100%; max-height: 80vh; }
     </style>
 </head>
 <body>
 
+    <!-- QULFLASH EKRANI (PIN LOCK) -->
+    <div class="pin-overlay" id="pinLockOverlay">
+        <div class="pin-title" id="pinLockTitle">PIN Kodni Kiriting</div>
+        <div class="pin-sub" id="pinLockSub">Ilovadan foydalanish uchun xavfsizlik kodini kiriting</div>
+        <div class="pin-dots">
+            <div class="dot" id="dot0"></div>
+            <div class="dot" id="dot1"></div>
+            <div class="dot" id="dot2"></div>
+            <div class="dot" id="dot3"></div>
+        </div>
+        <div class="pin-keypad">
+            <div class="key-btn" onclick="pressPin('1')">1</div>
+            <div class="key-btn" onclick="pressPin('2')">2</div>
+            <div class="key-btn" onclick="pressPin('3')">3</div>
+            <div class="key-btn" onclick="pressPin('4')">4</div>
+            <div class="key-btn" onclick="pressPin('5')">5</div>
+            <div class="key-btn" onclick="pressPin('6')">6</div>
+            <div class="key-btn" onclick="pressPin('7')">7</div>
+            <div class="key-btn" onclick="pressPin('8')">8</div>
+            <div class="key-btn" onclick="pressPin('9')">9</div>
+            <div class="key-btn" onclick="clearPin()">C</div>
+            <div class="key-btn" onclick="pressPin('0')">0</div>
+            <div class="key-btn" onclick="deletePin()">⌫</div>
+        </div>
+    </div>
+
+    <!-- APP HEADER -->
     <header class="app-header">
         <div class="brand-logo">IKROMJON <span>TV</span></div>
-        <div class="header-widgets">
-            <div class="weather-box" id="weatherWidget">☀️ Toshkent 28°C</div>
-            <div class="digital-clock" id="liveClock">00:00</div>
+        <div class="header-controls">
+            <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
+                <option value="uz">🇺🇿 UZ</option>
+                <option value="ru">🇷🇺 RU</option>
+                <option value="eng">🇬🇧 ENG</option>
+                <option value="tj">🇹🇯 TJ</option>
+                <option value="kz">🇰🇿 KZ</option>
+            </select>
+            <button class="lock-btn" onclick="lockAppNow()">🔒</button>
         </div>
     </header>
 
     <main id="mainView">
+        <!-- HERO BANNER -->
         <section class="hero-section">
             <div class="hero-card">
-                <div class="hero-content">
-                    <div class="hero-tag">PREMYERA & KINOLAR</div>
-                    <div class="hero-title">Harry Potter: Barcha qismlari bir joyda!</div>
-                    <button class="play-btn" onclick="playStream('Harry Potter 1', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4')">
-                        <span>▶</span> TOMOSHA QILISH
-                    </button>
-                </div>
+                <div class="hero-tag" id="tagPremieres">PREMYERA & KINOLAR</div>
+                <div class="hero-title" id="heroMovieTitle">Dune: Part Two (2024)</div>
+                <button class="play-btn" onclick="playStream('Dune: Part Two', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">
+                    <span>▶</span> <span id="btnWatch">TOMOSHA QILISH</span>
+                </button>
             </div>
         </section>
 
         <!-- KATEGORIYALAR -->
         <div class="category-container">
-            <div class="cat-box" onclick="scrollToSection('tvChannelsRow')"><div class="cat-icon">📡</div><div class="cat-title">Jonli Efir</div></div>
-            <div class="cat-box" onclick="scrollToSection('arabicChannelsRow')"><div class="cat-icon">🇸🇦</div><div class="cat-title">Arab Kanallari</div></div>
-            <div class="cat-box" onclick="scrollToSection('cartoonsRow')"><div class="cat-icon">🧸</div><div class="cat-title">Multfilm</div></div>
-            <div class="cat-box" onclick="scrollToSection('comedyRow')"><div class="cat-icon">😂</div><div class="cat-title">Komediya</div></div>
-            <div class="cat-box" onclick="scrollToSection('dramaRow')"><div class="cat-icon">🎭</div><div class="cat-title">Drama</div></div>
-            <div class="cat-box" onclick="scrollToSection('indianRow')"><div class="cat-icon">🇮🇳</div><div class="cat-title">Hind Filmlari</div></div>
-            <div class="cat-box" onclick="scrollToSection('foreignRow')"><div class="cat-icon">🌍</div><div class="cat-title">Xorijiy Filmlar</div></div>
-            <div class="cat-box" onclick="scrollToSection('musicRow')"><div class="cat-icon">🎵</div><div class="cat-title">Musiqa & Kliplar</div></div>
+            <div class="cat-box" onclick="scrollToSection('uzTvRow')"><div class="cat-icon">📡</div><div class="cat-title" data-i18n="nav_tv">Jonli TV</div></div>
+            <div class="cat-box" onclick="scrollToSection('radioRow')"><div class="cat-icon">📻</div><div class="cat-title" data-i18n="nav_radio">Radio</div></div>
+            <div class="cat-box" onclick="scrollToSection('premieresRow')"><div class="cat-icon">🔥</div><div class="cat-title" data-i18n="nav_premieres">Premyera</div></div>
+            <div class="cat-box" onclick="scrollToSection('foreignRow')"><div class="cat-icon">🌍</div><div class="cat-title" data-i18n="nav_foreign">Xorijiy</div></div>
+            <div class="cat-box" onclick="scrollToSection('cartoonsRow')"><div class="cat-icon">🧸</div><div class="cat-title" data-i18n="nav_cartoons">Multfilm</div></div>
+            <div class="cat-box" onclick="scrollToSection('comedyRow')"><div class="cat-icon">😂</div><div class="cat-title" data-i18n="nav_comedy">Komediya</div></div>
+            <div class="cat-box" onclick="scrollToSection('dramaRow')"><div class="cat-icon">🎭</div><div class="cat-title" data-i18n="nav_drama">Drama</div></div>
+            <div class="cat-box" onclick="scrollToSection('indianRow')"><div class="cat-icon">🇮🇳</div><div class="cat-title" data-i18n="nav_indian">Hind</div></div>
         </div>
 
-        <!-- JANRLAR BO'YICHA QATORLAR -->
-        <div class="section-header"><div class="section-title">📡 Jonli Telekanallar</div></div>
-        <div class="horizontal-grid" id="tvChannelsRow"></div>
+        <!-- SECTIONS -->
+        <div class="section-header"><div class="section-title" data-i18n="sec_uz_tv">🇺🇿 O'zbekiston Telekanallari (MTRK)</div></div>
+        <div class="horizontal-grid" id="uzTvRow"></div>
 
-        <div class="section-header"><div class="section-title">🇸🇦 Arab Telekanallari</div></div>
-        <div class="horizontal-grid" id="arabicChannelsRow"></div>
+        <div class="section-header"><div class="section-title" data-i18n="sec_radio">📻 O'zbekiston Radio Stansiyalari</div></div>
+        <div class="horizontal-grid" id="radioRow"></div>
 
-        <div class="section-header"><div class="section-title">🧸 Multfilmlar</div></div>
-        <div class="horizontal-grid" id="cartoonsRow"></div>
+        <div class="section-header"><div class="section-title" data-i18n="sec_premieres">🔥 Sara Premyeralar (2024)</div></div>
+        <div class="horizontal-grid" id="premieresRow"></div>
 
-        <div class="section-header"><div class="section-title">😂 Komediya Filmlar</div></div>
-        <div class="horizontal-grid" id="comedyRow"></div>
-
-        <div class="section-header"><div class="section-title">🎭 Drama & Seriallar</div></div>
-        <div class="horizontal-grid" id="dramaRow"></div>
-
-        <div class="section-header"><div class="section-title">🇮🇳 Hind Kino San'ati</div></div>
-        <div class="horizontal-grid" id="indianRow"></div>
-
-        <div class="section-header"><div class="section-title">🌍 Xorijiy Kinolar</div></div>
+        <div class="section-header"><div class="section-title" data-i18n="sec_foreign">🌍 Jahon Kinematografiyasi (Xorijiy)</div></div>
         <div class="horizontal-grid" id="foreignRow"></div>
 
-        <div class="section-header"><div class="section-title">🎬 Videolar va Kinolar</div></div>
-        <div class="horizontal-grid" id="moviesRow"></div>
+        <div class="section-header"><div class="section-title" data-i18n="sec_cartoons">🧸 Multfilmlar</div></div>
+        <div class="horizontal-grid" id="cartoonsRow"></div>
 
-        <div class="section-header"><div class="section-title">🎵 Musiqa & Kliplar</div></div>
-        <div class="horizontal-grid" id="musicRow"></div>
+        <div class="section-header"><div class="section-title" data-i18n="sec_comedy">😂 Komediya va Qiziqarli Filmlar</div></div>
+        <div class="horizontal-grid" id="comedyRow"></div>
+
+        <div class="section-header"><div class="section-title" data-i18n="sec_drama">🎭 Drama & Seriallar</div></div>
+        <div class="horizontal-grid" id="dramaRow"></div>
+
+        <div class="section-header"><div class="section-title" data-i18n="sec_indian">🇮🇳 Hind Kino San'ati</div></div>
+        <div class="horizontal-grid" id="indianRow"></div>
     </main>
 
-    <!-- KONTENT QO'SHISH -->
+    <!-- KONTENT QO'SHISH MODALI -->
     <div class="settings-modal" id="addContentView">
         <div class="modal-header">
-            <h2>📁 Galereyadan Yuklash</h2>
+            <h2 data-i18n="title_upload">📁 Galereyadan Yuklash</h2>
             <button onclick="switchTab('main')" style="background:none; border:none; color:var(--text-main); font-size:22px;">✕</button>
         </div>
         <form class="setting-group" onsubmit="handleAddNewContent(event)">
-            <label>Kategoriya va Janrni Tanlang:</label>
+            <label data-i18n="lbl_select_cat">Kategoriya:</label>
             <select id="newCategory" required>
-                <option value="tvChannels">📡 Telekanallar / Jonli Efir</option>
-                <option value="arabicChannels">🇸🇦 Arab Telekanallari</option>
-                <option value="cartoons">🧸 Multfilmlar</option>
-                <option value="comedy">😂 Komediya Filmlar</option>
-                <option value="drama">🎭 Drama Filmlar</option>
-                <option value="indian">🇮🇳 Hind Filmlari</option>
+                <option value="uzTv">📡 O'zbekiston Telekanallari</option>
+                <option value="radio">📻 Radio Stansiya</option>
+                <option value="premieres">🔥 Premyeralar</option>
                 <option value="foreign">🌍 Xorijiy Filmlar</option>
-                <option value="movies">🎬 Boshqa Videolar / Kinolar</option>
-                <option value="music">🎵 Musiqa / Kliplar</option>
+                <option value="cartoons">🧸 Multfilmlar</option>
+                <option value="comedy">😂 Komediya</option>
+                <option value="drama">🎭 Drama</option>
+                <option value="indian">🇮🇳 Hind Filmlari</option>
             </select>
             
-            <label>Nomi / Sarlavha:</label>
-            <input type="text" id="newTitle" placeholder="Masalan: Yangi Arab Kanali" required>
+            <label data-i18n="lbl_title">Nomi / Sarlavha:</label>
+            <input type="text" id="newTitle" placeholder="Masalan: Yangi Kanal" required>
             
-            <label>🖼️ Rasm (Galereyadan):</label>
-            <div class="file-input-wrapper">
-                <label for="imgFileInput" class="file-custom-btn" id="imgLabelText">📁 Rasm tanlash</label>
-                <input type="file" id="imgFileInput" accept="image/*" onchange="updateFileName('imgFileInput', 'imgLabelText')">
-            </div>
+            <label data-i18n="lbl_img">🖼️ Rasm yoki Logo (Galereyadan):</label>
+            <input type="file" id="imgFileInput" accept="image/*">
             
-            <label>🎥 Video (Galereyadan):</label>
-            <div class="file-input-wrapper">
-                <label for="videoFileInput" class="file-custom-btn" id="videoLabelText">📁 Video tanlash</label>
-                <input type="file" id="videoFileInput" accept="video/*" onchange="updateFileName('videoFileInput', 'videoLabelText')">
-            </div>
+            <label data-i18n="lbl_stream">🎥 Video yoki Audio fayl:</label>
+            <input type="file" id="videoFileInput" accept="video/*,audio/*">
             
-            <button type="submit" class="btn-submit">💾 Saqlash</button>
+            <button type="submit" class="btn-submit" data-i18n="btn_save">💾 Saqlash</button>
         </form>
     </div>
 
-    <!-- SOZLAMALAR -->
+    <!-- SOZLAMALAR MODALI -->
     <div class="settings-modal" id="settingsView">
         <div class="modal-header">
-            <h2>⚙️ Ilova Sozlamalari</h2>
+            <h2 data-i18n="title_settings">⚙️ Ilova Sozlamalari</h2>
             <button onclick="switchTab('main')" style="background:none; border:none; color:var(--text-main); font-size:22px;">✕</button>
         </div>
 
         <div class="setting-group">
-            <label>🎨 Ilova Mavzusi (Theme):</label>
+            <label data-i18n="lbl_theme">🎨 Ilova Mavzusi:</label>
             <select id="themeSelect" onchange="changeTheme(this.value)">
                 <option value="dark">🌑 Qorong'i (Dark)</option>
                 <option value="light">☀️ Yorug' (Light)</option>
@@ -386,45 +351,21 @@
         </div>
 
         <div class="setting-group">
-            <label>🔊 Standart Ovoz Balandligi: <span id="volumeVal">80</span>%</label>
-            <input type="range" id="globalVolume" min="0" max="100" value="80" oninput="updateVolumeLabel(this.value)">
+            <label data-i18n="lbl_app_lock">🔒 Ilova Qulfi (PIN Set):</label>
+            <input type="password" id="pinCodeInput" placeholder="4-xonali PIN (masalan: 1234)" maxlength="4">
+            <button type="button" class="btn-submit" onclick="savePinCode()" data-i18n="btn_set_pin">PIN-kodni Saqlash</button>
+            <button type="button" class="btn-submit" style="background:var(--danger-color);" onclick="disablePinCode()" data-i18n="btn_disable_pin">PIN-kodni O'chirish</button>
         </div>
 
         <div class="setting-group">
-            <label>🖼️ Rasm Sifati (Image Quality):</label>
-            <select id="imgQualitySelect">
-                <option value="hd">🔴 Yuqori sifat (HD)</option>
-                <option value="standard" selected>🟡 O'rtacha (Standart)</option>
-                <option value="low">🟢 Tejamkor (Tez yuklanadi)</option>
-            </select>
-        </div>
-
-        <div class="setting-group">
-            <label>🎬 Standart Video Sifati:</label>
-            <select id="videoQualitySelect">
-                <option value="1080">Full HD (1080p)</option>
-                <option value="720" selected>HD (720p)</option>
-                <option value="480">Tejamkor (480p)</option>
-            </select>
-        </div>
-
-        <div class="setting-group">
-            <label>📊 Ilova Ishlashini Tekshiruvchi Tizim:</label>
-            <button type="button" class="btn-submit" onclick="runPerformanceCheck()">🔍 Diagnostikani Boshlash</button>
-            <div class="perf-box" id="perfResultBox" style="margin-top: 8px; display:none;">
-                <span>⏳ Tekshirilmoqda...</span>
-            </div>
-        </div>
-
-        <div class="setting-group">
-            <button onclick="resetDatabase()" class="btn-submit" style="background:var(--danger-color);">🔄 Bazani Qayta Yuklash</button>
+            <button onclick="resetDatabase()" class="btn-submit" style="background:var(--danger-color);" data-i18n="btn_reset">🔄 Bazani Qayta Tiklash</button>
         </div>
     </div>
 
     <!-- PLEYER -->
     <div class="modal-player" id="modalPlayer">
         <div class="player-bar">
-            <span id="playerTitle" style="font-size:12px; font-weight:700;">Video...</span>
+            <span id="playerTitle" style="font-size:12px; font-weight:700;">Ijro etilmoqda...</span>
             <button onclick="closePlayer()" style="background:none; border:none; color:#fff; font-size:20px;">✕</button>
         </div>
         <div class="player-viewport">
@@ -434,76 +375,148 @@
 
     <!-- BOTTOM NAV -->
     <nav class="bottom-nav">
-        <div class="nav-item active" onclick="switchTab('main')"><span class="nav-icon">🏠</span><span>Bosh sahifa</span></div>
-        <div class="nav-item" onclick="scrollToSection('arabicChannelsRow')"><span class="nav-icon">🇸🇦</span><span>Arab Kanallari</span></div>
-        <div class="nav-item" onclick="switchTab('add')"><span class="nav-icon">▶</span><span>Yuklash</span></div>
-        <div class="nav-item" onclick="switchTab('settings')"><span class="nav-icon">⚙️</span><span>Sozlamalar</span></div>
+        <div class="nav-item active" onclick="switchTab('main')"><span style="font-size:18px;">🏠</span><span data-i18n="nav_home">Bosh sahifa</span></div>
+        <div class="nav-item" onclick="scrollToSection('radioRow')"><span style="font-size:18px;">📻</span><span data-i18n="nav_radio">Radio</span></div>
+        <div class="nav-item" onclick="switchTab('add')"><span style="font-size:18px;">▶</span><span data-i18n="nav_upload">Yuklash</span></div>
+        <div class="nav-item" onclick="switchTab('settings')"><span style="font-size:18px;">⚙️</span><span data-i18n="nav_settings">Sozlamalar</span></div>
     </nav>
 
     <script>
-        const defaultChannels = [
-            // BOSHQA KANALLAR
-            { id: 1, category: "tvChannels", title: "🇹🇷 Power Türk HD", img: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Power_Turk_TV_logo.png", stream: "https://powerturktv.radyotvonline.net/powerturktv/live.m3u8" },
-            { id: 2, category: "tvChannels", title: "🇺🇸 BBC News HD", img: "https://upload.wikimedia.org/wikipedia/commons/6/62/BBC_News_2019.svg", stream: "https://vs-hls-push-uk-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_news_channel_hd/t=3600/v=pv14/b=5070000/main.m3u8" },
-            
-            // ARAB TELEKANALLARI
-            { id: 101, category: "arabicChannels", title: "🇸🇦 Al Jazeera HD", img: "https://upload.wikimedia.org/wikipedia/en/7/75/Al_Jazeera_English_logo.svg", stream: "https://live-hls-web-aje.getaj.net/AJE/index.m3u8" },
-            { id: 102, category: "arabicChannels", title: "🇸🇦 Al Arabiya HD", img: "https://upload.wikimedia.org/wikipedia/commons/0/07/Al_Arabiya_Logo.svg", stream: "https://alarabiya-live.akamaized.net/hls/live/2012111/alarabiya/master.m3u8" },
-            { id: 103, category: "arabicChannels", title: "🇸🇦 MBC 1 HD", img: "https://upload.wikimedia.org/wikipedia/commons/1/13/MBC1_Logo.svg", stream: "https://shls-mbc1-prod-dubai.shahid.net/out/v1/aefbc02143764834927cb0dcd71fb04d/index.m3u8" },
-            { id: 104, category: "arabicChannels", title: "🇦🇪 Dubai TV HD", img: "https://upload.wikimedia.org/wikipedia/commons/d/df/Dubai_TV_Logo.svg", stream: "https://dmi.akamaized.net/hls/live/2012690/dubaitv/master.m3u8" },
-            { id: 105, category: "arabicChannels", title: "🇸🇦 Saudi Quran TV", img: "https://upload.wikimedia.org/wikipedia/commons/2/28/Saudi_Quran_TV_logo.png", stream: "https://sauditv-hls.akamaized.net/hls/live/2013898/quran/master.m3u8" },
-            { id: 106, category: "arabicChannels", title: "🇸🇦 Sky News Arabia", img: "https://upload.wikimedia.org/wikipedia/commons/a/aa/Sky_News_Arabia_logo.svg", stream: "https://skynewsarabia-live.akamaized.net/hls/live/2002934/sna/master.m3u8" },
+        // TRANSLATION DICTIONARY
+        const i18n = {
+            uz: {
+                nav_tv: "Jonli TV", nav_radio: "Radio", nav_premieres: "Premyera", nav_foreign: "Xorijiy",
+                nav_cartoons: "Multfilm", nav_comedy: "Komediya", nav_drama: "Drama", nav_indian: "Hind",
+                nav_home: "Bosh sahifa", nav_upload: "Yuklash", nav_settings: "Sozlamalar",
+                sec_uz_tv: "🇺🇿 O'zbekiston Telekanallari (Jonli Efir)", sec_radio: "📻 O'zbekiston Radio Stansiyalari",
+                sec_premieres: "🔥 Sara Premyeralar (2024)", sec_foreign: "🌍 Jahon Kinematografiyasi (Xorijiy)",
+                sec_cartoons: "🧸 Multfilmlar", sec_comedy: "😂 Komediya Filmlari", sec_drama: "🎭 Drama & Seriallar",
+                sec_indian: "🇮🇳 Hind Filmlari", title_upload: "📁 Galereyadan Yuklash", title_settings: "⚙️ Ilova Sozlamalari",
+                btn_save: "💾 Saqlash", btn_set_pin: "PIN Kodni Saqlash", btn_disable_pin: "PIN Kodni O'chirish",
+                lbl_app_lock: "🔒 Ilova Qulfi (PIN Set):", lbl_theme: "🎨 Ilova Mavzusi:", btn_reset: "🔄 Bazani Qayta Tiklash",
+                pin_title: "PIN Kodni Kiriting", pin_sub: "Ilovadan foydalanish uchun PIN kodni kiriting"
+            },
+            ru: {
+                nav_tv: "ТВ Эфир", nav_radio: "Радио", nav_premieres: "Премьеры", nav_foreign: "Зарубежные",
+                nav_cartoons: "Мультики", nav_comedy: "Комедии", nav_drama: "Драмы", nav_indian: "Индийские",
+                nav_home: "Главная", nav_upload: "Загрузка", nav_settings: "Настройки",
+                sec_uz_tv: "🇺🇿 Телеканалы Узбекистана (Прямой эфир)", sec_radio: "📻 Радиостанции Узбекистана",
+                sec_premieres: "🔥 Новые Премьеры (2024)", sec_foreign: "🌍 Зарубежное Кино",
+                sec_cartoons: "🧸 Мультфильмы", sec_comedy: "😂 Комедии", sec_drama: "🎭 Драмы и Сериалы",
+                sec_indian: "🇮🇳 Индийское Кино", title_upload: "📁 Загрузить из галереи", title_settings: "⚙️ Настройки",
+                btn_save: "💾 Сохранить", btn_set_pin: "Установить PIN", btn_disable_pin: "Отключить PIN",
+                lbl_app_lock: "🔒 Блокировка приложения:", lbl_theme: "🎨 Тема приложения:", btn_reset: "🔄 Сбросить базу",
+                pin_title: "Введите PIN-код", pin_sub: "Введите PIN для входа в приложение"
+            },
+            eng: {
+                nav_tv: "Live TV", nav_radio: "Radio", nav_premieres: "Premieres", nav_foreign: "Foreign",
+                nav_cartoons: "Cartoons", nav_comedy: "Comedy", nav_drama: "Drama", nav_indian: "Indian",
+                nav_home: "Home", nav_upload: "Upload", nav_settings: "Settings",
+                sec_uz_tv: "🇺🇿 Uzbekistan Live TV Channels", sec_radio: "📻 Uzbekistan Radio Stations",
+                sec_premieres: "🔥 Top Premieres (2024)", sec_foreign: "🌍 Foreign Blockbusters",
+                sec_cartoons: "🧸 Animated Movies", sec_comedy: "😂 Comedy Movies", sec_drama: "🎭 Drama & Series",
+                sec_indian: "🇮🇳 Indian Movies", title_upload: "📁 Upload Media", title_settings: "⚙️ Settings",
+                btn_save: "💾 Save", btn_set_pin: "Set PIN Code", btn_disable_pin: "Disable PIN",
+                lbl_app_lock: "🔒 App Lock (PIN):", lbl_theme: "🎨 Theme:", btn_reset: "🔄 Reset Database",
+                pin_title: "Enter PIN Code", pin_sub: "Enter PIN code to access the app"
+            },
+            tj: {
+                nav_tv: "ТВ Зинда", nav_radio: "Радио", nav_premieres: "Премераҳо", nav_foreign: "Хориҷӣ",
+                nav_cartoons: "Мультфилм", nav_comedy: "Комедия", nav_drama: "Драма", nav_indian: "Ҳиндӣ",
+                nav_home: "Асосӣ", nav_upload: "Боргирӣ", nav_settings: "Танзимот",
+                sec_uz_tv: "🇺🇿 Каналҳои ТВ Ӯзбекистон", sec_radio: "📻 Истгоҳҳои Радиои Ӯзбекистон",
+                sec_premieres: "🔥 Премераҳои Нав (2024)", sec_foreign: "🌍 Филмҳои Хориҷӣ",
+                sec_cartoons: "🧸 Мультфилмҳо", sec_comedy: "😂 Филмҳои Комедия", sec_drama: "🎭 Драма ва Сериалҳо",
+                sec_indian: "🇮🇳 Филмҳои Ҳиндӣ", title_upload: "📁 Боргирӣ аз галерея", title_settings: "⚙️ Танзимот",
+                btn_save: "💾 Сабт кардан", btn_set_pin: "Гузоштани PIN", btn_disable_pin: "Омӯхтани PIN",
+                lbl_app_lock: "🔒 Қулфи Барнома (PIN):", lbl_theme: "🎨 Мавзӯи Барнома:", btn_reset: "🔄 Бозсозии база",
+                pin_title: "Рамзро ворид кунед", pin_sub: "Барои ворид шудан рамзро гузоред"
+            },
+            kz: {
+                nav_tv: "Тікелей ТВ", nav_radio: "Радио", nav_premieres: "Премьера", nav_foreign: "Шетелдік",
+                nav_cartoons: "Мультфильм", nav_comedy: "Комедия", nav_drama: "Драма", nav_indian: "Үнді",
+                nav_home: "Басты бет", nav_upload: "Юктеу", nav_settings: "Баптаулар",
+                sec_uz_tv: "🇺🇿 Өзбекстан Телеарналары", sec_radio: "📻 Өзбекстан Радиостанциялары",
+                sec_premieres: "🔥 Үздік Премьералар (2024)", sec_foreign: "🌍 Шетелдік Фильмдер",
+                sec_cartoons: "🧸 Мультфильмдер", sec_comedy: "😂 Комедия Фильмдері", sec_drama: "🎭 Драма мен Сериалдар",
+                sec_indian: "🇮🇳 Үнді Фильмдері", title_upload: "📁 Галереядан жүктеу", title_settings: "⚙️ Баптаулар",
+                btn_save: "💾 Saqtaý", btn_set_pin: "PIN кодты орнату", btn_disable_pin: "PIN кодты өшіру",
+                lbl_app_lock: "🔒 Қолданба құлпы (PIN):", lbl_theme: "🎨 Қолданба тақырыбы:", btn_reset: "🔄 Базаны қайта жүктеу",
+                pin_title: "PIN кодын енгізіңіз", pin_sub: "Қолданбаға кіру үшін PIN кодын енгізіңіз"
+            }
+        };
 
-            // Multfilmlar
-            { id: 201, category: "cartoons", title: "Tom va Jerry", img: "https://m.media-amazon.com/images/M/MV5BYzA2Nzk5M2EtNWY4Ny00ZjE3LThkZTUtZjE0ZTk5MGYwMzNhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
-            
-            // Komediya
-            { id: 301, category: "comedy", title: "Mister Bean Komediya", img: "https://m.media-amazon.com/images/M/MV5BMTgwMzI5NTM5MF5BMl5BanBnXkFtZTcwMTQ2Mzg2OQ@@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
+        // DEFAULT CONTENT DATABASE
+        const defaultMediaData = [
+            // UZBEKISTAN TELEVISION (MTRK)
+            { id: 10, category: "uzTv", title: "O'zbekiston HD", img: "https://upload.wikimedia.org/wikipedia/commons/1/12/O%27zbekiston_TV_logo.png", stream: "https://live.mtrk.uz/hls/uzbekistan/index.m3u8" },
+            { id: 11, category: "uzTv", title: "Yoshlar TV", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Yoshlar_TV_logo.svg/300px-Yoshlar_TV_logo.svg.png", stream: "https://live.mtrk.uz/hls/yoshlar/index.m3u8" },
+            { id: 12, category: "uzTv", title: "Sport HD", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Sport_TV_Uzbekistan.png/320px-Sport_TV_Uzbekistan.png", stream: "https://live.mtrk.uz/hls/sport/index.m3u8" },
+            { id: 13, category: "uzTv", title: "Navo TV", img: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Navo_TV_logo.png", stream: "https://live.mtrk.uz/hls/navo/index.m3u8" },
+            { id: 14, category: "uzTv", title: "Madaniyat va Ma'rifat", img: "https://upload.wikimedia.org/wikipedia/commons/1/11/Madaniyat_va_marifat.png", stream: "https://live.mtrk.uz/hls/madaniyat/index.m3u8" },
+            { id: 15, category: "uzTv", title: "Toshkent TV", img: "https://upload.wikimedia.org/wikipedia/commons/9/91/Toshkent_TV_logo.png", stream: "https://live.mtrk.uz/hls/toshkent/index.m3u8" },
+            { id: 16, category: "uzTv", title: "Dunyo bo'ylab", img: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Dunyo_boylab_logo.png", stream: "https://live.mtrk.uz/hls/dunyoboylab/index.m3u8" },
+            { id: 17, category: "uzTv", title: "Bolajon TV", img: "https://upload.wikimedia.org/wikipedia/commons/3/30/Bolajon_TV_logo.png", stream: "https://live.mtrk.uz/hls/bolajon/index.m3u8" },
+            { id: 18, category: "uzTv", title: "O'zbekiston 24", img: "https://upload.wikimedia.org/wikipedia/commons/6/69/Uzbekiston_24_logo.png", stream: "https://live.mtrk.uz/hls/uzbekiston24/index.m3u8" },
 
-            // Hind Filmlari
-            { id: 401, category: "indian", title: "3 Ahmoq (3 Idiots)", img: "https://m.media-amazon.com/images/M/MV5BNTkyOGVjMGEtNDQzMy00DY1LWIwZmUtMGE2ZDAyOWE3YmJiXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+            // UZBEKISTAN RADIO STATIONS
+            { id: 50, category: "radio", title: "O'zbekiston Radiosi", img: "📻", stream: "https://radio.mtrk.uz/uzbekiston" },
+            { id: 51, category: "radio", title: "Yoshlar FM", img: "📻", stream: "https://radio.mtrk.uz/yoshlar" },
+            { id: 52, category: "radio", title: "Oriat Dono 106.5 FM", img: "📻", stream: "https://stream.oriat.uz/dono128" },
+            { id: 53, category: "radio", title: "Oriat FM 100.5", img: "📻", stream: "https://stream.oriat.uz/oriat128" },
+            { id: 54, category: "radio", title: "Radio Toshkent", img: "📻", stream: "https://radio.mtrk.uz/toshkent" },
+            { id: 55, category: "radio", title: "Maxima FM 105.4", img: "📻", stream: "https://stream.maxima.uz/live" },
 
-            // Xorijiy Filmlar
-            { id: 501, category: "foreign", title: "Avatar 2", img: "https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctYzE0Mi00YTY4LWJiNDktY2ExM2I4ZjA4ZDcxXkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
+            // PREMIERES (2024 Blockbusters)
+            { id: 101, category: "premieres", title: "Dune: Part Two (2024)", img: "https://m.media-amazon.com/images/M/MV5BN2QyMDgwM2MtGWJmNy00Mzc4LWE1M2ItMDBhM2JiMWM4ZmE1XkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
+            { id: 102, category: "premieres", title: "Oppenheimer (2023)", img: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ5LTk4OWEtZmE6M2JhM2JkZDgwXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+            { id: 103, category: "premieres", title: "Spider-Man: Across Spider-Verse", img: "https://m.media-amazon.com/images/M/MV5BMzI0NmJjNDgtNGExMS00NGJhLTg3N2ItNzM1ZTlkZmFiODliXkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
+            { id: 104, category: "premieres", title: "Avatar 2: The Way of Water", img: "https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctYzE0Mi00YTY4LWJiNDktY2ExM2I4ZjA4ZDcxXkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+            { id: 105, category: "premieres", title: "Interstellar (Classic HD)", img: "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
 
-            // Boshqa Kinolar
-            { id: 601, category: "movies", title: "1. Harry Potter va Falsafa Toshi", img: "https://m.media-amazon.com/images/M/MV5BNmQ0ODBhMjUtNDRhOC00MGQyLWFkMTAtNzgzYzdjOTZiZjY5XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" }
+            // FOREIGN MOVIES
+            { id: 201, category: "foreign", title: "Inception (Boshlanish)", img: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutback2012.mp4" },
+            { id: 202, category: "foreign", title: "Gladiator (2000)", img: "https://m.media-amazon.com/images/M/MV5BMDliMmNhNDEtODUyOS00M2UxLTgxNjgtOJlNDhhNDI1NWZlXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
+            { id: 203, category: "foreign", title: "Titanic (1997 HD)", img: "https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWEzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
+            { id: 204, category: "foreign", title: "Fast X (Forsaj 10)", img: "https://m.media-amazon.com/images/M/MV5BNzZmOTU1ZTEtYzLzc00NzA2LTg1N2QtOGJiNTM3AxXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" },
+
+            // CARTOONS
+            { id: 301, category: "cartoons", title: "Tom va Jerry HD", img: "https://m.media-amazon.com/images/M/MV5BYzA2Nzk5M2EtNWY4Ny00ZjE3LThkZTUtZjE0ZTk5MGYwMzNhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
+            { id: 302, category: "cartoons", title: "Kung Fu Panda 4", img: "https://m.media-amazon.com/images/M/MV5BY2ZiNWY3ODgtM2IzOC00N2I0LTgwNzYtNzdhZGFlOWZlNWNmXkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
+
+            // COMEDY
+            { id: 401, category: "comedy", title: "Mister Bean sarguzashtlari", img: "https://m.media-amazon.com/images/M/MV5BMTgwMzI5NTM5MF5BMl5BanBnXkFtZTcwMTQ2Mzg2OQ@@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
+
+            // INDIAN
+            { id: 501, category: "indian", title: "3 Ahmoq (3 Idiots)", img: "https://m.media-amazon.com/images/M/MV5BNTkyOGVjMGEtNDQzMy00DY1LWIwZmUtMGE2ZDAyOWE3YmJiXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" }
         ];
 
         let db;
-        const request = indexedDB.open("IkromjonTV_OfficialDB", 7);
+        let enteredPin = "";
 
-        request.onupgradeneeded = function(e) {
+        // DB INITIALIZATION
+        const request = indexedDB.open("IkromjonTV_v10", 1);
+        request.onupgradeneeded = (e) => {
             db = e.target.result;
             if (db.objectStoreNames.contains("mediaStore")) db.deleteObjectStore("mediaStore");
             db.createObjectStore("mediaStore", { keyPath: "id" });
         };
-
-        request.onsuccess = function(e) {
+        request.onsuccess = (e) => {
             db = e.target.result;
-            checkAndInitData();
+            checkDataAndRender();
         };
 
-        function checkAndInitData() {
+        function checkDataAndRender() {
             getAllMedia((items) => {
                 if (items.length === 0) {
                     const tx = db.transaction("mediaStore", "readwrite");
                     const store = tx.objectStore("mediaStore");
-                    defaultChannels.forEach(item => store.put(item));
+                    defaultMediaData.forEach(item => store.put(item));
                     tx.oncomplete = () => renderAllContent();
                 } else {
                     renderAllContent();
                 }
             });
-        }
-
-        function resetDatabase() {
-            if (confirm("Barcha ma'lumotlar qayta boshlang'ich holatga keltirilsinmi?")) {
-                const tx = db.transaction("mediaStore", "readwrite");
-                tx.objectStore("mediaStore").clear();
-                defaultChannels.forEach(item => tx.objectStore("mediaStore").put(item));
-                tx.oncomplete = () => { renderAllContent(); alert("Baza yangilandi!"); };
-            }
         }
 
         function getAllMedia(callback) {
@@ -519,66 +532,150 @@
             tx.oncomplete = () => callback();
         }
 
+        function resetDatabase() {
+            if (confirm("Ilova ma'lumotlari qayta tiklansinmi?")) {
+                const tx = db.transaction("mediaStore", "readwrite");
+                tx.objectStore("mediaStore").clear();
+                defaultMediaData.forEach(item => tx.objectStore("mediaStore").put(item));
+                tx.oncomplete = () => { renderAllContent(); alert("Baza qayta tiklandi!"); };
+            }
+        }
+
+        // RENDER METHOD
         function renderAllContent() {
             getAllMedia((items) => {
-                const containers = ['tvChannels', 'arabicChannels', 'cartoons', 'comedy', 'drama', 'indian', 'foreign', 'movies', 'music'];
-                containers.forEach(c => {
-                    const el = document.getElementById(c + 'Row');
+                const rows = ['uzTv', 'radio', 'premieres', 'foreign', 'cartoons', 'comedy', 'drama', 'indian'];
+                rows.forEach(r => {
+                    const el = document.getElementById(r + 'Row');
                     if (el) el.innerHTML = '';
                 });
 
                 items.forEach(item => {
-                    const container = document.getElementById(item.category + 'Row') || document.getElementById('moviesRow');
+                    const container = document.getElementById(item.category + 'Row') || document.getElementById('premieresRow');
                     const card = document.createElement('div');
-                    
-                    if (item.category === 'tvChannels' || item.category === 'arabicChannels') {
-                        card.className = 'channel-card';
+
+                    if (item.category === 'uzTv') {
+                        card.className = 'media-card tv-card';
+                        card.onclick = () => playStream(item.title, item.stream);
                         card.innerHTML = `
-                            <span class="hd-badge">HD</span>
-                            <div class="channel-img-wrapper" onclick="playStream('${item.title}', '${item.stream}')">
-                                <img src="${item.img}" class="channel-img" onerror="this.src='https://picsum.photos/100/100'">
-                            </div>
-                            <div class="channel-name">${item.title}</div>
+                            <span class="live-badge">JONLI</span>
+                            <img src="${item.img}" class="tv-img" onerror="this.src='https://picsum.photos/100/100'">
+                            <div class="movie-title">${item.title}</div>
+                        `;
+                    } else if (item.category === 'radio') {
+                        card.className = 'media-card radio-card';
+                        card.onclick = () => playStream(item.title, item.stream);
+                        card.innerHTML = `
+                            <div class="radio-icon">📻</div>
+                            <div class="movie-title" style="font-weight:800;">${item.title}</div>
                         `;
                     } else {
-                        card.className = 'movie-card';
+                        card.className = 'media-card movie-card';
+                        card.onclick = () => playStream(item.title, item.stream);
                         card.innerHTML = `
-                            <span class="hd-badge">HD</span>
-                            <div onclick="playStream('${item.title}', '${item.stream}')">
-                                <img src="${item.img}" class="movie-poster" onerror="this.src='https://picsum.photos/200/300'">
-                                <div class="movie-info"><div class="movie-title">${item.title}</div></div>
-                            </div>
+                            <img src="${item.img}" class="movie-poster" onerror="this.src='https://picsum.photos/200/300'">
+                            <div class="movie-info"><div class="movie-title">${item.title}</div></div>
                         `;
                     }
-                    if(container) container.appendChild(card);
+                    if (container) container.appendChild(card);
                 });
             });
         }
 
-        function updateFileName(inputId, labelId) {
-            const input = document.getElementById(inputId);
-            const label = document.getElementById(labelId);
-            if (input.files && input.files[0]) {
-                label.innerText = "✅ Tanlandi: " + input.files[0].name;
+        // PIN LOCK LOGIC
+        function checkPinOnStartup() {
+            const savedPin = localStorage.getItem('app_pin_code');
+            if (savedPin) {
+                document.getElementById('pinLockOverlay').classList.add('active');
             }
         }
 
+        function pressPin(num) {
+            if (enteredPin.length < 4) {
+                enteredPin += num;
+                updatePinDots();
+                if (enteredPin.length === 4) {
+                    setTimeout(verifyPin, 100);
+                }
+            }
+        }
+
+        function clearPin() { enteredPin = ""; updatePinDots(); }
+        function deletePin() { enteredPin = enteredPin.slice(0, -1); updatePinDots(); }
+
+        function updatePinDots() {
+            for (let i = 0; i < 4; i++) {
+                const dot = document.getElementById('dot' + i);
+                if (i < enteredPin.length) dot.classList.add('filled');
+                else dot.classList.remove('filled');
+            }
+        }
+
+        function verifyPin() {
+            const savedPin = localStorage.getItem('app_pin_code');
+            if (enteredPin === savedPin) {
+                document.getElementById('pinLockOverlay').classList.remove('active');
+                clearPin();
+            } else {
+                alert("PIN kod noto'g'ri!");
+                clearPin();
+            }
+        }
+
+        function lockAppNow() {
+            const savedPin = localStorage.getItem('app_pin_code');
+            if (!savedPin) {
+                alert("PIN kod o'rnatilmagan! Avval sozlamalardan PIN-kod kiriting.");
+                switchTab('settings');
+            } else {
+                clearPin();
+                document.getElementById('pinLockOverlay').classList.add('active');
+            }
+        }
+
+        function savePinCode() {
+            const pin = document.getElementById('pinCodeInput').value;
+            if (pin.length === 4 && !isNaN(pin)) {
+                localStorage.setItem('app_pin_code', pin);
+                alert("PIN-kod muvaffaqiyatli saqlandi!");
+                document.getElementById('pinCodeInput').value = "";
+            } else {
+                alert("Iltimos, 4 xonali faqat raqamlardan iborat PIN kiriting!");
+            }
+        }
+
+        function disablePinCode() {
+            localStorage.removeItem('app_pin_code');
+            alert("PIN-kod o'chirildi!");
+        }
+
+        // LANGUAGE LOGIC
+        function changeLanguage(lang) {
+            localStorage.setItem('app_lang', lang);
+            const dict = i18n[lang] || i18n['uz'];
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) el.innerText = dict[key];
+            });
+            document.getElementById('langSelect').value = lang;
+        }
+
+        // MEDIA UPLOAD
         async function handleAddNewContent(e) {
             e.preventDefault();
             const category = document.getElementById('newCategory').value;
             const title = document.getElementById('newTitle').value;
             const imgFile = document.getElementById('imgFileInput').files[0];
             const videoFile = document.getElementById('videoFileInput').files[0];
-            
-            if (!imgFile || !videoFile) {
-                alert("Iltimos, galereyadan ham rasm, ham video tanlang!");
-                return;
-            }
 
-            const finalImgUrl = await convertFileToBase64(imgFile);
-            const finalStreamUrl = await convertFileToBase64(videoFile);
+            let imgUrl = "https://picsum.photos/200/300";
+            let streamUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
-            saveMediaItem({ id: Date.now(), category, title, img: finalImgUrl, stream: finalStreamUrl }, () => {
+            if (imgFile) imgUrl = await convertFileToBase64(imgFile);
+            if (videoFile) streamUrl = await convertFileToBase64(videoFile);
+
+            saveMediaItem({ id: Date.now(), category, title, img: imgUrl, stream: streamUrl }, () => {
                 alert("Muvaffaqiyatli saqlandi!");
                 e.target.reset();
                 switchTab('main');
@@ -587,50 +684,20 @@
         }
 
         function convertFileToBase64(file) {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 const reader = new FileReader();
                 reader.onload = () => resolve(reader.result);
-                reader.onerror = error => reject(error);
                 reader.readAsDataURL(file);
             });
         }
 
-        function changeTheme(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('app_theme', theme);
-        }
-
-        function updateVolumeLabel(val) {
-            document.getElementById('volumeVal').innerText = val;
-            localStorage.setItem('app_volume', val);
-        }
-
-        function runPerformanceCheck() {
-            const box = document.getElementById('perfResultBox');
-            box.style.display = 'flex';
-            box.innerHTML = '<span>⏳ Tarmoq va xotira tekshirilmoqda...</span>';
-
-            setTimeout(() => {
-                const memoryUsage = navigator.deviceMemory ? navigator.deviceMemory + " GB RAM" : "Optimal";
-                box.innerHTML = `
-                    <span class="perf-success">✔ Holat: A'lo darajada ishlayapti!</span>
-                    <span>• Xotira (RAM): ${memoryUsage}</span>
-                    <span>• Kesh xotira: Toza va barqaror</span>
-                    <span>• Tarmoq kechikishi (Ping): ~18 ms</span>
-                `;
-            }, 1200);
-        }
-
+        // PLAYER LOGIC
         let hlsPlayer = null;
         function playStream(title, url) {
             document.getElementById('playerTitle').innerText = title;
             const video = document.getElementById('activeVideo');
-            
-            const vol = (localStorage.getItem('app_volume') || 80) / 100;
-            video.volume = vol;
-
             document.getElementById('modalPlayer').classList.add('active');
-            
+
             if (hlsPlayer) hlsPlayer.destroy();
 
             if (url.includes('.m3u8') && Hls.isSupported()) {
@@ -664,9 +731,19 @@
             if (el) el.scrollIntoView({ behavior: 'smooth' });
         }
 
-        setInterval(() => {
-            document.getElementById('liveClock').innerText = new Date().toLocaleTimeString('uz-UZ', {hour: '2-digit', minute:'2-digit'});
-        }, 1000);
+        function changeTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('app_theme', theme);
+        }
+
+        // INITIAL LOAD
+        window.onload = () => {
+            const savedLang = localStorage.getItem('app_lang') || 'uz';
+            changeLanguage(savedLang);
+            const savedTheme = localStorage.getItem('app_theme') || 'dark';
+            changeTheme(savedTheme);
+            checkPinOnStartup();
+        };
     </script>
 </body>
 </html>
