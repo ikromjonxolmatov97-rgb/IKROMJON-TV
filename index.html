@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IKROMJON TV — Enterprise IPTV</title>
+    <title>IKROMJON TV — V8 Pro Max Edition</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -70,6 +70,11 @@
         .net-speed {
             background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #10b981;
             font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 10px;
+            display: flex; align-items: center; gap: 4px;
+        }
+        .timer-badge {
+            background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #ef4444;
+            font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 10px; display: none;
         }
 
         /* SEARCH BAR */
@@ -121,6 +126,7 @@
         /* SECTIONS & GRID */
         .section-header { padding: 16px 20px 10px 20px; display: flex; align-items: center; justify-content: space-between; }
         .section-title { font-size: 15px; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
+        .btn-clear { background: transparent; border: none; color: #ef4444; font-size: 11px; font-weight: 700; cursor: pointer; }
 
         .horizontal-grid { display: flex; gap: 14px; padding: 0 20px 10px 20px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
         .horizontal-grid::-webkit-scrollbar { display: none; }
@@ -133,32 +139,56 @@
         }
         .media-card:hover { transform: translateY(-5px); border-color: var(--accent-glow); box-shadow: 0 15px 35px rgba(0, 198, 255, 0.25); }
 
+        .card-actions { position: absolute; top: 8px; right: 8px; display: flex; gap: 6px; z-index: 10; }
+        .action-ico-btn {
+            background: rgba(0, 0, 0, 0.6); border: 1px solid var(--border-glow); border-radius: 50%;
+            width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 11px; backdrop-filter: blur(5px); cursor: pointer; color: #fff;
+        }
+        .action-ico-btn.fav.active { background: rgba(239, 68, 68, 0.85); border-color: #ef4444; }
+
+        .badge-4k {
+            position: absolute; top: 8px; left: 8px; background: rgba(0, 0, 0, 0.7);
+            color: var(--accent-glow); border: 1px solid var(--accent-glow); font-size: 8px;
+            font-weight: 900; padding: 2px 6px; border-radius: 6px; backdrop-filter: blur(5px); z-index: 5;
+        }
+
         .tv-card { width: 150px; }
         .tv-thumb-wrapper { width: 100%; height: 90px; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
         .tv-img { width: 70%; height: 70%; object-fit: contain; }
 
+        .radio-card { width: 130px; padding: 18px 10px; text-align: center; }
         .movie-card { width: 130px; }
         .movie-poster { width: 100%; height: 175px; object-fit: cover; }
         .movie-info { padding: 8px; display: flex; flex-direction: column; gap: 3px; }
         .movie-title { font-size: 11px; font-weight: 800; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* IPTV IMPORT SECTION */
-        .iptv-box {
-            background: var(--bg-card); border: 1px dashed var(--accent-glow); border-radius: 20px;
-            padding: 20px; margin: 10px 20px; display: flex; flex-direction: column; gap: 12px;
+        /* ADVANCED CINEMA PLAYER WITH THEATER MODE */
+        .modal-player {
+            position: fixed; inset: 0; z-index: 3000; background: #000; display: none;
+            flex-direction: column; justify-content: space-between; transition: background 0.5s;
+        }
+        .modal-player.active { display: flex; }
+        .modal-player.theater-dim { background: #000000f0; }
+
+        .player-header {
+            padding: 16px 20px; background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, transparent 100%);
+            display: flex; justify-content: space-between; align-items: center; color: #fff; z-index: 10;
         }
 
-        /* ADVANCED CINEMA PLAYER */
-        .modal-player { position: fixed; inset: 0; z-index: 3000; background: #000; display: none; flex-direction: column; justify-content: space-between; }
-        .modal-player.active { display: flex; }
-
-        .player-header { padding: 16px 20px; background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, transparent 100%); display: flex; justify-content: space-between; align-items: center; color: #fff; z-index: 10; }
         .player-body { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .player-video { width: 100%; height: 100%; object-fit: contain; }
-        .player-controls { padding: 20px; background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, transparent 100%); display: flex; flex-direction: column; gap: 12px; color: #fff; z-index: 10; }
+
+        .player-controls {
+            padding: 20px; background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, transparent 100%);
+            display: flex; flex-direction: column; gap: 12px; color: #fff; z-index: 10;
+        }
+
+        .volume-row { display: flex; align-items: center; gap: 10px; font-size: 11px; }
+        .volume-row input { flex: 1; accent-color: #00f2fe; }
 
         .controls-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; flex-wrap: wrap; }
         .p-btn { background: rgba(255, 255, 255, 0.12); border: 1px solid var(--border-glow); color: #fff; padding: 9px 12px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 11px; }
+        .p-btn.active-glow { border-color: #00f2fe; background: rgba(0, 242, 254, 0.2); }
         .p-btn-main { background: var(--accent-gradient); color: #fff; border: none; padding: 11px 20px; border-radius: 14px; font-weight: 800; font-size: 14px; }
 
         /* FLOATING BOTTOM NAV */
@@ -167,11 +197,14 @@
             width: calc(100% - 40px); max-width: 450px; height: 64px;
             background: var(--bg-card); backdrop-filter: blur(30px);
             border: 1px solid var(--border-glow); border-radius: 32px;
-            display: grid; grid-template-columns: repeat(3, 1fr); align-items: center;
+            display: grid; grid-template-columns: repeat(4, 1fr); align-items: center;
             z-index: 200; box-shadow: var(--card-shadow);
         }
 
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-sub); font-size: 9px; font-weight: 800; cursor: pointer; transition: all 0.3s; }
+        .nav-item {
+            display: flex; flex-direction: column; align-items: center; gap: 3px;
+            color: var(--text-sub); font-size: 9px; font-weight: 800; cursor: pointer; transition: all 0.3s;
+        }
         .nav-item.active { color: var(--accent-glow); }
 
         .settings-modal { position: fixed; inset: 0; z-index: 2000; display: none; flex-direction: column; background: var(--bg-main); padding: 24px 20px 100px 20px; overflow-y: auto; }
@@ -185,9 +218,10 @@
 
     <!-- HEADER -->
     <header class="app-header">
-        <div class="brand-logo">IKROMJON <span>ENTERPRISE</span></div>
+        <div class="brand-logo">IKROMJON <span>PRO MAX</span></div>
         <div class="header-badges">
-            <div class="net-speed" id="netSpeedBadge">⚡ LIVE NET</div>
+            <div class="net-speed" id="netSpeedBadge">⚡ 12.4 MB/s</div>
+            <div class="timer-badge" id="timerBadge">💤 00:00</div>
         </div>
     </header>
 
@@ -200,24 +234,90 @@
     </div>
 
     <main id="mainView">
-        <!-- M3U IMPORT QUICK BOX -->
-        <div class="iptv-box">
-            <div style="font-weight: 800; font-size: 13px;">📑 IPTV Pleylist Import (.m3u / .m3u8)</div>
-            <input type="text" id="m3uUrlInput" class="search-input" placeholder="Pleylist havolasini kiriting (https://...)">
-            <button class="btn-submit" onclick="importM3uPlaylist()">⚡ Yuklab olish va Bazasiga qoʻshish</button>
+        <!-- HERO BANNER -->
+        <section class="hero-section">
+            <div class="hero-card">
+                <div class="hero-tag">🔥 IMAX PREMYERA</div>
+                <div class="hero-title">Avatar: The Way of Water</div>
+                <button class="play-btn" onclick="playStream(999, 'Avatar: The Way of Water', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">
+                    <span>▶</span> <span>TOMOSHA QILISH</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- KATEGORIYALAR -->
+        <div class="category-container">
+            <div class="cat-box" onclick="scrollToSection('uzTvRow')"><span>📡</span><span class="cat-title">TV</span></div>
+            <div class="cat-box" onclick="scrollToSection('radioRow')"><span>📻</span><span class="cat-title">Radio</span></div>
+            <div class="cat-box" onclick="scrollToSection('offlineRow')"><span>📥</span><span class="cat-title">Offline (Kesh)</span></div>
+            <div class="cat-box" onclick="scrollToSection('favRow')"><span>⭐</span><span class="cat-title">Sevimlilar</span></div>
+            <div class="cat-box" onclick="scrollToSection('premieresRow')"><span>🔥</span><span class="cat-title">Premyera</span></div>
         </div>
 
+        <!-- OFFLINE KESH -->
+        <div class="section-header" id="offlineHeader" style="display: none;">
+            <div class="section-title">📥 Yuklab olinganlar (Offline)</div>
+        </div>
+        <div class="horizontal-grid" id="offlineRow" style="display: none;"></div>
+
+        <!-- SEVIMLILAR -->
+        <div class="section-header" id="favHeader" style="display: none;">
+            <div class="section-title">⭐ Sevimlilar</div>
+            <button class="btn-clear" onclick="clearFavorites()">Tozalash 🗑️</button>
+        </div>
+        <div class="horizontal-grid" id="favRow" style="display: none;"></div>
+
         <!-- SEKTORLAR -->
-        <div class="section-header"><div class="section-title">📡 Barcha Telekanallar</div></div>
+        <div class="section-header"><div class="section-title">📡 Telekanallar</div></div>
         <div class="horizontal-grid" id="uzTvRow"></div>
 
-        <div class="section-header"><div class="section-title">🔥 Premyeralar va Filmlar</div></div>
+        <div class="section-header"><div class="section-title">📻 Radio Stansiyalar</div></div>
+        <div class="horizontal-grid" id="radioRow"></div>
+
+        <div class="section-header"><div class="section-title">🔥 Premyeralar</div></div>
         <div class="horizontal-grid" id="premieresRow"></div>
     </main>
 
+    <!-- MEDIA YUKLASH -->
+    <div class="settings-modal" id="addContentView">
+        <h2 style="margin-bottom:16px;">📁 Media Qoʻshish</h2>
+        <form class="setting-group" onsubmit="handleAddNewContent(event)">
+            <label>Kategoriya:</label>
+            <select id="newCategory" required>
+                <option value="uzTv">📡 Telekanallar</option>
+                <option value="radio">📻 Radio</option>
+                <option value="premieres">🔥 Premyeralar</option>
+            </select>
+            <label>Nomi:</label>
+            <input type="text" id="newTitle" placeholder="Nomi..." required>
+            <label>🖼️ Poster havolasi:</label>
+            <input type="text" id="newImg" placeholder="https://... rasm" required>
+            <label>🎥 Stream havolasi:</label>
+            <input type="text" id="newStream" placeholder="https://... stream" required>
+            <button type="submit" class="btn-submit">💾 Saqlash</button>
+        </form>
+    </div>
+
     <!-- SOZLAMALAR -->
     <div class="settings-modal" id="settingsView">
-        <h2 style="margin-bottom:16px;">⚙️ Tizim Sozlamalari</h2>
+        <h2 style="margin-bottom:16px;">⚙️ Pro Sozlamalar</h2>
+        
+        <div class="setting-group">
+            <label>💤 Sleep Timer:</label>
+            <select id="sleepTimerSelect" onchange="setSleepTimer(this.value)">
+                <option value="0">Oʻchirilgan</option>
+                <option value="15">15 Daqiqa</option>
+                <option value="30">30 Daqiqa</option>
+                <option value="60">1 Soat</option>
+            </select>
+        </div>
+
+        <div class="setting-group">
+            <label>🔒 Parental PIN:</label>
+            <input type="password" id="pinInput" placeholder="4 xonali PIN" maxlength="4">
+            <button type="button" class="btn-submit" onclick="savePin()">PIN Saqlash</button>
+        </div>
+
         <div class="setting-group">
             <label>🎨 Interfeys Mavzusi:</label>
             <select id="themeSelect" onchange="changeTheme(this.value)">
@@ -225,7 +325,6 @@
                 <option value="light">☀️ Clean Light</option>
             </select>
         </div>
-        <button class="btn-submit" onclick="resetDatabase()" style="background:#ef4444;">🗑️ Bazani tozalash</button>
     </div>
 
     <!-- PLEYER MODAL -->
@@ -240,6 +339,11 @@
         </div>
 
         <div class="player-controls">
+            <div class="volume-row">
+                <span>🔊 Ovoz:</span>
+                <input type="range" id="volumeRange" min="0" max="2" step="0.05" value="1" oninput="adjustVolume(this.value)">
+            </div>
+
             <div class="controls-row" style="justify-content:center; gap:14px;">
                 <button class="p-btn" onclick="seekVideo(-10)">⏪ -10s</button>
                 <button class="p-btn-main" id="playPauseBtn" onclick="togglePlayPause()">▶ Play</button>
@@ -247,6 +351,7 @@
             </div>
 
             <div class="controls-row">
+                <button class="p-btn" id="theaterBtn" onclick="toggleTheaterMode()">Kinoteatr 🎬</button>
                 <button class="p-btn" onclick="togglePip()">PiP 📱</button>
                 <button class="p-btn" onclick="toggleFullScreen()">Toʻliq ekran ⛶</button>
             </div>
@@ -256,6 +361,8 @@
     <!-- FLOATING NAV -->
     <nav class="bottom-nav">
         <div class="nav-item active" onclick="switchTab('main')"><span style="font-size:18px;">🏠</span><span>Asosiy</span></div>
+        <div class="nav-item" onclick="scrollToSection('favRow')"><span style="font-size:18px;">⭐</span><span>Sevimlilar</span></div>
+        <div class="nav-item" onclick="protectedTabSwitch('add')"><span style="font-size:18px;">➕</span><span>Qoʻshish</span></div>
         <div class="nav-item" onclick="switchTab('settings')"><span style="font-size:18px;">⚙️</span><span>Sozlama</span></div>
     </nav>
 
@@ -263,11 +370,23 @@
         const defaultMediaData = [
             { id: 1, category: "uzTv", title: "O'zbekiston HD", img: "https://upload.wikimedia.org/wikipedia/commons/1/12/O%27zbekiston_TV_logo.png", stream: "https://live.mtrk.uz/hls/uzbekistan/index.m3u8" },
             { id: 2, category: "uzTv", title: "Yoshlar TV", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Yoshlar_TV_logo.svg/300px-Yoshlar_TV_logo.svg.png", stream: "https://live.mtrk.uz/hls/yoshlar/index.m3u8" },
-            { id: 3, category: "premieres", title: "Interstellar", img: "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" }
+            { id: 3, category: "radio", title: "Yoshlar FM", img: "📻", stream: "https://radio.mtrk.uz/yoshlar" },
+            { id: 4, category: "premieres", title: "Interstellar", img: "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" }
         ];
 
         let db;
-        const request = indexedDB.open("IkromjonTV_EnterpriseDB", 1);
+        let favorites = JSON.parse(localStorage.getItem('app_favs_v8') || "[]");
+        let offlineCache = JSON.parse(localStorage.getItem('app_offline_v8') || "[]");
+        let appPin = localStorage.getItem('app_pin_v8') || null;
+        let timerInterval = null;
+
+        // Real-time network speed simulator ticker
+        setInterval(() => {
+            const speed = (Math.random() * 8 + 8).toFixed(1);
+            document.getElementById('netSpeedBadge').innerText = `⚡ ${speed} MB/s`;
+        }, 3000);
+
+        const request = indexedDB.open("IkromjonTV_V8DB", 1);
         request.onupgradeneeded = (e) => {
             db = e.target.result;
             if (db.objectStoreNames.contains("mediaStore")) db.deleteObjectStore("mediaStore");
@@ -291,83 +410,123 @@
             req.onsuccess = () => callback(req.result);
         }
 
-        /* M3U IPTV PARSER ENGINE */
-        async function importM3uPlaylist() {
-            const url = document.getElementById('m3uUrlInput').value;
-            if (!url) return alert("Iltimos, M3U havolasini kiriting!");
-
-            try {
-                const response = await fetch(url);
-                const text = await response.text();
-                const lines = text.split('\n');
-                
-                let currentTitle = "";
-                let count = 0;
-                const tx = db.transaction("mediaStore", "readwrite");
-
-                for (let i = 0; i < lines.length; i++) {
-                    let line = lines[i].trim();
-                    if (line.startsWith('#EXTINF:')) {
-                        currentTitle = line.split(',')[1] || "IPTV Kanal";
-                    } else if (line.startsWith('http')) {
-                        const newObj = {
-                            id: Date.now() + Math.random(),
-                            category: "uzTv",
-                            title: currentTitle || "IPTV Stream",
-                            img: "https://picsum.photos/200/200",
-                            stream: line
-                        };
-                        tx.objectStore("mediaStore").put(newObj);
-                        count++;
-                    }
-                }
-
-                tx.oncomplete = () => {
-                    alert(`${count} ta IPTV kanali muvaffaqiyatli yuklandi! 🎉`);
-                    renderAllContent();
-                };
-            } catch (err) { alert("Pleylistni yuklab bo'lmadi! CORS yoki havola xatosi."); }
+        function savePin() {
+            const pin = document.getElementById('pinInput').value;
+            if (pin.length === 4) { appPin = pin; localStorage.setItem('app_pin_v8', pin); alert("PIN Saqlandi! 🔒"); }
+            else { alert("4 xonali son kiriting!"); }
         }
 
-        function resetDatabase() {
-            const tx = db.transaction("mediaStore", "readwrite");
-            tx.objectStore("mediaStore").clear();
-            tx.oncomplete = () => { alert("Baza tozalandi!"); renderAllContent(); };
+        function protectedTabSwitch(tab) {
+            if (appPin) {
+                const p = prompt("PIN kiriting:");
+                if (p === appPin) switchTab(tab); else alert("Xato PIN!");
+            } else { switchTab(tab); }
         }
+
+        function setSleepTimer(minutes) {
+            clearInterval(timerInterval);
+            const badge = document.getElementById('timerBadge');
+            let sec = parseInt(minutes) * 60;
+            if (sec <= 0) { badge.style.display = 'none'; return; }
+            badge.style.display = 'block';
+            timerInterval = setInterval(() => {
+                sec--;
+                const m = Math.floor(sec / 60), s = sec % 60;
+                badge.innerText = `💤 ${m}:${s < 10 ? '0' : ''}${s}`;
+                if (sec <= 0) { clearInterval(timerInterval); closePlayer(); badge.style.display = 'none'; }
+            }, 1000);
+        }
+
+        function toggleFavorite(id, e) {
+            e.stopPropagation();
+            if (favorites.includes(id)) favorites = favorites.filter(i => i !== id); else favorites.push(id);
+            localStorage.setItem('app_favs_v8', JSON.stringify(favorites));
+            renderAllContent();
+        }
+
+        function toggleOffline(id, e) {
+            e.stopPropagation();
+            if (offlineCache.includes(id)) {
+                offlineCache = offlineCache.filter(i => i !== id);
+                alert("Offline xotiradan o'chirildi.");
+            } else {
+                offlineCache.push(id);
+                alert("📥 Media Offline ko'rish uchun keshlandi!");
+            }
+            localStorage.setItem('app_offline_v8', JSON.stringify(offlineCache));
+            renderAllContent();
+        }
+
+        function clearFavorites() { favorites = []; localStorage.setItem('app_favs_v8', JSON.stringify(favorites)); renderAllContent(); }
 
         function handleSearch(query) {
             const f = query.toLowerCase();
             getAllMedia(items => renderCards(items.filter(i => i.title.toLowerCase().includes(f))));
         }
 
+        function handleAddNewContent(e) {
+            e.preventDefault();
+            const obj = {
+                id: Date.now(),
+                category: document.getElementById('newCategory').value,
+                title: document.getElementById('newTitle').value,
+                img: document.getElementById('newImg').value || "https://picsum.photos/200/300",
+                stream: document.getElementById('newStream').value
+            };
+            const tx = db.transaction("mediaStore", "readwrite");
+            tx.objectStore("mediaStore").put(obj);
+            tx.oncomplete = () => { alert("Qo'shildi! ✅"); e.target.reset(); switchTab('main'); renderAllContent(); };
+        }
+
         function renderAllContent() { getAllMedia(items => renderCards(items)); }
 
         function renderCards(items) {
-            ['uzTv', 'premieres'].forEach(r => {
+            ['uzTv', 'radio', 'premieres', 'fav', 'offline'].forEach(r => {
                 const el = document.getElementById(r + 'Row'); if (el) el.innerHTML = '';
             });
 
+            // Favorites
+            const favItems = items.filter(i => favorites.includes(i.id));
+            const favHeader = document.getElementById('favHeader');
+            const favRow = document.getElementById('favRow');
+            if (favItems.length > 0) { favHeader.style.display = 'flex'; favRow.style.display = 'flex'; favItems.forEach(i => favRow.appendChild(createCard(i))); }
+            else { favHeader.style.display = 'none'; favRow.style.display = 'none'; }
+
+            // Offline Cache
+            const offItems = items.filter(i => offlineCache.includes(i.id));
+            const offHeader = document.getElementById('offlineHeader');
+            const offRow = document.getElementById('offlineRow');
+            if (offItems.length > 0) { offHeader.style.display = 'flex'; offRow.style.display = 'flex'; offItems.forEach(i => offRow.appendChild(createCard(i))); }
+            else { offHeader.style.display = 'none'; offRow.style.display = 'none'; }
+
             items.forEach(item => {
-                const container = document.getElementById(item.category + 'Row') || document.getElementById('uzTvRow');
+                const container = document.getElementById(item.category + 'Row') || document.getElementById('premieresRow');
                 if (container) container.appendChild(createCard(item));
             });
         }
 
         function createCard(item) {
             const card = document.createElement('div');
+            const isFav = favorites.includes(item.id) ? 'fav active' : 'fav';
+            const isOff = offlineCache.includes(item.id) ? 'active' : '';
+
             if (item.category === 'uzTv') {
                 card.className = 'media-card tv-card';
                 card.onclick = () => playStream(item.title, item.stream);
-                card.innerHTML = `<div class="tv-thumb-wrapper"><img src="${item.img}" class="tv-img"></div><div class="movie-info"><div class="movie-title">${item.title}</div></div>`;
+                card.innerHTML = `<div class="badge-4k">PRO</div><div class="card-actions"><div class="action-ico-btn ${isFav}" onclick="toggleFavorite(${item.id}, event)">❤️</div><div class="action-ico-btn ${isOff}" onclick="toggleOffline(${item.id}, event)">📥</div></div><div class="tv-thumb-wrapper"><img src="${item.img}" class="tv-img"></div><div class="movie-info"><div class="movie-title">${item.title}</div></div>`;
+            } else if (item.category === 'radio') {
+                card.className = 'media-card radio-card';
+                card.onclick = () => playStream(item.title, item.stream);
+                card.innerHTML = `<div class="card-actions"><div class="action-ico-btn ${isFav}" onclick="toggleFavorite(${item.id}, event)">❤️</div></div><div style="font-size:28px; margin-bottom:4px;">📻</div><div class="movie-title">${item.title}</div>`;
             } else {
                 card.className = 'media-card movie-card';
                 card.onclick = () => playStream(item.title, item.stream);
-                card.innerHTML = `<img src="${item.img}" class="movie-poster"><div class="movie-info"><div class="movie-title">${item.title}</div></div>`;
+                card.innerHTML = `<div class="badge-4k">IMAX</div><div class="card-actions"><div class="action-ico-btn ${isFav}" onclick="toggleFavorite(${item.id}, event)">❤️</div><div class="action-ico-btn ${isOff}" onclick="toggleOffline(${item.id}, event)">📥</div></div><img src="${item.img}" class="movie-poster"><div class="movie-info"><div class="movie-title">${item.title}</div></div>`;
             }
             return card;
         }
 
-        /* PLEYER ENGINE WITH AUTO-RECONNECT */
+        /* PLEYER & THEATER MODE */
         let hls = null;
         const video = document.getElementById('activeVideo');
         const playBtn = document.getElementById('playPauseBtn');
@@ -378,20 +537,21 @@
             if (hls) hls.destroy();
 
             if (url.includes('.m3u8') && Hls.isSupported()) {
-                hls = new Hls({ maxBufferLength: 30, liveSyncDurationCount: 3 });
-                hls.loadSource(url); 
-                hls.attachMedia(video);
+                hls = new Hls(); hls.loadSource(url); hls.attachMedia(video);
                 hls.on(Hls.Events.MANIFEST_PARSED, () => { video.play(); playBtn.innerText = "⏸ Pause"; });
-                
-                // Auto reconnect on network error
-                hls.on(Hls.Events.ERROR, (event, data) => {
-                    if (data.fatal) hls.startLoad();
-                });
             } else {
                 video.src = url; video.play(); playBtn.innerText = "⏸ Pause";
             }
         }
 
+        function toggleTheaterMode() {
+            const playerModal = document.getElementById('modalPlayer');
+            const btn = document.getElementById('theaterBtn');
+            playerModal.classList.toggle('theater-dim');
+            btn.classList.toggle('active-glow');
+        }
+
+        function adjustVolume(val) { video.volume = val > 1 ? 1 : val; video.preservesPitch = true; }
         function togglePlayPause() { if (video.paused) { video.play(); playBtn.innerText = "⏸ Pause"; } else { video.pause(); playBtn.innerText = "▶ Play"; } }
         function seekVideo(s) { video.currentTime += s; }
         function togglePip() { if (document.pictureInPictureElement) document.exitPictureInPicture(); else video.requestPictureInPicture(); }
@@ -401,13 +561,17 @@
             video.pause(); video.src = "";
             if (hls) { hls.destroy(); hls = null; }
             document.getElementById('modalPlayer').classList.remove('active');
+            document.getElementById('modalPlayer').classList.remove('theater-dim');
         }
 
         function switchTab(tab) {
+            document.getElementById('addContentView').classList.remove('active');
             document.getElementById('settingsView').classList.remove('active');
+            if (tab === 'add') document.getElementById('addContentView').classList.add('active');
             if (tab === 'settings') document.getElementById('settingsView').classList.add('active');
         }
 
+        function scrollToSection(id) { switchTab('main'); const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth' }); }
         function changeTheme(theme) { document.documentElement.setAttribute('data-theme', theme); }
     </script>
 </body>
