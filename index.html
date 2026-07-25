@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IKROMJON TV — Online TV & Settings</title>
+    <title>IKROMJON TV — Custom & Editable App</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -16,9 +16,9 @@
             --text-primary: #ffffff;
             --text-secondary: #94a3b8;
             --border-color: rgba(255, 255, 255, 0.08);
+            --danger-color: #ef4444;
         }
 
-        /* Light Theme uchun dynamic o'zgaruvchilar */
         body.light-theme {
             --bg-main: #f1f5f9;
             --card-bg: #ffffff;
@@ -40,7 +40,6 @@
             color: var(--text-primary);
             padding-bottom: 70px;
             min-height: 100vh;
-            transition: background-color 0.3s, color 0.3s;
         }
 
         /* Header Bar */
@@ -52,10 +51,6 @@
             border-bottom: 1px solid var(--border-color);
             padding: 10px 16px;
             display: flex; align-items: center; justify-content: space-between;
-        }
-
-        body.light-theme .app-header {
-            background: rgba(241, 245, 249, 0.92);
         }
 
         .brand-logo {
@@ -82,7 +77,7 @@
             padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; outline: none;
         }
 
-        /* Carousel & Cards */
+        /* Hero Carousel */
         .hero-section { padding: 12px 16px; }
 
         .hero-carousel {
@@ -115,11 +110,19 @@
         }
         .hero-title { font-size: 16px; font-weight: 800; color: #fff; }
         
+        .card-actions {
+            display: flex; gap: 8px; margin-top: 6px;
+        }
+
         .play-btn {
             background: #ffffff; color: #000; border: none;
             padding: 6px 12px; border-radius: 6px; font-weight: 700;
-            font-size: 11px; display: flex; align-items: center; gap: 4px;
-            width: max-content; margin-top: 6px; cursor: pointer;
+            font-size: 11px; cursor: pointer;
+        }
+
+        .delete-btn {
+            background: var(--danger-color); color: #fff; border: none;
+            padding: 6px 10px; border-radius: 6px; font-size: 11px; cursor: pointer;
         }
 
         .section-header {
@@ -138,7 +141,7 @@
             min-width: 110px; background: var(--card-bg);
             border: 1px solid var(--border-color); border-radius: 10px;
             padding: 8px; display: flex; flex-direction: column; align-items: center;
-            text-align: center; cursor: pointer; transition: 0.2s;
+            text-align: center; cursor: pointer; position: relative;
         }
 
         .channel-img-wrapper {
@@ -157,21 +160,27 @@
 
         .movie-card {
             background: var(--card-bg); border-radius: 8px; overflow: hidden;
-            border: 1px solid var(--border-color); cursor: pointer;
+            border: 1px solid var(--border-color); cursor: pointer; position: relative;
         }
         .movie-poster { width: 100%; height: 120px; object-fit: cover; }
         .movie-info { padding: 6px; }
         .movie-title { font-size: 10px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        .mini-del-btn {
+            position: absolute; top: 4px; right: 4px;
+            background: rgba(239, 68, 68, 0.85); color: #fff; border: none;
+            width: 20px; height: 20px; border-radius: 50%;
+            font-size: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer;
+        }
 
         /* Bottom Nav */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0; height: 55px;
             background: rgba(15, 20, 28, 0.95); backdrop-filter: blur(12px);
             border-top: 1px solid var(--border-color);
-            display: grid; grid-template-columns: repeat(4, 1fr);
+            display: grid; grid-template-columns: repeat(5, 1fr);
             align-items: center; z-index: 200;
         }
-        body.light-theme .bottom-nav { background: rgba(255, 255, 255, 0.95); }
 
         .nav-item {
             display: flex; flex-direction: column; align-items: center; gap: 2px;
@@ -180,7 +189,7 @@
         .nav-item.active { color: var(--accent-color); }
         .nav-icon { font-size: 16px; }
 
-        /* Settings Modal (Kabinet / Sozlamalar) */
+        /* Modals & Editors */
         .settings-modal {
             position: fixed; inset: 0; background: var(--bg-main);
             z-index: 900; display: none; flex-direction: column; overflow-y: auto;
@@ -188,61 +197,31 @@
         }
         .settings-modal.active { display: flex; }
 
-        .settings-header {
+        .modal-header {
             display: flex; align-items: center; justify-content: space-between;
             margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color);
         }
 
-        .settings-group {
+        .input-form {
             background: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 12px; padding: 12px 16px; margin-bottom: 16px;
+            border-radius: 12px; padding: 14px; margin-bottom: 16px;
+            display: flex; flex-direction: column; gap: 10px;
         }
 
-        .settings-group-title {
-            font-size: 11px; font-weight: 700; color: var(--text-secondary);
-            text-transform: uppercase; margin-bottom: 10px; letter-spacing: 0.5px;
-        }
+        .input-form label { font-size: 11px; font-weight: 700; color: var(--text-secondary); }
 
-        .setting-row {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 10px 0; border-bottom: 1px solid var(--border-color);
-        }
-        .setting-row:last-child { border-bottom: none; }
-
-        .setting-info { display: flex; flex-direction: column; gap: 2px; }
-        .setting-title { font-size: 13px; font-weight: 600; }
-        .setting-desc { font-size: 10px; color: var(--text-secondary); }
-
-        .setting-control select, .setting-control input {
+        .input-form input, .input-form select {
             background: var(--bg-main); color: var(--text-primary);
-            border: 1px solid var(--border-color); padding: 6px 10px;
+            border: 1px solid var(--border-color); padding: 8px 10px;
             border-radius: 6px; font-size: 12px; outline: none;
         }
 
-        /* Toggle Switch */
-        .switch {
-            position: relative; display: inline-block; width: 44px; height: 24px;
+        .btn-submit {
+            background: var(--accent-color); color: #fff; border: none;
+            padding: 10px; border-radius: 6px; font-weight: 700; font-size: 12px; cursor: pointer;
         }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider {
-            position: absolute; cursor: pointer; inset: 0;
-            background-color: #334155; transition: .3s; border-radius: 24px;
-        }
-        .slider:before {
-            position: absolute; content: ""; height: 18px; width: 18px;
-            left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%;
-        }
-        input:checked + .slider { background-color: var(--accent-color); }
-        input:checked + .slider:before { transform: translateX(20px); }
 
-        /* Color Picker Buttons */
-        .color-options { display: flex; gap: 8px; }
-        .color-btn {
-            width: 24px; height: 24px; border-radius: 50%; border: 2px solid transparent; cursor: pointer;
-        }
-        .color-btn.active { border-color: #fff; }
-
-        /* Video Player Modal */
+        /* Player Modal */
         .modal-player {
             position: fixed; inset: 0; background: #000;
             z-index: 1000; display: none; flex-direction: column;
@@ -266,12 +245,10 @@
             <option value="uz">UZ</option>
             <option value="ru">RU</option>
             <option value="en">ENG</option>
-            <option value="tj">TJ</option>
-            <option value="kz">KZ</option>
         </select>
     </header>
 
-    <!-- Asosiy Ekran Qismi -->
+    <!-- Asosiy Ekran -->
     <main id="mainView">
         <div class="section-header">
             <div class="section-title" id="txtPremyeraHeader">🔥 Yangi Premyeralar 2026</div>
@@ -291,97 +268,57 @@
         <div class="movies-grid" id="moviesGrid"></div>
     </main>
 
-    <!-- ⚙️ SOZLAMALAR VA KABINET MODALI -->
+    <!-- ✏️ KONTENT QO'SHISH MODALI (ADMIN) -->
+    <div class="settings-modal" id="addContentView">
+        <div class="modal-header">
+            <h2>➕ Yangi Kontent Qo'shish</h2>
+            <button onclick="switchTab('main')" style="background:none; border:none; color:var(--text-primary); font-size:22px;">✕</button>
+        </div>
+
+        <form class="input-form" onsubmit="handleAddNewContent(event)">
+            <div>
+                <label>Bo'limni tanlang:</label>
+                <select id="newType" required>
+                    <option value="premieres">🔥 Premyera</option>
+                    <option value="tvChannels">📡 Telekanal</option>
+                    <option value="movies">🎬 Kino / Serial</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Nomi / Sarlavha:</label>
+                <input type="text" id="newTitle" placeholder="Masalan: Yangi Kino 2026" required>
+            </div>
+
+            <div>
+                <label>Rasm / Poster Havolasi (URL):</label>
+                <input type="url" id="newImg" placeholder="https://site.com/rasm.jpg" required>
+            </div>
+
+            <div>
+                <label>Video / Stream Havolasi (.m3u8 yoki .mp4):</label>
+                <input type="url" id="newStream" placeholder="https://site.com/video.m3u8" required>
+            </div>
+
+            <div>
+                <label>Tavsif / EPG (Ixtiyoriy):</label>
+                <input type="text" id="newEpg" placeholder="Masalan: HD Sifatda">
+            </div>
+
+            <button type="submit" class="btn-submit">💾 Ro'yxatga Qo'shish</button>
+        </form>
+    </div>
+
+    <!-- ⚙️ SOZLAMALAR MODALI -->
     <div class="settings-modal" id="settingsView">
-        <div class="settings-header">
-            <h2>⚙️ Sozlamalar va Kabinet</h2>
-            <button onclick="toggleSettings(false)" style="background:none; border:none; color:var(--text-primary); font-size:22px; cursor:pointer;">✕</button>
+        <div class="modal-header">
+            <h2>⚙️ Sozlamalar va Boshqaruv</h2>
+            <button onclick="switchTab('main')" style="background:none; border:none; color:var(--text-primary); font-size:22px;">✕</button>
         </div>
 
-        <!-- 1. Video va Internet Sozlamalari -->
-        <div class="settings-group">
-            <div class="settings-group-title">📶 Internet & Pleyer Sozlamalari</div>
-            
-            <div class="setting-row">
-                <div class="setting-info">
-                    <div class="setting-title">Video Sifati (Trafik)</div>
-                    <div class="setting-desc">Past tezlikda kamroq trafik sarflaydi</div>
-                </div>
-                <div class="setting-control">
-                    <select id="qualitySelect" onchange="saveQualityPreference(this.value)">
-                        <option value="auto">Avto (Moslashuvchan)</option>
-                        <option value="low">Past (240p - Tejamkor)</option>
-                        <option value="medium">O'rta (480p)</option>
-                        <option value="high">Yuqori (720p/1080p)</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="setting-row">
-                <div class="setting-info">
-                    <div class="setting-title">Avto-ijro (Autoplay)</div>
-                    <div class="setting-desc">Ochilganda videoni darhol boshlash</div>
-                </div>
-                <div class="setting-control">
-                    <label class="switch">
-                        <input type="checkbox" id="autoplayCheck" checked>
-                        <span class="slider"></span>
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <!-- 2. Tashqi Ko'rinish (Dizayn) -->
-        <div class="settings-group">
-            <div class="settings-group-title">🎨 Tashqi Ko'rinish & Interfeys</div>
-            
-            <div class="setting-row">
-                <div class="setting-info">
-                    <div class="setting-title">Tungi / Yoritilgan Rejim</div>
-                    <div class="setting-desc">Qorong'u va yorug' rejim o'rtasida o'tish</div>
-                </div>
-                <div class="setting-control">
-                    <label class="switch">
-                        <input type="checkbox" id="themeToggle" onchange="toggleTheme(this.checked)">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-            </div>
-
-            <div class="setting-row">
-                <div class="setting-info">
-                    <div class="setting-title">Ilova Aksent Rangi</div>
-                    <div class="setting-desc">Tugmalar va elementlar rangi</div>
-                </div>
-                <div class="color-options">
-                    <div class="color-btn active" style="background:#2563eb" onclick="changeAccent('#2563eb', this)"></div>
-                    <div class="color-btn" style="background:#16a34a" onclick="changeAccent('#16a34a', this)"></div>
-                    <div class="color-btn" style="background:#9333ea" onclick="changeAccent('#9333ea', this)"></div>
-                    <div class="color-btn" style="background:#dc2626" onclick="changeAccent('#dc2626', this)"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. Tizim va Kesh -->
-        <div class="settings-group">
-            <div class="settings-group-title">🛠️ Tizim va Xotira</div>
-            
-            <div class="setting-row">
-                <div class="setting-info">
-                    <div class="setting-title">Ilova Keshini Tozalash</div>
-                    <div class="setting-desc">Vaqtinchalik yuklangan ma'lumotlarni o'chirish</div>
-                </div>
-                <div class="setting-control">
-                    <button onclick="clearAppCache()" style="background:var(--accent-color); color:#fff; border:none; padding:6px 12px; border-radius:6px; font-size:11px; cursor:pointer;">Tozalash</button>
-                </div>
-            </div>
-
-            <div class="setting-row">
-                <div class="setting-info">
-                    <div class="setting-title">Ilova Versiyasi</div>
-                    <div class="setting-desc">IKROMJON TV v2.4 (2026 Build)</div>
-                </div>
-            </div>
+        <div class="input-form">
+            <label>Tizim xotirasini boshqarish:</label>
+            <button onclick="resetToDefaultData()" class="btn-submit" style="background:var(--danger-color);">🔄 Kontentni Boshlang'ich Holatga Tiklash</button>
         </div>
     </div>
 
@@ -389,7 +326,7 @@
     <div class="modal-player" id="modalPlayer">
         <div class="player-bar">
             <span id="playerTitle" style="font-size:12px; font-weight:700;">Stream...</span>
-            <button onclick="closePlayer()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">✕</button>
+            <button onclick="closePlayer()" style="background:none; border:none; color:#fff; font-size:20px;">✕</button>
         </div>
         <div class="player-viewport">
             <video id="activeVideo" controls playsinline></video>
@@ -399,99 +336,137 @@
     <!-- Bottom Nav Bar -->
     <nav class="bottom-nav">
         <div class="nav-item active" onclick="switchTab('main')"><span class="nav-icon">🏠</span><span id="navHome">Asosiy</span></div>
-        <div class="nav-item" onclick="switchTab('tv')"><span class="nav-icon">📺</span><span id="navTv">Kanallar</span></div>
+        <div class="nav-item" onclick="switchTab('main')"><span class="nav-icon">📺</span><span id="navTv">Kanallar</span></div>
+        <div class="nav-item" onclick="switchTab('add')"><span class="nav-icon">➕</span><span>Qo'shish</span></div>
         <div class="nav-item" onclick="openSearch()"><span class="nav-icon">🔍</span><span id="navSearch">Qidiruv</span></div>
         <div class="nav-item" onclick="switchTab('settings')"><span class="nav-icon">⚙️</span><span id="navProfile">Kabinet</span></div>
     </nav>
 
     <script>
-        // Tillarni Boshqarish Lug'ati
-        const translations = {
-            uz: { premyeraHeader: "🔥 Yangi Premyeralar 2026", tvHeader: "📡 Jonli Telekanallar (Live)", movieHeader: "🎬 Kinolar va Seriallar", home: "Asosiy", tv: "Kanallar", search: "Qidiruv", profile: "Kabinet" },
-            ru: { premyeraHeader: "🔥 Новые Премьеры 2026", tvHeader: "📡 Прямой Эфир (Live)", movieHeader: "🎬 Фильмы и Сериалы", home: "Главная", tv: "Каналы", search: "Поиск", profile: "Кабинет" },
-            en: { premyeraHeader: "🔥 New Premieres 2026", tvHeader: "📡 Live TV Channels", movieHeader: "🎬 Movies & Series", home: "Home", tv: "Channels", search: "Search", profile: "Profile" },
-            tj: { premyeraHeader: "🔥 Навгониҳо 2026", tvHeader: "📡 Каналҳои мустақим", movieHeader: "Филмҳо", home: "Асосӣ", tv: "Каналҳо", search: "Ҷустуҷӯ", profile: "Кабинет" },
-            kz: { premyeraHeader: "🔥 Жаңа Премьералар 2026", tvHeader: "📡 Тікелей Эфир", movieHeader: "🎬 Фильмдер мен Сериалдар", home: "Басты", tv: "Арналар", search: "Издеу", profile: "Кабинет" }
+        // Boshlang'ich default ma'lumotlar
+        const defaultData = {
+            premieres: [
+                { id: 1, title: "Koinot Subhi: 2026", img: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800", stream: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" },
+                { id: 2, title: "Afsona: Qaytish", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" }
+            ],
+            tvChannels: [
+                { id: 1, name: "Euronews Live", logo: "https://upload.wikimedia.org/wikipedia/commons/2/29/Euronews_logo.svg", epg: "Dunyo yangiliklari", stream: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" },
+                { id: 2, name: "NASA TV", logo: "https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg", epg: "Koinot efiri", stream: "https://ntv1.akamaized.net/hls/live/2014075/NASA-NTV1-HLS/master.m3u8" }
+            ],
+            movies: [
+                { id: 1, title: "Sintez 2026", img: "https://picsum.photos/200/300?random=1", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
+                { id: 2, title: "Sehrli Olam", img: "https://picsum.photos/200/300?random=2", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" }
+            ]
         };
 
-        function changeLanguage(lang) {
-            const t = translations[lang];
-            document.getElementById('txtPremyeraHeader').innerText = t.premyeraHeader;
-            document.getElementById('txtTvHeader').innerText = t.tvHeader;
-            document.getElementById('txtMovieHeader').innerText = t.movieHeader;
-            document.getElementById('navHome').innerText = t.home;
-            document.getElementById('navTv').innerText = t.tv;
-            document.getElementById('navSearch').innerText = t.search;
-            document.getElementById('navProfile').innerText = t.profile;
+        // LocalStorage dan ma'lumotlarni yuklash
+        let appData = JSON.parse(localStorage.getItem('ikromjon_tv_data')) || defaultData;
+
+        function saveData() {
+            localStorage.setItem('ikromjon_tv_data', JSON.stringify(appData));
+            renderAllContent();
         }
 
-        setInterval(() => {
-            document.getElementById('liveClock').innerText = new Date().toLocaleTimeString('uz-UZ');
-        }, 1000);
+        // Kontentni ekranga chiqarish
+        function renderAllContent() {
+            // 1. Premyeralar
+            const premyeraCarousel = document.getElementById('premyeraCarousel');
+            premyeraCarousel.innerHTML = '';
+            appData.premieres.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'hero-card';
+                card.style.backgroundImage = `url('${p.img}')`;
+                card.innerHTML = `
+                    <div class="hero-content">
+                        <div class="hero-tag">PREMYERA</div>
+                        <div class="hero-title">${p.title}</div>
+                        <div class="card-actions">
+                            <button class="play-btn" onclick="playStream('${p.title}', '${p.stream}')">▶ Tomosha qilish</button>
+                            <button class="delete-btn" onclick="deleteItem('premieres', ${p.id})">🗑️</button>
+                        </div>
+                    </div>
+                `;
+                premyeraCarousel.appendChild(card);
+            });
 
-        // Premyeralar
-        const premieres = [
-            { title: "Koinot Subhi: 2026", img: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800", stream: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" },
-            { title: "Afsona: Qaytish", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" }
-        ];
+            // 2. Telekanallar
+            const channelsRow = document.getElementById('channelsRow');
+            channelsRow.innerHTML = '';
+            appData.tvChannels.forEach(ch => {
+                const card = document.createElement('div');
+                card.className = 'channel-card';
+                card.innerHTML = `
+                    <button class="mini-del-btn" onclick="event.stopPropagation(); deleteItem('tvChannels', ${ch.id})">✕</button>
+                    <div class="channel-img-wrapper" onclick="playStream('${ch.name}', '${ch.stream}')"><img src="${ch.logo}" class="channel-img"></div>
+                    <div class="channel-name">${ch.name}</div>
+                    <div class="channel-epg">${ch.epg || ''}</div>
+                `;
+                channelsRow.appendChild(card);
+            });
 
-        const premyeraCarousel = document.getElementById('premyeraCarousel');
-        premieres.forEach(p => {
-            const card = document.createElement('div');
-            card.className = 'hero-card';
-            card.style.backgroundImage = `url('${p.img}')`;
-            card.innerHTML = `
-                <div class="hero-content">
-                    <div class="hero-tag">PREMYERA</div>
-                    <div class="hero-title">${p.title}</div>
-                    <button class="play-btn" onclick="playStream('${p.title}', '${p.stream}')">▶ Tomosha qilish</button>
-                </div>
-            `;
-            premyeraCarousel.appendChild(card);
-        });
+            // 3. Kinolar
+            const moviesGrid = document.getElementById('moviesGrid');
+            moviesGrid.innerHTML = '';
+            appData.movies.forEach(m => {
+                const card = document.createElement('div');
+                card.className = 'movie-card';
+                card.innerHTML = `
+                    <button class="mini-del-btn" onclick="event.stopPropagation(); deleteItem('movies', ${m.id})">✕</button>
+                    <div onclick="playStream('${m.title}', '${m.stream}')">
+                        <img src="${m.img}" class="movie-poster">
+                        <div class="movie-info"><div class="movie-title">${m.title}</div></div>
+                    </div>
+                `;
+                moviesGrid.appendChild(card);
+            });
+        }
 
-        // Telekanallar
-        const tvChannels = [
-            { name: "Euronews Live", logo: "https://upload.wikimedia.org/wikipedia/commons/2/29/Euronews_logo.svg", epg: "Dunyo yangiliklari", stream: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" },
-            { name: "NASA TV", logo: "https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg", epg: "Koinot efiri", stream: "https://ntv1.akamaized.net/hls/live/2014075/NASA-NTV1-HLS/master.m3u8" },
-            { name: "Sport HD", logo: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Sport_Uzbekistan.png", epg: "Futbol Live", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" }
-        ];
+        // Yangi kontent qo'shish
+        function handleAddNewContent(e) {
+            e.preventDefault();
+            const type = document.getElementById('newType').value;
+            const title = document.getElementById('newTitle').value;
+            const img = document.getElementById('newImg').value;
+            const stream = document.getElementById('newStream').value;
+            const epg = document.getElementById('newEpg').value;
 
-        const channelsRow = document.getElementById('channelsRow');
-        tvChannels.forEach(ch => {
-            const card = document.createElement('div');
-            card.className = 'channel-card';
-            card.onclick = () => playStream(ch.name, ch.stream);
-            card.innerHTML = `
-                <div class="channel-img-wrapper"><img src="${ch.logo}" class="channel-img" alt="${ch.name}"></div>
-                <div class="channel-name">${ch.name}</div>
-                <div class="channel-epg">${ch.epg}</div>
-            `;
-            channelsRow.appendChild(card);
-        });
+            const newItem = {
+                id: Date.now(),
+                title: title,
+                name: title,
+                img: img,
+                logo: img,
+                stream: stream,
+                epg: epg
+            };
 
-        // Kinolar
-        const movies = [
-            { title: "Sintez 2026", img: "https://picsum.photos/200/300?random=1", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
-            { title: "Sehrli Olam", img: "https://picsum.photos/200/300?random=2", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" },
-            { title: "Tungi Poyga", img: "https://picsum.photos/200/300?random=3", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4" }
-        ];
+            appData[type].push(newItem);
+            saveData();
+            
+            alert("Muvaffaqiyatli qo'shildi!");
+            e.target.reset();
+            switchTab('main');
+        }
 
-        const moviesGrid = document.getElementById('moviesGrid');
-        movies.forEach(m => {
-            const card = document.createElement('div');
-            card.className = 'movie-card';
-            card.onclick = () => playStream(m.title, m.stream);
-            card.innerHTML = `
-                <img src="${m.img}" class="movie-poster" alt="${m.title}">
-                <div class="movie-info"><div class="movie-title">${m.title}</div></div>
-            `;
-            moviesGrid.appendChild(card);
-        });
+        // Kontentni o'chirish
+        function deleteItem(type, id) {
+            if (confirm("Ushbu kontentni o'chirishga ishonchingiz komilmi?")) {
+                appData[type] = appData[type].filter(item => item.id !== id);
+                saveData();
+            }
+        }
 
-        // Pleyer Boshqaruvi
+        // Zavod holatiga tiklash
+        function resetToDefaultData() {
+            if (confirm("Barcha saqlangan kontentlar o'chib ketadi va boshlang'ich holatga qaytadi. Rozimisiz?")) {
+                appData = defaultData;
+                saveData();
+                alert("Kontent tiklandi!");
+            }
+        }
+
+        // Pleyer
         let hlsInstance = null;
-
         function playStream(title, url) {
             document.getElementById('playerTitle').innerText = "IKROMJON TV — " + title;
             const video = document.getElementById('activeVideo');
@@ -503,17 +478,13 @@
                     hlsInstance = new Hls({ maxBufferLength: 10, enableWorker: true });
                     hlsInstance.loadSource(url);
                     hlsInstance.attachMedia(video);
-                    hlsInstance.on(Hls.Events.MANIFEST_PARSED, function() {
-                        if(document.getElementById('autoplayCheck').checked) video.play().catch(() => {});
-                    });
+                    hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(() => {}));
                 } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                    video.src = url;
-                    if(document.getElementById('autoplayCheck').checked) video.play();
+                    video.src = url; video.play();
                 }
             } else {
                 if (hlsInstance) hlsInstance.destroy();
-                video.src = url;
-                if(document.getElementById('autoplayCheck').checked) video.play();
+                video.src = url; video.play();
             }
         }
 
@@ -524,50 +495,26 @@
             document.getElementById('modalPlayer').classList.remove('active');
         }
 
-        // ⚙️ SOZLAMALAR FUNKSIYALARI
+        // Tablar bo'ylab o'tish
         function switchTab(tab) {
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(i => i.classList.remove('active'));
+            document.getElementById('addContentView').classList.remove('active');
+            document.getElementById('settingsView').classList.remove('active');
 
-            if (tab === 'settings') {
-                toggleSettings(true);
-                navItems[3].classList.add('active');
-            } else {
-                toggleSettings(false);
-                if(tab === 'main') navItems[0].classList.add('active');
-                if(tab === 'tv') navItems[1].classList.add('active');
-            }
+            if (tab === 'add') document.getElementById('addContentView').classList.add('active');
+            if (tab === 'settings') document.getElementById('settingsView').classList.add('active');
         }
 
-        function toggleSettings(show) {
-            const modal = document.getElementById('settingsView');
-            if (show) modal.classList.add('active');
-            else modal.classList.remove('active');
-        }
-
-        function toggleTheme(isLight) {
-            if (isLight) document.body.classList.add('light-theme');
-            else document.body.classList.remove('light-theme');
-        }
-
-        function changeAccent(color, el) {
-            document.documentElement.style.setProperty('--accent-color', color);
-            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
-            el.classList.add('active');
-        }
-
-        function saveQualityPreference(val) {
-            alert("Video sifati sozlandi: " + val.toUpperCase());
-        }
-
-        function clearAppCache() {
-            alert("Ilova keshi va vaqtinchalik xotira muvaffaqiyatli tozalandi!");
-        }
+        setInterval(() => {
+            document.getElementById('liveClock').innerText = new Date().toLocaleTimeString('uz-UZ');
+        }, 1000);
 
         function openSearch() {
-            const q = prompt("IKROMJON TV bo'yicha qidiruv:");
-            if(q) alert("'" + q + "' bo'yicha qidirilmoqda...");
+            const q = prompt("Qidirilayotgan kino yoki kanal nomi:");
+            if(q) alert("'" + q + "' bo'yicha izlanmoqda...");
         }
+
+        // Dastlabki yuklash
+        renderAllContent();
     </script>
 </body>
 </html>
