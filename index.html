@@ -73,9 +73,9 @@ class _NavigationHandlerState extends State<NavigationHandler> {
   }
 }
 
-// ---------------------------------------------------------
+// =========================================================
 // 1. HOME & TV SECTION
-// ---------------------------------------------------------
+// =========================================================
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -97,7 +97,10 @@ class HomeScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: const Text('IKROMJON TV', style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2)),
+            title: const Text(
+              'IKROMJON TV',
+              style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2),
+            ),
           ),
           body: SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.04),
@@ -106,7 +109,10 @@ class HomeScreen extends StatelessWidget {
               children: [
                 _buildLiveBanner(context),
                 const SizedBox(height: 16),
-                const Text('BO\'LIMLAR', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey)),
+                const Text(
+                  'BO\'LIMLAR',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey),
+                ),
                 const SizedBox(height: 10),
                 ListView.builder(
                   shrinkWrap: true,
@@ -117,10 +123,15 @@ class HomeScreen extends StatelessWidget {
                     return Card(
                       color: const Color(0xFF18152E),
                       margin: const EdgeInsets.symmetric(vertical: 4),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: ListTile(
                         leading: Icon(item['icon'], color: item['color']),
-                        title: Text('${item['id']}   ${item['title']}', style: const TextStyle(fontWeight: FontWeight.w600)),
+                        title: Text(
+                          '${item['id']}   ${item['title']}',
+                          style: const TextStyle(fontWeight: FontWeight.w600),
+                        ),
                         trailing: const Icon(Icons.play_arrow, color: Colors.purpleAccent),
                         onTap: () => _openTVPlayer(context, item['title']),
                       ),
@@ -160,15 +171,33 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('IKROMJON', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
-                Text('JONLI EFIR', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.purpleAccent), overflow: TextOverflow.ellipsis),
+                Text(
+                  'IKROMJON',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  'JONLI EFIR',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.purpleAccent,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ],
             ),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(4)),
-            child: const Text('● LIVE', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: const Text(
+              '● LIVE',
+              style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
@@ -189,8 +218,21 @@ class HomeScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(child: Text(channelName, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white), overflow: TextOverflow.ellipsis)),
-                  IconButton(icon: const Icon(Icons.close, color: Colors.white), onPressed: () => Navigator.pop(context)),
+                  Expanded(
+                    child: Text(
+                      channelName,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close, color: Colors.white),
+                    onPressed: () => Navigator.pop(context),
+                  ),
                 ],
               ),
               const SizedBox(height: 20),
@@ -221,9 +263,9 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------------
+// =========================================================
 // 2. RADIO PLAYER SECTION
-// ---------------------------------------------------------
+// =========================================================
 class RadioPlayerScreen extends StatefulWidget {
   const RadioPlayerScreen({super.key});
 
@@ -236,7 +278,11 @@ class _RadioPlayerScreenState extends State<RadioPlayerScreen> {
   String currentStation = "Uzbek FM 101.5";
 
   final List<String> radioStations = [
-    "Uzbek FM 101.5", "Grand FM 101.0", "Oriat Dono 106.5", "Avtoradio 102.0", "Nostalgiya FM 104.0"
+    "Uzbek FM 101.5",
+    "Grand FM 101.0",
+    "Oriat Dono 106.5",
+    "Avtoradio 102.0",
+    "Nostalgiya FM 104.0"
   ];
 
   @override
@@ -258,12 +304,22 @@ class _RadioPlayerScreenState extends State<RadioPlayerScreen> {
                 children: [
                   const Icon(Icons.radio, size: 70, color: Colors.purpleAccent),
                   const SizedBox(height: 10),
-                  Text(currentStation, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                  const Text('● JONLI RADIO EFIR', style: TextStyle(color: Colors.redAccent, fontSize: 12)),
+                  Text(
+                    currentStation,
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  const Text(
+                    '● JONLI RADIO EFIR',
+                    style: TextStyle(color: Colors.redAccent, fontSize: 12),
+                  ),
                   const SizedBox(height: 10),
                   IconButton(
                     iconSize: 56,
-                    icon: Icon(isPlaying ? Icons.pause_circle_filled : Icons.play_circle_fill, color: Colors.purpleAccent),
+                    icon: Icon(
+                      isPlaying ? Icons.pause_circle_filled : Icons.play_circle_fill,
+                      color: Colors.purpleAccent,
+                    ),
                     onPressed: () => setState(() => isPlaying = !isPlaying),
                   )
                 ],
@@ -272,7 +328,10 @@ class _RadioPlayerScreenState extends State<RadioPlayerScreen> {
             const SizedBox(height: 20),
             const Align(
               alignment: Alignment.centerLeft,
-              child: Text('RADIOLAR RO\'YXATI', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
+              child: Text(
+                'RADIOLAR RO\'YXATI',
+                style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+              ),
             ),
             const SizedBox(height: 10),
             Expanded(
@@ -286,7 +345,9 @@ class _RadioPlayerScreenState extends State<RadioPlayerScreen> {
                       leading: const Icon(Icons.graphic_eq, color: Colors.purpleAccent),
                       title: Text(station),
                       trailing: Icon(
-                        currentStation == station && isPlaying ? Icons.volume_up : Icons.play_arrow,
+                        currentStation == station && isPlaying
+                            ? Icons.volume_up
+                            : Icons.play_arrow,
                         color: Colors.purpleAccent,
                       ),
                       onTap: () => setState(() {
@@ -305,9 +366,9 @@ class _RadioPlayerScreenState extends State<RadioPlayerScreen> {
   }
 }
 
-// ---------------------------------------------------------
+// =========================================================
 // 3. MP3 AUDIO PLAYER SECTION
-// ---------------------------------------------------------
+// =========================================================
 class AudioPlayerScreen extends StatefulWidget {
   const AudioPlayerScreen({super.key});
 
@@ -335,13 +396,26 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                 decoration: BoxDecoration(
                   color: const Color(0xFF18152E),
                   borderRadius: BorderRadius.circular(20),
-                  boxShadow: [BoxShadow(color: Colors.purpleAccent.withOpacity(0.2), blurRadius: 20, spreadRadius: 5)],
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.purpleAccent.withOpacity(0.2),
+                      blurRadius: 20,
+                      spreadRadius: 5,
+                    )
+                  ],
                 ),
                 child: const Icon(Icons.music_note, size: 80, color: Colors.purpleAccent),
               ),
               const SizedBox(height: 20),
-              const Text('Musiqa Track 01', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-              const Text('Ikromjon TV Soundtrack', style: TextStyle(color: Colors.white54, fontSize: 13)),
+              const Text(
+                'Musiqa Track 01',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+              const Text(
+                'Ikromjon TV Soundtrack',
+                style: TextStyle(color: Colors.white54, fontSize: 13),
+              ),
               const SizedBox(height: 20),
               Slider(
                 value: _sliderValue,
@@ -364,13 +438,24 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconButton(iconSize: 36, icon: const Icon(Icons.skip_previous), onPressed: () {}),
+                  IconButton(
+                    iconSize: 36,
+                    icon: const Icon(Icons.skip_previous),
+                    onPressed: () {},
+                  ),
                   IconButton(
                     iconSize: 56,
-                    icon: Icon(isPlaying ? Icons.pause_circle_filled : Icons.play_circle_fill, color: Colors.purpleAccent),
+                    icon: Icon(
+                      isPlaying ? Icons.pause_circle_filled : Icons.play_circle_fill,
+                      color: Colors.purpleAccent,
+                    ),
                     onPressed: () => setState(() => isPlaying = !isPlaying),
                   ),
-                  IconButton(iconSize: 36, icon: const Icon(Icons.skip_next), onPressed: () {}),
+                  IconButton(
+                    iconSize: 36,
+                    icon: const Icon(Icons.skip_next),
+                    onPressed: () {},
+                  ),
                 ],
               )
             ],
@@ -381,9 +466,9 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   }
 }
 
-// ---------------------------------------------------------
+// =========================================================
 // 4. SETTINGS SECTION
-// ---------------------------------------------------------
+// =========================================================
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
@@ -394,9 +479,20 @@ class SettingsScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: const [
-          ListTile(leading: Icon(Icons.language, color: Colors.purpleAccent), title: Text('Ilova tili'), subtitle: Text('O\'zbekcha')),
-          ListTile(leading: Icon(Icons.high_quality, color: Colors.purpleAccent), title: Text('Video va Audio Sifati'), subtitle: Text('Yuqori (Auto)')),
-          ListTile(leading: Icon(Icons.cleaning_services, color: Colors.purpleAccent), title: Text('Keshni tozalash')),
+          ListTile(
+            leading: Icon(Icons.language, color: Colors.purpleAccent),
+            title: Text('Ilova tili'),
+            subtitle: Text('O\'zbekcha'),
+          ),
+          ListTile(
+            leading: Icon(Icons.high_quality, color: Colors.purpleAccent),
+            title: Text('Video va Audio Sifati'),
+            subtitle: Text('Yuqori (Auto)'),
+          ),
+          ListTile(
+            leading: Icon(Icons.cleaning_services, color: Colors.purpleAccent),
+            title: Text('Keshni tozalash'),
+          ),
         ],
       ),
     );
