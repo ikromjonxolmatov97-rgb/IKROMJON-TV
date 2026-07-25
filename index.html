@@ -594,4 +594,150 @@
         </div>
 
         <div class="settings-group">
-            <div class="setting-title">Xotira va Ke
+            <div class="setting-title">Xotira va Kesh</div>
+            <div class="setting-desc">Ilovadagi vaqtinchalik ma'lumotlarni tozalang</div>
+            <button class="btn-clear" onclick="clearCache()">🗑 Keshni tozalash (48.2 MB)</button>
+        </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <div class="bottom-nav">
+        <div class="nav-link active">
+            <span class="nav-icon">🏠</span>
+            <span>Bosh sahifa</span>
+        </div>
+        <div class="nav-link" onclick="triggerSearch()">
+            <span class="nav-icon">🔍</span>
+            <span>Qidirish</span>
+        </div>
+        <div class="nav-link" onclick="alert('Sevimli kontentlar yo\'q')">
+            <span class="nav-icon">💚</span>
+            <span>Sevimlilar</span>
+        </div>
+        <div class="nav-link" onclick="openSettings()">
+            <span class="nav-icon">⚙️</span>
+            <span>Sozlamalar</span>
+        </div>
+    </div>
+
+    <script>
+        // 10 Ta Asosiy Bo'limlar Bazasi
+        const categories = [
+            { id: "01", name: "JONLI EFIR", icon: "📡", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
+            { id: "02", name: "FILMLAR", icon: "🎬", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+            { id: "03", name: "SERIALAR", icon: "🎞️", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+            { id: "04", name: "ANIMELAR", icon: "👾", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+            { id: "05", name: "MULTFILMLAR", icon: "🧸", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
+            { id: "06", name: "KO'RSATUVLAR", icon: "📺", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" },
+            { id: "07", name: "SPORT", icon: "⚽", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" },
+            { id: "08", name: "MUSIQA", icon: "🎵", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
+            { id: "09", name: "BOLALAR UCHUN", icon: "👶", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackToys.mp4" },
+            { id: "10", name: "YANGILIKLAR", icon: "📰", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" }
+        ];
+
+        // Vertikal Ro'yxatni Yuklash
+        const vertListContainer = document.getElementById('verticalList');
+        categories.forEach(cat => {
+            const item = document.createElement('div');
+            item.className = 'list-item';
+            item.onclick = () => openPlayer(cat.name, cat.url);
+            item.innerHTML = `
+                <div class="item-left">
+                    <span class="item-num">${cat.id}</span>
+                    <span class="item-icon">${cat.icon}</span>
+                    <span class="item-name">${cat.name}</span>
+                </div>
+                <span style="color: var(--text-muted); font-size: 14px;">›</span>
+            `;
+            vertListContainer.appendChild(item);
+        });
+
+        // Gorizontal Karuselni Yuklash
+        const horizCarousel = document.getElementById('horizontalCarousel');
+        categories.forEach(cat => {
+            const col = document.createElement('div');
+            col.className = 'column-card';
+            col.innerHTML = `
+                <div class="col-header">
+                    <div class="col-num">${cat.id}</div>
+                    <div class="col-title">${cat.name}</div>
+                </div>
+                <img class="mini-poster" src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=200&auto=format&fit=crop" alt="Poster">
+                <img class="mini-poster" src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=200&auto=format&fit=crop" alt="Poster">
+                <div class="btn-barchasi" onclick="openPlayer('${cat.name}', '${cat.url}')">Barchasi</div>
+            `;
+            horizCarousel.appendChild(col);
+        });
+
+        // Real Vaqtdagi Soat
+        function updateClock() {
+            const now = new Date();
+            const secs = now.getSeconds();
+            const mins = now.getMinutes();
+            const hrs = now.getHours();
+
+            const secDeg = (secs / 60) * 360;
+            const minDeg = ((mins + secs/60) / 60) * 360;
+            const hrDeg = ((hrs % 12 + mins/60) / 12) * 360;
+
+            document.getElementById('secondHand').style.transform = `rotate(${secDeg}deg)`;
+            document.getElementById('minuteHand').style.transform = `rotate(${minDeg}deg)`;
+            document.getElementById('hourHand').style.transform = `rotate(${hrDeg}deg)`;
+
+            const timeStr = now.toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('digitalTime').innerText = timeStr;
+            
+            const options = { year: 'numeric', month: 'short', day: 'numeric', weekday: 'short' };
+            document.getElementById('digitalDate').innerText = now.toLocaleDateString('uz-UZ', options).toUpperCase();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Player Boshqaruvi
+        const videoModal = document.getElementById('videoModal');
+        const mainVideo = document.getElementById('mainVideo');
+        const videoModalTitle = document.getElementById('videoModalTitle');
+
+        function openPlayer(title, url) {
+            videoModalTitle.innerText = title;
+            mainVideo.src = url;
+            videoModal.classList.add('active');
+            mainVideo.play().catch(e => console.log('Autoplay handled'));
+        }
+
+        function closePlayer() {
+            mainVideo.pause();
+            mainVideo.src = '';
+            videoModal.classList.remove('active');
+        }
+
+        // SOZLAMALAR MANTIG'I (JavaScript Settings Logic)
+        const settingsModal = document.getElementById('settingsModal');
+
+        function openSettings() {
+            settingsModal.classList.add('active');
+        }
+
+        function closeSettings() {
+            settingsModal.classList.remove('active');
+        }
+
+        function toggleTheme(theme) {
+            if (theme === 'oled') {
+                document.body.classList.add('oled-mode');
+            } else {
+                document.body.classList.remove('oled-mode');
+            }
+        }
+
+        function clearCache() {
+            alert("Ilova keshi muvaffaqiyatli tozalandi (0.0 MB)!");
+        }
+
+        function triggerSearch() {
+            const q = prompt("IKROMJON TV bo'yicha qidiruv:");
+            if(q) alert("'" + q + "' bo'yicha qidiruv natijalari topildi.");
+        }
+    </script>
+</body>
+</html>
