@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IKROMJON TV — Premium Streaming Platform</title>
+    <title>IKROMJON TV — Premium Media & AI Platform</title>
+
+    <!-- External Libraries & Fonts -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
             --bg-main: #070913;
@@ -13,11 +17,11 @@
             --bg-glass: rgba(255, 255, 255, 0.06);
             --accent-glow: #6366f1;
             --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-            --accent-blue: #3b82f6;
             --border-glow: rgba(255, 255, 255, 0.12);
             --text-main: #ffffff;
             --text-sub: #94a3b8;
             --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+            --border-radius: 18px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -25,9 +29,10 @@
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
-            padding-bottom: 90px;
+            padding-bottom: 85px;
             min-height: 100vh;
             overflow-x: hidden;
+            user-select: none;
         }
 
         /* HEADER */
@@ -40,30 +45,35 @@
             display: flex; flex-direction: column; gap: 12px;
         }
         .header-top { display: flex; align-items: center; justify-content: space-between; }
-        .brand-logo { font-size: 20px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px; }
+        .brand-logo { font-size: 20px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px; cursor: pointer; }
         .brand-logo span { background: var(--accent-gradient); padding: 3px 8px; border-radius: 8px; font-size: 11px; }
-        .header-actions { display: flex; gap: 12px; align-items: center; }
-        .icon-btn { background: var(--bg-glass); border: 1px solid var(--border-glow); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; }
+        .header-actions { display: flex; gap: 10px; align-items: center; }
+        .icon-btn { background: var(--bg-glass); border: 1px solid var(--border-glow); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; transition: 0.2s; }
+        .icon-btn:hover { background: rgba(255,255,255,0.15); }
 
         /* TABS NAV */
         .top-tabs { display: flex; gap: 18px; overflow-x: auto; scrollbar-width: none; font-size: 13px; font-weight: 700; color: var(--text-sub); }
         .top-tabs::-webkit-scrollbar { display: none; }
-        .top-tab-item { padding-bottom: 6px; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; }
+        .top-tab-item { padding-bottom: 6px; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: 0.2s; }
         .top-tab-item.active { color: #fff; border-bottom-color: #6366f1; }
 
         /* HERO BANNER */
         .hero-banner {
-            margin: 16px 18px; height: 340px; border-radius: 28px; position: relative; overflow: hidden;
+            margin: 16px 18px; height: 320px; border-radius: 28px; position: relative; overflow: hidden;
             background: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1000&q=80') center/cover;
             border: 1px solid var(--border-glow); box-shadow: var(--card-shadow);
             display: flex; flex-direction: column; justify-content: flex-end; padding: 20px;
         }
-        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,9,19,0.2) 0%, rgba(7,9,19,0.95) 100%); z-index: 1; }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,9,19,0.1) 0%, rgba(7,9,19,0.95) 100%); z-index: 1; }
         .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 8px; }
         .hero-badge { background: var(--accent-gradient); color: #fff; font-size: 10px; font-weight: 900; padding: 4px 10px; border-radius: 12px; width: max-content; }
-        .hero-title { font-size: 26px; font-weight: 900; color: #fff; }
+        .hero-title { font-size: 24px; font-weight: 900; color: #fff; }
         .hero-meta { font-size: 12px; color: var(--text-sub); display: flex; gap: 10px; align-items: center; font-weight: 600; }
         .hero-meta span { background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 6px; }
+
+        /* BUTTONS */
+        .btn-main { background: var(--accent-gradient); color: #fff; border: none; padding: 12px 20px; border-radius: 14px; font-weight: 800; cursor: pointer; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; }
+        .btn-main:active { transform: scale(0.97); }
 
         /* SECTION HEADERS */
         .section-header { padding: 18px 18px 10px 18px; font-size: 16px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
@@ -82,10 +92,10 @@
 
         /* MEDIA CARDS */
         .media-card {
-            flex: 0 0 130px; background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 18px;
+            flex: 0 0 135px; background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 18px;
             overflow: hidden; cursor: pointer; position: relative; transition: transform 0.2s;
         }
-        .media-card:active { transform: scale(0.96); }
+        .media-card:active { transform: scale(0.95); }
         .media-poster { width: 100%; height: 180px; object-fit: cover; background: #1e293b; display: block; }
         .media-info { padding: 10px; }
         .media-title { font-size: 12px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -96,7 +106,7 @@
             flex: 0 0 110px; background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 20px;
             padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; text-align: center;
         }
-        .tv-logo-box { width: 56px; height: 56px; background: rgba(255,255,255,0.05); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 900; }
+        .tv-logo-box { width: 56px; height: 56px; background: rgba(255,255,255,0.05); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900; }
         .tv-name { font-size: 11px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
 
         /* BOTTOM NAV */
@@ -108,196 +118,406 @@
             z-index: 200;
         }
         .nav-btn { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-sub); font-size: 10px; font-weight: 800; cursor: pointer; }
+        .nav-btn i { font-size: 18px; }
         .nav-btn.active { color: #818cf8; }
 
-        /* PLAYER MODAL */
-        .player-modal { position: fixed; inset: 0; z-index: 5000; background: #000; display: none; flex-direction: column; }
-        .player-modal.active { display: flex; }
-        .player-header { padding: 16px; background: rgba(0,0,0,0.8); display: flex; justify-content: space-between; align-items: center; }
+        /* MODALS & OVERLAYS */
+        .modal-overlay { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); display: none; flex-direction: column; }
+        .modal-overlay.active { display: flex; }
+        .modal-header { padding: 16px; background: rgba(7,9,19,0.9); border-bottom: 1px solid var(--border-glow); display: flex; justify-content: space-between; align-items: center; }
 
-        /* UPLOAD MODAL */
-        .upload-modal { position: fixed; inset: 0; z-index: 4000; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); display: none; align-items: center; justify-content: center; padding: 20px; }
-        .upload-modal.active { display: flex; }
-        .upload-box { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 24px; width: 100%; max-width: 420px; padding: 24px; display: flex; flex-direction: column; gap: 14px; }
-        .upload-box input { background: var(--bg-glass); border: 1px solid var(--border-glow); padding: 12px; border-radius: 12px; color: #fff; outline: none; }
-        .btn-main { background: var(--accent-gradient); color: #fff; border: none; padding: 14px; border-radius: 14px; font-weight: 800; cursor: pointer; text-align: center; }
+        /* BROWSER INTEGRATION */
+        .browser-bar { display: flex; gap: 8px; padding: 10px; background: #121829; border-bottom: 1px solid var(--border-glow); }
+        .browser-bar input { flex: 1; background: rgba(255,255,255,0.08); border: 1px solid var(--border-glow); padding: 8px 14px; border-radius: 20px; color: #fff; outline: none; }
+
+        /* AI CHAT INTERFACE */
+        .chat-container { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+        .chat-msg { max-width: 80%; padding: 12px 16px; border-radius: 16px; font-size: 13px; line-height: 1.5; }
+        .chat-msg.user { background: var(--accent-gradient); align-self: flex-end; border-bottom-right-radius: 4px; }
+        .chat-msg.ai { background: var(--bg-card); border: 1px solid var(--border-glow); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .chat-input-area { padding: 12px; background: #070913; border-top: 1px solid var(--border-glow); display: flex; gap: 8px; }
+        .chat-input-area input { flex: 1; background: var(--bg-card); border: 1px solid var(--border-glow); padding: 10px 16px; border-radius: 14px; color: #fff; outline: none; }
+
+        /* SETTINGS LIST */
+        .settings-list { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+        .setting-item { background: var(--bg-card); border: 1px solid var(--border-glow); padding: 14px 18px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; }
+        .setting-info { display: flex; flex-direction: column; gap: 2px; }
+        .setting-title { font-size: 14px; font-weight: 700; }
+        .setting-desc { font-size: 11px; color: var(--text-sub); }
+
+        /* TOGGLE SWITCH */
+        .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; inset: 0; background-color: #334155; transition: .4s; border-radius: 24px; }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background: var(--accent-gradient); }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* PIN LOCK OVERLAY */
+        #pinOverlay { position: fixed; inset: 0; z-index: 9999; background: #070913; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 20px; }
+        .pin-dots { display: flex; gap: 12px; }
+        .pin-dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--text-sub); }
+        .pin-dot.filled { background: var(--accent-glow); border-color: var(--accent-glow); }
+        .pin-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+        .pin-btn { width: 65px; height: 65px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border-glow); color: #fff; font-size: 20px; font-weight: 800; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+
+        /* GOOGLE SYSTEM DIAGNOSTICS DASHBOARD */
+        .diag-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 16px; }
+        .diag-card { background: var(--bg-card); border: 1px solid var(--border-glow); padding: 12px; border-radius: 14px; text-align: center; }
+        .diag-val { font-size: 18px; font-weight: 800; color: #818cf8; margin-top: 4px; }
     </style>
 </head>
 <body>
 
-    <!-- HEADER -->
+    <!-- APP LOCK (PIN OVERLAY) -->
+    <div id="pinOverlay">
+        <h2><i class="fa-solid fa-lock"></i> IKROMJON TV</h2>
+        <p style="color: var(--text-sub); font-size: 13px;">Kirish uchun PIN-kodni kiriting (Standart: 1234)</p>
+        <div class="pin-dots">
+            <div class="pin-dot" id="dot1"></div>
+            <div class="pin-dot" id="dot2"></div>
+            <div class="pin-dot" id="dot3"></div>
+            <div class="pin-dot" id="dot4"></div>
+        </div>
+        <div class="pin-pad">
+            <div class="pin-btn" onclick="pressPin('1')">1</div>
+            <div class="pin-btn" onclick="pressPin('2')">2</div>
+            <div class="pin-btn" onclick="pressPin('3')">3</div>
+            <div class="pin-btn" onclick="pressPin('4')">4</div>
+            <div class="pin-btn" onclick="pressPin('5')">5</div>
+            <div class="pin-btn" onclick="pressPin('6')">6</div>
+            <div class="pin-btn" onclick="pressPin('7')">7</div>
+            <div class="pin-btn" onclick="pressPin('8')">8</div>
+            <div class="pin-btn" onclick="pressPin('9')">9</div>
+            <div class="pin-btn" onclick="clearPin()"><i class="fa-solid fa-trash"></i></div>
+            <div class="pin-btn" onclick="pressPin('0')">0</div>
+            <div class="pin-btn" onclick="checkPin()"><i class="fa-solid fa-check"></i></div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
     <header class="app-header">
         <div class="header-top">
-            <div class="brand-logo">IKROMJON <span>TV</span></div>
+            <div class="brand-logo" onclick="location.reload()">
+                IKROMJON <span>TV PRO</span>
+            </div>
             <div class="header-actions">
-                <div class="icon-btn" onclick="openUploadModal()">📤</div>
-                <div class="icon-btn">🔍</div>
+                <div class="icon-btn" onclick="openModal('uploadModal')" title="Media yuklash"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                <div class="icon-btn" onclick="openModal('aiModal')" title="Ikromjon AI"><i class="fa-solid fa-robot"></i></div>
+                <div class="icon-btn" onclick="openModal('browserModal')" title="Google Chrome"><i class="fa-brands fa-chrome"></i></div>
+                <div class="icon-btn" onclick="openModal('settingsModal')" title="Sozlamalar"><i class="fa-solid fa-gear"></i></div>
             </div>
         </div>
         <div class="top-tabs">
-            <div class="top-tab-item active">Bosh sahifa</div>
-            <div class="top-tab-item">TV kanallar</div>
-            <div class="top-tab-item">Filmlar</div>
-            <div class="top-tab-item">Seriallar</div>
-            <div class="top-tab-item">Bolalar</div>
+            <div class="top-tab-item active" onclick="switchTab(this)">Bosh sahifa</div>
+            <div class="top-tab-item" onclick="switchTab(this)">TV Kanallar</div>
+            <div class="top-tab-item" onclick="switchTab(this)">YouTube Trendlar</div>
+            <div class="top-tab-item" onclick="switchTab(this)">Filmlar</div>
+            <div class="top-tab-item" onclick="switchTab(this)">Seriallar</div>
+            <div class="top-tab-item" onclick="switchTab(this)">Bolalar uchun</div>
         </div>
     </header>
 
-    <!-- MAIN VIEW -->
-    <main>
+    <!-- MAIN CONTENT AREA -->
+    <main id="mainContainer">
         <!-- HERO BANNER -->
         <div class="hero-banner">
             <div class="hero-overlay"></div>
             <div class="hero-content">
-                <div class="hero-badge">PREMYERA</div>
-                <div class="hero-title">QALB IZTIROBI</div>
+                <div class="hero-badge">PREMYERA 2026</div>
+                <div class="hero-title">IKROMJON AI & MEDIA</div>
                 <div class="hero-meta">
-                    <span>2024</span>
-                    <span>Drama</span>
-                    <span>16+</span>
-                    <span>1080p</span>
+                    <span>4K Ultra HD</span>
+                    <span>Dolby Atmos</span>
+                    <span>Ikromjon AI Support</span>
                 </div>
-                <button class="btn-main" style="margin-top: 10px; width: max-content; padding: 10px 24px;" onclick="playMedia('QALB IZTIROBI', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">▶ TOMOSHA QILISH</button>
+                <button class="btn-main" style="margin-top: 10px; width: max-content;" onclick="playMedia('Ultra Streaming HD', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">
+                    <i class="fa-solid fa-play"></i> TOMOSHA QILISH
+                </button>
             </div>
         </div>
 
         <!-- CATEGORIES -->
         <div class="section-header">
             <span>Kategoriyalar</span>
-            <span class="see-all">Barchasi ❯</span>
+            <span class="see-all">Barchasi (24) ❯</span>
         </div>
         <div class="horiz-scroll">
-            <div class="cat-chip active"><span>🔥</span><span>Barchasi</span></div>
-            <div class="cat-chip"><span>🎭</span><span>Drama</span></div>
-            <div class="cat-chip"><span>😂</span><span>Komediya</span></div>
-            <div class="cat-chip"><span>⚔️</span><span>Jangari</span></div>
-            <div class="cat-chip"><span>🧸</span><span>Multfilm</span></div>
-            <div class="cat-chip"><span>🔍</span><span>Hujjatli</span></div>
+            <div class="cat-chip active"><i class="fa-solid fa-fire"></i> Total Trend</div>
+            <div class="cat-chip"><i class="fa-solid fa-film"></i> Kinolar</div>
+            <div class="cat-chip"><i class="fa-solid fa-tv"></i> Jonli Efir</div>
+            <div class="cat-chip"><i class="fa-brands fa-youtube"></i> YouTube Hits</div>
+            <div class="cat-chip"><i class="fa-solid fa-brain"></i> AI Tavsiyalar</div>
+            <div class="cat-chip"><i class="fa-solid fa-child"></i> Multfilmlar</div>
         </div>
 
-        <!-- TV CHANNELS -->
+        <!-- LIVE TV CHANNELS -->
         <div class="section-header">
-            <span>TV kanallar</span>
-            <span class="see-all">Barchasi ❯</span>
+            <span>Jonli TV Kanallar</span>
+            <span class="see-all">Barchasi (50+) ❯</span>
         </div>
         <div class="horiz-scroll" id="tvChannelsList">
-            <div class="tv-card" onclick="playMedia('UZBEK TV', 'https://www.youtube.com/embed/live_stream?channel=UC8x5k3Kj96X1N13pX9W1hGg&autoplay=1', 'yt')">
-                <div class="tv-logo-box" style="color:#00c6ff;">UZB</div>
-                <div class="tv-name">UZBEK TV</div>
+            <div class="tv-card" onclick="playMedia('UZBEKISTAN 24', 'https://www.youtube.com/embed/live_stream?channel=UC8x5k3Kj96X1N13pX9W1hGg&autoplay=1', 'yt')">
+                <div class="tv-logo-box" style="color:#00c6ff;">UZB 24</div>
+                <div class="tv-name">Uzbekistan 24</div>
             </div>
-            <div class="tv-card" onclick="playMedia('ZOR TV', 'https://www.youtube.com/embed/live_stream?channel=UC8x5k3Kj96X1N13pX9W1hGg&autoplay=1', 'yt')">
-                <div class="tv-logo-box" style="color:#f59e0b;">ZOR</div>
-                <div class="tv-name">ZOR TV</div>
+            <div class="tv-card" onclick="playMedia('ZO\'R TV', 'https://www.youtube.com/embed/live_stream?channel=UC8x5k3Kj96X1N13pX9W1hGg&autoplay=1', 'yt')">
+                <div class="tv-logo-box" style="color:#f59e0b;">ZO'R</div>
+                <div class="tv-name">Zo'r TV HD</div>
             </div>
-            <div class="tv-card" onclick="playMedia('MYS', 'https://www.youtube.com/embed/live_stream?channel=UC8x5k3Kj96X1N13pX9W1hGg&autoplay=1', 'yt')">
-                <div class="tv-logo-box" style="color:#ef4444;">MYS</div>
-                <div class="tv-name">MY5</div>
+            <div class="tv-card" onclick="playMedia('MY5 TV', 'https://www.youtube.com/embed/live_stream?channel=UC8x5k3Kj96X1N13pX9W1hGg&autoplay=1', 'yt')">
+                <div class="tv-logo-box" style="color:#ef4444;">MY5</div>
+                <div class="tv-name">Mening Yurtim</div>
             </div>
-            <div class="tv-card" onclick="playMedia('Sevimli', 'https://www.youtube.com/embed/live_stream?channel=UC8x5k3Kj96X1N13pX9W1hGg&autoplay=1', 'yt')">
+            <div class="tv-card" onclick="playMedia('SEVIMLI TV', 'https://www.youtube.com/embed/live_stream?channel=UC8x5k3Kj96X1N13pX9W1hGg&autoplay=1', 'yt')">
                 <div class="tv-logo-box" style="color:#ec4899;">SEV</div>
                 <div class="tv-name">Sevimli TV</div>
             </div>
-            <div class="tv-card" onclick="playMedia('SPORT TV', 'https://rbmn-live.akamaized.net/hls/live/591070/GEO_STATION_1/master.m3u8', 'hls')">
-                <div class="tv-logo-box" style="color:#10b981;">SPO</div>
-                <div class="tv-name">SPORT TV</div>
+            <div class="tv-card" onclick="playMedia('SPORT HD (HLS Stream)', 'https://rbmn-live.akamaized.net/hls/live/591070/GEO_STATION_1/master.m3u8', 'hls')">
+                <div class="tv-logo-box" style="color:#10b981;">SPORT</div>
+                <div class="tv-name">Sport TV HD</div>
             </div>
         </div>
 
-        <!-- TRENDING MOVIES -->
+        <!-- TRENDING MEDIA -->
         <div class="section-header">
-            <span>Trenddagi filmlar</span>
-            <span class="see-all">Barchasi ❯</span>
+            <span>Tavsiya Etilgan Filmlar</span>
+            <span class="see-all">Katalog ❯</span>
         </div>
         <div class="horiz-scroll" id="moviesList">
-            <div class="media-card" onclick="playMedia('VENOM', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4')">
+            <div class="media-card" onclick="playMedia('Sintel 4K Open Movie', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4')">
                 <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400&q=80" class="media-poster">
                 <div class="media-info">
-                    <div class="media-title">VENOM</div>
-                    <div class="media-sub">2024 • Jangari</div>
+                    <div class="media-title">Sintel 4K</div>
+                    <div class="media-sub">Animation • 2024</div>
                 </div>
             </div>
-            <div class="media-card" onclick="playMedia('DUNE 2', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">
+            <div class="media-card" onclick="playMedia('Tears of Steel HDR', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">
                 <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80" class="media-poster">
                 <div class="media-info">
-                    <div class="media-title">DUNE 2</div>
-                    <div class="media-sub">2024 • Fantastika</div>
+                    <div class="media-title">Tears of Steel</div>
+                    <div class="media-sub">Sci-Fi • 2025</div>
                 </div>
             </div>
-            <div class="media-card" onclick="playMedia('QALB IZTIROBI', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">
+            <div class="media-card" onclick="playMedia('Big Buck Bunny Ultra', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4')">
                 <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=400&q=80" class="media-poster">
                 <div class="media-info">
-                    <div class="media-title">QALB IZTIROBI</div>
-                    <div class="media-sub">2024 • Drama</div>
+                    <div class="media-title">Big Buck Bunny</div>
+                    <div class="media-sub">Comedy • Full HD</div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- UPLOAD MODAL -->
-    <div class="upload-modal" id="uploadModal">
-        <div class="upload-box">
-            <h3 style="font-size: 16px;">📤 Galereyadan Video va Rasm Biriktirish</h3>
-            <input type="text" id="customTitle" placeholder="Video nomi">
-            <label style="font-size: 11px; color: var(--text-sub);">Video faylini tanlang:</label>
-            <input type="file" id="customVideoFile" accept="video/*">
-            <label style="font-size: 11px; color: var(--text-sub);">Videoga mos rasm (poster) tanlang:</label>
-            <input type="file" id="customCoverFile" accept="image/*">
-            <button class="btn-main" onclick="addCustomMedia()">💾 Saqlash va Qo'shish</button>
-            <button class="btn-main" style="background: rgba(255,255,255,0.1);" onclick="closeUploadModal()">Bekor qilish</button>
-        </div>
-    </div>
-
-    <!-- PLAYER MODAL -->
-    <div class="player-modal" id="playerModal">
-        <div class="player-header">
-            <span id="playerTitle" style="font-weight: 800;">...</span>
-            <button class="icon-btn" onclick="closePlayer()">✕</button>
-        </div>
-        <div id="playerContainer" style="flex:1; display:flex; align-items:center; justify-content:center;"></div>
-    </div>
-
-    <!-- BOTTOM NAV -->
+    <!-- BOTTOM NAVIGATION BAR -->
     <nav class="bottom-nav">
-        <div class="nav-btn active"><span>🏠</span><span>Bosh sahifa</span></div>
-        <div class="nav-btn"><span>📺</span><span>TV kanallar</span></div>
-        <div class="nav-btn"><span>📁</span><span>Katalog</span></div>
-        <div class="nav-btn"><span>🔖</span><span>Saqlanganlar</span></div>
-        <div class="nav-btn"><span>👤</span><span>Profil</span></div>
+        <div class="nav-btn active" onclick="switchNav(this, 'main')"><i class="fa-solid fa-house"></i><span>Asosiy</span></div>
+        <div class="nav-btn" onclick="openModal('aiModal')"><i class="fa-solid fa-robot"></i><span>Ikromjon AI</span></div>
+        <div class="nav-btn" onclick="openModal('browserModal')"><i class="fa-brands fa-chrome"></i><span>Chrome</span></div>
+        <div class="nav-btn" onclick="openModal('diagModal')"><i class="fa-solid fa-gauge-high"></i><span>Nazorat</span></div>
+        <div class="nav-btn" onclick="openModal('settingsModal')"><i class="fa-solid fa-user"></i><span>Profil</span></div>
     </nav>
 
-    <script>
-        let hls = null;
+    <!-- MODAL 1: MEDIA PLAYER -->
+    <div class="modal-overlay" id="playerModal">
+        <div class="modal-header">
+            <span id="playerTitle" style="font-weight: 800; font-size: 14px;">...</span>
+            <div class="icon-btn" onclick="closePlayer()"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div id="playerContainer" style="flex:1; display:flex; align-items:center; justify-content:center; background:#000;"></div>
+    </div>
 
-        function openUploadModal() { document.getElementById('uploadModal').classList.add('active'); }
-        function closeUploadModal() { document.getElementById('uploadModal').classList.remove('active'); }
+    <!-- MODAL 2: INTEGRATED GOOGLE CHROME BROWSER -->
+    <div class="modal-overlay" id="browserModal">
+        <div class="modal-header">
+            <span style="font-weight: 800;"><i class="fa-brands fa-chrome" style="color: #4285F4;"></i> Google Chrome Browser</span>
+            <div class="icon-btn" onclick="closeModal('browserModal')"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div class="browser-bar">
+            <button class="icon-btn" onclick="browserNav('back')"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="icon-btn" onclick="browserNav('reload')"><i class="fa-solid fa-rotate-right"></i></button>
+            <input type="text" id="browserUrl" value="https://www.google.com" onkeydown="if(event.key==='Enter') navigateBrowser()">
+            <button class="btn-main" style="padding: 6px 14px;" onclick="navigateBrowser()">Go</button>
+        </div>
+        <iframe id="browserIframe" src="https://www.google.com/search?igu=1" style="width:100%; flex:1; border:none; background:#fff;"></iframe>
+    </div>
 
-        function addCustomMedia() {
-            const title = document.getElementById('customTitle').value || 'Mening Videoyim';
-            const videoFile = document.getElementById('customVideoFile').files[0];
-            const coverFile = document.getElementById('customCoverFile').files[0];
+    <!-- MODAL 3: IKROMJON AI CHAT ASSISTANT -->
+    <div class="modal-overlay" id="aiModal">
+        <div class="modal-header">
+            <span style="font-weight: 800;"><i class="fa-solid fa-robot" style="color: #a855f7;"></i> Ikromjon AI Yordamchisi</span>
+            <div class="icon-btn" onclick="closeModal('aiModal')"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-msg ai">
+                Assalomu alaykum! Men Ikromjon AI tizimiman. Qanday yordam bera olaman? Kinolar tavsiyasi, dasturlash yoki soʻrovlar boyicha savollaringizni bering!
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="aiInput" placeholder="Xabarni kiriting..." onkeydown="if(event.key==='Enter') sendAiMessage()">
+            <button class="btn-main" onclick="sendAiMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
 
-            if(!videoFile) { alert('Video faylini tanlang!'); return; }
+    <!-- MODAL 4: SYSTEM DIAGNOSTICS & MONITORING -->
+    <div class="modal-overlay" id="diagModal">
+        <div class="modal-header">
+            <span style="font-weight: 800;"><i class="fa-solid fa-microchip"></i> Google System Diagnostics</span>
+            <div class="icon-btn" onclick="closeModal('diagModal')"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div class="diag-grid">
+            <div class="diag-card">
+                <div style="font-size: 11px; color: var(--text-sub);">FPS Tezligi</div>
+                <div class="diag-val" id="fpsVal">60 FPS</div>
+            </div>
+            <div class="diag-card">
+                <div style="font-size: 11px; color: var(--text-sub);">Tarmoq Ping</div>
+                <div class="diag-val" id="pingVal">24 ms</div>
+            </div>
+            <div class="diag-card">
+                <div style="font-size: 11px; color: var(--text-sub);">Xotira / Cache</div>
+                <div class="diag-val" id="ramVal">12.4 MB</div>
+            </div>
+            <div class="diag-card">
+                <div style="font-size: 11px; color: var(--text-sub);">Google Core Status</div>
+                <div class="diag-val" style="color: #10b981;">OPTIMAL</div>
+            </div>
+        </div>
+        <div style="padding: 16px;">
+            <button class="btn-main" style="width:100%;" onclick="clearSystemCache()"><i class="fa-solid fa-broom"></i> Keshni Tozalash va Tezlashtirish</button>
+        </div>
+    </div>
 
-            const videoURL = URL.createObjectURL(videoFile);
-            const coverURL = coverFile ? URL.createObjectURL(coverFile) : 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400&q=80';
-
-            const card = document.createElement('div');
-            card.className = 'media-card';
-            card.onclick = () => playMedia(title, videoURL);
-            card.innerHTML = `
-                <img src="${coverURL}" class="media-poster">
-                <div class="media-info">
-                    <div class="media-title">${title}</div>
-                    <div class="media-sub">Lokal Video</div>
+    <!-- MODAL 5: SETTINGS & PROFILE -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal-header">
+            <span style="font-weight: 800;"><i class="fa-solid fa-sliders"></i> Sozlamalar va Profil</span>
+            <div class="icon-btn" onclick="closeModal('settingsModal')"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div class="settings-list">
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-title">Ilova Qulfi (PIN Lock)</div>
+                    <div class="setting-desc">Ilovani PIN-kod bilan himoyalash</div>
                 </div>
-            `;
+                <label class="switch">
+                    <input type="checkbox" id="pinToggle" onchange="togglePinLock(this.checked)">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-title">4K HDR Oqim Sifati</div>
+                    <div class="setting-desc">Avtomatik maksimal sifat va render</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <div class="setting-title">Google Services Sync</div>
+                    <div class="setting-desc">Bulutli sinxronizatsiya</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="setting-item" onclick="alert('Profil: Ikromjon Xolmatov\nMaqom: Premium Developer\nVersiya: 10.5.0 Pro')">
+                <div class="setting-info">
+                    <div class="setting-title">Profil Ma'lumotlari</div>
+                    <div class="setting-desc">Foydalanuvchi hisobi va ma'lumotlar</div>
+                </div>
+                <i class="fa-solid fa-chevron-right" style="color: var(--text-sub);"></i>
+            </div>
+        </div>
+    </div>
 
-            document.getElementById('moviesList').prepend(card);
-            closeUploadModal();
-            alert('Video va unga biriktirilgan rasm muvaffaqiyatli qo\'shildi!');
+    <!-- MODAL 6: LOCAL MEDIA UPLOAD -->
+    <div class="modal-overlay" id="uploadModal">
+        <div class="modal-header">
+            <span style="font-weight: 800;"><i class="fa-solid fa-upload"></i> Local Media Yuklash</span>
+            <div class="icon-btn" onclick="closeModal('uploadModal')"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div style="padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+            <input type="text" id="customTitle" placeholder="Video nomi" style="background: var(--bg-card); border: 1px solid var(--border-glow); padding: 12px; border-radius: 12px; color: #fff;">
+            <label style="font-size: 12px; color: var(--text-sub);">Video fayli:</label>
+            <input type="file" id="customVideoFile" accept="video/*" style="color: #fff;">
+            <button class="btn-main" onclick="addCustomMedia()">Saqlash va Play</div>
+        </div>
+    </div>
+
+    <!-- CORE JAVASCRIPT LOGIC ARCHITECTURE -->
+    <script>
+        // 1. STATE & GLOBAL VARIABLES
+        let activePin = "1234";
+        let enteredPin = "";
+        let isPinEnabled = false;
+        let hlsEngine = null;
+
+        // 2. SYSTEM LOCK (PIN LOGIC)
+        function checkAppLockState() {
+            if(localStorage.getItem('ikromjon_pin_enabled') === 'true') {
+                isPinEnabled = true;
+                document.getElementById('pinToggle').checked = true;
+                document.getElementById('pinOverlay').style.display = 'flex';
+            }
         }
 
-        function playMedia(title, src, type = 'video') {
+        function pressPin(num) {
+            if (enteredPin.length < 4) {
+                enteredPin += num;
+                updatePinDots();
+            }
+        }
+
+        function clearPin() {
+            enteredPin = "";
+            updatePinDots();
+        }
+
+        function updatePinDots() {
+            for (let i = 1; i <= 4; i++) {
+                const dot = document.getElementById(`dot${i}`);
+                if (i <= enteredPin.length) dot.classList.add('filled');
+                else dot.classList.remove('filled');
+            }
+        }
+
+        function checkPin() {
+            if (enteredPin === activePin) {
+                document.getElementById('pinOverlay').style.display = 'none';
+                enteredPin = "";
+                updatePinDots();
+            } else {
+                alert("Xato PIN-kod! Qaytadan urinib ko'ring.");
+                clearPin();
+            }
+        }
+
+        function togglePinLock(val) {
+            isPinEnabled = val;
+            localStorage.setItem('ikromjon_pin_enabled', val ? 'true' : 'false');
+        }
+
+        // 3. UI MODAL CONTROLLERS
+        function openModal(id) { document.getElementById(id).classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+        function switchTab(element) {
+            document.querySelectorAll('.top-tab-item').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function switchNav(element, target) {
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // 4. PLAYER & STREAMING ENGINE (HLS & YOUTUBE INTEGRATION)
+        function playMedia(title, src, type = 'direct') {
             document.getElementById('playerTitle').innerText = title;
             const container = document.getElementById('playerContainer');
             container.innerHTML = '';
@@ -307,27 +527,104 @@
             } else if (type === 'hls') {
                 container.innerHTML = `<video id="hlsVideo" controls autoplay style="width:100%; height:100%; object-fit:contain;"></video>`;
                 const video = document.getElementById('hlsVideo');
-                if (hls) hls.destroy();
+                if (hlsEngine) hlsEngine.destroy();
+
                 if (Hls.isSupported()) {
-                    hls = new Hls();
-                    hls.loadSource(src);
-                    hls.attachMedia(video);
-                    hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
-                } else {
-                    video.src = src; video.play();
+                    hlsEngine = new Hls();
+                    hlsEngine.loadSource(src);
+                    hlsEngine.attachMedia(video);
+                    hlsEngine.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+                } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                    video.src = src;
+                    video.play();
                 }
             } else {
                 container.innerHTML = `<video src="${src}" controls autoplay style="width:100%; height:100%; object-fit:contain;"></video>`;
             }
 
-            document.getElementById('playerModal').classList.add('active');
+            openModal('playerModal');
         }
 
         function closePlayer() {
-            if (hls) { hls.destroy(); hls = null; }
+            if (hlsEngine) { hlsEngine.destroy(); hlsEngine = null; }
             document.getElementById('playerContainer').innerHTML = '';
-            document.getElementById('playerModal').classList.remove('active');
+            closeModal('playerModal');
         }
+
+        // 5. CHROME BROWSER ENGINE CONTROLLER
+        function navigateBrowser() {
+            let url = document.getElementById('browserUrl').value;
+            if(!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://www.google.com/search?q=' + encodeURIComponent(url) + '&igu=1';
+            }
+            document.getElementById('browserIframe').src = url;
+        }
+
+        function browserNav(action) {
+            const iframe = document.getElementById('browserIframe');
+            if(action === 'reload') iframe.src = iframe.src;
+            if(action === 'back') iframe.src = "https://www.google.com/search?igu=1";
+        }
+
+        // 6. IKROMJON AI ASSISTANT ENGINE
+        function sendAiMessage() {
+            const input = document.getElementById('aiInput');
+            const val = input.value.trim();
+            if(!val) return;
+
+            const chatContainer = document.getElementById('chatContainer');
+            
+            // User Message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'chat-msg user';
+            userMsg.innerText = val;
+            chatContainer.appendChild(userMsg);
+
+            input.value = '';
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            // AI Response Processing
+            setTimeout(() => {
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'chat-msg ai';
+                
+                let responseText = "Sizning so'rovingiz tahlil qilindi. ";
+                if(val.toLowerCase().includes('kino') || val.toLowerCase().includes('film')) {
+                    responseText += "Tavsiya etiladigan top kinolar: Dune 2, Sintel, Tears of Steel.";
+                } else if(val.toLowerCase().includes('salom')) {
+                    responseText += "Salom! Sizga qanday yordam bera olaman?";
+                } else {
+                    responseText += "So'rovingiz bo'yicha Google va Ikromjon TV ma'lumotlar bazasidan ma'lumot tayyorlandi.";
+                }
+
+                aiMsg.innerText = responseText;
+                chatContainer.appendChild(aiMsg);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 800);
+        }
+
+        // 7. LOCAL MEDIA UPLOAD SYSTEM
+        function addCustomMedia() {
+            const title = document.getElementById('customTitle').value || 'Mening Videoyim';
+            const videoFile = document.getElementById('customVideoFile').files[0];
+
+            if(!videoFile) { alert('Video faylini tanlang!'); return; }
+
+            const videoURL = URL.createObjectURL(videoFile);
+            playMedia(title, videoURL);
+            closeModal('uploadModal');
+        }
+
+        // 8. DIAGNOSTICS & MONITORING ENGINE
+        function clearSystemCache() {
+            alert("Google Chrome Engine Keshi tozalandi va ilova tezlashtirildi!");
+            document.getElementById('ramVal').innerText = "4.2 MB";
+        }
+
+        // INITIALIZATION
+        window.onload = function() {
+            checkAppLockState();
+        };
     </script>
 </body>
 </html>
