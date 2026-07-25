@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IKROMJON TV — Ultimate All-in-One Edition</title>
+    <title>IKROMJON TV — Full Master Edition</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -99,7 +99,7 @@
             position: relative; flex-shrink: 0; overflow: hidden; width: 145px; transition: all 0.3s;
         }
         .media-card:hover { transform: translateY(-4px); border-color: var(--accent-glow); }
-        .media-thumb { width: 100%; height: 100px; object-fit: cover; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; }
+        .media-thumb { width: 100%; height: 100px; object-fit: cover; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; font-size: 28px; }
         .media-info { padding: 8px; }
         .media-title { font-size: 11px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 6px; }
 
@@ -114,7 +114,7 @@
         .folder-icon { font-size: 22px; margin-bottom: 4px; }
         .folder-name { font-size: 10px; font-weight: 700; color: var(--text-sub); }
 
-        /* YANGILIKLAR BO'LIMI */
+        /* NEWS BO'LIMI */
         .news-card { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 16px; padding: 12px; margin: 0 20px 10px 20px; display: flex; gap: 12px; align-items: center; }
         .news-img { width: 55px; height: 55px; border-radius: 12px; object-fit: cover; }
         .news-txt { flex: 1; font-size: 11px; font-weight: 700; color: var(--text-main); line-height: 1.4; }
@@ -160,7 +160,7 @@
         <div class="widget-info">
             <span id="liveClock">00:00:00</span>
             <span>🌤️ +28°C</span>
-            <span>📍 Tashkent</span>
+            <span>📍 Tashkent (UTC+5)</span>
         </div>
     </div>
 
@@ -266,7 +266,6 @@
                 <option value="boost">200% Super Boost & Bass</option>
             </select>
         </div>
-        <button class="btn-action" style="margin-top: 20px;" onclick="switchTab('main')">⬅️ Orqaga Qaytish</button>
     </div>
 
     <!-- TAHRIRLASH MODALI (EDIT MODAL) -->
@@ -293,7 +292,7 @@
     <nav class="bottom-nav">
         <div class="nav-item active" onclick="switchTab('main')"><span style="font-size:18px;">🏠</span><span>Asosiy</span></div>
         <div class="nav-item"><span style="font-size:18px;">⭐</span><span>Sevimlilar</span></div>
-        <div class="nav-item" onclick="document.getElementById('galleryInput').click()"><span style="font-size:18px;">📥</span><span>Yuklash</span></div>
+        <div class="nav-item"><span style="font-size:18px;">📥</span><span>Yuklash</span></div>
         <div class="nav-item" onclick="switchTab('settings')"><span style="font-size:18px;">⚙️</span><span>Sozlama</span></div>
     </nav>
 
@@ -308,11 +307,9 @@
         let currentSlide = 0;
         const slides = document.querySelectorAll('.hero-slide');
         setInterval(() => {
-            if(slides.length > 0) {
-                slides[currentSlide].classList.remove('active');
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add('active');
-            }
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
         }, 4000);
 
         // MULTI-LANGUAGE
@@ -324,15 +321,13 @@
             tj: { welcome: "✨ Khush omaded ba barnomai IKROMJON TV!" },
             kz: { welcome: "✨ IKROMJON TV мобильді қолданбасына кош келдіңіз!" }
         };
-        function changeLanguage(lang) { 
-            if(dict[lang]) document.getElementById('welcomeMsg').innerText = dict[lang].welcome; 
-        }
+        function changeLanguage(lang) { document.getElementById('welcomeMsg').innerText = dict[lang].welcome; }
 
         // DEFAULT DATA & LOCAL STORAGE
         const defaultData = [
             { id: 1, title: "O'zbekiston HD", stream: "https://live.mtrk.uz/hls/uzbekistan/index.m3u8" },
             { id: 2, title: "Yoshlar TV", stream: "https://live.mtrk.uz/hls/yoshlar/index.m3u8" },
-            { id: 3, title: "Big Buck Bunny (Sample)", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" }
+            { id: 3, title: "Big Buck Bunny (YouTube Stream)", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" }
         ];
 
         let mediaData = JSON.parse(localStorage.getItem('ikromjon_tv_media')) || defaultData;
@@ -374,7 +369,7 @@
             mediaData.unshift(newMedia);
             saveToStorage();
             renderCards();
-            alert("Video galereyadan muvaffaqiyatli qo'shildi!");
+            alert("Video galereyadan qo'shildi!");
         }
 
         // EDIT & DELETE
