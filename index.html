@@ -7,21 +7,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #05050d;
-            --card-bg: rgba(20, 16, 38, 0.7);
-            --border-glow: rgba(147, 51, 234, 0.3);
+            --bg-dark: #070614;
+            --card-bg: rgba(22, 18, 42, 0.85);
+            --border-glow: rgba(147, 51, 234, 0.4);
             --primary-purple: #9333ea;
             --accent-pink: #ec4899;
             --accent-cyan: #06b6d4;
             --live-red: #ef4444;
             --text-main: #ffffff;
             --text-muted: #94a3b8;
-        }
-
-        body.oled-mode {
-            --bg-dark: #000000;
-            --card-bg: #0d0d0d;
-            --border-glow: #222222;
         }
 
         * {
@@ -36,33 +30,46 @@
         body {
             background-color: var(--bg-dark);
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(147, 51, 234, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+                radial-gradient(circle at 15% 10%, rgba(147, 51, 234, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 85% 90%, rgba(236, 72, 153, 0.2) 0%, transparent 40%);
             color: var(--text-main);
-            padding-bottom: 75px;
+            padding-bottom: 80px;
             min-height: 100vh;
-            transition: background 0.3s;
         }
 
-        /* Clock Banner Container */
-        .header-clock-section {
-            padding: 16px;
+        /* Top Welcome Header */
+        .welcome-header {
+            text-align: center;
+            padding: 20px 16px 10px 16px;
+        }
+        .welcome-header h1 {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--accent-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
+        }
+
+        /* Clock Section */
+        .clock-section {
+            padding: 10px 16px 20px 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: linear-gradient(180deg, rgba(147, 51, 234, 0.1) 0%, transparent 100%);
-            border-bottom: 1px solid var(--border-glow);
         }
 
         .analog-clock {
-            width: 120px;
-            height: 120px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             border: 3px solid var(--primary-purple);
-            box-shadow: 0 0 20px rgba(147, 51, 234, 0.4), inset 0 0 15px rgba(0,0,0,0.8);
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.5), inset 0 0 10px rgba(0,0,0,0.9);
             position: relative;
-            background: rgba(10, 8, 20, 0.9);
-            margin-bottom: 10px;
+            background: rgba(10, 8, 20, 0.95);
+            margin-bottom: 8px;
         }
 
         .hand {
@@ -70,558 +77,317 @@
             bottom: 50%;
             left: 50%;
             transform-origin: bottom center;
-            background: #fff;
             border-radius: 4px;
         }
-        .hour-hand { width: 4px; height: 30px; background: var(--accent-pink); }
-        .minute-hand { width: 3px; height: 42px; background: var(--accent-cyan); }
-        .second-hand { width: 2px; height: 48px; background: var(--live-red); }
+        .hour-hand { width: 4px; height: 26px; background: var(--accent-pink); }
+        .minute-hand { width: 3px; height: 38px; background: var(--accent-cyan); }
+        .second-hand { width: 2px; height: 44px; background: var(--live-red); }
         .clock-center {
             position: absolute;
             top: 50%; left: 50%;
-            width: 8px; height: 8px;
+            width: 6px; height: 6px;
             background: #fff;
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 5px #fff;
         }
 
-        .digital-clock-box {
-            background: rgba(15, 12, 29, 0.8);
-            border: 1px solid var(--primary-purple);
-            border-radius: 12px;
-            padding: 6px 16px;
-            text-align: center;
-            box-shadow: 0 0 15px rgba(147, 51, 234, 0.3);
-        }
         .digital-time {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
-            letter-spacing: 1px;
             color: var(--text-main);
+            letter-spacing: 1px;
+            background: rgba(15, 12, 29, 0.9);
+            padding: 4px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-glow);
         }
-        .digital-date {
-            font-size: 10px;
-            color: var(--text-muted);
+
+        .section-title {
+            padding: 12px 16px 8px 16px;
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            letter-spacing: 0.5px;
             text-transform: uppercase;
         }
 
-        /* Top Header */
-        header {
-            padding: 12px 16px;
+        /* 10 Ta Surilib O'tadigan Anonslar (Carousel) */
+        .anons-carousel {
             display: flex;
-            align-items: center;
+            gap: 12px;
+            padding: 0 16px 16px 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .anons-carousel::-webkit-scrollbar { display: none; }
+
+        .anons-card {
+            min-width: 220px;
+            height: 120px;
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.25), rgba(6, 182, 212, 0.25));
+            border: 1px solid var(--border-glow);
+            border-radius: 14px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
             justify-content: space-between;
-        }
-
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 18px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff, var(--accent-pink));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Live Hero Player Banner */
-        .hero-live-card {
-            margin: 0 16px 16px 16px;
-            background: linear-gradient(135deg, rgba(147, 51, 234, 0.3), rgba(236, 72, 153, 0.2));
-            border: 1px solid rgba(236, 72, 153, 0.4);
-            border-radius: 16px;
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
             cursor: pointer;
-        }
-
-        .play-btn-glow {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            box-shadow: 0 0 15px var(--accent-pink);
             flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
         }
-
-        .live-badge {
+        .anons-badge {
             background: var(--live-red);
-            color: #fff;
+            color: white;
             font-size: 9px;
             font-weight: 800;
             padding: 2px 6px;
             border-radius: 4px;
-            display: inline-block;
-            margin-left: 6px;
-            animation: pulse 1.5s infinite;
+            width: max-content;
         }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.4; }
-            100% { opacity: 1; }
-        }
-
-        /* 10 Ta Vertikal Ro'yxat Bo'limlari */
-        .section-title-label {
-            padding: 8px 16px;
-            font-size: 12px;
+        .anons-title {
+            font-size: 13px;
             font-weight: 700;
-            color: var(--text-muted);
-            letter-spacing: 1px;
+            line-height: 1.2;
         }
 
-        .vertical-list {
+        /* To'rtburchak Shakldagi Ketma-ket Bo'limlar Grid */
+        .grid-sections {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
             padding: 0 16px 16px 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
         }
 
-        .list-item {
+        .rect-card {
             background: var(--card-bg);
             border: 1px solid var(--border-glow);
-            border-radius: 12px;
-            padding: 12px 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .list-item:active {
-            background: rgba(147, 51, 234, 0.3);
-            transform: scale(0.98);
-        }
-
-        .item-left {
+            border-radius: 14px;
+            padding: 16px;
             display: flex;
             align-items: center;
             gap: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
         }
-
-        .item-num {
-            font-size: 13px;
+        .rect-card:active {
+            transform: scale(0.97);
+            background: rgba(147, 51, 234, 0.3);
+        }
+        .rect-icon {
+            font-size: 24px;
+            width: 44px;
+            height: 44px;
+            background: rgba(147, 51, 234, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .rect-info .num {
+            font-size: 10px;
+            color: var(--accent-pink);
             font-weight: 800;
-            color: var(--accent-cyan);
-            width: 22px;
         }
-
-        .item-icon {
-            font-size: 18px;
-        }
-
-        .item-name {
-            font-size: 13px;
+        .rect-info .name {
+            font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
         }
 
-        /* 6 Ta Funktsiyalar Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            padding: 0 16px 16px 16px;
-        }
-
-        .feature-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow);
+        /* Munajjimlar Bashorati Bloki */
+        .horoscope-box {
+            margin: 0 16px 16px 16px;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(147, 51, 234, 0.2));
+            border: 1px solid var(--accent-pink);
             border-radius: 14px;
-            padding: 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            cursor: pointer;
+            padding: 16px;
         }
-
-        .feature-icon-box {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: rgba(147, 51, 234, 0.2);
-            border: 1px solid var(--primary-purple);
+        .horoscope-header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            margin-bottom: 8px;
-            color: var(--accent-cyan);
-        }
-
-        .feature-title {
-            font-size: 12px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .feature-desc {
-            font-size: 10px;
-            color: var(--text-muted);
-        }
-
-        /* Horizontal Carousel Columns */
-        .horizontal-carousel-section {
-            display: flex;
-            gap: 12px;
-            padding: 0 16px 20px 16px;
-            overflow-x: auto;
-            scrollbar-width: none;
-        }
-        .horizontal-carousel-section::-webkit-scrollbar { display: none; }
-
-        .column-card {
-            min-width: 140px;
-            max-width: 140px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow);
-            border-radius: 14px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
             gap: 8px;
-            flex-shrink: 0;
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--accent-pink);
+        }
+        .horoscope-text {
+            font-size: 12px;
+            color: #e2e8f0;
+            line-height: 1.5;
         }
 
-        .col-header {
-            text-align: center;
-            border-bottom: 1px solid var(--border-glow);
-            padding-bottom: 6px;
-        }
-        .col-num { font-size: 11px; color: var(--accent-pink); font-weight: 800; }
-        .col-title { font-size: 11px; font-weight: 700; text-transform: uppercase; }
-
-        .mini-poster {
-            width: 100%;
-            height: 70px;
-            border-radius: 8px;
-            object-fit: cover;
-            background: rgba(255,255,255,0.05);
-        }
-
-        .btn-barchasi {
-            background: rgba(147, 51, 234, 0.2);
-            border: 1px solid var(--primary-purple);
-            color: #fff;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 6px;
-            border-radius: 6px;
-            cursor: pointer;
-            text-align: center;
-            margin-top: auto;
-        }
-
-        /* Video Player Modal Window */
-        .video-modal {
+        /* Brauzer / Pleyer Modal Oynasi (YouTube O'rniga) */
+        .player-modal {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0,0,0,0.96);
             z-index: 1000;
             display: none;
             flex-direction: column;
         }
-        .video-modal.active { display: flex; }
+        .player-modal.active { display: flex; }
 
-        .modal-top {
+        .player-top-bar {
             padding: 14px 16px;
+            background: #110e21;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(20, 16, 38, 0.9);
-        }
-
-        .video-container {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #000;
-        }
-        video { width: 100%; height: 100%; }
-
-        /* SOZLAMALAR MODAL OYNASI */
-        .settings-modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(5, 5, 13, 0.95);
-            backdrop-filter: blur(15px);
-            z-index: 999;
-            display: none;
-            flex-direction: column;
-            padding: 20px;
-            overflow-y: auto;
-        }
-        .settings-modal.active { display: flex; }
-
-        .settings-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
             border-bottom: 1px solid var(--border-glow);
-            padding-bottom: 12px;
         }
 
-        .settings-group {
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow);
-            border-radius: 14px;
-            padding: 14px;
-            margin-bottom: 14px;
-        }
-
-        .settings-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .settings-row:last-child { border-bottom: none; }
-
-        .setting-title { font-size: 13px; font-weight: 700; }
-        .setting-desc { font-size: 10px; color: var(--text-muted); }
-
-        select, input[type="checkbox"] {
-            cursor: pointer;
-        }
-
-        select {
-            background: #141026;
-            color: #fff;
-            border: 1px solid var(--primary-purple);
-            padding: 6px 10px;
-            border-radius: 8px;
-            font-size: 12px;
-        }
-
-        .btn-clear {
+        .browser-screen {
             width: 100%;
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid var(--live-red);
-            color: #fff;
-            padding: 10px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 12px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        /* Bottom Fixed Navigation */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            height: 60px;
-            background: rgba(10, 8, 20, 0.95);
-            backdrop-filter: blur(15px);
-            border-top: 1px solid var(--border-glow);
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            align-items: center;
-            z-index: 200;
-        }
-
-        .nav-link {
+            flex: 1;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            color: var(--text-muted);
-            font-size: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            gap: 3px;
+            background: #000;
+            position: relative;
         }
-        .nav-link.active { color: var(--accent-pink); }
-        .nav-icon { font-size: 18px; }
+        .browser-screen video {
+            width: 100%;
+            max-height: 100%;
+        }
+
+        /* Audio Player Control Indicator (Fon Musiqasi uchun) */
+        .audio-float-btn {
+            position: fixed;
+            bottom: 75px;
+            right: 16px;
+            background: var(--primary-purple);
+            color: #fff;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px var(--primary-purple);
+            cursor: pointer;
+            z-index: 100;
+            font-size: 18px;
+            animation: spinAudio 4s linear infinite;
+        }
+        @keyframes spinAudio {
+            0% { box-shadow: 0 0 10px var(--primary-purple); }
+            50% { box-shadow: 0 0 20px var(--accent-pink); }
+            100% { box-shadow: 0 0 10px var(--primary-purple); }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Header Section -->
-    <header>
-        <div class="brand-logo">
-            <span>▶</span> IKROMJON TV
-        </div>
-        <button onclick="openSettings()" style="background:none; border:none; font-size:20px; cursor:pointer; color:#fff;">⚙️</button>
-    </header>
+    <!-- Fon Musiqasi (Avtomatik ishga tushadi) -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
 
-    <!-- Toshkent Vaqti va Soat -->
-    <div class="header-clock-section">
+    <div class="audio-float-btn" onclick="toggleAudio()" title="Musiqani yoqish/o'chirish" id="audioBtn">🎵</div>
+
+    <!-- 1. Yirik Sarlavha -->
+    <div class="welcome-header">
+        <h1>IKROMJON TV GA HUSH KELIBSIZ</h1>
+    </div>
+
+    <!-- 2. Soat Vaqti -->
+    <div class="clock-section">
         <div class="analog-clock">
             <div class="hand hour-hand" id="hourHand"></div>
             <div class="hand minute-hand" id="minuteHand"></div>
             <div class="hand second-hand" id="secondHand"></div>
             <div class="clock-center"></div>
         </div>
-        <div class="digital-clock-box">
-            <div class="digital-time" id="digitalTime">00:00:00</div>
-            <div class="digital-date" id="digitalDate">TOSHKENT VAQTI</div>
+        <div class="digital-time" id="digitalTime">00:00:00</div>
+    </div>
+
+    <!-- 3. 10 Tacha Surilib O'tadigan Anonslar -->
+    <div class="section-title">✨ Qaynoq Anonslar</div>
+    <div class="anons-carousel" id="anonsCarousel">
+        <!-- JS orqali 10 ta anons qo'shiladi -->
+    </div>
+
+    <!-- 4. Kunlik Munajjimlar Bashorati -->
+    <div class="section-title">🔮 Kunlik Munajjimlar Bashorati</div>
+    <div class="horoscope-box">
+        <div class="horoscope-header">
+            <span>⭐ Bugungi Yulduzlar Bashorati</span>
+        </div>
+        <div class="horoscope-text" id="horoscopeText">
+            Bugun ijodiy ishlarda katta muvaffaqiyatlar kutilmoqda. Yangi loyihalarni boshlash uchun qulay vaqt. Oila davrasida iliq xabarlar eshitasiz.
         </div>
     </div>
 
-    <!-- Live Stream Card -->
-    <div class="hero-live-card" onclick="openPlayer('Uzbekistan 24 - Jonli Efir', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4')">
-        <div class="play-btn-glow">▶</div>
-        <div>
-            <div style="font-size: 15px; font-weight: 800;">IKROMJON JONLI EFIR <span class="live-badge">• LIVE</span></div>
-            <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Hozir jonli efirda eng sara ko'rsatuvlar</div>
-        </div>
+    <!-- 5. To'rtburchak Shakldagi Ketma-ket Bo'limlar -->
+    <div class="section-title">📁 Barcha Bo'limlar</div>
+    <div class="grid-sections" id="gridSections">
+        <!-- JS orqali to'rtburchak bo'limlar -->
     </div>
 
-    <!-- 10 Ta Asosiy Vertikal Bo'limlar -->
-    <div class="section-title-label">BO'LIMLAR</div>
-    <div class="vertical-list" id="verticalList"></div>
-
-    <!-- 6 Ta Ilova Funksiyasi -->
-    <div class="section-title-label">6 TA ILOVA FUNKSIYASI</div>
-    <div class="features-grid">
-        <div class="feature-card" onclick="triggerSearch()">
-            <div class="feature-icon-box">🔍</div>
-            <div class="feature-title">TEZKOR QIDIRUV</div>
-            <div class="feature-desc">Kerakli kontentni tezda toping</div>
-        </div>
-        <div class="feature-card" onclick="alert('Yuklab olish bo\'limi tayyorlanmoqda')">
-            <div class="feature-icon-box">⬇️</div>
-            <div class="feature-title">YUKLAB OLISH</div>
-            <div class="feature-desc">Sevimli kontentni yuklab oling</div>
-        </div>
-        <div class="feature-card" onclick="alert('Sevimli kontentlar saqlandi')">
-            <div class="feature-icon-box">💚</div>
-            <div class="feature-title">SEVIMLILAR</div>
-            <div class="feature-desc">Yoqgan kontentlarni saqlang</div>
-        </div>
-        <div class="feature-card" onclick="alert('Tomosha tarixi bo\'sh')">
-            <div class="feature-icon-box">🕒</div>
-            <div class="feature-title">TARIX</div>
-            <div class="feature-desc">Tomosha qilgan kontentlaringiz</div>
-        </div>
-        <div class="feature-card" onclick="openSettings()">
-            <div class="feature-icon-box">⚙️</div>
-            <div class="feature-title">SOZLAMALAR</div>
-            <div class="feature-desc">Ilovani o'zingizga moslang</div>
-        </div>
-        <div class="feature-card" onclick="alert('IKROMJON TV v3.0 Ultra\nBarcha huquqlar himoyalangan.')">
-            <div class="feature-icon-box">ℹ️</div>
-            <div class="feature-title">HAQIDA</div>
-            <div class="feature-desc">Ilova haqida barcha ma'lumotlar</div>
-        </div>
-    </div>
-
-    <!-- 10 Ta Surilib O'tadigan Gorizontal Bo'limlar -->
-    <div class="section-title-label">10 TA SURILIB O'TADIGAN BO'LIM</div>
-    <div class="horizontal-carousel-section" id="horizontalCarousel"></div>
-
-    <!-- Video Player Popup Modal -->
-    <div class="video-modal" id="videoModal">
-        <div class="modal-top">
-            <span id="videoModalTitle" style="font-weight: 700; font-size: 14px;">Efir</span>
+    <!-- 6. Video Brauzer Pleyer (YouTube o'rniga maxsus pleyer) -->
+    <div class="player-modal" id="playerModal">
+        <div class="player-top-bar">
+            <span id="playerTitle" style="font-weight: 700; font-size: 14px; color: var(--accent-cyan);">Brauzer Pleyer</span>
             <button onclick="closePlayer()" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;">✕</button>
         </div>
-        <div class="video-container">
-            <video id="mainVideo" controls playsinline></video>
-        </div>
-    </div>
-
-    <!-- ILOVA SOZLAMALARI MODAL OYNASI -->
-    <div class="settings-modal" id="settingsModal">
-        <div class="settings-header">
-            <h2 style="font-size: 18px; font-weight: 800;">⚙️ Ilova Sozlamalari</h2>
-            <button onclick="closeSettings()" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;">✕</button>
-        </div>
-
-        <div class="settings-group">
-            <div class="settings-row">
-                <div>
-                    <div class="setting-title">Video Sifati</div>
-                    <div class="setting-desc">Odatiy video ijro sifatini tanlang</div>
-                </div>
-                <select id="qualitySelect" onchange="saveSetting('quality', this.value)">
-                    <option value="auto">Avto (Tavsiya etiladi)</option>
-                    <option value="1080">1080p Full HD</option>
-                    <option value="720">720p HD</option>
-                    <option value="480">480p SD</option>
-                </select>
-            </div>
-            <div class="settings-row">
-                <div>
-                    <div class="setting-title">Ilova Mavzusi</div>
-                    <div class="setting-desc">Vizual ko'rinish rejimini o'zgartiring</div>
-                </div>
-                <select id="themeSelect" onchange="toggleTheme(this.value)">
-                    <option value="dark">Dark Neon</option>
-                    <option value="oled">OLED Black</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="settings-group">
-            <div class="settings-row">
-                <div>
-                    <div class="setting-title">Ilova Tili</div>
-                    <div class="setting-desc">Interfeys tilini belgilang</div>
-                </div>
-                <select id="langSelect">
-                    <option value="uz">O'zbekcha</option>
-                    <option value="ru">Русский</option>
-                    <option value="en">English</option>
-                </select>
-            </div>
-            <div class="settings-row">
-                <div>
-                    <div class="setting-title">Avto Play</div>
-                    <div class="setting-desc">Videoni av hisoblash va ijro etish</div>
-                </div>
-                <input type="checkbox" id="autoplayCheck" checked>
-            </div>
-            <div class="settings-row">
-                <div>
-                    <div class="setting-title">Bildirishnomalar</div>
-                    <div class="setting-desc">Yangi premyera va ko'rsatuvlar</div>
-                </div>
-                <input type="checkbox" id="notifCheck" checked>
-            </div>
-        </div>
-
-        <div class="settings-group">
-            <div class="setting-title">Xotira va Kesh</div>
-            <div class="setting-desc">Ilovadagi vaqtinchalik ma'lumotlarni tozalang</div>
-            <button class="btn-clear" onclick="clearCache()">🗑 Keshni tozalash (48.2 MB)</button>
-        </div>
-    </div>
-
-    <!-- Bottom Nav -->
-    <div class="bottom-nav">
-        <div class="nav-link active">
-            <span class="nav-icon">🏠</span>
-            <span>Bosh sahifa</span>
-        </div>
-        <div class="nav-link" onclick="triggerSearch()">
-            <span class="nav-icon">🔍</span>
-            <span>Qidirish</span>
-        </div>
-        <div class="nav-link" onclick="alert('Sevimli kontentlar yo\'q')">
-            <span class="nav-icon">💚</span>
-            <span>Sevimlilar</span>
-        </div>
-        <div class="nav-link" onclick="openSettings()">
-            <span class="nav-icon">⚙️</span>
-            <span>Sozlamalar</span>
+        <div class="browser-screen">
+            <video id="activeVideo" controls playsinline></video>
         </div>
     </div>
 
     <script>
-        // 10 Ta Asosiy Bo'limlar Bazasi
+        // Fon Musiqasini Brauzer ruxsati bilan yoqish
+        window.addEventListener('click', () => {
+            const music = document.getElementById('bgMusic');
+            if (music.paused) {
+                music.play().catch(e => console.log('Audio autoplay restricted'));
+            }
+        }, { once: true });
+
+        function toggleAudio() {
+            const music = document.getElementById('bgMusic');
+            const btn = document.getElementById('audioBtn');
+            if (music.paused) {
+                music.play();
+                btn.style.opacity = '1';
+            } else {
+                music.pause();
+                btn.style.opacity = '0.5';
+            }
+        }
+
+        // 10 Ta Anonslar Ma'lumotlar Bazasi
+        const anonsList = [
+            { title: "01. Jonli Efirda maxsus shou start oldi!", tag: "PREMYERA" },
+            { title: "02. Yangi eksklyuziv filmlar premyerasi", tag: "KINO" },
+            { title: "03. Eng so'nggi qiziqarli seriallar", tag: "SERIAL" },
+            { title: "04. Saralangan anime olami yangiliklari", tag: "ANIME" },
+            { title: "05. Bolajonlar uchun sevimli multfilmlar", tag: "MULTFILM" },
+            { title: "06. Haftaning eng sara ko'rsatuvlari", tag: "SHOU" },
+            { title: "07. Sport olamidagi eng muhim uchrashuvlar", tag: "SPORT" },
+            { title: "08. Hit musiqiy qo'shiqlar va konsertlar", tag: "MUSIQA" },
+            { title: "09. Bolalar uchun rivojlantiruvchi darslar", tag: "BOLALAR" },
+            { title: "10. Dunyo va mahalliy eng so'nggi yangiliklar", tag: "YANGILIK" }
+        ];
+
+        const anonsCarousel = document.getElementById('anonsCarousel');
+        anonsList.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'anons-card';
+            card.onclick = () => openPlayer(item.title, 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+            card.innerHTML = `
+                <div class="anons-badge">${item.tag}</div>
+                <div class="anons-title">${item.title}</div>
+                <div style="font-size:10px; color: var(--accent-cyan); font-weight: 700;">Ko'rish uchun bosing →</div>
+            `;
+            anonsCarousel.appendChild(card);
+        });
+
+        // 10 Ta To'rtburchak Bo'limlar
         const categories = [
             { id: "01", name: "JONLI EFIR", icon: "📡", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
             { id: "02", name: "FILMLAR", icon: "🎬", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
@@ -635,109 +401,63 @@
             { id: "10", name: "YANGILIKLAR", icon: "📰", url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" }
         ];
 
-        // Vertikal Ro'yxatni Yuklash
-        const vertListContainer = document.getElementById('verticalList');
+        const gridSections = document.getElementById('gridSections');
         categories.forEach(cat => {
-            const item = document.createElement('div');
-            item.className = 'list-item';
-            item.onclick = () => openPlayer(cat.name, cat.url);
-            item.innerHTML = `
-                <div class="item-left">
-                    <span class="item-num">${cat.id}</span>
-                    <span class="item-icon">${cat.icon}</span>
-                    <span class="item-name">${cat.name}</span>
+            const rect = document.createElement('div');
+            rect.className = 'rect-card';
+            rect.onclick = () => openPlayer(cat.name, cat.url);
+            rect.innerHTML = `
+                <div class="rect-icon">${cat.icon}</div>
+                <div class="rect-info">
+                    <div class="num">BO'LIM ${cat.id}</div>
+                    <div class="name">${cat.name}</div>
                 </div>
-                <span style="color: var(--text-muted); font-size: 14px;">›</span>
             `;
-            vertListContainer.appendChild(item);
+            gridSections.appendChild(rect);
         });
 
-        // Gorizontal Karuselni Yuklash
-        const horizCarousel = document.getElementById('horizontalCarousel');
-        categories.forEach(cat => {
-            const col = document.createElement('div');
-            col.className = 'column-card';
-            col.innerHTML = `
-                <div class="col-header">
-                    <div class="col-num">${cat.id}</div>
-                    <div class="col-title">${cat.name}</div>
-                </div>
-                <img class="mini-poster" src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=200&auto=format&fit=crop" alt="Poster">
-                <img class="mini-poster" src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=200&auto=format&fit=crop" alt="Poster">
-                <div class="btn-barchasi" onclick="openPlayer('${cat.name}', '${cat.url}')">Barchasi</div>
-            `;
-            horizCarousel.appendChild(col);
-        });
-
-        // Real Vaqtdagi Soat
+        // Soat Ishlashi (Toshkent vaqti)
         function updateClock() {
             const now = new Date();
             const secs = now.getSeconds();
             const mins = now.getMinutes();
             const hrs = now.getHours();
 
-            const secDeg = (secs / 60) * 360;
-            const minDeg = ((mins + secs/60) / 60) * 360;
-            const hrDeg = ((hrs % 12 + mins/60) / 12) * 360;
+            document.getElementById('secondHand').style.transform = `rotate(${(secs / 60) * 360}deg)`;
+            document.getElementById('minuteHand').style.transform = `rotate(${((mins + secs/60) / 60) * 360}deg)`;
+            document.getElementById('hourHand').style.transform = `rotate(${((hrs % 12 + mins/60) / 12) * 360}deg)`;
 
-            document.getElementById('secondHand').style.transform = `rotate(${secDeg}deg)`;
-            document.getElementById('minuteHand').style.transform = `rotate(${minDeg}deg)`;
-            document.getElementById('hourHand').style.transform = `rotate(${hrDeg}deg)`;
-
-            const timeStr = now.toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            document.getElementById('digitalTime').innerText = timeStr;
-            
-            const options = { year: 'numeric', month: 'short', day: 'numeric', weekday: 'short' };
-            document.getElementById('digitalDate').innerText = now.toLocaleDateString('uz-UZ', options).toUpperCase();
+            document.getElementById('digitalTime').innerText = now.toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Player Boshqaruvi
-        const videoModal = document.getElementById('videoModal');
-        const mainVideo = document.getElementById('mainVideo');
-        const videoModalTitle = document.getElementById('videoModalTitle');
+        // Pleyer Boshqaruvi (Brauzer rejimi)
+        const playerModal = document.getElementById('playerModal');
+        const activeVideo = document.getElementById('activeVideo');
+        const playerTitle = document.getElementById('playerTitle');
 
         function openPlayer(title, url) {
-            videoModalTitle.innerText = title;
-            mainVideo.src = url;
-            videoModal.classList.add('active');
-            mainVideo.play().catch(e => console.log('Autoplay handled'));
+            playerTitle.innerText = "IKROMJON TV — " + title;
+            activeVideo.src = url;
+            playerModal.classList.add('active');
+            activeVideo.play().catch(e => console.log('Play error'));
         }
 
         function closePlayer() {
-            mainVideo.pause();
-            mainVideo.src = '';
-            videoModal.classList.remove('active');
+            activeVideo.pause();
+            activeVideo.src = '';
+            playerModal.classList.remove('active');
         }
 
-        // SOZLAMALAR MANTIG'I (JavaScript Settings Logic)
-        const settingsModal = document.getElementById('settingsModal');
-
-        function openSettings() {
-            settingsModal.classList.add('active');
-        }
-
-        function closeSettings() {
-            settingsModal.classList.remove('active');
-        }
-
-        function toggleTheme(theme) {
-            if (theme === 'oled') {
-                document.body.classList.add('oled-mode');
-            } else {
-                document.body.classList.remove('oled-mode');
-            }
-        }
-
-        function clearCache() {
-            alert("Ilova keshi muvaffaqiyatli tozalandi (0.0 MB)!");
-        }
-
-        function triggerSearch() {
-            const q = prompt("IKROMJON TV bo'yicha qidiruv:");
-            if(q) alert("'" + q + "' bo'yicha qidiruv natijalari topildi.");
-        }
+        // Kunlik Munajjimlar bashorati generatori
+        const horoTexts = [
+            "Bugun o'zingizga bo'lgan ishonch yuqori bo'ladi. Har qanday murakkab vazifani oson hal qilasiz.",
+            "Moliyaviy masalalarda e'tiborli bo'ling, kutilmagan foyda yoki sovg'a kelishi mumkin.",
+            "Yangi tanishuvlar kelajakdagi rejalaringizga ijobiy ta'sir ko'rsatadi.",
+            "Sog'ligingizga e'tibor qaratib, ochiq havoda ko'proq sayr qilish tavsiya etiladi."
+        ];
+        document.getElementById('horoscopeText').innerText = horoTexts[new Date().getDate() % horoTexts.length];
     </script>
 </body>
 </html>
