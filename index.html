@@ -3,211 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IKROMJON TV — Ultimate Edition</title>
+    <title>IKROMJON TV — Ultra Pro Edition</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root[data-theme="dark"] {
-            --bg-main: #050b14;
-            --bg-card: rgba(13, 22, 38, 0.88);
-            --accent-blue: #0066ff;
-            --accent-cyan: #00f0ff;
-            --border-glow: rgba(0, 102, 255, 0.3);
-            --text-main: #ffffff;
-            --text-sub: #8a99ad;
-            --danger-color: #ff3366;
-            --success-color: #00ff66;
+            --bg-main: #030712;
+            --bg-card: rgba(17, 24, 39, 0.65);
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-purple: #8b5cf6;
+            --border-glow: rgba(255, 255, 255, 0.08);
+            --border-active: rgba(6, 182, 212, 0.5);
+            --text-main: #f9fafb;
+            --text-sub: #9ca3af;
+            --danger-color: #ef4444;
+            --success-color: #10b981;
+            --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
         }
 
         :root[data-theme="light"] {
-            --bg-main: #f0f4f8;
-            --bg-card: rgba(255, 255, 255, 0.92);
-            --accent-blue: #0051cc;
-            --accent-cyan: #00a8ff;
-            --border-glow: rgba(0, 81, 204, 0.2);
+            --bg-main: #f3f4f6;
+            --bg-card: rgba(255, 255, 255, 0.75);
+            --bg-glass: rgba(0, 0, 0, 0.02);
+            --accent-blue: #2563eb;
+            --accent-cyan: #0891b2;
+            --accent-purple: #7c3aed;
+            --border-glow: rgba(0, 0, 0, 0.08);
+            --border-active: rgba(8, 145, 178, 0.5);
             --text-main: #111827;
             --text-sub: #4b5563;
             --danger-color: #dc2626;
-            --success-color: #16a34a;
+            --success-color: #059669;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
 
         body {
             background-color: var(--bg-main);
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(0, 102, 255, 0.18) 0%, transparent 70%),
-                radial-gradient(circle at 80% 80%, rgba(0, 240, 255, 0.08) 0%, transparent 50%);
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(6, 182, 212, 0.1) 0px, transparent 50%);
+            background-attachment: fixed;
             color: var(--text-main);
-            padding-bottom: 75px;
+            padding-bottom: 80px;
             min-height: 100vh;
-            transition: background 0.3s, color 0.3s;
+            overflow-x: hidden;
         }
 
-        /* HEADER */
+        /* GLASSMORPHISM HEADER */
         .app-header {
             position: sticky; top: 0; z-index: 100;
-            background: var(--bg-card);
-            backdrop-filter: blur(16px);
+            background: rgba(3, 7, 18, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-glow);
-            padding: 12px 16px;
+            padding: 14px 20px;
             display: flex; align-items: center; justify-content: space-between;
         }
 
         .brand-logo {
-            display: flex; align-items: center; gap: 6px;
-            font-size: 17px; font-weight: 900; color: var(--text-main);
+            display: flex; align-items: center; gap: 8px;
+            font-size: 18px; font-weight: 800; letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff 30%, var(--text-sub));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
+
         .brand-logo span {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-            padding: 2px 7px; border-radius: 6px; font-size: 10px; color: #fff;
-            box-shadow: 0 0 10px rgba(0, 102, 255, 0.4);
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: padding-box; -webkit-text-fill-color: #fff;
+            padding: 3px 8px; border-radius: 8px; font-size: 10px; font-weight: 900;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
         }
 
-        .header-controls { display: flex; align-items: center; gap: 8px; }
+        .header-controls { display: flex; align-items: center; gap: 10px; }
 
-        .lang-select {
-            background: var(--bg-main); color: var(--accent-cyan);
-            border: 1px solid var(--border-glow); font-size: 11px; font-weight: 700;
-            padding: 4px 8px; border-radius: 8px; outline: none; cursor: pointer;
+        .lang-select, .lock-btn {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glow);
+            color: var(--text-main);
+            font-size: 12px; font-weight: 600;
+            padding: 6px 12px; border-radius: 10px; outline: none;
+            backdrop-filter: blur(10px); transition: all 0.3s; cursor: pointer;
         }
 
-        .lock-btn {
-            background: rgba(0,102,255,0.15); border: 1px solid var(--border-glow);
-            color: var(--accent-cyan); padding: 5px 10px; border-radius: 8px;
-            font-size: 12px; cursor: pointer; font-weight: 700;
+        .lang-select:hover, .lock-btn:hover {
+            border-color: var(--border-active);
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
         }
 
-        /* HERO SECTION */
-        .hero-section { padding: 14px 16px; }
+        /* HERO PRO BANNER */
+        .hero-section { padding: 16px 20px; }
         .hero-card {
-            width: 100%; height: 210px; border-radius: 18px; padding: 16px;
+            width: 100%; height: 230px; border-radius: 24px; padding: 20px;
             display: flex; flex-direction: column; justify-content: flex-end;
             border: 1px solid var(--border-glow);
-            background: linear-gradient(180deg, rgba(5,11,20,0.2) 0%, rgba(5,11,20,0.95) 100%),
-                        url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1000&q=80');
+            background: linear-gradient(180deg, rgba(3, 7, 18, 0) 0%, rgba(3, 7, 18, 0.95) 100%),
+                        url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1200&q=80');
             background-size: cover; background-position: center;
-            position: relative; overflow: hidden;
-        }
-        .hero-tag {
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
-            color: #fff; font-size: 9px; font-weight: 800; padding: 3px 8px;
-            border-radius: 4px; width: max-content; margin-bottom: 6px;
-        }
-        .hero-title { font-size: 17px; font-weight: 900; color: #fff; text-shadow: 0 2px 6px rgba(0,0,0,0.9); }
-        .play-btn {
-            background: linear-gradient(135deg, #ffffff, #d9e6ff); color: #000; border: none;
-            padding: 8px 16px; border-radius: 8px; font-weight: 800;
-            font-size: 11px; cursor: pointer; margin-top: 8px;
-            display: inline-flex; align-items: center; gap: 6px; width: max-content;
+            position: relative; overflow: hidden; box-shadow: var(--card-shadow);
         }
 
-        /* CATEGORY GRID */
-        .category-container {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
-            padding: 0 16px 14px 16px;
+        .hero-tag {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #fff; font-size: 10px; font-weight: 800; padding: 4px 10px;
+            border-radius: 20px; width: max-content; margin-bottom: 8px;
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
         }
+
+        .hero-title { font-size: 20px; font-weight: 800; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+
+        .play-btn {
+            background: #ffffff; color: #000; border: none;
+            padding: 10px 20px; border-radius: 12px; font-weight: 700;
+            font-size: 12px; cursor: pointer; margin-top: 10px;
+            display: inline-flex; align-items: center; gap: 8px; width: max-content;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .play-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3); }
+
+        /* CATEGORY NAVIGATION */
+        .category-container {
+            display: flex; gap: 10px; padding: 0 20px 16px 20px;
+            overflow-x: auto; scrollbar-width: none;
+        }
+        .category-container::-webkit-scrollbar { display: none; }
+
         .cat-box {
             background: var(--bg-card); border: 1px solid var(--border-glow);
-            border-radius: 12px; padding: 8px 4px;
-            display: flex; flex-direction: column; align-items: center; gap: 4px;
-            cursor: pointer; transition: transform 0.2s;
+            border-radius: 16px; padding: 10px 16px; flex-shrink: 0;
+            display: flex; align-items: center; gap: 8px;
+            cursor: pointer; transition: all 0.3s; backdrop-filter: blur(10px);
         }
-        .cat-box:active { transform: scale(0.95); }
-        .cat-icon { font-size: 18px; }
-        .cat-title { font-size: 9px; font-weight: 700; color: var(--text-main); text-align: center; }
 
-        /* SECTIONS & CARDS */
-        .section-header { padding: 12px 16px 6px 16px; display: flex; align-items: center; justify-content: space-between; }
-        .section-title { font-size: 13px; font-weight: 800; color: var(--text-main); }
-        .section-title::before {
-            content: ''; display: inline-block; width: 4px; height: 12px;
-            background: var(--accent-cyan); margin-right: 6px; border-radius: 2px;
+        .cat-box:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.1);
+            transform: translateY(-2px);
         }
+
+        .cat-icon { font-size: 16px; }
+        .cat-title { font-size: 11px; font-weight: 700; color: var(--text-main); white-space: nowrap; }
+
+        /* SECTIONS & GRID CARDS */
+        .section-header { padding: 16px 20px 10px 20px; display: flex; align-items: center; justify-content: space-between; }
+        .section-title { font-size: 15px; font-weight: 800; color: var(--text-main); letter-spacing: -0.3px; }
 
         .horizontal-grid {
-            display: flex; gap: 10px; padding: 0 16px 10px 16px;
+            display: flex; gap: 14px; padding: 0 20px 10px 20px;
             overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
         }
         .horizontal-grid::-webkit-scrollbar { display: none; }
 
         .media-card {
             background: var(--bg-card); border: 1px solid var(--border-glow);
-            border-radius: 12px; cursor: pointer; position: relative; flex-shrink: 0;
-            overflow: hidden;
+            border-radius: 18px; cursor: pointer; position: relative; flex-shrink: 0;
+            overflow: hidden; backdrop-filter: blur(12px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--card-shadow);
         }
 
-        .tv-card { width: 110px; padding: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; }
-        .tv-img { width: 65px; height: 45px; object-fit: contain; margin-bottom: 6px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
-        
-        .radio-card { width: 120px; padding: 10px; text-align: center; background: rgba(0, 102, 255, 0.08); }
-        .radio-icon { font-size: 32px; margin-bottom: 4px; }
+        .media-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 12px 30px rgba(6, 182, 212, 0.25);
+        }
 
-        .movie-card { width: 125px; }
-        .movie-poster { width: 100%; height: 165px; object-fit: cover; }
-        .movie-info { padding: 6px 8px; }
-        .movie-title { font-size: 10px; font-weight: 700; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tv-card { width: 125px; padding: 14px 10px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        .tv-img { width: 65px; height: 50px; object-fit: contain; margin-bottom: 8px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); }
 
+        .radio-card { width: 130px; padding: 14px 10px; text-align: center; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)); }
+        .radio-icon { font-size: 36px; margin-bottom: 6px; }
+
+        .movie-card { width: 135px; }
+        .movie-poster { width: 100%; height: 180px; object-fit: cover; }
+        .movie-info { padding: 10px; }
+        .movie-title { font-size: 11px; font-weight: 700; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* PULSING LIVE BADGE */
         .live-badge {
-            position: absolute; top: 6px; right: 6px;
-            background: #ff0055; color: #fff; padding: 2px 5px;
-            border-radius: 4px; font-size: 8px; font-weight: 900; z-index: 5;
+            position: absolute; top: 8px; right: 8px;
+            background: rgba(239, 68, 68, 0.85); color: #fff; padding: 3px 7px;
+            border-radius: 6px; font-size: 8px; font-weight: 900; z-index: 5;
+            backdrop-filter: blur(4px); box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+            display: flex; align-items: center; gap: 4px;
         }
 
-        /* PIN LOCK OVERLAY */
+        .live-badge::before {
+            content: ''; display: inline-block; width: 5px; height: 5px;
+            background: #fff; border-radius: 50%; animation: pulse 1.2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(1.4); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* PIN LOCK ULTRA OVERLAY */
         .pin-overlay {
-            position: fixed; inset: 0; background: #050b14; z-index: 2000;
-            display: none; flex-direction: column; align-items: center; justify-content: center;
-            padding: 20px;
+            position: fixed; inset: 0; background: rgba(3, 7, 18, 0.95); z-index: 2000;
+            backdrop-filter: blur(30px); display: none; flex-direction: column;
+            align-items: center; justify-content: center; padding: 20px;
         }
         .pin-overlay.active { display: flex; }
-        .pin-title { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 8px; }
-        .pin-sub { font-size: 12px; color: var(--text-sub); margin-bottom: 20px; }
-        .pin-dots { display: flex; gap: 12px; margin-bottom: 30px; }
-        .dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--accent-cyan); }
-        .dot.filled { background: var(--accent-cyan); box-shadow: 0 0 10px var(--accent-cyan); }
-        .pin-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; width: 220px; }
+        .pin-title { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+        .pin-sub { font-size: 12px; color: var(--text-sub); margin-bottom: 24px; }
+        .pin-dots { display: flex; gap: 14px; margin-bottom: 32px; }
+        .dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--border-glow); transition: all 0.2s; }
+        .dot.filled { background: var(--accent-cyan); border-color: var(--accent-cyan); box-shadow: 0 0 15px var(--accent-cyan); }
+        .pin-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; width: 240px; }
         .key-btn {
-            width: 60px; height: 60px; border-radius: 50%;
-            background: rgba(255,255,255,0.08); border: 1px solid var(--border-glow);
-            color: #fff; font-size: 20px; font-weight: 700;
+            width: 65px; height: 65px; border-radius: 50%;
+            background: var(--bg-glass); border: 1px solid var(--border-glow);
+            color: #fff; font-size: 22px; font-weight: 700;
             display: flex; align-items: center; justify-content: center; cursor: pointer;
+            transition: all 0.2s; backdrop-filter: blur(10px);
         }
-        .key-btn:active { background: var(--accent-blue); }
+        .key-btn:active { background: var(--accent-blue); transform: scale(0.92); }
 
-        /* BOTTOM NAV */
+        /* BOTTOM NAV PRO */
         .bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0; height: 60px;
-            background: var(--bg-card); backdrop-filter: blur(20px);
+            position: fixed; bottom: 0; left: 0; right: 0; height: 65px;
+            background: rgba(3, 7, 18, 0.8); backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-top: 1px solid var(--border-glow);
             display: grid; grid-template-columns: repeat(4, 1fr);
             align-items: center; z-index: 200;
         }
-        .nav-item {
-            display: flex; flex-direction: column; align-items: center; gap: 3px;
-            color: var(--text-sub); font-size: 9px; font-weight: 700; cursor: pointer;
-        }
-        .nav-item.active { color: var(--accent-cyan); }
 
-        /* MODALS */
+        .nav-item {
+            display: flex; flex-direction: column; align-items: center; gap: 4px;
+            color: var(--text-sub); font-size: 10px; font-weight: 700; cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-item.active { color: var(--accent-cyan); }
+        .nav-item.active span:first-child { transform: translateY(-2px); }
+
+        /* MODALS & INPUTS */
         .settings-modal {
             position: fixed; inset: 0; background: var(--bg-main);
             z-index: 900; display: none; flex-direction: column; overflow-y: auto;
-            padding: 20px 16px 80px 16px;
+            padding: 24px 20px 80px 20px;
         }
         .settings-modal.active { display: flex; }
-        .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border-glow); }
-        .setting-group { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 12px; padding: 12px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 8px; }
-        .setting-group label { font-size: 11px; font-weight: 700; color: var(--accent-cyan); }
-        .setting-group input, .setting-group select { background: var(--bg-main); color: var(--text-main); border: 1px solid var(--border-glow); padding: 8px; border-radius: 8px; font-size: 12px; }
-        .btn-submit { background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); color: #fff; border: none; padding: 10px; border-radius: 8px; font-weight: 800; font-size: 12px; cursor: pointer; }
+        .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border-glow); }
+        .setting-group { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 18px; padding: 16px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 10px; backdrop-filter: blur(12px); }
+        .setting-group label { font-size: 12px; font-weight: 700; color: var(--accent-cyan); }
+        .setting-group input, .setting-group select { background: var(--bg-glass); color: var(--text-main); border: 1px solid var(--border-glow); padding: 12px; border-radius: 12px; font-size: 12px; outline: none; }
+        .btn-submit { background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); color: #fff; border: none; padding: 12px; border-radius: 12px; font-weight: 800; font-size: 12px; cursor: pointer; transition: all 0.3s; }
+        .btn-submit:hover { opacity: 0.9; box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4); }
 
-        /* PLAYER */
+        /* MODAL PLAYER */
         .modal-player { position: fixed; inset: 0; background: #000; z-index: 1000; display: none; flex-direction: column; }
         .modal-player.active { display: flex; }
-        .player-bar { padding: 12px 16px; background: rgba(5, 11, 20, 0.9); display: flex; justify-content: space-between; align-items: center; color: #fff; }
+        .player-bar { padding: 16px; background: rgba(3, 7, 18, 0.9); display: flex; justify-content: space-between; align-items: center; color: #fff; }
         .player-viewport { flex: 1; display: flex; align-items: center; justify-content: center; }
-        video, audio { width: 100%; max-height: 80vh; }
+        video { width: 100%; max-height: 85vh; border-radius: 12px; }
     </style>
 </head>
 <body>
@@ -240,7 +297,7 @@
 
     <!-- APP HEADER -->
     <header class="app-header">
-        <div class="brand-logo">IKROMJON <span>TV</span></div>
+        <div class="brand-logo">IKROMJON <span>TV PRO</span></div>
         <div class="header-controls">
             <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
                 <option value="uz">🇺🇿 UZ</option>
@@ -257,7 +314,7 @@
         <!-- HERO BANNER -->
         <section class="hero-section">
             <div class="hero-card">
-                <div class="hero-tag" id="tagPremieres">PREMYERA & KINOLAR</div>
+                <div class="hero-tag" id="tagPremieres">TOP PREMYERA</div>
                 <div class="hero-title" id="heroMovieTitle">Dune: Part Two (2024)</div>
                 <button class="play-btn" onclick="playStream('Dune: Part Two', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">
                     <span>▶</span> <span id="btnWatch">TOMOSHA QILISH</span>
@@ -278,7 +335,7 @@
         </div>
 
         <!-- SECTIONS -->
-        <div class="section-header"><div class="section-title" data-i18n="sec_uz_tv">🇺🇿 O'zbekiston Telekanallari (MTRK)</div></div>
+        <div class="section-header"><div class="section-title" data-i18n="sec_uz_tv">🇺🇿 O'zbekiston Telekanallari</div></div>
         <div class="horizontal-grid" id="uzTvRow"></div>
 
         <div class="section-header"><div class="section-title" data-i18n="sec_radio">📻 O'zbekiston Radio Stansiyalari</div></div>
@@ -287,13 +344,13 @@
         <div class="section-header"><div class="section-title" data-i18n="sec_premieres">🔥 Sara Premyeralar (2024)</div></div>
         <div class="horizontal-grid" id="premieresRow"></div>
 
-        <div class="section-header"><div class="section-title" data-i18n="sec_foreign">🌍 Jahon Kinematografiyasi (Xorijiy)</div></div>
+        <div class="section-header"><div class="section-title" data-i18n="sec_foreign">🌍 Jahon Kinematografiyasi</div></div>
         <div class="horizontal-grid" id="foreignRow"></div>
 
         <div class="section-header"><div class="section-title" data-i18n="sec_cartoons">🧸 Multfilmlar</div></div>
         <div class="horizontal-grid" id="cartoonsRow"></div>
 
-        <div class="section-header"><div class="section-title" data-i18n="sec_comedy">😂 Komediya va Qiziqarli Filmlar</div></div>
+        <div class="section-header"><div class="section-title" data-i18n="sec_comedy">😂 Komediya Filmlari</div></div>
         <div class="horizontal-grid" id="comedyRow"></div>
 
         <div class="section-header"><div class="section-title" data-i18n="sec_drama">🎭 Drama & Seriallar</div></div>
@@ -345,8 +402,8 @@
         <div class="setting-group">
             <label data-i18n="lbl_theme">🎨 Ilova Mavzusi:</label>
             <select id="themeSelect" onchange="changeTheme(this.value)">
-                <option value="dark">🌑 Qorong'i (Dark)</option>
-                <option value="light">☀️ Yorug' (Light)</option>
+                <option value="dark">🌑 Qorong'i (Dark Glass)</option>
+                <option value="light">☀️ Yorug' (Light Glass)</option>
             </select>
         </div>
 
@@ -365,8 +422,8 @@
     <!-- PLEYER -->
     <div class="modal-player" id="modalPlayer">
         <div class="player-bar">
-            <span id="playerTitle" style="font-size:12px; font-weight:700;">Ijro etilmoqda...</span>
-            <button onclick="closePlayer()" style="background:none; border:none; color:#fff; font-size:20px;">✕</button>
+            <span id="playerTitle" style="font-size:13px; font-weight:700;">Ijro etilmoqda...</span>
+            <button onclick="closePlayer()" style="background:none; border:none; color:#fff; font-size:22px;">✕</button>
         </div>
         <div class="player-viewport">
             <video id="activeVideo" controls playsinline></video>
@@ -375,21 +432,20 @@
 
     <!-- BOTTOM NAV -->
     <nav class="bottom-nav">
-        <div class="nav-item active" onclick="switchTab('main')"><span style="font-size:18px;">🏠</span><span data-i18n="nav_home">Bosh sahifa</span></div>
-        <div class="nav-item" onclick="scrollToSection('radioRow')"><span style="font-size:18px;">📻</span><span data-i18n="nav_radio">Radio</span></div>
-        <div class="nav-item" onclick="switchTab('add')"><span style="font-size:18px;">▶</span><span data-i18n="nav_upload">Yuklash</span></div>
-        <div class="nav-item" onclick="switchTab('settings')"><span style="font-size:18px;">⚙️</span><span data-i18n="nav_settings">Sozlamalar</span></div>
+        <div class="nav-item active" onclick="switchTab('main')"><span style="font-size:20px;">🏠</span><span data-i18n="nav_home">Bosh sahifa</span></div>
+        <div class="nav-item" onclick="scrollToSection('radioRow')"><span style="font-size:20px;">📻</span><span data-i18n="nav_radio">Radio</span></div>
+        <div class="nav-item" onclick="switchTab('add')"><span style="font-size:20px;">▶</span><span data-i18n="nav_upload">Yuklash</span></div>
+        <div class="nav-item" onclick="switchTab('settings')"><span style="font-size:20px;">⚙️</span><span data-i18n="nav_settings">Sozlamalar</span></div>
     </nav>
 
     <script>
-        // TRANSLATION DICTIONARY
         const i18n = {
             uz: {
                 nav_tv: "Jonli TV", nav_radio: "Radio", nav_premieres: "Premyera", nav_foreign: "Xorijiy",
                 nav_cartoons: "Multfilm", nav_comedy: "Komediya", nav_drama: "Drama", nav_indian: "Hind",
                 nav_home: "Bosh sahifa", nav_upload: "Yuklash", nav_settings: "Sozlamalar",
-                sec_uz_tv: "🇺🇿 O'zbekiston Telekanallari (Jonli Efir)", sec_radio: "📻 O'zbekiston Radio Stansiyalari",
-                sec_premieres: "🔥 Sara Premyeralar (2024)", sec_foreign: "🌍 Jahon Kinematografiyasi (Xorijiy)",
+                sec_uz_tv: "🇺🇿 O'zbekiston Telekanallari", sec_radio: "📻 O'zbekiston Radio Stansiyalari",
+                sec_premieres: "🔥 Sara Premyeralar (2024)", sec_foreign: "🌍 Jahon Kinematografiyasi",
                 sec_cartoons: "🧸 Multfilmlar", sec_comedy: "😂 Komediya Filmlari", sec_drama: "🎭 Drama & Seriallar",
                 sec_indian: "🇮🇳 Hind Filmlari", title_upload: "📁 Galereyadan Yuklash", title_settings: "⚙️ Ilova Sozlamalari",
                 btn_save: "💾 Saqlash", btn_set_pin: "PIN Kodni Saqlash", btn_disable_pin: "PIN Kodni O'chirish",
@@ -400,7 +456,7 @@
                 nav_tv: "ТВ Эфир", nav_radio: "Радио", nav_premieres: "Премьеры", nav_foreign: "Зарубежные",
                 nav_cartoons: "Мультики", nav_comedy: "Комедии", nav_drama: "Драмы", nav_indian: "Индийские",
                 nav_home: "Главная", nav_upload: "Загрузка", nav_settings: "Настройки",
-                sec_uz_tv: "🇺🇿 Телеканалы Узбекистана (Прямой эфир)", sec_radio: "📻 Радиостанции Узбекистана",
+                sec_uz_tv: "🇺🇿 Телеканалы Узбекистана", sec_radio: "📻 Радиостанции Узбекистана",
                 sec_premieres: "🔥 Новые Премьеры (2024)", sec_foreign: "🌍 Зарубежное Кино",
                 sec_cartoons: "🧸 Мультфильмы", sec_comedy: "😂 Комедии", sec_drama: "🎭 Драмы и Сериалы",
                 sec_indian: "🇮🇳 Индийское Кино", title_upload: "📁 Загрузить из галереи", title_settings: "⚙️ Настройки",
@@ -446,9 +502,7 @@
             }
         };
 
-        // DEFAULT CONTENT DATABASE
         const defaultMediaData = [
-            // UZBEKISTAN TELEVISION (MTRK)
             { id: 10, category: "uzTv", title: "O'zbekiston HD", img: "https://upload.wikimedia.org/wikipedia/commons/1/12/O%27zbekiston_TV_logo.png", stream: "https://live.mtrk.uz/hls/uzbekistan/index.m3u8" },
             { id: 11, category: "uzTv", title: "Yoshlar TV", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Yoshlar_TV_logo.svg/300px-Yoshlar_TV_logo.svg.png", stream: "https://live.mtrk.uz/hls/yoshlar/index.m3u8" },
             { id: 12, category: "uzTv", title: "Sport HD", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Sport_TV_Uzbekistan.png/320px-Sport_TV_Uzbekistan.png", stream: "https://live.mtrk.uz/hls/sport/index.m3u8" },
@@ -458,44 +512,22 @@
             { id: 16, category: "uzTv", title: "Dunyo bo'ylab", img: "https://upload.wikimedia.org/wikipedia/commons/1/1a/Dunyo_boylab_logo.png", stream: "https://live.mtrk.uz/hls/dunyoboylab/index.m3u8" },
             { id: 17, category: "uzTv", title: "Bolajon TV", img: "https://upload.wikimedia.org/wikipedia/commons/3/30/Bolajon_TV_logo.png", stream: "https://live.mtrk.uz/hls/bolajon/index.m3u8" },
             { id: 18, category: "uzTv", title: "O'zbekiston 24", img: "https://upload.wikimedia.org/wikipedia/commons/6/69/Uzbekiston_24_logo.png", stream: "https://live.mtrk.uz/hls/uzbekiston24/index.m3u8" },
-
-            // UZBEKISTAN RADIO STATIONS
             { id: 50, category: "radio", title: "O'zbekiston Radiosi", img: "📻", stream: "https://radio.mtrk.uz/uzbekiston" },
             { id: 51, category: "radio", title: "Yoshlar FM", img: "📻", stream: "https://radio.mtrk.uz/yoshlar" },
             { id: 52, category: "radio", title: "Oriat Dono 106.5 FM", img: "📻", stream: "https://stream.oriat.uz/dono128" },
             { id: 53, category: "radio", title: "Oriat FM 100.5", img: "📻", stream: "https://stream.oriat.uz/oriat128" },
-            { id: 54, category: "radio", title: "Radio Toshkent", img: "📻", stream: "https://radio.mtrk.uz/toshkent" },
-            { id: 55, category: "radio", title: "Maxima FM 105.4", img: "📻", stream: "https://stream.maxima.uz/live" },
-
-            // PREMIERES (2024 Blockbusters)
             { id: 101, category: "premieres", title: "Dune: Part Two (2024)", img: "https://m.media-amazon.com/images/M/MV5BN2QyMDgwM2MtGWJmNy00Mzc4LWE1M2ItMDBhM2JiMWM4ZmE1XkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
             { id: 102, category: "premieres", title: "Oppenheimer (2023)", img: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ5LTk4OWEtZmE6M2JhM2JkZDgwXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
-            { id: 103, category: "premieres", title: "Spider-Man: Across Spider-Verse", img: "https://m.media-amazon.com/images/M/MV5BMzI0NmJjNDgtNGExMS00NGJhLTg3N2ItNzM1ZTlkZmFiODliXkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
-            { id: 104, category: "premieres", title: "Avatar 2: The Way of Water", img: "https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctYzE0Mi00YTY4LWJiNDktY2ExM2I4ZjA4ZDcxXkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
-            { id: 105, category: "premieres", title: "Interstellar (Classic HD)", img: "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
-
-            // FOREIGN MOVIES
             { id: 201, category: "foreign", title: "Inception (Boshlanish)", img: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutback2012.mp4" },
-            { id: 202, category: "foreign", title: "Gladiator (2000)", img: "https://m.media-amazon.com/images/M/MV5BMDliMmNhNDEtODUyOS00M2UxLTgxNjgtOJlNDhhNDI1NWZlXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
-            { id: 203, category: "foreign", title: "Titanic (1997 HD)", img: "https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWEzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
-            { id: 204, category: "foreign", title: "Fast X (Forsaj 10)", img: "https://m.media-amazon.com/images/M/MV5BNzZmOTU1ZTEtYzLzc00NzA2LTg1N2QtOGJiNTM3AxXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" },
-
-            // CARTOONS
             { id: 301, category: "cartoons", title: "Tom va Jerry HD", img: "https://m.media-amazon.com/images/M/MV5BYzA2Nzk5M2EtNWY4Ny00ZjE3LThkZTUtZjE0ZTk5MGYwMzNhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
-            { id: 302, category: "cartoons", title: "Kung Fu Panda 4", img: "https://m.media-amazon.com/images/M/MV5BY2ZiNWY3ODgtM2IzOC00N2I0LTgwNzYtNzdhZGFlOWZlNWNmXkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
-
-            // COMEDY
             { id: 401, category: "comedy", title: "Mister Bean sarguzashtlari", img: "https://m.media-amazon.com/images/M/MV5BMTgwMzI5NTM5MF5BMl5BanBnXkFtZTcwMTQ2Mzg2OQ@@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
-
-            // INDIAN
             { id: 501, category: "indian", title: "3 Ahmoq (3 Idiots)", img: "https://m.media-amazon.com/images/M/MV5BNTkyOGVjMGEtNDQzMy00DY1LWIwZmUtMGE2ZDAyOWE3YmJiXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" }
         ];
 
         let db;
         let enteredPin = "";
 
-        // DB INITIALIZATION
-        const request = indexedDB.open("IkromjonTV_v10", 1);
+        const request = indexedDB.open("IkromjonTV_UltraDB", 1);
         request.onupgradeneeded = (e) => {
             db = e.target.result;
             if (db.objectStoreNames.contains("mediaStore")) db.deleteObjectStore("mediaStore");
@@ -541,7 +573,6 @@
             }
         }
 
-        // RENDER METHOD
         function renderAllContent() {
             getAllMedia((items) => {
                 const rows = ['uzTv', 'radio', 'premieres', 'foreign', 'cartoons', 'comedy', 'drama', 'indian'];
@@ -558,7 +589,7 @@
                         card.className = 'media-card tv-card';
                         card.onclick = () => playStream(item.title, item.stream);
                         card.innerHTML = `
-                            <span class="live-badge">JONLI</span>
+                            <span class="live-badge">LIVE</span>
                             <img src="${item.img}" class="tv-img" onerror="this.src='https://picsum.photos/100/100'">
                             <div class="movie-title">${item.title}</div>
                         `;
@@ -582,7 +613,6 @@
             });
         }
 
-        // PIN LOCK LOGIC
         function checkPinOnStartup() {
             const savedPin = localStorage.getItem('app_pin_code');
             if (savedPin) {
@@ -594,9 +624,7 @@
             if (enteredPin.length < 4) {
                 enteredPin += num;
                 updatePinDots();
-                if (enteredPin.length === 4) {
-                    setTimeout(verifyPin, 100);
-                }
+                if (enteredPin.length === 4) setTimeout(verifyPin, 150);
             }
         }
 
@@ -625,7 +653,7 @@
         function lockAppNow() {
             const savedPin = localStorage.getItem('app_pin_code');
             if (!savedPin) {
-                alert("PIN kod o'rnatilmagan! Avval sozlamalardan PIN-kod kiriting.");
+                alert("Avval sozlamalardan PIN-kod o'rnating!");
                 switchTab('settings');
             } else {
                 clearPin();
@@ -637,10 +665,10 @@
             const pin = document.getElementById('pinCodeInput').value;
             if (pin.length === 4 && !isNaN(pin)) {
                 localStorage.setItem('app_pin_code', pin);
-                alert("PIN-kod muvaffaqiyatli saqlandi!");
+                alert("PIN-kod saqlandi!");
                 document.getElementById('pinCodeInput').value = "";
             } else {
-                alert("Iltimos, 4 xonali faqat raqamlardan iborat PIN kiriting!");
+                alert("4 xonali raqam kiriting!");
             }
         }
 
@@ -649,11 +677,9 @@
             alert("PIN-kod o'chirildi!");
         }
 
-        // LANGUAGE LOGIC
         function changeLanguage(lang) {
             localStorage.setItem('app_lang', lang);
             const dict = i18n[lang] || i18n['uz'];
-            
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (dict[key]) el.innerText = dict[key];
@@ -661,7 +687,6 @@
             document.getElementById('langSelect').value = lang;
         }
 
-        // MEDIA UPLOAD
         async function handleAddNewContent(e) {
             e.preventDefault();
             const category = document.getElementById('newCategory').value;
@@ -676,7 +701,7 @@
             if (videoFile) streamUrl = await convertFileToBase64(videoFile);
 
             saveMediaItem({ id: Date.now(), category, title, img: imgUrl, stream: streamUrl }, () => {
-                alert("Muvaffaqiyatli saqlandi!");
+                alert("Saqlandi!");
                 e.target.reset();
                 switchTab('main');
                 renderAllContent();
@@ -691,7 +716,6 @@
             });
         }
 
-        // PLAYER LOGIC
         let hlsPlayer = null;
         function playStream(title, url) {
             document.getElementById('playerTitle').innerText = title;
@@ -736,7 +760,6 @@
             localStorage.setItem('app_theme', theme);
         }
 
-        // INITIAL LOAD
         window.onload = () => {
             const savedLang = localStorage.getItem('app_lang') || 'uz';
             changeLanguage(savedLang);
