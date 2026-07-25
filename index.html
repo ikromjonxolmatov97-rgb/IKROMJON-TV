@@ -74,7 +74,7 @@ class _NavigationHandlerState extends State<NavigationHandler> {
 }
 
 // ---------------------------------------------------------
-// 1. HOME & TV SECTION (Moslashuvchan)
+// 1. HOME & TV SECTION
 // ---------------------------------------------------------
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -156,10 +156,10 @@ class HomeScreen extends StatelessWidget {
             onPressed: () => _openTVPlayer(context, "Asosiy Jonli Efir"),
           ),
           const SizedBox(width: 8),
-          Expanded(
+          const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text('IKROMJON', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
                 Text('JONLI EFIR', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.purpleAccent), overflow: TextOverflow.ellipsis),
               ],
@@ -350,11 +350,11 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                 inactiveColor: Colors.white24,
                 onChanged: (val) => setState(() => _sliderValue = val),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Text('01:15', style: TextStyle(color: Colors.white54, fontSize: 12)),
                     Text('03:45', style: TextStyle(color: Colors.white54, fontSize: 12)),
                   ],
@@ -387,7 +387,6 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
-  @builders
   @override
   Widget build(BuildContext context) {
     return Scaffold(
