@@ -31,7 +31,7 @@
             padding-bottom: 120px; min-height: 100vh; overflow-x: hidden;
         }
 
-        /* SMART TOP BAR */
+        /* TOP BAR */
         .smart-top-bar {
             background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-glow); padding: 6px 16px;
@@ -49,7 +49,6 @@
         .brand-logo { font-size: 20px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 6px; }
         .brand-logo span { background: var(--accent-gradient); padding: 3px 8px; border-radius: 8px; font-size: 11px; }
         .welcome-subtext { font-size: 12px; font-weight: 700; color: var(--accent-glow); margin-top: 2px; }
-        
         .lang-select { background: var(--bg-glass); border: 1px solid var(--border-glow); color: #fff; padding: 5px 8px; border-radius: 10px; font-size: 11px; outline: none; }
 
         /* SEARCH BAR */
@@ -69,7 +68,6 @@
             scrollbar-width: none; -webkit-overflow-scrolling: touch;
         }
         .hero-slider-wrapper::-webkit-scrollbar { display: none; }
-        
         .hero-slide-card {
             flex: 0 0 85%; scroll-snap-align: center; height: 190px; border-radius: 24px;
             position: relative; overflow: hidden; border: 1px solid var(--border-glow);
@@ -91,13 +89,12 @@
         /* GRID SYSTEM */
         .horizontal-grid { display: flex; gap: 14px; padding: 0 20px 10px 20px; overflow-x: auto; scrollbar-width: none; }
         .horizontal-grid::-webkit-scrollbar { display: none; }
-
         .media-card {
             background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 20px;
             position: relative; flex-shrink: 0; overflow: hidden; width: 150px; transition: all 0.3s;
         }
         .media-card:hover { border-color: var(--accent-glow); }
-        .media-thumb { width: 100%; height: 95px; object-fit: cover; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; position: relative; }
+        .media-thumb { width: 100%; height: 95px; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; }
         .media-info { padding: 8px; }
         .media-title { font-size: 11px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 6px; }
 
@@ -107,16 +104,16 @@
         .btn-del { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid #ef4444; }
         .btn-fav { background: rgba(255, 255, 255, 0.1); color: #ffcc00; }
 
-        /* MULTIMEDIA PAPKALAR */
+        /* FOLDERS */
         .folders-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 0 20px; }
         .folder-card { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 16px; padding: 12px; text-align: center; cursor: pointer; }
         .folder-icon { font-size: 22px; margin-bottom: 4px; }
         .folder-name { font-size: 10px; font-weight: 700; color: var(--text-sub); }
 
-        /* ACTION BOX */
+        /* UPLOAD BOX */
         .action-box-bottom {
             background: var(--bg-card); border: 1px dashed var(--accent-glow);
-            border-radius: 20px; padding: 16px; margin: 20px 20px 10px 20px; display: flex; flex-direction: column; gap: 10px;
+            border-radius: 20px; padding: 16px; margin: 20px; display: flex; flex-direction: column; gap: 10px;
         }
         .btn-action {
             background: var(--accent-gradient); color: #fff; border: none;
@@ -136,7 +133,6 @@
         .modal-player { position: fixed; inset: 0; z-index: 3000; background: #000; display: none; flex-direction: column; }
         .modal-player.active { display: flex; }
         .player-header { padding: 14px 16px; background: rgba(0,0,0,0.9); display: flex; justify-content: space-between; align-items: center; color: #fff; }
-        .player-tools { display: flex; gap: 8px; }
         .tool-btn { background: var(--bg-glass); border: 1px solid var(--border-glow); color: #fff; padding: 6px 10px; border-radius: 8px; font-size: 11px; cursor: pointer; }
 
         /* BOTTOM NAV */
@@ -159,7 +155,7 @@
 </head>
 <body>
 
-    <!-- SMART TOP BAR -->
+    <!-- TOP BAR -->
     <div class="smart-top-bar">
         <span>📍 Tashkent, UZB</span>
         <div class="widget-info">
@@ -168,20 +164,20 @@
         </div>
     </div>
 
-    <!-- MAIN HEADER -->
+    <!-- HEADER -->
     <header class="app-header-box">
         <div class="header-top">
-            <div class="brand-logo">IKROMJON TV <span>LIVE STREAM</span></div>
-            <select class="lang-select" id="langSelect">
+            <div class="brand-logo">IKROMJON TV <span>LIVE</span></div>
+            <select class="lang-select">
                 <option value="uz">🇺🇿 O'zbek</option>
                 <option value="ru">🇷🇺 Русский</option>
                 <option value="en">🇬🇧 English</option>
             </select>
         </div>
-        <div class="welcome-subtext" id="welcomeMsg">✨ IKROMJON TV mobil ilovasiga xush kelibsiz!</div>
+        <div class="welcome-subtext">✨ IKROMJON TV mobil ilovasiga xush kelibsiz!</div>
     </header>
 
-    <!-- SEARCH BAR -->
+    <!-- SEARCH -->
     <div class="search-container">
         <div class="search-box">
             <span class="search-icon">🔍</span>
@@ -191,7 +187,7 @@
 
     <main id="mainView">
         
-        <!-- PREMYERA VA ANONSLAR -->
+        <!-- PREMYERA -->
         <div class="section-header">
             <span>🔥 Premyera va Anonslar</span>
             <span style="font-size: 11px; color: var(--accent-glow);">Surib ko'ring ➔</span>
@@ -205,14 +201,6 @@
                     <button class="play-btn-sm" onclick="playVideoDirect('Dune: Part Two', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">▶ TOMOSHA QILISH</button>
                 </div>
             </div>
-            <div class="hero-slide-card" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80');">
-                <div class="hero-overlay"></div>
-                <div class="hero-content">
-                    <div class="hero-tag">🎬 TEZ KUNDA</div>
-                    <div class="hero-title">Avatar: Fire and Ash</div>
-                    <button class="play-btn-sm" onclick="alert('Tez kunda efirga uzatiladi!')">🔔 ANONS REJIMI</button>
-                </div>
-            </div>
         </div>
 
         <!-- CATEGORIES -->
@@ -223,11 +211,11 @@
             <div class="cat-box"><span>⭐</span><span class="cat-title">Sevimlilar</span></div>
         </div>
 
-        <!-- TELEKANALLAR BO'LIMI (JONLI EFIR) -->
+        <!-- TV CHANNELS -->
         <div class="section-header"><span>📡 Telekanallar (Barqaror Jonli Efir)</span></div>
         <div class="horizontal-grid" id="mediaContainer"></div>
 
-        <!-- MULTIMEDIA PAPKALAR -->
+        <!-- FOLDERS -->
         <div class="section-header"><span>📁 Multimedia Papkalar</span></div>
         <div class="folders-grid">
             <div class="folder-card"><div class="folder-icon">🎵</div><div class="folder-name">Musiqa</div></div>
@@ -236,7 +224,7 @@
             <div class="folder-card"><div class="folder-icon">📥</div><div class="folder-name">Kesh</div></div>
         </div>
 
-        <!-- GALEREYADAN YUKLASH BO'LIMI -->
+        <!-- UPLOAD SECTION -->
         <div class="action-box-bottom">
             <div style="font-weight: 800; font-size: 13px;">📁 Galereyadan Video yoki Rasm Yuklash</div>
             <p style="font-size: 11px; color: var(--text-sub);">Qurilmangiz xotirasidagi video va fotolarni ilovaga qo'shing:</p>
@@ -248,7 +236,7 @@
 
     </main>
 
-    <!-- SOZLAMALAR MODAL -->
+    <!-- SETTINGS MODAL -->
     <div class="settings-modal" id="settingsView">
         <h2 style="margin-bottom:16px;">⚙️ Ilova Sozlamalari</h2>
         <div class="setting-group">
@@ -258,10 +246,6 @@
                 <option value="purple">Purple Cyberpunk</option>
                 <option value="gold">Gold Luxury</option>
             </select>
-        </div>
-        <div class="setting-group">
-            <label>🔒 Ilova PIN Qulfi:</label>
-            <input type="password" id="appPinInput" placeholder="4 xonali PIN kiriting" maxlength="4">
         </div>
         <button class="btn-action" style="margin-top: 15px;" onclick="switchTab('main')">⬅️ Orqaga Qaytish</button>
     </div>
@@ -277,13 +261,11 @@
         </div>
     </div>
 
-    <!-- PLEYER MODAL -->
+    <!-- PLAYER MODAL -->
     <div class="modal-player" id="modalPlayer">
         <div class="player-header">
             <span id="playerTitle" style="font-weight:800; font-size:13px;">...</span>
-            <div class="player-tools">
-                <button class="tool-btn" onclick="closePlayer()">✕ Yopish</button>
-            </div>
+            <button class="tool-btn" onclick="closePlayer()">✕ Yopish</button>
         </div>
         <div id="playerContainer" style="width:100%; height:100%; flex:1; display:flex; align-items:center; justify-content:center; background:#000;"></div>
     </div>
@@ -303,26 +285,13 @@
             document.getElementById('liveClock').innerText = d.toLocaleTimeString();
         }, 1000);
 
-        // SLIDER
-        const slider = document.getElementById('heroSlider');
-        setInterval(() => {
-            if (slider) {
-                if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
-                    slider.scrollTo({ left: 0, behavior: 'smooth' });
-                } else {
-                    slider.scrollBy({ left: 260, behavior: 'smooth' });
-                }
-            }
-        }, 4500);
-
-        // 100% ISHLAYDIGAN JONLI TV KANALLAR RO'YXATI
+        // ISHLAYDIGAN TELEKANALLAR RO'YXATI
         const workingChannels = [
-            { id: 1, title: "UzReport TV (Jonli)", type: "yt", src: "https://www.youtube.com/embed/live_stream?channel=UC8x5k3Kj96X1N13pX9W1hGg&autoplay=1", icon: "📺", fav: true },
-            { id: 2, title: "O'zbekiston 24 (Jonli)", type: "yt", src: "https://www.youtube.com/embed/live_stream?channel=UCXw8N1Q06i9T2S3L3E2u7Ww&autoplay=1", icon: "🔴", fav: true },
-            { id: 3, title: "Euronews (Jonli)", type: "yt", src: "https://www.youtube.com/embed/live_stream?channel=UCSrZ3UV4jDididA8986LWwA&autoplay=1", icon: "🌐", fav: false },
-            { id: 4, title: "NASA TV (Kosmos)", type: "yt", src: "https://www.youtube.com/embed/21X5lGlDOfg?autoplay=1", icon: "🚀", fav: true },
-            { id: 5, title: "Red Bull TV", type: "hls", src: "https://rbmn-live.akamaized.net/hls/live/591070/GEO_STATION_1/master.m3u8", icon: "🏎️", fav: false },
-            { id: 6, title: "Muzik TV Live", type: "yt", src: "https://www.youtube.com/embed/live_stream?channel=UC_Muzik_TV&autoplay=1", icon: "🎵", fav: false }
+            { id: 1, title: "UzReport TV", type: "yt", src: "https://www.youtube.com/embed/live_stream?channel=UC8x5k3Kj96X1N13pX9W1hGg&autoplay=1", icon: "📺", fav: true },
+            { id: 2, title: "O'zbekiston 24", type: "yt", src: "https://www.youtube.com/embed/live_stream?channel=UCXw8N1Q06i9T2S3L3E2u7Ww&autoplay=1", icon: "🔴", fav: true },
+            { id: 3, title: "Euronews", type: "yt", src: "https://www.youtube.com/embed/live_stream?channel=UCSrZ3UV4jDididA8986LWwA&autoplay=1", icon: "🌐", fav: false },
+            { id: 4, title: "NASA TV", type: "yt", src: "https://www.youtube.com/embed/21X5lGlDOfg?autoplay=1", icon: "🚀", fav: true },
+            { id: 5, title: "Red Bull TV", type: "hls", src: "https://rbmn-live.akamaized.net/hls/live/591070/GEO_STATION_1/master.m3u8", icon: "🏎️", fav: false }
         ];
 
         let mediaData = JSON.parse(localStorage.getItem('ikromjon_working_tv')) || workingChannels;
@@ -373,7 +342,6 @@
             alert("Fayl muvaffaqiyatli qo'shildi!");
         }
 
-        // TELEKANALNI AYLANTIRIB O'YNATISH
         function playChannel(id) {
             const item = mediaData.find(m => m.id == id);
             if (!item) return;
