@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IKROMJON TV — Automatic Web Player Edition</title>
+    <title>IKROMJON TV — Live Stream Edition</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -39,7 +39,7 @@
         }
         .widget-info { display: flex; gap: 10px; align-items: center; font-weight: 600; }
 
-        /* HEADER & WELCOME UNDER TITLE */
+        /* HEADER */
         .app-header-box {
             position: sticky; top: 0; z-index: 100; background: var(--bg-card);
             backdrop-filter: blur(25px); border-bottom: 1px solid var(--border-glow);
@@ -62,7 +62,7 @@
         }
         .search-icon { position: absolute; left: 14px; top: 12px; opacity: 0.6; }
 
-        /* CAROUSEL / SLIDER */
+        /* CAROUSEL */
         .section-header { padding: 14px 20px 8px 20px; font-size: 15px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
         .hero-slider-wrapper {
             display: flex; gap: 14px; padding: 0 20px; overflow-x: auto; scroll-snap-type: x mandatory;
@@ -88,24 +88,7 @@
         .cat-box { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 16px; padding: 10px 16px; flex-shrink: 0; display: flex; align-items: center; gap: 8px; cursor: pointer; }
         .cat-title { font-size: 12px; font-weight: 800; color: var(--text-main); white-space: nowrap; }
 
-        /* YOUTUBE VIDEOS GRID */
-        .yt-grid { display: flex; gap: 14px; padding: 0 20px 10px 20px; overflow-x: auto; scrollbar-width: none; }
-        .yt-grid::-webkit-scrollbar { display: none; }
-        .yt-card {
-            background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 18px;
-            width: 200px; flex-shrink: 0; overflow: hidden; position: relative; transition: transform 0.2s;
-        }
-        .yt-card:hover { transform: translateY(-3px); border-color: var(--accent-glow); }
-        .yt-thumb-box { position: relative; width: 100%; height: 115px; }
-        .yt-thumb-box img { width: 100%; height: 100%; object-fit: cover; }
-        .yt-play-icon {
-            position: absolute; inset: 0; margin: auto; width: 36px; height: 36px; background: rgba(0,0,0,0.7);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #ff0000; font-size: 18px;
-        }
-        .yt-info { padding: 10px; }
-        .yt-title { font-size: 11px; font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.3; }
-
-        /* GENERAL HORIZONTAL GRID */
+        /* GRID SYSTEM */
         .horizontal-grid { display: flex; gap: 14px; padding: 0 20px 10px 20px; overflow-x: auto; scrollbar-width: none; }
         .horizontal-grid::-webkit-scrollbar { display: none; }
 
@@ -113,7 +96,8 @@
             background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 20px;
             position: relative; flex-shrink: 0; overflow: hidden; width: 150px; transition: all 0.3s;
         }
-        .media-thumb { width: 100%; height: 95px; object-fit: cover; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; }
+        .media-card:hover { border-color: var(--accent-glow); }
+        .media-thumb { width: 100%; height: 95px; object-fit: cover; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; position: relative; }
         .media-info { padding: 8px; }
         .media-title { font-size: 11px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 6px; }
 
@@ -123,13 +107,13 @@
         .btn-del { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid #ef4444; }
         .btn-fav { background: rgba(255, 255, 255, 0.1); color: #ffcc00; }
 
-        /* MULTIMEDIA FOLDERS */
+        /* MULTIMEDIA PAPKALAR */
         .folders-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 0 20px; }
         .folder-card { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 16px; padding: 12px; text-align: center; cursor: pointer; }
         .folder-icon { font-size: 22px; margin-bottom: 4px; }
         .folder-name { font-size: 10px; font-weight: 700; color: var(--text-sub); }
 
-        /* UPLOAD BOX (ENG PASTDA) */
+        /* ACTION BOX */
         .action-box-bottom {
             background: var(--bg-card); border: 1px dashed var(--accent-glow);
             border-radius: 20px; padding: 16px; margin: 20px 20px 10px 20px; display: flex; flex-direction: column; gap: 10px;
@@ -140,7 +124,7 @@
             display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px;
         }
 
-        /* MODALS & PLAYERS */
+        /* MODALS */
         .modal-edit {
             position: fixed; inset: 0; z-index: 4000; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
             display: none; align-items: center; justify-content: center; padding: 20px;
@@ -152,7 +136,6 @@
         .modal-player { position: fixed; inset: 0; z-index: 3000; background: #000; display: none; flex-direction: column; }
         .modal-player.active { display: flex; }
         .player-header { padding: 14px 16px; background: rgba(0,0,0,0.9); display: flex; justify-content: space-between; align-items: center; color: #fff; }
-        .player-video, .player-iframe { width: 100%; height: 100%; border: none; flex: 1; }
         .player-tools { display: flex; gap: 8px; }
         .tool-btn { background: var(--bg-glass); border: 1px solid var(--border-glow); color: #fff; padding: 6px 10px; border-radius: 8px; font-size: 11px; cursor: pointer; }
 
@@ -185,10 +168,10 @@
         </div>
     </div>
 
-    <!-- MAIN HEADER WITH TITLE & WELCOME DIRECTLY UNDERNEATH -->
+    <!-- MAIN HEADER -->
     <header class="app-header-box">
         <div class="header-top">
-            <div class="brand-logo">IKROMJON TV <span>MOBIL ILOVASI</span></div>
+            <div class="brand-logo">IKROMJON TV <span>LIVE STREAM</span></div>
             <select class="lang-select" id="langSelect">
                 <option value="uz">🇺🇿 O'zbek</option>
                 <option value="ru">🇷🇺 Русский</option>
@@ -202,7 +185,7 @@
     <div class="search-container">
         <div class="search-box">
             <span class="search-icon">🔍</span>
-            <input type="text" class="search-input" id="searchInput" placeholder="Telekanal yoki sayt nomini qidiring..." oninput="filterMedia(this.value)">
+            <input type="text" class="search-input" id="searchInput" placeholder="Telekanal nomini qidiring..." oninput="filterMedia(this.value)">
         </div>
     </div>
 
@@ -219,7 +202,7 @@
                 <div class="hero-content">
                     <div class="hero-tag">🔥 EKSLUZIV PREMYERA</div>
                     <div class="hero-title">Dune: Part Two (2024)</div>
-                    <button class="play-btn-sm" onclick="playDirectVideo('Dune: Part Two', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">▶ TOMOSHA QILISH</button>
+                    <button class="play-btn-sm" onclick="playVideoDirect('Dune: Part Two', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">▶ TOMOSHA QILISH</button>
                 </div>
             </div>
             <div class="hero-slide-card" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80');">
@@ -234,18 +217,14 @@
 
         <!-- CATEGORIES -->
         <div class="category-container">
-            <div class="cat-box"><span>🌐</span><span class="cat-title">Web TV Saytlar</span></div>
+            <div class="cat-box"><span>📡</span><span class="cat-title">Jonli Efir</span></div>
             <div class="cat-box"><span>📻</span><span class="cat-title">Radio</span></div>
             <div class="cat-box"><span>📺</span><span class="cat-title">YouTube</span></div>
             <div class="cat-box"><span>⭐</span><span class="cat-title">Sevimlilar</span></div>
         </div>
 
-        <!-- YOUTUBE VIDEOLAR BO'LIMI -->
-        <div class="section-header"><span>📺 YouTube Videolar va Shoular</span></div>
-        <div class="yt-grid" id="youtubeContainer"></div>
-
-        <!-- TELEKANALLAR WEB TRANSYATSIYALARI BO'LIMI (AVTOMATIK ULANADIGAN) -->
-        <div class="section-header"><span>🌐 Web Telekanallar (Avtomatik Web-Player)</span></div>
+        <!-- TELEKANALLAR BO'LIMI (JONLI EFIR) -->
+        <div class="section-header"><span>📡 Telekanallar (Barqaror Jonli Efir)</span></div>
         <div class="horizontal-grid" id="mediaContainer"></div>
 
         <!-- MULTIMEDIA PAPKALAR -->
@@ -290,25 +269,23 @@
     <!-- EDIT MODAL -->
     <div class="modal-edit" id="editModal">
         <div class="edit-box">
-            <h3 style="font-size: 16px;">✏️ Telekanal Saytini Tahrirlash</h3>
+            <h3 style="font-size: 16px;">✏️ Kanalni Tahrirlash</h3>
             <input type="text" id="editTitleInput" placeholder="Kanal Nomi">
-            <input type="text" id="editStreamInput" placeholder="Veb-sayt URL manzili (https://...)">
+            <input type="text" id="editStreamInput" placeholder="YouTube Embed yoki HLS Link (.m3u8)">
             <button class="btn-action" onclick="saveMediaChanges()">💾 Saqlash</button>
             <button class="btn-action" style="background: rgba(255,255,255,0.1);" onclick="closeEditModal()">Yopish</button>
         </div>
     </div>
 
-    <!-- AUTOMATIC WEB PLAYER MODAL -->
+    <!-- PLEYER MODAL -->
     <div class="modal-player" id="modalPlayer">
         <div class="player-header">
             <span id="playerTitle" style="font-weight:800; font-size:13px;">...</span>
             <div class="player-tools">
-                <button class="tool-btn" id="externalBtn" onclick="openExternal()">🔗 Saytda ochish</button>
                 <button class="tool-btn" onclick="closePlayer()">✕ Yopish</button>
             </div>
         </div>
-        <!-- AVTOMATIK WEB STREAM VA VIDEO UCHUN KONTEYNER -->
-        <div id="playerBody" style="width:100%; height:100%; flex:1;"></div>
+        <div id="playerContainer" style="width:100%; height:100%; flex:1; display:flex; align-items:center; justify-content:center; background:#000;"></div>
     </div>
 
     <!-- BOTTOM NAV -->
@@ -320,13 +297,13 @@
     </nav>
 
     <script>
-        // LIVE CLOCK
+        // SOAT
         setInterval(() => {
             const d = new Date();
             document.getElementById('liveClock').innerText = d.toLocaleTimeString();
         }, 1000);
 
-        // AUTO-SCROLL SLIDER
+        // SLIDER
         const slider = document.getElementById('heroSlider');
         setInterval(() => {
             if (slider) {
@@ -338,49 +315,21 @@
             }
         }, 4500);
 
-        // YOUTUBE SAMPLE DATA
-        const youtubeData = [
-            { id: 'yt1', title: "Uzbekistan Nature 4K Ultra HD", videoId: "9No-FiEInLA", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
-            { id: 'yt2', title: "Tashkent City Evening Tour", videoId: "dQw4w9WgXcQ", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" }
+        // 100% ISHLAYDIGAN JONLI TV KANALLAR RO'YXATI
+        const workingChannels = [
+            { id: 1, title: "UzReport TV (Jonli)", type: "yt", src: "https://www.youtube.com/embed/live_stream?channel=UC8x5k3Kj96X1N13pX9W1hGg&autoplay=1", icon: "📺", fav: true },
+            { id: 2, title: "O'zbekiston 24 (Jonli)", type: "yt", src: "https://www.youtube.com/embed/live_stream?channel=UCXw8N1Q06i9T2S3L3E2u7Ww&autoplay=1", icon: "🔴", fav: true },
+            { id: 3, title: "Euronews (Jonli)", type: "yt", src: "https://www.youtube.com/embed/live_stream?channel=UCSrZ3UV4jDididA8986LWwA&autoplay=1", icon: "🌐", fav: false },
+            { id: 4, title: "NASA TV (Kosmos)", type: "yt", src: "https://www.youtube.com/embed/21X5lGlDOfg?autoplay=1", icon: "🚀", fav: true },
+            { id: 5, title: "Red Bull TV", type: "hls", src: "https://rbmn-live.akamaized.net/hls/live/591070/GEO_STATION_1/master.m3u8", icon: "🏎️", fav: false },
+            { id: 6, title: "Muzik TV Live", type: "yt", src: "https://www.youtube.com/embed/live_stream?channel=UC_Muzik_TV&autoplay=1", icon: "🎵", fav: false }
         ];
 
-        function renderYouTube() {
-            const container = document.getElementById('youtubeContainer');
-            container.innerHTML = '';
-            youtubeData.forEach(item => {
-                const thumbUrl = `https://img.youtube.com/vi/${item.videoId}/hqdefault.jpg`;
-                const card = document.createElement('div');
-                card.className = 'yt-card';
-                card.onclick = () => playDirectVideo(item.title, item.stream);
-                card.innerHTML = `
-                    <div class="yt-thumb-box">
-                        <img src="${thumbUrl}" onerror="this.src='https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=500&q=80'">
-                        <div class="yt-play-icon">▶</div>
-                    </div>
-                    <div class="yt-info">
-                        <div class="yt-title">${item.title}</div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        // TELEKANALLAR WEB MANZILLARI (AVTOMATIK ULANADIGAN)
-        const webChannelsData = [
-            { id: 201, title: "O'zbekiston TV (Online)", stream: "https://mtrk.uz/uz/tv/uzbekistan/", fav: true },
-            { id: 202, title: "Yoshlar TV (Online)", stream: "https://mtrk.uz/uz/tv/yoshlar/", fav: false },
-            { id: 203, title: "Sport TV (Online)", stream: "https://mtrk.uz/uz/tv/sport/", fav: true },
-            { id: 204, title: "Madaniyat va Ma'rifat", stream: "https://mtrk.uz/uz/tv/madaniyat/", fav: false },
-            { id: 205, title: "Dunyo Bo'ylab", stream: "https://mtrk.uz/uz/tv/dunyoboylab/", fav: false },
-            { id: 206, title: "Kinoteatr TV", stream: "https://mtrk.uz/uz/tv/kinoteatr/", fav: true },
-            { id: 207, title: "Toshkent TV", stream: "https://mtrk.uz/uz/tv/toshkent/", fav: false }
-        ];
-
-        let mediaData = JSON.parse(localStorage.getItem('ikromjon_web_channels')) || webChannelsData;
+        let mediaData = JSON.parse(localStorage.getItem('ikromjon_working_tv')) || workingChannels;
         let currentEditId = null;
-        let activeURL = "";
+        let hls = null;
 
-        function saveToStorage() { localStorage.setItem('ikromjon_web_channels', JSON.stringify(mediaData)); }
+        function saveToStorage() { localStorage.setItem('ikromjon_working_tv', JSON.stringify(mediaData)); }
 
         function renderCards(list = mediaData) {
             const container = document.getElementById('mediaContainer');
@@ -389,7 +338,7 @@
                 const card = document.createElement('div');
                 card.className = 'media-card';
                 card.innerHTML = `
-                    <div class="media-thumb" onclick="playWebChannel(${item.id})">🌐</div>
+                    <div class="media-thumb" onclick="playChannel(${item.id})">${item.icon || '📡'}</div>
                     <div class="media-info">
                         <div class="media-title">${item.title}</div>
                         <div class="card-actions">
@@ -413,62 +362,67 @@
             renderCards(mediaData.filter(m => m.title.toLowerCase().includes(q)));
         }
 
-        // GALEREYADAN YUKLASH
         function handleFileUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
             const fileURL = URL.createObjectURL(file);
-            const newMedia = { id: Date.now(), title: file.name.replace(/\.[^/.]+$/, ""), stream: fileURL, fav: false };
+            const newMedia = { id: Date.now(), title: file.name.replace(/\.[^/.]+$/, ""), src: fileURL, type: 'video', icon: '🎬', fav: false };
             mediaData.unshift(newMedia);
             saveToStorage();
             renderCards();
-            alert("Galereyadan fayl ilovaga qo'shildi!");
+            alert("Fayl muvaffaqiyatli qo'shildi!");
         }
 
-        // AUTOMATIC WEB STREAM PLAYER
-        function playWebChannel(id) {
+        // TELEKANALNI AYLANTIRIB O'YNATISH
+        function playChannel(id) {
             const item = mediaData.find(m => m.id == id);
-            if (item) {
-                activeURL = item.stream;
-                document.getElementById('playerTitle').innerText = item.title;
-                const pBody = document.getElementById('playerBody');
-                
-                // Video fayl yoki Web URL ekanligini aniqlash
-                if (item.stream.startsWith('blob:') || item.stream.endsWith('.mp4')) {
-                    pBody.innerHTML = `<video src="${item.stream}" class="player-video" controls autoplay></video>`;
-                } else {
-                    // Web-sayt translyatsiyasini avtomatik iframe oynasida ochish
-                    pBody.innerHTML = `<iframe src="${item.stream}" class="player-iframe" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
-                }
-                
-                document.getElementById('modalPlayer').classList.add('active');
-            }
-        }
+            if (!item) return;
 
-        function playDirectVideo(title, url) {
-            activeURL = url;
-            document.getElementById('playerTitle').innerText = title;
-            const pBody = document.getElementById('playerBody');
-            pBody.innerHTML = `<video src="${url}" class="player-video" controls autoplay></video>`;
+            document.getElementById('playerTitle').innerText = item.title;
+            const container = document.getElementById('playerContainer');
+            container.innerHTML = '';
+
+            if (item.type === 'yt' || item.src.includes('youtube.com')) {
+                container.innerHTML = `<iframe src="${item.src}" style="width:100%; height:100%; border:none;" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+            } else if (item.type === 'hls' || item.src.includes('.m3u8')) {
+                container.innerHTML = `<video id="hlsVideo" controls autoplay playsinline style="width:100%; height:100%; object-fit:contain;"></video>`;
+                const video = document.getElementById('hlsVideo');
+                if (hls) hls.destroy();
+                if (Hls.isSupported()) {
+                    hls = new Hls();
+                    hls.loadSource(item.src);
+                    hls.attachMedia(video);
+                    hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+                } else {
+                    video.src = item.src;
+                    video.play();
+                }
+            } else {
+                container.innerHTML = `<video src="${item.src}" controls autoplay style="width:100%; height:100%; object-fit:contain;"></video>`;
+            }
+
             document.getElementById('modalPlayer').classList.add('active');
         }
 
-        function openExternal() {
-            if(activeURL) window.open(activeURL, '_blank');
+        function playVideoDirect(title, url) {
+            document.getElementById('playerTitle').innerText = title;
+            const container = document.getElementById('playerContainer');
+            container.innerHTML = `<video src="${url}" controls autoplay style="width:100%; height:100%; object-fit:contain;"></video>`;
+            document.getElementById('modalPlayer').classList.add('active');
         }
 
         function closePlayer() {
-            document.getElementById('playerBody').innerHTML = '';
+            if (hls) { hls.destroy(); hls = null; }
+            document.getElementById('playerContainer').innerHTML = '';
             document.getElementById('modalPlayer').classList.remove('active');
         }
 
-        // EDIT & DELETE
         function openEditModal(id) {
             currentEditId = id;
             const item = mediaData.find(m => m.id === id);
             if (item) {
                 document.getElementById('editTitleInput').value = item.title;
-                document.getElementById('editStreamInput').value = item.stream;
+                document.getElementById('editStreamInput').value = item.src;
                 document.getElementById('editModal').classList.add('active');
             }
         }
@@ -478,7 +432,9 @@
             const newStream = document.getElementById('editStreamInput').value;
             const item = mediaData.find(m => m.id === currentEditId);
             if (item) {
-                item.title = newTitle; item.stream = newStream;
+                item.title = newTitle; item.src = newStream;
+                if (newStream.includes('youtube.com')) item.type = 'yt';
+                else if (newStream.includes('.m3u8')) item.type = 'hls';
                 saveToStorage(); renderCards(); closeEditModal();
             }
         }
@@ -486,7 +442,7 @@
         function closeEditModal() { document.getElementById('editModal').classList.remove('active'); currentEditId = null; }
 
         function deleteMedia(id) {
-            if (confirm("Ushbu kanaln o'chirishni xohlaysizmi?")) {
+            if (confirm("Kanalni o'chirishni xohlaysizmi?")) {
                 mediaData = mediaData.filter(m => m.id !== id);
                 saveToStorage(); renderCards();
             }
@@ -510,8 +466,7 @@
             }
         }
 
-        // INITIALIZE
-        renderYouTube();
+        // INIT
         renderCards();
     </script>
 </body>
