@@ -3,28 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IKROMJON TV — V8 Pro Max Edition</title>
+    <title>IKROMJON TV — VIP Cinema Edition</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root[data-theme="dark"] {
-            --bg-main: #02040a;
-            --bg-card: rgba(13, 18, 30, 0.75);
-            --bg-glass: rgba(255, 255, 255, 0.05);
+            --bg-main: #040711;
+            --bg-card: rgba(18, 24, 43, 0.6);
+            --bg-glass: rgba(255, 255, 255, 0.06);
             --accent-glow: #00f2fe;
-            --accent-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
-            --border-glow: rgba(255, 255, 255, 0.1);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --accent-purple: linear-gradient(135deg, #b721ff 0%, #21d4fd 100%);
+            --border-glow: rgba(255, 255, 255, 0.12);
             --text-main: #ffffff;
             --text-sub: #94a3b8;
-            --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.95);
+            --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.9);
         }
 
         :root[data-theme="light"] {
-            --bg-main: #f1f5f9;
-            --bg-card: rgba(255, 255, 255, 0.9);
-            --bg-glass: rgba(0, 0, 0, 0.03);
+            --bg-main: #f8fafc;
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --bg-glass: rgba(0, 0, 0, 0.04);
             --accent-glow: #0284c7;
             --accent-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            --accent-purple: linear-gradient(135deg, #7c3aed 0%, #6366f1 100%);
             --border-glow: rgba(0, 0, 0, 0.08);
             --text-main: #0f172a;
             --text-sub: #64748b;
@@ -36,25 +38,29 @@
         body {
             background-color: var(--bg-main);
             background-image: 
-                radial-gradient(circle at 10% 10%, rgba(0, 198, 255, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(0, 114, 255, 0.08) 0%, transparent 40%);
+                radial-gradient(circle at 10% 10%, rgba(0, 242, 254, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(183, 33, 255, 0.15) 0%, transparent 40%);
             background-attachment: fixed;
             color: var(--text-main);
-            padding-bottom: 120px; min-height: 100vh; overflow-x: hidden;
+            padding-bottom: 110px;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         /* HEADER */
         .app-header {
             position: sticky; top: 0; z-index: 100;
-            background: var(--bg-card);
-            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            background: rgba(4, 7, 17, 0.75);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border-bottom: 1px solid var(--border-glow);
-            padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 20px;
+            display: flex; align-items: center; justify-content: space-between;
         }
 
         .brand-logo {
             display: flex; align-items: center; gap: 8px;
-            font-size: 19px; font-weight: 900; letter-spacing: -0.5px;
+            font-size: 20px; font-weight: 900; letter-spacing: -0.5px;
             background: linear-gradient(135deg, #fff 40%, var(--text-sub));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
@@ -62,116 +68,126 @@
         .brand-logo span {
             background: var(--accent-gradient);
             -webkit-background-clip: padding-box; -webkit-text-fill-color: #fff;
-            padding: 3px 8px; border-radius: 8px; font-size: 9px; font-weight: 900;
-            box-shadow: 0 0 15px rgba(0, 198, 255, 0.4);
-        }
-
-        .header-badges { display: flex; align-items: center; gap: 8px; }
-        .net-speed {
-            background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #10b981;
-            font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 10px;
-            display: flex; align-items: center; gap: 4px;
-        }
-        .timer-badge {
-            background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #ef4444;
-            font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 10px; display: none;
+            padding: 3px 8px; border-radius: 8px; font-size: 10px; font-weight: 900;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
         }
 
         /* SEARCH BAR */
         .search-container { padding: 12px 20px 6px 20px; }
         .search-box { position: relative; display: flex; align-items: center; }
         .search-input {
-            width: 100%; background: var(--bg-glass); border: 1px solid var(--border-glow);
-            padding: 12px 16px 12px 42px; border-radius: 16px; color: var(--text-main);
-            font-size: 13px; font-weight: 600; outline: none; backdrop-filter: blur(15px); transition: all 0.3s;
+            width: 100%;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glow);
+            padding: 12px 16px 12px 42px;
+            border-radius: 16px;
+            color: var(--text-main);
+            font-size: 13px; font-weight: 600; outline: none;
+            backdrop-filter: blur(15px); transition: all 0.3s;
         }
-        .search-input:focus { border-color: var(--accent-glow); box-shadow: 0 0 20px rgba(0, 198, 255, 0.25); }
+        .search-input:focus { border-color: var(--accent-glow); box-shadow: 0 0 20px rgba(0, 242, 254, 0.25); }
         .search-icon { position: absolute; left: 14px; font-size: 16px; opacity: 0.6; }
 
         /* HERO BANNER */
         .hero-section { padding: 10px 20px 16px 20px; }
         .hero-card {
-            width: 100%; height: 230px; border-radius: 28px; padding: 24px;
+            width: 100%; height: 260px; border-radius: 28px; padding: 24px;
             display: flex; flex-direction: column; justify-content: flex-end;
             border: 1px solid var(--border-glow);
-            background: linear-gradient(180deg, rgba(2, 4, 10, 0) 10%, rgba(2, 4, 10, 0.95) 100%),
-                        url('https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(180deg, rgba(4, 7, 17, 0) 10%, rgba(4, 7, 17, 0.95) 100%),
+                        url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1200&q=80');
             background-size: cover; background-position: center;
             position: relative; overflow: hidden; box-shadow: var(--card-shadow);
         }
         .hero-tag {
-            background: var(--accent-gradient); color: #fff; font-size: 10px; font-weight: 900;
-            padding: 5px 12px; border-radius: 20px; width: max-content; margin-bottom: 8px;
-            box-shadow: 0 4px 15px rgba(0, 198, 255, 0.4);
+            background: var(--accent-gradient);
+            color: #fff; font-size: 10px; font-weight: 900; padding: 5px 12px;
+            border-radius: 20px; width: max-content; margin-bottom: 8px;
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4); letter-spacing: 0.5px;
         }
-        .hero-title { font-size: 21px; font-weight: 900; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.9); }
+        .hero-title { font-size: 24px; font-weight: 900; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.9); }
         .play-btn {
-            background: #ffffff; color: #000; border: none; padding: 10px 20px; border-radius: 14px;
-            font-weight: 800; font-size: 12px; cursor: pointer; margin-top: 10px;
+            background: #ffffff; color: #000; border: none;
+            padding: 10px 22px; border-radius: 14px; font-weight: 800;
+            font-size: 12px; cursor: pointer; margin-top: 12px;
             display: inline-flex; align-items: center; gap: 8px; width: max-content;
             transition: all 0.3s; box-shadow: 0 10px 25px rgba(255, 255, 255, 0.25);
         }
+        .play-btn:active { transform: scale(0.95); }
 
         /* CATEGORIES ROW */
-        .category-container { display: flex; gap: 10px; padding: 0 20px 16px 20px; overflow-x: auto; scrollbar-width: none; }
+        .category-container {
+            display: flex; gap: 10px; padding: 0 20px 16px 20px;
+            overflow-x: auto; scrollbar-width: none;
+        }
         .category-container::-webkit-scrollbar { display: none; }
         .cat-box {
-            background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 16px;
-            padding: 10px 18px; flex-shrink: 0; display: flex; align-items: center; gap: 8px;
+            background: var(--bg-card); border: 1px solid var(--border-glow);
+            border-radius: 16px; padding: 10px 18px; flex-shrink: 0;
+            display: flex; align-items: center; gap: 8px;
             cursor: pointer; transition: all 0.3s; backdrop-filter: blur(15px);
         }
-        .cat-box:hover { border-color: var(--accent-glow); background: rgba(0, 198, 255, 0.1); }
+        .cat-box:hover { border-color: var(--accent-glow); background: rgba(0, 242, 254, 0.12); transform: translateY(-2px); }
         .cat-title { font-size: 12px; font-weight: 800; color: var(--text-main); white-space: nowrap; }
 
         /* SECTIONS & GRID */
         .section-header { padding: 16px 20px 10px 20px; display: flex; align-items: center; justify-content: space-between; }
-        .section-title { font-size: 15px; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
-        .btn-clear { background: transparent; border: none; color: #ef4444; font-size: 11px; font-weight: 700; cursor: pointer; }
+        .section-title { font-size: 16px; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
 
-        .horizontal-grid { display: flex; gap: 14px; padding: 0 20px 10px 20px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        .horizontal-grid {
+            display: flex; gap: 14px; padding: 0 20px 10px 20px;
+            overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+        }
         .horizontal-grid::-webkit-scrollbar { display: none; }
 
         /* CARDS DESIGN */
         .media-card {
-            background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 20px;
-            cursor: pointer; position: relative; flex-shrink: 0; overflow: hidden; backdrop-filter: blur(15px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: var(--card-shadow);
+            background: var(--bg-card); border: 1px solid var(--border-glow);
+            border-radius: 20px; cursor: pointer; position: relative; flex-shrink: 0;
+            overflow: hidden; backdrop-filter: blur(15px);
+            transition: all 0.3s; box-shadow: var(--card-shadow);
         }
-        .media-card:hover { transform: translateY(-5px); border-color: var(--accent-glow); box-shadow: 0 15px 35px rgba(0, 198, 255, 0.25); }
+        .media-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            border-color: var(--accent-glow);
+            box-shadow: 0 12px 30px rgba(0, 242, 254, 0.3);
+        }
 
-        .card-actions { position: absolute; top: 8px; right: 8px; display: flex; gap: 6px; z-index: 10; }
-        .action-ico-btn {
-            background: rgba(0, 0, 0, 0.6); border: 1px solid var(--border-glow); border-radius: 50%;
-            width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 11px; backdrop-filter: blur(5px); cursor: pointer; color: #fff;
+        .fav-btn {
+            position: absolute; top: 8px; right: 8px;
+            background: rgba(0, 0, 0, 0.6); border: 1px solid var(--border-glow);
+            border-radius: 50%; width: 30px; height: 30px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; z-index: 10; backdrop-filter: blur(5px); transition: all 0.2s;
         }
-        .action-ico-btn.fav.active { background: rgba(239, 68, 68, 0.85); border-color: #ef4444; }
+        .fav-btn.active { background: rgba(239, 68, 68, 0.85); border-color: #ef4444; }
 
         .badge-4k {
-            position: absolute; top: 8px; left: 8px; background: rgba(0, 0, 0, 0.7);
-            color: var(--accent-glow); border: 1px solid var(--accent-glow); font-size: 8px;
-            font-weight: 900; padding: 2px 6px; border-radius: 6px; backdrop-filter: blur(5px); z-index: 5;
+            position: absolute; top: 8px; left: 8px;
+            background: rgba(0, 0, 0, 0.7); color: var(--accent-glow);
+            border: 1px solid var(--accent-glow); font-size: 8px; font-weight: 900;
+            padding: 2px 6px; border-radius: 6px; backdrop-filter: blur(5px); z-index: 5;
         }
 
-        .tv-card { width: 150px; }
-        .tv-thumb-wrapper { width: 100%; height: 90px; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
+        .tv-card { width: 160px; }
+        .tv-thumb-wrapper { width: 100%; height: 95px; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
         .tv-img { width: 70%; height: 70%; object-fit: contain; }
 
-        .radio-card { width: 130px; padding: 18px 10px; text-align: center; }
-        .movie-card { width: 130px; }
-        .movie-poster { width: 100%; height: 175px; object-fit: cover; }
-        .movie-info { padding: 8px; display: flex; flex-direction: column; gap: 3px; }
+        .radio-card { width: 140px; padding: 20px 12px; text-align: center; }
+        .movie-card { width: 135px; }
+        .movie-poster { width: 100%; height: 190px; object-fit: cover; }
+        .movie-info { padding: 8px 10px; }
         .movie-title { font-size: 11px; font-weight: 800; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* ADVANCED CINEMA PLAYER WITH THEATER MODE */
+        /* ADVANCED CINEMA PLAYER */
         .modal-player {
-            position: fixed; inset: 0; z-index: 3000; background: #000; display: none;
-            flex-direction: column; justify-content: space-between; transition: background 0.5s;
+            position: fixed; inset: 0; z-index: 3000;
+            background: #000; display: none; flex-direction: column; justify-content: space-between;
         }
         .modal-player.active { display: flex; }
-        .modal-player.theater-dim { background: #000000f0; }
 
         .player-header {
-            padding: 16px 20px; background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, transparent 100%);
+            padding: 16px 20px; background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
             display: flex; justify-content: space-between; align-items: center; color: #fff; z-index: 10;
         }
 
@@ -179,26 +195,22 @@
         .player-video { width: 100%; height: 100%; object-fit: contain; }
 
         .player-controls {
-            padding: 20px; background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, transparent 100%);
+            padding: 20px; background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, transparent 100%);
             display: flex; flex-direction: column; gap: 12px; color: #fff; z-index: 10;
         }
 
-        .volume-row { display: flex; align-items: center; gap: 10px; font-size: 11px; }
-        .volume-row input { flex: 1; accent-color: #00f2fe; }
-
-        .controls-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; flex-wrap: wrap; }
-        .p-btn { background: rgba(255, 255, 255, 0.12); border: 1px solid var(--border-glow); color: #fff; padding: 9px 12px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 11px; }
-        .p-btn.active-glow { border-color: #00f2fe; background: rgba(0, 242, 254, 0.2); }
-        .p-btn-main { background: var(--accent-gradient); color: #fff; border: none; padding: 11px 20px; border-radius: 14px; font-weight: 800; font-size: 14px; }
+        .controls-row { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+        .p-btn { background: rgba(255, 255, 255, 0.1); border: 1px solid var(--border-glow); color: #fff; padding: 10px 16px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 14px; }
+        .p-btn-main { background: var(--accent-gradient); color: #fff; border: none; padding: 12px 24px; border-radius: 14px; font-weight: 800; font-size: 16px; }
 
         /* FLOATING BOTTOM NAV */
         .bottom-nav {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
             width: calc(100% - 40px); max-width: 450px; height: 64px;
-            background: var(--bg-card); backdrop-filter: blur(30px);
+            background: rgba(18, 24, 43, 0.85); backdrop-filter: blur(30px);
             border: 1px solid var(--border-glow); border-radius: 32px;
             display: grid; grid-template-columns: repeat(4, 1fr); align-items: center;
-            z-index: 200; box-shadow: var(--card-shadow);
+            z-index: 200; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
         }
 
         .nav-item {
@@ -218,14 +230,10 @@
 
     <!-- HEADER -->
     <header class="app-header">
-        <div class="brand-logo">IKROMJON <span>PRO MAX</span></div>
-        <div class="header-badges">
-            <div class="net-speed" id="netSpeedBadge">⚡ 12.4 MB/s</div>
-            <div class="timer-badge" id="timerBadge">💤 00:00</div>
-        </div>
+        <div class="brand-logo">IKROMJON <span>CINEMA</span></div>
     </header>
 
-    <!-- SEARCH BAR -->
+    <!-- REAL-TIME SEARCH BAR -->
     <div class="search-container">
         <div class="search-box">
             <span class="search-icon">🔍</span>
@@ -235,11 +243,11 @@
 
     <main id="mainView">
         <!-- HERO BANNER -->
-        <section class="hero-section">
+        <section class="hero-section" id="heroSection">
             <div class="hero-card">
-                <div class="hero-tag">🔥 IMAX PREMYERA</div>
-                <div class="hero-title">Avatar: The Way of Water</div>
-                <button class="play-btn" onclick="playStream(999, 'Avatar: The Way of Water', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">
+                <div class="hero-tag">🔥 TAVSIYA ETILADI</div>
+                <div class="hero-title">Dune: Part Two (2024)</div>
+                <button class="play-btn" onclick="playStream('Dune: Part Two', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">
                     <span>▶</span> <span>TOMOSHA QILISH</span>
                 </button>
             </div>
@@ -249,22 +257,13 @@
         <div class="category-container">
             <div class="cat-box" onclick="scrollToSection('uzTvRow')"><span>📡</span><span class="cat-title">TV</span></div>
             <div class="cat-box" onclick="scrollToSection('radioRow')"><span>📻</span><span class="cat-title">Radio</span></div>
-            <div class="cat-box" onclick="scrollToSection('offlineRow')"><span>📥</span><span class="cat-title">Offline (Kesh)</span></div>
             <div class="cat-box" onclick="scrollToSection('favRow')"><span>⭐</span><span class="cat-title">Sevimlilar</span></div>
             <div class="cat-box" onclick="scrollToSection('premieresRow')"><span>🔥</span><span class="cat-title">Premyera</span></div>
+            <div class="cat-box" onclick="scrollToSection('foreignRow')"><span>🌍</span><span class="cat-title">Xorijiy</span></div>
         </div>
-
-        <!-- OFFLINE KESH -->
-        <div class="section-header" id="offlineHeader" style="display: none;">
-            <div class="section-title">📥 Yuklab olinganlar (Offline)</div>
-        </div>
-        <div class="horizontal-grid" id="offlineRow" style="display: none;"></div>
 
         <!-- SEVIMLILAR -->
-        <div class="section-header" id="favHeader" style="display: none;">
-            <div class="section-title">⭐ Sevimlilar</div>
-            <button class="btn-clear" onclick="clearFavorites()">Tozalash 🗑️</button>
-        </div>
+        <div class="section-header" id="favHeader" style="display: none;"><div class="section-title">⭐ Sevimlilar</div></div>
         <div class="horizontal-grid" id="favRow" style="display: none;"></div>
 
         <!-- SEKTORLAR -->
@@ -276,62 +275,49 @@
 
         <div class="section-header"><div class="section-title">🔥 Premyeralar</div></div>
         <div class="horizontal-grid" id="premieresRow"></div>
+
+        <div class="section-header"><div class="section-title">🌍 Jahon Kinolari</div></div>
+        <div class="horizontal-grid" id="foreignRow"></div>
     </main>
 
     <!-- MEDIA YUKLASH -->
     <div class="settings-modal" id="addContentView">
-        <h2 style="margin-bottom:16px;">📁 Media Qoʻshish</h2>
+        <h2 style="margin-bottom:16px;">📁 Media Yuklash</h2>
         <form class="setting-group" onsubmit="handleAddNewContent(event)">
             <label>Kategoriya:</label>
             <select id="newCategory" required>
                 <option value="uzTv">📡 Telekanallar</option>
                 <option value="radio">📻 Radio</option>
                 <option value="premieres">🔥 Premyeralar</option>
+                <option value="foreign">🌍 Xorijiy Filmlar</option>
             </select>
             <label>Nomi:</label>
-            <input type="text" id="newTitle" placeholder="Nomi..." required>
-            <label>🖼️ Poster havolasi:</label>
-            <input type="text" id="newImg" placeholder="https://... rasm" required>
-            <label>🎥 Stream havolasi:</label>
-            <input type="text" id="newStream" placeholder="https://... stream" required>
-            <button type="submit" class="btn-submit">💾 Saqlash</button>
+            <input type="text" id="newTitle" placeholder="Kanal yoki film nomi" required>
+            <label>🖼️ Poster fayli:</label>
+            <input type="file" id="imgFileInput" accept="image/*">
+            <label>🎥 Video / Audio fayl:</label>
+            <input type="file" id="videoFileInput" accept="video/*,audio/*">
+            <button type="submit" class="btn-submit">💾 Bazasiga Saqlash</button>
         </form>
     </div>
 
     <!-- SOZLAMALAR -->
     <div class="settings-modal" id="settingsView">
-        <h2 style="margin-bottom:16px;">⚙️ Pro Sozlamalar</h2>
-        
+        <h2 style="margin-bottom:16px;">⚙️ Sozlamalar</h2>
         <div class="setting-group">
-            <label>💤 Sleep Timer:</label>
-            <select id="sleepTimerSelect" onchange="setSleepTimer(this.value)">
-                <option value="0">Oʻchirilgan</option>
-                <option value="15">15 Daqiqa</option>
-                <option value="30">30 Daqiqa</option>
-                <option value="60">1 Soat</option>
-            </select>
-        </div>
-
-        <div class="setting-group">
-            <label>🔒 Parental PIN:</label>
-            <input type="password" id="pinInput" placeholder="4 xonali PIN" maxlength="4">
-            <button type="button" class="btn-submit" onclick="savePin()">PIN Saqlash</button>
-        </div>
-
-        <div class="setting-group">
-            <label>🎨 Interfeys Mavzusi:</label>
+            <label>🎨 Mavzu:</label>
             <select id="themeSelect" onchange="changeTheme(this.value)">
-                <option value="dark">🌑 Midnight Obsidian</option>
-                <option value="light">☀️ Clean Light</option>
+                <option value="dark">🌑 Cyber Neon Dark</option>
+                <option value="light">☀️ Premium Light</option>
             </select>
         </div>
     </div>
 
-    <!-- PLEYER MODAL -->
+    <!-- MAXSUS PLEYER MODAL (CINEMA PLAYER) -->
     <div class="modal-player" id="modalPlayer">
         <div class="player-header">
-            <span id="playerTitle" style="font-weight:800; font-size: 14px;">...</span>
-            <button onclick="closePlayer()" style="background:rgba(255,255,255,0.12); border:none; color:#fff; width:34px; height:34px; border-radius:50%; font-size:16px; cursor:pointer;">✕</button>
+            <span id="playerTitle" style="font-weight:800; font-size: 16px;">...</span>
+            <button onclick="closePlayer()" style="background:rgba(255,255,255,0.1); border:none; color:#fff; width:36px; height:36px; border-radius:50%; font-size:18px; cursor:pointer;">✕</button>
         </div>
 
         <div class="player-body">
@@ -339,21 +325,14 @@
         </div>
 
         <div class="player-controls">
-            <div class="volume-row">
-                <span>🔊 Ovoz:</span>
-                <input type="range" id="volumeRange" min="0" max="2" step="0.05" value="1" oninput="adjustVolume(this.value)">
-            </div>
-
-            <div class="controls-row" style="justify-content:center; gap:14px;">
+            <div class="controls-row" style="justify-content:center; gap:20px;">
                 <button class="p-btn" onclick="seekVideo(-10)">⏪ -10s</button>
                 <button class="p-btn-main" id="playPauseBtn" onclick="togglePlayPause()">▶ Play</button>
                 <button class="p-btn" onclick="seekVideo(10)">+10s ⏩</button>
             </div>
-
             <div class="controls-row">
-                <button class="p-btn" id="theaterBtn" onclick="toggleTheaterMode()">Kinoteatr 🎬</button>
-                <button class="p-btn" onclick="togglePip()">PiP 📱</button>
-                <button class="p-btn" onclick="toggleFullScreen()">Toʻliq ekran ⛶</button>
+                <button class="p-btn" onclick="toggleFullScreen()">fullscreen ⛶</button>
+                <button class="p-btn" onclick="toggleAspectRatio()">Ekran hajmi 📐</button>
             </div>
         </div>
     </div>
@@ -362,31 +341,23 @@
     <nav class="bottom-nav">
         <div class="nav-item active" onclick="switchTab('main')"><span style="font-size:18px;">🏠</span><span>Asosiy</span></div>
         <div class="nav-item" onclick="scrollToSection('favRow')"><span style="font-size:18px;">⭐</span><span>Sevimlilar</span></div>
-        <div class="nav-item" onclick="protectedTabSwitch('add')"><span style="font-size:18px;">➕</span><span>Qoʻshish</span></div>
+        <div class="nav-item" onclick="switchTab('add')"><span style="font-size:18px;">➕</span><span>Yuklash</span></div>
         <div class="nav-item" onclick="switchTab('settings')"><span style="font-size:18px;">⚙️</span><span>Sozlama</span></div>
     </nav>
 
     <script>
         const defaultMediaData = [
-            { id: 1, category: "uzTv", title: "O'zbekiston HD", img: "https://upload.wikimedia.org/wikipedia/commons/1/12/O%27zbekiston_TV_logo.png", stream: "https://live.mtrk.uz/hls/uzbekistan/index.m3u8" },
-            { id: 2, category: "uzTv", title: "Yoshlar TV", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Yoshlar_TV_logo.svg/300px-Yoshlar_TV_logo.svg.png", stream: "https://live.mtrk.uz/hls/yoshlar/index.m3u8" },
-            { id: 3, category: "radio", title: "Yoshlar FM", img: "📻", stream: "https://radio.mtrk.uz/yoshlar" },
-            { id: 4, category: "premieres", title: "Interstellar", img: "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" }
+            { id: 10, category: "uzTv", title: "O'zbekiston HD", img: "https://upload.wikimedia.org/wikipedia/commons/1/12/O%27zbekiston_TV_logo.png", stream: "https://live.mtrk.uz/hls/uzbekistan/index.m3u8" },
+            { id: 11, category: "uzTv", title: "Yoshlar TV", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Yoshlar_TV_logo.svg/300px-Yoshlar_TV_logo.svg.png", stream: "https://live.mtrk.uz/hls/yoshlar/index.m3u8" },
+            { id: 50, category: "radio", title: "Yoshlar FM", img: "📻", stream: "https://radio.mtrk.uz/yoshlar" },
+            { id: 101, category: "premieres", title: "Dune: Part Two", img: "https://m.media-amazon.com/images/M/MV5BN2QyMDgwM2MtGWJmNy00Mzc4LWE1M2ItMDBhM2JiMWM4ZmE1XkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
+            { id: 201, category: "foreign", title: "Inception", img: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutback2012.mp4" }
         ];
 
         let db;
-        let favorites = JSON.parse(localStorage.getItem('app_favs_v8') || "[]");
-        let offlineCache = JSON.parse(localStorage.getItem('app_offline_v8') || "[]");
-        let appPin = localStorage.getItem('app_pin_v8') || null;
-        let timerInterval = null;
+        let favorites = JSON.parse(localStorage.getItem('app_favorites') || "[]");
 
-        // Real-time network speed simulator ticker
-        setInterval(() => {
-            const speed = (Math.random() * 8 + 8).toFixed(1);
-            document.getElementById('netSpeedBadge').innerText = `⚡ ${speed} MB/s`;
-        }, 3000);
-
-        const request = indexedDB.open("IkromjonTV_V8DB", 1);
+        const request = indexedDB.open("IkromjonTV_CinemaDB", 1);
         request.onupgradeneeded = (e) => {
             db = e.target.result;
             if (db.objectStoreNames.contains("mediaStore")) db.deleteObjectStore("mediaStore");
@@ -410,158 +381,127 @@
             req.onsuccess = () => callback(req.result);
         }
 
-        function savePin() {
-            const pin = document.getElementById('pinInput').value;
-            if (pin.length === 4) { appPin = pin; localStorage.setItem('app_pin_v8', pin); alert("PIN Saqlandi! 🔒"); }
-            else { alert("4 xonali son kiriting!"); }
-        }
-
-        function protectedTabSwitch(tab) {
-            if (appPin) {
-                const p = prompt("PIN kiriting:");
-                if (p === appPin) switchTab(tab); else alert("Xato PIN!");
-            } else { switchTab(tab); }
-        }
-
-        function setSleepTimer(minutes) {
-            clearInterval(timerInterval);
-            const badge = document.getElementById('timerBadge');
-            let sec = parseInt(minutes) * 60;
-            if (sec <= 0) { badge.style.display = 'none'; return; }
-            badge.style.display = 'block';
-            timerInterval = setInterval(() => {
-                sec--;
-                const m = Math.floor(sec / 60), s = sec % 60;
-                badge.innerText = `💤 ${m}:${s < 10 ? '0' : ''}${s}`;
-                if (sec <= 0) { clearInterval(timerInterval); closePlayer(); badge.style.display = 'none'; }
-            }, 1000);
-        }
-
-        function toggleFavorite(id, e) {
-            e.stopPropagation();
-            if (favorites.includes(id)) favorites = favorites.filter(i => i !== id); else favorites.push(id);
-            localStorage.setItem('app_favs_v8', JSON.stringify(favorites));
+        function toggleFavorite(id, event) {
+            event.stopPropagation();
+            if (favorites.includes(id)) { favorites = favorites.filter(favId => favId !== id); } 
+            else { favorites.push(id); }
+            localStorage.setItem('app_favorites', JSON.stringify(favorites));
             renderAllContent();
         }
-
-        function toggleOffline(id, e) {
-            e.stopPropagation();
-            if (offlineCache.includes(id)) {
-                offlineCache = offlineCache.filter(i => i !== id);
-                alert("Offline xotiradan o'chirildi.");
-            } else {
-                offlineCache.push(id);
-                alert("📥 Media Offline ko'rish uchun keshlandi!");
-            }
-            localStorage.setItem('app_offline_v8', JSON.stringify(offlineCache));
-            renderAllContent();
-        }
-
-        function clearFavorites() { favorites = []; localStorage.setItem('app_favs_v8', JSON.stringify(favorites)); renderAllContent(); }
 
         function handleSearch(query) {
-            const f = query.toLowerCase();
-            getAllMedia(items => renderCards(items.filter(i => i.title.toLowerCase().includes(f))));
+            const filter = query.toLowerCase();
+            getAllMedia((items) => {
+                const filtered = items.filter(i => i.title.toLowerCase().includes(filter));
+                renderCards(filtered);
+            });
         }
 
-        function handleAddNewContent(e) {
-            e.preventDefault();
-            const obj = {
-                id: Date.now(),
-                category: document.getElementById('newCategory').value,
-                title: document.getElementById('newTitle').value,
-                img: document.getElementById('newImg').value || "https://picsum.photos/200/300",
-                stream: document.getElementById('newStream').value
-            };
-            const tx = db.transaction("mediaStore", "readwrite");
-            tx.objectStore("mediaStore").put(obj);
-            tx.oncomplete = () => { alert("Qo'shildi! ✅"); e.target.reset(); switchTab('main'); renderAllContent(); };
-        }
-
-        function renderAllContent() { getAllMedia(items => renderCards(items)); }
+        function renderAllContent() { getAllMedia((items) => renderCards(items)); }
 
         function renderCards(items) {
-            ['uzTv', 'radio', 'premieres', 'fav', 'offline'].forEach(r => {
-                const el = document.getElementById(r + 'Row'); if (el) el.innerHTML = '';
-            });
+            const rows = ['uzTv', 'radio', 'premieres', 'foreign', 'fav'];
+            rows.forEach(r => { const el = document.getElementById(r + 'Row'); if (el) el.innerHTML = ''; });
 
-            // Favorites
             const favItems = items.filter(i => favorites.includes(i.id));
             const favHeader = document.getElementById('favHeader');
             const favRow = document.getElementById('favRow');
-            if (favItems.length > 0) { favHeader.style.display = 'flex'; favRow.style.display = 'flex'; favItems.forEach(i => favRow.appendChild(createCard(i))); }
+
+            if (favItems.length > 0) { favHeader.style.display = 'flex'; favRow.style.display = 'flex'; } 
             else { favHeader.style.display = 'none'; favRow.style.display = 'none'; }
 
-            // Offline Cache
-            const offItems = items.filter(i => offlineCache.includes(i.id));
-            const offHeader = document.getElementById('offlineHeader');
-            const offRow = document.getElementById('offlineRow');
-            if (offItems.length > 0) { offHeader.style.display = 'flex'; offRow.style.display = 'flex'; offItems.forEach(i => offRow.appendChild(createCard(i))); }
-            else { offHeader.style.display = 'none'; offRow.style.display = 'none'; }
-
             items.forEach(item => {
+                const isFav = favorites.includes(item.id);
+                const card = createCardElement(item, isFav);
+                if (isFav) { favRow.appendChild(createCardElement(item, true)); }
+
                 const container = document.getElementById(item.category + 'Row') || document.getElementById('premieresRow');
-                if (container) container.appendChild(createCard(item));
+                if (container) container.appendChild(card);
             });
         }
 
-        function createCard(item) {
+        function createCardElement(item, isFav) {
             const card = document.createElement('div');
-            const isFav = favorites.includes(item.id) ? 'fav active' : 'fav';
-            const isOff = offlineCache.includes(item.id) ? 'active' : '';
+            const favClass = isFav ? 'fav-btn active' : 'fav-btn';
 
             if (item.category === 'uzTv') {
                 card.className = 'media-card tv-card';
                 card.onclick = () => playStream(item.title, item.stream);
-                card.innerHTML = `<div class="badge-4k">PRO</div><div class="card-actions"><div class="action-ico-btn ${isFav}" onclick="toggleFavorite(${item.id}, event)">❤️</div><div class="action-ico-btn ${isOff}" onclick="toggleOffline(${item.id}, event)">📥</div></div><div class="tv-thumb-wrapper"><img src="${item.img}" class="tv-img"></div><div class="movie-info"><div class="movie-title">${item.title}</div></div>`;
+                card.innerHTML = `
+                    <div class="badge-4k">4K HD</div>
+                    <div class="${favClass}" onclick="toggleFavorite(${item.id}, event)">❤️</div>
+                    <div class="tv-thumb-wrapper"><img src="${item.img}" class="tv-img" onerror="this.src='https://picsum.photos/100/100'"></div>
+                    <div class="tv-info"><div class="movie-title">${item.title}</div></div>
+                `;
             } else if (item.category === 'radio') {
                 card.className = 'media-card radio-card';
                 card.onclick = () => playStream(item.title, item.stream);
-                card.innerHTML = `<div class="card-actions"><div class="action-ico-btn ${isFav}" onclick="toggleFavorite(${item.id}, event)">❤️</div></div><div style="font-size:28px; margin-bottom:4px;">📻</div><div class="movie-title">${item.title}</div>`;
+                card.innerHTML = `
+                    <div class="${favClass}" onclick="toggleFavorite(${item.id}, event)">❤️</div>
+                    <div style="font-size:32px;">📻</div>
+                    <div class="movie-title">${item.title}</div>
+                `;
             } else {
                 card.className = 'media-card movie-card';
                 card.onclick = () => playStream(item.title, item.stream);
-                card.innerHTML = `<div class="badge-4k">IMAX</div><div class="card-actions"><div class="action-ico-btn ${isFav}" onclick="toggleFavorite(${item.id}, event)">❤️</div><div class="action-ico-btn ${isOff}" onclick="toggleOffline(${item.id}, event)">📥</div></div><img src="${item.img}" class="movie-poster"><div class="movie-info"><div class="movie-title">${item.title}</div></div>`;
+                card.innerHTML = `
+                    <div class="badge-4k">ULTRA HD</div>
+                    <div class="${favClass}" onclick="toggleFavorite(${item.id}, event)">❤️</div>
+                    <img src="${item.img}" class="movie-poster" onerror="this.src='https://picsum.photos/200/300'">
+                    <div class="movie-info"><div class="movie-title">${item.title}</div></div>
+                `;
             }
             return card;
         }
 
-        /* PLEYER & THEATER MODE */
-        let hls = null;
+        /* CUSTOM CINEMA PLAYER LOGIC */
+        let hlsPlayer = null;
         const video = document.getElementById('activeVideo');
         const playBtn = document.getElementById('playPauseBtn');
 
         function playStream(title, url) {
             document.getElementById('playerTitle').innerText = title;
             document.getElementById('modalPlayer').classList.add('active');
-            if (hls) hls.destroy();
+            if (hlsPlayer) hlsPlayer.destroy();
 
             if (url.includes('.m3u8') && Hls.isSupported()) {
-                hls = new Hls(); hls.loadSource(url); hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, () => { video.play(); playBtn.innerText = "⏸ Pause"; });
+                hlsPlayer = new Hls();
+                hlsPlayer.loadSource(url);
+                hlsPlayer.attachMedia(video);
+                hlsPlayer.on(Hls.Events.MANIFEST_PARSED, () => { video.play(); playBtn.innerText = "⏸ Pause"; });
             } else {
-                video.src = url; video.play(); playBtn.innerText = "⏸ Pause";
+                video.src = url;
+                video.play();
+                playBtn.innerText = "⏸ Pause";
             }
         }
 
-        function toggleTheaterMode() {
-            const playerModal = document.getElementById('modalPlayer');
-            const btn = document.getElementById('theaterBtn');
-            playerModal.classList.toggle('theater-dim');
-            btn.classList.toggle('active-glow');
+        function togglePlayPause() {
+            if (video.paused) { video.play(); playBtn.innerText = "⏸ Pause"; } 
+            else { video.pause(); playBtn.innerText = "▶ Play"; }
         }
 
-        function adjustVolume(val) { video.volume = val > 1 ? 1 : val; video.preservesPitch = true; }
-        function togglePlayPause() { if (video.paused) { video.play(); playBtn.innerText = "⏸ Pause"; } else { video.pause(); playBtn.innerText = "▶ Play"; } }
-        function seekVideo(s) { video.currentTime += s; }
-        function togglePip() { if (document.pictureInPictureElement) document.exitPictureInPicture(); else video.requestPictureInPicture(); }
-        function toggleFullScreen() { if (!document.fullscreenElement) document.getElementById('modalPlayer').requestFullscreen(); else document.exitFullscreen(); }
+        function seekVideo(seconds) { video.currentTime += seconds; }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.getElementById('modalPlayer').requestFullscreen().catch(() => {});
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        let aspectModes = ['contain', 'cover', 'fill'];
+        let currentAspect = 0;
+        function toggleAspectRatio() {
+            currentAspect = (currentAspect + 1) % aspectModes.length;
+            video.style.objectFit = aspectModes[currentAspect];
+        }
 
         function closePlayer() {
             video.pause(); video.src = "";
-            if (hls) { hls.destroy(); hls = null; }
+            if (hlsPlayer) { hlsPlayer.destroy(); hlsPlayer = null; }
             document.getElementById('modalPlayer').classList.remove('active');
-            document.getElementById('modalPlayer').classList.remove('theater-dim');
         }
 
         function switchTab(tab) {
@@ -571,7 +511,12 @@
             if (tab === 'settings') document.getElementById('settingsView').classList.add('active');
         }
 
-        function scrollToSection(id) { switchTab('main'); const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth' }); }
+        function scrollToSection(id) {
+            switchTab('main');
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+
         function changeTheme(theme) { document.documentElement.setAttribute('data-theme', theme); }
     </script>
 </body>
