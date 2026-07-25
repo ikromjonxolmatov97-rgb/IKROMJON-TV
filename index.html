@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IKROMJON TV — Ko'p Kategoriyali Versiya</title>
+    <title>IKROMJON TV — HD Badge & Large DB</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -60,7 +60,7 @@
             font-size: 12px; font-weight: 700; color: var(--accent-light);
         }
 
-        /* Hero Carousel */
+        /* Carousel */
         .hero-section { padding: 12px 16px; }
 
         .hero-carousel {
@@ -106,7 +106,7 @@
             padding: 6px 10px; border-radius: 6px; font-size: 11px; cursor: pointer;
         }
 
-        /* Section Layouts */
+        /* Sections */
         .section-header {
             padding: 14px 16px 6px 16px;
             display: flex; align-items: center; justify-content: space-between;
@@ -147,15 +147,17 @@
         .movie-info { padding: 6px; }
         .movie-title { font-size: 10px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        .mini-del-btn {
-            position: absolute; top: 4px; right: 4px;
-            background: rgba(239, 68, 68, 0.85); color: #fff; border: none;
-            width: 20px; height: 20px; border-radius: 50%;
-            font-size: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer;
-            z-index: 10;
+        /* HD BADGE DESIGN */
+        .hd-badge {
+            position: absolute; top: 5px; right: 5px;
+            background: var(--accent-color); color: #fff;
+            padding: 2px 5px; border-radius: 4px;
+            font-size: 9px; font-weight: 800;
+            letter-spacing: 0.5px; z-index: 10;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
         }
 
-        /* Bottom Navigation */
+        /* Bottom Nav */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0; height: 55px;
             background: rgba(15, 20, 28, 0.95); backdrop-filter: blur(12px);
@@ -171,7 +173,7 @@
         .nav-item.active { color: var(--accent-color); }
         .nav-icon { font-size: 16px; }
 
-        /* Modals & Forms */
+        /* Modals */
         .settings-modal {
             position: fixed; inset: 0; background: var(--bg-main);
             z-index: 900; display: none; flex-direction: column; overflow-y: auto;
@@ -200,7 +202,7 @@
 
         .file-upload-box {
             border: 2px dashed var(--border-color);
-            padding: 10px; border-radius: 8px; text-align: center;
+            padding: 12px; border-radius: 8px; text-align: center;
             background: rgba(255,255,255,0.02); cursor: pointer;
         }
         .file-upload-box input { display: none; }
@@ -232,57 +234,34 @@
         <div class="digital-clock" id="liveClock">00:00:00</div>
     </header>
 
-    <!-- ASOSIY BO'LIMLAR EKRANI -->
+    <!-- MAIN VIEWS -->
     <main id="mainView">
-        <!-- 1. Premyeralar Carousel -->
-        <div class="section-header">
-            <div class="section-title">🔥 Yangi Premyeralar</div>
-        </div>
-        <section class="hero-section">
-            <div class="hero-carousel" id="premieresRow"></div>
-        </section>
+        <div class="section-header"><div class="section-title">🔥 Yangi Premyeralar</div></div>
+        <section class="hero-section"><div class="hero-carousel" id="premieresRow"></div></section>
 
-        <!-- 2. Live Telekanallar -->
-        <div class="section-header">
-            <div class="section-title">📡 Jonli Telekanallar</div>
-        </div>
+        <div class="section-header"><div class="section-title">📡 Jonli Telekanallar</div></div>
         <div class="horizontal-grid" id="tvChannelsRow"></div>
 
-        <!-- 3. Kinolar va Seriallar -->
-        <div class="section-header">
-            <div class="section-title">🎬 Kinolar va Seriallar</div>
-        </div>
+        <div class="section-header"><div class="section-title">🎬 Kinolar va Seriallar</div></div>
         <div class="movies-grid" id="moviesRow"></div>
 
-        <!-- 4. Sport Live -->
-        <div class="section-header">
-            <div class="section-title">⚽ Sport Live & Efirlar</div>
-        </div>
+        <div class="section-header"><div class="section-title">⚽ Sport Live</div></div>
         <div class="horizontal-grid" id="sportsRow"></div>
 
-        <!-- 5. Multfilmlar -->
-        <div class="section-header">
-            <div class="section-title">👶 Multfilmlar va Bolalar</div>
-        </div>
+        <div class="section-header"><div class="section-title">👶 Multfilmlar va Bolalar</div></div>
         <div class="movies-grid" id="cartoonsRow"></div>
 
-        <!-- 6. Kliplar & Konsertlar -->
-        <div class="section-header">
-            <div class="section-title">🎵 Kliplar va Konsertlar</div>
-        </div>
+        <div class="section-header"><div class="section-title">🎵 Kliplar va Konsertlar</div></div>
         <div class="horizontal-grid" id="musicRow"></div>
 
-        <!-- 7. Hujjatli & Ilmiy -->
-        <div class="section-header">
-            <div class="section-title">📚 Hujjatli va Ilmiy</div>
-        </div>
+        <div class="section-header"><div class="section-title">📚 Hujjatli va Ilmiy</div></div>
         <div class="movies-grid" id="docsRow"></div>
     </main>
 
-    <!-- KONTENT QO'SHISH VA KATEGORIYA TANLASH -->
+    <!-- UPLOAD MODAL -->
     <div class="settings-modal" id="addContentView">
         <div class="modal-header">
-            <h2>📁 Galereyadan Yuklash & Kategoriya</h2>
+            <h2>📁 Galereyadan Yuklash</h2>
             <button onclick="switchTab('main')" style="background:none; border:none; color:var(--text-primary); font-size:22px;">✕</button>
         </div>
 
@@ -302,37 +281,35 @@
 
             <div>
                 <label>Nomi / Sarlavha:</label>
-                <input type="text" id="newTitle" placeholder="Masalan: Chempionlar Ligasi / Multfilm 2026" required>
+                <input type="text" id="newTitle" placeholder="Masalan: Mening Videom" required>
             </div>
 
-            <!-- GALEREYADAN RASM TANLASH -->
             <div class="file-upload-box" onclick="document.getElementById('imageFile').click()">
                 <div class="file-label" id="imgFileLabel">🖼️ Galereyadan Rasm / Poster tanlash</div>
                 <input type="file" id="imageFile" accept="image/*" onchange="previewImageName(this)">
             </div>
 
-            <!-- GALEREYADAN VIDEO TANLASH -->
             <div class="file-upload-box" onclick="document.getElementById('videoFile').click()">
                 <div class="file-label" id="videoFileLabel">🎥 Xotiradan Video tanlash (.mp4)</div>
                 <input type="file" id="videoFile" accept="video/mp4,video/*" onchange="previewVideoName(this)">
             </div>
 
-            <button type="submit" class="btn-submit">💾 Kategoriyaga Saqlash</button>
+            <button type="submit" class="btn-submit" id="btnSave">💾 Bazaga Saqlash</button>
         </form>
     </div>
 
-    <!-- SOZLAMALAR -->
+    <!-- SETTINGS MODAL -->
     <div class="settings-modal" id="settingsView">
         <div class="modal-header">
             <h2>⚙️ Sozlamalar</h2>
             <button onclick="switchTab('main')" style="background:none; border:none; color:var(--text-primary); font-size:22px;">✕</button>
         </div>
         <div class="input-form">
-            <button onclick="resetToDefaultData()" class="btn-submit" style="background:var(--danger-color);">🔄 Xotirani Tozalash va Qayta Tiklash</button>
+            <button onclick="resetDatabase()" class="btn-submit" style="background:var(--danger-color);">🔄 Xotirani Tozalash (Reset DB)</button>
         </div>
     </div>
 
-    <!-- PLEYER -->
+    <!-- PLAYER -->
     <div class="modal-player" id="modalPlayer">
         <div class="player-bar">
             <span id="playerTitle" style="font-size:12px; font-weight:700;">Video...</span>
@@ -343,7 +320,7 @@
         </div>
     </div>
 
-    <!-- PASTKI NAVIGATSIYA -->
+    <!-- BOTTOM NAV -->
     <nav class="bottom-nav">
         <div class="nav-item active" onclick="switchTab('main')"><span class="nav-icon">🏠</span><span>Asosiy</span></div>
         <div class="nav-item" onclick="switchTab('main')"><span class="nav-icon">📺</span><span>Kanallar</span></div>
@@ -353,99 +330,123 @@
     </nav>
 
     <script>
-        const defaultData = {
-            premieres: [
-                { id: 1, title: "Koinot Subhi 2026", img: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" }
-            ],
-            tvChannels: [
-                { id: 1, name: "NASA TV", logo: "https://upload.wikimedia.org/wikipedia/commons/e/e5/NASA_logo.svg", stream: "https://ntv1.akamaized.net/hls/live/2014075/NASA-NTV1-HLS/master.m3u8" }
-            ],
-            movies: [
-                { id: 1, title: "Sintez", img: "https://picsum.photos/200/300?random=1", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" }
-            ],
-            sports: [
-                { id: 1, name: "Futbol HD", logo: "https://picsum.photos/200/300?random=10", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" }
-            ],
-            cartoons: [
-                { id: 1, title: "Mikki Sichqon", img: "https://picsum.photos/200/300?random=20", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" }
-            ],
-            music: [
-                { id: 1, name: "Top Muzik 2026", logo: "https://picsum.photos/200/300?random=30", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" }
-            ],
-            docs: [
-                { id: 1, title: "Tabiat Mo'jizalari", img: "https://picsum.photos/200/300?random=40", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" }
-            ]
+        // INDEXEDDB DATABASE SYSTEM
+        let db;
+        const request = indexedDB.open("IkromjonTV_DB", 1);
+
+        request.onupgradeneeded = function(e) {
+            db = e.target.result;
+            if (!db.objectStoreNames.contains("mediaStore")) {
+                db.createObjectStore("mediaStore", { keyPath: "id" });
+            }
         };
 
-        let appData = JSON.parse(localStorage.getItem('ikromjon_categories_tv')) || defaultData;
+        request.onsuccess = function(e) {
+            db = e.target.result;
+            renderAllContent();
+        };
 
-        function saveData() {
-            try {
-                localStorage.setItem('ikromjon_categories_tv', JSON.stringify(appData));
-                renderAllContent();
-            } catch (e) {
-                alert("Xotira to'ldi! Fayl hajmini kichikroq qiling.");
+        function getAllMedia(callback) {
+            if (!db) return;
+            const tx = db.transaction("mediaStore", "readonly");
+            const store = tx.objectStore("mediaStore");
+            const req = store.getAll();
+            req.onsuccess = () => callback(req.result);
+        }
+
+        function saveMediaItem(item, callback) {
+            const tx = db.transaction("mediaStore", "readwrite");
+            const store = tx.objectStore("mediaStore");
+            store.put(item);
+            tx.oncomplete = () => callback();
+        }
+
+        function deleteMediaItem(id, callback) {
+            const tx = db.transaction("mediaStore", "readwrite");
+            const store = tx.objectStore("mediaStore");
+            store.delete(id);
+            tx.oncomplete = () => callback();
+        }
+
+        function resetDatabase() {
+            if (confirm("Barcha saqlangan ma'lumotlar o'chiriladi. Rozimisiz?")) {
+                const tx = db.transaction("mediaStore", "readwrite");
+                const store = tx.objectStore("mediaStore");
+                store.clear();
+                tx.oncomplete = () => {
+                    alert("Xotira tozalandi!");
+                    renderAllContent();
+                };
             }
         }
 
+        // RENDER FUNCTIONS
         function renderAllContent() {
-            // 1. Premyeralar (Carousel)
-            const premieresRow = document.getElementById('premieresRow');
-            premieresRow.innerHTML = '';
-            (appData.premieres || []).forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'hero-card';
-                card.style.backgroundImage = `url('${p.img}')`;
-                card.innerHTML = `
-                    <div class="hero-content">
-                        <div class="hero-tag">PREMYERA</div>
-                        <div class="hero-title">${p.title}</div>
-                        <div class="card-actions">
-                            <button class="play-btn" onclick="playStream('${p.title}', '${p.stream}')">▶ Ko'rish</button>
-                            <button class="delete-btn" onclick="deleteItem('premieres', ${p.id})">🗑️</button>
-                        </div>
-                    </div>
-                `;
-                premieresRow.appendChild(card);
-            });
-
-            // Gid va Gridlarni render qilish uchun yordamchi
-            renderGridCategory('tvChannels', 'tvChannelsRow', true);
-            renderGridCategory('movies', 'moviesRow', false);
-            renderGridCategory('sports', 'sportsRow', true);
-            renderGridCategory('cartoons', 'cartoonsRow', false);
-            renderGridCategory('music', 'musicRow', true);
-            renderGridCategory('docs', 'docsRow', false);
-        }
-
-        function renderGridCategory(catKey, containerId, isHorizontal) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
-            (appData[catKey] || []).forEach(item => {
-                const card = document.createElement('div');
-                card.className = isHorizontal ? 'channel-card' : 'movie-card';
+            getAllMedia((items) => {
+                const categories = ['premieres', 'tvChannels', 'movies', 'sports', 'cartoons', 'music', 'docs'];
                 
-                if(isHorizontal) {
-                    card.innerHTML = `
-                        <button class="mini-del-btn" onclick="event.stopPropagation(); deleteItem('${catKey}', ${item.id})">✕</button>
-                        <div class="channel-img-wrapper" onclick="playStream('${item.name || item.title}', '${item.stream}')">
-                            <img src="${item.logo || item.img}" class="channel-img">
-                        </div>
-                        <div class="channel-name">${item.name || item.title}</div>
-                    `;
-                } else {
-                    card.innerHTML = `
-                        <button class="mini-del-btn" onclick="event.stopPropagation(); deleteItem('${catKey}', ${item.id})">✕</button>
-                        <div onclick="playStream('${item.title || item.name}', '${item.stream}')">
-                            <img src="${item.img || item.logo}" class="movie-poster">
-                            <div class="movie-info"><div class="movie-title">${item.title || item.name}</div></div>
-                        </div>
-                    `;
-                }
-                container.appendChild(card);
+                document.getElementById('premieresRow').innerHTML = '';
+                categories.slice(1).forEach(cat => {
+                    const el = document.getElementById(cat + 'Row');
+                    if (el) el.innerHTML = '';
+                });
+
+                items.forEach(item => {
+                    if (item.category === 'premieres') {
+                        const card = document.createElement('div');
+                        card.className = 'hero-card';
+                        card.style.backgroundImage = `url('${item.img}')`;
+                        card.innerHTML = `
+                            <div class="hero-content">
+                                <div class="hero-tag">PREMYERA</div>
+                                <div class="hero-title">${item.title}</div>
+                                <div class="card-actions">
+                                    <button class="play-btn" onclick="playStream('${item.title}', '${item.stream}')">▶ Ko'rish</button>
+                                    <button class="delete-btn" onclick="removeItem(${item.id})">🗑️</button>
+                                </div>
+                            </div>
+                        `;
+                        document.getElementById('premieresRow').appendChild(card);
+                    } else {
+                        const container = document.getElementById(item.category + 'Row');
+                        if (container) {
+                            const isHorizontal = ['tvChannels', 'sports', 'music'].includes(item.category);
+                            const card = document.createElement('div');
+                            card.className = isHorizontal ? 'channel-card' : 'movie-card';
+
+                            // Long press to delete option, and HD label on top right
+                            if (isHorizontal) {
+                                card.innerHTML = `
+                                    <span class="hd-badge">HD</span>
+                                    <div class="channel-img-wrapper" onclick="playStream('${item.title}', '${item.stream}')">
+                                        <img src="${item.img}" class="channel-img">
+                                    </div>
+                                    <div class="channel-name">${item.title}</div>
+                                `;
+                            } else {
+                                card.innerHTML = `
+                                    <span class="hd-badge">HD</span>
+                                    <div onclick="playStream('${item.title}', '${item.stream}')">
+                                        <img src="${item.img}" class="movie-poster">
+                                        <div class="movie-info"><div class="movie-title">${item.title}</div></div>
+                                    </div>
+                                `;
+                            }
+
+                            // Context menu to allow deletion without 'X' button
+                            card.oncontextmenu = (e) => {
+                                e.preventDefault();
+                                removeItem(item.id);
+                            };
+
+                            container.appendChild(card);
+                        }
+                    }
+                });
             });
         }
 
+        // FILE HANDLING & SAVE
         let selectedImageBase64 = "";
         let selectedVideoBase64 = "";
 
@@ -462,9 +463,12 @@
         function previewVideoName(input) {
             if (input.files && input.files[0]) {
                 const file = input.files[0];
-                document.getElementById('videoFileLabel').innerText = "Video: " + file.name;
+                document.getElementById('videoFileLabel').innerText = "Video yuklanmoqda: " + file.name;
                 const reader = new FileReader();
-                reader.onload = (e) => selectedVideoBase64 = e.target.result;
+                reader.onload = (e) => {
+                    selectedVideoBase64 = e.target.result;
+                    document.getElementById('videoFileLabel').innerText = "Tayyor: " + file.name;
+                };
                 reader.readAsDataURL(file);
             }
         }
@@ -475,47 +479,45 @@
             const title = document.getElementById('newTitle').value;
 
             if (!selectedImageBase64 || !selectedVideoBase64) {
-                alert("Iltimos, galereyadan Rasm va Video tanlang!");
+                alert("Iltimos, galereyadan Rasm va Videoni to'liq tanlang!");
                 return;
             }
 
+            const btnSave = document.getElementById('btnSave');
+            btnSave.innerText = "Saqlanmoqda...";
+            btnSave.disabled = true;
+
             const newItem = {
                 id: Date.now(),
+                category: category,
                 title: title,
-                name: title,
                 img: selectedImageBase64,
-                logo: selectedImageBase64,
                 stream: selectedVideoBase64
             };
 
-            if(!appData[category]) appData[category] = [];
-            appData[category].push(newItem);
-            saveData();
-            
-            alert("Kategoriyaga muvaffaqiyatli saqlandi!");
-            e.target.reset();
-            selectedImageBase64 = "";
-            selectedVideoBase64 = "";
-            document.getElementById('imgFileLabel').innerText = "🖼️ Galereyadan Rasm / Poster tanlash";
-            document.getElementById('videoFileLabel').innerText = "🎥 Xotiradan Video tanlash (.mp4)";
-            switchTab('main');
+            saveMediaItem(newItem, () => {
+                alert("Muvaffaqiyatli saqlandi!");
+                btnSave.innerText = "💾 Bazaga Saqlash";
+                btnSave.disabled = false;
+                e.target.reset();
+                selectedImageBase64 = "";
+                selectedVideoBase64 = "";
+                document.getElementById('imgFileLabel').innerText = "🖼️ Galereyadan Rasm / Poster tanlash";
+                document.getElementById('videoFileLabel').innerText = "🎥 Xotiradan Video tanlash (.mp4)";
+                switchTab('main');
+                renderAllContent();
+            });
         }
 
-        function deleteItem(catKey, id) {
-            if (confirm("O'chirishni xohlaysizmi?")) {
-                appData[catKey] = appData[catKey].filter(item => item.id !== id);
-                saveData();
+        function removeItem(id) {
+            if (confirm("Ushbu videoni ilovadan o'chirmoqchimisiz?")) {
+                deleteMediaItem(id, () => {
+                    renderAllContent();
+                });
             }
         }
 
-        function resetToDefaultData() {
-            if (confirm("Barcha ma'lumotlar tozalanadi?")) {
-                appData = defaultData;
-                saveData();
-                alert("Tozalandi!");
-            }
-        }
-
+        // PLAYER CONTROL
         function playStream(title, url) {
             document.getElementById('playerTitle').innerText = title;
             const video = document.getElementById('activeVideo');
@@ -547,8 +549,6 @@
         setInterval(() => {
             document.getElementById('liveClock').innerText = new Date().toLocaleTimeString('uz-UZ');
         }, 1000);
-
-        renderAllContent();
     </script>
 </body>
 </html>
