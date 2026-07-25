@@ -3,34 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IKROMJON TV — VIP Cinema Edition</title>
+    <title>IKROMJON TV — Mega Edition</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        :root[data-theme="dark"] {
-            --bg-main: #040711;
-            --bg-card: rgba(18, 24, 43, 0.6);
-            --bg-glass: rgba(255, 255, 255, 0.06);
+        :root {
+            --bg-main: #060913;
+            --bg-card: rgba(18, 26, 43, 0.75);
+            --bg-glass: rgba(255, 255, 255, 0.05);
             --accent-glow: #00f2fe;
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --accent-purple: linear-gradient(135deg, #b721ff 0%, #21d4fd 100%);
-            --border-glow: rgba(255, 255, 255, 0.12);
+            --accent-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            --border-glow: rgba(255, 255, 255, 0.1);
             --text-main: #ffffff;
             --text-sub: #94a3b8;
-            --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.9);
-        }
-
-        :root[data-theme="light"] {
-            --bg-main: #f8fafc;
-            --bg-card: rgba(255, 255, 255, 0.85);
-            --bg-glass: rgba(0, 0, 0, 0.04);
-            --accent-glow: #0284c7;
-            --accent-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-            --accent-purple: linear-gradient(135deg, #7c3aed 0%, #6366f1 100%);
-            --border-glow: rgba(0, 0, 0, 0.08);
-            --text-main: #0f172a;
-            --text-sub: #64748b;
-            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.95);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -38,486 +24,329 @@
         body {
             background-color: var(--bg-main);
             background-image: 
-                radial-gradient(circle at 10% 10%, rgba(0, 242, 254, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(183, 33, 255, 0.15) 0%, transparent 40%);
+                radial-gradient(circle at 10% 10%, rgba(0, 198, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(0, 114, 255, 0.1) 0%, transparent 40%);
             background-attachment: fixed;
             color: var(--text-main);
-            padding-bottom: 110px;
-            min-height: 100vh;
-            overflow-x: hidden;
+            padding-bottom: 110px; min-height: 100vh; overflow-x: hidden;
         }
 
-        /* HEADER */
+        /* HEADER & TOP SMART BAR */
+        .smart-top-bar {
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-glow); padding: 6px 16px;
+            display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--text-sub);
+        }
+        .welcome-txt { font-weight: 700; color: var(--accent-glow); }
+        .widget-info { display: flex; gap: 10px; align-items: center; font-weight: 600; }
+
         .app-header {
-            position: sticky; top: 0; z-index: 100;
-            background: rgba(4, 7, 17, 0.75);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border-bottom: 1px solid var(--border-glow);
-            padding: 14px 20px;
-            display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 100; background: var(--bg-card);
+            backdrop-filter: blur(25px); border-bottom: 1px solid var(--border-glow);
+            padding: 12px 20px; display: flex; align-items: center; justify-content: space-between;
         }
 
-        .brand-logo {
-            display: flex; align-items: center; gap: 8px;
-            font-size: 20px; font-weight: 900; letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #fff 40%, var(--text-sub));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-
+        .brand-logo { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; color: #fff; display: flex; align-items: center; gap: 8px; }
         .brand-logo span {
-            background: var(--accent-gradient);
-            -webkit-background-clip: padding-box; -webkit-text-fill-color: #fff;
+            background: var(--accent-gradient); -webkit-background-clip: padding-box; -webkit-text-fill-color: #fff;
             padding: 3px 8px; border-radius: 8px; font-size: 10px; font-weight: 900;
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
         }
+
+        .lang-select { background: var(--bg-glass); border: 1px solid var(--border-glow); color: #fff; padding: 5px 8px; border-radius: 10px; font-size: 11px; outline: none; }
 
         /* SEARCH BAR */
         .search-container { padding: 12px 20px 6px 20px; }
-        .search-box { position: relative; display: flex; align-items: center; }
         .search-input {
-            width: 100%;
-            background: var(--bg-glass);
-            border: 1px solid var(--border-glow);
-            padding: 12px 16px 12px 42px;
-            border-radius: 16px;
-            color: var(--text-main);
-            font-size: 13px; font-weight: 600; outline: none;
-            backdrop-filter: blur(15px); transition: all 0.3s;
+            width: 100%; background: var(--bg-glass); border: 1px solid var(--border-glow);
+            padding: 12px 16px 12px 42px; border-radius: 16px; color: var(--text-main);
+            font-size: 13px; outline: none; backdrop-filter: blur(15px); transition: all 0.3s;
         }
-        .search-input:focus { border-color: var(--accent-glow); box-shadow: 0 0 20px rgba(0, 242, 254, 0.25); }
-        .search-icon { position: absolute; left: 14px; font-size: 16px; opacity: 0.6; }
+        .search-box { position: relative; }
+        .search-icon { position: absolute; left: 14px; top: 12px; opacity: 0.6; }
 
-        /* HERO BANNER */
+        /* PREMERA & ANONS SLIDER */
         .hero-section { padding: 10px 20px 16px 20px; }
-        .hero-card {
-            width: 100%; height: 260px; border-radius: 28px; padding: 24px;
-            display: flex; flex-direction: column; justify-content: flex-end;
-            border: 1px solid var(--border-glow);
-            background: linear-gradient(180deg, rgba(4, 7, 17, 0) 10%, rgba(4, 7, 17, 0.95) 100%),
-                        url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover; background-position: center;
-            position: relative; overflow: hidden; box-shadow: var(--card-shadow);
+        .hero-slider-wrapper { position: relative; width: 100%; height: 230px; border-radius: 28px; overflow: hidden; border: 1px solid var(--border-glow); box-shadow: var(--card-shadow); }
+        .hero-slide {
+            position: absolute; inset: 0; padding: 24px; display: flex; flex-direction: column; justify-content: flex-end;
+            background-size: cover; background-position: center; opacity: 0; transition: opacity 0.8s ease-in-out;
         }
-        .hero-tag {
-            background: var(--accent-gradient);
-            color: #fff; font-size: 10px; font-weight: 900; padding: 5px 12px;
-            border-radius: 20px; width: max-content; margin-bottom: 8px;
-            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4); letter-spacing: 0.5px;
-        }
-        .hero-title { font-size: 24px; font-weight: 900; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.9); }
-        .play-btn {
-            background: #ffffff; color: #000; border: none;
-            padding: 10px 22px; border-radius: 14px; font-weight: 800;
-            font-size: 12px; cursor: pointer; margin-top: 12px;
-            display: inline-flex; align-items: center; gap: 8px; width: max-content;
-            transition: all 0.3s; box-shadow: 0 10px 25px rgba(255, 255, 255, 0.25);
-        }
-        .play-btn:active { transform: scale(0.95); }
+        .hero-slide.active { opacity: 1; }
+        .hero-tag { background: var(--accent-gradient); color: #fff; font-size: 10px; font-weight: 900; padding: 4px 10px; border-radius: 20px; width: max-content; margin-bottom: 6px; }
+        .hero-title { font-size: 20px; font-weight: 900; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.9); }
+        .play-btn { background: #ffffff; color: #000; border: none; padding: 10px 18px; border-radius: 14px; font-weight: 800; font-size: 12px; cursor: pointer; margin-top: 8px; width: max-content; }
 
         /* CATEGORIES ROW */
-        .category-container {
-            display: flex; gap: 10px; padding: 0 20px 16px 20px;
-            overflow-x: auto; scrollbar-width: none;
-        }
+        .category-container { display: flex; gap: 10px; padding: 0 20px 16px 20px; overflow-x: auto; scrollbar-width: none; }
         .category-container::-webkit-scrollbar { display: none; }
         .cat-box {
-            background: var(--bg-card); border: 1px solid var(--border-glow);
-            border-radius: 16px; padding: 10px 18px; flex-shrink: 0;
-            display: flex; align-items: center; gap: 8px;
-            cursor: pointer; transition: all 0.3s; backdrop-filter: blur(15px);
+            background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 16px;
+            padding: 10px 16px; flex-shrink: 0; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: all 0.3s;
         }
-        .cat-box:hover { border-color: var(--accent-glow); background: rgba(0, 242, 254, 0.12); transform: translateY(-2px); }
+        .cat-box:hover { border-color: var(--accent-glow); background: rgba(0, 198, 255, 0.1); }
         .cat-title { font-size: 12px; font-weight: 800; color: var(--text-main); white-space: nowrap; }
 
-        /* SECTIONS & GRID */
+        /* SECTIONS & CARDS */
         .section-header { padding: 16px 20px 10px 20px; display: flex; align-items: center; justify-content: space-between; }
-        .section-title { font-size: 16px; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
+        .section-title { font-size: 15px; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
 
-        .horizontal-grid {
-            display: flex; gap: 14px; padding: 0 20px 10px 20px;
-            overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
-        }
+        .horizontal-grid { display: flex; gap: 14px; padding: 0 20px 10px 20px; overflow-x: auto; scrollbar-width: none; }
         .horizontal-grid::-webkit-scrollbar { display: none; }
 
-        /* CARDS DESIGN */
         .media-card {
-            background: var(--bg-card); border: 1px solid var(--border-glow);
-            border-radius: 20px; cursor: pointer; position: relative; flex-shrink: 0;
-            overflow: hidden; backdrop-filter: blur(15px);
-            transition: all 0.3s; box-shadow: var(--card-shadow);
+            background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 20px;
+            cursor: pointer; position: relative; flex-shrink: 0; overflow: hidden; backdrop-filter: blur(15px); transition: all 0.3s;
         }
-        .media-card:hover {
-            transform: translateY(-6px) scale(1.02);
-            border-color: var(--accent-glow);
-            box-shadow: 0 12px 30px rgba(0, 242, 254, 0.3);
-        }
+        .media-card:hover { transform: translateY(-4px); border-color: var(--accent-glow); }
 
-        .fav-btn {
-            position: absolute; top: 8px; right: 8px;
-            background: rgba(0, 0, 0, 0.6); border: 1px solid var(--border-glow);
-            border-radius: 50%; width: 30px; height: 30px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 14px; z-index: 10; backdrop-filter: blur(5px); transition: all 0.2s;
-        }
-        .fav-btn.active { background: rgba(239, 68, 68, 0.85); border-color: #ef4444; }
+        .tv-card { width: 150px; }
+        .tv-thumb-wrapper { width: 100%; height: 90px; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
+        .tv-img { width: 65%; height: 65%; object-fit: contain; }
 
-        .badge-4k {
-            position: absolute; top: 8px; left: 8px;
-            background: rgba(0, 0, 0, 0.7); color: var(--accent-glow);
-            border: 1px solid var(--accent-glow); font-size: 8px; font-weight: 900;
-            padding: 2px 6px; border-radius: 6px; backdrop-filter: blur(5px); z-index: 5;
-        }
-
-        .tv-card { width: 160px; }
-        .tv-thumb-wrapper { width: 100%; height: 95px; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
-        .tv-img { width: 70%; height: 70%; object-fit: contain; }
-
-        .radio-card { width: 140px; padding: 20px 12px; text-align: center; }
-        .movie-card { width: 135px; }
-        .movie-poster { width: 100%; height: 190px; object-fit: cover; }
-        .movie-info { padding: 8px 10px; }
+        .movie-card { width: 130px; }
+        .movie-poster { width: 100%; height: 170px; object-fit: cover; }
+        .movie-info { padding: 8px; display: flex; flex-direction: column; gap: 3px; }
         .movie-title { font-size: 11px; font-weight: 800; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* ADVANCED CINEMA PLAYER */
-        .modal-player {
-            position: fixed; inset: 0; z-index: 3000;
-            background: #000; display: none; flex-direction: column; justify-content: space-between;
-        }
+        /* MULTIMEDIA FOLDERS SECTION */
+        .folders-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 0 20px; }
+        .folder-card { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 16px; padding: 12px; text-align: center; cursor: pointer; }
+        .folder-icon { font-size: 24px; margin-bottom: 4px; }
+        .folder-name { font-size: 10px; font-weight: 700; color: var(--text-sub); }
+
+        /* NEWS SECTION */
+        .news-card { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 16px; padding: 12px; margin: 0 20px 10px 20px; display: flex; gap: 12px; align-items: center; }
+        .news-img { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; }
+        .news-txt { flex: 1; font-size: 11px; font-weight: 700; color: var(--text-main); line-height: 1.4; }
+
+        /* MODAL PLAYER */
+        .modal-player { position: fixed; inset: 0; z-index: 3000; background: #000; display: none; flex-direction: column; justify-content: space-between; }
         .modal-player.active { display: flex; }
-
-        .player-header {
-            padding: 16px 20px; background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
-            display: flex; justify-content: space-between; align-items: center; color: #fff; z-index: 10;
-        }
-
-        .player-body { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .player-header { padding: 16px; background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, transparent 100%); display: flex; justify-content: space-between; align-items: center; color: #fff; z-index: 10; }
+        .player-body { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; }
         .player-video { width: 100%; height: 100%; object-fit: contain; }
-
-        .player-controls {
-            padding: 20px; background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, transparent 100%);
-            display: flex; flex-direction: column; gap: 12px; color: #fff; z-index: 10;
-        }
-
-        .controls-row { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
-        .p-btn { background: rgba(255, 255, 255, 0.1); border: 1px solid var(--border-glow); color: #fff; padding: 10px 16px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 14px; }
-        .p-btn-main { background: var(--accent-gradient); color: #fff; border: none; padding: 12px 24px; border-radius: 14px; font-weight: 800; font-size: 16px; }
+        .player-controls { padding: 16px; background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, transparent 100%); display: flex; flex-direction: column; gap: 10px; color: #fff; }
+        .controls-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+        .p-btn { background: rgba(255, 255, 255, 0.12); border: 1px solid var(--border-glow); color: #fff; padding: 8px 12px; border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 11px; }
 
         /* FLOATING BOTTOM NAV */
         .bottom-nav {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
             width: calc(100% - 40px); max-width: 450px; height: 64px;
-            background: rgba(18, 24, 43, 0.85); backdrop-filter: blur(30px);
+            background: var(--bg-card); backdrop-filter: blur(30px);
             border: 1px solid var(--border-glow); border-radius: 32px;
             display: grid; grid-template-columns: repeat(4, 1fr); align-items: center;
-            z-index: 200; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+            z-index: 200; box-shadow: var(--card-shadow);
         }
-
-        .nav-item {
-            display: flex; flex-direction: column; align-items: center; gap: 3px;
-            color: var(--text-sub); font-size: 9px; font-weight: 800; cursor: pointer; transition: all 0.3s;
-        }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-sub); font-size: 9px; font-weight: 800; cursor: pointer; }
         .nav-item.active { color: var(--accent-glow); }
 
-        .settings-modal { position: fixed; inset: 0; z-index: 2000; display: none; flex-direction: column; background: var(--bg-main); padding: 24px 20px 100px 20px; overflow-y: auto; }
+        .settings-modal { position: fixed; inset: 0; z-index: 2000; display: none; flex-direction: column; background: var(--bg-main); padding: 20px; overflow-y: auto; }
         .settings-modal.active { display: flex; }
-        .setting-group { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 20px; padding: 18px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 10px; }
-        .setting-group input, .setting-group select { background: var(--bg-glass); color: var(--text-main); border: 1px solid var(--border-glow); padding: 12px; border-radius: 12px; font-size: 12px; outline: none; }
-        .btn-submit { background: var(--accent-gradient); color: #fff; border: none; padding: 12px; border-radius: 12px; font-weight: 800; cursor: pointer; }
+        .setting-group { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 16px; padding: 14px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 8px; font-size: 12px; }
+        .setting-group input, .setting-group select { background: var(--bg-glass); color: var(--text-main); border: 1px solid var(--border-glow); padding: 10px; border-radius: 10px; font-size: 12px; outline: none; }
     </style>
 </head>
 <body>
 
-    <!-- HEADER -->
+    <!-- TOP SMART BAR -->
+    <div class="smart-top-bar">
+        <div class="welcome-txt" id="welcomeMsg">✨ IKROMJON TV mobil ilovasiga xush kelibsiz!</div>
+        <div class="widget-info">
+            <span id="liveClock">00:00:00</span>
+            <span>🌤️ +28°C</span>
+            <span>📍 Tashkent (UTC+5)</span>
+        </div>
+    </div>
+
+    <!-- MAIN APP HEADER -->
     <header class="app-header">
         <div class="brand-logo">IKROMJON <span>CINEMA</span></div>
+        <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
+            <option value="uz">🇺🇿 O'zbek</option>
+            <option value="ru">🇷🇺 Русский</option>
+            <option value="en">🇬🇧 English</option>
+            <option value="tr">🇹🇷 Türkçe</option>
+            <option value="tj">🇹🇯 Тоҷикӣ</option>
+            <option value="kz">🇰🇿 Қазақша</option>
+        </select>
     </header>
 
-    <!-- REAL-TIME SEARCH BAR -->
+    <!-- SEARCH BAR -->
     <div class="search-container">
         <div class="search-box">
             <span class="search-icon">🔍</span>
-            <input type="text" class="search-input" id="searchInput" placeholder="Kanal yoki film nomini qidiring..." oninput="handleSearch(this.value)">
+            <input type="text" class="search-input" id="searchInput" placeholder="Kanal yoki film nomini qidiring...">
         </div>
     </div>
 
     <main id="mainView">
-        <!-- HERO BANNER -->
-        <section class="hero-section" id="heroSection">
-            <div class="hero-card">
-                <div class="hero-tag">🔥 TAVSIYA ETILADI</div>
-                <div class="hero-title">Dune: Part Two (2024)</div>
-                <button class="play-btn" onclick="playStream('Dune: Part Two', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">
-                    <span>▶</span> <span>TOMOSHA QILISH</span>
-                </button>
+        <!-- AUTOMATIC HERO ANONS SLIDER -->
+        <section class="hero-section">
+            <div class="hero-slider-wrapper">
+                <div class="hero-slide active" style="background-image: linear-gradient(180deg, transparent 20%, #060913 100%), url('https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1000&q=80');">
+                    <div class="hero-tag">🔥 TAVSIYA ETILADI</div>
+                    <div class="hero-title">Dune: Part Two (2024)</div>
+                    <button class="play-btn" onclick="playStream('Dune: Part Two', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">▶ TOMOSHA QILISH</button>
+                </div>
+                <div class="hero-slide" style="background-image: linear-gradient(180deg, transparent 20%, #060913 100%), url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80');">
+                    <div class="hero-tag">🎬 TEZ KUNDA</div>
+                    <div class="hero-title">Avatar 3: Fire and Ash</div>
+                    <button class="play-btn">🔔 ANONS REJIMI</button>
+                </div>
             </div>
         </section>
 
         <!-- KATEGORIYALAR -->
         <div class="category-container">
-            <div class="cat-box" onclick="scrollToSection('uzTvRow')"><span>📡</span><span class="cat-title">TV</span></div>
-            <div class="cat-box" onclick="scrollToSection('radioRow')"><span>📻</span><span class="cat-title">Radio</span></div>
-            <div class="cat-box" onclick="scrollToSection('favRow')"><span>⭐</span><span class="cat-title">Sevimlilar</span></div>
-            <div class="cat-box" onclick="scrollToSection('premieresRow')"><span>🔥</span><span class="cat-title">Premyera</span></div>
-            <div class="cat-box" onclick="scrollToSection('foreignRow')"><span>🌍</span><span class="cat-title">Xorijiy</span></div>
+            <div class="cat-box"><span>📡</span><span class="cat-title">TV</span></div>
+            <div class="cat-box"><span>📻</span><span class="cat-title">Radio</span></div>
+            <div class="cat-box"><span>📺</span><span class="cat-title">YouTube</span></div>
+            <div class="cat-box"><span>📟</span><span class="cat-title">DVB-T2</span></div>
+            <div class="cat-box"><span>⭐</span><span class="cat-title">Sevimlilar</span></div>
+            <div class="cat-box"><span>🔥</span><span class="cat-title">Premyera</span></div>
         </div>
-
-        <!-- SEVIMLILAR -->
-        <div class="section-header" id="favHeader" style="display: none;"><div class="section-title">⭐ Sevimlilar</div></div>
-        <div class="horizontal-grid" id="favRow" style="display: none;"></div>
 
         <!-- SEKTORLAR -->
-        <div class="section-header"><div class="section-title">📡 Telekanallar</div></div>
-        <div class="horizontal-grid" id="uzTvRow"></div>
+        <div class="section-header"><div class="section-title">📡 Telekanallar (DVB / Online)</div></div>
+        <div class="horizontal-grid">
+            <div class="media-card tv-card" onclick="playStream('O\'zbekiston HD', 'https://live.mtrk.uz/hls/uzbekistan/index.m3u8')">
+                <div class="tv-thumb-wrapper"><img src="https://upload.wikimedia.org/wikipedia/commons/1/12/O%27zbekiston_TV_logo.png" class="tv-img"></div>
+                <div class="movie-info"><div class="movie-title">O'zbekiston HD</div></div>
+            </div>
+            <div class="media-card tv-card" onclick="playStream('Yoshlar TV', 'https://live.mtrk.uz/hls/yoshlar/index.m3u8')">
+                <div class="tv-thumb-wrapper"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Yoshlar_TV_logo.svg/300px-Yoshlar_TV_logo.svg.png" class="tv-img"></div>
+                <div class="movie-info"><div class="movie-title">Yoshlar TV</div></div>
+            </div>
+        </div>
 
-        <div class="section-header"><div class="section-title">📻 Radio Stansiyalar</div></div>
-        <div class="horizontal-grid" id="radioRow"></div>
+        <div class="section-header"><div class="section-title">📺 YouTube va Onlayn Tizim</div></div>
+        <div class="horizontal-grid">
+            <div class="media-card movie-card" onclick="playStream('YouTube Stream', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4')">
+                <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=400&q=80" class="movie-poster">
+                <div class="movie-info"><div class="movie-title">YouTube Live Blog</div></div>
+            </div>
+        </div>
 
-        <div class="section-header"><div class="section-title">🔥 Premyeralar</div></div>
-        <div class="horizontal-grid" id="premieresRow"></div>
+        <!-- MULTIMEDIA PAPKALAR -->
+        <div class="section-header"><div class="section-title">📁 Multimedia Papkalar</div></div>
+        <div class="folders-grid">
+            <div class="folder-card"><div class="folder-icon">🎵</div><div class="folder-name">Musiqa</div></div>
+            <div class="folder-card"><div class="folder-icon">🖼️</div><div class="folder-name">Rasmlar</div></div>
+            <div class="folder-card"><div class="folder-icon">📂</div><div class="folder-name">Fayllar</div></div>
+            <div class="folder-card"><div class="folder-icon">📥</div><div class="folder-name">Kesh</div></div>
+        </div>
 
-        <div class="section-header"><div class="section-title">🌍 Jahon Kinolari</div></div>
-        <div class="horizontal-grid" id="foreignRow"></div>
+        <!-- YANGILIKLAR BO'LIMI -->
+        <div class="section-header"><div class="section-title">📰 So'nggi Yangiliklar</div></div>
+        <div class="news-card">
+            <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=200&q=80" class="news-img">
+            <div class="news-txt">O'zbekistonda raqamli DVB-T2 televideniyesi tarmog'i yangi bosqichga o'tkazilmoqda.</div>
+        </div>
     </main>
 
-    <!-- MEDIA YUKLASH -->
-    <div class="settings-modal" id="addContentView">
-        <h2 style="margin-bottom:16px;">📁 Media Yuklash</h2>
-        <form class="setting-group" onsubmit="handleAddNewContent(event)">
-            <label>Kategoriya:</label>
-            <select id="newCategory" required>
-                <option value="uzTv">📡 Telekanallar</option>
-                <option value="radio">📻 Radio</option>
-                <option value="premieres">🔥 Premyeralar</option>
-                <option value="foreign">🌍 Xorijiy Filmlar</option>
-            </select>
-            <label>Nomi:</label>
-            <input type="text" id="newTitle" placeholder="Kanal yoki film nomi" required>
-            <label>🖼️ Poster fayli:</label>
-            <input type="file" id="imgFileInput" accept="image/*">
-            <label>🎥 Video / Audio fayl:</label>
-            <input type="file" id="videoFileInput" accept="video/*,audio/*">
-            <button type="submit" class="btn-submit">💾 Bazasiga Saqlash</button>
-        </form>
-    </div>
-
-    <!-- SOZLAMALAR -->
+    <!-- SOZLAMALAR MODAL -->
     <div class="settings-modal" id="settingsView">
-        <h2 style="margin-bottom:16px;">⚙️ Sozlamalar</h2>
+        <h2 style="margin-bottom:16px;">⚙️ Ilova Sozlamalari</h2>
         <div class="setting-group">
-            <label>🎨 Mavzu:</label>
-            <select id="themeSelect" onchange="changeTheme(this.value)">
-                <option value="dark">🌑 Cyber Neon Dark</option>
-                <option value="light">☀️ Premium Light</option>
+            <label>🔒 Ilova PIN Qulfi:</label>
+            <input type="password" id="appPinInput" placeholder="4 xonali PIN kiriting" maxlength="4">
+        </div>
+        <div class="setting-group">
+            <label>🎥 Odatiy Video Sifati:</label>
+            <select id="videoQuality">
+                <option value="auto">Auto (Moslashuvchan)</option>
+                <option value="4k">4K Ultra HD</option>
+                <option value="1080p">1080p Full HD</option>
+                <option value="720p">720p HD</option>
+                <option value="480p">480p SD</option>
+            </select>
+        </div>
+        <div class="setting-group">
+            <label>🎧 Audio va Ekvalayzer:</label>
+            <select id="audioBoost">
+                <option value="normal">Normal Sound</option>
+                <option value="boost">200% Super Boost & Bass</option>
             </select>
         </div>
     </div>
 
-    <!-- MAXSUS PLEYER MODAL (CINEMA PLAYER) -->
+    <!-- PLEYER MODAL -->
     <div class="modal-player" id="modalPlayer">
         <div class="player-header">
-            <span id="playerTitle" style="font-weight:800; font-size: 16px;">...</span>
-            <button onclick="closePlayer()" style="background:rgba(255,255,255,0.1); border:none; color:#fff; width:36px; height:36px; border-radius:50%; font-size:18px; cursor:pointer;">✕</button>
+            <span id="playerTitle" style="font-weight:800; font-size: 14px;">...</span>
+            <button onclick="closePlayer()" style="background:rgba(255,255,255,0.12); border:none; color:#fff; width:34px; height:34px; border-radius:50%; font-size:16px; cursor:pointer;">✕</button>
         </div>
-
         <div class="player-body">
-            <video id="activeVideo" class="player-video" playsinline></video>
-        </div>
-
-        <div class="player-controls">
-            <div class="controls-row" style="justify-content:center; gap:20px;">
-                <button class="p-btn" onclick="seekVideo(-10)">⏪ -10s</button>
-                <button class="p-btn-main" id="playPauseBtn" onclick="togglePlayPause()">▶ Play</button>
-                <button class="p-btn" onclick="seekVideo(10)">+10s ⏩</button>
-            </div>
-            <div class="controls-row">
-                <button class="p-btn" onclick="toggleFullScreen()">fullscreen ⛶</button>
-                <button class="p-btn" onclick="toggleAspectRatio()">Ekran hajmi 📐</button>
-            </div>
+            <video id="activeVideo" class="player-video" playsinline controls></video>
         </div>
     </div>
 
-    <!-- FLOATING NAV -->
+    <!-- BOTTOM NAV -->
     <nav class="bottom-nav">
         <div class="nav-item active" onclick="switchTab('main')"><span style="font-size:18px;">🏠</span><span>Asosiy</span></div>
-        <div class="nav-item" onclick="scrollToSection('favRow')"><span style="font-size:18px;">⭐</span><span>Sevimlilar</span></div>
-        <div class="nav-item" onclick="switchTab('add')"><span style="font-size:18px;">➕</span><span>Yuklash</span></div>
+        <div class="nav-item"><span style="font-size:18px;">⭐</span><span>Sevimlilar</span></div>
+        <div class="nav-item"><span style="font-size:18px;">📥</span><span>Yuklash</span></div>
         <div class="nav-item" onclick="switchTab('settings')"><span style="font-size:18px;">⚙️</span><span>Sozlama</span></div>
     </nav>
 
     <script>
-        const defaultMediaData = [
-            { id: 10, category: "uzTv", title: "O'zbekiston HD", img: "https://upload.wikimedia.org/wikipedia/commons/1/12/O%27zbekiston_TV_logo.png", stream: "https://live.mtrk.uz/hls/uzbekistan/index.m3u8" },
-            { id: 11, category: "uzTv", title: "Yoshlar TV", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Yoshlar_TV_logo.svg/300px-Yoshlar_TV_logo.svg.png", stream: "https://live.mtrk.uz/hls/yoshlar/index.m3u8" },
-            { id: 50, category: "radio", title: "Yoshlar FM", img: "📻", stream: "https://radio.mtrk.uz/yoshlar" },
-            { id: 101, category: "premieres", title: "Dune: Part Two", img: "https://m.media-amazon.com/images/M/MV5BN2QyMDgwM2MtGWJmNy00Mzc4LWE1M2ItMDBhM2JiMWM4ZmE1XkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" },
-            { id: 201, category: "foreign", title: "Inception", img: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg", stream: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutback2012.mp4" }
-        ];
+        // REAL TIME CLOCK
+        setInterval(() => {
+            const d = new Date();
+            document.getElementById('liveClock').innerText = d.toLocaleTimeString();
+        }, 1000);
 
-        let db;
-        let favorites = JSON.parse(localStorage.getItem('app_favorites') || "[]");
+        // SLIDER AUTOMATION
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 4000);
 
-        const request = indexedDB.open("IkromjonTV_CinemaDB", 1);
-        request.onupgradeneeded = (e) => {
-            db = e.target.result;
-            if (db.objectStoreNames.contains("mediaStore")) db.deleteObjectStore("mediaStore");
-            db.createObjectStore("mediaStore", { keyPath: "id" });
+        // DICTIONARY FOR MULTI-LANGUAGE
+        const dict = {
+            uz: { welcome: "✨ IKROMJON TV mobil ilovasiga xush kelibsiz!" },
+            ru: { welcome: "✨ Добро пожаловать в приложение IKROMJON TV!" },
+            en: { welcome: "✨ Welcome to IKROMJON TV mobile app!" },
+            tr: { welcome: "✨ IKROMJON TV mobil uygulamasına hoş geldiniz!" },
+            tj: { welcome: "✨ Khush omaded ba barnomai IKROMJON TV!" },
+            kz: { welcome: "✨ IKROMJON TV мобильді қолданбасына кош келдіңіз!" }
         };
-        request.onsuccess = (e) => { db = e.target.result; checkDataAndRender(); };
 
-        function checkDataAndRender() {
-            getAllMedia((items) => {
-                if (items.length === 0) {
-                    const tx = db.transaction("mediaStore", "readwrite");
-                    defaultMediaData.forEach(item => tx.objectStore("mediaStore").put(item));
-                    tx.oncomplete = () => renderAllContent();
-                } else { renderAllContent(); }
-            });
+        function changeLanguage(lang) {
+            document.getElementById('welcomeMsg').innerText = dict[lang].welcome;
         }
 
-        function getAllMedia(callback) {
-            const tx = db.transaction("mediaStore", "readonly");
-            const req = tx.objectStore("mediaStore").getAll();
-            req.onsuccess = () => callback(req.result);
-        }
-
-        function toggleFavorite(id, event) {
-            event.stopPropagation();
-            if (favorites.includes(id)) { favorites = favorites.filter(favId => favId !== id); } 
-            else { favorites.push(id); }
-            localStorage.setItem('app_favorites', JSON.stringify(favorites));
-            renderAllContent();
-        }
-
-        function handleSearch(query) {
-            const filter = query.toLowerCase();
-            getAllMedia((items) => {
-                const filtered = items.filter(i => i.title.toLowerCase().includes(filter));
-                renderCards(filtered);
-            });
-        }
-
-        function renderAllContent() { getAllMedia((items) => renderCards(items)); }
-
-        function renderCards(items) {
-            const rows = ['uzTv', 'radio', 'premieres', 'foreign', 'fav'];
-            rows.forEach(r => { const el = document.getElementById(r + 'Row'); if (el) el.innerHTML = ''; });
-
-            const favItems = items.filter(i => favorites.includes(i.id));
-            const favHeader = document.getElementById('favHeader');
-            const favRow = document.getElementById('favRow');
-
-            if (favItems.length > 0) { favHeader.style.display = 'flex'; favRow.style.display = 'flex'; } 
-            else { favHeader.style.display = 'none'; favRow.style.display = 'none'; }
-
-            items.forEach(item => {
-                const isFav = favorites.includes(item.id);
-                const card = createCardElement(item, isFav);
-                if (isFav) { favRow.appendChild(createCardElement(item, true)); }
-
-                const container = document.getElementById(item.category + 'Row') || document.getElementById('premieresRow');
-                if (container) container.appendChild(card);
-            });
-        }
-
-        function createCardElement(item, isFav) {
-            const card = document.createElement('div');
-            const favClass = isFav ? 'fav-btn active' : 'fav-btn';
-
-            if (item.category === 'uzTv') {
-                card.className = 'media-card tv-card';
-                card.onclick = () => playStream(item.title, item.stream);
-                card.innerHTML = `
-                    <div class="badge-4k">4K HD</div>
-                    <div class="${favClass}" onclick="toggleFavorite(${item.id}, event)">❤️</div>
-                    <div class="tv-thumb-wrapper"><img src="${item.img}" class="tv-img" onerror="this.src='https://picsum.photos/100/100'"></div>
-                    <div class="tv-info"><div class="movie-title">${item.title}</div></div>
-                `;
-            } else if (item.category === 'radio') {
-                card.className = 'media-card radio-card';
-                card.onclick = () => playStream(item.title, item.stream);
-                card.innerHTML = `
-                    <div class="${favClass}" onclick="toggleFavorite(${item.id}, event)">❤️</div>
-                    <div style="font-size:32px;">📻</div>
-                    <div class="movie-title">${item.title}</div>
-                `;
-            } else {
-                card.className = 'media-card movie-card';
-                card.onclick = () => playStream(item.title, item.stream);
-                card.innerHTML = `
-                    <div class="badge-4k">ULTRA HD</div>
-                    <div class="${favClass}" onclick="toggleFavorite(${item.id}, event)">❤️</div>
-                    <img src="${item.img}" class="movie-poster" onerror="this.src='https://picsum.photos/200/300'">
-                    <div class="movie-info"><div class="movie-title">${item.title}</div></div>
-                `;
-            }
-            return card;
-        }
-
-        /* CUSTOM CINEMA PLAYER LOGIC */
-        let hlsPlayer = null;
+        // PLAYER ENGINE
+        let hls = null;
         const video = document.getElementById('activeVideo');
-        const playBtn = document.getElementById('playPauseBtn');
 
         function playStream(title, url) {
             document.getElementById('playerTitle').innerText = title;
             document.getElementById('modalPlayer').classList.add('active');
-            if (hlsPlayer) hlsPlayer.destroy();
+            if (hls) hls.destroy();
 
             if (url.includes('.m3u8') && Hls.isSupported()) {
-                hlsPlayer = new Hls();
-                hlsPlayer.loadSource(url);
-                hlsPlayer.attachMedia(video);
-                hlsPlayer.on(Hls.Events.MANIFEST_PARSED, () => { video.play(); playBtn.innerText = "⏸ Pause"; });
+                hls = new Hls(); hls.loadSource(url); hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
             } else {
-                video.src = url;
-                video.play();
-                playBtn.innerText = "⏸ Pause";
+                video.src = url; video.play();
             }
-        }
-
-        function togglePlayPause() {
-            if (video.paused) { video.play(); playBtn.innerText = "⏸ Pause"; } 
-            else { video.pause(); playBtn.innerText = "▶ Play"; }
-        }
-
-        function seekVideo(seconds) { video.currentTime += seconds; }
-
-        function toggleFullScreen() {
-            if (!document.fullscreenElement) {
-                document.getElementById('modalPlayer').requestFullscreen().catch(() => {});
-            } else {
-                document.exitFullscreen();
-            }
-        }
-
-        let aspectModes = ['contain', 'cover', 'fill'];
-        let currentAspect = 0;
-        function toggleAspectRatio() {
-            currentAspect = (currentAspect + 1) % aspectModes.length;
-            video.style.objectFit = aspectModes[currentAspect];
         }
 
         function closePlayer() {
             video.pause(); video.src = "";
-            if (hlsPlayer) { hlsPlayer.destroy(); hlsPlayer = null; }
+            if (hls) { hls.destroy(); hls = null; }
             document.getElementById('modalPlayer').classList.remove('active');
         }
 
         function switchTab(tab) {
-            document.getElementById('addContentView').classList.remove('active');
             document.getElementById('settingsView').classList.remove('active');
-            if (tab === 'add') document.getElementById('addContentView').classList.add('active');
             if (tab === 'settings') document.getElementById('settingsView').classList.add('active');
         }
-
-        function scrollToSection(id) {
-            switchTab('main');
-            const el = document.getElementById(id);
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function changeTheme(theme) { document.documentElement.setAttribute('data-theme', theme); }
     </script>
 </body>
 </html>
