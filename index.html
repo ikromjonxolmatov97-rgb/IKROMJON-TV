@@ -1,500 +1,597 @@
-import 'package:flutter/material.dart';
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IKROMJON TV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #05050d;
+            --card-bg: rgba(20, 16, 38, 0.7);
+            --border-glow: rgba(147, 51, 234, 0.3);
+            --primary-purple: #9333ea;
+            --accent-pink: #ec4899;
+            --accent-cyan: #06b6d4;
+            --live-red: #ef4444;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+        }
 
-void main() {
-  runApp(const IkromjonTVApp());
-}
+        body.oled-mode {
+            --bg-dark: #000000;
+            --card-bg: #0d0d0d;
+            --border-glow: #222222;
+        }
 
-class IkromjonTVApp extends StatelessWidget {
-  const IkromjonTVApp({super.key});
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'IKROMJON TV',
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color(0xFF0D0B1E),
-        primaryColor: const Color(0xFF8E24AA),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
-      ),
-      home: const NavigationHandler(),
-    );
-  }
-}
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(147, 51, 234, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+            color: var(--text-main);
+            padding-bottom: 75px;
+            min-height: 100vh;
+            transition: background 0.3s;
+        }
 
-class NavigationHandler extends StatefulWidget {
-  const NavigationHandler({super.key});
+        /* Clock Banner Container */
+        .header-clock-section {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(147, 51, 234, 0.1) 0%, transparent 100%);
+            border-bottom: 1px solid var(--border-glow);
+        }
 
-  @override
-  State<NavigationHandler> createState() => _NavigationHandlerState();
-}
+        .analog-clock {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-purple);
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.4), inset 0 0 15px rgba(0,0,0,0.8);
+            position: relative;
+            background: rgba(10, 8, 20, 0.9);
+            margin-bottom: 10px;
+        }
 
-class _NavigationHandlerState extends State<NavigationHandler> {
-  int _currentIndex = 0;
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+            background: #fff;
+            border-radius: 4px;
+        }
+        .hour-hand { width: 4px; height: 30px; background: var(--accent-pink); }
+        .minute-hand { width: 3px; height: 42px; background: var(--accent-cyan); }
+        .second-hand { width: 2px; height: 48px; background: var(--live-red); }
+        .clock-center {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 8px; height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 5px #fff;
+        }
 
-  final List<Widget> _pages = [
-    const HomeScreen(),
-    const RadioPlayerScreen(),
-    const AudioPlayerScreen(),
-    const SettingsScreen(),
-  ];
+        .digital-clock-box {
+            background: rgba(15, 12, 29, 0.8);
+            border: 1px solid var(--primary-purple);
+            border-radius: 12px;
+            padding: 6px 16px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(147, 51, 234, 0.3);
+        }
+        .digital-time {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--text-main);
+        }
+        .digital-date {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: IndexedStack(
-          index: _currentIndex,
-          children: _pages,
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: const Color(0xFF131127),
-        selectedItemColor: Colors.purpleAccent,
-        unselectedItemColor: Colors.white54,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.tv), label: 'TV'),
-          BottomNavigationBarItem(icon: Icon(Icons.radio), label: 'Radio'),
-          BottomNavigationBarItem(icon: Icon(Icons.music_note), label: 'MP3'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Sozlama'),
-        ],
-      ),
-    );
-  }
-}
+        /* Top Header */
+        header {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-// =========================================================
-// 1. HOME & TV SECTION
-// =========================================================
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-  final List<Map<String, dynamic>> categories = const [
-    {'id': '01', 'title': 'JONLI EFIR (TV)', 'icon': Icons.podcasts, 'color': Colors.red},
-    {'id': '02', 'title': 'FILMLAR', 'icon': Icons.movie, 'color': Colors.blue},
-    {'id': '03', 'title': 'SERIALAR', 'icon': Icons.tv, 'color': Colors.green},
-    {'id': '04', 'title': 'ANIMELAR', 'icon': Icons.psychology, 'color': Colors.purple},
-    {'id': '05', 'title': 'MULTFILMLAR', 'icon': Icons.child_care, 'color': Colors.orange},
-    {'id': '06', 'title': 'KO\'RSATUVLAR', 'icon': Icons.live_tv, 'color': Colors.cyan},
-    {'id': '07', 'title': 'SPORT', 'icon': Icons.sports_soccer, 'color': Colors.lightGreen},
-    {'id': '08', 'title': 'YANGILIKLAR', 'icon': Icons.article, 'color': Colors.indigo},
-  ];
+        /* Live Hero Player Banner */
+        .hero-live-card {
+            margin: 0 16px 16px 16px;
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.3), rgba(236, 72, 153, 0.2));
+            border: 1px solid rgba(236, 72, 153, 0.4);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            cursor: pointer;
+        }
 
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: const Text(
-              'IKROMJON TV',
-              style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2),
-            ),
-          ),
-          body: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.04),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildLiveBanner(context),
-                const SizedBox(height: 16),
-                const Text(
-                  'BO\'LIMLAR',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey),
-                ),
-                const SizedBox(height: 10),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: categories.length,
-                  itemBuilder: (context, index) {
-                    final item = categories[index];
-                    return Card(
-                      color: const Color(0xFF18152E),
-                      margin: const EdgeInsets.symmetric(vertical: 4),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: ListTile(
-                        leading: Icon(item['icon'], color: item['color']),
-                        title: Text(
-                          '${item['id']}   ${item['title']}',
-                          style: const TextStyle(fontWeight: FontWeight.w600),
-                        ),
-                        trailing: const Icon(Icons.play_arrow, color: Colors.purpleAccent),
-                        onTap: () => _openTVPlayer(context, item['title']),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
+        .play-btn-glow {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 0 15px var(--accent-pink);
+            flex-shrink: 0;
+        }
 
-  Widget _buildLiveBanner(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF2E1065), Color(0xFF1E1B4B)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.purpleAccent.withOpacity(0.3)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.play_circle_fill, size: 48, color: Colors.purpleAccent),
-            onPressed: () => _openTVPlayer(context, "Asosiy Jonli Efir"),
-          ),
-          const SizedBox(width: 8),
-          const Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'IKROMJON',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  'JONLI EFIR',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.purpleAccent,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: const Text(
-              '● LIVE',
-              style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        .live-badge {
+            background: var(--live-red);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-left: 6px;
+            animation: pulse 1.5s infinite;
+        }
 
-  void _openTVPlayer(BuildContext context, String channelName) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.black,
-      builder: (context) => FractionallySizedBox(
-        heightFactor: 0.85,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      channelName,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.close, color: Colors.white),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              AspectRatio(
-                aspectRatio: 16 / 9,
-                child: Container(
-                  color: Colors.black54,
-                  child: const Center(
-                    child: CircularProgressIndicator(color: Colors.purpleAccent),
-                  ),
-                ),
-              ),
-              const Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(icon: const Icon(Icons.pause, size: 32), onPressed: () {}),
-                  IconButton(icon: const Icon(Icons.fullscreen, size: 32), onPressed: () {}),
-                  IconButton(icon: const Icon(Icons.share, size: 32), onPressed: () {}),
-                ],
-              ),
-              const SizedBox(height: 20),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
 
-// =========================================================
-// 2. RADIO PLAYER SECTION
-// =========================================================
-class RadioPlayerScreen extends StatefulWidget {
-  const RadioPlayerScreen({super.key});
+        /* 10 Ta Vertikal Ro'yxat Bo'limlari */
+        .section-title-label {
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
 
-  @override
-  State<RadioPlayerScreen> createState() => _RadioPlayerScreenState();
-}
+        .vertical-list {
+            padding: 0 16px 16px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
 
-class _RadioPlayerScreenState extends State<RadioPlayerScreen> {
-  bool isPlaying = false;
-  String currentStation = "Uzbek FM 101.5";
+        .list-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
 
-  final List<String> radioStations = [
-    "Uzbek FM 101.5",
-    "Grand FM 101.0",
-    "Oriat Dono 106.5",
-    "Avtoradio 102.0",
-    "Nostalgiya FM 104.0"
-  ];
+        .list-item:active {
+            background: rgba(147, 51, 234, 0.3);
+            transform: scale(0.98);
+        }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('ONLAYN RADIO'), centerTitle: true),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: const Color(0xFF18152E),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.purpleAccent.withOpacity(0.5)),
-              ),
-              child: Column(
-                children: [
-                  const Icon(Icons.radio, size: 70, color: Colors.purpleAccent),
-                  const SizedBox(height: 10),
-                  Text(
-                    currentStation,
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
-                  const Text(
-                    '● JONLI RADIO EFIR',
-                    style: TextStyle(color: Colors.redAccent, fontSize: 12),
-                  ),
-                  const SizedBox(height: 10),
-                  IconButton(
-                    iconSize: 56,
-                    icon: Icon(
-                      isPlaying ? Icons.pause_circle_filled : Icons.play_circle_fill,
-                      color: Colors.purpleAccent,
-                    ),
-                    onPressed: () => setState(() => isPlaying = !isPlaying),
-                  )
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'RADIOLAR RO\'YXATI',
-                style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: ListView.builder(
-                itemCount: radioStations.length,
-                itemBuilder: (context, index) {
-                  final station = radioStations[index];
-                  return Card(
-                    color: const Color(0xFF18152E),
-                    child: ListTile(
-                      leading: const Icon(Icons.graphic_eq, color: Colors.purpleAccent),
-                      title: Text(station),
-                      trailing: Icon(
-                        currentStation == station && isPlaying
-                            ? Icons.volume_up
-                            : Icons.play_arrow,
-                        color: Colors.purpleAccent,
-                      ),
-                      onTap: () => setState(() {
-                        currentStation = station;
-                        isPlaying = true;
-                      }),
-                    ),
-                  );
-                },
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
+        .item-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-// =========================================================
-// 3. MP3 AUDIO PLAYER SECTION
-// =========================================================
-class AudioPlayerScreen extends StatefulWidget {
-  const AudioPlayerScreen({super.key});
+        .item-num {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            width: 22px;
+        }
 
-  @override
-  State<AudioPlayerScreen> createState() => _AudioPlayerScreenState();
-}
+        .item-icon {
+            font-size: 18px;
+        }
 
-class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
-  bool isPlaying = false;
-  double _sliderValue = 30.0;
+        .item-name {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('MP3 AUDIO PLAYER'), centerTitle: true),
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: 180,
-                width: 180,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF18152E),
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.purpleAccent.withOpacity(0.2),
-                      blurRadius: 20,
-                      spreadRadius: 5,
-                    )
-                  ],
-                ),
-                child: const Icon(Icons.music_note, size: 80, color: Colors.purpleAccent),
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                'Musiqa Track 01',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-              const Text(
-                'Ikromjon TV Soundtrack',
-                style: TextStyle(color: Colors.white54, fontSize: 13),
-              ),
-              const SizedBox(height: 20),
-              Slider(
-                value: _sliderValue,
-                max: 100.0,
-                activeColor: Colors.purpleAccent,
-                inactiveColor: Colors.white24,
-                onChanged: (val) => setState(() => _sliderValue = val),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('01:15', style: TextStyle(color: Colors.white54, fontSize: 12)),
-                    Text('03:45', style: TextStyle(color: Colors.white54, fontSize: 12)),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    iconSize: 36,
-                    icon: const Icon(Icons.skip_previous),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    iconSize: 56,
-                    icon: Icon(
-                      isPlaying ? Icons.pause_circle_filled : Icons.play_circle_fill,
-                      color: Colors.purpleAccent,
-                    ),
-                    onPressed: () => setState(() => isPlaying = !isPlaying),
-                  ),
-                  IconButton(
-                    iconSize: 36,
-                    icon: const Icon(Icons.skip_next),
-                    onPressed: () {},
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+        /* 6 Ta Funktsiyalar Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 0 16px 16px 16px;
+        }
 
-// =========================================================
-// 4. SETTINGS SECTION
-// =========================================================
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+        }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('SOZLAMALAR'), centerTitle: true),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: const [
-          ListTile(
-            leading: Icon(Icons.language, color: Colors.purpleAccent),
-            title: Text('Ilova tili'),
-            subtitle: Text('O\'zbekcha'),
-          ),
-          ListTile(
-            leading: Icon(Icons.high_quality, color: Colors.purpleAccent),
-            title: Text('Video va Audio Sifati'),
-            subtitle: Text('Yuqori (Auto)'),
-          ),
-          ListTile(
-            leading: Icon(Icons.cleaning_services, color: Colors.purpleAccent),
-            title: Text('Keshni tozalash'),
-          ),
-        ],
-      ),
-    );
-  }
-}
+        .feature-icon-box {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(147, 51, 234, 0.2);
+            border: 1px solid var(--primary-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: var(--accent-cyan);
+        }
+
+        .feature-title {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .feature-desc {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* Horizontal Carousel Columns */
+        .horizontal-carousel-section {
+            display: flex;
+            gap: 12px;
+            padding: 0 16px 20px 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .horizontal-carousel-section::-webkit-scrollbar { display: none; }
+
+        .column-card {
+            min-width: 140px;
+            max-width: 140px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 14px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .col-header {
+            text-align: center;
+            border-bottom: 1px solid var(--border-glow);
+            padding-bottom: 6px;
+        }
+        .col-num { font-size: 11px; color: var(--accent-pink); font-weight: 800; }
+        .col-title { font-size: 11px; font-weight: 700; text-transform: uppercase; }
+
+        .mini-poster {
+            width: 100%;
+            height: 70px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .btn-barchasi {
+            background: rgba(147, 51, 234, 0.2);
+            border: 1px solid var(--primary-purple);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 6px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        /* Video Player Modal Window */
+        .video-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+        .video-modal.active { display: flex; }
+
+        .modal-top {
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(20, 16, 38, 0.9);
+        }
+
+        .video-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+        }
+        video { width: 100%; height: 100%; }
+
+        /* SOZLAMALAR MODAL OYNASI */
+        .settings-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 5, 13, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 999;
+            display: none;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .settings-modal.active { display: flex; }
+
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-glow);
+            padding-bottom: 12px;
+        }
+
+        .settings-group {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 14px;
+        }
+
+        .settings-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .settings-row:last-child { border-bottom: none; }
+
+        .setting-title { font-size: 13px; font-weight: 700; }
+        .setting-desc { font-size: 10px; color: var(--text-muted); }
+
+        select, input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        select {
+            background: #141026;
+            color: #fff;
+            border: 1px solid var(--primary-purple);
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+
+        .btn-clear {
+            width: 100%;
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid var(--live-red);
+            color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Bottom Fixed Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            height: 60px;
+            background: rgba(10, 8, 20, 0.95);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid var(--border-glow);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            align-items: center;
+            z-index: 200;
+        }
+
+        .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            gap: 3px;
+        }
+        .nav-link.active { color: var(--accent-pink); }
+        .nav-icon { font-size: 18px; }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="brand-logo">
+            <span>▶</span> IKROMJON TV
+        </div>
+        <button onclick="openSettings()" style="background:none; border:none; font-size:20px; cursor:pointer; color:#fff;">⚙️</button>
+    </header>
+
+    <!-- Toshkent Vaqti va Soat -->
+    <div class="header-clock-section">
+        <div class="analog-clock">
+            <div class="hand hour-hand" id="hourHand"></div>
+            <div class="hand minute-hand" id="minuteHand"></div>
+            <div class="hand second-hand" id="secondHand"></div>
+            <div class="clock-center"></div>
+        </div>
+        <div class="digital-clock-box">
+            <div class="digital-time" id="digitalTime">00:00:00</div>
+            <div class="digital-date" id="digitalDate">TOSHKENT VAQTI</div>
+        </div>
+    </div>
+
+    <!-- Live Stream Card -->
+    <div class="hero-live-card" onclick="openPlayer('Uzbekistan 24 - Jonli Efir', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4')">
+        <div class="play-btn-glow">▶</div>
+        <div>
+            <div style="font-size: 15px; font-weight: 800;">IKROMJON JONLI EFIR <span class="live-badge">• LIVE</span></div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Hozir jonli efirda eng sara ko'rsatuvlar</div>
+        </div>
+    </div>
+
+    <!-- 10 Ta Asosiy Vertikal Bo'limlar -->
+    <div class="section-title-label">BO'LIMLAR</div>
+    <div class="vertical-list" id="verticalList"></div>
+
+    <!-- 6 Ta Ilova Funksiyasi -->
+    <div class="section-title-label">6 TA ILOVA FUNKSIYASI</div>
+    <div class="features-grid">
+        <div class="feature-card" onclick="triggerSearch()">
+            <div class="feature-icon-box">🔍</div>
+            <div class="feature-title">TEZKOR QIDIRUV</div>
+            <div class="feature-desc">Kerakli kontentni tezda toping</div>
+        </div>
+        <div class="feature-card" onclick="alert('Yuklab olish bo\'limi tayyorlanmoqda')">
+            <div class="feature-icon-box">⬇️</div>
+            <div class="feature-title">YUKLAB OLISH</div>
+            <div class="feature-desc">Sevimli kontentni yuklab oling</div>
+        </div>
+        <div class="feature-card" onclick="alert('Sevimli kontentlar saqlandi')">
+            <div class="feature-icon-box">💚</div>
+            <div class="feature-title">SEVIMLILAR</div>
+            <div class="feature-desc">Yoqgan kontentlarni saqlang</div>
+        </div>
+        <div class="feature-card" onclick="alert('Tomosha tarixi bo\'sh')">
+            <div class="feature-icon-box">🕒</div>
+            <div class="feature-title">TARIX</div>
+            <div class="feature-desc">Tomosha qilgan kontentlaringiz</div>
+        </div>
+        <div class="feature-card" onclick="openSettings()">
+            <div class="feature-icon-box">⚙️</div>
+            <div class="feature-title">SOZLAMALAR</div>
+            <div class="feature-desc">Ilovani o'zingizga moslang</div>
+        </div>
+        <div class="feature-card" onclick="alert('IKROMJON TV v3.0 Ultra\nBarcha huquqlar himoyalangan.')">
+            <div class="feature-icon-box">ℹ️</div>
+            <div class="feature-title">HAQIDA</div>
+            <div class="feature-desc">Ilova haqida barcha ma'lumotlar</div>
+        </div>
+    </div>
+
+    <!-- 10 Ta Surilib O'tadigan Gorizontal Bo'limlar -->
+    <div class="section-title-label">10 TA SURILIB O'TADIGAN BO'LIM</div>
+    <div class="horizontal-carousel-section" id="horizontalCarousel"></div>
+
+    <!-- Video Player Popup Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="modal-top">
+            <span id="videoModalTitle" style="font-weight: 700; font-size: 14px;">Efir</span>
+            <button onclick="closePlayer()" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;">✕</button>
+        </div>
+        <div class="video-container">
+            <video id="mainVideo" controls playsinline></video>
+        </div>
+    </div>
+
+    <!-- ILOVA SOZLAMALARI MODAL OYNASI -->
+    <div class="settings-modal" id="settingsModal">
+        <div class="settings-header">
+            <h2 style="font-size: 18px; font-weight: 800;">⚙️ Ilova Sozlamalari</h2>
+            <button onclick="closeSettings()" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;">✕</button>
+        </div>
+
+        <div class="settings-group">
+            <div class="settings-row">
+                <div>
+                    <div class="setting-title">Video Sifati</div>
+                    <div class="setting-desc">Odatiy video ijro sifatini tanlang</div>
+                </div>
+                <select id="qualitySelect" onchange="saveSetting('quality', this.value)">
+                    <option value="auto">Avto (Tavsiya etiladi)</option>
+                    <option value="1080">1080p Full HD</option>
+                    <option value="720">720p HD</option>
+                    <option value="480">480p SD</option>
+                </select>
+            </div>
+            <div class="settings-row">
+                <div>
+                    <div class="setting-title">Ilova Mavzusi</div>
+                    <div class="setting-desc">Vizual ko'rinish rejimini o'zgartiring</div>
+                </div>
+                <select id="themeSelect" onchange="toggleTheme(this.value)">
+                    <option value="dark">Dark Neon</option>
+                    <option value="oled">OLED Black</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="settings-group">
+            <div class="settings-row">
+                <div>
+                    <div class="setting-title">Ilova Tili</div>
+                    <div class="setting-desc">Interfeys tilini belgilang</div>
+                </div>
+                <select id="langSelect">
+                    <option value="uz">O'zbekcha</option>
+                    <option value="ru">Русский</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+            <div class="settings-row">
+                <div>
+                    <div class="setting-title">Avto Play</div>
+                    <div class="setting-desc">Videoni av hisoblash va ijro etish</div>
+                </div>
+                <input type="checkbox" id="autoplayCheck" checked>
+            </div>
+            <div class="settings-row">
+                <div>
+                    <div class="setting-title">Bildirishnomalar</div>
+                    <div class="setting-desc">Yangi premyera va ko'rsatuvlar</div>
+                </div>
+                <input type="checkbox" id="notifCheck" checked>
+            </div>
+        </div>
+
+        <div class="settings-group">
+            <div class="setting-title">Xotira va Ke
