@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IKROMJON TV — Premium Media & AI Platform</title>
+    <title>IKROMJON TV — Premium Media & TV System</title>
 
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -94,6 +94,7 @@
         /* BUTTONS */
         .btn-main { background: var(--accent-gradient); color: #fff; border: none; padding: 10px 18px; border-radius: 12px; font-size: 12px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: 0.2s; }
         .btn-main:active { transform: scale(0.95); }
+        .btn-danger { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
 
         /* SECTIONS & SCROLL */
         .section-header { padding: 14px 16px 8px 16px; font-size: 15px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
@@ -101,14 +102,13 @@
         .horiz-scroll { display: flex; gap: 12px; padding: 0 16px 8px 16px; overflow-x: auto; scrollbar-width: none; }
         .horiz-scroll::-webkit-scrollbar { display: none; }
 
-        .cat-chip { background: var(--bg-card); border: 1px solid var(--border-glow); padding: 8px 14px; border-radius: 14px; font-size: 11px; font-weight: 700; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; gap: 6px; }
-        .cat-chip.active { background: var(--accent-gradient); border-color: transparent; color: #fff; }
-
-        .media-card { flex: 0 0 130px; background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 16px; overflow: hidden; cursor: pointer; }
+        .media-card { flex: 0 0 135px; background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 16px; overflow: hidden; cursor: pointer; position: relative; }
         .media-poster { width: 100%; height: 165px; object-fit: cover; background: #1e293b; display: block; }
         .media-info { padding: 8px; }
         .media-title { font-size: 11px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .media-sub { font-size: 9px; color: var(--text-sub); margin-top: 2px; }
+
+        .delete-btn { position: absolute; top: 6px; right: 6px; background: rgba(239, 68, 68, 0.85); color: #fff; border: none; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; cursor: pointer; z-index: 10; backdrop-filter: blur(4px); }
 
         .tv-card { flex: 0 0 100px; background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 18px; padding: 10px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; text-align: center; }
         .tv-logo-box { width: 48px; height: 48px; background: rgba(255,255,255,0.05); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; }
@@ -125,22 +125,15 @@
         .modal-overlay.active { display: flex; }
         .modal-header { padding: 14px; background: rgba(7,9,19,0.9); border-bottom: 1px solid var(--border-glow); display: flex; justify-content: space-between; align-items: center; }
 
-        .browser-bar { display: flex; gap: 6px; padding: 8px; background: #121829; border-bottom: 1px solid var(--border-glow); }
-        .browser-bar input { flex: 1; background: rgba(255,255,255,0.08); border: 1px solid var(--border-glow); padding: 6px 12px; border-radius: 16px; color: #fff; outline: none; font-size: 12px; }
-
-        .chat-container { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
-        .chat-msg { max-width: 80%; padding: 10px 14px; border-radius: 14px; font-size: 12px; line-height: 1.4; }
-        .chat-msg.user { background: var(--accent-gradient); align-self: flex-end; color:#fff; }
-        .chat-msg.ai { background: var(--bg-card); border: 1px solid var(--border-glow); align-self: flex-start; }
-        .chat-input-area { padding: 10px; background: #070913; border-top: 1px solid var(--border-glow); display: flex; gap: 6px; }
-        .chat-input-area input { flex: 1; background: var(--bg-card); border: 1px solid var(--border-glow); padding: 8px 14px; border-radius: 12px; color: #fff; outline: none; font-size: 12px; }
-
-        /* FORM ELEMENTS & SETTINGS LIST */
+        /* SETTINGS & SUBSCRIPTION */
         .setting-group { padding: 14px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; flex: 1; }
         .setting-item { background: var(--bg-card); border: 1px solid var(--border-glow); padding: 12px 16px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; }
         .setting-title { font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
         .setting-select, .setting-input { background: var(--bg-glass); border: 1px solid var(--border-glow); color: var(--text-main); font-size: 11px; padding: 6px 10px; border-radius: 8px; outline: none; }
         
+        .sub-box { background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%); border: 2px solid #818cf8; border-radius: 20px; padding: 24px; text-align: center; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+        .sub-price { font-size: 26px; font-weight: 900; color: #ec4899; }
+
         /* LOCK SCREEN */
         .lock-screen { position: fixed; inset: 0; z-index: 2000; background: var(--bg-main); display: none; flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
         .lock-pin-input { width: 140px; text-align: center; font-size: 24px; letter-spacing: 10px; background: var(--bg-card); border: 1px solid var(--border-glow); color: var(--text-main); padding: 8px; border-radius: 12px; }
@@ -148,7 +141,7 @@
 </head>
 <body>
 
-    <!-- APP LOCK SCREEN -->
+    <!-- LOCK SCREEN -->
     <div class="lock-screen" id="appLockScreen">
         <i class="fa-solid fa-lock" style="font-size: 40px; color: #818cf8;"></i>
         <h3>Ilova Qulflangan</h3>
@@ -194,9 +187,8 @@
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
     <main>
-        <!-- HERO CAROUSEL SLIDER -->
+        <!-- HERO CAROUSEL -->
         <div class="hero-slider-container">
             <div class="hero-track" id="heroTrack">
                 <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80');">
@@ -222,58 +214,20 @@
                         </button>
                     </div>
                 </div>
-
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1511882150382-421056c89033?auto=format&fit=crop&w=1000&q=80');">
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <div class="hero-badge">LIFESTYLE</div>
-                        <div class="hero-title">Do'stlar Bilan Uyda Dam Olish</div>
-                        <div class="hero-meta"><span>Vlog</span><span>Dolby Digital</span></div>
-                        <button class="btn-main" style="margin-top: 8px; width: max-content;" onclick="playMedia('Uyda Dam Olish', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4')">
-                            <i class="fa-solid fa-play"></i> <span>TOMOSHA QILISH</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=1000&q=80');">
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <div class="hero-badge">SPORT</div>
-                        <div class="hero-title">Golf Chempionati 2026</div>
-                        <div class="hero-meta"><span>Sport HD</span><span>Live</span></div>
-                        <button class="btn-main" style="margin-top: 8px; width: max-content;" onclick="playMedia('Golf Chempionati', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4')">
-                            <i class="fa-solid fa-play"></i> <span>TOMOSHA QILISH</span>
-                        </button>
-                    </div>
-                </div>
             </div>
 
             <div class="slider-dots">
                 <div class="dot active" onclick="goToSlide(0)"></div>
                 <div class="dot" onclick="goToSlide(1)"></div>
-                <div class="dot" onclick="goToSlide(2)"></div>
-                <div class="dot" onclick="goToSlide(3)"></div>
             </div>
         </div>
 
-        <!-- YUKLANGAN MEDIA BO'LIMI -->
+        <!-- YUKLANGAN MEDIA VA SAQLANGAN FAYLLAR -->
         <div id="uploadedSection" style="display:none;">
             <div class="section-header">
-                <span>Yuklangan Fayllar</span>
+                <span>Saqlangan Fayllar (Video va Rasmlar)</span>
             </div>
             <div class="horiz-scroll" id="uploadedList"></div>
-        </div>
-
-        <!-- CATEGORIES -->
-        <div class="section-header">
-            <span>Kategoriyalar</span>
-            <span class="see-all">Barchasi ❯</span>
-        </div>
-        <div class="horiz-scroll">
-            <div class="cat-chip active"><i class="fa-solid fa-fire"></i> <span>Total Trend</span></div>
-            <div class="cat-chip"><i class="fa-solid fa-film"></i> <span>Kinolar</span></div>
-            <div class="cat-chip"><i class="fa-solid fa-tv"></i> <span>Jonli Efir</span></div>
-            <div class="cat-chip"><i class="fa-brands fa-youtube"></i> <span>YouTube Hits</span></div>
         </div>
 
         <!-- TV CHANNELS -->
@@ -282,43 +236,21 @@
             <span class="see-all">50+ ❯</span>
         </div>
         <div class="horiz-scroll">
-            <div class="tv-card" onclick="playMedia('UZBEKISTAN 24', 'https://www.youtube.com/embed/live_stream?channel=UC8x5k3Kj96X1N13pX9W1hGg&autoplay=1', 'yt')">
+            <div class="tv-card" onclick="openTvChannel('UZBEKISTAN 24')">
                 <div class="tv-logo-box" style="color:#00c6ff;">UZB 24</div>
                 <div class="tv-name">Uzbekistan 24</div>
             </div>
-            <div class="tv-card" onclick="playMedia('ZO\'R TV', 'https://www.youtube.com/embed/live_stream?channel=UC8x5k3Kj96X1N13pX9W1hGg&autoplay=1', 'yt')">
+            <div class="tv-card" onclick="openTvChannel('ZO\'R TV')">
                 <div class="tv-logo-box" style="color:#f59e0b;">ZO'R</div>
                 <div class="tv-name">Zo'r TV HD</div>
             </div>
-            <div class="tv-card" onclick="playMedia('MY5 TV', 'https://www.youtube.com/embed/live_stream?channel=UC8x5k3Kj96X1N13pX9W1hGg&autoplay=1', 'yt')">
+            <div class="tv-card" onclick="openTvChannel('MY5 TV')">
                 <div class="tv-logo-box" style="color:#ef4444;">MY5</div>
                 <div class="tv-name">Mening Yurtim</div>
             </div>
-            <div class="tv-card" onclick="playMedia('SPORT HD', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4')">
+            <div class="tv-card" onclick="openTvChannel('SPORT HD')">
                 <div class="tv-logo-box" style="color:#10b981;">SPORT</div>
                 <div class="tv-name">Sport TV HD</div>
-            </div>
-        </div>
-
-        <!-- MOVIES -->
-        <div class="section-header">
-            <span>Tavsiya Etilgan Filmlar</span>
-            <span class="see-all">Katalog ❯</span>
-        </div>
-        <div class="horiz-scroll">
-            <div class="media-card" onclick="playMedia('Sintel 4K', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4')">
-                <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=400&q=80" class="media-poster" alt="Movie">
-                <div class="media-info">
-                    <div class="media-title">Sintel 4K</div>
-                    <div class="media-sub">Animation • 2024</div>
-                </div>
-            </div>
-            <div class="media-card" onclick="playMedia('Tears of Steel', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">
-                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=400&q=80" class="media-poster" alt="Movie">
-                <div class="media-info">
-                    <div class="media-title">Tears of Steel</div>
-                    <div class="media-sub">Sci-Fi • 2025</div>
-                </div>
             </div>
         </div>
     </main>
@@ -332,6 +264,25 @@
         <div class="nav-btn" onclick="openModal('profileModal')"><i class="fa-solid fa-user"></i><span>Profil</span></div>
     </nav>
 
+    <!-- TV OBUNA SOTIB OLISH MODAL -->
+    <div class="modal-overlay" id="tvSubModal">
+        <div class="modal-header">
+            <span style="font-weight: 800; color:#ef4444;"><i class="fa-solid fa-tv"></i> TV Efir Obunasi</span>
+            <div class="icon-btn" onclick="closeModal('tvSubModal')"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div style="padding:24px; display:flex; justify-content:center; align-items:center; flex:1;">
+            <div class="sub-box">
+                <i class="fa-solid fa-lock" style="font-size: 36px; color:#ec4899;"></i>
+                <h3 id="targetChannelName">TV Kanal nomi</h3>
+                <p style="font-size:12px; color:var(--text-sub);">Ushbu TV kanalni va jonli efirni tomosha qilish uchun obunani faollashtiring.</p>
+                <div class="sub-price">55 000 soʻm <span style="font-size:12px; color:#fff;">/ 1 oy</span></div>
+                <button class="btn-main" style="width:100%; padding:14px; font-size:14px;" onclick="buyTvSubscription()">
+                    <i class="fa-solid fa-credit-card"></i> 55 000 soʻmga 1 Oylik Obuna Sotib Olish
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- VIDEO/RASM YUKLASH MODAL -->
     <div class="modal-overlay" id="uploadModal">
         <div class="modal-header">
@@ -340,23 +291,45 @@
         </div>
         <div style="padding:20px; display:flex; flex-direction:column; gap:16px;">
             <label class="btn-main" style="padding:15px; text-align:center;">
-                <i class="fa-solid fa-file-video"></i> Video Tanlash va Yuklash
+                <i class="fa-solid fa-file-video"></i> Video Tanlash va Saqlash
                 <input type="file" accept="video/*" style="display:none;" onchange="handleFileUpload(event, 'video')">
             </label>
             <label class="btn-main" style="padding:15px; text-align:center; background:linear-gradient(135deg, #10b981 0%, #3b82f6 100%);">
-                <i class="fa-solid fa-file-image"></i> Rasm Tanlash va Yuklash
+                <i class="fa-solid fa-file-image"></i> Rasm Tanlash va Saqlash
                 <input type="file" accept="image/*" style="display:none;" onchange="handleFileUpload(event, 'image')">
             </label>
         </div>
     </div>
 
-    <!-- SOZLAMALAR MODAL -->
+    <!-- SOZLAMALAR MODAL (TV SOZLAMALAR VA TV SISTEMASI BILAN) -->
     <div class="modal-overlay" id="settingsModal">
         <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-gear"></i> Ilova Sozlamalari</span>
+            <span style="font-weight: 800;"><i class="fa-solid fa-gear"></i> Ilova va TV Sozlamalari</span>
             <div class="icon-btn" onclick="closeModal('settingsModal')"><i class="fa-solid fa-xmark"></i></div>
         </div>
         <div class="setting-group">
+            <div style="font-size:12px; font-weight:800; color:#818cf8; margin-top:4px;">📺 TV SISTEMASI VA TV SOZLAMALARI</div>
+            <div class="setting-item">
+                <div class="setting-title"><i class="fa-solid fa-tv"></i> TV Ekran Nisbati (Aspect Ratio)</div>
+                <select class="setting-select">
+                    <option value="16:9">16:9 (Standart TV)</option>
+                    <option value="4:3">4:3 (Klassik)</option>
+                    <option value="fill">Ekranni To'ldirish</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <div class="setting-title"><i class="fa-solid fa-play"></i> TV Kanallarni Avto Ijro Etish</div>
+                <input type="checkbox" checked style="width:20px; height:20px;">
+            </div>
+            <div class="setting-item">
+                <div class="setting-title"><i class="fa-solid fa-gamepad"></i> TV Pult CEC Integratsiyasi</div>
+                <select class="setting-select">
+                    <option>Yoqilgan</option>
+                    <option>O'chirilgan</option>
+                </select>
+            </div>
+
+            <div style="font-size:12px; font-weight:800; color:#818cf8; margin-top:10px;">⚙️ UMUMIY SOZLAMALAR</div>
             <div class="setting-item">
                 <div class="setting-title"><i class="fa-solid fa-lock"></i> Ilova Qulfi (PIN)</div>
                 <input type="password" maxlength="4" placeholder="4 xonali PIN" id="setPinInput" class="setting-input" style="width:100px;" onchange="savePinSetting(this.value)">
@@ -368,51 +341,49 @@
                     <option value="light">Kungi (Light)</option>
                 </select>
             </div>
-            <div class="setting-item">
-                <div class="setting-title"><i class="fa-solid fa-video"></i> Video Sifati</div>
-                <select class="setting-select">
-                    <option value="auto">Avto (Moslashuvchan)</option>
-                    <option value="4k">4K Ultra HD</option>
-                    <option value="1080p" selected>1080p Full HD</option>
-                    <option value="720p">720p HD</option>
-                </select>
-            </div>
-            <div class="setting-item">
-                <div class="setting-title"><i class="fa-solid fa-volume-high"></i> Ovoz Sifati va Effekt</div>
-                <select class="setting-select">
-                    <option value="dolby">Dolby Atmos</option>
-                    <option value="bass">Bass Boost</option>
-                    <option value="hq" selected>Yuqori (320 kbps)</option>
-                </select>
-            </div>
-            <div class="setting-item">
-                <div class="setting-title"><i class="fa-solid fa-shield-cat"></i> Ilovani Nazorat Qilish (Parental)</div>
-                <input type="checkbox" style="width:20px; height:20px;" onchange="alert('Ota-ona nazorati rejimi almashtirildi')">
-            </div>
+        </div>
+    </div>
+
+    <!-- MUSIQA MODAL -->
+    <div class="modal-overlay" id="musicModal">
+        <div class="modal-header">
+            <span style="font-weight: 800;"><i class="fa-solid fa-music" style="color: #ec4899;"></i> Musiqa Pleyer</span>
+            <div class="icon-btn" onclick="closeModal('musicModal')"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div style="padding:16px; border-bottom: 1px solid var(--border-glow);">
+            <label class="btn-main" style="cursor:pointer; text-align:center; width:100%;">
+                <i class="fa-solid fa-folder-open"></i> Qurilmadan Musiqa Tanlash va Saqlash
+                <input type="file" accept="audio/*" multiple style="display:none;" onchange="handleAudioUpload(event)">
+            </label>
+        </div>
+        <div style="flex:1; overflow-y:auto; padding:14px;" id="musicList"></div>
+        <div style="padding:16px; background:var(--bg-card); border-top:1px solid var(--border-glow); display:flex; flex-direction:column; gap:10px;">
+            <div id="currentTrackTitle" style="font-size:12px; font-weight:800; text-align:center;">Ijro etilmayapti</div>
+            <audio id="mainAudioPlayer" controls style="width:100%; outline:none;"></audio>
         </div>
     </div>
 
     <!-- PROFIL MODAL -->
     <div class="modal-overlay" id="profileModal">
         <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-user"></i> Foydalanuvchi Profili</span>
+            <span style="font-weight: 800;"><i class="fa-solid fa-user"></i> Profil</span>
             <div class="icon-btn" onclick="closeModal('profileModal')"><i class="fa-solid fa-xmark"></i></div>
         </div>
         <div style="padding:20px; display:flex; flex-direction:column; align-items:center; gap:12px;">
-            <div style="width:80px; height:80px; border-radius:50%; background:var(--accent-gradient); display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:900; color:#fff;">
-                IX
-            </div>
+            <div style="width:80px; height:80px; border-radius:50%; background:var(--accent-gradient); display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:900; color:#fff;">IX</div>
             <h3 style="font-size:16px; font-weight:800;">Ikromjon Xolmatov</h3>
-            <span style="font-size:11px; background:rgba(16,185,129,0.2); color:#10b981; padding:4px 10px; border-radius:10px; font-weight:700;">PRO A'ZO (2026)</span>
+            <span style="font-size:11px; background:rgba(16,185,129,0.2); color:#10b981; padding:4px 10px; border-radius:10px; font-weight:700;">PRO A'ZO</span>
+        </div>
+    </div>
 
-            <div style="width:100%; margin-top:15px;" class="setting-group">
-                <div class="setting-item">
-                    <span>ID:</span> <strong>#884920</strong>
-                </div>
-                <div class="setting-item">
-                    <span>Xavfsizlik Holati:</span> <span style="color:#10b981;">Himoyalangan</span>
-                </div>
-            </div>
+    <!-- AI CHAT MODAL -->
+    <div class="modal-overlay" id="aiModal">
+        <div class="modal-header">
+            <span style="font-weight: 800;"><i class="fa-solid fa-robot" style="color: #a855f7;"></i> Ikromjon AI</span>
+            <div class="icon-btn" onclick="closeModal('aiModal')"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div class="chat-container" id="chatContainer" style="flex:1; padding:14px; overflow-y:auto;">
+            <div style="background:var(--bg-card); padding:10px; border-radius:10px; font-size:12px;">Assalomu alaykum! Ikromjon AI xizmatingizda.</div>
         </div>
     </div>
 
@@ -425,253 +396,195 @@
         <div id="playerContainer" style="flex:1; display:flex; align-items:center; justify-content:center; background:#000;"></div>
     </div>
 
-    <!-- BROWSER MODAL (CHROME) -->
-    <div class="modal-overlay" id="browserModal">
-        <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-brands fa-chrome" style="color: #4285F4;"></i> Google Chrome</span>
-            <div class="icon-btn" onclick="closeModal('browserModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div class="browser-bar">
-            <input type="text" id="browserUrl" value="https://www.google.com" onkeydown="if(event.key==='Enter') navigateBrowser('browserUrl', 'browserIframe')">
-            <button class="btn-main" style="padding: 4px 12px;" onclick="navigateBrowser('browserUrl', 'browserIframe')">Go</button>
-        </div>
-        <iframe id="browserIframe" src="https://www.google.com/search?igu=1" style="width:100%; flex:1; border:none; background:#fff;"></iframe>
-    </div>
-
-    <!-- YANDEX MODAL -->
-    <div class="modal-overlay" id="yandexModal">
-        <div class="modal-header">
-            <span style="font-weight: 800; color:#ef4444;"><i class="fa-bold"></i> Yandex Browser</span>
-            <div class="icon-btn" onclick="closeModal('yandexModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div class="browser-bar">
-            <input type="text" id="yandexUrl" value="https://yandex.ru" onkeydown="if(event.key==='Enter') navigateBrowser('yandexUrl', 'yandexIframe')">
-            <button class="btn-main" style="padding: 4px 12px; background:#ef4444;" onclick="navigateBrowser('yandexUrl', 'yandexIframe')">Qidirish</button>
-        </div>
-        <iframe id="yandexIframe" src="https://ya.ru" style="width:100%; flex:1; border:none; background:#fff;"></iframe>
-    </div>
-
-    <!-- MUSIC MODAL -->
-    <div class="modal-overlay" id="musicModal">
-        <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-music" style="color: #ec4899;"></i> Musiqa Pleyer</span>
-            <div class="icon-btn" onclick="closeModal('musicModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div style="padding:16px; border-bottom: 1px solid var(--border-glow);">
-            <label class="btn-main" style="cursor:pointer; text-align:center; width:100%;">
-                <i class="fa-solid fa-folder-open"></i> Qurilmadan Musiqa Tanlash
-                <input type="file" accept="audio/*" multiple style="display:none;" onchange="loadLocalAudioFiles(event)">
-            </label>
-        </div>
-        <div style="flex:1; overflow-y:auto; padding:14px;" id="musicList">
-            <p style="text-align:center; color: var(--text-sub); margin-top:20px;">Hali qo'shiqlar yuklanmadi.</p>
-        </div>
-        <div style="padding:16px; background:var(--bg-card); border-top:1px solid var(--border-glow); display:flex; flex-direction:column; gap:10px;">
-            <div id="currentTrackTitle" style="font-size:12px; font-weight:800; text-align:center;">Ijro etilmayapti</div>
-            <audio id="mainAudioPlayer" controls style="width:100%; outline:none;"></audio>
-        </div>
-    </div>
-
-    <!-- AI CHAT MODAL -->
-    <div class="modal-overlay" id="aiModal">
-        <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-robot" style="color: #a855f7;"></i> Ikromjon AI</span>
-            <div class="icon-btn" onclick="closeModal('aiModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div class="chat-container" id="chatContainer">
-            <div class="chat-msg ai">Assalomu alaykum! Men Ikromjon AI intellektual yordamchisiman. Sizga qanday yordam bera olaman?</div>
-        </div>
-        <div class="chat-input-area">
-            <input type="text" id="aiInput" placeholder="Xabar yozing..." onkeydown="if(event.key==='Enter') sendAiMessage()">
-            <button class="btn-main" onclick="sendAiMessage()"><i class="fa-solid fa-paper-plane"></i></button>
-        </div>
-    </div>
-
     <script>
-        // CAROUSEL MANTIG'I
-        let currentSlide = 0;
-        const totalSlides = 4;
-        let slideInterval;
+        // STORAGE VA SAQLASH MANTIG'I
+        let savedMediaFiles = JSON.parse(localStorage.getItem('saved_media_files') || '[]');
+        let savedMusicFiles = JSON.parse(localStorage.getItem('saved_music_files') || '[]');
 
-        function goToSlide(index) {
-            currentSlide = index;
-            document.getElementById('heroTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
-            document.querySelectorAll('.slider-dots .dot').forEach((dot, idx) => {
-                dot.classList.toggle('active', idx === currentSlide);
+        function renderStoredMedia() {
+            const list = document.getElementById('uploadedList');
+            list.innerHTML = '';
+            if(savedMediaFiles.length > 0) {
+                document.getElementById('uploadedSection').style.display = 'block';
+            } else {
+                document.getElementById('uploadedSection').style.display = 'none';
+            }
+
+            savedMediaFiles.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'media-card';
+                
+                const delBtn = document.createElement('button');
+                delBtn.className = 'delete-btn';
+                delBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+                delBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    deleteMedia(index);
+                };
+
+                if (item.type === 'video') {
+                    card.onclick = () => playMedia(item.name, item.data, 'direct');
+                    card.innerHTML = `
+                        <div style="width:100%; height:165px; background:#000; display:flex; align-items:center; justify-content:center; color:#818cf8; font-size:24px;">
+                            <i class="fa-solid fa-circle-play"></i>
+                        </div>
+                        <div class="media-info"><div class="media-title">${item.name}</div><div class="media-sub">Video (Saqlangan)</div></div>`;
+                } else {
+                    card.onclick = () => playMedia(item.name, item.data, 'img');
+                    card.innerHTML = `
+                        <img src="${item.data}" class="media-poster">
+                        <div class="media-info"><div class="media-title">${item.name}</div><div class="media-sub">Rasm (Saqlangan)</div></div>`;
+                }
+                card.appendChild(delBtn);
+                list.appendChild(card);
             });
-            resetSliderTimer();
         }
 
-        function startSliderTimer() {
-            slideInterval = setInterval(() => {
-                currentSlide = (currentSlide + 1) % totalSlides;
-                goToSlide(currentSlide);
-            }, 4500);
+        function handleFileUpload(e, fileType) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                const base64Data = evt.target.result;
+                savedMediaFiles.unshift({
+                    name: file.name,
+                    type: fileType,
+                    data: base64Data
+                });
+                localStorage.setItem('saved_media_files', JSON.stringify(savedMediaFiles));
+                renderStoredMedia();
+                closeModal('uploadModal');
+                alert('Fayl saqlandi!');
+            };
+            reader.readAsDataURL(file);
         }
 
-        function resetSliderTimer() {
-            clearInterval(slideInterval);
-            startSliderTimer();
+        function deleteMedia(index) {
+            if(confirm("Ushbu faylni o'chirib tashlamoqchimisiz?")) {
+                savedMediaFiles.splice(index, 1);
+                localStorage.setItem('saved_media_files', JSON.stringify(savedMediaFiles));
+                renderStoredMedia();
+            }
         }
-        startSliderTimer();
 
-        // SOAT VA SANA
+        // MUSIQALARNI SAQLASH VA O'CHIRISH
+        function renderStoredMusic() {
+            const list = document.getElementById('musicList');
+            list.innerHTML = '';
+            if(savedMusicFiles.length === 0) {
+                list.innerHTML = '<p style="text-align:center; color: var(--text-sub); margin-top:20px;">Hali saqlangan qo\'shiqlar yo\'q.</p>';
+                return;
+            }
+
+            savedMusicFiles.forEach((song, idx) => {
+                const item = document.createElement('div');
+                item.style.cssText = "padding: 10px 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glow); border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;";
+                item.innerHTML = `
+                    <span style="font-size:12px; font-weight:600; flex:1; cursor:pointer;">${song.name}</span>
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        <i class="fa-solid fa-circle-play" style="color:#6366f1; font-size:18px; cursor:pointer;"></i>
+                        <i class="fa-solid fa-trash" style="color:#ef4444; font-size:14px; cursor:pointer;"></i>
+                    </div>`;
+
+                item.querySelector('.fa-circle-play').onclick = () => {
+                    document.getElementById('currentTrackTitle').innerText = song.name;
+                    const p = document.getElementById('mainAudioPlayer');
+                    p.src = song.data;
+                    p.play();
+                };
+
+                item.querySelector('.fa-trash').onclick = () => {
+                    deleteMusic(idx);
+                };
+
+                list.appendChild(item);
+            });
+        }
+
+        function handleAudioUpload(e) {
+            const files = Array.from(e.target.files);
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    savedMusicFiles.push({ name: file.name, data: evt.target.result });
+                    localStorage.setItem('saved_music_files', JSON.stringify(savedMusicFiles));
+                    renderStoredMusic();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function deleteMusic(index) {
+            if(confirm("Ushbu musiqani o'chirasizmi?")) {
+                savedMusicFiles.splice(index, 1);
+                localStorage.setItem('saved_music_files', JSON.stringify(savedMusicFiles));
+                renderStoredMusic();
+            }
+        }
+
+        // TV OBUNA MANTIG'I
+        function openTvChannel(channelName) {
+            document.getElementById('targetChannelName').innerText = channelName;
+            openModal('tvSubModal');
+        }
+
+        function buyTvSubscription() {
+            alert("55 000 so'mlik obuna muvaffaqiyatli xarid qilindi! Efir uzatilmog'da.");
+            closeModal('tvSubModal');
+            playMedia('TV Jonli Efir', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4');
+        }
+
+        // SLIDER VA SOAT
+        let currentSlide = 0;
+        function goToSlide(idx) {
+            currentSlide = idx;
+            document.getElementById('heroTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
         function updateClock() {
             const now = new Date();
             document.getElementById('clockVal').innerText = now.toTimeString().split(' ')[0];
             document.getElementById('dateVal').innerText = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
         }
-        setInterval(updateClock, 1000);
-        updateClock();
+        setInterval(updateClock, 1000); updateClock();
 
-        // MODAL BO'LIMLARI
         function openModal(id) { document.getElementById(id).classList.add('active'); }
         function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-        function switchTab(el) {
-            document.querySelectorAll('.top-tab-item').forEach(e => e.classList.remove('active'));
-            el.classList.add('active');
-        }
-
-        // PLEYER
         function playMedia(title, src, type = 'direct') {
             document.getElementById('playerTitle').innerText = title;
             const container = document.getElementById('playerContainer');
-            if (type === 'yt') {
-                container.innerHTML = `<iframe src="${src}" style="width:100%; height:100%; border:none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-            } else if (type === 'img') {
-                container.innerHTML = `<img src="${src}" style="max-width:100%; max-height:100%; object-fit:contain;">`;
+            if(type === 'img') {
+                container.innerHTML = `<img src="${src}" style="max-width:100%; max-height:100%;">`;
             } else {
-                container.innerHTML = `<video src="${src}" controls autoplay style="width:100%; height:100%; object-fit:contain;"></video>`;
+                container.innerHTML = `<video src="${src}" controls autoplay style="width:100%; height:100%;"></video>`;
             }
             openModal('playerModal');
         }
-
         function closePlayer() {
             document.getElementById('playerContainer').innerHTML = '';
             closeModal('playerModal');
         }
 
-        // FAYL YUKLASH (VIDEO VA RASM)
-        function handleFileUpload(e, fileType) {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            const url = URL.createObjectURL(file);
-            const list = document.getElementById('uploadedList');
-            document.getElementById('uploadedSection').style.display = 'block';
-
-            const card = document.createElement('div');
-            card.className = 'media-card';
-            
-            if (fileType === 'video') {
-                card.onclick = () => playMedia(file.name, url, 'direct');
-                card.innerHTML = `
-                    <div style="width:100%; height:165px; background:#000; display:flex; align-items:center; justify-content:center; color:#818cf8; font-size:24px;">
-                        <i class="fa-solid fa-circle-play"></i>
-                    </div>
-                    <div class="media-info"><div class="media-title">${file.name}</div><div class="media-sub">Yuklangan Video</div></div>`;
-            } else {
-                card.onclick = () => playMedia(file.name, url, 'img');
-                card.innerHTML = `
-                    <img src="${url}" class="media-poster">
-                    <div class="media-info"><div class="media-title">${file.name}</div><div class="media-sub">Yuklangan Rasm</div></div>`;
-            }
-
-            list.prepend(card);
-            closeModal('uploadModal');
-            alert('Fayl muvaffaqiyatli yuklandi!');
-        }
-
-        // MUSIQA PLEYER
-        let createdObjectUrls = [];
-        function loadLocalAudioFiles(e) {
-            const files = Array.from(e.target.files);
-            const list = document.getElementById('musicList');
-            list.innerHTML = '';
-
-            createdObjectUrls.forEach(url => URL.revokeObjectURL(url));
-            createdObjectUrls = [];
-
-            files.forEach((file) => {
-                const objectUrl = URL.createObjectURL(file);
-                createdObjectUrls.push(objectUrl);
-
-                const item = document.createElement('div');
-                item.style.cssText = "padding: 10px 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glow); border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;";
-                item.innerHTML = `<span style="font-size:12px; font-weight:600;">${file.name}</span><i class="fa-solid fa-circle-play" style="color:#6366f1; font-size:16px;"></i>`;
-                item.onclick = () => {
-                    document.getElementById('currentTrackTitle').innerText = file.name;
-                    const p = document.getElementById('mainAudioPlayer');
-                    p.src = objectUrl;
-                    p.play();
-                };
-                list.appendChild(item);
-            });
-        }
-
-        // BRAUZERLAR
-        function navigateBrowser(inputId, iframeId) {
-            let url = document.getElementById(inputId).value.trim();
-            if(!url.startsWith('http://') && !url.startsWith('https://')) {
-                url = 'https://www.google.com/search?q=' + encodeURIComponent(url);
-            }
-            document.getElementById(iframeId).src = url;
-        }
-
-        // AI CHAT
-        function sendAiMessage() {
-            const input = document.getElementById('aiInput');
-            const text = input.value.trim();
-            if(!text) return;
-
-            const container = document.getElementById('chatContainer');
-            const userMsg = document.createElement('div');
-            userMsg.className = 'chat-msg user';
-            userMsg.innerText = text;
-            container.appendChild(userMsg);
-            input.value = '';
-
-            container.scrollTop = container.scrollHeight;
-
-            setTimeout(() => {
-                const aiMsg = document.createElement('div');
-                aiMsg.className = 'chat-msg ai';
-                aiMsg.innerText = "Xabaringiz qabul qilindi. AI javobi tez orada shakllantiriladi.";
-                container.appendChild(aiMsg);
-                container.scrollTop = container.scrollHeight;
-            }, 600);
-        }
-
-        // SOZLAMALAR VA QULF
+        // PIN VA THEME
         let appPin = localStorage.getItem('app_pin') || '';
-
-        if(appPin) {
-            document.getElementById('appLockScreen').style.display = 'flex';
-        }
-
-        function savePinSetting(val) {
-            if(val.length === 4) {
-                localStorage.setItem('app_pin', val);
-                appPin = val;
-                alert("PIN qulf o'rnatildi!");
-            } else if(val === '') {
-                localStorage.removeItem('app_pin');
-                appPin = '';
-                alert("PIN qulf olib tashlandi!");
-            }
-        }
+        if(appPin) document.getElementById('appLockScreen').style.display = 'flex';
 
         function verifyPin() {
-            const input = document.getElementById('pinInput');
-            if(input.value === appPin) {
+            if(document.getElementById('pinInput').value === appPin) {
                 document.getElementById('appLockScreen').style.display = 'none';
-                input.value = '';
             }
         }
-
-        function changeTheme(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
+        function savePinSetting(val) {
+            localStorage.setItem('app_pin', val);
+            appPin = val;
+            alert('PIN o\'zgartirildi!');
         }
+        function changeTheme(theme) { document.documentElement.setAttribute('data-theme', theme); }
+
+        // ISHGA TUSHMAGAN ELEMENTLARNI TIKLASH
+        renderStoredMedia();
+        renderStoredMusic();
     </script>
 </body>
 </html>
