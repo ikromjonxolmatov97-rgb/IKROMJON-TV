@@ -46,10 +46,10 @@
         .header-top { display: flex; align-items: center; justify-content: space-between; }
         .brand-logo { font-size: 18px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 6px; cursor: pointer; }
         .brand-logo span { background: var(--accent-gradient); padding: 2px 6px; border-radius: 6px; font-size: 10px; }
-        .header-actions { display: flex; gap: 8px; align-items: center; }
-        .icon-btn { background: var(--bg-glass); border: 1px solid var(--border-glow); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; transition: 0.2s; font-size: 14px; }
+        .header-actions { display: flex; gap: 6px; align-items: center; }
+        .icon-btn { background: var(--bg-glass); border: 1px solid var(--border-glow); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; transition: 0.2s; font-size: 13px; }
 
-        /* WIDGET BAR (DATE, TIME, WEATHER, REGION) */
+        /* WIDGET BAR */
         .widget-bar {
             background: var(--bg-card); border: 1px solid var(--border-glow);
             border-radius: 14px; padding: 8px 12px; display: flex;
@@ -58,7 +58,7 @@
         .widget-item { display: flex; align-items: center; gap: 5px; }
         .widget-item i { color: #818cf8; }
 
-        /* LANGUAGE SELECTOR IN HEADER */
+        /* LANGUAGE SELECTOR */
         .lang-select {
             background: var(--bg-glass); border: 1px solid var(--border-glow);
             color: #fff; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 10px; outline: none; cursor: pointer;
@@ -71,11 +71,17 @@
         .top-tab-item { padding-bottom: 4px; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; }
         .top-tab-item.active { color: #fff; border-bottom-color: #6366f1; }
 
-        /* HERO BANNER */
-        .hero-banner {
-            margin: 14px 18px; height: 300px; border-radius: 24px; position: relative; overflow: hidden;
-            background: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1000&q=80') center/cover;
+        /* HERO CAROUSEL SLIDER */
+        .hero-slider-container {
+            margin: 14px 18px; height: 320px; border-radius: 24px; position: relative; overflow: hidden;
             border: 1px solid var(--border-glow); box-shadow: var(--card-shadow);
+        }
+        .hero-track {
+            display: flex; height: 100%; transition: transform 0.5s ease-in-out;
+        }
+        .hero-slide {
+            min-width: 100%; height: 100%; position: relative;
+            background-size: cover; background-position: center;
             display: flex; flex-direction: column; justify-content: flex-end; padding: 18px;
         }
         .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,9,19,0.1) 0%, rgba(7,9,19,0.95) 100%); z-index: 1; }
@@ -84,6 +90,12 @@
         .hero-title { font-size: 22px; font-weight: 900; color: #fff; }
         .hero-meta { font-size: 11px; color: var(--text-sub); display: flex; gap: 8px; align-items: center; font-weight: 600; }
         .hero-meta span { background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 6px; }
+        
+        .slider-dots {
+            position: absolute; bottom: 12px; right: 18px; z-index: 10; display: flex; gap: 6px;
+        }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
+        .dot.active { background: #6366f1; width: 18px; border-radius: 10px; }
 
         /* BUTTONS */
         .btn-main { background: var(--accent-gradient); color: #fff; border: none; padding: 10px 18px; border-radius: 12px; font-size: 12px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
@@ -129,6 +141,12 @@
         .chat-msg.ai { background: var(--bg-card); border: 1px solid var(--border-glow); align-self: flex-start; }
         .chat-input-area { padding: 10px; background: #070913; border-top: 1px solid var(--border-glow); display: flex; gap: 6px; }
         .chat-input-area input { flex: 1; background: var(--bg-card); border: 1px solid var(--border-glow); padding: 8px 14px; border-radius: 12px; color: #fff; outline: none; font-size: 12px; }
+
+        /* MUSIC PLAYER STYLES */
+        .music-card { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 16px; padding: 14px; display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+        .music-list { flex: 1; overflow-y: auto; padding: 14px; }
+        .track-item { padding: 10px 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glow); border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .track-item:hover { background: rgba(255,255,255,0.08); }
 
         /* PIN LOCK */
         #pinOverlay { position: fixed; inset: 0; z-index: 9999; background: #070913; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
@@ -180,20 +198,22 @@
                 <option value="ru">🇷🇺 RU</option>
                 <option value="eng">🇬🇧 ENG</option>
                 <option value="tj">🇹🇯 TJ</option>
-                <option value="kz">🇰🇿 KZ</option>
+                <option value="kz">🇰ℤ KZ</option>
                 <option value="az">🇦🇿 AZ</option>
                 <option value="trk">🇹🇷 TRK</option>
             </select>
 
             <div class="header-actions">
-                <div class="icon-btn" onclick="openModal('uploadModal')"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                <div class="icon-btn" onclick="openModal('aiModal')"><i class="fa-solid fa-robot"></i></div>
-                <div class="icon-btn" onclick="openModal('browserModal')"><i class="fa-brands fa-chrome"></i></div>
-                <div class="icon-btn" onclick="openModal('settingsModal')"><i class="fa-solid fa-gear"></i></div>
+                <div class="icon-btn" title="Musiqa Pleyer" onclick="openModal('musicModal')"><i class="fa-solid fa-music" style="color:#ec4899;"></i></div>
+                <div class="icon-btn" title="Yandex Browser" onclick="openModal('yandexModal')"><i class="fa-bold" style="color:#red; font-weight:900;">Y</i></div>
+                <div class="icon-btn" title="Google Chrome" onclick="openModal('browserModal')"><i class="fa-brands fa-chrome" style="color:#4285F4;"></i></div>
+                <div class="icon-btn" title="Ikromjon AI" onclick="openModal('aiModal')"><i class="fa-solid fa-robot"></i></div>
+                <div class="icon-btn" title="Yuklash" onclick="openModal('uploadModal')"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                <div class="icon-btn" title="Sozlamalar" onclick="openModal('settingsModal')"><i class="fa-solid fa-gear"></i></div>
             </div>
         </div>
 
-        <!-- SANA, VAQT, OB-HAVO, MINTAQA WIDGETI -->
+        <!-- WIDGET BAR -->
         <div class="widget-bar">
             <div class="widget-item"><i class="fa-solid fa-clock"></i> <span id="clockVal">--:--:--</span></div>
             <div class="widget-item"><i class="fa-solid fa-calendar-days"></i> <span id="dateVal">--.--.----</span></div>
@@ -212,20 +232,68 @@
 
     <!-- MAIN CONTENT -->
     <main>
-        <!-- HERO BANNER -->
-        <div class="hero-banner">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <div class="hero-badge" id="heroBadge">PREMYERA 2026</div>
-                <div class="hero-title">IKROMJON AI & MEDIA</div>
-                <div class="hero-meta">
-                    <span>4K Ultra HD</span>
-                    <span>Dolby Atmos</span>
-                    <span>Ikromjon AI Support</span>
+        <!-- HERO CAROUSEL SLIDER (SURILADIGAN ANONS) -->
+        <div class="hero-slider-container">
+            <div class="hero-track" id="heroTrack">
+                <!-- Slide 1: Squid Game -->
+                <div class="hero-slide" style="background-image: url('1000008403.png');">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <div class="hero-badge">PREMYERA 2026</div>
+                        <div class="hero-title">Kalmar O'yini — Toshkent</div>
+                        <div class="hero-meta"><span>Action</span><span>4K Ultra HD</span></div>
+                        <button class="btn-main" style="margin-top: 8px; width: max-content;" onclick="playMedia('Kalmar O\'yini', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">
+                            <i class="fa-solid fa-play"></i> <span class="btnWatchText">TOMOSHA QILISH</span>
+                        </button>
+                    </div>
                 </div>
-                <button class="btn-main" style="margin-top: 8px; width: max-content;" onclick="playMedia('Ultra Streaming HD', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')">
-                    <i class="fa-solid fa-play"></i> <span id="btnWatch">TOMOSHA QILISH</span>
-                </button>
+
+                <!-- Slide 2: Fishing -->
+                <div class="hero-slide" style="background-image: url('1000008400.png');">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <div class="hero-badge">SARGUZASHT</div>
+                        <div class="hero-title">Tabiat Qo'ynida Baliq Ovlash</div>
+                        <div class="hero-meta"><span>Relax</span><span>1080p Full HD</span></div>
+                        <button class="btn-main" style="margin-top: 8px; width: max-content;" onclick="playMedia('Baliq Ovlash', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4')">
+                            <i class="fa-solid fa-play"></i> <span class="btnWatchText">TOMOSHA QILISH</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Home & Chill -->
+                <div class="hero-slide" style="background-image: url('1000008398.png');">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <div class="hero-badge">LIFESTYLE</div>
+                        <div class="hero-title">Do'stlar Bilan Uyda Dam Olish</div>
+                        <div class="hero-meta"><span>Vlog</span><span>Dolby Digital</span></div>
+                        <button class="btn-main" style="margin-top: 8px; width: max-content;" onclick="playMedia('Uyda Dam Olish', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4')">
+                            <i class="fa-solid fa-play"></i> <span class="btnWatchText">TOMOSHA QILISH</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Slide 4: Golf -->
+                <div class="hero-slide" style="background-image: url('1000008395.png');">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <div class="hero-badge">SPORT</div>
+                        <div class="hero-title">Golf Chempionati 2026</div>
+                        <div class="hero-meta"><span>Sport HD</span><span>Live</span></div>
+                        <button class="btn-main" style="margin-top: 8px; width: max-content;" onclick="playMedia('Golf Chempionati', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4')">
+                            <i class="fa-solid fa-play"></i> <span class="btnWatchText">TOMOSHA QILISH</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dots -->
+            <div class="slider-dots">
+                <div class="dot active" onclick="goToSlide(0)"></div>
+                <div class="dot" onclick="goToSlide(1)"></div>
+                <div class="dot" onclick="goToSlide(2)"></div>
+                <div class="dot" onclick="goToSlide(3)"></div>
             </div>
         </div>
 
@@ -292,7 +360,7 @@
     <nav class="bottom-nav">
         <div class="nav-btn active"><i class="fa-solid fa-house"></i><span id="navHome">Asosiy</span></div>
         <div class="nav-btn" onclick="openModal('aiModal')"><i class="fa-solid fa-robot"></i><span id="navAi">Ikromjon AI</span></div>
-        <div class="nav-btn" onclick="openModal('browserModal')"><i class="fa-brands fa-chrome"></i><span>Chrome</span></div>
+        <div class="nav-btn" onclick="openModal('musicModal')"><i class="fa-solid fa-music"></i><span id="navMusic">Musiqa</span></div>
         <div class="nav-btn" onclick="openModal('diagModal')"><i class="fa-solid fa-gauge-high"></i><span id="navDiag">Nazorat</span></div>
         <div class="nav-btn" onclick="openModal('settingsModal')"><i class="fa-solid fa-user"></i><span id="navProfile">Profil</span></div>
     </nav>
@@ -313,11 +381,48 @@
             <div class="icon-btn" onclick="closeModal('browserModal')"><i class="fa-solid fa-xmark"></i></div>
         </div>
         <div class="browser-bar">
-            <button class="icon-btn" onclick="browserNav('reload')"><i class="fa-solid fa-rotate-right"></i></button>
-            <input type="text" id="browserUrl" value="https://www.google.com" onkeydown="if(event.key==='Enter') navigateBrowser()">
-            <button class="btn-main" style="padding: 4px 10px;" onclick="navigateBrowser()">Go</button>
+            <button class="icon-btn" onclick="browserNav('reload', 'browserIframe')"><i class="fa-solid fa-rotate-right"></i></button>
+            <input type="text" id="browserUrl" value="https://www.google.com" onkeydown="if(event.key==='Enter') navigateBrowser('browserUrl', 'browserIframe')">
+            <button class="btn-main" style="padding: 4px 10px;" onclick="navigateBrowser('browserUrl', 'browserIframe')">Go</button>
         </div>
         <iframe id="browserIframe" src="https://www.google.com/search?igu=1" style="width:100%; flex:1; border:none; background:#fff;"></iframe>
+    </div>
+
+    <!-- YANDEX BROWSER MODAL -->
+    <div class="modal-overlay" id="yandexModal">
+        <div class="modal-header">
+            <span style="font-weight: 800; color:#ef4444;"><i class="fa-bold"></i> Yandex Browser</span>
+            <div class="icon-btn" onclick="closeModal('yandexModal')"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div class="browser-bar">
+            <button class="icon-btn" onclick="browserNav('reload', 'yandexIframe')"><i class="fa-solid fa-rotate-right"></i></button>
+            <input type="text" id="yandexUrl" value="https://yandex.ru" onkeydown="if(event.key==='Enter') navigateBrowser('yandexUrl', 'yandexIframe')">
+            <button class="btn-main" style="padding: 4px 10px; background:#ef4444;" onclick="navigateBrowser('yandexUrl', 'yandexIframe')">Qidirish</button>
+        </div>
+        <iframe id="yandexIframe" src="https://ya.ru" style="width:100%; flex:1; border:none; background:#fff;"></iframe>
+    </div>
+
+    <!-- MUSIC PLAYER MODAL (TELEFON Musiqalarini eshitish) -->
+    <div class="modal-overlay" id="musicModal">
+        <div class="modal-header">
+            <span style="font-weight: 800;"><i class="fa-solid fa-music" style="color: #ec4899;"></i> Musiqa Pleyer</span>
+            <div class="icon-btn" onclick="closeModal('musicModal')"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div style="padding:16px; border-bottom: 1px solid var(--border-glow); display:flex; flex-direction:column; gap:10px;">
+            <label class="btn-main" style="cursor:pointer; text-align:center;">
+                <i class="fa-solid fa-folder-open"></i> Telefondan Qo'shiqlar Tanlash
+                <input type="file" id="localAudioInput" accept="audio/*" multiple style="display:none;" onchange="loadLocalAudioFiles(event)">
+            </label>
+        </div>
+
+        <div class="music-list" id="musicList">
+            <p style="text-align:center; color: var(--text-sub); margin-top:20px;">Hali musiqa yuklanmadi. Yuqoridagi tugma orqali telefondan musiqalarni tanglang.</p>
+        </div>
+
+        <div style="padding:16px; background:var(--bg-card); border-top:1px solid var(--border-glow); display:flex; flex-direction:column; gap:10px;">
+            <div id="currentTrackTitle" style="font-size:12px; font-weight:800; text-align:center;">Ijro etilmayapti</div>
+            <audio id="mainAudioPlayer" controls style="width:100%; outline:none;"></audio>
+        </div>
     </div>
 
     <!-- AI MODAL -->
@@ -381,17 +486,35 @@
     </div>
 
     <script>
-        // 1. DYNAMIC CLOCK, DATE, WEATHER & REGION MODULE
+        // 1. CAROUSEL SLIDER AUTO-PLAY LOGIC
+        let currentSlide = 0;
+        const totalSlides = 4;
+
+        function goToSlide(index) {
+            currentSlide = index;
+            const track = document.getElementById('heroTrack');
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            const dots = document.querySelectorAll('.slider-dots .dot');
+            dots.forEach((dot, idx) => {
+                if(idx === currentSlide) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
+        }
+
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            goToSlide(currentSlide);
+        }, 4000);
+
+        // 2. DYNAMIC CLOCK, DATE, WEATHER & REGION MODULE
         function updateClockAndWidget() {
             const now = new Date();
-            
-            // Vaqt (HH:MM:SS)
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
             document.getElementById('clockVal').innerText = `${hours}:${minutes}:${seconds}`;
 
-            // Sana (DD.MM.YYYY)
             const day = String(now.getDate()).padStart(2, '0');
             const month = String(now.getMonth() + 1).padStart(2, '0');
             const year = now.getFullYear();
@@ -400,62 +523,62 @@
         setInterval(updateClockAndWidget, 1000);
         updateClockAndWidget();
 
-        // 2. MULTI-LANGUAGE SYSTEM (7 TILLAR: UZ, RU, ENG, TJ, KZ, AZ, TRK)
+        // 3. MULTI-LANGUAGE SYSTEM (7 TILLAR)
         const i18n = {
             uz: {
                 tabHome: "Bosh sahifa", tabTv: "TV Kanallar", tabYt: "YouTube Trendlar", tabMovies: "Filmlar", tabSeries: "Seriallar",
-                heroBadge: "PREMYERA 2026", btnWatch: "TOMOSHA QILISH", txtCatHeader: "Kategoriyalar", txtSeeAll: "Barchasi ❯",
+                txtCatHeader: "Kategoriyalar", txtSeeAll: "Barchasi ❯",
                 cat1: "Total Trend", cat2: "Kinolar", cat3: "Jonli Efir", cat4: "YouTube Hits",
                 txtTvHeader: "Jonli TV Kanallar", txtMoviesHeader: "Tavsiya Etilgan Filmlar",
-                navHome: "Asosiy", navAi: "Ikromjon AI", navDiag: "Nazorat", navProfile: "Profil",
+                navHome: "Asosiy", navAi: "Ikromjon AI", navMusic: "Musiqa", navDiag: "Nazorat", navProfile: "Profil",
                 aiWelcome: "Assalomu alaykum! Men Ikromjon AI tizimiman. Qanday yordam bera olaman?"
             },
             ru: {
                 tabHome: "Главная", tabTv: "ТВ Каналы", tabYt: "Тренды YouTube", tabMovies: "Фильмы", tabSeries: "Сериалы",
-                heroBadge: "ПРЕМЬЕРА 2026", btnWatch: "СМОТРЕТЬ", txtCatHeader: "Категории", txtSeeAll: "Все ❯",
+                txtCatHeader: "Категории", txtSeeAll: "Все ❯",
                 cat1: "Тренды", cat2: "Фильмы", cat3: "Прямой Эфир", cat4: "Хиты YouTube",
                 txtTvHeader: "Прямой ТВ Эфир", txtMoviesHeader: "Рекомендуемые Фильмы",
-                navHome: "Главная", navAi: "Ikromjon AI", navDiag: "Контроль", navProfile: "Профиль",
+                navHome: "Главная", navAi: "Ikromjon AI", navMusic: "Музыка", navDiag: "Контроль", navProfile: "Профиль",
                 aiWelcome: "Здравствуйте! Я Ikromjon AI. Чем могу помочь?"
             },
             eng: {
                 tabHome: "Home", tabTv: "TV Channels", tabYt: "YouTube Trends", tabMovies: "Movies", tabSeries: "Series",
-                heroBadge: "PREMIERE 2026", btnWatch: "WATCH NOW", txtCatHeader: "Categories", txtSeeAll: "See All ❯",
+                txtCatHeader: "Categories", txtSeeAll: "See All ❯",
                 cat1: "Total Trend", cat2: "Movies", cat3: "Live Stream", cat4: "YouTube Hits",
                 txtTvHeader: "Live TV Channels", txtMoviesHeader: "Recommended Movies",
-                navHome: "Home", navAi: "Ikromjon AI", navDiag: "Monitor", navProfile: "Profile",
+                navHome: "Home", navAi: "Ikromjon AI", navMusic: "Music", navDiag: "Monitor", navProfile: "Profile",
                 aiWelcome: "Hello! I am Ikromjon AI system. How can I help you today?"
             },
             tj: {
                 tabHome: "Асосӣ", tabTv: "Каналҳои ТВ", tabYt: "Трандҳои YouTube", tabMovies: "Филмҳо", tabSeries: "Сериалҳо",
-                heroBadge: "ПРЕМЙЕРА 2026", btnWatch: "ТАМОШО КАРДАН", txtCatHeader: "Категорияҳо", txtSeeAll: "Ҳамааш ❯",
+                txtCatHeader: "Категорияҳо", txtSeeAll: "Ҳамааш ❯",
                 cat1: "Транди Умумӣ", cat2: "Филмҳо", cat3: "Пахши Зинда", cat4: "Хитҳои YouTube",
                 txtTvHeader: "Каналҳои ТВ Зинда", txtMoviesHeader: "Филмҳои Тавсияшуда",
-                navHome: "Асосӣ", navAi: "Ikromjon AI", navDiag: "Назорат", navProfile: "Профил",
+                navHome: "Асосӣ", navAi: "Ikromjon AI", navMusic: "Мусиқӣ", navDiag: "Назорат", navProfile: "Профил",
                 aiWelcome: "Ассалому алейкум! Ман Ikromjon AI ҳастам. Чӣ тавр кӯмак карда метавонам?"
             },
             kz: {
                 tabHome: "Басты бет", tabTv: "ТВ Арналар", tabYt: "YouTube Трэндтер", tabMovies: "Фильмдер", tabSeries: "Сериалдар",
-                heroBadge: "ПРЕМЬЕРА 2026", btnWatch: "КӨРУ", txtCatHeader: "Санаттар", txtSeeAll: "Барлығы ❯",
+                txtCatHeader: "Санаттар", txtSeeAll: "Барлығы ❯",
                 cat1: "Трэндтер", cat2: "Фильмдер", cat3: "Тікелей Эфир", cat4: "YouTube Хиттері",
                 txtTvHeader: "Тікелей ТВ Арналар", txtMoviesHeader: "Ұсынылған Фильмдер",
-                navHome: "Басты", navAi: "Ikromjon AI", navDiag: "Бақылау", navProfile: "Профиль",
+                navHome: "Басты", navAi: "Ikromjon AI", navMusic: "Музыка", navDiag: "Бақылау", navProfile: "Профиль",
                 aiWelcome: "Сәлеметсіз бе! Мен Ikromjon AI жүйесімін. Қалай көмектесе аламын?"
             },
             az: {
                 tabHome: "Ana Səhifə", tabTv: "TV Kanallar", tabYt: "YouTube Trendləri", tabMovies: "Filmlər", tabSeries: "Seriallar",
-                heroBadge: "PREMYERA 2026", btnWatch: "İZLƏ", txtCatHeader: "Kategoriyalar", txtSeeAll: "Hamısı ❯",
+                txtCatHeader: "Kategoriyalar", txtSeeAll: "Hamısı ❯",
                 cat1: "Trendlər", cat2: "Filmlər", cat3: "Canlı Yayım", cat4: "YouTube Hitləri",
                 txtTvHeader: "Canlı TV Kanalları", txtMoviesHeader: "Tövsiyə Olunan Filmlər",
-                navHome: "Ana Səhifə", navAi: "Ikromjon AI", navDiag: "Nəzarət", navProfile: "Profil",
+                navHome: "Ana Səhifə", navAi: "Ikromjon AI", navMusic: "Musiqi", navDiag: "Nəzarət", navProfile: "Profil",
                 aiWelcome: "Salam! Mən Ikromjon AI sistemiyəm. Sizə necə kömək edə bilərəm?"
             },
             trk: {
                 tabHome: "Ana Sayfa", tabTv: "TV Kanalları", tabYt: "YouTube Trendleri", tabMovies: "Filmler", tabSeries: "Diziler",
-                heroBadge: "PRÖMİYER 2026", btnWatch: "İZLE", txtCatHeader: "Kategoriler", txtSeeAll: "Tümü ❯",
+                txtCatHeader: "Kategoriler", txtSeeAll: "Tümü ❯",
                 cat1: "Trendler", cat2: "Filmler", cat3: "Canlı Yayın", cat4: "YouTube Hitleri",
                 txtTvHeader: "Canlı TV Kanalları", txtMoviesHeader: "Önerilen Filmler",
-                navHome: "Ana Sayfa", navAi: "Ikromjon AI", navDiag: "Kontrol", navProfile: "Profil",
+                navHome: "Ana Sayfa", navAi: "Ikromjon AI", navMusic: "Müzik", navDiag: "Kontrol", navProfile: "Profil",
                 aiWelcome: "Merhaba! Ben Ikromjon AI sistemiyim. Size nasıl yardımcı olabilirim?"
             }
         };
@@ -468,10 +591,53 @@
                 const el = document.getElementById(key);
                 if (el) el.innerText = lang[key];
             }
+            document.querySelectorAll('.btnWatchText').forEach(el => {
+                if(langKey === 'ru') el.innerText = 'СМОТРЕТЬ';
+                else if(langKey === 'eng') el.innerText = 'WATCH NOW';
+                else el.innerText = 'TOMOSHA QILISH';
+            });
             localStorage.setItem('ikromjon_lang', langKey);
         }
 
-        // 3. CORE INTERACTION LOGIC
+        // 4. MUSIC PLAYER FUNCTIONS (LOCAL AUDIO)
+        let localTracks = [];
+
+        function loadLocalAudioFiles(e) {
+            const files = e.target.files;
+            if(!files.length) return;
+
+            localTracks = Array.from(files);
+            const musicList = document.getElementById('musicList');
+            musicList.innerHTML = '';
+
+            localTracks.forEach((file, idx) => {
+                const item = document.createElement('div');
+                item.className = 'track-item';
+                item.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <i class="fa-solid fa-music" style="color:#a855f7;"></i>
+                        <span style="font-size:12px; font-weight:700;">${file.name}</span>
+                    </div>
+                    <i class="fa-solid fa-circle-play" style="color:#6366f1; font-size:16px;"></i>
+                `;
+                item.onclick = () => playLocalTrack(idx);
+                musicList.appendChild(item);
+            });
+
+            playLocalTrack(0);
+        }
+
+        function playLocalTrack(index) {
+            if(!localTracks[index]) return;
+            const file = localTracks[index];
+            const audioPlayer = document.getElementById('mainAudioPlayer');
+            document.getElementById('currentTrackTitle').innerText = file.name;
+
+            audioPlayer.src = URL.createObjectURL(file);
+            audioPlayer.play();
+        }
+
+        // 5. CORE INTERACTION LOGIC
         let activePin = "1234", enteredPin = "", hlsEngine = null;
 
         function openModal(id) { document.getElementById(id).classList.add('active'); }
@@ -511,14 +677,14 @@
             closeModal('playerModal');
         }
 
-        function navigateBrowser() {
-            let url = document.getElementById('browserUrl').value;
+        function navigateBrowser(inputId, iframeId) {
+            let url = document.getElementById(inputId).value;
             if(!url.startsWith('http')) url = 'https://www.google.com/search?q=' + encodeURIComponent(url) + '&igu=1';
-            document.getElementById('browserIframe').src = url;
+            document.getElementById(iframeId).src = url;
         }
 
-        function browserNav(action) {
-            const iframe = document.getElementById('browserIframe');
+        function browserNav(action, iframeId) {
+            const iframe = document.getElementById(iframeId);
             if(action === 'reload') iframe.src = iframe.src;
         }
 
