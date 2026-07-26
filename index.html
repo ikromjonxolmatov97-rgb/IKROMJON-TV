@@ -83,13 +83,13 @@
         }
         .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,9,19,0.1) 0%, rgba(7,9,19,0.95) 100%); z-index: 1; }
         .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 4px; }
-        .hero-badge { background: var(--accent-gradient); color: #fff; font-size: 9px; font-weight: 900; padding: 3px 8px; border-radius: 10px; width: max-content; }
+        .hero-badge { color: #fff; font-size: 9px; font-weight: 900; padding: 3px 8px; border-radius: 10px; width: max-content; }
         .hero-title { font-size: 20px; font-weight: 900; color: #fff; }
         .hero-meta { font-size: 11px; color: #cbd5e1; display: flex; gap: 8px; align-items: center; font-weight: 600; }
 
-        .slider-dots { position: absolute; bottom: 12px; right: 18px; z-index: 10; display: flex; gap: 6px; }
-        .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
-        .dot.active { background: #6366f1; width: 20px; border-radius: 10px; }
+        .slider-dots { position: absolute; bottom: 12px; right: 18px; z-index: 10; display: flex; gap: 4px; }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
+        .dot.active { background: #6366f1; width: 16px; border-radius: 10px; }
 
         /* QUICK UTILITIES & GAMES BAR */
         .quick-tools { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 0 16px 14px 16px; }
@@ -101,7 +101,7 @@
         .game-card i { font-size: 22px; color: #ec4899; }
 
         /* BUTTONS */
-        .btn-main { background: var(--accent-gradient); color: #fff; border: none; padding: 10px 18px; border-radius: 12px; font-size: 12px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: 0.2s; }
+        .btn-main { background: var(--accent-gradient); color: #fff; border: none; padding: 12px 18px; border-radius: 14px; font-size: 12px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; text-align: center; }
         .btn-main:active { transform: scale(0.95); }
 
         /* SECTIONS & SCROLL */
@@ -115,7 +115,6 @@
         .media-title { font-size: 11px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .media-sub { font-size: 9px; color: var(--text-sub); margin-top: 2px; }
 
-        /* YANGILANDI: HDfull O'chirish Tugmasi */
         .delete-btn { 
             position: absolute; top: 6px; right: 6px; 
             background: rgba(239, 68, 68, 0.9); color: #fff; 
@@ -198,7 +197,7 @@
             </select>
 
             <div class="header-actions">
-                <div class="icon-btn" title="Media Yuklash" onclick="openModal('uploadModal')"><i class="fa-solid fa-cloud-arrow-up" style="color:#10b981;"></i></div>
+                <div class="icon-btn" title="Galereyadan Yuklash" onclick="openModal('uploadModal')"><i class="fa-solid fa-images" style="color:#10b981;"></i></div>
                 <div class="icon-btn" title="Musiqa Pleyer" onclick="openModal('musicModal')"><i class="fa-solid fa-music" style="color:#ec4899;"></i></div>
                 <div class="icon-btn" title="Yandex Browser" onclick="openModal('yandexModal')"><i class="fa-bold" style="color:#ef4444; font-weight:900;">Y</i></div>
                 <div class="icon-btn" title="Google Chrome" onclick="openModal('browserModal')"><i class="fa-brands fa-chrome" style="color:#4285F4;"></i></div>
@@ -225,39 +224,71 @@
         <!-- REKLAMA / HERO CAROUSEL -->
         <div class="hero-slider-container">
             <div class="hero-track" id="heroTrack">
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=1000&q=80');">
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1556742049-0a67d9834246?auto=format&fit=crop&w=1000&q=80');">
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
-                        <div class="hero-badge" style="background:#ef4444;">REKLAMA</div>
-                        <div class="hero-title">Coca-Cola — Muzdek Ishtiyoq</div>
-                        <div class="hero-meta"><span>Har bir lahzadan zavqlaning!</span></div>
+                        <div class="hero-badge" style="background:#ffcc00; color:#000;">BEELINE UZBEKISTAN</div>
+                        <div class="hero-title">Beeline — Yorqinroq Yashang!</div>
+                        <div class="hero-meta"><span>Cheksiz internet va foydali tariflar</span></div>
                     </div>
                 </div>
 
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1622543925917-763c34d1a86e?auto=format&fit=crop&w=1000&q=80');">
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=80');">
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
-                        <div class="hero-badge" style="background:#eab308; color:#000;">ENERGYY</div>
-                        <div class="hero-title">Flash Up Energy</div>
-                        <div class="hero-meta"><span>Maksimal quvvat va energiya oqimi!</span></div>
+                        <div class="hero-badge" style="background:#ef4444;">MOBIUZ (UMS)</div>
+                        <div class="hero-title">Mobiuz — Oʻzingiznikilarga Yaqinroq</div>
+                        <div class="hero-meta"><span>Yuqori tezlikdagi 4G/5G internet</span></div>
                     </div>
                 </div>
 
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=1000&q=80');">
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1000&q=80');">
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
-                        <div class="hero-badge" style="background:#10b981;">ARTEL TECH</div>
-                        <div class="hero-title">Artel Smart TV 4K</div>
-                        <div class="hero-meta"><span>Sifatli maishiy texnika va smart televizorlar</span></div>
+                        <div class="hero-badge" style="background:#f59e0b; color:#000;">HUMANS</div>
+                        <div class="hero-title">Humans Uzbekistan</div>
+                        <div class="hero-meta"><span>Aloqa, Bank kartasi va Keshbeklar</span></div>
+                    </div>
+                </div>
+
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=1000&q=80');">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <div class="hero-badge" style="background:#8b5cf6;">UCELL</div>
+                        <div class="hero-title">Ucell — Yaxshilik Sariya!</div>
+                        <div class="hero-meta"><span>Qulay va arzon aloqa xizmatlari</span></div>
+                    </div>
+                </div>
+
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80');">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <div class="hero-badge" style="background:#06b6d4;">PERFECTUM</div>
+                        <div class="hero-title">Perfectum 5G</div>
+                        <div class="hero-meta"><span>Oʻzbekistonda birinchi haqiqiy 5G standart</span></div>
+                    </div>
+                </div>
+
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1000&q=80');">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <div class="hero-badge" style="background:#10b981;">OQ MOBILE</div>
+                        <div class="hero-title">OQ — Raqamli Operator</div>
+                        <div class="hero-meta"><span>Faqat kerakli trafik va daqiqalarni tanlang</span></div>
+                    </div>
+                </div>
+
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1000&q=80');">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <div class="hero-badge" style="background:#2563eb;">PAYNET</div>
+                        <div class="hero-title">Paynet — Tezkor Toʻlovlar</div>
+                        <div class="hero-meta"><span>Barcha xizmatlar uchun komissiyasiz toʻlov</span></div>
                     </div>
                 </div>
             </div>
 
-            <div class="slider-dots">
-                <div class="dot active" onclick="goToSlide(0)"></div>
-                <div class="dot" onclick="goToSlide(1)"></div>
-                <div class="dot" onclick="goToSlide(2)"></div>
-            </div>
+            <div class="slider-dots" id="sliderDotsContainer"></div>
         </div>
 
         <!-- QUICK UTILITIES BAR -->
@@ -278,10 +309,10 @@
             <div class="game-card" onclick="openCoinGame()"><i class="fa-solid fa-coins"></i>Tanga Yigʻish</div>
         </div>
 
-        <!-- YUKLANGAN MEDIA VA SAQLANGAN FAYLLAR -->
+        <!-- YUKLANGAN MEDIA VA GALEREYA FAYLLARI -->
         <div id="uploadedSection" style="display:none;">
             <div class="section-header">
-                <span>Saqlangan Fayllar (Video va Rasmlar)</span>
+                <span>📁 Galereyadan Yuklangan Fayllar</span>
             </div>
             <div class="horiz-scroll" id="uploadedList"></div>
         </div>
@@ -319,6 +350,34 @@
         <div class="nav-btn" onclick="openModal('settingsModal')"><i class="fa-solid fa-sliders"></i><span>Sozlamalar</span></div>
         <div class="nav-btn" onclick="openModal('profileModal')"><i class="fa-solid fa-user"></i><span>Profil</span></div>
     </nav>
+
+    <!-- GALEREYADAN YUKLASH MODAL -->
+    <div class="modal-overlay" id="uploadModal">
+        <div class="modal-header">
+            <span style="font-weight: 800;"><i class="fa-solid fa-photo-film" style="color:#10b981;"></i> Galereyadan Yuklash</span>
+            <div class="icon-btn" onclick="closeModal('uploadModal')"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div style="padding:20px; display:flex; flex-direction:column; gap:16px;">
+            <div id="uploadProgress" style="display:none; color:#10b981; font-size:12px; font-weight:700; text-align:center;">
+                <i class="fa-solid fa-spinner fa-spin"></i> Fayllar galereyadan xotiraga yuklanmoqda...
+            </div>
+            
+            <!-- GALEREYADAN BRON QILIB BIR NECHA FAYL TANLASH -->
+            <label class="btn-main" style="padding:16px; font-size:13px; background:linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                <i class="fa-solid fa-images" style="font-size:18px;"></i> Galereyadan Rasmlar Tanlash
+                <input type="file" accept="image/*" multiple style="display:none;" onchange="handleGalleryUpload(event, 'image')">
+            </label>
+
+            <label class="btn-main" style="padding:16px; font-size:13px; background:linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);">
+                <i class="fa-solid fa-film" style="font-size:18px;"></i> Galereyadan Videolar Tanlash
+                <input type="file" accept="video/*" multiple style="display:none;" onchange="handleGalleryUpload(event, 'video')">
+            </label>
+
+            <div style="font-size:11px; color:var(--text-sub); text-align:center; margin-top:6px;">
+                💡 Bir nechta rasm va videolarni bir vaqtda tanlab yuklashingiz mumkin.
+            </div>
+        </div>
+    </div>
 
     <!-- O'YIN 1: ILON O'YINI MODAL -->
     <div class="modal-overlay" id="snakeModal">
@@ -420,15 +479,11 @@
                 </div>
                 <div class="setting-item">
                     <div class="setting-title"><i class="fa-solid fa-code-branch" style="color:#a855f7;"></i> Ilova Talqini (Version)</div>
-                    <span style="font-size:11px; font-weight:700;">v3.5 Ultimate PRO</span>
+                    <span style="font-size:11px; font-weight:700;">v3.7 Gallery Enabled</span>
                 </div>
                 <div class="setting-item">
-                    <div class="setting-title"><i class="fa-solid fa-shield-halved" style="color:#f59e0b;"></i> Xavfsizlik va Litsenziya</div>
-                    <span style="font-size:11px; color:var(--text-sub);">Himoyalangan</span>
-                </div>
-                <div class="setting-item">
-                    <div class="setting-title"><i class="fa-solid fa-layer-group" style="color:#ec4899;"></i> Asosiy Dasturchi</div>
-                    <span style="font-size:11px; font-weight:700;">IKROMJON AI Studio</span>
+                    <div class="setting-title"><i class="fa-solid fa-database" style="color:#10b981;"></i> Xotira Tizimi</div>
+                    <span style="font-size:11px; font-weight:700; color:#10b981;">IndexedDB Multi-Storage</span>
                 </div>
             </div>
         </div>
@@ -508,24 +563,6 @@
         </div>
     </div>
 
-    <!-- VIDEO/RASM YUKLASH MODAL -->
-    <div class="modal-overlay" id="uploadModal">
-        <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-cloud-arrow-up" style="color:#10b981;"></i> Video / Rasm Yuklash</span>
-            <div class="icon-btn" onclick="closeModal('uploadModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div style="padding:20px; display:flex; flex-direction:column; gap:16px;">
-            <label class="btn-main" style="padding:15px; text-align:center;">
-                <i class="fa-solid fa-file-video"></i> Video Tanlash va Saqlash
-                <input type="file" accept="video/*" style="display:none;" onchange="handleFileUpload(event, 'video')">
-            </label>
-            <label class="btn-main" style="padding:15px; text-align:center; background:linear-gradient(135deg, #10b981 0%, #3b82f6 100%);">
-                <i class="fa-solid fa-file-image"></i> Rasm Tanlash va Saqlash
-                <input type="file" accept="image/*" style="display:none;" onchange="handleFileUpload(event, 'image')">
-            </label>
-        </div>
-    </div>
-
     <!-- SOZLAMALAR MODAL -->
     <div class="modal-overlay" id="settingsModal">
         <div class="modal-header">
@@ -585,94 +622,131 @@
     </div>
 
     <script>
-        // STORAGE VA MEDIA SAQLASH
-        let savedMediaFiles = JSON.parse(localStorage.getItem('saved_media_files') || '[]');
-        let savedMusicFiles = JSON.parse(localStorage.getItem('saved_music_files') || '[]');
+        // INDEXEDDB XOTIRA TIZIMI
+        let db;
+        const dbReq = indexedDB.open("IkromjonTV_DB", 1);
+
+        dbReq.onupgradeneeded = function(e) {
+            db = e.target.result;
+            if(!db.objectStoreNames.contains("media")) db.createObjectStore("media", { keyPath: "id", autoIncrement: true });
+            if(!db.objectStoreNames.contains("music")) db.createObjectStore("music", { keyPath: "id", autoIncrement: true });
+        };
+
+        dbReq.onsuccess = function(e) {
+            db = e.target.result;
+            renderStoredMedia();
+            renderStoredMusic();
+        };
 
         function renderStoredMedia() {
-            const list = document.getElementById('uploadedList');
-            list.innerHTML = '';
-            if(savedMediaFiles.length > 0) {
-                document.getElementById('uploadedSection').style.display = 'block';
-            } else {
-                document.getElementById('uploadedSection').style.display = 'none';
-            }
+            if(!db) return;
+            const tx = db.transaction("media", "readonly");
+            const store = tx.objectStore("media");
+            const req = store.getAll();
 
-            savedMediaFiles.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = 'media-card';
-                
-                // YANGILANDI: HDfull tugmasini yaratish va o'chirish hodisasi
-                const delBtn = document.createElement('button');
-                delBtn.className = 'delete-btn';
-                delBtn.innerText = 'HDfull';
-                delBtn.onclick = (e) => { e.stopPropagation(); deleteMedia(index); };
-
-                if (item.type === 'video') {
-                    card.onclick = () => playMedia(item.name, item.data, 'direct');
-                    card.innerHTML = `<div style="width:100%; height:150px; background:#000; display:flex; align-items:center; justify-content:center; color:#818cf8; font-size:24px;"><i class="fa-solid fa-circle-play"></i></div><div class="media-info"><div class="media-title">${item.name}</div><div class="media-sub">Video</div></div>`;
+            req.onsuccess = function() {
+                const items = req.result;
+                const list = document.getElementById('uploadedList');
+                list.innerHTML = '';
+                if(items.length > 0) {
+                    document.getElementById('uploadedSection').style.display = 'block';
                 } else {
-                    card.onclick = () => playMedia(item.name, item.data, 'img');
-                    card.innerHTML = `<img src="${item.data}" class="media-poster"><div class="media-info"><div class="media-title">${item.name}</div><div class="media-sub">Rasm</div></div>`;
+                    document.getElementById('uploadedSection').style.display = 'none';
                 }
-                card.appendChild(delBtn);
-                list.appendChild(card);
-            });
+
+                items.forEach((item) => {
+                    const card = document.createElement('div');
+                    card.className = 'media-card';
+                    
+                    const delBtn = document.createElement('button');
+                    delBtn.className = 'delete-btn';
+                    delBtn.innerText = 'HDfull';
+                    delBtn.onclick = (e) => { e.stopPropagation(); deleteMedia(item.id); };
+
+                    const blobUrl = URL.createObjectURL(item.blob);
+
+                    if (item.type === 'video') {
+                        card.onclick = () => playMedia(item.name, blobUrl, 'direct');
+                        card.innerHTML = `<div style="width:100%; height:150px; background:#000; display:flex; align-items:center; justify-content:center; color:#818cf8; font-size:24px;"><i class="fa-solid fa-circle-play"></i></div><div class="media-info"><div class="media-title">${item.name}</div><div class="media-sub">Video (Galereya)</div></div>`;
+                    } else {
+                        card.onclick = () => playMedia(item.name, blobUrl, 'img');
+                        card.innerHTML = `<img src="${blobUrl}" class="media-poster"><div class="media-info"><div class="media-title">${item.name}</div><div class="media-sub">Rasm (Galereya)</div></div>`;
+                    }
+                    card.appendChild(delBtn);
+                    list.appendChild(card);
+                });
+            }
         }
 
-        function handleFileUpload(e, fileType) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(evt) {
-                savedMediaFiles.unshift({ name: file.name, type: fileType, data: evt.target.result });
-                localStorage.setItem('saved_media_files', JSON.stringify(savedMediaFiles));
+        // GALEREYADAN MULTI-YUKLASH FUNCTION
+        function handleGalleryUpload(e, fileType) {
+            const files = Array.from(e.target.files);
+            if (files.length === 0) return;
+
+            document.getElementById('uploadProgress').style.display = 'block';
+
+            const tx = db.transaction("media", "readwrite");
+            const store = tx.objectStore("media");
+
+            files.forEach(file => {
+                store.add({ name: file.name, type: fileType, blob: file });
+            });
+
+            tx.oncomplete = function() {
+                document.getElementById('uploadProgress').style.display = 'none';
                 renderStoredMedia();
                 closeModal('uploadModal');
             };
-            reader.readAsDataURL(file);
         }
 
-        function deleteMedia(index) {
-            if(confirm("Ushbu videoni/faylni o'chirishga ishonchingiz komilmi?")) {
-                savedMediaFiles.splice(index, 1);
-                localStorage.setItem('saved_media_files', JSON.stringify(savedMediaFiles));
-                renderStoredMedia();
+        function deleteMedia(id) {
+            if(confirm("Ushbu faylni xotiradan o'chirishga ishonchingiz komilmi?")) {
+                const tx = db.transaction("media", "readwrite");
+                tx.objectStore("media").delete(id);
+                tx.oncomplete = function() { renderStoredMedia(); };
             }
         }
 
-        // MUSIQA FAYLLARI
+        // MUSIQA FAYLLARI SAQLASH
         function renderStoredMusic() {
-            const list = document.getElementById('musicList');
-            list.innerHTML = '';
-            savedMusicFiles.forEach((song, idx) => {
-                const item = document.createElement('div');
-                item.style.cssText = "padding:10px; background:rgba(255,255,255,0.03); border:1px solid var(--border-glow); border-radius:10px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;";
-                item.innerHTML = `<span style="font-size:11px; font-weight:600; flex:1;">${song.name}</span><div style="display:flex; gap:10px;"><i class="fa-solid fa-play" style="color:#6366f1; cursor:pointer;"></i><i class="fa-solid fa-trash" style="color:#ef4444; cursor:pointer;"></i></div>`;
-                item.querySelector('.fa-play').onclick = () => {
-                    document.getElementById('currentTrackTitle').innerText = song.name;
-                    const p = document.getElementById('mainAudioPlayer');
-                    p.src = song.data; p.play();
-                };
-                item.querySelector('.fa-trash').onclick = () => {
-                    savedMusicFiles.splice(idx, 1);
-                    localStorage.setItem('saved_music_files', JSON.stringify(savedMusicFiles));
-                    renderStoredMusic();
-                };
-                list.appendChild(item);
-            });
+            if(!db) return;
+            const tx = db.transaction("music", "readonly");
+            const store = tx.objectStore("music");
+            const req = store.getAll();
+
+            req.onsuccess = function() {
+                const songs = req.result;
+                const list = document.getElementById('musicList');
+                list.innerHTML = '';
+                songs.forEach((song) => {
+                    const item = document.createElement('div');
+                    item.style.cssText = "padding:10px; background:rgba(255,255,255,0.03); border:1px solid var(--border-glow); border-radius:10px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;";
+                    item.innerHTML = `<span style="font-size:11px; font-weight:600; flex:1;">${song.name}</span><div style="display:flex; gap:10px;"><i class="fa-solid fa-play" style="color:#6366f1; cursor:pointer;"></i><i class="fa-solid fa-trash" style="color:#ef4444; cursor:pointer;"></i></div>`;
+                    
+                    const blobUrl = URL.createObjectURL(song.blob);
+                    
+                    item.querySelector('.fa-play').onclick = () => {
+                        document.getElementById('currentTrackTitle').innerText = song.name;
+                        const p = document.getElementById('mainAudioPlayer');
+                        p.src = blobUrl; p.play();
+                    };
+                    item.querySelector('.fa-trash').onclick = () => {
+                        const delTx = db.transaction("music", "readwrite");
+                        delTx.objectStore("music").delete(song.id);
+                        delTx.oncomplete = () => renderStoredMusic();
+                    };
+                    list.appendChild(item);
+                });
+            }
         }
 
         function handleAudioUpload(e) {
-            Array.from(e.target.files).forEach(file => {
-                const reader = new FileReader();
-                reader.onload = function(evt) {
-                    savedMusicFiles.push({ name: file.name, data: evt.target.result });
-                    localStorage.setItem('saved_music_files', JSON.stringify(savedMusicFiles));
-                    renderStoredMusic();
-                };
-                reader.readAsDataURL(file);
-            });
+            const files = Array.from(e.target.files);
+            if(files.length === 0) return;
+            const tx = db.transaction("music", "readwrite");
+            const store = tx.objectStore("music");
+            files.forEach(file => store.add({ name: file.name, blob: file }));
+            tx.oncomplete = function() { renderStoredMusic(); };
         }
 
         // O'YIN 1: ILON O'YINI MANTIG'I
@@ -803,6 +877,19 @@
 
         // CAROUSEL & UTILS
         let currentSlide = 0;
+        const totalSlides = 7;
+
+        function initDots() {
+            const container = document.getElementById('sliderDotsContainer');
+            container.innerHTML = '';
+            for(let i=0; i<totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = `dot ${i===0?'active':''}`;
+                dot.onclick = () => goToSlide(i);
+                container.appendChild(dot);
+            }
+        }
+
         function goToSlide(idx) {
             currentSlide = idx;
             document.getElementById('heroTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
@@ -810,9 +897,9 @@
         }
 
         setInterval(() => {
-            currentSlide = (currentSlide + 1) % 3;
+            currentSlide = (currentSlide + 1) % totalSlides;
             goToSlide(currentSlide);
-        }, 4000);
+        }, 3500);
 
         function updateClock() {
             const now = new Date();
@@ -851,8 +938,7 @@
         function savePinSetting(val) { localStorage.setItem('app_pin', val); appPin = val; alert('PIN saqlandi!'); }
 
         // INITIALIZE
-        renderStoredMedia();
-        renderStoredMusic();
+        initDots();
         renderCalendar();
     </script>
 </body>
