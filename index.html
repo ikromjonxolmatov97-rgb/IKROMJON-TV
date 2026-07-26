@@ -70,7 +70,7 @@
         .top-tab-item { padding-bottom: 4px; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: 0.3s; }
         .top-tab-item.active { color: var(--text-main); border-bottom-color: #6366f1; }
 
-        /* HERO CAROUSEL / REKLAMALAR */
+        /* HERO CAROUSEL */
         .hero-slider-container {
             margin: 14px 16px; height: 250px; border-radius: 24px; position: relative; overflow: hidden;
             border: 1px solid var(--border-glow); box-shadow: var(--card-shadow); background: #1e293b;
@@ -81,7 +81,7 @@
             background-size: cover; background-position: center; background-repeat: no-repeat;
             display: flex; flex-direction: column; justify-content: flex-end; padding: 18px;
         }
-        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,9,19,0.1) 0%, rgba(7,9,19,0.95) 100%); z-index: 1; }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,9,19,0.2) 0%, rgba(7,9,19,0.95) 100%); z-index: 1; }
         .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 4px; }
         .hero-badge { color: #fff; font-size: 9px; font-weight: 900; padding: 3px 8px; border-radius: 10px; width: max-content; }
         .hero-title { font-size: 20px; font-weight: 900; color: #fff; }
@@ -89,7 +89,7 @@
 
         .slider-dots { position: absolute; bottom: 12px; right: 18px; z-index: 10; display: flex; gap: 4px; }
         .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
-        .dot.active { background: #6366f1; width: 16px; border-radius: 10px; }
+        .dot.active { background: #4285F4; width: 16px; border-radius: 10px; }
 
         /* QUICK UTILITIES & GAMES BAR */
         .quick-tools { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 0 16px 14px 16px; }
@@ -169,8 +169,16 @@
         .piece-red { background: #ef4444; }
         .piece-black { background: #000; }
 
-        .coin-btn { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border: 4px solid #fef08a; display: flex; align-items: center; justify-content: center; font-size: 50px; color: #fff; cursor: pointer; box-shadow: 0 0 30px rgba(245, 158, 11, 0.5); transition: transform 0.1s; margin: 20px auto; }
+        /* COIN GAME ENHANCED STYLES */
+        .coin-game-container { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 10px; }
+        .coin-balance-card { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 18px; padding: 16px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .coin-btn { width: 110px; height: 110px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border: 4px solid #fef08a; display: flex; align-items: center; justify-content: center; font-size: 45px; color: #fff; cursor: pointer; box-shadow: 0 0 25px rgba(245, 158, 11, 0.6); transition: transform 0.1s; margin: 6px auto; }
         .coin-btn:active { transform: scale(0.9); }
+        .coin-action-btn { width: 100%; padding: 12px; border-radius: 12px; font-weight: 800; font-size: 12px; cursor: pointer; border: none; display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+        /* CHROME BROWSER STYLES */
+        .chrome-bar { display: flex; gap: 8px; padding: 10px 14px; background: rgba(15,23,42,0.95); border-bottom: 1px solid var(--border-glow); }
+        .chrome-input { flex: 1; background: var(--bg-glass); border: 1px solid var(--border-glow); border-radius: 20px; padding: 8px 16px; color: #fff; font-size: 12px; outline: none; }
     </style>
 </head>
 <body>
@@ -199,8 +207,7 @@
             <div class="header-actions">
                 <div class="icon-btn" title="Galereyadan Yuklash" onclick="openModal('uploadModal')"><i class="fa-solid fa-images" style="color:#10b981;"></i></div>
                 <div class="icon-btn" title="Musiqa Pleyer" onclick="openModal('musicModal')"><i class="fa-solid fa-music" style="color:#ec4899;"></i></div>
-                <div class="icon-btn" title="Yandex Browser" onclick="openModal('yandexModal')"><i class="fa-bold" style="color:#ef4444; font-weight:900;">Y</i></div>
-                <div class="icon-btn" title="Google Chrome" onclick="openModal('browserModal')"><i class="fa-brands fa-chrome" style="color:#4285F4;"></i></div>
+                <div class="icon-btn" title="Google Chrome" onclick="openChromeBrowser()"><i class="fa-brands fa-chrome" style="color:#4285F4;"></i></div>
                 <div class="icon-btn" title="Ikromjon AI" onclick="openModal('aiModal')"><i class="fa-solid fa-robot"></i></div>
             </div>
         </div>
@@ -224,103 +231,57 @@
         <!-- REKLAMA / HERO CAROUSEL -->
         <div class="hero-slider-container">
             <div class="hero-track" id="heroTrack">
-                <!-- 1. COCA-COLA -->
                 <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=1000&q=80');">
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
-                        <div class="hero-badge" style="background:#dc2626;">COCA-COLA UZBEKISTAN</div>
-                        <div class="hero-title">Coca-Cola — Haqiqiy Hissiyotlar!</div>
-                        <div class="hero-meta"><span>Har bir lahzadan muzday lazzat oling</span></div>
+                        <div class="hero-badge" style="background:#f40000;">COCA-COLA</div>
+                        <div class="hero-title">Real Ta'm, Haqiqiy Zavq</div>
+                        <div class="hero-meta"><span>Coca-Cola bilan har bir lahza unutilmas</span></div>
                     </div>
                 </div>
 
-                <!-- 2. PEPSI -->
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1553456558-aff63285bdd1?auto=format&fit=crop&w=1000&q=80');">
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1629203851122-3726ecdf080e?auto=format&fit=crop&w=1000&q=80');">
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
-                        <div class="hero-badge" style="background:#2563eb;">PEPSI</div>
-                        <div class="hero-title">Pepsi — Ko'proq Zavq Oling!</div>
-                        <div class="hero-meta"><span>Yangi uslub, doimiy a'lo ta'm</span></div>
+                        <div class="hero-badge" style="background:#004b93;">PEPSI</div>
+                        <div class="hero-title">Generation Pepsi</div>
+                        <div class="hero-meta"><span>Chegaralarni bilmaydigan shijoat</span></div>
                     </div>
                 </div>
 
-                <!-- 3. UZUM MARKET -->
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1000&q=80');">
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?auto=format&fit=crop&w=1000&q=80');">
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
-                        <div class="hero-badge" style="background:#7c3aed;">UZUM MARKET</div>
-                        <div class="hero-title">Uzum Market — Tezkor Yetkazib Berish</div>
-                        <div class="hero-meta"><span>1 kunda barcha turdagi mahsulotlar eshigingizda</span></div>
+                        <div class="hero-badge" style="background:#00a651;">SPRITE</div>
+                        <div class="hero-title">Chanqoqni Butunlay Bos</div>
+                        <div class="hero-meta"><span>Limon-laym ta'mi bilan tetiklashing</span></div>
                     </div>
                 </div>
 
-                <!-- 4. RED BULL (ENERGETIK) -->
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1622543925917-763c34d1a86e?auto=format&fit=crop&w=1000&q=80');">
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?auto=format&fit=crop&w=1000&q=80');">
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
-                        <div class="hero-badge" style="background:#0284c7;">RED BULL ENERGETIK</div>
-                        <div class="hero-title">Red Bull — Qanot Bag'ishlaydi!</div>
-                        <div class="hero-meta"><span>Cheksiz energiya va yuksak marralar sari</span></div>
+                        <div class="hero-badge" style="background:#4285F4;">GOOGLE</div>
+                        <div class="hero-title">Dunyo Bilimlari Bir Qadamda</div>
+                        <div class="hero-meta"><span>Google xizmatlari va qidiruv tizimi</span></div>
                     </div>
                 </div>
 
-                <!-- 5. MOBIUZ -->
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=80');">
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?auto=format&fit=crop&w=1000&q=80');">
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
-                        <div class="hero-badge" style="background:#ef4444;">MOBIUZ (UMS)</div>
-                        <div class="hero-title">Mobiuz — Oʻzingiznikilarga Yaqinroq</div>
-                        <div class="hero-meta"><span>Yuqori tezlikdagi 4G/5G internet</span></div>
+                        <div class="hero-badge" style="background:#000000;">ADIDAS</div>
+                        <div class="hero-title">Impossible is Nothing</div>
+                        <div class="hero-meta"><span>Sport va erkinlik estetikasi</span></div>
                     </div>
                 </div>
 
-                <!-- 6. HUMANS -->
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1000&q=80');">
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=1000&q=80');">
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
-                        <div class="hero-badge" style="background:#f59e0b; color:#000;">HUMANS</div>
-                        <div class="hero-title">Humans Uzbekistan</div>
-                        <div class="hero-meta"><span>Aloqa, Bank kartasi va Keshbeklar</span></div>
-                    </div>
-                </div>
-
-                <!-- 7. UCELL -->
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=1000&q=80');">
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <div class="hero-badge" style="background:#8b5cf6;">UCELL</div>
-                        <div class="hero-title">Ucell — Yaxshilik Sariya!</div>
-                        <div class="hero-meta"><span>Qulay va arzon aloqa xizmatlari</span></div>
-                    </div>
-                </div>
-
-                <!-- 8. PERFECTUM -->
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80');">
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <div class="hero-badge" style="background:#06b6d4;">PERFECTUM</div>
-                        <div class="hero-title">Perfectum 5G</div>
-                        <div class="hero-meta"><span>Oʻzbekistonda birinchi haqiqiy 5G standart</span></div>
-                    </div>
-                </div>
-
-                <!-- 9. OQ MOBILE -->
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1000&q=80');">
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <div class="hero-badge" style="background:#10b981;">OQ MOBILE</div>
-                        <div class="hero-title">OQ — Raqamli Operator</div>
-                        <div class="hero-meta"><span>Faqat kerakli trafik va daqiqalarni tanlang</span></div>
-                    </div>
-                </div>
-
-                <!-- 10. PAYNET -->
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1000&q=80');">
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <div class="hero-badge" style="background:#2563eb;">PAYNET</div>
-                        <div class="hero-title">Paynet — Tezkor Toʻlovlar</div>
-                        <div class="hero-meta"><span>Barcha xizmatlar uchun komissiyasiz toʻlov</span></div>
+                        <div class="hero-badge" style="background:#d81159;">PUMA</div>
+                        <div class="hero-title">Forever Faster</div>
+                        <div class="hero-meta"><span>Har doim oldinda va tezkor bo'ling</span></div>
                     </div>
                 </div>
             </div>
@@ -382,11 +343,26 @@
     <!-- BOTTOM NAV -->
     <nav class="bottom-nav">
         <div class="nav-btn active" onclick="location.reload()"><i class="fa-solid fa-house"></i><span>Asosiy</span></div>
+        <div class="nav-btn" onclick="openChromeBrowser()"><i class="fa-brands fa-chrome" style="color:#4285F4;"></i><span>Google</span></div>
         <div class="nav-btn" onclick="openModal('aiModal')"><i class="fa-solid fa-robot"></i><span>Ikromjon AI</span></div>
         <div class="nav-btn" onclick="openModal('musicModal')"><i class="fa-solid fa-music"></i><span>Musiqa</span></div>
         <div class="nav-btn" onclick="openModal('settingsModal')"><i class="fa-solid fa-sliders"></i><span>Sozlamalar</span></div>
-        <div class="nav-btn" onclick="openModal('profileModal')"><i class="fa-solid fa-user"></i><span>Profil</span></div>
     </nav>
+
+    <!-- GOOGLE CHROME BRAUZER MODAL -->
+    <div class="modal-overlay" id="chromeModal">
+        <div class="modal-header" style="padding:10px 14px;">
+            <span style="font-weight: 800; display:flex; align-items:center; gap:8px;">
+                <i class="fa-brands fa-chrome" style="color:#4285F4; font-size:18px;"></i> Google Chrome
+            </span>
+            <div class="icon-btn" onclick="closeModal('chromeModal')"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div class="chrome-bar">
+            <input type="text" id="chromeSearchInput" class="chrome-input" placeholder="Google'dan qidiring yoki URL kiriting..." onkeydown="if(event.key==='Enter') searchGoogle()">
+            <button class="btn-main" style="padding:6px 14px; font-size:11px;" onclick="searchGoogle()"><i class="fa-solid fa-magnifying-glass"></i> Qidiruv</button>
+        </div>
+        <iframe id="chromeIframe" src="https://www.bing.com" style="width:100%; flex:1; border:none; background:#fff;"></iframe>
+    </div>
 
     <!-- GALEREYADAN YUKLASH MODAL -->
     <div class="modal-overlay" id="uploadModal">
@@ -408,10 +384,6 @@
                 <i class="fa-solid fa-film" style="font-size:18px;"></i> Galereyadan Videolar Tanlash
                 <input type="file" accept="video/*" multiple style="display:none;" onchange="handleGalleryUpload(event, 'video')">
             </label>
-
-            <div style="font-size:11px; color:var(--text-sub); text-align:center; margin-top:6px;">
-                💡 Bir nechta rasm va videolarni bir vaqtda tanlab yuklashingiz mumkin.
-            </div>
         </div>
     </div>
 
@@ -445,21 +417,36 @@
         </div>
     </div>
 
-    <!-- O'YIN 3: TANGA YIG'ISH MODAL -->
+    <!-- O'YIN 3: TANGA YIG'ISH VA BALANS MODAL -->
     <div class="modal-overlay" id="coinModal">
         <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-coins" style="color:#f59e0b;"></i> Tanga Yigʻish Oʻyini</span>
+            <span style="font-weight: 800;"><i class="fa-solid fa-coins" style="color:#f59e0b;"></i> Tanga Yigʻish va Balans</span>
             <div class="icon-btn" onclick="closeModal('coinModal')"><i class="fa-solid fa-xmark"></i></div>
         </div>
-        <div style="padding:20px; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; flex:1;">
-            <h2 style="font-size:28px; font-weight:900; color:#f59e0b;" id="coinCountVal">0</h2>
-            <p style="font-size:11px; color:var(--text-sub);">Toʻplangan Oltin Tangalar</p>
-            <div class="coin-btn" onclick="clickCoin()"><i class="fa-solid fa-coins"></i></div>
-            <p style="font-size:12px; font-weight:700;">Tangani bosing va tangalar yigʻing!</p>
+        <div style="padding:16px; flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+            <div class="coin-game-container">
+                <div class="coin-balance-card">
+                    <div style="font-size: 12px; color: var(--text-sub); font-weight: 700;">HISOB BALANSINGIZ</div>
+                    <div style="font-size: 32px; font-weight: 900; color: #f59e0b; margin: 4px 0;" id="coinCountVal">0 Tanga</div>
+                    <div style="font-size: 16px; font-weight: 800; color: #10b981;" id="coinSomVal">= 0 soʻm</div>
+                </div>
+
+                <div class="coin-btn" onclick="clickCoin()"><i class="fa-solid fa-coins"></i></div>
+                <p style="font-size: 11px; color: var(--text-sub); text-align: center;">Tanga ustiga bosing (+1 tanga = 10 soʻm)</p>
+
+                <div style="width: 100%; display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+                    <button class="coin-action-btn" style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: #fff;" onclick="buyTvSubWithCoins()">
+                        <i class="fa-solid fa-tv"></i> TV Obuna Sotib Olish (5 000 soʻm)
+                    </button>
+                    <button class="coin-action-btn" style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #10b981;" onclick="withdrawCoinsMoney()">
+                        <i class="fa-solid fa-wallet"></i> Pulni Yechib Olish (Min: 10 000 soʻm)
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- TV OBUNA SOTIB OLISH VA TO'LOV TIZIMI MODAL -->
+    <!-- TV OBUNA SOTIB OLISH MODAL -->
     <div class="modal-overlay" id="tvSubModal">
         <div class="modal-header">
             <span style="font-weight: 800; color:#ef4444;"><i class="fa-solid fa-tv"></i> TV Efir Obunasi</span>
@@ -490,36 +477,6 @@
                     <h4 style="font-size:14px;">Karta Raqamini Kiriting</h4>
                     <input type="text" id="cardNumberInput" maxlength="19" placeholder="8600 **** **** ****" class="setting-input" style="width:100%; text-align:center; font-size:16px; padding:12px; letter-spacing:2px;" oninput="formatCardNumber(this)">
                     <button class="btn-main" style="width:100%; padding:12px;" onclick="processPayment()">Toʻlov Qilish (55 000 soʻm)</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PROFIL MODAL -->
-    <div class="modal-overlay" id="profileModal">
-        <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-user"></i> Profil va Ilova Ma'lumotlari</span>
-            <div class="icon-btn" onclick="closeModal('profileModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div style="padding:20px; display:flex; flex-direction:column; gap:16px; overflow-y:auto; flex:1;">
-            <div style="display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center;">
-                <div style="width:70px; height:70px; border-radius:50%; background:var(--accent-gradient); display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:900; color:#fff;">IX</div>
-                <h3 style="font-size:16px; font-weight:800;">Ikromjon Xolmatov</h3>
-                <span style="font-size:10px; background:rgba(16,185,129,0.2); color:#10b981; padding:3px 8px; border-radius:8px; font-weight:700;">PRO A'ZO</span>
-            </div>
-
-            <div class="setting-group" style="padding:0;">
-                <div class="setting-item">
-                    <div class="setting-title"><i class="fa-solid fa-download" style="color:#3b82f6;"></i> Yuklab Olinganlar Soni</div>
-                    <span style="font-weight:800; color:#10b981;">125,400+ ta</span>
-                </div>
-                <div class="setting-item">
-                    <div class="setting-title"><i class="fa-solid fa-code-branch" style="color:#a855f7;"></i> Ilova Talqini (Version)</div>
-                    <span style="font-size:11px; font-weight:700;">v3.8 Multi-Brand</span>
-                </div>
-                <div class="setting-item">
-                    <div class="setting-title"><i class="fa-solid fa-database" style="color:#10b981;"></i> Xotira Tizimi</div>
-                    <span style="font-size:11px; font-weight:700; color:#10b981;">IndexedDB Multi-Storage</span>
                 </div>
             </div>
         </div>
@@ -658,6 +615,23 @@
     </div>
 
     <script>
+        // GOOGLE CHROME BRAUZER MANTIG'I
+        function openChromeBrowser() {
+            openModal('chromeModal');
+        }
+
+        function searchGoogle() {
+            const query = document.getElementById('chromeSearchInput').value.trim();
+            const iframe = document.getElementById('chromeIframe');
+            if(!query) return;
+
+            if(query.startsWith('http://') || query.startsWith('https://')) {
+                iframe.src = query;
+            } else {
+                iframe.src = 'https://www.bing.com/search?q=' + encodeURIComponent(query);
+            }
+        }
+
         // INDEXEDDB XOTIRA TIZIMI
         let db;
         const dbReq = indexedDB.open("IkromjonTV_DB", 1);
@@ -847,16 +821,55 @@
             }
         }
 
-        // O'YIN 3: TANGA YIG'ISH MANTIG'I
+        // O'YIN 3: TANGA YIG'ISH VA BALANS MANTIG'I (1 Tanga = 10 so'm)
         let coinCount = parseInt(localStorage.getItem('app_coins') || '0');
+        const somPerCoin = 10;
+
         function openCoinGame() {
-            document.getElementById('coinCountVal').innerText = coinCount;
+            updateCoinDisplay();
             openModal('coinModal');
         }
+
+        function updateCoinDisplay() {
+            const totalSom = coinCount * somPerCoin;
+            document.getElementById('coinCountVal').innerText = coinCount + " Tanga";
+            document.getElementById('coinSomVal').innerText = "= " + totalSom.toLocaleString() + " soʻm";
+        }
+
         function clickCoin() {
             coinCount++;
-            document.getElementById('coinCountVal').innerText = coinCount;
             localStorage.setItem('app_coins', coinCount.toString());
+            updateCoinDisplay();
+        }
+
+        function buyTvSubWithCoins() {
+            const totalSom = coinCount * somPerCoin;
+            const subCostSom = 5000;
+            const requiredCoins = subCostSom / somPerCoin;
+
+            if (totalSom >= subCostSom) {
+                coinCount -= requiredCoins;
+                localStorage.setItem('app_coins', coinCount.toString());
+                updateCoinDisplay();
+                alert("Tabriklaymiz! Tanga balansingizdan foydalanib TV obunasi muvaffaqiyatli sotib olindi!");
+                playMedia('TV Jonli Efir', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4');
+            } else {
+                alert(`Balansingiz yetarli emas! Kerakli summa: ${subCostSom.toLocaleString()} soʻm (500 tanga).`);
+            }
+        }
+
+        function withdrawCoinsMoney() {
+            const totalSom = coinCount * somPerCoin;
+            const minWithdrawSom = 10000;
+
+            if (totalSom >= minWithdrawSom) {
+                alert(`Muvaffaqiyatli! ${totalSom.toLocaleString()} soʻm pulingiz yechib olish uchun navbatga qoʻyildi.`);
+                coinCount = 0;
+                localStorage.setItem('app_coins', coinCount.toString());
+                updateCoinDisplay();
+            } else {
+                alert(`Minimal yechib olish summasi 10 000 soʻm (1 000 tanga). Hozirgi balansingiz: ${totalSom.toLocaleString()} soʻm.`);
+            }
         }
 
         // TV OBUNA MANTIG'I
@@ -911,9 +924,9 @@
             catch { document.getElementById('calcDisplay').value = 'Xato!'; }
         }
 
-        // CAROUSEL & UTILS (10 TA REKLAMA SLIDE)
+        // CAROUSEL & UTILS
         let currentSlide = 0;
-        const totalSlides = 10;
+        const totalSlides = 6;
 
         function initDots() {
             const container = document.getElementById('sliderDotsContainer');
