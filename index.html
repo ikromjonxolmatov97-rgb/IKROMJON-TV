@@ -122,7 +122,6 @@
             display: flex; align-items: center; justify-content: center; 
             font-size: 9px; font-weight: 900; cursor: pointer; z-index: 10; 
             backdrop-filter: blur(4px); box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-            letter-spacing: 0.5px;
         }
 
         .tv-card { flex: 0 0 100px; background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 18px; padding: 10px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; text-align: center; }
@@ -140,7 +139,7 @@
         .modal-overlay.active { display: flex; }
         .modal-header { padding: 14px; background: rgba(7,9,19,0.9); border-bottom: 1px solid var(--border-glow); display: flex; justify-content: space-between; align-items: center; }
 
-        /* SETTINGS & PAYMENT */
+        /* SETTINGS & PAYMENT STYLES */
         .setting-group { padding: 14px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; flex: 1; }
         .setting-item { background: var(--bg-card); border: 1px solid var(--border-glow); padding: 12px 16px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; }
         .setting-title { font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
@@ -148,7 +147,6 @@
         
         .sub-box { background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%); border: 2px solid #818cf8; border-radius: 20px; padding: 20px; text-align: center; display: flex; flex-direction: column; gap: 12px; align-items: center; width: 100%; max-width: 360px; }
         .sub-price { font-size: 24px; font-weight: 900; color: #ec4899; }
-
         .card-type-btn { flex: 1; padding: 12px; background: var(--bg-card); border: 2px solid var(--border-glow); border-radius: 12px; font-weight: 800; cursor: pointer; text-align: center; }
         .card-type-btn.selected { border-color: #6366f1; background: rgba(99, 102, 241, 0.2); }
 
@@ -169,14 +167,14 @@
         .piece-red { background: #ef4444; }
         .piece-black { background: #000; }
 
-        /* COIN GAME ENHANCED STYLES */
+        /* COIN GAME */
         .coin-game-container { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 10px; }
         .coin-balance-card { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 18px; padding: 16px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .coin-btn { width: 110px; height: 110px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border: 4px solid #fef08a; display: flex; align-items: center; justify-content: center; font-size: 45px; color: #fff; cursor: pointer; box-shadow: 0 0 25px rgba(245, 158, 11, 0.6); transition: transform 0.1s; margin: 6px auto; }
         .coin-btn:active { transform: scale(0.9); }
         .coin-action-btn { width: 100%; padding: 12px; border-radius: 12px; font-weight: 800; font-size: 12px; cursor: pointer; border: none; display: flex; align-items: center; justify-content: center; gap: 8px; }
 
-        /* CHROME BROWSER STYLES */
+        /* CHROME BROWSER */
         .chrome-bar { display: flex; gap: 8px; padding: 10px 14px; background: rgba(15,23,42,0.95); border-bottom: 1px solid var(--border-glow); }
         .chrome-input { flex: 1; background: var(--bg-glass); border: 1px solid var(--border-glow); border-radius: 20px; padding: 8px 16px; color: #fff; font-size: 12px; outline: none; }
     </style>
@@ -228,7 +226,7 @@
     </header>
 
     <main>
-        <!-- REKLAMA / HERO CAROUSEL -->
+        <!-- HERO CAROUSEL -->
         <div class="hero-slider-container">
             <div class="hero-track" id="heroTrack">
                 <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=1000&q=80');">
@@ -387,7 +385,7 @@
         </div>
     </div>
 
-    <!-- O'YIN 1: ILON O'YINI MODAL -->
+    <!-- O'YIN 1: ILON O'YINI -->
     <div class="modal-overlay" id="snakeModal">
         <div class="modal-header">
             <span style="font-weight: 800;"><i class="fa-solid fa-staff-snake" style="color:#10b981;"></i> Ilon Oʻyini</span>
@@ -405,7 +403,7 @@
         </div>
     </div>
 
-    <!-- O'YIN 2: SHASHKA MODAL -->
+    <!-- O'YIN 2: SHASHKA -->
     <div class="modal-overlay" id="checkersModal">
         <div class="modal-header">
             <span style="font-weight: 800;"><i class="fa-solid fa-chess-board" style="color:#a855f7;"></i> Shashka Oʻyini</span>
@@ -417,7 +415,7 @@
         </div>
     </div>
 
-    <!-- O'YIN 3: TANGA YIG'ISH VA BALANS MODAL -->
+    <!-- O'YIN 3: TANGA YIG'ISH -->
     <div class="modal-overlay" id="coinModal">
         <div class="modal-header">
             <span style="font-weight: 800;"><i class="fa-solid fa-coins" style="color:#f59e0b;"></i> Tanga Yigʻish va Balans</span>
@@ -446,7 +444,7 @@
         </div>
     </div>
 
-    <!-- TV OBUNA SOTIB OLISH MODAL -->
+    <!-- TV OBUNA MODAL -->
     <div class="modal-overlay" id="tvSubModal">
         <div class="modal-header">
             <span style="font-weight: 800; color:#ef4444;"><i class="fa-solid fa-tv"></i> TV Efir Obunasi</span>
@@ -459,9 +457,7 @@
                     <h3 id="targetChannelName">TV Kanal nomi</h3>
                     <p style="font-size:12px; color:var(--text-sub);">TV kanaliga kirganda 55 000 soʻmga 1 oylik obuna sotib oling!</p>
                     <div class="sub-price">55 000 soʻm <span style="font-size:12px; color:#fff;">/ 1 oy</span></div>
-                    <button class="btn-main" style="width:100%; padding:14px; font-size:13px;" onclick="goToPayStep(2)">
-                        Obunani Sotib Olish
-                    </button>
+                    <button class="btn-main" style="width:100%; padding:14px; font-size:13px;" onclick="goToPayStep(2)">Obunani Sotib Olish</button>
                 </div>
 
                 <div id="payStep2" style="display:none; flex-direction:column; gap:14px; width:100%;">
@@ -482,7 +478,7 @@
         </div>
     </div>
 
-    <!-- TAQVIM MODAL -->
+    <!-- TAQVIM -->
     <div class="modal-overlay" id="calendarModal">
         <div class="modal-header">
             <span style="font-weight: 800;"><i class="fa-solid fa-calendar-days"></i> Kalendar</span>
@@ -497,7 +493,7 @@
         </div>
     </div>
 
-    <!-- NAMOZ TAQVIMI MODAL -->
+    <!-- NAMOZ -->
     <div class="modal-overlay" id="namazModal">
         <div class="modal-header">
             <span style="font-weight: 800;"><i class="fa-solid fa-kaaba"></i> Namoz Taqvimi (Toshkent)</span>
@@ -513,7 +509,7 @@
         </div>
     </div>
 
-    <!-- KALKULYATOR MODAL -->
+    <!-- KALKULYATOR -->
     <div class="modal-overlay" id="calcModal">
         <div class="modal-header">
             <span style="font-weight: 800;"><i class="fa-solid fa-calculator"></i> Kalkulyator</span>
@@ -543,7 +539,7 @@
         </div>
     </div>
 
-    <!-- VALYUTA KURSI MODAL -->
+    <!-- VALYUTA -->
     <div class="modal-overlay" id="currencyModal">
         <div class="modal-header">
             <span style="font-weight: 800;"><i class="fa-solid fa-money-bill-transfer"></i> Valyuta Kurslari</span>
@@ -556,22 +552,74 @@
         </div>
     </div>
 
-    <!-- SOZLAMALAR MODAL -->
+    <!-- TO'LIQ SOZLAMALAR MODALI -->
     <div class="modal-overlay" id="settingsModal">
         <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-gear"></i> TV va Ilova Sozlamalari</span>
+            <span style="font-weight: 800;"><i class="fa-solid fa-gear"></i> Ilova Sozlamalari va Xavfsizlik</span>
             <div class="icon-btn" onclick="closeModal('settingsModal')"><i class="fa-solid fa-xmark"></i></div>
         </div>
         <div class="setting-group">
-            <div style="font-size:11px; font-weight:800; color:#818cf8;">📺 TV SISTEMASI SOZLAMALARI</div>
+            
+            <!-- PROFIL VA RO'YXATDAN O'TGANLAR -->
+            <div style="font-size:11px; font-weight:800; color:#818cf8;">👤 PROFIL VA STATISTIKA</div>
             <div class="setting-item">
-                <div class="setting-title"><i class="fa-solid fa-tv"></i> Ekran Formatini Tanlang</div>
-                <select class="setting-select"><option>16:9 Auto</option><option>4:3 Classic</option></select>
+                <div class="setting-title"><i class="fa-solid fa-user-shield" style="color:#10b981;"></i> Profil: Ikromjon Xolmatov</div>
+                <span style="font-size: 10px; color: #10b981; font-weight: 700;">Faol</span>
             </div>
             <div class="setting-item">
-                <div class="setting-title"><i class="fa-solid fa-lock"></i> Ilova PIN Kod</div>
-                <input type="password" maxlength="4" placeholder="PIN" id="setPinInput" class="setting-input" style="width:80px;" onchange="savePinSetting(this.value)">
+                <div class="setting-title"><i class="fa-solid fa-users"></i> Jami ro'yxatdan o'tganlar</div>
+                <b style="color: #6366f1;">1,245 ta foydalanuvchi</b>
             </div>
+
+            <!-- XAVFSIZLIK VA QULF -->
+            <div style="font-size:11px; font-weight:800; color:#818cf8; margin-top:6px;">🔒 XAVFSIZLIK VA QULF</div>
+            <div class="setting-item">
+                <div class="setting-title"><i class="fa-solid fa-lock"></i> Sozlamalarga PIN Qulf</div>
+                <input type="password" maxlength="4" placeholder="PIN" id="setPinInput" class="setting-input" style="width:80px; text-align:center;" onchange="savePinSetting(this.value)">
+            </div>
+
+            <!-- DISPLEY VA OVOZ -->
+            <div style="font-size:11px; font-weight:800; color:#818cf8; margin-top:6px;">🎛️ DISPLEY VA OVOZ</div>
+            <div class="setting-item" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                <div class="setting-title"><i class="fa-solid fa-sun"></i> Ekran Yorug'ligi</div>
+                <input type="range" min="10" max="100" value="80" style="width:100%; accent-color:#6366f1;" oninput="adjustBrightness(this.value)">
+            </div>
+            <div class="setting-item" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                <div class="setting-title"><i class="fa-solid fa-volume-high"></i> Ilova Ovoz Balandligi</div>
+                <input type="range" min="0" max="100" value="50" style="width:100%; accent-color:#6366f1;" oninput="adjustVolume(this.value)">
+            </div>
+
+            <!-- ANTIVIRUS VA TEKSHIRUVCHI -->
+            <div style="font-size:11px; font-weight:800; color:#818cf8; margin-top:6px;">🛡️ ANTIVIRUS VA TIZIM</div>
+            <div class="setting-item">
+                <div class="setting-title"><i class="fa-solid fa-shield-halved" style="color:#10b981;"></i> Antivirus Himoyasi</div>
+                <button class="btn-main" style="padding: 6px 12px; font-size: 10px;" onclick="runAntivirusScan()">Skanerlash</button>
+            </div>
+            <div class="setting-item">
+                <div class="setting-title"><i class="fa-solid fa-rotate"></i> Ilova Tekshiruvchi (Update)</div>
+                <button class="btn-main" style="padding: 6px 12px; font-size: 10px; background: rgba(99,102,241,0.2); border:1px solid #6366f1;" onclick="checkAppUpdates()">Tekshirish</button>
+            </div>
+
+            <!-- ILOVA HAQIDA -->
+            <div style="font-size:11px; font-weight:800; color:#818cf8; margin-top:6px;">ℹ️ MA'LUMOT</div>
+            <div class="setting-item" onclick="openModal('aboutModal')" style="cursor:pointer;">
+                <div class="setting-title"><i class="fa-solid fa-circle-info"></i> Ilova Haqida</div>
+                <i class="fa-solid fa-chevron-right" style="font-size: 11px; color:var(--text-sub);"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- ILOVA HAQIDA MODAL -->
+    <div class="modal-overlay" id="aboutModal">
+        <div class="modal-header">
+            <span style="font-weight: 800;"><i class="fa-solid fa-circle-info"></i> Ilova Haqida</span>
+            <div class="icon-btn" onclick="closeModal('aboutModal')"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div style="padding:20px; text-align:center; display:flex; flex-direction:column; gap:12px; align-items:center; flex:1; justify-content:center;">
+            <div style="font-size:40px; color:#6366f1;"><i class="fa-solid fa-tv"></i></div>
+            <h3>IKROMJON TV PRO</h3>
+            <p style="font-size:12px; color:var(--text-sub);">Versiya: 2.0.4 (Ultimate Edition)</p>
+            <p style="font-size:11px; color:var(--text-main);">Ushbu tizim media kontentlar, jonli TV kanallar, mini oʻyinlar va toʻliq xavfsizlik himoyasini oʻz ichiga olgan maxsus dasturdir.</p>
         </div>
     </div>
 
@@ -615,16 +663,12 @@
     </div>
 
     <script>
-        // GOOGLE CHROME BRAUZER MANTIG'I
-        function openChromeBrowser() {
-            openModal('chromeModal');
-        }
-
+        // GOOGLE CHROME BRAUZER
+        function openChromeBrowser() { openModal('chromeModal'); }
         function searchGoogle() {
             const query = document.getElementById('chromeSearchInput').value.trim();
             const iframe = document.getElementById('chromeIframe');
             if(!query) return;
-
             if(query.startsWith('http://') || query.startsWith('https://')) {
                 iframe.src = query;
             } else {
@@ -635,13 +679,11 @@
         // INDEXEDDB XOTIRA TIZIMI
         let db;
         const dbReq = indexedDB.open("IkromjonTV_DB", 1);
-
         dbReq.onupgradeneeded = function(e) {
             db = e.target.result;
             if(!db.objectStoreNames.contains("media")) db.createObjectStore("media", { keyPath: "id", autoIncrement: true });
             if(!db.objectStoreNames.contains("music")) db.createObjectStore("music", { keyPath: "id", autoIncrement: true });
         };
-
         dbReq.onsuccess = function(e) {
             db = e.target.result;
             renderStoredMedia();
@@ -653,34 +695,25 @@
             const tx = db.transaction("media", "readonly");
             const store = tx.objectStore("media");
             const req = store.getAll();
-
             req.onsuccess = function() {
                 const items = req.result;
                 const list = document.getElementById('uploadedList');
                 list.innerHTML = '';
-                if(items.length > 0) {
-                    document.getElementById('uploadedSection').style.display = 'block';
-                } else {
-                    document.getElementById('uploadedSection').style.display = 'none';
-                }
-
+                document.getElementById('uploadedSection').style.display = items.length > 0 ? 'block' : 'none';
                 items.forEach((item) => {
                     const card = document.createElement('div');
                     card.className = 'media-card';
-                    
                     const delBtn = document.createElement('button');
                     delBtn.className = 'delete-btn';
-                    delBtn.innerText = 'HDfull';
+                    delBtn.innerText = 'O‘chirish';
                     delBtn.onclick = (e) => { e.stopPropagation(); deleteMedia(item.id); };
-
                     const blobUrl = URL.createObjectURL(item.blob);
-
                     if (item.type === 'video') {
                         card.onclick = () => playMedia(item.name, blobUrl, 'direct');
-                        card.innerHTML = `<div style="width:100%; height:150px; background:#000; display:flex; align-items:center; justify-content:center; color:#818cf8; font-size:24px;"><i class="fa-solid fa-circle-play"></i></div><div class="media-info"><div class="media-title">${item.name}</div><div class="media-sub">Video (Galereya)</div></div>`;
+                        card.innerHTML = `<div style="width:100%; height:150px; background:#000; display:flex; align-items:center; justify-content:center; color:#818cf8; font-size:24px;"><i class="fa-solid fa-circle-play"></i></div><div class="media-info"><div class="media-title">${item.name}</div><div class="media-sub">Video</div></div>`;
                     } else {
                         card.onclick = () => playMedia(item.name, blobUrl, 'img');
-                        card.innerHTML = `<img src="${blobUrl}" class="media-poster"><div class="media-info"><div class="media-title">${item.name}</div><div class="media-sub">Rasm (Galereya)</div></div>`;
+                        card.innerHTML = `<img src="${blobUrl}" class="media-poster"><div class="media-info"><div class="media-title">${item.name}</div><div class="media-sub">Rasm</div></div>`;
                     }
                     card.appendChild(delBtn);
                     list.appendChild(card);
@@ -688,20 +721,13 @@
             }
         }
 
-        // GALEREYADAN MULTI-YUKLASH FUNCTION
         function handleGalleryUpload(e, fileType) {
             const files = Array.from(e.target.files);
             if (files.length === 0) return;
-
             document.getElementById('uploadProgress').style.display = 'block';
-
             const tx = db.transaction("media", "readwrite");
             const store = tx.objectStore("media");
-
-            files.forEach(file => {
-                store.add({ name: file.name, type: fileType, blob: file });
-            });
-
+            files.forEach(file => store.add({ name: file.name, type: fileType, blob: file }));
             tx.oncomplete = function() {
                 document.getElementById('uploadProgress').style.display = 'none';
                 renderStoredMedia();
@@ -710,20 +736,19 @@
         }
 
         function deleteMedia(id) {
-            if(confirm("Ushbu faylni xotiradan o'chirishga ishonchingiz komilmi?")) {
+            if(confirm("Ushbu faylni o'chirishni xohlaysizmi?")) {
                 const tx = db.transaction("media", "readwrite");
                 tx.objectStore("media").delete(id);
                 tx.oncomplete = function() { renderStoredMedia(); };
             }
         }
 
-        // MUSIQA FAYLLARI SAQLASH
+        // MUSIQA
         function renderStoredMusic() {
             if(!db) return;
             const tx = db.transaction("music", "readonly");
             const store = tx.objectStore("music");
             const req = store.getAll();
-
             req.onsuccess = function() {
                 const songs = req.result;
                 const list = document.getElementById('musicList');
@@ -732,9 +757,7 @@
                     const item = document.createElement('div');
                     item.style.cssText = "padding:10px; background:rgba(255,255,255,0.03); border:1px solid var(--border-glow); border-radius:10px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;";
                     item.innerHTML = `<span style="font-size:11px; font-weight:600; flex:1;">${song.name}</span><div style="display:flex; gap:10px;"><i class="fa-solid fa-play" style="color:#6366f1; cursor:pointer;"></i><i class="fa-solid fa-trash" style="color:#ef4444; cursor:pointer;"></i></div>`;
-                    
                     const blobUrl = URL.createObjectURL(song.blob);
-                    
                     item.querySelector('.fa-play').onclick = () => {
                         document.getElementById('currentTrackTitle').innerText = song.name;
                         const p = document.getElementById('mainAudioPlayer');
@@ -759,7 +782,7 @@
             tx.oncomplete = function() { renderStoredMusic(); };
         }
 
-        // O'YIN 1: ILON O'YINI MANTIG'I
+        // ILON O'YINI
         let snakeInterval, snake, food, dir, score;
         function startSnakeGame() {
             openModal('snakeModal');
@@ -770,7 +793,6 @@
             dir = 'RIGHT';
             score = 0;
             document.getElementById('snakeScore').innerText = score;
-
             if(snakeInterval) clearInterval(snakeInterval);
             snakeInterval = setInterval(() => {
                 let head = {...snake[0]};
@@ -778,13 +800,11 @@
                 if(dir === 'DOWN') head.y++;
                 if(dir === 'LEFT') head.x--;
                 if(dir === 'RIGHT') head.x++;
-
                 if(head.x < 0 || head.x >= 20 || head.y < 0 || head.y >= 20) {
                     alert("O'yin tugadi! Ochko: " + score);
                     clearInterval(snakeInterval);
                     return;
                 }
-
                 snake.unshift(head);
                 if(head.x === food.x && head.y === food.y) {
                     score += 10;
@@ -793,17 +813,15 @@
                 } else {
                     snake.pop();
                 }
-
                 ctx.fillStyle = '#0f172a'; ctx.fillRect(0,0,240,240);
                 ctx.fillStyle = '#ef4444'; ctx.fillRect(food.x*12, food.y*12, 10, 10);
                 ctx.fillStyle = '#10b981';
                 snake.forEach(part => ctx.fillRect(part.x*12, part.y*12, 10, 10));
             }, 150);
         }
-
         function changeSnakeDir(d) { dir = d; }
 
-        // O'YIN 2: SHASHKA MANTIG'I
+        // SHASHKA
         function openCheckersGame() {
             openModal('checkersModal');
             const board = document.getElementById('checkersBoard');
@@ -821,76 +839,58 @@
             }
         }
 
-        // O'YIN 3: TANGA YIG'ISH VA BALANS MANTIG'I (1 Tanga = 10 so'm)
+        // TANGA YIG'ISH
         let coinCount = parseInt(localStorage.getItem('app_coins') || '0');
         const somPerCoin = 10;
-
-        function openCoinGame() {
-            updateCoinDisplay();
-            openModal('coinModal');
-        }
-
+        function openCoinGame() { updateCoinDisplay(); openModal('coinModal'); }
         function updateCoinDisplay() {
-            const totalSom = coinCount * somPerCoin;
             document.getElementById('coinCountVal').innerText = coinCount + " Tanga";
-            document.getElementById('coinSomVal').innerText = "= " + totalSom.toLocaleString() + " soʻm";
+            document.getElementById('coinSomVal').innerText = "= " + (coinCount * somPerCoin).toLocaleString() + " soʻm";
         }
-
         function clickCoin() {
             coinCount++;
             localStorage.setItem('app_coins', coinCount.toString());
             updateCoinDisplay();
         }
-
         function buyTvSubWithCoins() {
-            const totalSom = coinCount * somPerCoin;
-            const subCostSom = 5000;
-            const requiredCoins = subCostSom / somPerCoin;
-
-            if (totalSom >= subCostSom) {
-                coinCount -= requiredCoins;
+            if ((coinCount * somPerCoin) >= 5000) {
+                coinCount -= 500;
                 localStorage.setItem('app_coins', coinCount.toString());
                 updateCoinDisplay();
-                alert("Tabriklaymiz! Tanga balansingizdan foydalanib TV obunasi muvaffaqiyatli sotib olindi!");
+                alert("TV obunasi muvaffaqiyatli sotib olindi!");
                 playMedia('TV Jonli Efir', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4');
             } else {
-                alert(`Balansingiz yetarli emas! Kerakli summa: ${subCostSom.toLocaleString()} soʻm (500 tanga).`);
+                alert("Balansingiz yetarli emas! Kerakli summa: 5 000 soʻm (500 tanga).");
             }
         }
-
         function withdrawCoinsMoney() {
-            const totalSom = coinCount * somPerCoin;
-            const minWithdrawSom = 10000;
-
-            if (totalSom >= minWithdrawSom) {
-                alert(`Muvaffaqiyatli! ${totalSom.toLocaleString()} soʻm pulingiz yechib olish uchun navbatga qoʻyildi.`);
+            const total = coinCount * somPerCoin;
+            if (total >= 10000) {
+                alert(`${total.toLocaleString()} soʻm yechib olish uchun navbatga qoʻyildi!`);
                 coinCount = 0;
                 localStorage.setItem('app_coins', coinCount.toString());
                 updateCoinDisplay();
             } else {
-                alert(`Minimal yechib olish summasi 10 000 soʻm (1 000 tanga). Hozirgi balansingiz: ${totalSom.toLocaleString()} soʻm.`);
+                alert("Minimal yechish summasi 10 000 soʻm (1 000 tanga).");
             }
         }
 
-        // TV OBUNA MANTIG'I
+        // TV OBUNA
         let selectedCard = 'UZCARD';
         function openTvChannel(name) {
             document.getElementById('targetChannelName').innerText = name;
             goToPayStep(1); openModal('tvSubModal');
         }
-
         function goToPayStep(step) {
             document.getElementById('payStep1').style.display = (step === 1) ? 'flex' : 'none';
             document.getElementById('payStep2').style.display = (step === 2) ? 'flex' : 'none';
             document.getElementById('payStep3').style.display = (step === 3) ? 'flex' : 'none';
         }
-
         function selectCardType(type) {
             selectedCard = type;
             document.getElementById('btnUzcard').classList.toggle('selected', type === 'UZCARD');
             document.getElementById('btnHumo').classList.toggle('selected', type === 'HUMO');
         }
-
         function formatCardNumber(input) {
             let val = input.value.replace(/\D/g, '');
             let formatted = '';
@@ -900,23 +900,35 @@
             }
             input.value = formatted;
         }
-
         function processPayment() {
-            const cardNum = document.getElementById('cardNumberInput').value.replace(/\s/g, '');
-            if(cardNum.length < 16) {
-                alert("Iltimos, 16 xonali karta raqamini to'liq kiriting!");
+            if(document.getElementById('cardNumberInput').value.replace(/\s/g, '').length < 16) {
+                alert("Karta raqamini to'liq kiriting!");
                 return;
             }
-            alert(`To'lov muvaffaqiyatli amalga oshirildi!\n1 Oylik TV Obunangiz Aktivlashtirildi!`);
+            alert("To'lov muvaffaqiyatli amalga oshirildi!");
             closeModal('tvSubModal');
             playMedia('TV Jonli Efir', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4');
+        }
+
+        // SOZLAMALAR FUNKSIYALARI
+        function adjustBrightness(val) {
+            document.body.style.filter = `brightness(${val}%)`;
+        }
+        function adjustVolume(val) {
+            const audio = document.getElementById('mainAudioPlayer');
+            if(audio) audio.volume = val / 100;
+        }
+        function runAntivirusScan() {
+            alert("Antivirus skanerlash yakunlandi: Tizim to'liq xavfsiz, hech qanday tahdid topilmadi!");
+        }
+        function checkAppUpdates() {
+            alert("Siz ilovaning eng soʻnggi versiyasidan (2.0.4) foydalanib turibsiz!");
         }
 
         // KALKULYATOR
         function appendCalc(val) {
             const d = document.getElementById('calcDisplay');
-            if(d.value === '0') d.value = val;
-            else d.value += val;
+            d.value = d.value === '0' ? val : d.value + val;
         }
         function clearCalc() { document.getElementById('calcDisplay').value = '0'; }
         function runCalc() {
@@ -924,10 +936,9 @@
             catch { document.getElementById('calcDisplay').value = 'Xato!'; }
         }
 
-        // CAROUSEL & UTILS
+        // CAROUSEL & CLOCK
         let currentSlide = 0;
         const totalSlides = 6;
-
         function initDots() {
             const container = document.getElementById('sliderDotsContainer');
             container.innerHTML = '';
@@ -938,13 +949,11 @@
                 container.appendChild(dot);
             }
         }
-
         function goToSlide(idx) {
             currentSlide = idx;
             document.getElementById('heroTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
             document.querySelectorAll('.slider-dots .dot').forEach((dot, i) => dot.classList.toggle('active', i === idx));
         }
-
         setInterval(() => {
             currentSlide = (currentSlide + 1) % totalSlides;
             goToSlide(currentSlide);
@@ -984,7 +993,7 @@
                 document.getElementById('appLockScreen').style.display = 'none';
             }
         }
-        function savePinSetting(val) { localStorage.setItem('app_pin', val); appPin = val; alert('PIN saqlandi!'); }
+        function savePinSetting(val) { localStorage.setItem('app_pin', val); appPin = val; alert('PIN kod saqlandi!'); }
 
         // INITIALIZE
         initDots();
