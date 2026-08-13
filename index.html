@@ -1,49 +1,51 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ikromjon AI</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ikromjon AI</title>
+<style>
+body { background: #0d0d1a; color: white; font-family: sans-serif; margin: 0; overflow-x: hidden; }
+header { text-align: center; padding: 20px; position: relative; }
+#snow-container { position: fixed; top: 0; width: 100%; height: 100%; pointer-events: none; }
+.nav-8 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 20px; }
+.nav-btn { background: #1c1c3c; padding: 15px; border-radius: 10px; text-align: center; cursor: pointer; }
+.carousel { display: flex; overflow-x: scroll; gap: 20px; padding: 20px; }
+.ad-item { min-width: 150px; height: 100px; background: #2a2a4a; display: flex; align-items: center; justify-content: center; }
+</style>
 </head>
 <body>
-    <header>
-        <h1>Ikromjon AI</h1>
-        <div id="snow-container"></div>
-        <audio id="bg-music" src="background-music.mp3" loop></audio>
-        <button onclick="toggleMusic()">🎵</button>
-    </header>
-
-    <main>
-        <section id="media-slider">
-            <!-- Media/Video/Image Slider -->
-        </section>
-
-        <section id="features">
-            <!-- Feature Cards (8 sections) -->
-        </section>
-    </main>
-
-    <nav id="bottom-nav">
-        <!-- 8 Navigation Items -->
-    </nav>
-
-    <section id="ad-carousel">
-        <!-- 10 Brand Ad Carousel -->
-    </section>
-
-    <script src="script.js"></script>
-</body>
-</html>
-
-/* style.css */
-body { background-color: #0d0d1a; color: white; margin: 0; font-family: sans-serif; }
-/* ... Add styles for snow, cards, carousel, nav ... */
-
-// script.js
-function toggleMusic() {
-    let audio = document.getElementById("bg-music");
-    audio.paused ? audio.play() : audio.pause();
+<header>
+<h1>Ikromjon AI</h1>
+<div id="snow-container"></div>
+<audio id="bg-music" src="background-music.mp3"></audio>
+<button onclick="document.getElementById('bg-music').play()">🎵 Musiqani yoqish</button>
+</header>
+​<div class="nav-8">
+<div class="nav-btn">Bosh</div><div class="nav-btn">Chat</div>
+<div class="nav-btn">Kod</div><div class="nav-btn">Til</div>
+<div class="nav-btn">Yangilik</div><div class="nav-btn">Profil</div>
+<div class="nav-btn">Premium</div><div class="nav-btn">Sozlama</div>
+</div>
+​<div class="carousel" id="ad-carousel">
+<div class="ad-item">Coca-Cola</div><div class="ad-item">Fanta</div>
+<div class="ad-item">Nike</div><div class="ad-item">Adidas</div>
+<div class="ad-item">Zara</div><div class="ad-item">H&M</div>
+<div class="ad-item">Samsung</div><div class="ad-item">Apple</div>
+<div class="ad-item">Beeline</div><div class="ad-item">XM</div>
+</div>
+​<script>
+function createSnow() {
+let snow = document.createElement('div');
+snow.innerHTML = '❄';
+snow.style.position = 'absolute';
+snow.style.left = Math.random() * 100 + 'vw';
+snow.style.top = '-10px';
+snow.style.fontSize = Math.random() * 20 + 'px';
+document.getElementById('snow-container').appendChild(snow);
+setTimeout(() => snow.remove(), 5000);
 }
-// Add logic for sliders, carousel, and language switching
+setInterval(createSnow, 300);
+</script>
+</body>
+</html>  
