@@ -11,8 +11,8 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            user-select: none;
         }
-
         body {
             background: #0a0a1a;
             display: flex;
@@ -20,9 +20,8 @@
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
+            margin: 0;
         }
-
-        /* === APP CONTAINER (Windows 11 uslubi) === */
         #app {
             width: 100%;
             max-width: 430px;
@@ -31,16 +30,15 @@
             background: rgba(30, 30, 60, 0.6);
             backdrop-filter: blur(40px);
             -webkit-backdrop-filter: blur(40px);
-            border-radius: 0px;
+            border-radius: 0;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             flex-direction: column;
+            transition: background 0.8s ease;
         }
-
-        /* Windows 11 orqa fon effekti */
         #app::before {
             content: '';
             position: absolute;
@@ -54,8 +52,11 @@
             z-index: 0;
             pointer-events: none;
         }
+        .season-winter #app::before { background: radial-gradient(circle at 30% 40%, #1a2a6c, #0a0a1a 70%); }
+        .season-spring #app::before { background: radial-gradient(circle at 30% 40%, #2b5a4a, #1a2a2a 70%); }
+        .season-summer #app::before { background: radial-gradient(circle at 30% 40%, #6a4a1a, #2a1a0a 70%); }
+        .season-autumn #app::before { background: radial-gradient(circle at 30% 40%, #6a2a1a, #2a1a0a 70%); }
 
-        /* === QOR YOG'ISH === */
         #snow-canvas {
             position: absolute;
             top: 0;
@@ -66,7 +67,7 @@
             z-index: 1;
         }
 
-        /* === SPLASH SCREEN === */
+        /* SPLASH */
         #splash {
             position: absolute;
             inset: 0;
@@ -142,7 +143,7 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* === REKLAMA MODAL === */
+        /* REKLAMA */
         #ad-modal {
             position: absolute;
             inset: 0;
@@ -153,9 +154,7 @@
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
         }
-        #ad-modal.active {
-            display: flex;
-        }
+        #ad-modal.active { display: flex; }
         .ad-card {
             width: 90%;
             max-width: 350px;
@@ -189,11 +188,7 @@
             flex-direction: column;
             gap: 5px;
         }
-        .ad-slide small {
-            font-size: 0.8rem;
-            font-weight: 300;
-            opacity: 0.8;
-        }
+        .ad-slide small { font-size: 0.8rem; font-weight: 300; opacity: 0.8; }
         .ad-dots {
             display: flex;
             justify-content: center;
@@ -208,10 +203,7 @@
             transition: 0.3s;
             cursor: pointer;
         }
-        .ad-dot.active {
-            background: #7a5cff;
-            width: 24px;
-        }
+        .ad-dot.active { background: #7a5cff; width: 24px; }
         .ad-skip {
             background: rgba(255, 255, 255, 0.08);
             border: none;
@@ -223,16 +215,14 @@
             transition: 0.3s;
             font-weight: 500;
         }
-        .ad-skip:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
+        .ad-skip:hover { background: rgba(255, 255, 255, 0.2); }
         .ad-timer {
             font-size: 0.8rem;
             color: rgba(255, 255, 255, 0.4);
             margin-top: 5px;
         }
 
-        /* === ASOSIY MENYU (HEADER) === */
+        /* ASOSIY UI */
         #main-ui {
             display: none;
             flex-direction: column;
@@ -244,27 +234,18 @@
             scrollbar-width: thin;
             scrollbar-color: rgba(255,255,255,0.1) transparent;
         }
-        #main-ui.active {
-            display: flex;
-        }
-        #main-ui::-webkit-scrollbar {
-            width: 3px;
-        }
-        #main-ui::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-        }
+        #main-ui.active { display: flex; }
+        #main-ui::-webkit-scrollbar { width: 3px; }
+        #main-ui::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
 
         .app-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             padding-top: 10px;
+            flex-wrap: wrap;
         }
-        .header-left {
-            display: flex;
-            flex-direction: column;
-        }
+        .header-left { display: flex; flex-direction: column; }
         .app-title {
             font-size: 1.6rem;
             font-weight: 700;
@@ -274,18 +255,20 @@
             -webkit-text-fill-color: transparent;
         }
         .app-title small {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             background: none;
             -webkit-text-fill-color: rgba(255,255,255,0.4);
             font-weight: 400;
+            margin-left: 6px;
         }
         .datetime {
             color: rgba(255, 255, 255, 0.7);
-            font-size: 0.8rem;
-            margin-top: 4px;
+            font-size: 0.75rem;
+            margin-top: 2px;
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
+            align-items: center;
         }
         .weather {
             color: rgba(255, 255, 255, 0.5);
@@ -297,7 +280,8 @@
         }
         .header-right {
             display: flex;
-            gap: 8px;
+            gap: 4px;
+            flex-wrap: wrap;
         }
         .season-btn {
             background: rgba(255, 255, 255, 0.05);
@@ -320,12 +304,11 @@
             box-shadow: 0 0 20px rgba(122, 92, 255, 0.2);
         }
 
-        /* === MENYU GRID === */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-top: 20px;
+            gap: 10px;
+            margin-top: 16px;
             padding-bottom: 10px;
         }
         .menu-item {
@@ -333,33 +316,29 @@
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 16px;
-            padding: 14px 6px;
+            padding: 12px 4px;
             text-align: center;
             color: #fff;
-            transition: 0.2s ease;
+            transition: 0.15s ease;
             cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 2px;
         }
         .menu-item:active {
-            transform: scale(0.94);
+            transform: scale(0.93);
             background: rgba(255, 255, 255, 0.08);
         }
-        .menu-item .icon {
-            font-size: 1.8rem;
-            line-height: 1.2;
-        }
+        .menu-item .icon { font-size: 1.7rem; line-height: 1.2; }
         .menu-item .label {
-            font-size: 0.6rem;
-            opacity: 0.8;
+            font-size: 0.55rem;
+            opacity: 0.85;
             line-height: 1.2;
             max-width: 100%;
             word-break: break-word;
         }
 
-        /* === PASTKI NAVIGATSIYA === */
         .bottom-nav {
             position: absolute;
             bottom: 0;
@@ -372,7 +351,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
             justify-content: space-around;
-            padding: 8px 0 16px;
+            padding: 6px 0 14px;
         }
         .nav-btn {
             background: none;
@@ -382,23 +361,17 @@
             flex-direction: column;
             align-items: center;
             font-size: 0.6rem;
-            gap: 2px;
+            gap: 0px;
             cursor: pointer;
             transition: 0.3s;
-            padding: 4px 16px;
+            padding: 4px 12px;
             border-radius: 30px;
         }
-        .nav-btn .nav-icon {
-            font-size: 1.5rem;
-        }
-        .nav-btn.active {
-            color: #fff;
-        }
-        .nav-btn.active .nav-icon {
-            text-shadow: 0 0 20px rgba(122, 92, 255, 0.5);
-        }
+        .nav-btn .nav-icon { font-size: 1.4rem; }
+        .nav-btn.active { color: #fff; }
+        .nav-btn.active .nav-icon { text-shadow: 0 0 20px rgba(122, 92, 255, 0.5); }
 
-        /* === MODAL (PREMIUM, SOZLAMALAR, FIKR) === */
+        /* MODALLAR */
         .modal-overlay {
             position: absolute;
             inset: 0;
@@ -410,9 +383,7 @@
             backdrop-filter: blur(12px);
             padding: 20px;
         }
-        .modal-overlay.active {
-            display: flex;
-        }
+        .modal-overlay.active { display: flex; }
         .modal-box {
             background: rgba(20, 20, 50, 0.95);
             border-radius: 32px;
@@ -432,11 +403,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .modal-box p {
-            opacity: 0.7;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
+        .modal-box p { opacity: 0.7; font-size: 0.9rem; line-height: 1.5; }
         .modal-close {
             float: right;
             background: rgba(255, 255, 255, 0.05);
@@ -449,46 +416,35 @@
             cursor: pointer;
             transition: 0.3s;
         }
-        .modal-close:hover {
-            background: rgba(255, 0, 0, 0.2);
-        }
+        .modal-close:hover { background: rgba(255, 0, 0, 0.2); }
         .pay-options {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0;
+            gap: 8px;
+            margin: 16px 0;
         }
         .pay-btn {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 10px 16px;
+            padding: 10px 14px;
             border-radius: 40px;
             color: #fff;
             font-weight: 500;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             cursor: pointer;
             transition: 0.3s;
             flex: 1 0 auto;
         }
-        .pay-btn:hover {
-            background: rgba(122, 92, 255, 0.3);
-            border-color: #7a5cff;
-        }
+        .pay-btn:hover { background: rgba(122, 92, 255, 0.3); border-color: #7a5cff; }
         .stars {
             display: flex;
             gap: 8px;
             font-size: 2rem;
-            margin: 16px 0;
+            margin: 12px 0;
             cursor: pointer;
         }
-        .stars span {
-            transition: 0.2s;
-            color: rgba(255, 255, 255, 0.2);
-        }
-        .stars span.active {
-            color: #ffc107;
-            text-shadow: 0 0 20px #ffc107;
-        }
+        .stars span { transition: 0.2s; color: rgba(255,255,255,0.2); }
+        .stars span.active { color: #ffc107; text-shadow: 0 0 20px #ffc107; }
         .input-field {
             width: 100%;
             padding: 12px 16px;
@@ -500,14 +456,12 @@
             margin-top: 10px;
             outline: none;
         }
-        .input-field:focus {
-            border-color: #7a5cff;
-        }
+        .input-field:focus { border-color: #7a5cff; }
         .setting-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
+            padding: 10px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
         .setting-row select {
@@ -517,6 +471,7 @@
             padding: 6px 12px;
             border-radius: 30px;
             outline: none;
+            font-size: 0.8rem;
         }
         .toggle {
             width: 44px;
@@ -526,10 +481,9 @@
             position: relative;
             cursor: pointer;
             transition: 0.3s;
+            flex-shrink: 0;
         }
-        .toggle.active {
-            background: #7a5cff;
-        }
+        .toggle.active { background: #7a5cff; }
         .toggle::after {
             content: '';
             position: absolute;
@@ -541,51 +495,26 @@
             background: #fff;
             transition: 0.3s;
         }
-        .toggle.active::after {
-            left: 22px;
-        }
+        .toggle.active::after { left: 22px; }
 
-        /* === RESPONSIVE === */
         @media (max-width: 430px) {
-            #app {
-                max-height: 100vh;
-                border-radius: 0;
-            }
-            .menu-grid {
-                gap: 8px;
-            }
-            .menu-item .icon {
-                font-size: 1.5rem;
-            }
+            #app { max-height: 100vh; border-radius: 0; }
+            .menu-grid { gap: 6px; }
+            .menu-item .icon { font-size: 1.4rem; }
+            .menu-item .label { font-size: 0.5rem; }
         }
-
-        /* === SCROLLBAR === */
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-        }
-
-        /* Fasl dinamik ranglari */
-        .season-winter { background: radial-gradient(circle at 30% 40%, #1a2a6c, #0a0a1a 70%) !important; }
-        .season-spring { background: radial-gradient(circle at 30% 40%, #2b5a4a, #1a2a2a 70%) !important; }
-        .season-summer { background: radial-gradient(circle at 30% 40%, #6a4a1a, #2a1a0a 70%) !important; }
-        .season-autumn { background: radial-gradient(circle at 30% 40%, #6a2a1a, #2a1a0a 70%) !important; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
     </style>
 </head>
 <body>
 
-<div id="app">
+<div id="app" class="season-winter">
 
-    <!-- QOR CANVAS -->
     <canvas id="snow-canvas"></canvas>
 
-    <!-- SPLASH SCREEN -->
+    <!-- SPLASH -->
     <div id="splash">
         <div class="splash-logo">IKROMJON <span>AI</span></div>
         <div class="splash-sub">Sun'iy Intellekt</div>
@@ -596,7 +525,7 @@
         <div class="splash-phone">📞 +99887 770-71-02</div>
     </div>
 
-    <!-- REKLAMA MODAL -->
+    <!-- REKLAMA -->
     <div id="ad-modal">
         <div class="ad-card">
             <div class="ad-carousel" id="ad-carousel">
@@ -612,12 +541,11 @@
         </div>
     </div>
 
-    <!-- ASOSIY INTERFEYS -->
+    <!-- ASOSIY UI -->
     <div id="main-ui">
-        <!-- Header -->
         <div class="app-header">
             <div class="header-left">
-                <div class="app-title">IKROMJON AI <small>v2.0</small></div>
+                <div class="app-title">IKROMJON AI <small id="music-status">🎵</small></div>
                 <div class="datetime">
                     <span id="date-time">2026-08-13 14:30</span>
                     <span class="weather" id="weather-badge">🌤️ Toshkent 26°C</span>
@@ -631,10 +559,8 @@
             </div>
         </div>
 
-        <!-- Grid menyu -->
         <div class="menu-grid" id="menu-grid"></div>
 
-        <!-- Bottom Nav -->
         <div class="bottom-nav">
             <button class="nav-btn active" data-tab="home"><span class="nav-icon">🏠</span>Bosh</button>
             <button class="nav-btn" data-tab="premium" id="open-premium"><span class="nav-icon">⭐</span>Premium</button>
@@ -643,7 +569,7 @@
         </div>
     </div>
 
-    <!-- PREMIUM MODAL -->
+    <!-- PREMIUM -->
     <div class="modal-overlay" id="premium-modal">
         <div class="modal-box">
             <button class="modal-close" id="close-premium">✕</button>
@@ -663,7 +589,7 @@
         </div>
     </div>
 
-    <!-- SOZLAMALAR MODAL -->
+    <!-- SOZLAMALAR -->
     <div class="modal-overlay" id="settings-modal">
         <div class="modal-box">
             <button class="modal-close" id="close-settings">✕</button>
@@ -677,7 +603,7 @@
         </div>
     </div>
 
-    <!-- FIKR MODAL -->
+    <!-- FIKR -->
     <div class="modal-overlay" id="feedback-modal">
         <div class="modal-box">
             <button class="modal-close" id="close-feedback">✕</button>
@@ -697,13 +623,13 @@
     (function() {
         'use strict';
 
-        // ========== 1. SPLASH ==========
+        // ===================== SPLASH =====================
         const splash = document.getElementById('splash');
         const progressBar = document.getElementById('progress-bar');
         const progressText = document.getElementById('progress-text');
         let progress = 0;
         const splashInterval = setInterval(() => {
-            progress += Math.floor(Math.random() * 10) + 1;
+            progress += Math.floor(Math.random() * 8) + 3;
             if (progress > 100) progress = 100;
             progressBar.style.width = progress + '%';
             progressText.textContent = progress + '%';
@@ -717,11 +643,12 @@
                     initSnow();
                     updateDateTime();
                     setInterval(updateDateTime, 1000);
-                }, 400);
+                    startLoFiMusic();
+                }, 300);
             }
-        }, 50);
+        }, 40);
 
-        // ========== 2. REKLAMA ==========
+        // ===================== REKLAMA =====================
         let adIndex = 0;
         const adSlides = document.querySelectorAll('.ad-slide');
         const dotsContainer = document.getElementById('ad-dots');
@@ -738,7 +665,7 @@
         function showAdSlide(index) {
             const slides = document.querySelectorAll('.ad-slide');
             const dots = document.querySelectorAll('.ad-dot');
-            slides.forEach((s, i) => { s.style.transform = `translateX(-${index * 100}%)`; });
+            slides.forEach((s, i) => { s.style.transform = 'translateX(-' + (index * 100) + '%)'; });
             dots.forEach((d, i) => d.classList.toggle('active', i === index));
         }
 
@@ -759,7 +686,6 @@
                     document.getElementById('ad-modal').classList.remove('active');
                 }
             }, 1000);
-            // Avtomatik karusel
             setInterval(nextAdSlide, 3000);
         }
 
@@ -768,38 +694,37 @@
             clearInterval(adTimerInterval);
         });
 
-        // ========== 3. QOR ==========
+        // ===================== QOR =====================
         function initSnow() {
             const canvas = document.getElementById('snow-canvas');
             const ctx = canvas.getContext('2d');
-            canvas.width = canvas.parentElement.offsetWidth;
-            canvas.height = canvas.parentElement.offsetHeight;
+            const app = document.getElementById('app');
+            canvas.width = app.offsetWidth || 430;
+            canvas.height = app.offsetHeight || 932;
 
             const flakes = [];
-            const count = 60;
-
+            const count = 70;
             for (let i = 0; i < count; i++) {
                 flakes.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
                     r: Math.random() * 3 + 1,
-                    d: Math.random() * 2 + 0.5,
-                    speed: Math.random() * 1 + 0.5,
-                    wind: Math.random() * 0.5 - 0.25
+                    speed: Math.random() * 1.2 + 0.3,
+                    wind: Math.random() * 0.6 - 0.3
                 });
             }
 
             function drawSnow() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-                ctx.shadowColor = 'rgba(255,255,255,0.2)';
-                ctx.shadowBlur = 8;
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+                ctx.shadowColor = 'rgba(255,255,255,0.15)';
+                ctx.shadowBlur = 6;
                 flakes.forEach(f => {
                     ctx.beginPath();
                     ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
                     ctx.fill();
                     f.y += f.speed;
-                    f.x += f.wind + Math.sin(f.y / 30) * 0.1;
+                    f.x += f.wind + Math.sin(f.y / 40) * 0.15;
                     if (f.y > canvas.height) { f.y = -5; f.x = Math.random() * canvas.width; }
                     if (f.x > canvas.width) f.x = 0;
                     if (f.x < 0) f.x = canvas.width;
@@ -809,19 +734,19 @@
             drawSnow();
 
             window.addEventListener('resize', () => {
-                canvas.width = canvas.parentElement.offsetWidth;
-                canvas.height = canvas.parentElement.offsetHeight;
+                canvas.width = app.offsetWidth || 430;
+                canvas.height = app.offsetHeight || 932;
             });
         }
 
-        // ========== 4. VAQT & OB-HAVO ==========
+        // ===================== VAQT & OB-HAVO =====================
         function updateDateTime() {
             const now = new Date();
-            const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
-            document.getElementById('date-time').textContent = now.toLocaleString('uz-UZ', options);
+            const opts = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+            document.getElementById('date-time').textContent = now.toLocaleString('uz-UZ', opts);
         }
 
-        // ========== 5. FASL TUGMALARI ==========
+        // ===================== FASL TUGMALARI =====================
         document.querySelectorAll('.season-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.season-btn').forEach(b => b.classList.remove('active'));
@@ -833,7 +758,7 @@
             });
         });
 
-        // ========== 6. MENYU (33 ta funksiya) ==========
+        // ===================== MENYU (33 ta) =====================
         const menuItems = [
             { icon: '📺', label: 'TV' },
             { icon: '📻', label: 'Radio' },
@@ -864,7 +789,10 @@
             { icon: '🧸', label: 'Bolalar o\'yinlari' },
             { icon: '👶', label: 'Bolalar maslahat' },
             { icon: '🤲', label: 'Mehr fondi' },
-            { icon: 'ℹ️', label: 'Ilova haqida' }
+            { icon: 'ℹ️', label: 'Ilova haqida' },
+            { icon: '📱', label: 'Video qo\'shish' },
+            { icon: '🌍', label: 'Yandex Translate' },
+            { icon: '🎯', label: 'Mini o\'yinlar' }
         ];
 
         const grid = document.getElementById('menu-grid');
@@ -878,42 +806,36 @@
             grid.appendChild(div);
         });
 
-        // ========== 7. MODAL BOSHQARISH ==========
+        // ===================== MODALLAR =====================
         function toggleModal(id, show) {
             const el = document.getElementById(id);
-            if (show === undefined) {
-                el.classList.toggle('active');
-            } else if (show) {
-                el.classList.add('active');
-            } else {
-                el.classList.remove('active');
-            }
+            if (show === undefined) el.classList.toggle('active');
+            else if (show) el.classList.add('active');
+            else el.classList.remove('active');
         }
 
         document.getElementById('open-premium').addEventListener('click', () => toggleModal('premium-modal', true));
         document.getElementById('close-premium').addEventListener('click', () => toggleModal('premium-modal', false));
-
         document.getElementById('open-settings').addEventListener('click', () => toggleModal('settings-modal', true));
         document.getElementById('close-settings').addEventListener('click', () => toggleModal('settings-modal', false));
-
         document.getElementById('open-feedback').addEventListener('click', () => toggleModal('feedback-modal', true));
         document.getElementById('close-feedback').addEventListener('click', () => toggleModal('feedback-modal', false));
 
-        // Modal orqasini bosganda yopish
         document.querySelectorAll('.modal-overlay').forEach(m => {
             m.addEventListener('click', function(e) {
                 if (e.target === this) this.classList.remove('active');
             });
         });
 
-        // ========== 8. YULDUZCHA REYTING ==========
+        // ===================== YULDUZCHA =====================
         let selectedStar = 0;
         document.querySelectorAll('#star-rating span').forEach(star => {
             star.addEventListener('click', function() {
                 selectedStar = parseInt(this.dataset.star);
                 document.querySelectorAll('#star-rating span').forEach(s => {
-                    s.classList.toggle('active', parseInt(s.dataset.star) <= selectedStar);
-                    s.textContent = parseInt(s.dataset.star) <= selectedStar ? '★' : '☆';
+                    const val = parseInt(s.dataset.star);
+                    s.classList.toggle('active', val <= selectedStar);
+                    s.textContent = val <= selectedStar ? '★' : '☆';
                 });
             });
             star.addEventListener('mouseenter', function() {
@@ -931,86 +853,119 @@
             });
         });
 
-        // ========== 9. TOGGLE (ovoz va qulf) ==========
+        // ===================== TOGGLE =====================
         document.querySelectorAll('.toggle').forEach(t => {
             t.addEventListener('click', function() {
                 this.classList.toggle('active');
+                if (this.id === 'sound-toggle') {
+                    const status = document.getElementById('music-status');
+                    if (this.classList.contains('active')) {
+                        status.textContent = '🎵';
+                        resumeMusic();
+                    } else {
+                        status.textContent = '🔇';
+                        pauseMusic();
+                    }
+                }
             });
         });
 
-        // ========== 10. NAVIGATSIYA ==========
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                if (this.dataset.tab === 'premium') toggleModal('premium-modal', true);
-                if (this.dataset.tab === 'settings') toggleModal('settings-modal', true);
-                if (this.dataset.tab === 'feedback') toggleModal('feedback-modal', true);
-            });
-        });
-
-        // ========== 11. MUSIQA (Lo-fi) - foydalanuvchi interfeysi orqali ishga tushadi ==========
-        // Brauzer avtomatik o'ynatishni bloklaydi, shuning uchun foydalanuvchi bosganda ishga tushiramiz.
-        let audioCtx;
+        // ===================== MUSIQA (Lo-Fi) =====================
+        let audioCtx = null;
+        let musicNodes = [];
+        let musicInterval = null;
         let isMusicPlaying = false;
 
+        function playNote(freq, duration, gain) {
+            if (!audioCtx) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const g = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = freq;
+                g.gain.value = gain || 0.08;
+                osc.connect(g);
+                g.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+                musicNodes.push(osc);
+            } catch(e) {}
+        }
+
+        function loFiLoop() {
+            if (!audioCtx || audioCtx.state === 'suspended') return;
+            const notes = [
+                [440, 0.3, 0.06], [554, 0.3, 0.05], [659, 0.4, 0.05],
+                [523, 0.3, 0.06], [587, 0.3, 0.05], [659, 0.4, 0.05],
+                [440, 0.5, 0.07], [523, 0.4, 0.06], [587, 0.3, 0.05]
+            ];
+            let delay = 0;
+            notes.forEach(([freq, dur, gain]) => {
+                setTimeout(() => playNote(freq, dur, gain), delay * 1000);
+                delay += dur + 0.1;
+            });
+        }
+
         function startLoFiMusic() {
-            if (isMusicPlaying) return;
+            if (audioCtx) return;
             try {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                // Oddiy lo-fi ohang (sintetik)
-                const oscillator = audioCtx.createOscillator();
-                const gainNode = audioCtx.createGain();
-                oscillator.type = 'sine';
-                oscillator.frequency.value = 440;
-                gainNode.gain.value = 0.15;
-                oscillator.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-                oscillator.start();
-                oscillator.stop(audioCtx.currentTime + 0.5);
-                // Qisqa ohang
-                setTimeout(() => {
-                    const osc2 = audioCtx.createOscillator();
-                    const g2 = audioCtx.createGain();
-                    osc2.type = 'sine';
-                    osc2.frequency.value = 523;
-                    g2.gain.value = 0.1;
-                    osc2.connect(g2);
-                    g2.connect(audioCtx.destination);
-                    osc2.start();
-                    osc2.stop(audioCtx.currentTime + 0.4);
-                }, 200);
                 isMusicPlaying = true;
-                document.querySelector('.app-title small').textContent = '🎵 Musiqa yoqilgan';
+                document.getElementById('music-status').textContent = '🎵';
+                document.getElementById('sound-toggle').classList.add('active');
+                // birinchi marta darhol ijro
+                loFiLoop();
+                musicInterval = setInterval(loFiLoop, 5000);
             } catch(e) {
-                console.log('Audio boshlashda xatolik');
+                console.log('AudioContext xatosi:', e);
             }
         }
 
-        // Har qanday interfeys bosilganda musiqani ishga tushirish (agar yoqilgan bo'lsa)
+        function resumeMusic() {
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            if (!musicInterval) {
+                musicInterval = setInterval(loFiLoop, 5000);
+                loFiLoop();
+            }
+            isMusicPlaying = true;
+            document.getElementById('music-status').textContent = '🎵';
+        }
+
+        function pauseMusic() {
+            if (audioCtx && audioCtx.state === 'running') {
+                audioCtx.suspend();
+            }
+            if (musicInterval) {
+                clearInterval(musicInterval);
+                musicInterval = null;
+            }
+            isMusicPlaying = false;
+            document.getElementById('music-status').textContent = '🔇';
+        }
+
+        // Avtomatik musiqa uchun birinchi bosish
         document.addEventListener('click', function firstClick() {
-            if (!isMusicPlaying) {
+            if (!audioCtx) {
                 startLoFiMusic();
             }
             document.removeEventListener('click', firstClick);
         }, { once: true });
 
-        // Sound toggle orqali boshqarish (faqat holat)
-        document.getElementById('sound-toggle').addEventListener('click', function() {
-            if (this.classList.contains('active')) {
-                if (audioCtx) {
-                    audioCtx.resume();
-                }
-                document.querySelector('.app-title small').textContent = '🎵 Musiqa yoqilgan';
-            } else {
-                if (audioCtx) {
-                    audioCtx.suspend();
-                }
-                document.querySelector('.app-title small').textContent = '🔇 Musiqa o\'chirilgan';
-            }
+        // ===================== NAVIGATSIYA =====================
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const tab = this.dataset.tab;
+                if (tab === 'premium') toggleModal('premium-modal', true);
+                else if (tab === 'settings') toggleModal('settings-modal', true);
+                else if (tab === 'feedback') toggleModal('feedback-modal', true);
+            });
         });
 
-        console.log('IKROMJON AI v2.0 to\'liq ishga tushdi!');
+        console.log('IKROMJON AI v2.0 to‘liq ishga tushdi!');
     })();
 </script>
 
