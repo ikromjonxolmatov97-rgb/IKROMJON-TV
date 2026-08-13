@@ -1,51 +1,270 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="uz">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ikromjon AI</title>
-<style>
-body { background: #0d0d1a; color: white; font-family: sans-serif; margin: 0; overflow-x: hidden; }
-header { text-align: center; padding: 20px; position: relative; }
-#snow-container { position: fixed; top: 0; width: 100%; height: 100%; pointer-events: none; }
-.nav-8 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 20px; }
-.nav-btn { background: #1c1c3c; padding: 15px; border-radius: 10px; text-align: center; cursor: pointer; }
-.carousel { display: flex; overflow-x: scroll; gap: 20px; padding: 20px; }
-.ad-item { min-width: 150px; height: 100px; background: #2a2a4a; display: flex; align-items: center; justify-content: center; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ikromjon AI</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background: #0d0d1a; color: white; overflow-x: hidden; }
+        
+        /* Qor effekti */
+        #snow-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
+        
+        /* Header */
+        header { text-align: center; padding: 15px; position: relative; background: rgba(13, 13, 26, 0.95); border-bottom: 1px solid #1c1c3c; }
+        h1 { font-size: 22px; margin-bottom: 8px; background: linear-gradient(45deg, #00dbde, #fc00ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .music-box button { background: #1c1c3c; color: white; border: 1px solid #4a4ae2; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 13px; }
+
+        /* Sahifalar uchun umumiy qism */
+        .page { display: none; padding: 15px; padding-bottom: 80px; }
+        .page.active { display: block; }
+
+        /* Asosiy Video */
+        .video-container { width: 100%; max-width: 400px; margin: 0 auto 15px auto; border-radius: 12px; overflow: hidden; border: 2px solid #2a2a4a; }
+        video { width: 100%; display: block; }
+
+        /* 8 ta Navigatsiya tugmalari gridi */
+        .nav-8 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 10px 15px; }
+        .nav-btn { background: #1c1c3c; padding: 12px 5px; border-radius: 10px; text-align: center; cursor: pointer; font-size: 12px; border: 1px solid #2a2a4a; transition: 0.3s; }
+        .nav-btn:hover { background: #2a2a6a; }
+
+        /* Reklama karuseli */
+        .carousel-title { padding: 5px 15px; font-size: 14px; color: #a0a0c0; }
+        .carousel { display: flex; overflow-x: auto; gap: 12px; padding: 10px 15px; scroll-snap-type: x mandatory; }
+        .carousel::-webkit-scrollbar { display: none; }
+        .ad-item { min-width: 120px; height: 75px; background: #1c1c3c; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13px; border: 1px solid #3a3a6a; flex-shrink: 0; }
+
+        /* Chat oynasi dizayni */
+        .chat-box { background: #13132b; border-radius: 10px; height: 350px; border: 1px solid #2a2a4a; display: flex; flex-direction: column; justify-content: space-between; padding: 10px; }
+        .chat-messages { overflow-y: auto; flex-grow: 1; padding: 5px; font-size: 14px; }
+        .message { background: #1c1c3c; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; width: fit-content; max-width: 80%; }
+        .message.ai { background: #2a2a5a; }
+        .chat-input-area { display: flex; gap: 8px; margin-top: 10px; }
+        .chat-input-area input { flex-grow: 1; background: #0d0d1a; border: 1px solid #3a3a6a; padding: 10px; border-radius: 8px; color: white; outline: none; }
+        .chat-input-area button { background: #4a4ae2; color: white; border: none; padding: 0 15px; border-radius: 8px; cursor: pointer; }
+
+        /* Til va Sozlamalar ro'yxati */
+        .list-group { display: flex; flex-direction: column; gap: 10px; }
+        .list-item { background: #1c1c3c; padding: 12px 15px; border-radius: 8px; border: 1px solid #2a2a4a; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+    </style>
 </head>
 <body>
-<header>
-<h1>Ikromjon AI</h1>
-<div id="snow-container"></div>
-<audio id="bg-music" src="background-music.mp3"></audio>
-<button onclick="document.getElementById('bg-music').play()">🎵 Musiqani yoqish</button>
-</header>
-​<div class="nav-8">
-<div class="nav-btn">Bosh</div><div class="nav-btn">Chat</div>
-<div class="nav-btn">Kod</div><div class="nav-btn">Til</div>
-<div class="nav-btn">Yangilik</div><div class="nav-btn">Profil</div>
-<div class="nav-btn">Premium</div><div class="nav-btn">Sozlama</div>
-</div>
-​<div class="carousel" id="ad-carousel">
-<div class="ad-item">Coca-Cola</div><div class="ad-item">Fanta</div>
-<div class="ad-item">Nike</div><div class="ad-item">Adidas</div>
-<div class="ad-item">Zara</div><div class="ad-item">H&M</div>
-<div class="ad-item">Samsung</div><div class="ad-item">Apple</div>
-<div class="ad-item">Beeline</div><div class="ad-item">XM</div>
-</div>
-​<script>
-function createSnow() {
-let snow = document.createElement('div');
-snow.innerHTML = '❄';
-snow.style.position = 'absolute';
-snow.style.left = Math.random() * 100 + 'vw';
-snow.style.top = '-10px';
-snow.style.fontSize = Math.random() * 20 + 'px';
-document.getElementById('snow-container').appendChild(snow);
-setTimeout(() => snow.remove(), 5000);
-}
-setInterval(createSnow, 300);
-</script>
+
+    <div id="snow-container"></div>
+
+    <header>
+        <h1>Ikromjon AI</h1>
+        <div class="music-box">
+            <audio id="bg-music" src="background-music.mp3" loop></audio>
+            <button onclick="toggleMusic()">🎵 Sokin musiqa</button>
+        </div>
+    </header>
+
+    <!-- 1. BOSH SAHIFA -->
+    <div id="page-bosh" class="page active">
+        <div class="video-container">
+            <video controls autoplay muted>
+                <source src="1000009038.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="nav-8">
+            <div class="nav-btn" onclick="switchPage('bosh')">🏠 Bosh</div>
+            <div class="nav-btn" onclick="switchPage('chat')">💬 Chat</div>
+            <div class="nav-btn" onclick="switchPage('kod')">💻 Kod</div>
+            <div class="nav-btn" onclick="switchPage('til')">🌍 Til</div>
+            <div class="nav-btn" onclick="switchPage('yangilik')">📰 Yangilik</div>
+            <div class="nav-btn" onclick="switchPage('profil')">👤 Profil</div>
+            <div class="nav-btn" onclick="switchPage('premium')">⭐ Premium</div>
+            <div class="nav-btn" onclick="switchPage('sozlama')">⚙️ Sozlama</div>
+        </div>
+
+        <div class="carousel-title">Hamkorlar va Brendlar</div>
+        <div class="carousel">
+            <div class="ad-item">Coca-Cola</div>
+            <div class="ad-item">Fanta</div>
+            <div class="ad-item">Nike</div>
+            <div class="ad-item">Adidas</div>
+            <div class="ad-item">Zara</div>
+            <div class="ad-item">H&M</div>
+            <div class="ad-item">Samsung</div>
+            <div class="ad-item">Apple</div>
+            <div class="ad-item">Beeline</div>
+            <div class="ad-item">XM App</div>
+        </div>
+    </div>
+
+    <!-- 2. AI CHAT SAHifasi -->
+    <div id="page-chat" class="page">
+        <h2>Ikromjon AI Chat</h2>
+        <br>
+        <div class="chat-box">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai">Assalomu alaykum! Men Ikromjon AI yordamchingizman. Qanday yordam bera olaman?</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="userInput" placeholder="Xabar yozing...">
+                <button onclick="sendMessage()">Yuborish</button>
+            </div>
+        </div>
+        <br>
+        <button class="nav-btn" style="width: 100%;" onclick="switchPage('bosh')">Orqaga qaytish</button>
+    </div>
+
+    <!-- 3. KOD YARATISH -->
+    <div id="page-kod" class="page">
+        <h2>Dasturlash va Kodlar</h2>
+        <p style="color: #a0a0c0; font-size: 13px; margin: 10px 0;">Python, C++, Java, Flutter va Web loyihalar uchun yordamchi bo'lim.</p>
+        <textarea style="width: 100%; height: 200px; background: #13132b; color: #00dbde; border: 1px solid #2a2a4a; border-radius: 8px; padding: 10px; font-family: monospace;" placeholder="// Bu yerda kodlar yoziladi..."></textarea>
+        <br><br>
+        <button class="nav-btn" style="width: 100%;" onclick="switchPage('bosh')">Orqaga qaytish</button>
+    </div>
+
+    <!-- 4. TIL SEKSIYASI (O'rta Osiyo va Xalqaro) -->
+    <div id="page-til" class="page">
+        <h2>Tilni tanlang</h2>
+        <br>
+        <div class="list-group">
+            <div class="list-item" onclick="alert('O\'zbek tili tanlandi')">🇺🇿 O'zbek tili</div>
+            <div class="list-item" onclick="alert('Qozoq tili tanlandi')">🇰🇿 Qazaq tili</div>
+            <div class="list-item" onclick="alert('Qirg\'iz tili tanlandi')">🇰🇬 Кыргыз тили</div>
+            <div class="list-item" onclick="alert('Tojik tili tanlandi')">🇹🇯 Тоҷикӣ</div>
+            <div class="list-item" onclick="alert('Turkman tili tanlandi')">🇹🇲 Türkmen dili</div>
+            <div class="list-item" onclick="alert('Rus tili tanlandi')">🇷🇺 Русский</div>
+            <div class="list-item" onclick="alert('Ingliz tili tanlandi')">🇬🇧 English</div>
+        </div>
+        <br>
+        <button class="nav-btn" style="width: 100%;" onclick="switchPage('bosh')">Orqaga qaytish</button>
+    </div>
+
+    <!-- 5. YANGILIKLAR -->
+    <div id="page-yangilik" class="page">
+        <h2>So'nggi Yangiliklar</h2>
+        <br>
+        <div class="list-group">
+            <div class="list-item">Python dasturlash darslari yangilandi <span>10:30</span></div>
+            <div class="list-item">Ikromjon AI yangi versiyasi chiqdi <span>09:15</span></div>
+            <div class="list-item">Jonli efir vaqti e'lon qilindi <span>KECHA</span></div>
+        </div>
+        <br>
+        <button class="nav-btn" style="width: 100%;" onclick="switchPage('bosh')">Orqaga qaytish</button>
+    </div>
+
+    <!-- 6. PROFIL -->
+    <div id="page-profil" class="page">
+        <h2>Foydalanuvchi Profili</h2>
+        <br>
+        <div style="background: #1c1c3c; padding: 20px; border-radius: 10px; text-align: center;">
+            <h3>Xolmatov Ikromjon</h3>
+            <p style="color: #a0a0c0; font-size: 13px; margin-top: 5px;">Guruh: ITS 23_11 | Sirtqi ta'lim</p>
+            <p style="color: #00dbde; font-size: 13px; margin-top: 10px;">Status: Premium foydalanuvchi</p>
+        </div>
+        <br>
+        <button class="nav-btn" style="width: 100%;" onclick="switchPage('bosh')">Orqaga qaytish</button>
+    </div>
+
+    <!-- 7. PREMIUM -->
+    <div id="page-premium" class="page">
+        <h2>Ikromjon AI Premium</h2>
+        <br>
+        <div style="background: linear-gradient(135deg, #2a2a5a, #4a4ae2); padding: 20px; border-radius: 10px; text-align: center;">
+            <h3>Cheksiz Imkoniyatlar</h3>
+            <p style="font-size: 13px; margin-top: 10px;">Barcha sun'iy intellekt funksiyalari, tezkor serverlar va eksklyuziv darslar.</p>
+            <br>
+            <button class="nav-btn" style="background: gold; color: black; font-weight: bold; width: 100%; border: none;" onclick="alert('Premium faollashtirildi!')">Obuna bo'lish</button>
+        </div>
+        <br>
+        <button class="nav-btn" style="width: 100%;" onclick="switchPage('bosh')">Orqaga qaytish</button>
+    </div>
+
+    <!-- 8. SOZLAMALAR -->
+    <div id="page-sozlama" class="page">
+        <h2>Ilova Sozlamalari</h2>
+        <br>
+        <div class="list-group">
+            <div class="list-item">Qorong'i rejim (Dark Mode) <span>🟢 Yoqilgan</span></div>
+            <div class="list-item">Bildirishnomalar <span>🟢 Yoqilgan</span></div>
+            <div class="list-item">Tilni almashtirish <span>O'zbekcha</span></div>
+        </div>
+        <br>
+        <button class="nav-btn" style="width: 100%;" onclick="switchPage('bosh')">Orqaga qaytish</button>
+    </div>
+
+    <script>
+        // Sahifalararo o'tish funksiyasi
+        function switchPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-_' + pageId).classList.add('active'); // Fixed selector logic below
+        }
+        
+        // To'g'rilangan sahifa almashtirish funksiyasi
+        window.switchPage = function(name) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + name).classList.add('active');
+        }
+
+        // Musiqa pleyeri
+        function toggleMusic() {
+            let audio = document.getElementById("bg-music");
+            if (audio.paused) {
+                audio.play();
+                event.target.innerText = "🔇 Musiqani to'xtatish";
+            } else {
+                audio.pause();
+                event.target.innerText = "🎵 Sokin musiqa";
+            }
+        }
+
+        // Chat xabar yuborish
+        function sendMessage() {
+            let input = document.getElementById('userInput');
+            let messages = document.getElementById('chatMessages');
+            if(input.value.trim() === '') return;
+            
+            let userMsg = document.createElement('div');
+            userMsg.className = 'message';
+            userMsg.style.marginLeft = 'auto';
+            userMsg.style.background = '#4a4ae2';
+            userMsg.innerText = input.value;
+            messages.appendChild(userMsg);
+            
+            let query = input.value;
+            input.value = '';
+            
+            setTimeout(() => {
+                let aiMsg = document.createElement('div');
+                aiMsg.className = 'message ai';
+                aiMsg.innerText = "Tushunarli: '" + query + "'. Bu bo'yicha sizga qanday yordam bera olaman?";
+                messages.appendChild(aiMsg);
+                messages.scrollTop = messages.scrollHeight;
+            }, 600);
+        }
+
+        // Qor yog'ish effekti
+        function createSnow() {
+            let snow = document.createElement('div');
+            snow.innerHTML = '❄';
+            snow.style.position = 'absolute';
+            snow.style.left = Math.random() * 100 + 'vw';
+            snow.style.top = '-10px';
+            snow.style.fontSize = (Math.random() * 12 + 8) + 'px';
+            snow.style.opacity = Math.random();
+            document.getElementById('snow-container').appendChild(snow);
+            
+            let fallSpeed = Math.random() * 2 + 1.5;
+            let currentTop = -10;
+            
+            let fallInterval = setInterval(() => {
+                currentTop += fallSpeed;
+                snow.style.top = currentTop + 'px';
+                if (currentTop > window.innerHeight) {
+                    snow.remove();
+                    clearInterval(fallInterval);
+                }
+            }, 50);
+        }
+        setInterval(createSnow, 300);
+    </script>
 </body>
-</html>  
+</html>
