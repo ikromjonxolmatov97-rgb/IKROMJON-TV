@@ -1,97 +1,1019 @@
+```html
 <!DOCTYPE html>
-<html lang="uz" class="dark">
+<html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IKROMJON AI - Global Super Platforma</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IKROMJON AI</title>
     <style>
-        /* Futuristik AI Orqa Fon */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
         body {
-            background-color: #050508;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(147, 51, 234, 0.15) 0px, transparent 50%),
-                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 50px 50px, 50px 50px;
-            background-attachment: fixed;
-            color: #e5e7eb;
+            background: #0a0a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
         }
 
-        .glass {
-            background: rgba(17, 24, 39, 0.7) !important;
-            backdrop-filter: blur(12px);
+        /* === APP CONTAINER (Windows 11 uslubi) === */
+        #app {
+            width: 100%;
+            max-width: 430px;
+            height: 100vh;
+            max-height: 932px;
+            background: rgba(30, 30, 60, 0.6);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border-radius: 0px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Windows 11 orqa fon effekti */
+        #app::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 40%, #1a2a6c, #0a0a1a 70%);
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cGF0aCBkPSJNMjAgM2wxNyAxMC0xNyAxMC0xNy0xMHoiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=');
+            background-size: 200px 200px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* === QOR YOG'ISH === */
+        #snow-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* === SPLASH SCREEN === */
+        #splash {
+            position: absolute;
+            inset: 0;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(10, 10, 30, 0.95);
+            backdrop-filter: blur(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        #splash.hide {
+            opacity: 0;
+            transform: scale(1.05);
+            pointer-events: none;
+        }
+        .splash-logo {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00d2ff, #7a5cff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(0, 210, 255, 0.3);
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+        .splash-logo span {
+            font-size: 1.8rem;
+            background: none;
+            -webkit-text-fill-color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0 10px;
+            border-radius: 40px;
+        }
+        .splash-sub {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            margin-top: -5px;
+        }
+        .progress-wrap {
+            width: 220px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #00d2ff, #7a5cff);
+            border-radius: 10px;
+            transition: width 0.1s linear;
+        }
+        .progress-text {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            margin-top: 12px;
+            font-weight: 300;
+        }
+        .splash-phone {
+            position: absolute;
+            bottom: 40px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 20px;
+            border-radius: 40px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* === REKLAMA MODAL === */
+        #ad-modal {
+            position: absolute;
+            inset: 0;
+            z-index: 900;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+        }
+        #ad-modal.active {
+            display: flex;
+        }
+        .ad-card {
+            width: 90%;
+            max-width: 350px;
+            background: rgba(20, 20, 50, 0.9);
+            border-radius: 28px;
+            padding: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+        .ad-carousel {
+            display: flex;
+            overflow: hidden;
+            border-radius: 16px;
+            position: relative;
+            height: 140px;
+            background: #111;
+        }
+        .ad-slide {
+            min-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            transition: transform 0.5s ease;
+            background-size: cover;
+            background-position: center;
+            padding: 10px;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .ad-slide small {
+            font-size: 0.8rem;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+        .ad-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 15px 0 10px;
+        }
+        .ad-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .ad-dot.active {
+            background: #7a5cff;
+            width: 24px;
+        }
+        .ad-skip {
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: #fff;
+            padding: 8px 25px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+        .ad-skip:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .ad-timer {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 5px;
         }
 
-        @keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .animate-spin-slow { animation: spin-slow 4s linear infinite; }
+        /* === ASOSIY MENYU (HEADER) === */
+        #main-ui {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            z-index: 2;
+            padding: 10px 16px 80px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.1) transparent;
+        }
+        #main-ui.active {
+            display: flex;
+        }
+        #main-ui::-webkit-scrollbar {
+            width: 3px;
+        }
+        #main-ui::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-top: 10px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+        }
+        .app-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .app-title small {
+            font-size: 0.8rem;
+            background: none;
+            -webkit-text-fill-color: rgba(255,255,255,0.4);
+            font-weight: 400;
+        }
+        .datetime {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+            margin-top: 4px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .weather {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.7rem;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 2px 12px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .header-right {
+            display: flex;
+            gap: 8px;
+        }
+        .season-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #fff;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        .season-btn.active {
+            background: rgba(122, 92, 255, 0.4);
+            border-color: #7a5cff;
+            box-shadow: 0 0 20px rgba(122, 92, 255, 0.2);
+        }
+
+        /* === MENYU GRID === */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+            padding-bottom: 10px;
+        }
+        .menu-item {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 14px 6px;
+            text-align: center;
+            color: #fff;
+            transition: 0.2s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .menu-item:active {
+            transform: scale(0.94);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .menu-item .icon {
+            font-size: 1.8rem;
+            line-height: 1.2;
+        }
+        .menu-item .label {
+            font-size: 0.6rem;
+            opacity: 0.8;
+            line-height: 1.2;
+            max-width: 100%;
+            word-break: break-word;
+        }
+
+        /* === PASTKI NAVIGATSIYA === */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+            background: rgba(10, 10, 30, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0 16px;
+        }
+        .nav-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.6rem;
+            gap: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        .nav-btn .nav-icon {
+            font-size: 1.5rem;
+        }
+        .nav-btn.active {
+            color: #fff;
+        }
+        .nav-btn.active .nav-icon {
+            text-shadow: 0 0 20px rgba(122, 92, 255, 0.5);
+        }
+
+        /* === MODAL (PREMIUM, SOZLAMALAR, FIKR) === */
+        .modal-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 500;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            padding: 20px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-box {
+            background: rgba(20, 20, 50, 0.95);
+            border-radius: 32px;
+            padding: 28px 24px;
+            max-width: 380px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+            color: #fff;
+        }
+        .modal-box h2 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .modal-box p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .modal-close {
+            float: right;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .modal-close:hover {
+            background: rgba(255, 0, 0, 0.2);
+        }
+        .pay-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .pay-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 16px;
+            border-radius: 40px;
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.3s;
+            flex: 1 0 auto;
+        }
+        .pay-btn:hover {
+            background: rgba(122, 92, 255, 0.3);
+            border-color: #7a5cff;
+        }
+        .stars {
+            display: flex;
+            gap: 8px;
+            font-size: 2rem;
+            margin: 16px 0;
+            cursor: pointer;
+        }
+        .stars span {
+            transition: 0.2s;
+            color: rgba(255, 255, 255, 0.2);
+        }
+        .stars span.active {
+            color: #ffc107;
+            text-shadow: 0 0 20px #ffc107;
+        }
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            outline: none;
+        }
+        .input-field:focus {
+            border-color: #7a5cff;
+        }
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .setting-row select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 30px;
+            outline: none;
+        }
+        .toggle {
+            width: 44px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            position: relative;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .toggle.active {
+            background: #7a5cff;
+        }
+        .toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fff;
+            transition: 0.3s;
+        }
+        .toggle.active::after {
+            left: 22px;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 430px) {
+            #app {
+                max-height: 100vh;
+                border-radius: 0;
+            }
+            .menu-grid {
+                gap: 8px;
+            }
+            .menu-item .icon {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* === SCROLLBAR === */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        /* Fasl dinamik ranglari */
+        .season-winter { background: radial-gradient(circle at 30% 40%, #1a2a6c, #0a0a1a 70%) !important; }
+        .season-spring { background: radial-gradient(circle at 30% 40%, #2b5a4a, #1a2a2a 70%) !important; }
+        .season-summer { background: radial-gradient(circle at 30% 40%, #6a4a1a, #2a1a0a 70%) !important; }
+        .season-autumn { background: radial-gradient(circle at 30% 40%, #6a2a1a, #2a1a0a 70%) !important; }
     </style>
 </head>
-<body class="h-screen flex flex-col overflow-hidden">
+<body>
 
-    <!-- YUKLANISH EKRANI -->
-    <div id="preloader" class="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center space-y-6">
-        <div class="relative">
-            <div class="w-28 h-28 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin-slow"></div>
-            <div class="absolute inset-0 flex items-center justify-center">
-                <i class="fa-solid fa-robot text-4xl text-blue-400"></i>
-            </div>
+<div id="app">
+
+    <!-- QOR CANVAS -->
+    <canvas id="snow-canvas"></canvas>
+
+    <!-- SPLASH SCREEN -->
+    <div id="splash">
+        <div class="splash-logo">IKROMJON <span>AI</span></div>
+        <div class="splash-sub">Sun'iy Intellekt</div>
+        <div class="progress-wrap">
+            <div class="progress-bar" id="progress-bar"></div>
         </div>
-        <h1 class="text-2xl font-bold text-blue-400">IKROMJON AI</h1>
-        <div class="w-64 bg-gray-900 rounded-full h-2 overflow-hidden">
-            <div id="progress-bar" class="bg-blue-600 h-2 transition-all duration-150" style="width: 0%"></div>
-        </div>
-        <div id="progress-text" class="text-sm font-bold text-blue-400">0%</div>
+        <div class="progress-text" id="progress-text">0%</div>
+        <div class="splash-phone">📞 +99887 770-71-02</div>
     </div>
 
-    <!-- FON MUSIQASI -->
-    <audio id="bg-music" loop>
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf7f6.mp3" type="audio/mpeg">
-    </audio>
-
-    <div class="flex-1 flex overflow-hidden">
-        <!-- SIDEBAR -->
-        <aside id="sidebar" class="w-64 glass flex flex-col z-20">
-            <div class="p-5 font-bold text-blue-400 text-xl border-b border-gray-800">IKROMJON AI</div>
-            <nav class="flex-1 overflow-y-auto p-4 space-y-2">
-                <button onclick="alert('AI Bo\'limi')" class="w-full text-left p-3 rounded-xl hover:bg-blue-600 transition flex items-center gap-3">
-                    <i class="fa-solid fa-robot"></i> AI Chat
-                </button>
-                <button onclick="alert('Dasturlash')" class="w-full text-left p-3 rounded-xl hover:bg-blue-600 transition flex items-center gap-3">
-                    <i class="fa-solid fa-code"></i> Dasturlash
-                </button>
-            </nav>
-        </aside>
-
-        <!-- MAIN CONTENT -->
-        <main class="flex-1 p-8 overflow-y-auto">
-            <div class="glass p-8 rounded-3xl">
-                <h2 class="text-3xl font-bold mb-4">Xush kelibsiz, Ikromjon!</h2>
-                <p class="text-gray-400">Ushbu tizim sizning shaxsiy AI yordamchingiz.</p>
-                <button onclick="document.getElementById('bg-music').play()" class="mt-6 bg-blue-600 px-6 py-2 rounded-xl font-bold hover:bg-blue-500">
-                    Musiqani boshlash
-                </button>
+    <!-- REKLAMA MODAL -->
+    <div id="ad-modal">
+        <div class="ad-card">
+            <div class="ad-carousel" id="ad-carousel">
+                <div class="ad-slide" style="background:linear-gradient(135deg,#cc0000,#800000);">🥤 Coca-Cola <small>Ichimlik</small></div>
+                <div class="ad-slide" style="background:linear-gradient(135deg,#003399,#001a66);">⚡ Pepsi <small>Energetik</small></div>
+                <div class="ad-slide" style="background:linear-gradient(135deg,#00a86b,#006644);">🛒 Uzum Market <small>Yetkazib berish</small></div>
+                <div class="ad-slide" style="background:linear-gradient(135deg,#1a1a1a,#333);">👟 Adidas <small>Sport</small></div>
+                <div class="ad-slide" style="background:linear-gradient(135deg,#666,#222);">🐆 Puma <small>Fashion</small></div>
             </div>
-        </main>
+            <div class="ad-dots" id="ad-dots"></div>
+            <button class="ad-skip" id="ad-skip">O'tkazib yuborish</button>
+            <div class="ad-timer" id="ad-timer">5 soniya</div>
+        </div>
     </div>
 
-    <script>
+    <!-- ASOSIY INTERFEYS -->
+    <div id="main-ui">
+        <!-- Header -->
+        <div class="app-header">
+            <div class="header-left">
+                <div class="app-title">IKROMJON AI <small>v2.0</small></div>
+                <div class="datetime">
+                    <span id="date-time">2026-08-13 14:30</span>
+                    <span class="weather" id="weather-badge">🌤️ Toshkent 26°C</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="season-btn active" data-season="winter" title="Qish">❄️</button>
+                <button class="season-btn" data-season="spring" title="Bahor">🌸</button>
+                <button class="season-btn" data-season="summer" title="Yoz">☀️</button>
+                <button class="season-btn" data-season="autumn" title="Kuz">🍂</button>
+            </div>
+        </div>
+
+        <!-- Grid menyu -->
+        <div class="menu-grid" id="menu-grid"></div>
+
+        <!-- Bottom Nav -->
+        <div class="bottom-nav">
+            <button class="nav-btn active" data-tab="home"><span class="nav-icon">🏠</span>Bosh</button>
+            <button class="nav-btn" data-tab="premium" id="open-premium"><span class="nav-icon">⭐</span>Premium</button>
+            <button class="nav-btn" data-tab="settings" id="open-settings"><span class="nav-icon">⚙️</span>Sozlamalar</button>
+            <button class="nav-btn" data-tab="feedback" id="open-feedback"><span class="nav-icon">💬</span>Fikr</button>
+        </div>
+    </div>
+
+    <!-- PREMIUM MODAL -->
+    <div class="modal-overlay" id="premium-modal">
+        <div class="modal-box">
+            <button class="modal-close" id="close-premium">✕</button>
+            <h2>⭐ Premium</h2>
+            <p>Barcha funksiyalardan cheksiz foydalaning. Reklamalar olib tashlanadi!</p>
+            <div style="background:rgba(122,92,255,0.2);padding:12px;border-radius:16px;margin:16px 0;text-align:center;font-size:1.4rem;font-weight:700;">15 000 so'm / oy</div>
+            <div class="pay-options">
+                <button class="pay-btn">💳 Uzcard</button>
+                <button class="pay-btn">💳 Humo</button>
+                <button class="pay-btn">💳 Visa</button>
+                <button class="pay-btn">📱 Payme</button>
+                <button class="pay-btn">📱 Click</button>
+                <button class="pay-btn">🌐 PayPal</button>
+                <button class="pay-btn">📱 Beepul</button>
+            </div>
+            <button class="pay-btn" style="width:100%;background:#7a5cff;border:none;padding:14px;">Ulanish</button>
+        </div>
+    </div>
+
+    <!-- SOZLAMALAR MODAL -->
+    <div class="modal-overlay" id="settings-modal">
+        <div class="modal-box">
+            <button class="modal-close" id="close-settings">✕</button>
+            <h2>⚙️ Sozlamalar</h2>
+            <div class="setting-row"><span>Til</span><select><option>O'zbekcha</option><option>Русский</option><option>English</option><option>Turkish</option><option>العربية</option><option>中文</option></select></div>
+            <div class="setting-row"><span>Ilova ovozi</span><div class="toggle active" id="sound-toggle"></div></div>
+            <div class="setting-row"><span>Ilova qulfi (PIN)</span><div class="toggle" id="lock-toggle"></div></div>
+            <div class="setting-row"><span>Video sifati</span><select><option>480p</option><option>720p</option><option selected>1080p</option><option>4K</option></select></div>
+            <div class="setting-row"><span>Sana formati</span><select><option>YYYY-MM-DD</option><option>DD/MM/YYYY</option></select></div>
+            <button class="pay-btn" style="width:100%;margin-top:16px;background:rgba(255,0,0,0.2);border-color:rgba(255,0,0,0.3);">🗑️ Kesh tozalash</button>
+        </div>
+    </div>
+
+    <!-- FIKR MODAL -->
+    <div class="modal-overlay" id="feedback-modal">
+        <div class="modal-box">
+            <button class="modal-close" id="close-feedback">✕</button>
+            <h2>💬 Fikr bildiring</h2>
+            <p>Ilova haqida fikringizni yozing va baholang.</p>
+            <div class="stars" id="star-rating">
+                <span data-star="1">☆</span><span data-star="2">☆</span><span data-star="3">☆</span><span data-star="4">☆</span><span data-star="5">☆</span>
+            </div>
+            <textarea class="input-field" rows="3" placeholder="Fikringiz..."></textarea>
+            <button class="pay-btn" style="width:100%;margin-top:16px;background:#7a5cff;border:none;">Yuborish</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    (function() {
+        'use strict';
+
+        // ========== 1. SPLASH ==========
+        const splash = document.getElementById('splash');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
         let progress = 0;
-        const bar = document.getElementById('progress-bar');
-        const txt = document.getElementById('progress-text');
-        
-        const interval = setInterval(() => {
-            progress += 2;
-            bar.style.width = progress + '%';
-            txt.innerText = progress + '%';
-            if (progress >= 100) {
-                clearInterval(interval);
-                document.getElementById('preloader').style.display = 'none';
+        const splashInterval = setInterval(() => {
+            progress += Math.floor(Math.random() * 10) + 1;
+            if (progress > 100) progress = 100;
+            progressBar.style.width = progress + '%';
+            progressText.textContent = progress + '%';
+            if (progress === 100) {
+                clearInterval(splashInterval);
+                setTimeout(() => {
+                    splash.classList.add('hide');
+                    document.getElementById('main-ui').classList.add('active');
+                    document.getElementById('ad-modal').classList.add('active');
+                    startAdTimer();
+                    initSnow();
+                    updateDateTime();
+                    setInterval(updateDateTime, 1000);
+                }, 400);
             }
         }, 50);
-    </script>
+
+        // ========== 2. REKLAMA ==========
+        let adIndex = 0;
+        const adSlides = document.querySelectorAll('.ad-slide');
+        const dotsContainer = document.getElementById('ad-dots');
+        let adTimerInterval;
+        let adCountdown = 5;
+
+        adSlides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.className = 'ad-dot' + (i === 0 ? ' active' : '');
+            dot.dataset.index = i;
+            dotsContainer.appendChild(dot);
+        });
+
+        function showAdSlide(index) {
+            const slides = document.querySelectorAll('.ad-slide');
+            const dots = document.querySelectorAll('.ad-dot');
+            slides.forEach((s, i) => { s.style.transform = `translateX(-${index * 100}%)`; });
+            dots.forEach((d, i) => d.classList.toggle('active', i === index));
+        }
+
+        function nextAdSlide() {
+            adIndex = (adIndex + 1) % adSlides.length;
+            showAdSlide(adIndex);
+        }
+
+        function startAdTimer() {
+            adCountdown = 5;
+            document.getElementById('ad-timer').textContent = adCountdown + ' soniya';
+            if (adTimerInterval) clearInterval(adTimerInterval);
+            adTimerInterval = setInterval(() => {
+                adCountdown--;
+                document.getElementById('ad-timer').textContent = adCountdown + ' soniya';
+                if (adCountdown <= 0) {
+                    clearInterval(adTimerInterval);
+                    document.getElementById('ad-modal').classList.remove('active');
+                }
+            }, 1000);
+            // Avtomatik karusel
+            setInterval(nextAdSlide, 3000);
+        }
+
+        document.getElementById('ad-skip').addEventListener('click', () => {
+            document.getElementById('ad-modal').classList.remove('active');
+            clearInterval(adTimerInterval);
+        });
+
+        // ========== 3. QOR ==========
+        function initSnow() {
+            const canvas = document.getElementById('snow-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+
+            const flakes = [];
+            const count = 60;
+
+            for (let i = 0; i < count; i++) {
+                flakes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    r: Math.random() * 3 + 1,
+                    d: Math.random() * 2 + 0.5,
+                    speed: Math.random() * 1 + 0.5,
+                    wind: Math.random() * 0.5 - 0.25
+                });
+            }
+
+            function drawSnow() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.shadowColor = 'rgba(255,255,255,0.2)';
+                ctx.shadowBlur = 8;
+                flakes.forEach(f => {
+                    ctx.beginPath();
+                    ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+                    ctx.fill();
+                    f.y += f.speed;
+                    f.x += f.wind + Math.sin(f.y / 30) * 0.1;
+                    if (f.y > canvas.height) { f.y = -5; f.x = Math.random() * canvas.width; }
+                    if (f.x > canvas.width) f.x = 0;
+                    if (f.x < 0) f.x = canvas.width;
+                });
+                requestAnimationFrame(drawSnow);
+            }
+            drawSnow();
+
+            window.addEventListener('resize', () => {
+                canvas.width = canvas.parentElement.offsetWidth;
+                canvas.height = canvas.parentElement.offsetHeight;
+            });
+        }
+
+        // ========== 4. VAQT & OB-HAVO ==========
+        function updateDateTime() {
+            const now = new Date();
+            const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+            document.getElementById('date-time').textContent = now.toLocaleString('uz-UZ', options);
+        }
+
+        // ========== 5. FASL TUGMALARI ==========
+        document.querySelectorAll('.season-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.season-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const app = document.getElementById('app');
+                const season = this.dataset.season;
+                app.className = app.className.split(' ').filter(c => !c.startsWith('season-')).join(' ');
+                app.classList.add('season-' + season);
+            });
+        });
+
+        // ========== 6. MENYU (33 ta funksiya) ==========
+        const menuItems = [
+            { icon: '📺', label: 'TV' },
+            { icon: '📻', label: 'Radio' },
+            { icon: '🎮', label: 'Qiziqarli ilovalar' },
+            { icon: '💻', label: 'Dasturlash tillari' },
+            { icon: '💞', label: 'Tanishuv chatlari' },
+            { icon: '🌐', label: 'Google Chrome' },
+            { icon: '🔍', label: 'Yandex Brauzer' },
+            { icon: '🖼️', label: 'Rasm qo\'shish' },
+            { icon: '🤖', label: 'Chat Bot AI' },
+            { icon: '👨‍⚕️', label: '24/7 Mutaxassis' },
+            { icon: '🐍', label: 'Mobil o\'yinlar' },
+            { icon: '🎰', label: 'Sovrinlar barabani' },
+            { icon: '🎵', label: 'Musiqa player' },
+            { icon: '🎬', label: 'Video player' },
+            { icon: '📚', label: 'Kitoblar kutubxonasi' },
+            { icon: '⌨️', label: 'Kod yozish' },
+            { icon: '🐒', label: 'Monkey Tube' },
+            { icon: '▶️', label: 'YouTube' },
+            { icon: '🎉', label: 'Tabriklar she\'rlar' },
+            { icon: '📰', label: 'Kun yangiliklari' },
+            { icon: '✈️', label: 'Telegram' },
+            { icon: '🎤', label: 'Ovozli partalar' },
+            { icon: '🎶', label: 'Qo\'shiq yaratish' },
+            { icon: '🔎', label: 'Yooho Go' },
+            { icon: '🎧', label: 'Yandex Music' },
+            { icon: '🖼️', label: 'Yandex Rasmlar' },
+            { icon: '🧸', label: 'Bolalar o\'yinlari' },
+            { icon: '👶', label: 'Bolalar maslahat' },
+            { icon: '🤲', label: 'Mehr fondi' },
+            { icon: 'ℹ️', label: 'Ilova haqida' }
+        ];
+
+        const grid = document.getElementById('menu-grid');
+        menuItems.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'menu-item';
+            div.innerHTML = `<span class="icon">${item.icon}</span><span class="label">${item.label}</span>`;
+            div.addEventListener('click', () => {
+                alert(`"${item.label}" funksiyasi ochilmoqda... (AI tomonidan boshqariladi)`);
+            });
+            grid.appendChild(div);
+        });
+
+        // ========== 7. MODAL BOSHQARISH ==========
+        function toggleModal(id, show) {
+            const el = document.getElementById(id);
+            if (show === undefined) {
+                el.classList.toggle('active');
+            } else if (show) {
+                el.classList.add('active');
+            } else {
+                el.classList.remove('active');
+            }
+        }
+
+        document.getElementById('open-premium').addEventListener('click', () => toggleModal('premium-modal', true));
+        document.getElementById('close-premium').addEventListener('click', () => toggleModal('premium-modal', false));
+
+        document.getElementById('open-settings').addEventListener('click', () => toggleModal('settings-modal', true));
+        document.getElementById('close-settings').addEventListener('click', () => toggleModal('settings-modal', false));
+
+        document.getElementById('open-feedback').addEventListener('click', () => toggleModal('feedback-modal', true));
+        document.getElementById('close-feedback').addEventListener('click', () => toggleModal('feedback-modal', false));
+
+        // Modal orqasini bosganda yopish
+        document.querySelectorAll('.modal-overlay').forEach(m => {
+            m.addEventListener('click', function(e) {
+                if (e.target === this) this.classList.remove('active');
+            });
+        });
+
+        // ========== 8. YULDUZCHA REYTING ==========
+        let selectedStar = 0;
+        document.querySelectorAll('#star-rating span').forEach(star => {
+            star.addEventListener('click', function() {
+                selectedStar = parseInt(this.dataset.star);
+                document.querySelectorAll('#star-rating span').forEach(s => {
+                    s.classList.toggle('active', parseInt(s.dataset.star) <= selectedStar);
+                    s.textContent = parseInt(s.dataset.star) <= selectedStar ? '★' : '☆';
+                });
+            });
+            star.addEventListener('mouseenter', function() {
+                const hover = parseInt(this.dataset.star);
+                document.querySelectorAll('#star-rating span').forEach(s => {
+                    const val = parseInt(s.dataset.star);
+                    s.textContent = val <= hover ? '★' : '☆';
+                });
+            });
+            star.addEventListener('mouseleave', function() {
+                document.querySelectorAll('#star-rating span').forEach(s => {
+                    const val = parseInt(s.dataset.star);
+                    s.textContent = val <= selectedStar ? '★' : '☆';
+                });
+            });
+        });
+
+        // ========== 9. TOGGLE (ovoz va qulf) ==========
+        document.querySelectorAll('.toggle').forEach(t => {
+            t.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+
+        // ========== 10. NAVIGATSIYA ==========
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                if (this.dataset.tab === 'premium') toggleModal('premium-modal', true);
+                if (this.dataset.tab === 'settings') toggleModal('settings-modal', true);
+                if (this.dataset.tab === 'feedback') toggleModal('feedback-modal', true);
+            });
+        });
+
+        // ========== 11. MUSIQA (Lo-fi) - foydalanuvchi interfeysi orqali ishga tushadi ==========
+        // Brauzer avtomatik o'ynatishni bloklaydi, shuning uchun foydalanuvchi bosganda ishga tushiramiz.
+        let audioCtx;
+        let isMusicPlaying = false;
+
+        function startLoFiMusic() {
+            if (isMusicPlaying) return;
+            try {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                // Oddiy lo-fi ohang (sintetik)
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                oscillator.type = 'sine';
+                oscillator.frequency.value = 440;
+                gainNode.gain.value = 0.15;
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.5);
+                // Qisqa ohang
+                setTimeout(() => {
+                    const osc2 = audioCtx.createOscillator();
+                    const g2 = audioCtx.createGain();
+                    osc2.type = 'sine';
+                    osc2.frequency.value = 523;
+                    g2.gain.value = 0.1;
+                    osc2.connect(g2);
+                    g2.connect(audioCtx.destination);
+                    osc2.start();
+                    osc2.stop(audioCtx.currentTime + 0.4);
+                }, 200);
+                isMusicPlaying = true;
+                document.querySelector('.app-title small').textContent = '🎵 Musiqa yoqilgan';
+            } catch(e) {
+                console.log('Audio boshlashda xatolik');
+            }
+        }
+
+        // Har qanday interfeys bosilganda musiqani ishga tushirish (agar yoqilgan bo'lsa)
+        document.addEventListener('click', function firstClick() {
+            if (!isMusicPlaying) {
+                startLoFiMusic();
+            }
+            document.removeEventListener('click', firstClick);
+        }, { once: true });
+
+        // Sound toggle orqali boshqarish (faqat holat)
+        document.getElementById('sound-toggle').addEventListener('click', function() {
+            if (this.classList.contains('active')) {
+                if (audioCtx) {
+                    audioCtx.resume();
+                }
+                document.querySelector('.app-title small').textContent = '🎵 Musiqa yoqilgan';
+            } else {
+                if (audioCtx) {
+                    audioCtx.suspend();
+                }
+                document.querySelector('.app-title small').textContent = '🔇 Musiqa o\'chirilgan';
+            }
+        });
+
+        console.log('IKROMJON AI v2.0 to\'liq ishga tushdi!');
+    })();
+</script>
+
 </body>
 </html>
+```
