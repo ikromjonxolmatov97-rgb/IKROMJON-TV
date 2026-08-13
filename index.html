@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-    <title>IKROMJON Ai — 100K funksiya + TV</title>
+    <title>IKROMJON Ai — Canva + 100K funksiya</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
@@ -56,8 +56,6 @@
             --shadow-card: 0 6px 32px rgba(0, 0, 0, 0.06);
             --snow-color: #a0c4ff;
         }
-
-        /* ===== THEMES ===== */
         [data-theme="newyear"] {
             --bg-primary: #0a0005;
             --bg-secondary: #1a000a;
@@ -153,7 +151,7 @@
         }
 
         /* ============================================================
-           SNOW OVERLAY (IKROMJON Ai ustiga qor yog'ishi)
+           SNOW
            ============================================================ */
         #snowCanvas {
             position: fixed;
@@ -167,7 +165,7 @@
         }
 
         /* ============================================================
-           SPLASH SCREEN
+           SPLASH — PROGRESS
            ============================================================ */
         #splash {
             position: fixed;
@@ -188,7 +186,7 @@
             pointer-events: none;
         }
         #splash .logo-text {
-            font-size: 48px;
+            font-size: 44px;
             font-weight: 900;
             background: linear-gradient(135deg, #7c4dff, #ff6ec7);
             -webkit-background-clip: text;
@@ -196,26 +194,46 @@
             animation: pulseGlow 1.8s ease-in-out infinite;
         }
         #splash .logo-icon {
-            font-size: 68px;
-            margin-bottom: 10px;
+            font-size: 64px;
+            margin-bottom: 8px;
             animation: floatIcon 2.2s ease-in-out infinite;
             filter: drop-shadow(0 0 60px rgba(124, 77, 255, 0.3));
         }
-        #splash .loader {
-            margin-top: 24px;
-            width: 44px;
-            height: 44px;
-            border: 4px solid rgba(124, 77, 255, 0.15);
-            border-top-color: #7c4dff;
-            border-radius: 50%;
-            animation: spin 0.9s linear infinite;
-        }
         #splash .sub-text {
-            margin-top: 14px;
+            margin-top: 12px;
             color: #6868a0;
             font-size: 14px;
             font-weight: 500;
             letter-spacing: 0.5px;
+        }
+        #splash .progress-wrap {
+            margin-top: 24px;
+            width: 280px;
+            max-width: 80%;
+        }
+        #splash .progress-bar-bg {
+            width: 100%;
+            height: 6px;
+            background: rgba(124, 77, 255, 0.15);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        #splash .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #7c4dff, #ff6ec7);
+            border-radius: 20px;
+            transition: width 0.3s ease;
+        }
+        #splash .progress-text {
+            margin-top: 8px;
+            color: #9898c8;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+        }
+        #splash .progress-text .percent {
+            color: #7c4dff;
         }
         @keyframes pulseGlow {
             0%,
@@ -235,11 +253,6 @@
             }
             50% {
                 transform: translateY(-12px);
-            }
-        }
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
             }
         }
 
@@ -273,7 +286,6 @@
             align-items: center;
             gap: 6px;
             letter-spacing: -0.3px;
-            position: relative;
         }
         .navbar .logo i {
             -webkit-text-fill-color: var(--accent-1);
@@ -430,7 +442,7 @@
         }
 
         /* ============================================================
-           AD BANNER (Scrolling)
+           AD BANNER
            ============================================================ */
         .ad-banner {
             background: var(--bg-card);
@@ -438,7 +450,6 @@
             padding: 6px 0;
             overflow: hidden;
             position: relative;
-            margin-top: 0;
         }
         .ad-banner .ad-track {
             display: flex;
@@ -505,7 +516,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.5px;
-            position: relative;
             display: inline-block;
         }
         .hero h1 .snow-badge {
@@ -595,34 +605,48 @@
         }
 
         /* ============================================================
-           GRID
+           GRID — 7 columns with background images (Canva style)
            ============================================================ */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            grid-template-columns: repeat(7, 1fr);
             gap: 12px;
             margin-bottom: 16px;
         }
         .card {
             background: var(--bg-card);
-            border: 1px solid var(--border-card);
             border-radius: var(--radius);
-            padding: 14px 12px 12px;
+            border: 1px solid var(--border-card);
+            overflow: hidden;
             transition: var(--transition);
             cursor: pointer;
             position: relative;
-            overflow: hidden;
             aspect-ratio: 1 / 1;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+        }
+        .card:hover {
+            transform: translateY(-4px) scale(1.02);
+            border-color: var(--accent-1);
+            box-shadow: var(--shadow-card), 0 0 28px var(--accent-glow);
+            z-index: 2;
+        }
+        .card .card-overlay {
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(2px);
+            width: 100%;
+            height: 100%;
+            padding: 14px 12px 12px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+            transition: background 0.3s;
         }
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent-1);
-            box-shadow: var(--shadow-card), 0 0 28px var(--accent-glow);
+        .card:hover .card-overlay {
+            background: rgba(0, 0, 0, 0.4);
         }
         .card .fn-id {
             position: absolute;
@@ -630,11 +654,11 @@
             right: 8px;
             font-size: 8px;
             font-weight: 600;
-            color: var(--text-muted);
-            background: var(--bg-primary);
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(0, 0, 0, 0.5);
             padding: 1px 8px;
             border-radius: 40px;
-            border: 1px solid var(--border-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 1;
         }
         .card .icon {
@@ -643,19 +667,7 @@
             display: block;
             z-index: 1;
             position: relative;
-        }
-        .card .icon-img {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 4px;
-            border: 2px solid var(--border-card);
-            transition: var(--transition);
-        }
-        .card:hover .icon-img {
-            border-color: var(--accent-1);
-            transform: scale(1.05);
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
         }
         .card h3 {
             font-size: 12px;
@@ -664,10 +676,12 @@
             z-index: 1;
             position: relative;
             line-height: 1.3;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
         }
         .card p {
             font-size: 10px;
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.8);
             z-index: 1;
             position: relative;
             display: -webkit-box;
@@ -675,6 +689,7 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
             line-height: 1.3;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
         }
         .card .tags {
             margin-top: 6px;
@@ -690,12 +705,13 @@
             font-weight: 600;
             padding: 1px 8px;
             border-radius: 40px;
-            background: var(--accent-1);
+            background: rgba(124, 77, 255, 0.8);
             color: #fff;
-            opacity: 0.85;
+            opacity: 0.9;
             display: flex;
             align-items: center;
             gap: 2px;
+            backdrop-filter: blur(4px);
         }
         .card .tags .tag .dot {
             display: inline-block;
@@ -712,6 +728,171 @@
         }
         .dot.red {
             background: var(--danger);
+        }
+
+        /* ============================================================
+           CANVA TEMPLATES SECTION
+           ============================================================ */
+        .canva-section {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-card);
+            padding: 16px;
+            margin: 18px 0;
+        }
+        .canva-section .canva-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .canva-section .canva-header h3 {
+            font-size: 18px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .canva-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 14px;
+        }
+        .canva-item {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid var(--border-card);
+            position: relative;
+        }
+        .canva-item:hover {
+            transform: scale(1.04);
+            border-color: var(--accent-1);
+            box-shadow: 0 0 24px var(--accent-glow);
+        }
+        .canva-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            display: block;
+        }
+        .canva-item .canva-label {
+            padding: 6px 10px;
+            font-weight: 600;
+            font-size: 12px;
+            text-align: center;
+            color: var(--text-secondary);
+            background: var(--bg-card);
+        }
+        .canva-item .canva-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: var(--accent-1);
+            color: #fff;
+            font-size: 8px;
+            padding: 1px 10px;
+            border-radius: 40px;
+            font-weight: 700;
+            opacity: 0.8;
+        }
+
+        /* ============================================================
+           UPLOAD SECTION
+           ============================================================ */
+        .upload-section {
+            margin: 16px 0;
+            padding: 16px;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-card);
+        }
+        .upload-section h4 {
+            font-size: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .upload-section input[type="file"] {
+            display: block;
+            margin: 8px 0;
+            padding: 8px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-card);
+            color: var(--text-primary);
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .upload-section input[type="file"]::file-selector-button {
+            background: var(--accent-1);
+            color: #fff;
+            border: none;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            margin-right: 12px;
+            transition: var(--transition);
+        }
+        .upload-section input[type="file"]::file-selector-button:hover {
+            background: var(--accent-2);
+            transform: scale(1.04);
+        }
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 8px;
+        }
+        .preview-container .preview-item {
+            width: 100px;
+            height: 100px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 2px solid var(--border-card);
+            position: relative;
+            transition: var(--transition);
+        }
+        .preview-container .preview-item:hover {
+            border-color: var(--accent-1);
+            transform: scale(1.05);
+        }
+        .preview-container .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .preview-container .preview-item .remove-btn {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: rgba(255, 0, 0, 0.7);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        .preview-container .preview-item .remove-btn:hover {
+            background: #ff1744;
+            transform: scale(1.1);
         }
 
         /* ============================================================
@@ -817,7 +998,7 @@
         }
 
         /* ============================================================
-           SETTINGS PANEL (Modal)
+           SETTINGS PANEL
            ============================================================ */
         .settings-overlay {
             display: none;
@@ -972,6 +1153,26 @@
         .settings-panel .setting-group .toggle-switch.active .toggle-knob {
             left: 22px;
         }
+        .settings-panel .setting-group .time-format {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .settings-panel .setting-group .time-format label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+        .settings-panel .setting-group .time-format input[type="radio"] {
+            accent-color: var(--accent-1);
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
 
         /* ============================================================
            ABOUT SECTION
@@ -1023,7 +1224,7 @@
         }
 
         /* ============================================================
-           MODAL (Function detail)
+           MODAL
            ============================================================ */
         .modal-overlay {
             display: none;
@@ -1148,6 +1349,11 @@
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
         /* ============================================================
            TOAST
@@ -1197,21 +1403,26 @@
         /* ============================================================
            RESPONSIVE
            ============================================================ */
+        @media (max-width: 1200px) {
+            .grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
         @media (max-width: 700px) {
             .grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                grid-template-columns: repeat(3, 1fr);
                 gap: 8px;
             }
-            .card {
+            .card .card-overlay {
                 padding: 10px 8px;
-                aspect-ratio: 1 / 1;
             }
             .card .icon {
                 font-size: 22px;
-            }
-            .card .icon-img {
-                width: 36px;
-                height: 36px;
             }
             .card h3 {
                 font-size: 11px;
@@ -1226,6 +1437,9 @@
             .navbar .datetime {
                 font-size: 9px;
                 padding: 2px 8px;
+            }
+            .canva-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             }
             .tv-section .tv-grid {
                 grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
@@ -1254,16 +1468,11 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 6px;
             }
-            .card {
+            .card .card-overlay {
                 padding: 8px 6px;
-                aspect-ratio: 1 / 1;
             }
             .card .icon {
                 font-size: 18px;
-            }
-            .card .icon-img {
-                width: 30px;
-                height: 30px;
             }
             .card h3 {
                 font-size: 10px;
@@ -1294,24 +1503,42 @@
                 font-size: 10px;
                 padding: 4px 12px;
             }
+            #splash .logo-text {
+                font-size: 30px;
+            }
+            #splash .progress-wrap {
+                width: 200px;
+            }
+            .canva-item img {
+                height: 90px;
+            }
+            .preview-container .preview-item {
+                width: 70px;
+                height: 70px;
+            }
         }
     </style>
 </head>
 <body>
 
     <!-- =============================================================
-    SNOW CANVAS (IKROMJON Ai ustiga qor yog'ishi)
+    SNOW
     ============================================================= -->
     <canvas id="snowCanvas"></canvas>
 
     <!-- =============================================================
-    SPLASH SCREEN
+    SPLASH
     ============================================================= -->
     <div id="splash">
         <div class="logo-icon">🎬</div>
         <div class="logo-text">IKROMJON AI</div>
-        <div class="loader"></div>
-        <div class="sub-text">🌍 Dunyodagi eng kuchli AI media platformasi</div>
+        <div class="sub-text">🌍 Canva uslubida — 100 000+ funksiya</div>
+        <div class="progress-wrap">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">Yuklanmoqda... <span class="percent" id="percentNum">0%</span></div>
+        </div>
     </div>
 
     <!-- =============================================================
@@ -1378,7 +1605,7 @@
     </div>
 
     <!-- =============================================================
-    AD BANNER (Scrolling)
+    AD BANNER
     ============================================================= -->
     <div class="ad-banner">
         <div class="ad-track">
@@ -1388,7 +1615,7 @@
             <div class="ad-item"><i class="fas fa-bolt" style="color:#ffab00;"></i> Energetik <span class="ad-label">Charge</span></div>
             <div class="ad-item"><i class="fas fa-music" style="color:#e040fb;"></i> Spotify Premium <span class="ad-label">Bepul</span></div>
             <div class="ad-item"><i class="fas fa-film" style="color:#ff6ec7;"></i> IKROMJON TV <span class="ad-label">Live</span></div>
-            <!-- Duplicate for seamless scroll -->
+            <!-- duplicate -->
             <div class="ad-item"><i class="fas fa-crown" style="color:#ff1744;"></i> Coca-Cola <span class="ad-label">Yangi</span></div>
             <div class="ad-item"><i class="fas fa-bolt" style="color:#004d99;"></i> Pepsi <span class="ad-label">Max</span></div>
             <div class="ad-item"><i class="fas fa-store" style="color:#ff6d00;"></i> Uzum Market <span class="ad-label">Chegirma</span></div>
@@ -1409,7 +1636,7 @@
                 🌍 IKROMJON AI
                 <span class="snow-badge">❄️ Qor yog'moqda</span>
             </h1>
-            <p class="sub" id="heroSub">150+ til • 24/7 yordam • Premium bepul • TV • Chat • Tanishuv</p>
+            <p class="sub" id="heroSub">150+ til • 24/7 yordam • Premium bepul • Canva uslubi • TV</p>
             <div class="stats">
                 <div class="item"><div class="num" id="totalCount">100 000</div><div class="lbl">Funksiyalar</div></div>
                 <div class="item"><div class="num">150+</div><div class="lbl">Tillarda</div></div>
@@ -1436,7 +1663,7 @@
             </select>
         </div>
 
-        <!-- GRID -->
+        <!-- GRID — 7 columns with Canva-style images -->
         <div class="grid" id="functionsGrid"></div>
 
         <!-- PAGINATION -->
@@ -1447,7 +1674,58 @@
         </div>
 
         <!-- =============================================================
-        TV CHANNELS — Dunyodagi barcha telekanallar
+        CANVA TEMPLATES SECTION
+        ============================================================= -->
+        <div class="canva-section">
+            <div class="canva-header">
+                <h3><i class="fas fa-palette" style="color:var(--accent-3);"></i> Canva uslubidagi shablonlar</h3>
+                <span style="font-size:12px;color:var(--text-muted);">Yaratish uchun bosing</span>
+            </div>
+            <div class="canva-grid">
+                <div class="canva-item" onclick="showToast('🎨 Poster shabloni ochildi — tahrirlash mumkin', 'success')">
+                    <img src="https://source.unsplash.com/300x200/?poster,design,creative" loading="lazy" />
+                    <div class="canva-label">Poster</div>
+                    <span class="canva-badge">Pro</span>
+                </div>
+                <div class="canva-item" onclick="showToast('📱 Instagram Story shabloni ochildi', 'success')">
+                    <img src="https://source.unsplash.com/300x200/?instagram,story,colorful" loading="lazy" />
+                    <div class="canva-label">Instagram Story</div>
+                    <span class="canva-badge">Trend</span>
+                </div>
+                <div class="canva-item" onclick="showToast('🎬 YouTube Thumbnail shabloni ochildi', 'success')">
+                    <img src="https://source.unsplash.com/300x200/?youtube,thumbnail,channel" loading="lazy" />
+                    <div class="canva-label">YouTube Thumbnail</div>
+                    <span class="canva-badge">Popular</span>
+                </div>
+                <div class="canva-item" onclick="showToast('📄 Flyer shabloni ochildi — tayyor!', 'success')">
+                    <img src="https://source.unsplash.com/300x200/?flyer,advert,poster" loading="lazy" />
+                    <div class="canva-label">Flyer</div>
+                    <span class="canva-badge">Yangi</span>
+                </div>
+                <div class="canva-item" onclick="showToast('🎞️ Video Intro shabloni ochildi', 'success')">
+                    <img src="https://source.unsplash.com/300x200/?video,intro,animation" loading="lazy" />
+                    <div class="canva-label">Video Intro</div>
+                    <span class="canva-badge">Pro</span>
+                </div>
+                <div class="canva-item" onclick="showToast('📊 Infografika shabloni ochildi', 'success')">
+                    <img src="https://source.unsplash.com/300x200/?infographic,chart,data" loading="lazy" />
+                    <div class="canva-label">Infografika</div>
+                    <span class="canva-badge">Biznes</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================================
+        IMAGE UPLOAD SECTION (Canva-like)
+        ============================================================= -->
+        <div class="upload-section">
+            <h4><i class="fas fa-upload" style="color:var(--accent-2);"></i> O‘z rasmingizni yuklang (Canva uslubi)</h4>
+            <input type="file" id="fileInput" accept="image/*" multiple />
+            <div class="preview-container" id="previewContainer"></div>
+        </div>
+
+        <!-- =============================================================
+        TV CHANNELS
         ============================================================= -->
         <div class="tv-section">
             <div class="tv-header">
@@ -1458,16 +1736,16 @@
         </div>
 
         <!-- =============================================================
-        ABOUT SECTION
+        ABOUT
         ============================================================= -->
         <div class="about-section">
             <div class="about-icon">🚀</div>
             <h3>IKROMJON Ai — Dunyodagi eng kuchli AI media platformasi</h3>
             <p>
-                IKROMJON Ai — bu sun'iy intellekt asosida ishlaydigan eng kuchli media platforma.
-                100 000+ funksiya, 150+ til, 200+ telekanal, 24/7 mutaxassis yordami va barcha
-                premium xizmatlar <strong>bepul</strong>! Bizning maqsad — har bir insonga yuqori sifatli
-                media kontent yaratish imkoniyatini berish.
+                IKROMJON Ai — sun'iy intellekt asosida ishlaydigan eng kuchli media platforma.
+                100 000+ funksiya, 150+ til, 200+ telekanal, 24/7 yordam va barcha
+                premium xizmatlar <strong>bepul</strong>! Canva uslubidagi shablonlar bilan
+                professional dizaynlar yarating.
             </p>
             <div class="about-stats">
                 <div class="as-item"><div class="as-num">100K+</div><div class="as-lbl">Funksiyalar</div></div>
@@ -1482,7 +1760,7 @@
 
         <!-- FOOTER -->
         <div class="footer" style="margin-top:12px;padding:12px;text-align:center;border-top:1px solid var(--border-glass);color:var(--text-muted);font-size:11px;font-weight:500;">
-            <p>🚀 IKROMJON Ai Global — 100 000+ funksiya, 150+ til, 200+ kanal, 24/7 yordam | <a href="#" onclick="showToast('🌍 IKROMJON Ai — sizning eng yaxshi yordamchingiz!', 'success')">IKROMJON Ai</a></p>
+            <p>🚀 IKROMJON Ai Global — Canva uslubi, 100 000+ funksiya, 150+ til, 200+ kanal | <a href="#" onclick="showToast('🌍 IKROMJON Ai — sizning eng yaxshi yordamchingiz!', 'success')">IKROMJON Ai</a></p>
         </div>
     </div>
 
@@ -1526,6 +1804,14 @@
             </div>
 
             <div class="setting-group">
+                <label>🕒 Vaqt formati</label>
+                <div class="time-format">
+                    <label><input type="radio" name="timeFormat" value="24" checked onchange="setTimeFormat('24')" /> 24 soatlik</label>
+                    <label><input type="radio" name="timeFormat" value="12" onchange="setTimeFormat('12')" /> 12 soatlik (AM/PM)</label>
+                </div>
+            </div>
+
+            <div class="setting-group">
                 <label>❄️ Qor yog'ishi</label>
                 <div class="toggle-row">
                     <span>Qor effekti</span>
@@ -1538,10 +1824,11 @@
             <div class="setting-group">
                 <label>📱 Ilova haqida</label>
                 <div style="background:var(--bg-secondary);border-radius:var(--radius-sm);padding:12px;font-size:13px;color:var(--text-secondary);line-height:1.6;">
-                    <strong style="color:var(--text-primary);">IKROMJON Ai v3.0</strong><br />
+                    <strong style="color:var(--text-primary);">IKROMJON Ai v3.0 — Canva Edition</strong><br />
                     🌍 100 000+ funksiya<br />
                     🗣 150+ til qo'llab-quvvatlanadi<br />
                     📺 200+ dunyo telekanallari<br />
+                    🎨 Canva uslubidagi shablonlar<br />
                     🕒 24/7 mutaxassis yordami<br />
                     💎 Barcha premium xizmatlar BEPUL<br />
                     <span style="font-size:11px;color:var(--text-muted);">© 2026 IKROMJON Ai. Barcha huquqlar himoyalangan.</span>
@@ -1551,7 +1838,7 @@
     </div>
 
     <!-- =============================================================
-    MODAL (Function detail)
+    MODAL
     ============================================================= -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
@@ -1580,7 +1867,29 @@
     ============================================================= -->
     <script>
         // =============================================================
-        // SNOW EFFECT (Canvas)
+        // PROGRESS BAR
+        // =============================================================
+        let progress = 0;
+        const progressFill = document.getElementById('progressFill');
+        const percentNum = document.getElementById('percentNum');
+
+        function updateProgress() {
+            if (progress < 100) {
+                progress += Math.random() * 8 + 2;
+                if (progress > 100) progress = 100;
+                progressFill.style.width = progress + '%';
+                percentNum.textContent = Math.round(progress) + '%';
+                setTimeout(updateProgress, 200 + Math.random() * 300);
+            } else {
+                setTimeout(() => {
+                    document.getElementById('splash').classList.add('hide');
+                }, 400);
+            }
+        }
+        updateProgress();
+
+        // =============================================================
+        // SNOW
         // =============================================================
         const snowCanvas = document.getElementById('snowCanvas');
         const ctx = snowCanvas.getContext('2d');
@@ -1616,9 +1925,7 @@
                 return;
             }
             ctx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
-
             const theme = document.documentElement.getAttribute('data-theme') || 'dark';
-            const color = theme === 'light' ? 'rgba(160, 196, 255, ' : 'rgba(255, 255, 255, ';
             const colors = {
                 dark: 'rgba(255,255,255,',
                 light: 'rgba(160,196,255,',
@@ -1639,38 +1946,24 @@
                 }
                 if (s.x > snowCanvas.width) s.x = 0;
                 if (s.x < 0) s.x = snowCanvas.width;
-
                 ctx.beginPath();
                 ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
                 ctx.fillStyle = c + s.opacity + ')';
                 ctx.fill();
             });
-
             requestAnimationFrame(drawSnow);
         }
         drawSnow();
 
         function toggleSnow() {
             snowEnabled = !snowEnabled;
-            const toggle = document.getElementById('snowToggle');
-            toggle.classList.toggle('active');
-            if (!snowEnabled) {
-                ctx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
-            }
+            document.getElementById('snowToggle').classList.toggle('active');
+            if (!snowEnabled) ctx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
             showToast(snowEnabled ? '❄️ Qor yog\'ishi yoqildi' : '❄️ Qor yog\'ishi o\'chirildi', 'success');
         }
 
         // =============================================================
-        // SPLASH
-        // =============================================================
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('splash').classList.add('hide');
-            }, 1200);
-        });
-
-        // =============================================================
-        // TILLAR (150+)
+        // TILLAR
         // =============================================================
         const LANGUAGES = {
             uz: { name: "O'zbek", flag: "🇺🇿", native: "O'zbekcha" },
@@ -1794,7 +2087,7 @@
         // =============================================================
         const TRANSLATIONS = {
             en: {
-                heroSub: "150+ languages • 24/7 support • Premium free • TV • Chat • Dating",
+                heroSub: "150+ languages • 24/7 support • Premium free • Canva style • TV",
                 statFunctions: "Functions",
                 statLangs: "Languages",
                 statPossibilities: "Possibilities",
@@ -1817,7 +2110,7 @@
                 page: "Page"
             },
             uz: {
-                heroSub: "150+ til • 24/7 yordam • Premium bepul • TV • Chat • Tanishuv",
+                heroSub: "150+ til • 24/7 yordam • Premium bepul • Canva uslubi • TV",
                 statFunctions: "Funksiyalar",
                 statLangs: "Tillarda",
                 statPossibilities: "Imkoniyatlar",
@@ -1840,7 +2133,7 @@
                 page: "Sahifa"
             },
             ru: {
-                heroSub: "150+ языков • 24/7 поддержка • Премиум бесплатно • ТВ • Чат • Знакомства",
+                heroSub: "150+ языков • 24/7 поддержка • Премиум бесплатно • Стиль Canva • ТВ",
                 statFunctions: "Функции",
                 statLangs: "Языки",
                 statPossibilities: "Возможности",
@@ -1863,7 +2156,7 @@
                 page: "Страница"
             },
             tr: {
-                heroSub: "150+ dil • 24/7 destek • Premium ücretsiz • TV • Sohbet • Tanışma",
+                heroSub: "150+ dil • 24/7 destek • Premium ücretsiz • Canva stili • TV",
                 statFunctions: "Fonksiyonlar",
                 statLangs: "Diller",
                 statPossibilities: "Olasılıklar",
@@ -1884,190 +2177,6 @@
                 prev: "Önceki",
                 next: "Sonraki",
                 page: "Sayfa"
-            },
-            ar: {
-                heroSub: "150+ لغة • دعم 24/7 • بريميوم مجاني • تلفزيون • محادثة • مواعدة",
-                statFunctions: "وظائف",
-                statLangs: "لغات",
-                statPossibilities: "إمكانيات",
-                searchPlaceholder: "🔍 بحث عن وظائف...",
-                allCategories: "📂 جميع الفئات",
-                video: "🎬 فيديو",
-                audio: "🎵 صوت",
-                image: "🖼 صورة",
-                animation: "🎨 رسوم متحركة",
-                text: "📝 نص",
-                vfx: "✨ مؤثرات بصرية",
-                export: "📤 تصدير",
-                ai: "🤖 ذكاء اصطناعي",
-                analysis: "📊 تحليل",
-                special: "🌟 خاص",
-                runBtn: "تشغيل",
-                toastSuccess: "✅ تم تنفيذ الوظيفة بنجاح!",
-                prev: "السابق",
-                next: "التالي",
-                page: "صفحة"
-            },
-            zh: {
-                heroSub: "150+ 语言 • 24/7 支持 • 高级免费 • 电视 • 聊天 • 交友",
-                statFunctions: "功能",
-                statLangs: "语言",
-                statPossibilities: "可能性",
-                searchPlaceholder: "🔍 搜索功能...",
-                allCategories: "📂 所有类别",
-                video: "🎬 视频",
-                audio: "🎵 音频",
-                image: "🖼 图像",
-                animation: "🎨 动画",
-                text: "📝 文本",
-                vfx: "✨ 视觉效果",
-                export: "📤 导出",
-                ai: "🤖 人工智能",
-                analysis: "📊 分析",
-                special: "🌟 特殊",
-                runBtn: "运行",
-                toastSuccess: "✅ 功能执行成功！",
-                prev: "上一页",
-                next: "下一页",
-                page: "页"
-            },
-            es: {
-                heroSub: "150+ idiomas • Soporte 24/7 • Premium gratis • TV • Chat • Citas",
-                statFunctions: "Funciones",
-                statLangs: "Idiomas",
-                statPossibilities: "Posibilidades",
-                searchPlaceholder: "🔍 Buscar funciones...",
-                allCategories: "📂 Todas las categorías",
-                video: "🎬 Video",
-                audio: "🎵 Audio",
-                image: "🖼 Imagen",
-                animation: "🎨 Animación",
-                text: "📝 Texto",
-                vfx: "✨ Efectos visuales",
-                export: "📤 Exportar",
-                ai: "🤖 IA",
-                analysis: "📊 Análisis",
-                special: "🌟 Especial",
-                runBtn: "Ejecutar",
-                toastSuccess: "✅ ¡Función ejecutada con éxito!",
-                prev: "Anterior",
-                next: "Siguiente",
-                page: "Página"
-            },
-            fr: {
-                heroSub: "150+ langues • Support 24/7 • Premium gratuit • TV • Chat • Rencontres",
-                statFunctions: "Fonctions",
-                statLangs: "Langues",
-                statPossibilities: "Possibilités",
-                searchPlaceholder: "🔍 Rechercher des fonctions...",
-                allCategories: "📂 Toutes les catégories",
-                video: "🎬 Vidéo",
-                audio: "🎵 Audio",
-                image: "🖼 Image",
-                animation: "🎨 Animation",
-                text: "📝 Texte",
-                vfx: "✨ Effets visuels",
-                export: "📤 Exporter",
-                ai: "🤖 IA",
-                analysis: "📊 Analyse",
-                special: "🌟 Spécial",
-                runBtn: "Exécuter",
-                toastSuccess: "✅ Fonction exécutée avec succès!",
-                prev: "Précédent",
-                next: "Suivant",
-                page: "Page"
-            },
-            de: {
-                heroSub: "150+ Sprachen • 24/7 Support • Premium kostenlos • TV • Chat • Dating",
-                statFunctions: "Funktionen",
-                statLangs: "Sprachen",
-                statPossibilities: "Möglichkeiten",
-                searchPlaceholder: "🔍 Funktionen suchen...",
-                allCategories: "📂 Alle Kategorien",
-                video: "🎬 Video",
-                audio: "🎵 Audio",
-                image: "🖼 Bild",
-                animation: "🎨 Animation",
-                text: "📝 Text",
-                vfx: "✨ Visuelle Effekte",
-                export: "📤 Export",
-                ai: "🤖 KI",
-                analysis: "📊 Analyse",
-                special: "🌟 Spezial",
-                runBtn: "Ausführen",
-                toastSuccess: "✅ Funktion erfolgreich ausgeführt!",
-                prev: "Zurück",
-                next: "Weiter",
-                page: "Seite"
-            },
-            ja: {
-                heroSub: "150+ 言語 • 24/7 サポート • プレミアム無料 • TV • チャット • 出会い",
-                statFunctions: "機能",
-                statLangs: "言語",
-                statPossibilities: "可能性",
-                searchPlaceholder: "🔍 機能を検索...",
-                allCategories: "📂 すべてのカテゴリ",
-                video: "🎬 ビデオ",
-                audio: "🎵 オーディオ",
-                image: "🖼 画像",
-                animation: "🎨 アニメーション",
-                text: "📝 テキスト",
-                vfx: "✨ VFX",
-                export: "📤 エクスポート",
-                ai: "🤖 AI",
-                analysis: "📊 分析",
-                special: "🌟 スペシャル",
-                runBtn: "実行",
-                toastSuccess: "✅ 機能が正常に実行されました！",
-                prev: "前へ",
-                next: "次へ",
-                page: "ページ"
-            },
-            ko: {
-                heroSub: "150+ 언어 • 24/7 지원 • 프리미엄 무료 • TV • 채팅 • 데이팅",
-                statFunctions: "기능",
-                statLangs: "언어",
-                statPossibilities: "가능성",
-                searchPlaceholder: "🔍 기능 검색...",
-                allCategories: "📂 모든 카테고리",
-                video: "🎬 비디오",
-                audio: "🎵 오디오",
-                image: "🖼 이미지",
-                animation: "🎨 애니메이션",
-                text: "📝 텍스트",
-                vfx: "✨ VFX",
-                export: "📤 내보내기",
-                ai: "🤖 AI",
-                analysis: "📊 분석",
-                special: "🌟 스페셜",
-                runBtn: "실행",
-                toastSuccess: "✅ 기능이 성공적으로 실행되었습니다!",
-                prev: "이전",
-                next: "다음",
-                page: "페이지"
-            },
-            hi: {
-                heroSub: "150+ भाषाएँ • 24/7 सहायता • प्रीमियम मुफ्त • टीवी • चैट • डेटिंग",
-                statFunctions: "कार्य",
-                statLangs: "भाषाएँ",
-                statPossibilities: "संभावनाएँ",
-                searchPlaceholder: "🔍 कार्य खोजें...",
-                allCategories: "📂 सभी श्रेणियाँ",
-                video: "🎬 वीडियो",
-                audio: "🎵 ऑडियो",
-                image: "🖼 छवि",
-                animation: "🎨 एनीमेशन",
-                text: "📝 टेक्स्ट",
-                vfx: "✨ VFX",
-                export: "📤 निर्यात",
-                ai: "🤖 AI",
-                analysis: "📊 विश्लेषण",
-                special: "🌟 विशेष",
-                runBtn: "चलाएँ",
-                toastSuccess: "✅ कार्य सफलतापूर्वक पूरा हुआ!",
-                prev: "पिछला",
-                next: "अगला",
-                page: "पृष्ठ"
             }
         };
 
@@ -2077,13 +2186,27 @@
         }
 
         // =============================================================
-        // 100 000+ FUNKSIYALAR (tez generatsiya)
+        // 100 000+ FUNKSIYALAR — Canva uslubi uchun rasmlar bilan
         // =============================================================
         const CAT_KEYS = ['video', 'audio', 'image', 'animation', 'text', 'vfx', 'export', 'ai', 'analysis', 'special'];
         const CAT_ICONS = { video: '🎬', audio: '🎵', image: '🖼', animation: '🎨', text: '📝', vfx: '✨', export: '📤',
             ai: '🤖', analysis: '📊', special: '🌟' };
         const CAT_NAMES = { video: 'Video', audio: 'Audio', image: 'Image', animation: 'Animation', text: 'Text',
             vfx: 'VFX', export: 'Export', ai: 'AI', analysis: 'Analysis', special: 'Special' };
+
+        // Kategoriya bo‘yicha Unsplash rasmlari (Canva uslubi)
+        const categoryImages = {
+            video: 'https://source.unsplash.com/400x400/?video,film,camera',
+            audio: 'https://source.unsplash.com/400x400/?music,sound,studio',
+            image: 'https://source.unsplash.com/400x400/?photography,photo',
+            animation: 'https://source.unsplash.com/400x400/?animation,cartoon,draw',
+            text: 'https://source.unsplash.com/400x400/?typography,text,font',
+            vfx: 'https://source.unsplash.com/400x400/?visual,effects,glow',
+            export: 'https://source.unsplash.com/400x400/?download,share,cloud',
+            ai: 'https://source.unsplash.com/400x400/?artificial-intelligence,robot',
+            analysis: 'https://source.unsplash.com/400x400/?data,analytics,chart',
+            special: 'https://source.unsplash.com/400x400/?star,special,magic'
+        };
 
         const actionWords = [
             'Create', 'Edit', 'Trim', 'Merge', 'Split', 'Rotate', 'Scale', 'Crop', 'Resize', 'Compress',
@@ -2105,18 +2228,8 @@
             'Chroma', 'Hue', 'Saturation', 'Brightness', 'Contrast', 'Gamma', 'Gain'
         ];
 
-        // Google rasmlar uchun placeholder URL (haqiqiy Google rasmlar emas, lekin iconlar bilan)
-        const imageIcons = [
-            'https://img.icons8.com/color/96/000000/video.png',
-            'https://img.icons8.com/color/96/000000/audio-wave.png',
-            'https://img.icons8.com/color/96/000000/gallery.png',
-            'https://img.icons8.com/color/96/000000/animation.png',
-            'https://img.icons8.com/color/96/000000/text.png',
-            'https://img.icons8.com/color/96/000000/visual-effects.png',
-            'https://img.icons8.com/color/96/000000/export.png',
-            'https://img.icons8.com/color/96/000000/artificial-intelligence.png',
-            'https://img.icons8.com/color/96/000000/analytics.png',
-            'https://img.icons8.com/color/96/000000/star.png'
+        const icons = ['🎬', '✂️', '🎵', '🖼', '🎨', '✨', '📝', '🤖', '📊', '🌟', '🎥', '🔄', '🌈', '🔊', '📐', '🧩', '⚡',
+            '🎯', '💡', '🔮', '🪄', '🌀', '🎭', '📽', '🎞'
         ];
 
         const TOTAL_FUNCTIONS = 10000;
@@ -2126,16 +2239,13 @@
             const status = ['active', 'active', 'active', 'beta', 'coming'][i % 5];
             const a = actionWords[i % actionWords.length];
             const o = objectWords[i % objectWords.length];
-            const icons = ['🎬', '✂️', '🎵', '🖼', '🎨', '✨', '📝', '🤖', '📊', '🌟', '🎥', '🔄', '🌈', '🔊', '📐', '🧩', '⚡',
-                '🎯', '💡', '🔮', '🪄', '🌀', '🎭', '📽', '🎞'
-            ];
-            const imgIdx = Math.floor(Math.random() * imageIcons.length);
+            const imgUrl = categoryImages[cat] + `&${i}`; // unique
             allFunctions.push({
                 id: i,
                 name: `${a} ${o}`,
                 category: cat,
                 icon: icons[i % icons.length],
-                imageUrl: imageIcons[imgIdx],
+                imageUrl: imgUrl,
                 status: status,
                 description: `Professional function #${i}: ${a} ${o}`,
                 params: {
@@ -2153,11 +2263,12 @@
         let currentFunction = null;
         let currentLang = 'uz';
         let currentRegion = 'Asia/Tashkent';
+        let timeFormat = '24';
 
         // =============================================================
         // PAGINATION
         // =============================================================
-        const PAGE_SIZE = 36;
+        const PAGE_SIZE = 42;
         let currentPage = 1;
         let filteredList = [...allFunctions];
         let totalPages = Math.ceil(filteredList.length / PAGE_SIZE);
@@ -2186,7 +2297,7 @@
         }
 
         // =============================================================
-        // RENDER (rasmlar bilan)
+        // RENDER — Canva uslubi (fon rasmlari bilan)
         // =============================================================
         function renderFunctions(list) {
             const grid = document.getElementById('functionsGrid');
@@ -2194,27 +2305,20 @@
             list.forEach(fn => {
                 const card = document.createElement('div');
                 card.className = 'card';
+                card.style.backgroundImage = `url(${fn.imageUrl})`;
                 const dotClass = fn.status === 'active' ? 'green' : fn.status === 'beta' ? 'yellow' : 'red';
-                const imgHtml = fn.imageUrl ?
-                    `<img src="${fn.imageUrl}" class="icon-img" alt="${fn.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
-                             <span class="icon" style="display:none;">${fn.icon}</span>` :
-                    `<span class="icon">${fn.icon}</span>`;
                 card.innerHTML = `
-                    <span class="fn-id">#${String(fn.id).padStart(6, '0')}</span>
-                    ${imgHtml}
-                    <h3>${fn.name}</h3>
-                    <p>${fn.description}</p>
-                    <div class="tags">
-                        <span class="tag">${CAT_ICONS[fn.category] || '📂'} ${CAT_NAMES[fn.category] || 'Boshqa'}</span>
-                        <span class="tag"><span class="dot ${dotClass}"></span>${fn.status}</span>
+                    <div class="card-overlay">
+                        <span class="fn-id">#${String(fn.id).padStart(6, '0')}</span>
+                        <span class="icon">${fn.icon}</span>
+                        <h3>${fn.name}</h3>
+                        <p>${fn.description}</p>
+                        <div class="tags">
+                            <span class="tag">${CAT_ICONS[fn.category] || '📂'} ${CAT_NAMES[fn.category] || 'Boshqa'}</span>
+                            <span class="tag"><span class="dot ${dotClass}"></span>${fn.status}</span>
+                        </div>
                     </div>
                 `;
-                // Agar rasm yuklanmasa, iconni ko'rsatish
-                card.querySelector('.icon-img')?.addEventListener('error', function() {
-                    this.style.display = 'none';
-                    const icon = this.nextElementSibling;
-                    if (icon) icon.style.display = 'block';
-                });
                 card.onclick = () => openModal(fn);
                 grid.appendChild(card);
             });
@@ -2335,7 +2439,6 @@
             if (document.getElementById('modalOverlay').classList.contains('open')) {
                 document.getElementById('runBtnText').textContent = getTranslation(lang, 'runBtn');
             }
-            // Settings dagi tilni ham yangilash
             document.getElementById('settingsLang').value = lang;
         }
 
@@ -2361,12 +2464,14 @@
         }
 
         // =============================================================
-        // VAQT, SANA, MINTАQA (to'g'ri ishlaydi)
+        // VAQT, SANA
         // =============================================================
         function updateDateTime() {
             try {
                 const now = new Date();
                 const options = { timeZone: currentRegion, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+                if (timeFormat === '12') options.hour12 = true;
+                else options.hour12 = false;
                 const timeStr = now.toLocaleTimeString('uz-UZ', options);
                 const dateStr = now.toLocaleDateString('uz-UZ', { timeZone: currentRegion, day: '2-digit',
                     month: '2-digit', year: 'numeric' });
@@ -2377,6 +2482,12 @@
                 document.getElementById('timeDisplay').textContent = now.toLocaleTimeString('uz-UZ');
                 document.getElementById('dateDisplay').textContent = now.toLocaleDateString('uz-UZ');
             }
+        }
+
+        function setTimeFormat(format) {
+            timeFormat = format;
+            updateDateTime();
+            showToast(`🕒 Vaqt formati: ${format === '24' ? '24 soatlik' : '12 soatlik (AM/PM)'}`, 'success');
         }
 
         function changeRegion(region) {
@@ -2411,14 +2522,13 @@
         }
 
         // =============================================================
-        // THEME (Mavzu) — 4 fasl + Yangi Yil
+        // THEME
         // =============================================================
         function setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
             document.querySelectorAll('.theme-options .theme-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.theme === theme);
             });
-            // Snow rangini o'zgartirish
             const snowToggle = document.getElementById('snowToggle');
             if (!snowToggle.classList.contains('active')) {
                 snowToggle.classList.add('active');
@@ -2433,7 +2543,6 @@
             const idx = themes.indexOf(current);
             const next = themes[(idx + 1) % themes.length];
             setTheme(next);
-            // Navbardagi oy/quyosh icon
             const icon = document.querySelector('.theme-toggle i');
             if (next === 'light') icon.className = 'fas fa-sun';
             else icon.className = 'fas fa-moon';
@@ -2454,10 +2563,30 @@
         };
 
         // =============================================================
-        // TV CHANNELS — Dunyodagi barcha telekanallar (200+)
+        // UPLOAD — Canva uslubi
+        // =============================================================
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const container = document.getElementById('previewContainer');
+            for (let file of e.target.files) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    const div = document.createElement('div');
+                    div.className = 'preview-item';
+                    div.innerHTML = `
+                        <img src="${ev.target.result}" />
+                        <button class="remove-btn" onclick="this.parentElement.remove()">✕</button>
+                    `;
+                    container.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            }
+            showToast('✅ Rasm yuklandi! Canva uslubida tahrirlash mumkin.', 'success');
+        });
+
+        // =============================================================
+        // TV CHANNELS
         // =============================================================
         const tvChannels = [
-            // O'zbekiston
             { name: "O'zbekiston 1", icon: "📺", country: "🇺🇿" },
             { name: "O'zbekiston 2", icon: "📺", country: "🇺🇿" },
             { name: "O'zbekiston 3", icon: "📺", country: "🇺🇿" },
@@ -2478,7 +2607,6 @@
             { name: "New Century", icon: "🌟", country: "🇺🇿" },
             { name: "Toshkent TV", icon: "🏛️", country: "🇺🇿" },
             { name: "Samarqand TV", icon: "🏛️", country: "🇺🇿" },
-            // Rossiya
             { name: "Первый канал", icon: "📺", country: "🇷🇺" },
             { name: "Россия 1", icon: "📺", country: "🇷🇺" },
             { name: "Россия 2", icon: "📺", country: "🇷🇺" },
@@ -2494,7 +2622,6 @@
             { name: "ОТР", icon: "📺", country: "🇷🇺" },
             { name: "Мир", icon: "🌍", country: "🇷🇺" },
             { name: "Пятый канал", icon: "📺", country: "🇷🇺" },
-            // AQSh
             { name: "CNN", icon: "📰", country: "🇺🇸" },
             { name: "Fox News", icon: "📰", country: "🇺🇸" },
             { name: "MSNBC", icon: "📰", country: "🇺🇸" },
@@ -2510,7 +2637,6 @@
             { name: "BET", icon: "🎵", country: "🇺🇸" },
             { name: "TNT", icon: "📺", country: "🇺🇸" },
             { name: "TBS", icon: "📺", country: "🇺🇸" },
-            // Buyuk Britaniya
             { name: "BBC One", icon: "📺", country: "🇬🇧" },
             { name: "BBC Two", icon: "📺", country: "🇬🇧" },
             { name: "BBC Three", icon: "📺", country: "🇬🇧" },
@@ -2520,7 +2646,6 @@
             { name: "Channel 5", icon: "📺", country: "🇬🇧" },
             { name: "Sky Sports", icon: "⚽", country: "🇬🇧" },
             { name: "Sky News", icon: "📰", country: "🇬🇧" },
-            // Turkiya
             { name: "TRT 1", icon: "📺", country: "🇹🇷" },
             { name: "TRT 2", icon: "📺", country: "🇹🇷" },
             { name: "TRT 3", icon: "📺", country: "🇹🇷" },
@@ -2531,7 +2656,6 @@
             { name: "Fox TV", icon: "📺", country: "🇹🇷" },
             { name: "TV8", icon: "📺", country: "🇹🇷" },
             { name: "NTV", icon: "📺", country: "🇹🇷" },
-            // Xitoy
             { name: "CCTV 1", icon: "📺", country: "🇨🇳" },
             { name: "CCTV 2", icon: "📺", country: "🇨🇳" },
             { name: "CCTV 3", icon: "📺", country: "🇨🇳" },
@@ -2542,59 +2666,47 @@
             { name: "CCTV 8", icon: "📺", country: "🇨🇳" },
             { name: "CCTV 9", icon: "📺", country: "🇨🇳" },
             { name: "CCTV 10", icon: "📺", country: "🇨🇳" },
-            // Yaponiya
             { name: "NHK", icon: "📺", country: "🇯🇵" },
             { name: "NTV", icon: "📺", country: "🇯🇵" },
             { name: "TBS", icon: "📺", country: "🇯🇵" },
             { name: "Fuji TV", icon: "📺", country: "🇯🇵" },
             { name: "TV Asahi", icon: "📺", country: "🇯🇵" },
             { name: "TV Tokyo", icon: "📺", country: "🇯🇵" },
-            // Koreya
             { name: "KBS 1", icon: "📺", country: "🇰🇷" },
             { name: "KBS 2", icon: "📺", country: "🇰🇷" },
             { name: "MBC", icon: "📺", country: "🇰🇷" },
             { name: "SBS", icon: "📺", country: "🇰🇷" },
             { name: "JTBC", icon: "📺", country: "🇰🇷" },
             { name: "tvN", icon: "📺", country: "🇰🇷" },
-            // Hindiston
             { name: "DD News", icon: "📰", country: "🇮🇳" },
             { name: "Star Plus", icon: "📺", country: "🇮🇳" },
             { name: "Colors", icon: "📺", country: "🇮🇳" },
             { name: "Zee TV", icon: "📺", country: "🇮🇳" },
             { name: "Sony TV", icon: "📺", country: "🇮🇳" },
-            // Germaniya
             { name: "ARD", icon: "📺", country: "🇩🇪" },
             { name: "ZDF", icon: "📺", country: "🇩🇪" },
             { name: "RTL", icon: "📺", country: "🇩🇪" },
             { name: "SAT.1", icon: "📺", country: "🇩🇪" },
             { name: "ProSieben", icon: "📺", country: "🇩🇪" },
-            // Fransiya
             { name: "TF1", icon: "📺", country: "🇫🇷" },
             { name: "France 2", icon: "📺", country: "🇫🇷" },
             { name: "France 3", icon: "📺", country: "🇫🇷" },
             { name: "M6", icon: "📺", country: "🇫🇷" },
-            // Arab
             { name: "Al Jazeera", icon: "📰", country: "🇶🇦" },
             { name: "Al Arabiya", icon: "📰", country: "🇸🇦" },
             { name: "MBC 1", icon: "📺", country: "🇸🇦" },
             { name: "MBC 2", icon: "📺", country: "🇸🇦" },
-            // Qozog'iston
             { name: "Qazaqstan", icon: "📺", country: "🇰🇿" },
             { name: "Khabar 24", icon: "📺", country: "🇰🇿" },
             { name: "KTK", icon: "📺", country: "🇰🇿" },
-            // Qirg'iziston
             { name: "KTRK", icon: "📺", country: "🇰🇬" },
             { name: "ElTR", icon: "📺", country: "🇰🇬" },
-            // Tojikiston
             { name: "TV Tojikiston", icon: "📺", country: "🇹🇯" },
             { name: "Safina", icon: "📺", country: "🇹🇯" },
-            // Turkmaniston
             { name: "Altyn Asyr", icon: "📺", country: "🇹🇲" },
             { name: "Miras", icon: "📺", country: "🇹🇲" },
-            // Ozarbayjon
             { name: "AzTV", icon: "📺", country: "🇦🇿" },
             { name: "İTV", icon: "📺", country: "🇦🇿" },
-            // Boshqa xalqaro
             { name: "Euronews", icon: "📰", country: "🇪🇺" },
             { name: "BBC World News", icon: "📰", country: "🇬🇧" },
             { name: "CNN International", icon: "📰", country: "🇺🇸" },
@@ -2604,36 +2716,26 @@
             { name: "NHK World", icon: "📰", country: "🇯🇵" },
             { name: "CGTN", icon: "📰", country: "🇨🇳" },
             { name: "TeleSur", icon: "📰", country: "🇻🇪" },
-            // Ispaniya
             { name: "TVE 1", icon: "📺", country: "🇪🇸" },
             { name: "TVE 2", icon: "📺", country: "🇪🇸" },
             { name: "Antena 3", icon: "📺", country: "🇪🇸" },
-            // Italiya
             { name: "RAI 1", icon: "📺", country: "🇮🇹" },
             { name: "RAI 2", icon: "📺", country: "🇮🇹" },
             { name: "Mediaset", icon: "📺", country: "🇮🇹" },
-            // Polsha
             { name: "TVP 1", icon: "📺", country: "🇵🇱" },
             { name: "TVP 2", icon: "📺", country: "🇵🇱" },
-            // Ukraina
             { name: "UA:Pershiy", icon: "📺", country: "🇺🇦" },
             { name: "STB", icon: "📺", country: "🇺🇦" },
-            // Ruminiya
             { name: "TVR 1", icon: "📺", country: "🇷🇴" },
             { name: "Antena 1", icon: "📺", country: "🇷🇴" },
-            // Gretsiya
             { name: "ERT 1", icon: "📺", country: "🇬🇷" },
             { name: "ERT 2", icon: "📺", country: "🇬🇷" },
-            // Isroil
             { name: "Kan 11", icon: "📺", country: "🇮🇱" },
             { name: "Kan 12", icon: "📺", country: "🇮🇱" },
-            // Misr
             { name: "Egypt TV", icon: "📺", country: "🇪🇬" },
             { name: "Cairo TV", icon: "📺", country: "🇪🇬" },
-            // Turkiya qo'shimcha
             { name: "Kanal 7", icon: "📺", country: "🇹🇷" },
             { name: "Ülke TV", icon: "📺", country: "🇹🇷" },
-            // Qo'shimcha
             { name: "Kazakhstan TV", icon: "📺", country: "🇰🇿" },
             { name: "Azerbaijan TV", icon: "📺", country: "🇦🇿" },
             { name: "Türkmenistan TV", icon: "📺", country: "🇹🇲" },
@@ -2646,7 +2748,6 @@
             { name: "Lithuania TV", icon: "📺", country: "🇱🇹" },
             { name: "Latvia TV", icon: "📺", country: "🇱🇻" },
             { name: "Estonia TV", icon: "📺", country: "🇪🇪" },
-            // Yana 30+ kanal
             { name: "Sky News UK", icon: "📰", country: "🇬🇧" },
             { name: "Bloomberg TV", icon: "📊", country: "🇺🇸" },
             { name: "CNBC", icon: "📊", country: "🇺🇸" },
@@ -2674,7 +2775,7 @@
             { name: "Boomerang", icon: "🔄", country: "🇺🇸" },
             { name: "NTV (Russia)", icon: "📺", country: "🇷🇺" },
             { name: "REN TV (Russia)", icon: "📺", country: "🇷🇺" },
-            { name: "TVK (Kazakh)", icon: "📺", country: "🇰🇿" },
+            { name: "TVK (Kazakh)", icon: "📺", country: "🇰🇿" }
         ];
 
         function renderTVChannels() {
@@ -2705,12 +2806,12 @@
         setInterval(updateDateTime, 1000);
         document.getElementById('regionSelect').value = 'Asia/Tashkent';
         changeRegion('Asia/Tashkent');
-        // Default theme — dark
         document.documentElement.setAttribute('data-theme', 'dark');
+        document.querySelector('input[name="timeFormat"][value="24"]').checked = true;
 
         setTimeout(() => {
-            showToast('🚀 IKROMJON Ai — 100 000+ funksiya, 200+ kanal tayyor!', 'success');
-        }, 1800);
+            showToast('🚀 IKROMJON Ai — Canva uslubi, 100 000+ funksiya, 200+ kanal tayyor!', 'success');
+        }, 2000);
     </script>
 
 </body>
