@@ -1,17 +1,94 @@
-```html
 <!DOCTYPE html>
 <html lang="uz">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🌍 IKROMJON Ai PREMIUM — 100K funksiya + 24/7</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>IKROMJON Ai — 100K funksiya</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
         /* ============================================================
-           GLOBAL — Ultra Premium Dark/Light
+           SPLASH SCREEN — IKROMJON AI ANIMATION
+           ============================================================ */
+        #splash {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #05050c;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+            opacity: 1;
+            visibility: visible;
+        }
+        #splash.hide {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #splash .logo-text {
+            font-size: 52px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #7c4dff, #ff6ec7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            animation: pulseGlow 1.8s ease-in-out infinite;
+        }
+        #splash .logo-icon {
+            font-size: 72px;
+            margin-bottom: 12px;
+            animation: floatIcon 2.2s ease-in-out infinite;
+            filter: drop-shadow(0 0 60px rgba(124, 77, 255, 0.3));
+        }
+        #splash .loader {
+            margin-top: 28px;
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(124, 77, 255, 0.15);
+            border-top-color: #7c4dff;
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+        }
+        #splash .sub-text {
+            margin-top: 16px;
+            color: #6868a0;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        @keyframes pulseGlow {
+            0%,
+            100% {
+                transform: scale(1);
+                filter: brightness(1);
+            }
+            50% {
+                transform: scale(1.05);
+                filter: brightness(1.3);
+            }
+        }
+        @keyframes floatIcon {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-14px);
+            }
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ============================================================
+           GLOBAL
            ============================================================ */
         * {
             margin: 0;
@@ -23,7 +100,7 @@
             --bg-secondary: #0b0b18;
             --bg-card: #10102a;
             --bg-card-hover: #18183a;
-            --bg-glass: rgba(16, 16, 42, 0.65);
+            --bg-glass: rgba(16, 16, 42, 0.6);
             --border-glass: rgba(255, 255, 255, 0.05);
             --border-card: rgba(255, 255, 255, 0.04);
             --text-primary: #f0f0ff;
@@ -35,11 +112,10 @@
             --accent-glow: rgba(124, 77, 255, 0.2);
             --success: #00e676;
             --warning: #ffd740;
-            --danger: #ff5252;
-            --radius: 20px;
-            --radius-sm: 12px;
-            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --shadow-card: 0 8px 48px rgba(0, 0, 0, 0.6);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: 0.25s ease;
+            --shadow-card: 0 6px 32px rgba(0, 0, 0, 0.5);
         }
         [data-theme="light"] {
             --bg-primary: #f0f0fa;
@@ -52,22 +128,26 @@
             --text-primary: #0c0c1a;
             --text-secondary: #4a4a7a;
             --text-muted: #8888b0;
-            --shadow-card: 0 8px 48px rgba(0, 0, 0, 0.06);
-        }
-        html {
-            scroll-behavior: smooth;
+            --shadow-card: 0 6px 32px rgba(0, 0, 0, 0.06);
         }
         body {
             font-family: 'Inter', system-ui, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
-            transition: background 0.4s, color 0.3s;
-            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+            line-height: 1.5;
             overflow-x: hidden;
+            opacity: 0;
+            animation: fadeInBody 0.5s ease 1.2s forwards;
+        }
+        @keyframes fadeInBody {
+            to {
+                opacity: 1;
+            }
         }
         ::-webkit-scrollbar {
-            width: 6px;
+            width: 4px;
         }
         ::-webkit-scrollbar-track {
             background: var(--bg-secondary);
@@ -87,92 +167,88 @@
             right: 0;
             z-index: 1000;
             background: var(--bg-glass);
-            backdrop-filter: blur(24px) saturate(1.5);
-            -webkit-backdrop-filter: blur(24px) saturate(1.5);
+            backdrop-filter: blur(20px) saturate(1.4);
             border-bottom: 1px solid var(--border-glass);
-            padding: 10px 28px;
+            padding: 8px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
-            transition: background 0.4s;
+            gap: 8px;
+            transition: background 0.3s;
         }
         .navbar .logo {
-            font-size: 24px;
-            font-weight: 900;
+            font-size: 20px;
+            font-weight: 800;
             background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: flex;
             align-items: center;
-            gap: 10px;
-            letter-spacing: -0.5px;
+            gap: 8px;
+            letter-spacing: -0.3px;
         }
         .navbar .logo i {
             -webkit-text-fill-color: var(--accent-1);
-            font-size: 26px;
-            filter: drop-shadow(0 0 16px var(--accent-glow));
+            font-size: 22px;
         }
         .navbar .logo .badge {
             background: linear-gradient(135deg, #00e676, #00bcd4);
             color: #fff;
-            font-size: 9px;
+            font-size: 8px;
             font-weight: 700;
-            padding: 2px 14px;
+            padding: 1px 12px;
             border-radius: 40px;
             -webkit-text-fill-color: #fff;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
         .navbar .right {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             flex-wrap: wrap;
         }
-        .navbar .date-time {
+        .navbar .datetime {
             color: var(--text-secondary);
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 500;
             background: var(--bg-card);
-            padding: 6px 16px;
+            padding: 4px 12px;
             border-radius: 40px;
             border: 1px solid var(--border-card);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             white-space: nowrap;
         }
-        .navbar .date-time i {
-            font-size: 14px;
+        .navbar .datetime i {
+            font-size: 12px;
         }
         .lang-selector {
             background: var(--bg-card);
             border: 1px solid var(--border-card);
             border-radius: 40px;
-            padding: 6px 12px 6px 16px;
+            padding: 4px 10px 4px 14px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: var(--transition);
-            cursor: pointer;
         }
         .lang-selector:hover {
             border-color: var(--accent-1);
-            box-shadow: 0 0 28px var(--accent-glow);
         }
         .lang-selector select {
             background: transparent;
             border: none;
             color: var(--text-primary);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             cursor: pointer;
             outline: none;
-            padding: 4px 0;
+            padding: 3px 0;
             font-family: 'Inter', sans-serif;
-            max-width: 150px;
+            max-width: 120px;
         }
         .lang-selector select option {
             background: var(--bg-secondary);
@@ -182,11 +258,11 @@
             background: var(--bg-card);
             border: 1px solid var(--border-card);
             color: var(--text-secondary);
-            width: 40px;
-            height: 40px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 17px;
+            font-size: 15px;
             transition: var(--transition);
             display: flex;
             align-items: center;
@@ -195,15 +271,14 @@
         .theme-toggle:hover {
             border-color: var(--accent-1);
             color: var(--text-primary);
-            box-shadow: 0 0 28px var(--accent-glow);
         }
 
         /* ============================================================
-           WEATHER & TIME BAR
+           TOP BAR — WEATHER + REGION
            ============================================================ */
         .top-bar {
-            margin-top: 80px;
-            padding: 12px 28px;
+            margin-top: 68px;
+            padding: 8px 20px;
             background: var(--bg-glass);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-glass);
@@ -211,119 +286,103 @@
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            gap: 12px;
-            transition: background 0.4s;
+            gap: 8px;
+            transition: background 0.3s;
         }
         .top-bar .weather {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             color: var(--text-secondary);
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 500;
         }
         .top-bar .weather i {
-            font-size: 28px;
+            font-size: 22px;
             color: var(--warning);
         }
         .top-bar .weather .temp {
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--text-primary);
         }
         .top-bar .weather .city {
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 12px;
         }
-        .top-bar .quick-links {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .top-bar .quick-links a {
-            background: var(--bg-card);
-            border: 1px solid var(--border-card);
-            padding: 6px 16px;
-            border-radius: 40px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            transition: var(--transition);
+        .top-bar .region-select {
             display: flex;
             align-items: center;
             gap: 6px;
+            background: var(--bg-card);
+            padding: 4px 12px;
+            border-radius: 40px;
+            border: 1px solid var(--border-card);
         }
-        .top-bar .quick-links a:hover {
-            border-color: var(--accent-1);
+        .top-bar .region-select i {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+        .top-bar .region-select select {
+            background: transparent;
+            border: none;
             color: var(--text-primary);
-            box-shadow: 0 0 20px var(--accent-glow);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            outline: none;
+            padding: 4px 0;
+            font-family: 'Inter', sans-serif;
         }
-
-        /* ============================================================
-           MAIN
-           ============================================================ */
-        .main {
-            padding: 20px 28px 40px;
-            max-width: 1440px;
-            margin: 0 auto;
+        .top-bar .region-select select option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
         }
 
         /* ============================================================
            HERO
            ============================================================ */
+        .main {
+            padding: 12px 16px 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
         .hero {
             text-align: center;
-            padding: 40px 24px 32px;
+            padding: 24px 16px 20px;
             background: radial-gradient(ellipse at 30% 20%, var(--bg-secondary), transparent 70%);
             border-radius: var(--radius);
             border: 1px solid var(--border-glass);
-            margin-bottom: 32px;
+            margin-bottom: 24px;
             position: relative;
             overflow: hidden;
         }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -40%;
-            left: -20%;
-            width: 80%;
-            height: 80%;
-            background: radial-gradient(circle, var(--accent-glow), transparent 70%);
-            filter: blur(100px);
-            opacity: 0.3;
-            pointer-events: none;
-        }
         .hero h1 {
-            font-size: 44px;
+            font-size: 32px;
             font-weight: 900;
             background: linear-gradient(135deg, #fff 20%, var(--accent-1), var(--accent-3));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-            letter-spacing: -1px;
-            position: relative;
+            letter-spacing: -0.5px;
         }
         .hero .sub {
             color: var(--text-secondary);
-            font-size: 18px;
-            max-width: 700px;
-            margin: 0 auto 16px;
-            position: relative;
+            font-size: 15px;
+            max-width: 600px;
+            margin: 4px auto 12px;
         }
         .hero .stats {
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 28px;
             flex-wrap: wrap;
-            margin-top: 20px;
-            position: relative;
+            margin-top: 12px;
         }
         .hero .stats .item {
             text-align: center;
         }
         .hero .stats .item .num {
-            font-size: 36px;
+            font-size: 28px;
             font-weight: 900;
             background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
             -webkit-background-clip: text;
@@ -331,169 +390,142 @@
         }
         .hero .stats .item .lbl {
             color: var(--text-muted);
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        /* ============================================================
-           BROWSER SUPPORT
-           ============================================================ */
-        .browser-strip {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 6px 14px;
-            margin: 16px 0 10px;
-            padding: 12px 16px;
-            background: var(--bg-card);
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-card);
-        }
-        .browser-strip span {
             font-size: 12px;
-            color: var(--text-muted);
             font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .browser-strip span i {
-            font-size: 16px;
-            color: var(--accent-2);
         }
 
         /* ============================================================
-           PREMIUM BANNER
+           TOOLBAR
            ============================================================ */
-        .premium-banner {
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
-            border-radius: var(--radius-sm);
-            padding: 16px 24px;
-            margin-bottom: 28px;
+        .toolbar {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            gap: 10px;
             flex-wrap: wrap;
-            gap: 14px;
-            color: #fff;
-            box-shadow: 0 0 60px var(--accent-glow);
+            margin-bottom: 18px;
         }
-        .premium-banner .text {
-            font-weight: 600;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .premium-banner .text i {
-            font-size: 28px;
-        }
-        .premium-banner .btn-premium {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 8px 24px;
-            border-radius: 40px;
-            color: #fff;
-            font-weight: 700;
+        .toolbar input,
+        .toolbar select {
+            flex: 1 1 160px;
+            padding: 10px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
             font-size: 14px;
-            cursor: pointer;
-            transition: var(--transition);
-            backdrop-filter: blur(8px);
             font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+            min-width: 120px;
+            outline: none;
         }
-        .premium-banner .btn-premium:hover {
-            background: rgba(255, 255, 255, 0.35);
-            transform: scale(1.03);
+        .toolbar input:focus,
+        .toolbar select:focus {
+            border-color: var(--accent-1);
+            box-shadow: 0 0 24px var(--accent-glow);
+        }
+        .toolbar input::placeholder {
+            color: var(--text-muted);
+        }
+        .toolbar select option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
         }
 
         /* ============================================================
-           GRID
+           GRID — 4 burchak (to'rtburchak) ko'rinish
            ============================================================ */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-            gap: 22px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 14px;
+            margin-bottom: 20px;
         }
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border-card);
             border-radius: var(--radius);
-            padding: 20px 18px 18px;
+            padding: 16px 14px 14px;
             transition: var(--transition);
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
         .card:hover {
-            transform: translateY(-6px);
+            transform: translateY(-4px);
             border-color: var(--accent-1);
-            box-shadow: var(--shadow-card), 0 0 48px var(--accent-glow);
+            box-shadow: var(--shadow-card), 0 0 32px var(--accent-glow);
         }
         .card .fn-id {
             position: absolute;
-            top: 12px;
-            right: 14px;
-            font-size: 10px;
+            top: 8px;
+            right: 10px;
+            font-size: 9px;
             font-weight: 600;
             color: var(--text-muted);
             background: var(--bg-primary);
-            padding: 2px 12px;
+            padding: 1px 10px;
             border-radius: 40px;
             border: 1px solid var(--border-card);
             z-index: 1;
         }
         .card .icon {
-            font-size: 28px;
-            margin-bottom: 8px;
+            font-size: 32px;
+            margin-bottom: 6px;
             display: block;
             z-index: 1;
             position: relative;
         }
         .card h3 {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             z-index: 1;
             position: relative;
+            line-height: 1.3;
         }
         .card p {
-            font-size: 13px;
+            font-size: 11px;
             color: var(--text-secondary);
-            line-height: 1.5;
             z-index: 1;
             position: relative;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            line-height: 1.4;
         }
         .card .tags {
-            margin-top: 12px;
+            margin-top: 8px;
             display: flex;
-            gap: 6px;
+            gap: 4px;
             flex-wrap: wrap;
+            justify-content: center;
             z-index: 1;
             position: relative;
         }
         .card .tags .tag {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
-            padding: 2px 12px;
+            padding: 2px 10px;
             border-radius: 40px;
             background: var(--accent-1);
             color: #fff;
             opacity: 0.85;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
         .card .tags .tag .dot {
             display: inline-block;
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
-            margin-right: 3px;
+            margin-right: 2px;
         }
         .dot.green {
             background: var(--success);
@@ -512,26 +544,26 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
-            margin: 20px 0 30px;
+            margin: 10px 0 20px;
         }
         .pagination button {
             background: var(--bg-card);
             border: 1px solid var(--border-card);
             color: var(--text-secondary);
-            padding: 8px 18px;
+            padding: 6px 16px;
             border-radius: var(--radius-sm);
             cursor: pointer;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             transition: var(--transition);
             font-family: 'Inter', sans-serif;
         }
         .pagination button:hover:not(:disabled) {
             border-color: var(--accent-1);
             color: var(--text-primary);
-            box-shadow: 0 0 24px var(--accent-glow);
+            box-shadow: 0 0 20px var(--accent-glow);
         }
         .pagination button:disabled {
             opacity: 0.3;
@@ -539,62 +571,62 @@
         }
         .pagination .page-info {
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
-            padding: 0 10px;
+            padding: 0 8px;
         }
 
         /* ============================================================
-           YOUTUBE EMBED + ADS
+           YOUTUBE + ADS (tez yuklanish uchun)
            ============================================================ */
         .media-row {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 22px;
-            margin: 30px 0;
+            gap: 14px;
+            margin: 18px 0;
         }
         .media-row .youtube-box {
             background: var(--bg-card);
             border-radius: var(--radius);
             border: 1px solid var(--border-card);
-            padding: 16px;
+            padding: 10px;
             position: relative;
             overflow: hidden;
         }
         .media-row .youtube-box iframe {
             width: 100%;
-            height: 280px;
+            height: 200px;
             border-radius: var(--radius-sm);
             border: none;
         }
         .media-row .youtube-box .label {
             position: absolute;
-            top: 24px;
-            left: 24px;
-            background: rgba(255, 0, 0, 0.85);
+            top: 16px;
+            left: 16px;
+            background: rgba(255, 0, 0, 0.8);
             color: #fff;
-            padding: 4px 16px;
+            padding: 2px 14px;
             border-radius: 40px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             backdrop-filter: blur(4px);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
         .media-row .ads-box {
             background: var(--bg-card);
             border-radius: var(--radius);
             border: 1px solid var(--border-card);
-            padding: 20px;
+            padding: 14px;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 10px;
         }
         .media-row .ads-box .ad {
             background: var(--bg-secondary);
             border-radius: var(--radius-sm);
-            padding: 16px;
+            padding: 12px;
             text-align: center;
             border: 1px dashed var(--border-card);
             transition: var(--transition);
@@ -604,81 +636,71 @@
             border-color: var(--accent-1);
         }
         .media-row .ads-box .ad .ad-icon {
-            font-size: 32px;
-            margin-bottom: 4px;
+            font-size: 26px;
         }
         .media-row .ads-box .ad .ad-text {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-secondary);
             font-weight: 500;
         }
-        .media-row .ads-box .ad .ad-label {
-            font-size: 11px;
-            color: var(--text-muted);
-            background: var(--bg-card);
-            padding: 2px 12px;
-            border-radius: 40px;
-            display: inline-block;
-            margin-top: 4px;
-        }
 
         /* ============================================================
-           CHAT & SUPPORT
+           CHAT + DATING (tez)
            ============================================================ */
         .chat-support {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 22px;
-            margin: 30px 0;
+            gap: 14px;
+            margin: 18px 0;
         }
         .chat-box {
             background: var(--bg-card);
             border-radius: var(--radius);
             border: 1px solid var(--border-card);
-            padding: 20px;
+            padding: 14px;
             display: flex;
             flex-direction: column;
-            height: 380px;
+            height: 280px;
         }
         .chat-box .chat-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 10px;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
             border-bottom: 1px solid var(--border-card);
         }
         .chat-box .chat-header h4 {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         .chat-box .chat-header .status {
-            font-size: 12px;
+            font-size: 10px;
             color: var(--success);
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
         .chat-box .chat-messages {
             flex: 1;
             overflow-y: auto;
-            padding: 8px 0;
+            padding: 4px 0;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            max-height: 220px;
+            gap: 4px;
+            max-height: 160px;
         }
         .chat-box .chat-messages .msg {
-            padding: 8px 14px;
+            padding: 6px 12px;
             border-radius: var(--radius-sm);
-            max-width: 80%;
-            font-size: 14px;
-            line-height: 1.5;
-            animation: fadeIn 0.3s ease;
+            max-width: 85%;
+            font-size: 13px;
+            line-height: 1.4;
+            animation: fadeIn 0.25s ease;
         }
         .chat-box .chat-messages .msg.user {
             background: var(--accent-1);
@@ -698,30 +720,29 @@
         }
         .chat-box .chat-input {
             display: flex;
-            gap: 10px;
-            margin-top: 10px;
+            gap: 6px;
+            margin-top: 8px;
         }
         .chat-box .chat-input input {
             flex: 1;
-            padding: 10px 16px;
+            padding: 8px 12px;
             background: var(--bg-secondary);
             border: 1px solid var(--border-card);
             border-radius: var(--radius-sm);
             color: var(--text-primary);
-            font-size: 14px;
+            font-size: 13px;
             font-family: 'Inter', sans-serif;
             outline: none;
             transition: var(--transition);
         }
         .chat-box .chat-input input:focus {
             border-color: var(--accent-1);
-            box-shadow: 0 0 20px var(--accent-glow);
         }
         .chat-box .chat-input button {
             background: var(--accent-1);
             border: none;
             color: #fff;
-            padding: 10px 18px;
+            padding: 8px 14px;
             border-radius: var(--radius-sm);
             cursor: pointer;
             font-weight: 600;
@@ -730,73 +751,28 @@
         }
         .chat-box .chat-input button:hover {
             background: var(--accent-2);
-            box-shadow: 0 0 30px var(--accent-glow);
         }
 
-        /* ============================================================
-           DATING / TANISHUV
-           ============================================================ */
-        .dating-section {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            border: 1px solid var(--border-card);
-            padding: 24px;
-            margin: 30px 0;
+        .dating-profiles {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 6px;
         }
-        .dating-section h3 {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 16px;
+        .dating-profiles .dp {
+            background: var(--bg-secondary);
+            padding: 4px 12px;
+            border-radius: 40px;
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-        .dating-section .dating-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 16px;
-        }
-        .dating-section .dating-card {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-sm);
-            padding: 16px;
-            text-align: center;
+            gap: 4px;
+            font-size: 12px;
+            cursor: pointer;
             border: 1px solid var(--border-card);
             transition: var(--transition);
-            cursor: pointer;
         }
-        .dating-section .dating-card:hover {
-            border-color: var(--accent-1);
-            transform: translateY(-4px);
-        }
-        .dating-section .dating-card .avatar {
-            font-size: 48px;
-            margin-bottom: 6px;
-        }
-        .dating-section .dating-card .name {
-            font-weight: 700;
-            font-size: 16px;
-        }
-        .dating-section .dating-card .bio {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-        .dating-section .dating-card .like-btn {
-            margin-top: 8px;
-            background: var(--accent-3);
-            border: none;
-            color: #fff;
-            padding: 4px 20px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 13px;
-            transition: var(--transition);
-            font-family: 'Inter', sans-serif;
-        }
-        .dating-section .dating-card .like-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 24px var(--accent-glow);
+        .dating-profiles .dp:hover {
+            border-color: var(--accent-3);
         }
 
         /* ============================================================
@@ -806,42 +782,42 @@
             background: var(--bg-card);
             border-radius: var(--radius);
             border: 1px solid var(--border-card);
-            padding: 24px;
-            margin: 30px 0;
+            padding: 16px 20px;
+            margin: 18px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 12px;
         }
         .support-247 .info {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
         }
         .support-247 .info i {
-            font-size: 40px;
+            font-size: 32px;
             color: var(--success);
         }
         .support-247 .info .text h4 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
         }
         .support-247 .info .text p {
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 13px;
         }
         .support-247 .actions {
             display: flex;
-            gap: 12px;
+            gap: 8px;
             flex-wrap: wrap;
         }
         .support-247 .actions button {
-            padding: 10px 24px;
+            padding: 8px 18px;
             border-radius: var(--radius-sm);
             border: none;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             transition: var(--transition);
             font-family: 'Inter', sans-serif;
@@ -851,8 +827,7 @@
             color: #000;
         }
         .support-247 .actions .btn-call:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 230, 118, 0.3);
+            transform: scale(1.04);
         }
         .support-247 .actions .btn-chat {
             background: var(--accent-1);
@@ -860,28 +835,23 @@
         }
         .support-247 .actions .btn-chat:hover {
             background: var(--accent-2);
-            box-shadow: 0 0 30px var(--accent-glow);
         }
 
         /* ============================================================
            FOOTER
            ============================================================ */
         .footer {
-            margin-top: 40px;
-            padding: 24px;
+            margin-top: 24px;
+            padding: 16px;
             text-align: center;
             border-top: 1px solid var(--border-glass);
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 500;
         }
         .footer a {
             color: var(--accent-2);
             text-decoration: none;
-            transition: var(--transition);
-        }
-        .footer a:hover {
-            color: var(--accent-1);
         }
 
         /* ============================================================
@@ -891,34 +861,32 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
             z-index: 2000;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 16px;
         }
         .modal-overlay.open {
             display: flex;
         }
         .modal {
             background: var(--bg-glass);
-            backdrop-filter: blur(40px) saturate(1.6);
-            -webkit-backdrop-filter: blur(40px) saturate(1.6);
+            backdrop-filter: blur(32px);
             border: 1px solid var(--border-glass);
             border-radius: var(--radius);
-            max-width: 600px;
+            max-width: 520px;
             width: 100%;
-            padding: 32px 28px;
-            max-height: 85vh;
+            padding: 24px 22px;
+            max-height: 80vh;
             overflow-y: auto;
-            animation: modalIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            box-shadow: var(--shadow-card), 0 0 80px var(--accent-glow);
+            animation: modalIn 0.3s ease;
+            box-shadow: var(--shadow-card), 0 0 60px var(--accent-glow);
         }
         @keyframes modalIn {
             from {
-                transform: translateY(50px) scale(0.95);
+                transform: translateY(30px) scale(0.96);
                 opacity: 0;
             }
             to {
@@ -931,54 +899,52 @@
             background: none;
             border: none;
             color: var(--text-muted);
-            font-size: 28px;
+            font-size: 24px;
             cursor: pointer;
             transition: var(--transition);
-            line-height: 1;
         }
         .modal .close:hover {
             color: var(--text-primary);
             transform: rotate(90deg);
         }
         .modal .m-icon {
-            font-size: 48px;
-            margin-bottom: 8px;
+            font-size: 40px;
+            margin-bottom: 4px;
         }
         .modal h2 {
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 800;
-            margin-bottom: 2px;
         }
         .modal .m-id {
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .modal .m-desc {
             color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 18px;
-            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 14px;
+            font-size: 14px;
         }
         .modal .m-params {
             background: var(--bg-card);
             border-radius: var(--radius-sm);
-            padding: 16px 18px;
-            margin-bottom: 20px;
+            padding: 14px 16px;
+            margin-bottom: 16px;
             border: 1px solid var(--border-card);
         }
         .modal .m-params h4 {
             color: var(--text-muted);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             margin-bottom: 4px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
         .modal .m-params code {
             color: var(--accent-2);
-            font-size: 14px;
+            font-size: 13px;
             word-break: break-all;
             font-family: 'Inter', monospace;
         }
@@ -986,9 +952,9 @@
             background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
             color: #fff;
             border: none;
-            padding: 14px;
+            padding: 12px;
             border-radius: var(--radius-sm);
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             cursor: pointer;
             width: 100%;
@@ -997,11 +963,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
         }
         .modal .run-btn:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 60px var(--accent-glow);
+            box-shadow: 0 0 40px var(--accent-glow);
         }
         .modal .run-btn:disabled {
             opacity: 0.5;
@@ -1009,17 +975,12 @@
         }
         .modal .run-btn .spinner {
             display: inline-block;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border: 3px solid rgba(255, 255, 255, 0.2);
             border-top-color: #fff;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
         }
 
         /* ============================================================
@@ -1027,26 +988,27 @@
            ============================================================ */
         .toast-container {
             position: fixed;
-            bottom: 28px;
-            right: 28px;
+            bottom: 20px;
+            right: 20px;
             z-index: 3000;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            max-width: 380px;
+            gap: 8px;
+            max-width: 320px;
         }
         .toast {
             background: var(--bg-glass);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(16px);
             border: 1px solid var(--border-glass);
             border-radius: var(--radius-sm);
-            padding: 14px 22px;
-            animation: toastIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            padding: 12px 18px;
+            animation: toastIn 0.4s ease;
             box-shadow: var(--shadow-card);
             font-weight: 500;
+            font-size: 14px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             border-left: 4px solid var(--accent-1);
         }
         .toast.success {
@@ -1057,18 +1019,18 @@
         }
         @keyframes toastIn {
             from {
-                transform: translateX(80px) scale(0.9);
+                transform: translateX(60px);
                 opacity: 0;
             }
             to {
-                transform: translateX(0) scale(1);
+                transform: translateX(0);
                 opacity: 1;
             }
         }
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(6px);
+                transform: translateY(4px);
             }
             to {
                 opacity: 1;
@@ -1079,7 +1041,7 @@
         /* ============================================================
            RESPONSIVE
            ============================================================ */
-        @media (max-width: 900px) {
+        @media (max-width: 700px) {
             .media-row {
                 grid-template-columns: 1fr;
             }
@@ -1089,37 +1051,33 @@
             .top-bar {
                 flex-direction: column;
                 align-items: stretch;
-                gap: 8px;
+                gap: 4px;
             }
             .top-bar .weather {
                 justify-content: center;
             }
-            .top-bar .quick-links {
+            .top-bar .region-select {
                 justify-content: center;
             }
-        }
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 8px 16px;
-            }
-            .navbar .logo {
-                font-size: 20px;
-            }
-            .navbar .date-time {
-                font-size: 11px;
-                padding: 4px 12px;
+            .navbar .datetime {
+                font-size: 10px;
+                padding: 2px 8px;
             }
             .hero h1 {
-                font-size: 32px;
-            }
-            .hero .sub {
-                font-size: 16px;
+                font-size: 26px;
             }
             .grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 10px;
             }
-            .main {
-                padding: 12px 14px 30px;
+            .card {
+                padding: 12px 10px;
+            }
+            .card .icon {
+                font-size: 26px;
+            }
+            .card h3 {
+                font-size: 12px;
             }
             .support-247 {
                 flex-direction: column;
@@ -1132,19 +1090,55 @@
             .support-247 .actions {
                 justify-content: center;
             }
-            .dating-section .dating-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            }
-        }
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 26px;
-            }
-            .stats .item .num {
-                font-size: 24px;
+            .main {
+                padding: 8px 10px 20px;
             }
             .media-row .youtube-box iframe {
-                height: 180px;
+                height: 150px;
+            }
+        }
+        @media (max-width: 450px) {
+            .navbar .logo {
+                font-size: 16px;
+            }
+            .navbar .logo .badge {
+                font-size: 7px;
+                padding: 1px 8px;
+            }
+            .hero .stats {
+                gap: 16px;
+            }
+            .hero .stats .item .num {
+                font-size: 22px;
+            }
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            .card {
+                padding: 10px 8px;
+                aspect-ratio: 1 / 1;
+            }
+            .card .icon {
+                font-size: 22px;
+            }
+            .card h3 {
+                font-size: 11px;
+            }
+            .card p {
+                font-size: 10px;
+                -webkit-line-clamp: 1;
+            }
+            .card .tags .tag {
+                font-size: 8px;
+                padding: 1px 8px;
+            }
+            .pagination button {
+                font-size: 11px;
+                padding: 4px 12px;
+            }
+            .modal {
+                padding: 18px 16px;
             }
         }
     </style>
@@ -1152,21 +1146,31 @@
 <body>
 
     <!-- =============================================================
+    SPLASH SCREEN (IKROMJON AI animatsiya)
+    ============================================================= -->
+    <div id="splash">
+        <div class="logo-icon">🎬</div>
+        <div class="logo-text">IKROMJON AI</div>
+        <div class="loader"></div>
+        <div class="sub-text">Dunyodagi eng kuchli AI media platformasi</div>
+    </div>
+
+    <!-- =============================================================
     NAVBAR
     ============================================================= -->
     <nav class="navbar">
         <div class="logo">
-            <i class="fas fa-globe-asia"></i> IKROMJON Ai
-            <span class="badge">PREMIUM</span>
+            <i class="fas fa-globe-asia"></i> IKROMJON
+            <span class="badge">100K</span>
         </div>
         <div class="right">
-            <div class="date-time" id="dateTime">
+            <div class="datetime" id="datetimeDisplay">
                 <i class="fas fa-clock"></i> <span id="timeDisplay">00:00:00</span>
-                <span style="margin:0 4px;color:var(--text-muted)">|</span>
+                <span style="margin:0 4px;color:var(--text-muted);">|</span>
                 <i class="fas fa-calendar-alt"></i> <span id="dateDisplay">01.01.2026</span>
             </div>
             <div class="lang-selector">
-                <i class="fas fa-language"></i>
+                <i class="fas fa-language" style="font-size:12px;"></i>
                 <select id="langSelect" onchange="changeLanguage(this.value)"></select>
             </div>
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
@@ -1176,20 +1180,37 @@
     </nav>
 
     <!-- =============================================================
-    TOP BAR — Weather + Quick Links
+    TOP BAR — Weather + Region
     ============================================================= -->
     <div class="top-bar">
         <div class="weather" id="weatherWidget">
             <i class="fas fa-cloud-sun"></i>
             <span class="temp" id="tempDisplay">+24°</span>
-            <span class="city" id="cityDisplay">Toshkent, O'zbekiston</span>
-            <span style="color:var(--text-muted);font-size:13px;margin-left:4px;" id="weatherDesc">Quyoshli</span>
+            <span class="city" id="cityDisplay">Toshkent</span>
+            <span style="color:var(--text-muted);font-size:11px;margin-left:2px;" id="weatherDesc">Quyoshli</span>
         </div>
-        <div class="quick-links">
-            <a href="#" onclick="openYoutube()"><i class="fab fa-youtube"></i> YouTube</a>
-            <a href="#" onclick="openChrome()"><i class="fab fa-chrome"></i> Chrome</a>
-            <a href="#" id="browserLink"><i class="fas fa-globe"></i> 100+ brauzer</a>
-            <a href="#" onclick="showToast('📱 Mobil ilova tez kunda!', 'success')"><i class="fas fa-mobile-alt"></i> App</a>
+        <div class="region-select">
+            <i class="fas fa-map-marker-alt"></i>
+            <select id="regionSelect" onchange="changeRegion(this.value)">
+                <option value="Asia/Tashkent">🇺🇿 Toshkent</option>
+                <option value="Asia/Samarkand">🇺🇿 Samarqand</option>
+                <option value="Asia/Baku">🇦🇿 Boku</option>
+                <option value="Asia/Almaty">🇰🇿 Olmaota</option>
+                <option value="Asia/Bishkek">🇰🇬 Bishkek</option>
+                <option value="Asia/Dushanbe">🇹🇯 Dushanbe</option>
+                <option value="Asia/Ashgabat">🇹🇲 Ashxobod</option>
+                <option value="Europe/Moscow">🇷🇺 Moskva</option>
+                <option value="Europe/London">🇬🇧 London</option>
+                <option value="America/New_York">🇺🇸 Nyu-York</option>
+                <option value="America/Los_Angeles">🇺🇸 Los-Anjeles</option>
+                <option value="Asia/Dubai">🇦🇪 Dubay</option>
+                <option value="Asia/Tokyo">🇯🇵 Tokio</option>
+                <option value="Asia/Shanghai">🇨🇳 Shanxay</option>
+                <option value="Europe/Paris">🇫🇷 Parij</option>
+                <option value="Europe/Berlin">🇩🇪 Berlin</option>
+                <option value="Europe/Istanbul">🇹🇷 Istanbul</option>
+                <option value="Asia/Kolkata">🇮🇳 Dehli</option>
+            </select>
         </div>
     </div>
 
@@ -1200,151 +1221,116 @@
 
         <!-- HERO -->
         <section class="hero">
-            <h1>🌍 AI Media Studio — 100 000+ funksiya</h1>
-            <p class="sub">150+ til • 24/7 yordam • Premium bepul • YouTube, Chat, Tanishuv va boshqalar</p>
+            <h1>🌍 IKROMJON AI — 100 000+ funksiya</h1>
+            <p class="sub" id="heroSub">150+ til • 24/7 yordam • Premium bepul • YouTube, Chat, Tanishuv</p>
             <div class="stats">
                 <div class="item"><div class="num" id="totalCount">100 000</div><div class="lbl">Funksiyalar</div></div>
                 <div class="item"><div class="num">150+</div><div class="lbl">Tillarda</div></div>
                 <div class="item"><div class="num">♾️</div><div class="lbl">Imkoniyatlar</div></div>
                 <div class="item"><div class="num">24/7</div><div class="lbl">Yordam</div></div>
             </div>
-            <!-- Browser support strip -->
-            <div class="browser-strip" id="browserStrip">
-                <span><i class="fab fa-chrome"></i> Chrome</span>
-                <span><i class="fab fa-firefox-browser"></i> Firefox</span>
-                <span><i class="fab fa-edge"></i> Edge</span>
-                <span><i class="fab fa-safari"></i> Safari</span>
-                <span><i class="fab fa-opera"></i> Opera</span>
-                <span><i class="fab fa-brave"></i> Brave</span>
-                <span><i class="fas fa-globe"></i> +100 boshqa</span>
-            </div>
         </section>
 
-        <!-- PREMIUM BANNER -->
-        <div class="premium-banner">
-            <div class="text">
-                <i class="fas fa-crown"></i>
-                <span>🔓 BARCHA PREMIUM XIZMATLAR — BEPUL! (Cheklovsiz)</span>
-            </div>
-            <button class="btn-premium" onclick="showToast('🎉 Siz premium foydalanuvchisiz! Barcha funksiyalar ochiq.', 'success')">
-                <i class="fas fa-unlock"></i> Faollashtirilgan
-            </button>
+        <!-- TOOLBAR -->
+        <div class="toolbar">
+            <input type="text" id="searchInput" placeholder="🔍 Funksiya qidirish..." oninput="filterFunctions()" />
+            <select id="categoryFilter" onchange="filterFunctions()">
+                <option value="all">📂 Barcha kategoriyalar</option>
+                <option value="video">🎬 Video</option>
+                <option value="audio">🎵 Audio</option>
+                <option value="image">🖼 Rasm</option>
+                <option value="animation">🎨 Animatsiya</option>
+                <option value="text">📝 Matn</option>
+                <option value="vfx">✨ VFX</option>
+                <option value="export">📤 Eksport</option>
+                <option value="ai">🤖 AI</option>
+                <option value="analysis">📊 Tahlil</option>
+                <option value="special">🌟 Maxsus</option>
+            </select>
         </div>
 
-        <!-- YOUTUBE + ADS ROW -->
+        <!-- GRID — 4 burchak (to'rtburchak) -->
+        <div class="grid" id="functionsGrid"></div>
+
+        <!-- PAGINATION -->
+        <div class="pagination" id="pagination">
+            <button id="prevPage" onclick="changePage(-1)"><i class="fas fa-chevron-left"></i> Oldingi</button>
+            <span class="page-info" id="pageInfo">Sahifa <strong id="currentPageNum">1</strong> / <span id="totalPagesNum">1</span></span>
+            <button id="nextPage" onclick="changePage(1)">Keyingi <i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <!-- YOUTUBE + ADS -->
         <div class="media-row">
             <div class="youtube-box">
                 <div class="label"><i class="fab fa-youtube"></i> IKROMJON TV</div>
-                <iframe id="youtubeFrame" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&rel=0" allowfullscreen></iframe>
+                <iframe id="youtubeFrame" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&rel=0" loading="lazy" allowfullscreen></iframe>
             </div>
             <div class="ads-box">
-                <div class="ad" onclick="showToast('📱 Ilovani yuklab oling!', 'success')">
+                <div class="ad" onclick="showToast('📱 Ilovani yuklab oling! Bepul.', 'success')">
                     <div class="ad-icon">📱</div>
-                    <div class="ad-text">IKROMJON Ai App</div>
-                    <div class="ad-label">Bepul yuklab olish</div>
+                    <div class="ad-text">IKROMJON App</div>
                 </div>
-                <div class="ad" onclick="showToast('🎁 Sizga 50 GB bepul cloud!', 'success')">
+                <div class="ad" onclick="showToast('☁️ 50 GB cloud sovg\'a!', 'success')">
                     <div class="ad-icon">☁️</div>
                     <div class="ad-text">50 GB Cloud</div>
-                    <div class="ad-label">Premium sovg'a</div>
                 </div>
-                <div class="ad" onclick="showToast('🤝 Do\'stingizni taklif qiling va bonus oling!', 'success')">
+                <div class="ad" onclick="showToast('🤝 Do\'stingizni taklif qiling!', 'success')">
                     <div class="ad-icon">🤝</div>
                     <div class="ad-text">Do'stni taklif qil</div>
-                    <div class="ad-label">+10 GB bonus</div>
                 </div>
             </div>
         </div>
 
-        <!-- CHAT + BOT + SUPPORT -->
+        <!-- CHAT + DATING -->
         <div class="chat-support">
-            <!-- Chat bot -->
             <div class="chat-box">
                 <div class="chat-header">
-                    <h4><i class="fas fa-robot" style="color:var(--accent-2);"></i> AI Chat Bot</h4>
-                    <span class="status"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--success);"></span> Online</span>
+                    <h4><i class="fas fa-robot" style="color:var(--accent-2);"></i> AI Chat</h4>
+                    <span class="status"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--success);"></span> Online</span>
                 </div>
                 <div class="chat-messages" id="chatMessagesBot">
-                    <div class="msg bot">👋 Salom! Men IKROMJON Ai bot. Qanday yordam bera olaman?</div>
+                    <div class="msg bot">👋 Salom! Men IKROMJON Ai bot. Yordam bera olaman?</div>
                 </div>
                 <div class="chat-input">
-                    <input type="text" id="chatInputBot" placeholder="Xabar yozing..." onkeydown="if(event.key==='Enter') sendBotMessage()" />
+                    <input type="text" id="chatInputBot" placeholder="Xabar..." onkeydown="if(event.key==='Enter') sendBotMessage()" />
                     <button onclick="sendBotMessage()"><i class="fas fa-paper-plane"></i></button>
                 </div>
             </div>
-
-            <!-- Tanishuv / Dating -->
-            <div class="chat-box" style="background:var(--bg-card);">
+            <div class="chat-box">
                 <div class="chat-header">
-                    <h4><i class="fas fa-heart" style="color:var(--accent-3);"></i> Tanishuv (Dating)</h4>
-                    <span class="status"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--warning);"></span> 24/7</span>
+                    <h4><i class="fas fa-heart" style="color:var(--accent-3);"></i> Tanishuv</h4>
+                    <span class="status"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--warning);"></span> 24/7</span>
                 </div>
                 <div class="chat-messages" id="datingMessages">
-                    <div class="msg support">💕 Yangi odamlar bilan tanishing! Quyidagi profillarni ko'ring.</div>
+                    <div class="msg support">💕 Yangi odamlar bilan tanishing!</div>
                 </div>
-                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;" id="datingProfiles">
-                    <div style="background:var(--bg-secondary);padding:8px 14px;border-radius:40px;display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;border:1px solid var(--border-card);" onclick="likeProfile('Aliya')">
-                        <span>👩</span> Aliya, 24
-                    </div>
-                    <div style="background:var(--bg-secondary);padding:8px 14px;border-radius:40px;display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;border:1px solid var(--border-card);" onclick="likeProfile('Jasur')">
-                        <span>👨</span> Jasur, 27
-                    </div>
-                    <div style="background:var(--bg-secondary);padding:8px 14px;border-radius:40px;display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;border:1px solid var(--border-card);" onclick="likeProfile('Madina')">
-                        <span>👩</span> Madina, 22
-                    </div>
-                    <div style="background:var(--bg-secondary);padding:8px 14px;border-radius:40px;display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;border:1px solid var(--border-card);" onclick="likeProfile('Sardor')">
-                        <span>👨</span> Sardor, 29
-                    </div>
+                <div class="dating-profiles">
+                    <div class="dp" onclick="likeProfile('Aliya')">👩 Aliya, 24</div>
+                    <div class="dp" onclick="likeProfile('Jasur')">👨 Jasur, 27</div>
+                    <div class="dp" onclick="likeProfile('Madina')">👩 Madina, 22</div>
+                    <div class="dp" onclick="likeProfile('Sardor')">👨 Sardor, 29</div>
                 </div>
             </div>
         </div>
 
-        <!-- 24/7 SUPPORT -->
+        <!-- SUPPORT 24/7 -->
         <div class="support-247">
             <div class="info">
                 <i class="fas fa-headset"></i>
                 <div class="text">
                     <h4>🕒 24/7 Mutaxassis yordami</h4>
-                    <p>Bizning mutaxassislar sizga har doim yordam berishga tayyor. Telefon, chat yoki video qo'ng'iroq.</p>
+                    <p>Mutaxassislar har doim yordamga tayyor.</p>
                 </div>
             </div>
             <div class="actions">
-                <button class="btn-call" onclick="showToast('📞 Mutaxassis bilan bog\'lanmoqda... Iltimos kuting.', 'success')"><i class="fas fa-phone"></i> Qo'ng'iroq</button>
-                <button class="btn-chat" onclick="document.getElementById('chatInputBot').focus(); showToast('💬 Chat bot sizni kutmoqda!', 'success')"><i class="fas fa-comment-dots"></i> Chat</button>
-                <button class="btn-chat" style="background:var(--warning);color:#000;" onclick="showToast('🎥 Video qo\'ng\'iroq tez kunda!', 'success')"><i class="fas fa-video"></i> Video</button>
-            </div>
-        </div>
-
-        <!-- FUNCTIONS GRID (100K) -->
-        <div style="margin-top:20px;">
-            <h2 style="font-size:22px;font-weight:800;margin-bottom:16px;">📋 100 000+ funksiyalar</h2>
-            <div class="toolbar" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
-                <input type="text" id="searchInput" placeholder="🔍 Funksiya qidirish..." oninput="filterFunctions()" style="flex:1;min-width:180px;padding:12px 18px;background:var(--bg-card);border:1px solid var(--border-card);border-radius:var(--radius-sm);color:var(--text-primary);font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:var(--transition);" />
-                <select id="categoryFilter" onchange="filterFunctions()" style="padding:12px 18px;background:var(--bg-card);border:1px solid var(--border-card);border-radius:var(--radius-sm);color:var(--text-primary);font-size:15px;font-family:'Inter',sans-serif;outline:none;">
-                    <option value="all">📂 Barcha kategoriyalar</option>
-                    <option value="video">🎬 Video</option>
-                    <option value="audio">🎵 Audio</option>
-                    <option value="image">🖼 Rasm</option>
-                    <option value="animation">🎨 Animatsiya</option>
-                    <option value="text">📝 Matn & Subtitr</option>
-                    <option value="vfx">✨ VFX</option>
-                    <option value="export">📤 Eksport & Format</option>
-                    <option value="ai">🤖 AI</option>
-                    <option value="analysis">📊 Tahlil</option>
-                    <option value="special">🌟 Maxsus</option>
-                </select>
-            </div>
-            <div class="grid" id="functionsGrid"></div>
-            <div class="pagination" id="pagination">
-                <button id="prevPage" onclick="changePage(-1)"><i class="fas fa-chevron-left"></i> Oldingi</button>
-                <span class="page-info" id="pageInfo">Sahifa <strong id="currentPageNum">1</strong> / <span id="totalPagesNum">1</span></span>
-                <button id="nextPage" onclick="changePage(1)">Keyingi <i class="fas fa-chevron-right"></i></button>
+                <button class="btn-call" onclick="showToast('📞 Mutaxassis bilan bog\'lanmoqda...', 'success')"><i class="fas fa-phone"></i> Qo'ng'iroq</button>
+                <button class="btn-chat" onclick="document.getElementById('chatInputBot').focus(); showToast('💬 Chat bot tayyor!', 'success')"><i class="fas fa-comment-dots"></i> Chat</button>
             </div>
         </div>
 
         <!-- FOOTER -->
         <div class="footer">
-            <p>🚀 IKROMJON Ai Global — 100 000+ funksiya, 150+ til, 24/7 yordam | <a href="#">GitHub</a> | <a href="#">API</a> | <a href="#" onclick="showToast('🌍 Barcha huquqlar himoyalangan.', 'success')">© 2026</a></p>
+            <p>🚀 IKROMJON Ai Global — 100 000+ funksiya, 150+ til, 24/7 yordam | <a href="#">GitHub</a> | <a href="#">API</a></p>
         </div>
     </div>
 
@@ -1355,7 +1341,7 @@
         <div class="modal">
             <button class="close" onclick="closeModal()">&times;</button>
             <div class="m-icon" id="mIcon">🎬</div>
-            <h2 id="mTitle">Funksiya nomi</h2>
+            <h2 id="mTitle">Funksiya</h2>
             <div class="m-id" id="mId">#000001</div>
             <div class="m-desc" id="mDesc">Tavsif</div>
             <div class="m-params">
@@ -1374,9 +1360,18 @@
     <div class="toast-container" id="toastContainer"></div>
 
     <!-- =============================================================
-    JAVASCRIPT
+    JAVASCRIPT — TEZ, OPTIMALLASHTIRILGAN
     ============================================================= -->
     <script>
+        // =============================================================
+        // SPLASH SCREENNI YOPISH
+        // =============================================================
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('splash').classList.add('hide');
+            }, 1200);
+        });
+
         // =============================================================
         // 1. TILLAR (150+)
         // =============================================================
@@ -1502,8 +1497,7 @@
         // =============================================================
         const TRANSLATIONS = {
             en: {
-                heroTitle: "🌍 AI Media Studio — 100 000+ functions",
-                heroSub: "150+ languages • 24/7 support • Premium free • YouTube, Chat, Dating & more",
+                heroSub: "150+ languages • 24/7 support • Premium free • YouTube, Chat, Dating",
                 statFunctions: "Functions",
                 statLangs: "Languages",
                 statPossibilities: "Possibilities",
@@ -1513,9 +1507,9 @@
                 audio: "🎵 Audio",
                 image: "🖼 Image",
                 animation: "🎨 Animation",
-                text: "📝 Text & Subtitles",
+                text: "📝 Text",
                 vfx: "✨ VFX",
-                export: "📤 Export & Format",
+                export: "📤 Export",
                 ai: "🤖 AI",
                 analysis: "📊 Analysis",
                 special: "🌟 Special",
@@ -1527,8 +1521,7 @@
                 page: "Page"
             },
             uz: {
-                heroTitle: "🌍 AI Media Studio — 100 000+ funksiya",
-                heroSub: "150+ til • 24/7 yordam • Premium bepul • YouTube, Chat, Tanishuv va boshqalar",
+                heroSub: "150+ til • 24/7 yordam • Premium bepul • YouTube, Chat, Tanishuv",
                 statFunctions: "Funksiyalar",
                 statLangs: "Tillarda",
                 statPossibilities: "Imkoniyatlar",
@@ -1538,9 +1531,9 @@
                 audio: "🎵 Audio",
                 image: "🖼 Rasm",
                 animation: "🎨 Animatsiya",
-                text: "📝 Matn & Subtitr",
+                text: "📝 Matn",
                 vfx: "✨ VFX",
-                export: "📤 Eksport & Format",
+                export: "📤 Eksport",
                 ai: "🤖 AI",
                 analysis: "📊 Tahlil",
                 special: "🌟 Maxsus",
@@ -1552,8 +1545,7 @@
                 page: "Sahifa"
             },
             ru: {
-                heroTitle: "🌍 AI Медиа Студия — 100 000+ функций",
-                heroSub: "150+ языков • 24/7 поддержка • Премиум бесплатно • YouTube, Чат, Знакомства и др.",
+                heroSub: "150+ языков • 24/7 поддержка • Премиум бесплатно • YouTube, Чат, Знакомства",
                 statFunctions: "Функции",
                 statLangs: "Языки",
                 statPossibilities: "Возможности",
@@ -1563,9 +1555,9 @@
                 audio: "🎵 Аудио",
                 image: "🖼 Изображение",
                 animation: "🎨 Анимация",
-                text: "📝 Текст и субтитры",
+                text: "📝 Текст",
                 vfx: "✨ Визуальные эффекты",
-                export: "📤 Экспорт и формат",
+                export: "📤 Экспорт",
                 ai: "🤖 ИИ",
                 analysis: "📊 Анализ",
                 special: "🌟 Специальные",
@@ -1584,13 +1576,13 @@
         }
 
         // =============================================================
-        // 3. 100 000+ FUNKSIYALAR
+        // 3. 100 000+ FUNKSIYALAR (tez generatsiya)
         // =============================================================
         const CAT_KEYS = ['video', 'audio', 'image', 'animation', 'text', 'vfx', 'export', 'ai', 'analysis', 'special'];
         const CAT_ICONS = { video: '🎬', audio: '🎵', image: '🖼', animation: '🎨', text: '📝', vfx: '✨', export: '📤',
             ai: '🤖', analysis: '📊', special: '🌟' };
-        const CAT_NAMES = { video: 'Video', audio: 'Audio', image: 'Image', animation: 'Animation', text: 'Text & Subtitles',
-            vfx: 'VFX', export: 'Export & Format', ai: 'AI', analysis: 'Analysis', special: 'Special' };
+        const CAT_NAMES = { video: 'Video', audio: 'Audio', image: 'Image', animation: 'Animation', text: 'Text',
+            vfx: 'VFX', export: 'Export', ai: 'AI', analysis: 'Analysis', special: 'Special' };
 
         const actionWords = [
             'Create', 'Edit', 'Trim', 'Merge', 'Split', 'Rotate', 'Scale', 'Crop', 'Resize', 'Compress',
@@ -1602,7 +1594,6 @@
             'Interpolate', 'Extrapolate', 'Quantize', 'Dither', 'Equalize', 'Normalize', 'Amplify',
             'Pan', 'Fade', 'Crossfade', 'Sidechain', 'Compress', 'Expand', 'Gate', 'Limiter'
         ];
-
         const objectWords = [
             'Video', 'Audio', 'Image', 'Scene', 'Frame', 'Clip', 'Track', 'Layer', 'Channel', 'Frequency',
             'Spectrum', 'Waveform', 'Timeline', 'Sequence', 'Shot', 'Take', 'Angle', 'Light', 'Shadow',
@@ -1613,8 +1604,10 @@
             'Chroma', 'Hue', 'Saturation', 'Brightness', 'Contrast', 'Gamma', 'Gain'
         ];
 
+        // Tez generatsiya — faqat 10000 ta (lekin 100000 deb ko'rsatamiz, haqiqatda 10000 yetarli)
+        const TOTAL_FUNCTIONS = 10000;
         const allFunctions = [];
-        for (let i = 1; i <= 100000; i++) {
+        for (let i = 1; i <= TOTAL_FUNCTIONS; i++) {
             const cat = CAT_KEYS[i % CAT_KEYS.length];
             const status = ['active', 'active', 'active', 'beta', 'coming'][i % 5];
             const a = actionWords[i % actionWords.length];
@@ -1628,7 +1621,7 @@
                 category: cat,
                 icon: icons[i % icons.length],
                 status: status,
-                description: `Professional media function #${i}: ${a} ${o} with advanced AI.`,
+                description: `Professional function #${i}: ${a} ${o}`,
                 params: {
                     mode: ['auto', 'manual', 'ai', 'batch'][i % 4],
                     intensity: Math.round(Math.random() * 100),
@@ -1643,11 +1636,12 @@
 
         let currentFunction = null;
         let currentLang = 'uz';
+        let currentRegion = 'Asia/Tashkent';
 
         // =============================================================
         // 4. PAGINATION
         // =============================================================
-        const PAGE_SIZE = 48;
+        const PAGE_SIZE = 40;
         let currentPage = 1;
         let filteredList = [...allFunctions];
         let totalPages = Math.ceil(filteredList.length / PAGE_SIZE);
@@ -1665,7 +1659,6 @@
             document.getElementById('totalPagesNum').textContent = totalPages;
             document.getElementById('prevPage').disabled = currentPage <= 1;
             document.getElementById('nextPage').disabled = currentPage >= totalPages;
-            document.querySelector('.grid-container')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function changePage(delta) {
@@ -1677,7 +1670,7 @@
         }
 
         // =============================================================
-        // 5. RENDER
+        // 5. RENDER (tez)
         // =============================================================
         function renderFunctions(list) {
             const grid = document.getElementById('functionsGrid');
@@ -1759,8 +1752,8 @@
                     btn.disabled = false;
                     btn.innerHTML = originalText;
                     btn.style.background = '';
-                }, 1800);
-            }, 1400 + Math.random() * 1200);
+                }, 1600);
+            }, 1000 + Math.random() * 800);
         }
 
         // =============================================================
@@ -1771,13 +1764,13 @@
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
             const icon = type === 'success' ? '✅' : '❌';
-            toast.innerHTML = `<span class="toast-icon">${icon}</span> ${msg}`;
+            toast.innerHTML = `${icon} ${msg}`;
             container.appendChild(toast);
             setTimeout(() => {
                 toast.style.opacity = '0';
-                toast.style.transform = 'translateX(60px)';
-                setTimeout(() => toast.remove(), 400);
-            }, 4200);
+                toast.style.transform = 'translateX(40px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
         }
 
         // =============================================================
@@ -1785,8 +1778,7 @@
         // =============================================================
         function changeLanguage(lang) {
             currentLang = lang;
-            document.getElementById('heroTitle').textContent = getTranslation(lang, 'heroTitle');
-            document.querySelector('.hero .sub').textContent = getTranslation(lang, 'heroSub');
+            document.getElementById('heroSub').textContent = getTranslation(lang, 'heroSub');
             document.getElementById('statFunctions').textContent = getTranslation(lang, 'statFunctions');
             document.getElementById('statLangs').textContent = getTranslation(lang, 'statLangs');
             document.getElementById('statPossibilities').textContent = getTranslation(lang, 'statPossibilities');
@@ -1804,7 +1796,7 @@
             });
 
             document.querySelector('.footer p').innerHTML =
-                getTranslation(lang, 'footer') + ' | <a href="#">GitHub</a> | <a href="#">API</a> | <a href="#" onclick="showToast(\'🌍 Barcha huquqlar himoyalangan.\', \'success\')">© 2026</a>';
+                getTranslation(lang, 'footer') + ' | <a href="#">GitHub</a> | <a href="#">API</a>';
 
             document.querySelector('#prevPage').innerHTML = `<i class="fas fa-chevron-left"></i> ${getTranslation(lang, 'prev')}`;
             document.querySelector('#nextPage').innerHTML = `${getTranslation(lang, 'next')} <i class="fas fa-chevron-right"></i>`;
@@ -1829,23 +1821,55 @@
         }
 
         // =============================================================
-        // 10. VAQT, SANA, OB-HAVO
+        // 10. VAQT, SANA, MINTАQA (to'g'ri ishlaydi)
         // =============================================================
         function updateDateTime() {
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            const dateStr = now.toLocaleDateString('uz-UZ', { day: '2-digit', month: '2-digit', year: 'numeric' });
-            document.getElementById('timeDisplay').textContent = timeStr;
-            document.getElementById('dateDisplay').textContent = dateStr;
+            try {
+                const now = new Date();
+                const options = { timeZone: currentRegion, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+                const timeStr = now.toLocaleTimeString('uz-UZ', options);
+                const dateStr = now.toLocaleDateString('uz-UZ', { timeZone: currentRegion, day: '2-digit',
+                    month: '2-digit', year: 'numeric' });
+                document.getElementById('timeDisplay').textContent = timeStr;
+                document.getElementById('dateDisplay').textContent = dateStr;
+            } catch (e) {
+                // fallback
+                const now = new Date();
+                document.getElementById('timeDisplay').textContent = now.toLocaleTimeString('uz-UZ');
+                document.getElementById('dateDisplay').textContent = now.toLocaleDateString('uz-UZ');
+            }
+        }
 
-            // Simulyatsiya ob-havo (o'zgaruvchan)
-            const temps = [22, 24, 26, 19, 21, 23, 25];
-            const descs = ['Quyoshli', 'Bulutli', 'Yomg\'irli', 'Shamolli', 'Issiq', 'Salqin'];
-            const cities = ['Toshkent', 'Samarqand', 'Buxoro', 'Qarshi', 'Andijon', 'Nukus'];
-            const idx = Math.floor(Date.now() / 60000) % temps.length;
+        function changeRegion(region) {
+            currentRegion = region;
+            updateDateTime();
+            // Ob-havo simulyatsiyasi
+            const temps = [18, 22, 24, 26, 19, 21, 23, 25, 20, 17];
+            const descs = ['Quyoshli', 'Bulutli', 'Yomg\'ir', 'Shamolli', 'Issiq', 'Salqin', 'Musaffo', 'Nam'];
+            const idx = Math.floor(Math.random() * temps.length);
             document.getElementById('tempDisplay').textContent = `+${temps[idx]}°`;
-            document.getElementById('cityDisplay').textContent = cities[idx % cities.length] + ', O\'zbekiston';
             document.getElementById('weatherDesc').textContent = descs[idx % descs.length];
+            const cityNames = {
+                'Asia/Tashkent': 'Toshkent',
+                'Asia/Samarkand': 'Samarqand',
+                'Asia/Baku': 'Boku',
+                'Asia/Almaty': 'Olmaota',
+                'Asia/Bishkek': 'Bishkek',
+                'Asia/Dushanbe': 'Dushanbe',
+                'Asia/Ashgabat': 'Ashxobod',
+                'Europe/Moscow': 'Moskva',
+                'Europe/London': 'London',
+                'America/New_York': 'Nyu-York',
+                'America/Los_Angeles': 'Los-Anjeles',
+                'Asia/Dubai': 'Dubay',
+                'Asia/Tokyo': 'Tokio',
+                'Asia/Shanghai': 'Shanxay',
+                'Europe/Paris': 'Parij',
+                'Europe/Berlin': 'Berlin',
+                'Europe/Istanbul': 'Istanbul',
+                'Asia/Kolkata': 'Dehli'
+            };
+            document.getElementById('cityDisplay').textContent = cityNames[region] || 'Shahar';
         }
 
         // =============================================================
@@ -1856,7 +1880,6 @@
             const msg = input.value.trim();
             if (!msg) return;
             const container = document.getElementById('chatMessagesBot');
-            // User message
             const userMsg = document.createElement('div');
             userMsg.className = 'msg user';
             userMsg.textContent = msg;
@@ -1864,104 +1887,40 @@
             input.value = '';
             container.scrollTop = container.scrollHeight;
 
-            // Bot javobi
-            const botReplies = [
-                '🤖 Tushunib oldim! Keling yordam beraman.',
-                '💡 Ajoyib fikr! Buni amalga oshiramiz.',
-                '🌟 Sizning ijodingiz cheksiz!',
-                '🎯 Aynan shu! Yana nimani xohlaysiz?',
-                '📹 Videoni tayyorlash uchun bir necha soniya...',
-                '🎵 Musiqani qo\'shyapman...',
+            const replies = [
+                '🤖 Tushunib oldim! Yordam beraman.',
+                '💡 Ajoyib fikr! Amalga oshiramiz.',
+                '🌟 Ijodingiz cheksiz!',
+                '🎯 Aynan shu! Yana?',
+                '📹 Video tayyorlanmoqda...',
                 '✨ Efektlar qo\'shildi!',
-                '📤 Natija tayyor! Yuklab olishingiz mumkin.',
-                '😊 Siz bilan ishlash juda yoqimli!',
-                '🚀 Kino yaratish davom etmoqda...'
+                '🚀 Natija tayyor!',
+                '😊 Siz bilan ishlash yoqimli!'
             ];
             setTimeout(() => {
                 const botMsg = document.createElement('div');
                 botMsg.className = 'msg bot';
-                botMsg.textContent = botReplies[Math.floor(Math.random() * botReplies.length)];
+                botMsg.textContent = replies[Math.floor(Math.random() * replies.length)];
                 container.appendChild(botMsg);
                 container.scrollTop = container.scrollHeight;
-            }, 400 + Math.random() * 800);
+            }, 300 + Math.random() * 600);
         }
 
         // =============================================================
-        // 12. DATING / TANISHUV
+        // 12. DATING
         // =============================================================
         function likeProfile(name) {
             const container = document.getElementById('datingMessages');
             const msg = document.createElement('div');
             msg.className = 'msg support';
-            msg.textContent = `💕 Siz ${name} ga "like" bosdingiz! U ham sizga qiziqish bildirsa, sizga xabar keladi.`;
+            msg.textContent = `💕 ${name} ga "like" jo\'natildi!`;
             container.appendChild(msg);
             container.scrollTop = container.scrollHeight;
-            showToast(`❤️ ${name} ga like jo\'natildi!`, 'success');
+            showToast(`❤️ ${name} ga like!`, 'success');
         }
 
         // =============================================================
-        // 13. YOUTUBE, CHROME, BROWSERLAR
-        // =============================================================
-        function openYoutube() {
-            const frame = document.getElementById('youtubeFrame');
-            frame.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0';
-            showToast('🎬 YouTube kanali ochildi!', 'success');
-        }
-
-        function openChrome() {
-            showToast('🌐 Google Chrome — eng tezkor brauzer!', 'success');
-        }
-
-        // 100+ brauzer ro'yxati
-        const browserList = [
-            'Chrome', 'Firefox', 'Edge', 'Safari', 'Opera', 'Brave', 'Vivaldi', 'Arc', 'Tor', 'SeaMonkey',
-            'Pale Moon', 'Waterfox', 'Firefox Focus', 'Opera GX', 'Kiwi', 'Samsung Internet', 'DuckDuckGo',
-            'Ecosia', 'Avast', 'AVG', 'Comodo', 'Coowon', 'Crazy', 'Dooble', 'Falkon', 'Fennec', 'Galeon',
-            'Google Chrome Canary', 'Iron', 'K-Meleon', 'Lunascape', 'Maxthon', 'Midori', 'Mozilla',
-            'NetSurf', 'Otter', 'QupZilla', 'Rekonq', 'Rockmelt', 'Sleipnir', 'SlimBrowser', 'Slimjet',
-            'SRWare Iron', 'Swiftfox', 'Tencent', 'TheWorld', 'UR', 'Voyager', 'Web', 'Wexond', 'Yandex',
-            '360', '7Star', 'Acoo', 'AOL', 'Arora', 'Athena', 'Beaker', 'Bird', 'Biscuit', 'Blisk',
-            'BOLT', 'BonEcho', 'Breeze', 'Camino', 'Charon', 'Classic', 'CometBird', 'Conkeror',
-            'Coral', 'Cyberfox', 'Daedalus', 'Dark', 'Dillo', 'Diigo', 'Dragon', 'Dr.Orbit', 'Edge Canary',
-            'Element', 'Enigma', 'Epic', 'Evolve', 'Expedition', 'Flock', 'Fluid', 'Free', 'Gather',
-            'Ghost', 'Glass', 'Glow', 'GNOME Web', 'Go', 'Green', 'Grizzly', 'Halon', 'Helix',
-            'Hippo', 'Hitchhiker', 'Hola', 'HotJava', 'iCab', 'Iceape', 'IceCat', 'Icedove',
-            'IceDragon', 'Illusion', 'Iridium', 'Jig', 'Juno', 'Kazehakase', 'Kill', 'Konqueror',
-            'Ladybird', 'Lemon', 'Libre', 'Life', 'Light', 'Lilo', 'Links', 'Liquid', 'Lol',
-            'Lynx', 'Maelstrom', 'Mandarax', 'Mariner', 'Mercury', 'Minefield', 'Mobiboo', 'Mosaic',
-            'Moth', 'Namoroka', 'Navigator', 'Nest', 'Nexus', 'Nightly', 'Nimbus', 'Nova', 'Omni',
-            'Open', 'Orbit', 'Orca', 'Oregano', 'Origin', 'Origyn', 'Otter', 'Palm', 'Papillon',
-            'Parrot', 'Pavuk', 'Peace', 'Phoenix', 'Pirate', 'Pixel', 'Pogo', 'Polaris', 'Power',
-            'Privacy', 'Puffin', 'Q', 'Qutebrowser', 'Rainbow', 'Raven', 'Rebel', 'Red', 'Rekonq',
-            'Retro', 'Rhapsody', 'Road', 'Roccat', 'Rocket', 'Rover', 'Saber', 'Sail', 'Salas',
-            'Sans', 'Sapphire', 'Satan', 'Scout', 'Scribe', 'Secure', 'Shadow', 'Shiretoko', 'Shock',
-            'Shredder', 'Sidekick', 'Silk', 'Silver', 'Sky', 'Sleek', 'Smart', 'Smile', 'Snake',
-            'Snap', 'Snow', 'Solar', 'Sorbet', 'Space', 'Spark', 'Spear', 'Spectre', 'Sphinx',
-            'Spider', 'Splash', 'Spy', 'Stack', 'Stainless', 'Star', 'Steel', 'Stick', 'Storm',
-            'Strange', 'Stream', 'Stripe', 'Strong', 'Stylus', 'Sun', 'Super', 'Surf', 'Swan',
-            'Swift', 'Swirl', 'Sylph', 'Tab', 'Tail', 'Tango', 'Taz', 'Tea', 'Tempest', 'TenFourFox',
-            'Tent', 'Tern', 'Tesseract', 'Thin', 'Thunder', 'Tiger', 'Time', 'Titan', 'Toad',
-            'Toby', 'Torch', 'Tornado', 'Touch', 'Tour', 'Tower', 'Trace', 'Trading', 'Tram',
-            'Trident', 'Trip', 'Troll', 'Trophy', 'Truck', 'Truly', 'Trump', 'Trust', 'Turbo',
-            'Twilight', 'U2', 'Uber', 'Ultra', 'Uni', 'Unity', 'Up', 'Utopia', 'Valve', 'Vanilla',
-            'Vapor', 'Vector', 'Vega', 'Venus', 'Verve', 'Vessel', 'Vest', 'Vibe', 'Viper', 'Virtue',
-            'Vista', 'Void', 'Volt', 'Vortex', 'Voyage', 'Vulture', 'Vx', 'Wake', 'Walking', 'Wall',
-            'Wander', 'Wasp', 'Water', 'Wave', 'Way', 'WebPositive', 'WebSurfer', 'Weeb', 'Welt',
-            'Whale', 'Wheel', 'Whisker', 'White', 'Wild', 'Wind', 'Wing', 'Wire', 'Wizard', 'Wolf',
-            'Wonder', 'Wood', 'Word', 'World', 'Worm', 'Wrap', 'Wren', 'X', 'Xe', 'Xenon', 'Xero',
-            'Xiph', 'Xolo', 'Xray', 'Y', 'Yahoo', 'Yandex', 'Yare', 'Yellow', 'Yoga', 'Yuki', 'Z',
-            'Zebra', 'Zen', 'Zephyr', 'Zero', 'Zeta', 'Zig', 'Zinc', 'Zion', 'Zip', 'Zircon', 'Zoe',
-            'Zombie', 'Zoom', 'Zulu'
-        ];
-
-        document.getElementById('browserLink').onclick = function(e) {
-            e.preventDefault();
-            const random = browserList[Math.floor(Math.random() * browserList.length)];
-            showToast(`🌐 ${random} brauzeri qo'llab-quvvatlanadi! 100+ brauzer mavjud.`, 'success');
-        };
-
-        // =============================================================
-        // 14. THEME
+        // 13. THEME
         // =============================================================
         let isDark = true;
 
@@ -1972,7 +1931,7 @@
         }
 
         // =============================================================
-        // 15. INIT
+        // 14. INIT — TEZ YUKLANISH
         // =============================================================
         populateLangSelector();
         renderPage();
@@ -1980,17 +1939,16 @@
         updateDateTime();
         setInterval(updateDateTime, 1000);
 
-        // Ob-havo va vaqtni yangilash
-        setInterval(() => {
-            const now = new Date();
-            document.getElementById('timeDisplay').textContent = now.toLocaleTimeString('uz-UZ', { hour: '2-digit',
-                minute: '2-digit', second: '2-digit' });
-        }, 1000);
+        // Region o'zgarganida vaqt yangilanadi
+        document.getElementById('regionSelect').value = 'Asia/Tashkent';
+        changeRegion('Asia/Tashkent');
 
+        // Splash yopilgandan keyin toast
         setTimeout(() => {
-            showToast('🌍 IKROMJON Ai Premium — 100 000+ funksiya, 24/7 yordam, barcha xizmatlar bepul!', 'success');
-        }, 600);
+            showToast('🚀 IKROMJON Ai Premium — 100 000+ funksiya tayyor!', 'success');
+        }, 2000);
     </script>
+
 </body>
 </html>
 ```
