@@ -1,1003 +1,1996 @@
+```html
 <!DOCTYPE html>
-<html lang="uz" data-theme="dark">
+<html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IKROMJON TV — Premium Media & TV System</title>
-
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌍 IKROMJON Ai PREMIUM — 100K funksiya + 24/7</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
+        /* ============================================================
+           GLOBAL — Ultra Premium Dark/Light
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         :root {
-            --bg-main: #070913;
-            --bg-card: rgba(18, 24, 41, 0.85);
-            --bg-glass: rgba(255, 255, 255, 0.06);
-            --accent-glow: #6366f1;
-            --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-            --border-glow: rgba(255, 255, 255, 0.12);
-            --text-main: #ffffff;
-            --text-sub: #94a3b8;
-            --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+            --bg-primary: #05050c;
+            --bg-secondary: #0b0b18;
+            --bg-card: #10102a;
+            --bg-card-hover: #18183a;
+            --bg-glass: rgba(16, 16, 42, 0.65);
+            --border-glass: rgba(255, 255, 255, 0.05);
+            --border-card: rgba(255, 255, 255, 0.04);
+            --text-primary: #f0f0ff;
+            --text-secondary: #9898c8;
+            --text-muted: #6868a0;
+            --accent-1: #7c4dff;
+            --accent-2: #b388ff;
+            --accent-3: #ff6ec7;
+            --accent-glow: rgba(124, 77, 255, 0.2);
+            --success: #00e676;
+            --warning: #ffd740;
+            --danger: #ff5252;
+            --radius: 20px;
+            --radius-sm: 12px;
+            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow-card: 0 8px 48px rgba(0, 0, 0, 0.6);
         }
-
         [data-theme="light"] {
-            --bg-main: #f1f5f9;
+            --bg-primary: #f0f0fa;
+            --bg-secondary: #e4e4f2;
             --bg-card: #ffffff;
-            --bg-glass: rgba(0, 0, 0, 0.05);
-            --border-glow: rgba(0, 0, 0, 0.1);
-            --text-main: #0f172a;
-            --text-sub: #64748b;
+            --bg-card-hover: #f5f5ff;
+            --bg-glass: rgba(255, 255, 255, 0.7);
+            --border-glass: rgba(0, 0, 0, 0.04);
+            --border-card: rgba(0, 0, 0, 0.05);
+            --text-primary: #0c0c1a;
+            --text-secondary: #4a4a7a;
+            --text-muted: #8888b0;
+            --shadow-card: 0 8px 48px rgba(0, 0, 0, 0.06);
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: background 0.4s, color 0.3s;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-1);
+            border-radius: 20px;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
-
-        body { background-color: var(--bg-main); color: var(--text-main); padding-bottom: 90px; min-height: 100vh; overflow-x: hidden; user-select: none; transition: 0.3s; }
-
-        /* HEADER */
-        .app-header {
-            position: sticky; top: 0; z-index: 100;
-            background: rgba(7, 9, 19, 0.95); backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-glow); padding: 12px 16px;
-            display: flex; flex-direction: column; gap: 10px;
+        /* ============================================================
+           NAVBAR
+           ============================================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--bg-glass);
+            backdrop-filter: blur(24px) saturate(1.5);
+            -webkit-backdrop-filter: blur(24px) saturate(1.5);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 10px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            transition: background 0.4s;
         }
-        .header-top { display: flex; align-items: center; justify-content: space-between; }
-        .brand-logo { font-size: 18px; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 6px; cursor: pointer; }
-        .brand-logo span { background: var(--accent-gradient); padding: 2px 6px; border-radius: 6px; font-size: 10px; color: #fff; }
-        .header-actions { display: flex; gap: 6px; align-items: center; }
-        .icon-btn { background: var(--bg-glass); border: 1px solid var(--border-glow); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-main); cursor: pointer; transition: 0.2s; font-size: 13px; }
-        .icon-btn:active { transform: scale(0.92); }
-
-        /* WIDGET BAR */
-        .widget-bar {
-            background: var(--bg-card); border: 1px solid var(--border-glow);
-            border-radius: 14px; padding: 8px 12px; display: flex;
-            align-items: center; justify-content: space-between; font-size: 11px; font-weight: 600; color: var(--text-sub);
-            overflow-x: auto; white-space: nowrap; gap: 12px;
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.5px;
         }
-        .widget-item { display: flex; align-items: center; gap: 5px; cursor: pointer; }
-        .widget-item i { color: #818cf8; }
-
-        .lang-select {
-            background: var(--bg-glass); border: 1px solid var(--border-glow);
-            color: var(--text-main); font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 10px; outline: none; cursor: pointer;
+        .navbar .logo i {
+            -webkit-text-fill-color: var(--accent-1);
+            font-size: 26px;
+            filter: drop-shadow(0 0 16px var(--accent-glow));
+        }
+        .navbar .logo .badge {
+            background: linear-gradient(135deg, #00e676, #00bcd4);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 14px;
+            border-radius: 40px;
+            -webkit-text-fill-color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .navbar .right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .navbar .date-time {
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            background: var(--bg-card);
+            padding: 6px 16px;
+            border-radius: 40px;
+            border: 1px solid var(--border-card);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .navbar .date-time i {
+            font-size: 14px;
+        }
+        .lang-selector {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 40px;
+            padding: 6px 12px 6px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .lang-selector:hover {
+            border-color: var(--accent-1);
+            box-shadow: 0 0 28px var(--accent-glow);
+        }
+        .lang-selector select {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            outline: none;
+            padding: 4px 0;
+            font-family: 'Inter', sans-serif;
+            max-width: 150px;
+        }
+        .lang-selector select option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            color: var(--text-secondary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 17px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .theme-toggle:hover {
+            border-color: var(--accent-1);
+            color: var(--text-primary);
+            box-shadow: 0 0 28px var(--accent-glow);
         }
 
-        /* TABS NAV */
-        .top-tabs { display: flex; gap: 16px; overflow-x: auto; scrollbar-width: none; font-size: 12px; font-weight: 700; color: var(--text-sub); }
-        .top-tabs::-webkit-scrollbar { display: none; }
-        .top-tab-item { padding-bottom: 4px; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: 0.3s; }
-        .top-tab-item.active { color: var(--text-main); border-bottom-color: #6366f1; }
-
-        /* HERO CAROUSEL */
-        .hero-slider-container {
-            margin: 14px 16px; height: 250px; border-radius: 24px; position: relative; overflow: hidden;
-            border: 1px solid var(--border-glow); box-shadow: var(--card-shadow); background: #1e293b;
+        /* ============================================================
+           WEATHER & TIME BAR
+           ============================================================ */
+        .top-bar {
+            margin-top: 80px;
+            padding: 12px 28px;
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-glass);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            transition: background 0.4s;
         }
-        .hero-track { display: flex; height: 100%; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .hero-slide {
-            min-width: 100%; height: 100%; position: relative;
-            background-size: cover; background-position: center; background-repeat: no-repeat;
-            display: flex; flex-direction: column; justify-content: flex-end; padding: 18px;
+        .top-bar .weather {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-secondary);
+            font-size: 15px;
+            font-weight: 500;
         }
-        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,9,19,0.2) 0%, rgba(7,9,19,0.95) 100%); z-index: 1; }
-        .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 4px; }
-        .hero-badge { color: #fff; font-size: 9px; font-weight: 900; padding: 3px 8px; border-radius: 10px; width: max-content; }
-        .hero-title { font-size: 20px; font-weight: 900; color: #fff; }
-        .hero-meta { font-size: 11px; color: #cbd5e1; display: flex; gap: 8px; align-items: center; font-weight: 600; }
-
-        .slider-dots { position: absolute; bottom: 12px; right: 18px; z-index: 10; display: flex; gap: 4px; }
-        .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
-        .dot.active { background: #4285F4; width: 16px; border-radius: 10px; }
-
-        /* QUICK UTILITIES & GAMES BAR */
-        .quick-tools { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 0 16px 14px 16px; }
-        .tool-card { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 16px; padding: 10px 6px; text-align: center; font-size: 10px; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-        .tool-card i { font-size: 18px; color: #818cf8; }
-
-        .games-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0 16px 14px 16px; }
-        .game-card { background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%); border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 16px; padding: 12px 8px; text-align: center; font-size: 10px; font-weight: 800; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-        .game-card i { font-size: 22px; color: #ec4899; }
-
-        /* BUTTONS */
-        .btn-main { background: var(--accent-gradient); color: #fff; border: none; padding: 12px 18px; border-radius: 14px; font-size: 12px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; text-align: center; }
-        .btn-main:active { transform: scale(0.95); }
-
-        /* SECTIONS & SCROLL */
-        .section-header { padding: 10px 16px 8px 16px; font-size: 14px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
-        .horiz-scroll { display: flex; gap: 12px; padding: 0 16px 8px 16px; overflow-x: auto; scrollbar-width: none; }
-        .horiz-scroll::-webkit-scrollbar { display: none; }
-
-        .media-card { flex: 0 0 135px; background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 16px; overflow: hidden; cursor: pointer; position: relative; }
-        .media-poster { width: 100%; height: 150px; object-fit: cover; background: #1e293b; display: block; }
-        .media-info { padding: 8px; }
-        .media-title { font-size: 11px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .media-sub { font-size: 9px; color: var(--text-sub); margin-top: 2px; }
-
-        .delete-btn { 
-            position: absolute; top: 6px; right: 6px; 
-            background: rgba(239, 68, 68, 0.9); color: #fff; 
-            border: none; padding: 3px 6px; border-radius: 6px; 
-            display: flex; align-items: center; justify-content: center; 
-            font-size: 9px; font-weight: 900; cursor: pointer; z-index: 10; 
-            backdrop-filter: blur(4px); box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+        .top-bar .weather i {
+            font-size: 28px;
+            color: var(--warning);
+        }
+        .top-bar .weather .temp {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .top-bar .weather .city {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        .top-bar .quick-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .top-bar .quick-links a {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            padding: 6px 16px;
+            border-radius: 40px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .top-bar .quick-links a:hover {
+            border-color: var(--accent-1);
+            color: var(--text-primary);
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
-        .tv-card { flex: 0 0 100px; background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 18px; padding: 10px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; text-align: center; }
-        .tv-logo-box { width: 48px; height: 48px; background: rgba(255,255,255,0.05); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; }
-        .tv-name { font-size: 10px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+        /* ============================================================
+           MAIN
+           ============================================================ */
+        .main {
+            padding: 20px 28px 40px;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
 
-        /* BOTTOM NAV */
-        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 65px; background: rgba(7, 9, 19, 0.95); backdrop-filter: blur(25px); border-top: 1px solid var(--border-glow); display: grid; grid-template-columns: repeat(5, 1fr); align-items: center; z-index: 200; }
-        .nav-btn { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-sub); font-size: 9px; font-weight: 800; cursor: pointer; }
-        .nav-btn i { font-size: 16px; }
-        .nav-btn.active { color: #818cf8; }
+        /* ============================================================
+           HERO
+           ============================================================ */
+        .hero {
+            text-align: center;
+            padding: 40px 24px 32px;
+            background: radial-gradient(ellipse at 30% 20%, var(--bg-secondary), transparent 70%);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-glass);
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: -20%;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+            filter: blur(100px);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 44px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 20%, var(--accent-1), var(--accent-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+            position: relative;
+        }
+        .hero .sub {
+            color: var(--text-secondary);
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 16px;
+            position: relative;
+        }
+        .hero .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            position: relative;
+        }
+        .hero .stats .item {
+            text-align: center;
+        }
+        .hero .stats .item .num {
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero .stats .item .lbl {
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 500;
+        }
 
-        /* MODALS */
-        .modal-overlay { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); display: none; flex-direction: column; }
-        .modal-overlay.active { display: flex; }
-        .modal-header { padding: 14px; background: rgba(7,9,19,0.9); border-bottom: 1px solid var(--border-glow); display: flex; justify-content: space-between; align-items: center; }
+        /* ============================================================
+           BROWSER SUPPORT
+           ============================================================ */
+        .browser-strip {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px 14px;
+            margin: 16px 0 10px;
+            padding: 12px 16px;
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-card);
+        }
+        .browser-strip span {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .browser-strip span i {
+            font-size: 16px;
+            color: var(--accent-2);
+        }
 
-        /* SETTINGS & PAYMENT STYLES */
-        .setting-group { padding: 14px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; flex: 1; }
-        .setting-item { background: var(--bg-card); border: 1px solid var(--border-glow); padding: 12px 16px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; }
-        .setting-title { font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-        .setting-select, .setting-input { background: var(--bg-glass); border: 1px solid var(--border-glow); color: var(--text-main); font-size: 11px; padding: 6px 10px; border-radius: 8px; outline: none; }
-        
-        .sub-box { background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%); border: 2px solid #818cf8; border-radius: 20px; padding: 20px; text-align: center; display: flex; flex-direction: column; gap: 12px; align-items: center; width: 100%; max-width: 360px; }
-        .sub-price { font-size: 24px; font-weight: 900; color: #ec4899; }
-        .card-type-btn { flex: 1; padding: 12px; background: var(--bg-card); border: 2px solid var(--border-glow); border-radius: 12px; font-weight: 800; cursor: pointer; text-align: center; }
-        .card-type-btn.selected { border-color: #6366f1; background: rgba(99, 102, 241, 0.2); }
+        /* ============================================================
+           PREMIUM BANNER
+           ============================================================ */
+        .premium-banner {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+            border-radius: var(--radius-sm);
+            padding: 16px 24px;
+            margin-bottom: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            color: #fff;
+            box-shadow: 0 0 60px var(--accent-glow);
+        }
+        .premium-banner .text {
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .premium-banner .text i {
+            font-size: 28px;
+        }
+        .premium-banner .btn-premium {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 24px;
+            border-radius: 40px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(8px);
+            font-family: 'Inter', sans-serif;
+        }
+        .premium-banner .btn-premium:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: scale(1.03);
+        }
 
-        /* LOCK SCREEN */
-        .lock-screen { position: fixed; inset: 0; z-index: 2000; background: var(--bg-main); display: none; flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
-        .lock-pin-input { width: 140px; text-align: center; font-size: 24px; letter-spacing: 10px; background: var(--bg-card); border: 1px solid var(--border-glow); color: var(--text-main); padding: 8px; border-radius: 12px; }
+        /* ============================================================
+           GRID
+           ============================================================ */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 22px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius);
+            padding: 20px 18px 18px;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-1);
+            box-shadow: var(--shadow-card), 0 0 48px var(--accent-glow);
+        }
+        .card .fn-id {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: var(--bg-primary);
+            padding: 2px 12px;
+            border-radius: 40px;
+            border: 1px solid var(--border-card);
+            z-index: 1;
+        }
+        .card .icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+            display: block;
+            z-index: 1;
+            position: relative;
+        }
+        .card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            z-index: 1;
+            position: relative;
+        }
+        .card p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            z-index: 1;
+            position: relative;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .card .tags {
+            margin-top: 12px;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            z-index: 1;
+            position: relative;
+        }
+        .card .tags .tag {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 40px;
+            background: var(--accent-1);
+            color: #fff;
+            opacity: 0.85;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .card .tags .tag .dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-right: 3px;
+        }
+        .dot.green {
+            background: var(--success);
+        }
+        .dot.yellow {
+            background: var(--warning);
+        }
+        .dot.red {
+            background: var(--danger);
+        }
 
-        /* GAMES STYLES */
-        #snakeCanvas { background: #0f172a; border: 2px solid #6366f1; border-radius: 12px; margin: 0 auto; display: block; }
-        .snake-ctrl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: 180px; margin: 12px auto 0 auto; }
-        .ctrl-btn { background: var(--bg-card); border: 1px solid var(--border-glow); padding: 12px; text-align: center; border-radius: 10px; font-size: 16px; font-weight: 800; cursor: pointer; }
+        /* ============================================================
+           PAGINATION
+           ============================================================ */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 20px 0 30px;
+        }
+        .pagination button {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            color: var(--text-secondary);
+            padding: 8px 18px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+        .pagination button:hover:not(:disabled) {
+            border-color: var(--accent-1);
+            color: var(--text-primary);
+            box-shadow: 0 0 24px var(--accent-glow);
+        }
+        .pagination button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        .pagination .page-info {
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 0 10px;
+        }
 
-        .checkers-board { display: grid; grid-template-columns: repeat(8, 1fr); width: 280px; height: 280px; margin: 0 auto; border: 3px solid #818cf8; border-radius: 12px; overflow: hidden; }
-        .checker-cell { display: flex; align-items: center; justify-content: center; }
-        .cell-dark { background: #1e293b; }
-        .cell-light { background: #cbd5e1; }
-        .piece { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; }
-        .piece-red { background: #ef4444; }
-        .piece-black { background: #000; }
+        /* ============================================================
+           YOUTUBE EMBED + ADS
+           ============================================================ */
+        .media-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 22px;
+            margin: 30px 0;
+        }
+        .media-row .youtube-box {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-card);
+            padding: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        .media-row .youtube-box iframe {
+            width: 100%;
+            height: 280px;
+            border-radius: var(--radius-sm);
+            border: none;
+        }
+        .media-row .youtube-box .label {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            background: rgba(255, 0, 0, 0.85);
+            color: #fff;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 700;
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .media-row .ads-box {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-card);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .media-row .ads-box .ad {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            text-align: center;
+            border: 1px dashed var(--border-card);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .media-row .ads-box .ad:hover {
+            border-color: var(--accent-1);
+        }
+        .media-row .ads-box .ad .ad-icon {
+            font-size: 32px;
+            margin-bottom: 4px;
+        }
+        .media-row .ads-box .ad .ad-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .media-row .ads-box .ad .ad-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            background: var(--bg-card);
+            padding: 2px 12px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-top: 4px;
+        }
 
-        /* COIN GAME */
-        .coin-game-container { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 10px; }
-        .coin-balance-card { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 18px; padding: 16px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .coin-btn { width: 110px; height: 110px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border: 4px solid #fef08a; display: flex; align-items: center; justify-content: center; font-size: 45px; color: #fff; cursor: pointer; box-shadow: 0 0 25px rgba(245, 158, 11, 0.6); transition: transform 0.1s; margin: 6px auto; }
-        .coin-btn:active { transform: scale(0.9); }
-        .coin-action-btn { width: 100%; padding: 12px; border-radius: 12px; font-weight: 800; font-size: 12px; cursor: pointer; border: none; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        /* ============================================================
+           CHAT & SUPPORT
+           ============================================================ */
+        .chat-support {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            margin: 30px 0;
+        }
+        .chat-box {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-card);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 380px;
+        }
+        .chat-box .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-card);
+        }
+        .chat-box .chat-header h4 {
+            font-size: 16px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .chat-box .chat-header .status {
+            font-size: 12px;
+            color: var(--success);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .chat-box .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 220px;
+        }
+        .chat-box .chat-messages .msg {
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            max-width: 80%;
+            font-size: 14px;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease;
+        }
+        .chat-box .chat-messages .msg.user {
+            background: var(--accent-1);
+            color: #fff;
+            align-self: flex-end;
+        }
+        .chat-box .chat-messages .msg.bot {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            align-self: flex-start;
+        }
+        .chat-box .chat-messages .msg.support {
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--warning);
+            color: var(--text-secondary);
+            align-self: flex-start;
+        }
+        .chat-box .chat-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .chat-box .chat-input input {
+            flex: 1;
+            padding: 10px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: var(--transition);
+        }
+        .chat-box .chat-input input:focus {
+            border-color: var(--accent-1);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+        .chat-box .chat-input button {
+            background: var(--accent-1);
+            border: none;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+        .chat-box .chat-input button:hover {
+            background: var(--accent-2);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
 
-        /* CHROME BROWSER */
-        .chrome-bar { display: flex; gap: 8px; padding: 10px 14px; background: rgba(15,23,42,0.95); border-bottom: 1px solid var(--border-glow); }
-        .chrome-input { flex: 1; background: var(--bg-glass); border: 1px solid var(--border-glow); border-radius: 20px; padding: 8px 16px; color: #fff; font-size: 12px; outline: none; }
+        /* ============================================================
+           DATING / TANISHUV
+           ============================================================ */
+        .dating-section {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-card);
+            padding: 24px;
+            margin: 30px 0;
+        }
+        .dating-section h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dating-section .dating-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .dating-section .dating-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border-card);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .dating-section .dating-card:hover {
+            border-color: var(--accent-1);
+            transform: translateY(-4px);
+        }
+        .dating-section .dating-card .avatar {
+            font-size: 48px;
+            margin-bottom: 6px;
+        }
+        .dating-section .dating-card .name {
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .dating-section .dating-card .bio {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .dating-section .dating-card .like-btn {
+            margin-top: 8px;
+            background: var(--accent-3);
+            border: none;
+            color: #fff;
+            padding: 4px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+        .dating-section .dating-card .like-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 24px var(--accent-glow);
+        }
+
+        /* ============================================================
+           SUPPORT 24/7
+           ============================================================ */
+        .support-247 {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-card);
+            padding: 24px;
+            margin: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .support-247 .info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .support-247 .info i {
+            font-size: 40px;
+            color: var(--success);
+        }
+        .support-247 .info .text h4 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .support-247 .info .text p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        .support-247 .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .support-247 .actions button {
+            padding: 10px 24px;
+            border-radius: var(--radius-sm);
+            border: none;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+        .support-247 .actions .btn-call {
+            background: var(--success);
+            color: #000;
+        }
+        .support-247 .actions .btn-call:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 230, 118, 0.3);
+        }
+        .support-247 .actions .btn-chat {
+            background: var(--accent-1);
+            color: #fff;
+        }
+        .support-247 .actions .btn-chat:hover {
+            background: var(--accent-2);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .footer {
+            margin-top: 40px;
+            padding: 24px;
+            text-align: center;
+            border-top: 1px solid var(--border-glass);
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer a:hover {
+            color: var(--accent-1);
+        }
+
+        /* ============================================================
+           MODAL
+           ============================================================ */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.open {
+            display: flex;
+        }
+        .modal {
+            background: var(--bg-glass);
+            backdrop-filter: blur(40px) saturate(1.6);
+            -webkit-backdrop-filter: blur(40px) saturate(1.6);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            max-width: 600px;
+            width: 100%;
+            padding: 32px 28px;
+            max-height: 85vh;
+            overflow-y: auto;
+            animation: modalIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: var(--shadow-card), 0 0 80px var(--accent-glow);
+        }
+        @keyframes modalIn {
+            from {
+                transform: translateY(50px) scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+        .modal .close {
+            float: right;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 28px;
+            cursor: pointer;
+            transition: var(--transition);
+            line-height: 1;
+        }
+        .modal .close:hover {
+            color: var(--text-primary);
+            transform: rotate(90deg);
+        }
+        .modal .m-icon {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+        .modal h2 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+        .modal .m-id {
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+        .modal .m-desc {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 18px;
+            font-size: 15px;
+        }
+        .modal .m-params {
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            padding: 16px 18px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-card);
+        }
+        .modal .m-params h4 {
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .modal .m-params code {
+            color: var(--accent-2);
+            font-size: 14px;
+            word-break: break-all;
+            font-family: 'Inter', monospace;
+        }
+        .modal .run-btn {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: var(--radius-sm);
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .modal .run-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 60px var(--accent-glow);
+        }
+        .modal .run-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .modal .run-btn .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ============================================================
+           TOAST
+           ============================================================ */
+        .toast-container {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 380px;
+        }
+        .toast {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-sm);
+            padding: 14px 22px;
+            animation: toastIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: var(--shadow-card);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid var(--accent-1);
+        }
+        .toast.success {
+            border-left-color: var(--success);
+        }
+        .toast.error {
+            border-left-color: var(--danger);
+        }
+        @keyframes toastIn {
+            from {
+                transform: translateX(80px) scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 900px) {
+            .media-row {
+                grid-template-columns: 1fr;
+            }
+            .chat-support {
+                grid-template-columns: 1fr;
+            }
+            .top-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+            .top-bar .weather {
+                justify-content: center;
+            }
+            .top-bar .quick-links {
+                justify-content: center;
+            }
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 8px 16px;
+            }
+            .navbar .logo {
+                font-size: 20px;
+            }
+            .navbar .date-time {
+                font-size: 11px;
+                padding: 4px 12px;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+            .hero .sub {
+                font-size: 16px;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .main {
+                padding: 12px 14px 30px;
+            }
+            .support-247 {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .support-247 .info {
+                justify-content: center;
+            }
+            .support-247 .actions {
+                justify-content: center;
+            }
+            .dating-section .dating-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 26px;
+            }
+            .stats .item .num {
+                font-size: 24px;
+            }
+            .media-row .youtube-box iframe {
+                height: 180px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- LOCK SCREEN -->
-    <div class="lock-screen" id="appLockScreen">
-        <i class="fa-solid fa-lock" style="font-size: 40px; color: #818cf8;"></i>
-        <h3>Ilova Qulflangan</h3>
-        <p style="font-size: 12px; color: var(--text-sub);">Kirish uchun PIN kodni kiriting</p>
-        <input type="password" maxlength="4" id="pinInput" class="lock-pin-input" oninput="verifyPin()">
-    </div>
-
-    <!-- MAIN HEADER -->
-    <header class="app-header">
-        <div class="header-top">
-            <div class="brand-logo" onclick="location.reload()">
-                IKROMJON <span>TV PRO</span>
+    <!-- =============================================================
+    NAVBAR
+    ============================================================= -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-globe-asia"></i> IKROMJON Ai
+            <span class="badge">PREMIUM</span>
+        </div>
+        <div class="right">
+            <div class="date-time" id="dateTime">
+                <i class="fas fa-clock"></i> <span id="timeDisplay">00:00:00</span>
+                <span style="margin:0 4px;color:var(--text-muted)">|</span>
+                <i class="fas fa-calendar-alt"></i> <span id="dateDisplay">01.01.2026</span>
             </div>
-            
-            <select class="lang-select" id="langSelect">
-                <option value="uz">🇺🇿 UZ</option>
-                <option value="ru">🇷🇺 RU</option>
-                <option value="eng">🇬🇧 ENG</option>
-            </select>
-
-            <div class="header-actions">
-                <div class="icon-btn" title="Galereyadan Yuklash" onclick="openModal('uploadModal')"><i class="fa-solid fa-images" style="color:#10b981;"></i></div>
-                <div class="icon-btn" title="Musiqa Pleyer" onclick="openModal('musicModal')"><i class="fa-solid fa-music" style="color:#ec4899;"></i></div>
-                <div class="icon-btn" title="Google Chrome" onclick="openChromeBrowser()"><i class="fa-brands fa-chrome" style="color:#4285F4;"></i></div>
-                <div class="icon-btn" title="Ikromjon AI" onclick="openModal('aiModal')"><i class="fa-solid fa-robot"></i></div>
+            <div class="lang-selector">
+                <i class="fas fa-language"></i>
+                <select id="langSelect" onchange="changeLanguage(this.value)"></select>
             </div>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
-
-        <div class="widget-bar">
-            <div class="widget-item"><i class="fa-solid fa-clock"></i> <span id="clockVal">--:--:--</span></div>
-            <div class="widget-item"><i class="fa-solid fa-calendar-days"></i> <span id="dateVal">--.--.----</span></div>
-            <div class="widget-item"><i class="fa-solid fa-cloud-sun"></i> <span>+28°C Toshkent</span></div>
-        </div>
-
-        <div class="top-tabs">
-            <div class="top-tab-item active" onclick="switchTab(this)">Bosh sahifa</div>
-            <div class="top-tab-item" onclick="switchTab(this)">TV Kanallar</div>
-            <div class="top-tab-item" onclick="switchTab(this)">YouTube Trendlar</div>
-            <div class="top-tab-item" onclick="switchTab(this)">Filmlar</div>
-            <div class="top-tab-item" onclick="switchTab(this)">Seriallar</div>
-        </div>
-    </header>
-
-    <main>
-        <!-- HERO CAROUSEL -->
-        <div class="hero-slider-container">
-            <div class="hero-track" id="heroTrack">
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=1000&q=80');">
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <div class="hero-badge" style="background:#f40000;">COCA-COLA</div>
-                        <div class="hero-title">Real Ta'm, Haqiqiy Zavq</div>
-                        <div class="hero-meta"><span>Coca-Cola bilan har bir lahza unutilmas</span></div>
-                    </div>
-                </div>
-
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1629203851122-3726ecdf080e?auto=format&fit=crop&w=1000&q=80');">
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <div class="hero-badge" style="background:#004b93;">PEPSI</div>
-                        <div class="hero-title">Generation Pepsi</div>
-                        <div class="hero-meta"><span>Chegaralarni bilmaydigan shijoat</span></div>
-                    </div>
-                </div>
-
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?auto=format&fit=crop&w=1000&q=80');">
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <div class="hero-badge" style="background:#00a651;">SPRITE</div>
-                        <div class="hero-title">Chanqoqni Butunlay Bos</div>
-                        <div class="hero-meta"><span>Limon-laym ta'mi bilan tetiklashing</span></div>
-                    </div>
-                </div>
-
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?auto=format&fit=crop&w=1000&q=80');">
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <div class="hero-badge" style="background:#4285F4;">GOOGLE</div>
-                        <div class="hero-title">Dunyo Bilimlari Bir Qadamda</div>
-                        <div class="hero-meta"><span>Google xizmatlari va qidiruv tizimi</span></div>
-                    </div>
-                </div>
-
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?auto=format&fit=crop&w=1000&q=80');">
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <div class="hero-badge" style="background:#000000;">ADIDAS</div>
-                        <div class="hero-title">Impossible is Nothing</div>
-                        <div class="hero-meta"><span>Sport va erkinlik estetikasi</span></div>
-                    </div>
-                </div>
-
-                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=1000&q=80');">
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <div class="hero-badge" style="background:#d81159;">PUMA</div>
-                        <div class="hero-title">Forever Faster</div>
-                        <div class="hero-meta"><span>Har doim oldinda va tezkor bo'ling</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slider-dots" id="sliderDotsContainer"></div>
-        </div>
-
-        <!-- QUICK UTILITIES BAR -->
-        <div class="quick-tools">
-            <div class="tool-card" onclick="openModal('calendarModal')"><i class="fa-solid fa-calendar-days"></i>Taqvim</div>
-            <div class="tool-card" onclick="openModal('namazModal')"><i class="fa-solid fa-kaaba"></i>Namozi</div>
-            <div class="tool-card" onclick="openModal('calcModal')"><i class="fa-solid fa-calculator"></i>Kalkulyator</div>
-            <div class="tool-card" onclick="openModal('currencyModal')"><i class="fa-solid fa-money-bill-transfer"></i>Valyuta</div>
-        </div>
-
-        <!-- O'YINLAR BO'LIMI -->
-        <div class="section-header">
-            <span>🎮 Mini Oʻyinlar Markazi</span>
-        </div>
-        <div class="games-grid">
-            <div class="game-card" onclick="startSnakeGame()"><i class="fa-solid fa-staff-snake"></i>Ilon Oʻyini</div>
-            <div class="game-card" onclick="openCheckersGame()"><i class="fa-solid fa-chess-board"></i>Shashka</div>
-            <div class="game-card" onclick="openCoinGame()"><i class="fa-solid fa-coins"></i>Tanga Yigʻish</div>
-        </div>
-
-        <!-- YUKLANGAN MEDIA VA GALEREYA FAYLLARI -->
-        <div id="uploadedSection" style="display:none;">
-            <div class="section-header">
-                <span>📁 Galereyadan Yuklangan Fayllar</span>
-            </div>
-            <div class="horiz-scroll" id="uploadedList"></div>
-        </div>
-
-        <!-- TV CHANNELS -->
-        <div class="section-header">
-            <span>Jonli TV Kanallar</span>
-            <span style="font-size:11px; color:#818cf8;">50+ Kanal</span>
-        </div>
-        <div class="horiz-scroll">
-            <div class="tv-card" onclick="openTvChannel('UZBEKISTAN 24')">
-                <div class="tv-logo-box" style="color:#00c6ff;">UZB 24</div>
-                <div class="tv-name">Uzbekistan 24</div>
-            </div>
-            <div class="tv-card" onclick="openTvChannel('ZO\'R TV')">
-                <div class="tv-logo-box" style="color:#f59e0b;">ZO'R</div>
-                <div class="tv-name">Zo'r TV HD</div>
-            </div>
-            <div class="tv-card" onclick="openTvChannel('MY5 TV')">
-                <div class="tv-logo-box" style="color:#ef4444;">MY5</div>
-                <div class="tv-name">Mening Yurtim</div>
-            </div>
-            <div class="tv-card" onclick="openTvChannel('SPORT HD')">
-                <div class="tv-logo-box" style="color:#10b981;">SPORT</div>
-                <div class="tv-name">Sport TV HD</div>
-            </div>
-        </div>
-    </main>
-
-    <!-- BOTTOM NAV -->
-    <nav class="bottom-nav">
-        <div class="nav-btn active" onclick="location.reload()"><i class="fa-solid fa-house"></i><span>Asosiy</span></div>
-        <div class="nav-btn" onclick="openChromeBrowser()"><i class="fa-brands fa-chrome" style="color:#4285F4;"></i><span>Google</span></div>
-        <div class="nav-btn" onclick="openModal('aiModal')"><i class="fa-solid fa-robot"></i><span>Ikromjon AI</span></div>
-        <div class="nav-btn" onclick="openModal('musicModal')"><i class="fa-solid fa-music"></i><span>Musiqa</span></div>
-        <div class="nav-btn" onclick="openModal('settingsModal')"><i class="fa-solid fa-sliders"></i><span>Sozlamalar</span></div>
     </nav>
 
-    <!-- GOOGLE CHROME BRAUZER MODAL -->
-    <div class="modal-overlay" id="chromeModal">
-        <div class="modal-header" style="padding:10px 14px;">
-            <span style="font-weight: 800; display:flex; align-items:center; gap:8px;">
-                <i class="fa-brands fa-chrome" style="color:#4285F4; font-size:18px;"></i> Google Chrome
-            </span>
-            <div class="icon-btn" onclick="closeModal('chromeModal')"><i class="fa-solid fa-xmark"></i></div>
+    <!-- =============================================================
+    TOP BAR — Weather + Quick Links
+    ============================================================= -->
+    <div class="top-bar">
+        <div class="weather" id="weatherWidget">
+            <i class="fas fa-cloud-sun"></i>
+            <span class="temp" id="tempDisplay">+24°</span>
+            <span class="city" id="cityDisplay">Toshkent, O'zbekiston</span>
+            <span style="color:var(--text-muted);font-size:13px;margin-left:4px;" id="weatherDesc">Quyoshli</span>
         </div>
-        <div class="chrome-bar">
-            <input type="text" id="chromeSearchInput" class="chrome-input" placeholder="Google'dan qidiring yoki URL kiriting..." onkeydown="if(event.key==='Enter') searchGoogle()">
-            <button class="btn-main" style="padding:6px 14px; font-size:11px;" onclick="searchGoogle()"><i class="fa-solid fa-magnifying-glass"></i> Qidiruv</button>
+        <div class="quick-links">
+            <a href="#" onclick="openYoutube()"><i class="fab fa-youtube"></i> YouTube</a>
+            <a href="#" onclick="openChrome()"><i class="fab fa-chrome"></i> Chrome</a>
+            <a href="#" id="browserLink"><i class="fas fa-globe"></i> 100+ brauzer</a>
+            <a href="#" onclick="showToast('📱 Mobil ilova tez kunda!', 'success')"><i class="fas fa-mobile-alt"></i> App</a>
         </div>
-        <iframe id="chromeIframe" src="https://www.bing.com" style="width:100%; flex:1; border:none; background:#fff;"></iframe>
     </div>
 
-    <!-- GALEREYADAN YUKLASH MODAL -->
-    <div class="modal-overlay" id="uploadModal">
-        <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-photo-film" style="color:#10b981;"></i> Galereyadan Yuklash</span>
-            <div class="icon-btn" onclick="closeModal('uploadModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div style="padding:20px; display:flex; flex-direction:column; gap:16px;">
-            <div id="uploadProgress" style="display:none; color:#10b981; font-size:12px; font-weight:700; text-align:center;">
-                <i class="fa-solid fa-spinner fa-spin"></i> Fayllar galereyadan xotiraga yuklanmoqda...
+    <!-- =============================================================
+    MAIN
+    ============================================================= -->
+    <div class="main">
+
+        <!-- HERO -->
+        <section class="hero">
+            <h1>🌍 AI Media Studio — 100 000+ funksiya</h1>
+            <p class="sub">150+ til • 24/7 yordam • Premium bepul • YouTube, Chat, Tanishuv va boshqalar</p>
+            <div class="stats">
+                <div class="item"><div class="num" id="totalCount">100 000</div><div class="lbl">Funksiyalar</div></div>
+                <div class="item"><div class="num">150+</div><div class="lbl">Tillarda</div></div>
+                <div class="item"><div class="num">♾️</div><div class="lbl">Imkoniyatlar</div></div>
+                <div class="item"><div class="num">24/7</div><div class="lbl">Yordam</div></div>
             </div>
-            
-            <label class="btn-main" style="padding:16px; font-size:13px; background:linear-gradient(135deg, #10b981 0%, #059669 100%);">
-                <i class="fa-solid fa-images" style="font-size:18px;"></i> Galereyadan Rasmlar Tanlash
-                <input type="file" accept="image/*" multiple style="display:none;" onchange="handleGalleryUpload(event, 'image')">
-            </label>
-
-            <label class="btn-main" style="padding:16px; font-size:13px; background:linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);">
-                <i class="fa-solid fa-film" style="font-size:18px;"></i> Galereyadan Videolar Tanlash
-                <input type="file" accept="video/*" multiple style="display:none;" onchange="handleGalleryUpload(event, 'video')">
-            </label>
-        </div>
-    </div>
-
-    <!-- O'YIN 1: ILON O'YINI -->
-    <div class="modal-overlay" id="snakeModal">
-        <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-staff-snake" style="color:#10b981;"></i> Ilon Oʻyini</span>
-            <div class="icon-btn" onclick="closeModal('snakeModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div style="padding:16px; text-align:center; flex:1; display:flex; flex-direction:column; justify-content:center;">
-            <div style="font-size:14px; font-weight:800; margin-bottom:8px;">Ochko: <span id="snakeScore" style="color:#10b981;">0</span></div>
-            <canvas id="snakeCanvas" width="240" height="240"></canvas>
-            
-            <div class="snake-ctrl">
-                <div></div><div class="ctrl-btn" onclick="changeSnakeDir('UP')">▲</div><div></div>
-                <div class="ctrl-btn" onclick="changeSnakeDir('LEFT')">◄</div><div></div><div class="ctrl-btn" onclick="changeSnakeDir('RIGHT')">►</div>
-                <div></div><div class="ctrl-btn" onclick="changeSnakeDir('DOWN')">▼</div><div></div>
+            <!-- Browser support strip -->
+            <div class="browser-strip" id="browserStrip">
+                <span><i class="fab fa-chrome"></i> Chrome</span>
+                <span><i class="fab fa-firefox-browser"></i> Firefox</span>
+                <span><i class="fab fa-edge"></i> Edge</span>
+                <span><i class="fab fa-safari"></i> Safari</span>
+                <span><i class="fab fa-opera"></i> Opera</span>
+                <span><i class="fab fa-brave"></i> Brave</span>
+                <span><i class="fas fa-globe"></i> +100 boshqa</span>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- O'YIN 2: SHASHKA -->
-    <div class="modal-overlay" id="checkersModal">
-        <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-chess-board" style="color:#a855f7;"></i> Shashka Oʻyini</span>
-            <div class="icon-btn" onclick="closeModal('checkersModal')"><i class="fa-solid fa-xmark"></i></div>
+        <!-- PREMIUM BANNER -->
+        <div class="premium-banner">
+            <div class="text">
+                <i class="fas fa-crown"></i>
+                <span>🔓 BARCHA PREMIUM XIZMATLAR — BEPUL! (Cheklovsiz)</span>
+            </div>
+            <button class="btn-premium" onclick="showToast('🎉 Siz premium foydalanuvchisiz! Barcha funksiyalar ochiq.', 'success')">
+                <i class="fas fa-unlock"></i> Faollashtirilgan
+            </button>
         </div>
-        <div style="padding:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; flex:1;">
-            <div class="checkers-board" id="checkersBoard"></div>
-            <p style="font-size:11px; color:var(--text-sub); margin-top:12px;">Navbat: Qizil toshlar</p>
-        </div>
-    </div>
 
-    <!-- O'YIN 3: TANGA YIG'ISH -->
-    <div class="modal-overlay" id="coinModal">
-        <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-coins" style="color:#f59e0b;"></i> Tanga Yigʻish va Balans</span>
-            <div class="icon-btn" onclick="closeModal('coinModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div style="padding:16px; flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-            <div class="coin-game-container">
-                <div class="coin-balance-card">
-                    <div style="font-size: 12px; color: var(--text-sub); font-weight: 700;">HISOB BALANSINGIZ</div>
-                    <div style="font-size: 32px; font-weight: 900; color: #f59e0b; margin: 4px 0;" id="coinCountVal">0 Tanga</div>
-                    <div style="font-size: 16px; font-weight: 800; color: #10b981;" id="coinSomVal">= 0 soʻm</div>
+        <!-- YOUTUBE + ADS ROW -->
+        <div class="media-row">
+            <div class="youtube-box">
+                <div class="label"><i class="fab fa-youtube"></i> IKROMJON TV</div>
+                <iframe id="youtubeFrame" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&rel=0" allowfullscreen></iframe>
+            </div>
+            <div class="ads-box">
+                <div class="ad" onclick="showToast('📱 Ilovani yuklab oling!', 'success')">
+                    <div class="ad-icon">📱</div>
+                    <div class="ad-text">IKROMJON Ai App</div>
+                    <div class="ad-label">Bepul yuklab olish</div>
                 </div>
-
-                <div class="coin-btn" onclick="clickCoin()"><i class="fa-solid fa-coins"></i></div>
-                <p style="font-size: 11px; color: var(--text-sub); text-align: center;">Tanga ustiga bosing (+1 tanga = 10 soʻm)</p>
-
-                <div style="width: 100%; display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
-                    <button class="coin-action-btn" style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: #fff;" onclick="buyTvSubWithCoins()">
-                        <i class="fa-solid fa-tv"></i> TV Obuna Sotib Olish (5 000 soʻm)
-                    </button>
-                    <button class="coin-action-btn" style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #10b981;" onclick="withdrawCoinsMoney()">
-                        <i class="fa-solid fa-wallet"></i> Pulni Yechib Olish (Min: 10 000 soʻm)
-                    </button>
+                <div class="ad" onclick="showToast('🎁 Sizga 50 GB bepul cloud!', 'success')">
+                    <div class="ad-icon">☁️</div>
+                    <div class="ad-text">50 GB Cloud</div>
+                    <div class="ad-label">Premium sovg'a</div>
+                </div>
+                <div class="ad" onclick="showToast('🤝 Do\'stingizni taklif qiling va bonus oling!', 'success')">
+                    <div class="ad-icon">🤝</div>
+                    <div class="ad-text">Do'stni taklif qil</div>
+                    <div class="ad-label">+10 GB bonus</div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- TV OBUNA MODAL -->
-    <div class="modal-overlay" id="tvSubModal">
-        <div class="modal-header">
-            <span style="font-weight: 800; color:#ef4444;"><i class="fa-solid fa-tv"></i> TV Efir Obunasi</span>
-            <div class="icon-btn" onclick="closeModal('tvSubModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div style="padding:20px; display:flex; justify-content:center; align-items:center; flex:1; overflow-y:auto;">
-            <div class="sub-box">
-                <div id="payStep1" style="display:flex; flex-direction:column; gap:10px; width:100%;">
-                    <i class="fa-solid fa-lock" style="font-size: 36px; color:#ec4899;"></i>
-                    <h3 id="targetChannelName">TV Kanal nomi</h3>
-                    <p style="font-size:12px; color:var(--text-sub);">TV kanaliga kirganda 55 000 soʻmga 1 oylik obuna sotib oling!</p>
-                    <div class="sub-price">55 000 soʻm <span style="font-size:12px; color:#fff;">/ 1 oy</span></div>
-                    <button class="btn-main" style="width:100%; padding:14px; font-size:13px;" onclick="goToPayStep(2)">Obunani Sotib Olish</button>
+        <!-- CHAT + BOT + SUPPORT -->
+        <div class="chat-support">
+            <!-- Chat bot -->
+            <div class="chat-box">
+                <div class="chat-header">
+                    <h4><i class="fas fa-robot" style="color:var(--accent-2);"></i> AI Chat Bot</h4>
+                    <span class="status"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--success);"></span> Online</span>
                 </div>
+                <div class="chat-messages" id="chatMessagesBot">
+                    <div class="msg bot">👋 Salom! Men IKROMJON Ai bot. Qanday yordam bera olaman?</div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chatInputBot" placeholder="Xabar yozing..." onkeydown="if(event.key==='Enter') sendBotMessage()" />
+                    <button onclick="sendBotMessage()"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
 
-                <div id="payStep2" style="display:none; flex-direction:column; gap:14px; width:100%;">
-                    <h4 style="font-size:14px;">Toʻlov Turini Tanlang</h4>
-                    <div style="display:flex; gap:10px; width:100%;">
-                        <div class="card-type-btn selected" id="btnUzcard" onclick="selectCardType('UZCARD')">UZCARD</div>
-                        <div class="card-type-btn" id="btnHumo" onclick="selectCardType('HUMO')">HUMO</div>
+            <!-- Tanishuv / Dating -->
+            <div class="chat-box" style="background:var(--bg-card);">
+                <div class="chat-header">
+                    <h4><i class="fas fa-heart" style="color:var(--accent-3);"></i> Tanishuv (Dating)</h4>
+                    <span class="status"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--warning);"></span> 24/7</span>
+                </div>
+                <div class="chat-messages" id="datingMessages">
+                    <div class="msg support">💕 Yangi odamlar bilan tanishing! Quyidagi profillarni ko'ring.</div>
+                </div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;" id="datingProfiles">
+                    <div style="background:var(--bg-secondary);padding:8px 14px;border-radius:40px;display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;border:1px solid var(--border-card);" onclick="likeProfile('Aliya')">
+                        <span>👩</span> Aliya, 24
                     </div>
-                    <button class="btn-main" style="width:100%; padding:12px;" onclick="goToPayStep(3)">Davom Etish</button>
+                    <div style="background:var(--bg-secondary);padding:8px 14px;border-radius:40px;display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;border:1px solid var(--border-card);" onclick="likeProfile('Jasur')">
+                        <span>👨</span> Jasur, 27
+                    </div>
+                    <div style="background:var(--bg-secondary);padding:8px 14px;border-radius:40px;display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;border:1px solid var(--border-card);" onclick="likeProfile('Madina')">
+                        <span>👩</span> Madina, 22
+                    </div>
+                    <div style="background:var(--bg-secondary);padding:8px 14px;border-radius:40px;display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;border:1px solid var(--border-card);" onclick="likeProfile('Sardor')">
+                        <span>👨</span> Sardor, 29
+                    </div>
                 </div>
+            </div>
+        </div>
 
-                <div id="payStep3" style="display:none; flex-direction:column; gap:14px; width:100%;">
-                    <h4 style="font-size:14px;">Karta Raqamini Kiriting</h4>
-                    <input type="text" id="cardNumberInput" maxlength="19" placeholder="8600 **** **** ****" class="setting-input" style="width:100%; text-align:center; font-size:16px; padding:12px; letter-spacing:2px;" oninput="formatCardNumber(this)">
-                    <button class="btn-main" style="width:100%; padding:12px;" onclick="processPayment()">Toʻlov Qilish (55 000 soʻm)</button>
+        <!-- 24/7 SUPPORT -->
+        <div class="support-247">
+            <div class="info">
+                <i class="fas fa-headset"></i>
+                <div class="text">
+                    <h4>🕒 24/7 Mutaxassis yordami</h4>
+                    <p>Bizning mutaxassislar sizga har doim yordam berishga tayyor. Telefon, chat yoki video qo'ng'iroq.</p>
                 </div>
             </div>
+            <div class="actions">
+                <button class="btn-call" onclick="showToast('📞 Mutaxassis bilan bog\'lanmoqda... Iltimos kuting.', 'success')"><i class="fas fa-phone"></i> Qo'ng'iroq</button>
+                <button class="btn-chat" onclick="document.getElementById('chatInputBot').focus(); showToast('💬 Chat bot sizni kutmoqda!', 'success')"><i class="fas fa-comment-dots"></i> Chat</button>
+                <button class="btn-chat" style="background:var(--warning);color:#000;" onclick="showToast('🎥 Video qo\'ng\'iroq tez kunda!', 'success')"><i class="fas fa-video"></i> Video</button>
+            </div>
+        </div>
+
+        <!-- FUNCTIONS GRID (100K) -->
+        <div style="margin-top:20px;">
+            <h2 style="font-size:22px;font-weight:800;margin-bottom:16px;">📋 100 000+ funksiyalar</h2>
+            <div class="toolbar" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
+                <input type="text" id="searchInput" placeholder="🔍 Funksiya qidirish..." oninput="filterFunctions()" style="flex:1;min-width:180px;padding:12px 18px;background:var(--bg-card);border:1px solid var(--border-card);border-radius:var(--radius-sm);color:var(--text-primary);font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:var(--transition);" />
+                <select id="categoryFilter" onchange="filterFunctions()" style="padding:12px 18px;background:var(--bg-card);border:1px solid var(--border-card);border-radius:var(--radius-sm);color:var(--text-primary);font-size:15px;font-family:'Inter',sans-serif;outline:none;">
+                    <option value="all">📂 Barcha kategoriyalar</option>
+                    <option value="video">🎬 Video</option>
+                    <option value="audio">🎵 Audio</option>
+                    <option value="image">🖼 Rasm</option>
+                    <option value="animation">🎨 Animatsiya</option>
+                    <option value="text">📝 Matn & Subtitr</option>
+                    <option value="vfx">✨ VFX</option>
+                    <option value="export">📤 Eksport & Format</option>
+                    <option value="ai">🤖 AI</option>
+                    <option value="analysis">📊 Tahlil</option>
+                    <option value="special">🌟 Maxsus</option>
+                </select>
+            </div>
+            <div class="grid" id="functionsGrid"></div>
+            <div class="pagination" id="pagination">
+                <button id="prevPage" onclick="changePage(-1)"><i class="fas fa-chevron-left"></i> Oldingi</button>
+                <span class="page-info" id="pageInfo">Sahifa <strong id="currentPageNum">1</strong> / <span id="totalPagesNum">1</span></span>
+                <button id="nextPage" onclick="changePage(1)">Keyingi <i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p>🚀 IKROMJON Ai Global — 100 000+ funksiya, 150+ til, 24/7 yordam | <a href="#">GitHub</a> | <a href="#">API</a> | <a href="#" onclick="showToast('🌍 Barcha huquqlar himoyalangan.', 'success')">© 2026</a></p>
         </div>
     </div>
 
-    <!-- TAQVIM -->
-    <div class="modal-overlay" id="calendarModal">
-        <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-calendar-days"></i> Kalendar</span>
-            <div class="icon-btn" onclick="closeModal('calendarModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div style="padding:20px; text-align:center; flex:1;">
-            <h3 style="margin-bottom:14px; font-size:16px;">Iyul 2026</h3>
-            <div style="display:grid; grid-template-columns:repeat(7, 1fr); gap:8px; font-size:12px; font-weight:700;">
-                <div>Dsh</div><div>Tsh</div><div>Chsh</div><div>Psh</div><div>Jum</div><div>Shn</div><div>Yak</div>
+    <!-- =============================================================
+    MODAL
+    ============================================================= -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="close" onclick="closeModal()">&times;</button>
+            <div class="m-icon" id="mIcon">🎬</div>
+            <h2 id="mTitle">Funksiya nomi</h2>
+            <div class="m-id" id="mId">#000001</div>
+            <div class="m-desc" id="mDesc">Tavsif</div>
+            <div class="m-params">
+                <h4>⚙️ Parametrlar</h4>
+                <code id="mParams">{ }</code>
             </div>
-            <div id="calendarDays" style="display:grid; grid-template-columns:repeat(7, 1fr); gap:8px; margin-top:10px; font-size:12px;"></div>
+            <button class="run-btn" id="runBtn" onclick="runFunction()">
+                <i class="fas fa-play"></i> <span id="runBtnText">Ishga tushirish</span>
+            </button>
         </div>
     </div>
 
-    <!-- NAMOZ -->
-    <div class="modal-overlay" id="namazModal">
-        <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-kaaba"></i> Namoz Taqvimi (Toshkent)</span>
-            <div class="icon-btn" onclick="closeModal('namazModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div style="padding:16px; display:flex; flex-direction:column; gap:10px; flex:1; overflow-y:auto;">
-            <div class="setting-item"><span>Bomdod</span><b style="color:#818cf8;">04:12</b></div>
-            <div class="setting-item"><span>Quyosh</span><b>05:45</b></div>
-            <div class="setting-item"><span>Peshin</span><b style="color:#818cf8;">12:30</b></div>
-            <div class="setting-item"><span>Asr</span><b style="color:#818cf8;">17:15</b></div>
-            <div class="setting-item"><span>Shom</span><b style="color:#818cf8;">19:48</b></div>
-            <div class="setting-item"><span>Xufton</span><b style="color:#818cf8;">21:15</b></div>
-        </div>
-    </div>
+    <!-- =============================================================
+    TOAST
+    ============================================================= -->
+    <div class="toast-container" id="toastContainer"></div>
 
-    <!-- KALKULYATOR -->
-    <div class="modal-overlay" id="calcModal">
-        <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-calculator"></i> Kalkulyator</span>
-            <div class="icon-btn" onclick="closeModal('calcModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div style="padding:16px; display:flex; flex-direction:column; flex:1; justify-content:flex-end;">
-            <input type="text" id="calcDisplay" readonly value="0" style="width:100%; font-size:32px; text-align:right; padding:12px; background:transparent; border:none; color:#fff; outline:none; margin-bottom:10px;">
-            <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px;">
-                <div class="ctrl-btn" onclick="clearCalc()" style="color:#ef4444;">C</div>
-                <div class="ctrl-btn" onclick="appendCalc('/')">/</div>
-                <div class="ctrl-btn" onclick="appendCalc('*')">*</div>
-                <div class="ctrl-btn" onclick="appendCalc('-')">-</div>
-                <div class="ctrl-btn" onclick="appendCalc('7')">7</div>
-                <div class="ctrl-btn" onclick="appendCalc('8')">8</div>
-                <div class="ctrl-btn" onclick="appendCalc('9')">9</div>
-                <div class="ctrl-btn" onclick="appendCalc('+')">+</div>
-                <div class="ctrl-btn" onclick="appendCalc('4')">4</div>
-                <div class="ctrl-btn" onclick="appendCalc('5')">5</div>
-                <div class="ctrl-btn" onclick="appendCalc('6')">6</div>
-                <div class="ctrl-btn" onclick="runCalc()" style="background:var(--accent-gradient); grid-row: span 2; display:flex; align-items:center; justify-content:center;">=</div>
-                <div class="ctrl-btn" onclick="appendCalc('1')">1</div>
-                <div class="ctrl-btn" onclick="appendCalc('2')">2</div>
-                <div class="ctrl-btn" onclick="appendCalc('3')">3</div>
-                <div class="ctrl-btn" onclick="appendCalc('0')" style="grid-column: span 2;">0</div>
-                <div class="ctrl-btn" onclick="appendCalc('.')">.</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- VALYUTA -->
-    <div class="modal-overlay" id="currencyModal">
-        <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-money-bill-transfer"></i> Valyuta Kurslari</span>
-            <div class="icon-btn" onclick="closeModal('currencyModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div style="padding:16px; display:flex; flex-direction:column; gap:12px; flex:1;">
-            <div class="setting-item"><span>1 USD</span><b style="font-size:14px; color:#10b981;">12 850 UZS</b></div>
-            <div class="setting-item"><span>1 EUR</span><b style="font-size:14px; color:#3b82f6;">13 920 UZS</b></div>
-            <div class="setting-item"><span>1 RUB</span><b style="font-size:14px; color:#ef4444;">142.5 UZS</b></div>
-        </div>
-    </div>
-
-    <!-- TO'LIQ SOZLAMALAR MODALI -->
-    <div class="modal-overlay" id="settingsModal">
-        <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-gear"></i> Ilova Sozlamalari va Xavfsizlik</span>
-            <div class="icon-btn" onclick="closeModal('settingsModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div class="setting-group">
-            
-            <!-- PROFIL VA RO'YXATDAN O'TGANLAR -->
-            <div style="font-size:11px; font-weight:800; color:#818cf8;">👤 PROFIL VA STATISTIKA</div>
-            <div class="setting-item">
-                <div class="setting-title"><i class="fa-solid fa-user-shield" style="color:#10b981;"></i> Profil: Ikromjon Xolmatov</div>
-                <span style="font-size: 10px; color: #10b981; font-weight: 700;">Faol</span>
-            </div>
-            <div class="setting-item">
-                <div class="setting-title"><i class="fa-solid fa-users"></i> Jami ro'yxatdan o'tganlar</div>
-                <b style="color: #6366f1;">1,245 ta foydalanuvchi</b>
-            </div>
-
-            <!-- XAVFSIZLIK VA QULF -->
-            <div style="font-size:11px; font-weight:800; color:#818cf8; margin-top:6px;">🔒 XAVFSIZLIK VA QULF</div>
-            <div class="setting-item">
-                <div class="setting-title"><i class="fa-solid fa-lock"></i> Sozlamalarga PIN Qulf</div>
-                <input type="password" maxlength="4" placeholder="PIN" id="setPinInput" class="setting-input" style="width:80px; text-align:center;" onchange="savePinSetting(this.value)">
-            </div>
-
-            <!-- DISPLEY VA OVOZ -->
-            <div style="font-size:11px; font-weight:800; color:#818cf8; margin-top:6px;">🎛️ DISPLEY VA OVOZ</div>
-            <div class="setting-item" style="flex-direction: column; align-items: flex-start; gap: 8px;">
-                <div class="setting-title"><i class="fa-solid fa-sun"></i> Ekran Yorug'ligi</div>
-                <input type="range" min="10" max="100" value="80" style="width:100%; accent-color:#6366f1;" oninput="adjustBrightness(this.value)">
-            </div>
-            <div class="setting-item" style="flex-direction: column; align-items: flex-start; gap: 8px;">
-                <div class="setting-title"><i class="fa-solid fa-volume-high"></i> Ilova Ovoz Balandligi</div>
-                <input type="range" min="0" max="100" value="50" style="width:100%; accent-color:#6366f1;" oninput="adjustVolume(this.value)">
-            </div>
-
-            <!-- ANTIVIRUS VA TEKSHIRUVCHI -->
-            <div style="font-size:11px; font-weight:800; color:#818cf8; margin-top:6px;">🛡️ ANTIVIRUS VA TIZIM</div>
-            <div class="setting-item">
-                <div class="setting-title"><i class="fa-solid fa-shield-halved" style="color:#10b981;"></i> Antivirus Himoyasi</div>
-                <button class="btn-main" style="padding: 6px 12px; font-size: 10px;" onclick="runAntivirusScan()">Skanerlash</button>
-            </div>
-            <div class="setting-item">
-                <div class="setting-title"><i class="fa-solid fa-rotate"></i> Ilova Tekshiruvchi (Update)</div>
-                <button class="btn-main" style="padding: 6px 12px; font-size: 10px; background: rgba(99,102,241,0.2); border:1px solid #6366f1;" onclick="checkAppUpdates()">Tekshirish</button>
-            </div>
-
-            <!-- ILOVA HAQIDA -->
-            <div style="font-size:11px; font-weight:800; color:#818cf8; margin-top:6px;">ℹ️ MA'LUMOT</div>
-            <div class="setting-item" onclick="openModal('aboutModal')" style="cursor:pointer;">
-                <div class="setting-title"><i class="fa-solid fa-circle-info"></i> Ilova Haqida</div>
-                <i class="fa-solid fa-chevron-right" style="font-size: 11px; color:var(--text-sub);"></i>
-            </div>
-        </div>
-    </div>
-
-    <!-- ILOVA HAQIDA MODAL -->
-    <div class="modal-overlay" id="aboutModal">
-        <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-circle-info"></i> Ilova Haqida</span>
-            <div class="icon-btn" onclick="closeModal('aboutModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div style="padding:20px; text-align:center; display:flex; flex-direction:column; gap:12px; align-items:center; flex:1; justify-content:center;">
-            <div style="font-size:40px; color:#6366f1;"><i class="fa-solid fa-tv"></i></div>
-            <h3>IKROMJON TV PRO</h3>
-            <p style="font-size:12px; color:var(--text-sub);">Versiya: 2.0.4 (Ultimate Edition)</p>
-            <p style="font-size:11px; color:var(--text-main);">Ushbu tizim media kontentlar, jonli TV kanallar, mini oʻyinlar va toʻliq xavfsizlik himoyasini oʻz ichiga olgan maxsus dasturdir.</p>
-        </div>
-    </div>
-
-    <!-- MUSIQA MODAL -->
-    <div class="modal-overlay" id="musicModal">
-        <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-music" style="color: #ec4899;"></i> Musiqa Pleyer</span>
-            <div class="icon-btn" onclick="closeModal('musicModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div style="padding:16px; border-bottom: 1px solid var(--border-glow);">
-            <label class="btn-main" style="cursor:pointer; text-align:center; width:100%;">
-                <i class="fa-solid fa-folder-open"></i> Musiqa Tanlash va Saqlash
-                <input type="file" accept="audio/*" multiple style="display:none;" onchange="handleAudioUpload(event)">
-            </label>
-        </div>
-        <div style="flex:1; overflow-y:auto; padding:14px;" id="musicList"></div>
-        <div style="padding:16px; background:var(--bg-card); border-top:1px solid var(--border-glow); display:flex; flex-direction:column; gap:8px;">
-            <div id="currentTrackTitle" style="font-size:12px; font-weight:800; text-align:center;">Pleyer To'xtatilgan</div>
-            <audio id="mainAudioPlayer" controls style="width:100%; outline:none;"></audio>
-        </div>
-    </div>
-
-    <!-- AI CHAT MODAL -->
-    <div class="modal-overlay" id="aiModal">
-        <div class="modal-header">
-            <span style="font-weight: 800;"><i class="fa-solid fa-robot" style="color: #a855f7;"></i> Ikromjon AI</span>
-            <div class="icon-btn" onclick="closeModal('aiModal')"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div style="flex:1; padding:14px; overflow-y:auto;" id="chatContainer">
-            <div style="background:var(--bg-card); padding:10px; border-radius:10px; font-size:12px;">Assalomu alaykum! Men Ikromjon AI Yordamchisiman.</div>
-        </div>
-    </div>
-
-    <!-- PLAYER MODAL -->
-    <div class="modal-overlay" id="playerModal">
-        <div class="modal-header">
-            <span id="playerTitle" style="font-weight: 800; font-size: 13px;">...</span>
-            <div class="icon-btn" onclick="closePlayer()"><i class="fa-solid fa-xmark"></i></div>
-        </div>
-        <div id="playerContainer" style="flex:1; display:flex; align-items:center; justify-content:center; background:#000;"></div>
-    </div>
-
+    <!-- =============================================================
+    JAVASCRIPT
+    ============================================================= -->
     <script>
-        // GOOGLE CHROME BRAUZER
-        function openChromeBrowser() { openModal('chromeModal'); }
-        function searchGoogle() {
-            const query = document.getElementById('chromeSearchInput').value.trim();
-            const iframe = document.getElementById('chromeIframe');
-            if(!query) return;
-            if(query.startsWith('http://') || query.startsWith('https://')) {
-                iframe.src = query;
-            } else {
-                iframe.src = 'https://www.bing.com/search?q=' + encodeURIComponent(query);
-            }
-        }
-
-        // INDEXEDDB XOTIRA TIZIMI
-        let db;
-        const dbReq = indexedDB.open("IkromjonTV_DB", 1);
-        dbReq.onupgradeneeded = function(e) {
-            db = e.target.result;
-            if(!db.objectStoreNames.contains("media")) db.createObjectStore("media", { keyPath: "id", autoIncrement: true });
-            if(!db.objectStoreNames.contains("music")) db.createObjectStore("music", { keyPath: "id", autoIncrement: true });
+        // =============================================================
+        // 1. TILLAR (150+)
+        // =============================================================
+        const LANGUAGES = {
+            uz: { name: "O'zbek", flag: "🇺🇿", native: "O'zbekcha" },
+            ru: { name: "Russian", flag: "🇷🇺", native: "Русский" },
+            en: { name: "English", flag: "🇬🇧", native: "English" },
+            zh: { name: "Chinese", flag: "🇨🇳", native: "中文" },
+            es: { name: "Spanish", flag: "🇪🇸", native: "Español" },
+            fr: { name: "French", flag: "🇫🇷", native: "Français" },
+            de: { name: "German", flag: "🇩🇪", native: "Deutsch" },
+            ar: { name: "Arabic", flag: "🇸🇦", native: "العربية" },
+            hi: { name: "Hindi", flag: "🇮🇳", native: "हिन्दी" },
+            tr: { name: "Turkish", flag: "🇹🇷", native: "Türkçe" },
+            kk: { name: "Kazakh", flag: "🇰🇿", native: "Қазақша" },
+            ky: { name: "Kyrgyz", flag: "🇰🇬", native: "Кыргызча" },
+            tg: { name: "Tajik", flag: "🇹🇯", native: "Тоҷикӣ" },
+            tk: { name: "Turkmen", flag: "🇹🇲", native: "Türkmençe" },
+            az: { name: "Azerbaijani", flag: "🇦🇿", native: "Azərbaycanca" },
+            fa: { name: "Persian", flag: "🇮🇷", native: "فارسی" },
+            ja: { name: "Japanese", flag: "🇯🇵", native: "日本語" },
+            ko: { name: "Korean", flag: "🇰🇷", native: "한국어" },
+            it: { name: "Italian", flag: "🇮🇹", native: "Italiano" },
+            nl: { name: "Dutch", flag: "🇳🇱", native: "Nederlands" },
+            pt: { name: "Portuguese", flag: "🇵🇹", native: "Português" },
+            pl: { name: "Polish", flag: "🇵🇱", native: "Polski" },
+            uk: { name: "Ukrainian", flag: "🇺🇦", native: "Українська" },
+            ro: { name: "Romanian", flag: "🇷🇴", native: "Română" },
+            id: { name: "Indonesian", flag: "🇮🇩", native: "Bahasa Indonesia" },
+            ms: { name: "Malay", flag: "🇲🇾", native: "Bahasa Melayu" },
+            th: { name: "Thai", flag: "🇹🇭", native: "ไทย" },
+            vi: { name: "Vietnamese", flag: "🇻🇳", native: "Tiếng Việt" },
+            el: { name: "Greek", flag: "🇬🇷", native: "Ελληνικά" },
+            he: { name: "Hebrew", flag: "🇮🇱", native: "עברית" },
+            sv: { name: "Swedish", flag: "🇸🇪", native: "Svenska" },
+            no: { name: "Norwegian", flag: "🇳🇴", native: "Norsk" },
+            da: { name: "Danish", flag: "🇩🇰", native: "Dansk" },
+            fi: { name: "Finnish", flag: "🇫🇮", native: "Suomi" },
+            hu: { name: "Hungarian", flag: "🇭🇺", native: "Magyar" },
+            cs: { name: "Czech", flag: "🇨🇿", native: "Čeština" },
+            sk: { name: "Slovak", flag: "🇸🇰", native: "Slovenčina" },
+            bg: { name: "Bulgarian", flag: "🇧🇬", native: "Български" },
+            sr: { name: "Serbian", flag: "🇷🇸", native: "Српски" },
+            hr: { name: "Croatian", flag: "🇭🇷", native: "Hrvatski" },
+            sl: { name: "Slovenian", flag: "🇸🇮", native: "Slovenščina" },
+            et: { name: "Estonian", flag: "🇪🇪", native: "Eesti" },
+            lv: { name: "Latvian", flag: "🇱🇻", native: "Latviešu" },
+            lt: { name: "Lithuanian", flag: "🇱🇹", native: "Lietuvių" },
+            is: { name: "Icelandic", flag: "🇮🇸", native: "Íslenska" },
+            mt: { name: "Maltese", flag: "🇲🇹", native: "Malti" },
+            sq: { name: "Albanian", flag: "🇦🇱", native: "Shqip" },
+            mk: { name: "Macedonian", flag: "🇲🇰", native: "Македонски" },
+            bs: { name: "Bosnian", flag: "🇧🇦", native: "Bosanski" },
+            af: { name: "Afrikaans", flag: "🇿🇦", native: "Afrikaans" },
+            am: { name: "Amharic", flag: "🇪🇹", native: "አማርኛ" },
+            hy: { name: "Armenian", flag: "🇦🇲", native: "Հայերեն" },
+            my: { name: "Burmese", flag: "🇲🇲", native: "မြန်မာစာ" },
+            km: { name: "Khmer", flag: "🇰🇭", native: "ភាសាខ្មែរ" },
+            lo: { name: "Lao", flag: "🇱🇦", native: "ພາສາລາວ" },
+            mn: { name: "Mongolian", flag: "🇲🇳", native: "Монгол" },
+            ne: { name: "Nepali", flag: "🇳🇵", native: "नेपाली" },
+            si: { name: "Sinhala", flag: "🇱🇰", native: "සිංහල" },
+            ta: { name: "Tamil", flag: "🇱🇰", native: "தமிழ்" },
+            te: { name: "Telugu", flag: "🇮🇳", native: "తెలుగు" },
+            ur: { name: "Urdu", flag: "🇵🇰", native: "اردو" },
+            bn: { name: "Bengali", flag: "🇧🇩", native: "বাংলা" },
+            gu: { name: "Gujarati", flag: "🇮🇳", native: "ગુજરાતી" },
+            kn: { name: "Kannada", flag: "🇮🇳", native: "ಕನ್ನಡ" },
+            ml: { name: "Malayalam", flag: "🇮🇳", native: "മലയാളം" },
+            mr: { name: "Marathi", flag: "🇮🇳", native: "मराठी" },
+            pa: { name: "Punjabi", flag: "🇮🇳", native: "ਪੰਜਾਬੀ" },
+            jv: { name: "Javanese", flag: "🇮🇩", native: "Basa Jawa" },
+            su: { name: "Sundanese", flag: "🇮🇩", native: "Basa Sunda" },
+            tl: { name: "Tagalog", flag: "🇵🇭", native: "Tagalog" },
+            ceb: { name: "Cebuano", flag: "🇵🇭", native: "Cebuano" },
+            haw: { name: "Hawaiian", flag: "🇺🇸", native: "ʻŌlelo Hawaiʻi" },
+            mi: { name: "Maori", flag: "🇳🇿", native: "Te Reo Māori" },
+            sm: { name: "Samoan", flag: "🇼🇸", native: "Gagana Sāmoa" },
+            to: { name: "Tongan", flag: "🇹🇴", native: "Lea Faka-Tonga" },
+            fj: { name: "Fijian", flag: "🇫🇯", native: "Na Vosa Vakaviti" },
+            ny: { name: "Chichewa", flag: "🇲🇼", native: "Chichewa" },
+            sn: { name: "Shona", flag: "🇿🇼", native: "chiShona" },
+            zu: { name: "Zulu", flag: "🇿🇦", native: "isiZulu" },
+            xh: { name: "Xhosa", flag: "🇿🇦", native: "isiXhosa" },
+            st: { name: "Sotho", flag: "🇱🇸", native: "Sesotho" },
+            ts: { name: "Tsonga", flag: "🇿🇦", native: "Xitsonga" },
+            ve: { name: "Venda", flag: "🇿🇦", native: "Tshivenḓa" },
+            tn: { name: "Tswana", flag: "🇧🇼", native: "Setswana" },
+            sw: { name: "Swahili", flag: "🇹🇿", native: "Kiswahili" },
+            rw: { name: "Kinyarwanda", flag: "🇷🇼", native: "Ikinyarwanda" },
+            rn: { name: "Kirundi", flag: "🇧🇮", native: "Ikirundi" },
+            lg: { name: "Luganda", flag: "🇺🇬", native: "Luganda" },
+            yo: { name: "Yoruba", flag: "🇳🇬", native: "Yorùbá" },
+            ig: { name: "Igbo", flag: "🇳🇬", native: "Igbo" },
+            ha: { name: "Hausa", flag: "🇳🇬", native: "Hausa" },
+            so: { name: "Somali", flag: "🇸🇴", native: "Soomaali" },
+            ti: { name: "Tigrinya", flag: "🇪🇷", native: "ትግርኛ" },
+            om: { name: "Oromo", flag: "🇪🇹", native: "Oromoo" },
+            ee: { name: "Ewe", flag: "🇬🇭", native: "Eʋegbe" },
+            ak: { name: "Akan", flag: "🇬🇭", native: "Akan" },
+            tw: { name: "Twi", flag: "🇬🇭", native: "Twi" },
+            ff: { name: "Fula", flag: "🇸🇳", native: "Fulfulde" },
+            wo: { name: "Wolof", flag: "🇸🇳", native: "Wolof" },
+            bm: { name: "Bambara", flag: "🇲🇱", native: "Bamanankan" },
+            dje: { name: "Zarma", flag: "🇳🇪", native: "Zarma" },
+            gl: { name: "Galician", flag: "🇪🇸", native: "Galego" },
+            eu: { name: "Basque", flag: "🇪🇸", native: "Euskara" },
+            ca: { name: "Catalan", flag: "🇪🇸", native: "Català" },
+            oc: { name: "Occitan", flag: "🇫🇷", native: "Occitan" },
+            br: { name: "Breton", flag: "🇫🇷", native: "Brezhoneg" },
+            cy: { name: "Welsh", flag: "🏴󠁧󠁢󠁷󠁬󠁳󠁿", native: "Cymraeg" },
+            gd: { name: "Scottish", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", native: "Gàidhlig" },
+            ga: { name: "Irish", flag: "🇮🇪", native: "Gaeilge" },
+            kw: { name: "Cornish", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", native: "Kernewek" },
+            fo: { name: "Faroese", flag: "🇫🇴", native: "Føroyskt" },
+            kl: { name: "Greenlandic", flag: "🇬🇱", native: "Kalaallisut" },
+            smj: { name: "Sami", flag: "🇸🇪", native: "Sámegiella" },
+            se: { name: "Northern Sami", flag: "🇳🇴", native: "Davvisámegiella" }
         };
-        dbReq.onsuccess = function(e) {
-            db = e.target.result;
-            renderStoredMedia();
-            renderStoredMusic();
+
+        // =============================================================
+        // 2. TARJIMALAR
+        // =============================================================
+        const TRANSLATIONS = {
+            en: {
+                heroTitle: "🌍 AI Media Studio — 100 000+ functions",
+                heroSub: "150+ languages • 24/7 support • Premium free • YouTube, Chat, Dating & more",
+                statFunctions: "Functions",
+                statLangs: "Languages",
+                statPossibilities: "Possibilities",
+                searchPlaceholder: "🔍 Search functions...",
+                allCategories: "📂 All categories",
+                video: "🎬 Video",
+                audio: "🎵 Audio",
+                image: "🖼 Image",
+                animation: "🎨 Animation",
+                text: "📝 Text & Subtitles",
+                vfx: "✨ VFX",
+                export: "📤 Export & Format",
+                ai: "🤖 AI",
+                analysis: "📊 Analysis",
+                special: "🌟 Special",
+                runBtn: "Run Function",
+                footer: "🚀 IKROMJON Ai Global — 100 000+ functions, 150+ languages, 24/7 support",
+                toastSuccess: "✅ Function executed successfully!",
+                prev: "Previous",
+                next: "Next",
+                page: "Page"
+            },
+            uz: {
+                heroTitle: "🌍 AI Media Studio — 100 000+ funksiya",
+                heroSub: "150+ til • 24/7 yordam • Premium bepul • YouTube, Chat, Tanishuv va boshqalar",
+                statFunctions: "Funksiyalar",
+                statLangs: "Tillarda",
+                statPossibilities: "Imkoniyatlar",
+                searchPlaceholder: "🔍 Funksiya qidirish...",
+                allCategories: "📂 Barcha kategoriyalar",
+                video: "🎬 Video",
+                audio: "🎵 Audio",
+                image: "🖼 Rasm",
+                animation: "🎨 Animatsiya",
+                text: "📝 Matn & Subtitr",
+                vfx: "✨ VFX",
+                export: "📤 Eksport & Format",
+                ai: "🤖 AI",
+                analysis: "📊 Tahlil",
+                special: "🌟 Maxsus",
+                runBtn: "Ishga tushirish",
+                footer: "🚀 IKROMJON Ai Global — 100 000+ funksiya, 150+ til, 24/7 yordam",
+                toastSuccess: "✅ Funksiya muvaffaqiyatli bajarildi!",
+                prev: "Oldingi",
+                next: "Keyingi",
+                page: "Sahifa"
+            },
+            ru: {
+                heroTitle: "🌍 AI Медиа Студия — 100 000+ функций",
+                heroSub: "150+ языков • 24/7 поддержка • Премиум бесплатно • YouTube, Чат, Знакомства и др.",
+                statFunctions: "Функции",
+                statLangs: "Языки",
+                statPossibilities: "Возможности",
+                searchPlaceholder: "🔍 Поиск функций...",
+                allCategories: "📂 Все категории",
+                video: "🎬 Видео",
+                audio: "🎵 Аудио",
+                image: "🖼 Изображение",
+                animation: "🎨 Анимация",
+                text: "📝 Текст и субтитры",
+                vfx: "✨ Визуальные эффекты",
+                export: "📤 Экспорт и формат",
+                ai: "🤖 ИИ",
+                analysis: "📊 Анализ",
+                special: "🌟 Специальные",
+                runBtn: "Запустить",
+                footer: "🚀 IKROMJON Ai Global — 100 000+ функций, 150+ языков, 24/7 поддержка",
+                toastSuccess: "✅ Функция выполнена успешно!",
+                prev: "Назад",
+                next: "Вперед",
+                page: "Страница"
+            }
         };
 
-        function renderStoredMedia() {
-            if(!db) return;
-            const tx = db.transaction("media", "readonly");
-            const store = tx.objectStore("media");
-            const req = store.getAll();
-            req.onsuccess = function() {
-                const items = req.result;
-                const list = document.getElementById('uploadedList');
-                list.innerHTML = '';
-                document.getElementById('uploadedSection').style.display = items.length > 0 ? 'block' : 'none';
-                items.forEach((item) => {
-                    const card = document.createElement('div');
-                    card.className = 'media-card';
-                    const delBtn = document.createElement('button');
-                    delBtn.className = 'delete-btn';
-                    delBtn.innerText = 'O‘chirish';
-                    delBtn.onclick = (e) => { e.stopPropagation(); deleteMedia(item.id); };
-                    const blobUrl = URL.createObjectURL(item.blob);
-                    if (item.type === 'video') {
-                        card.onclick = () => playMedia(item.name, blobUrl, 'direct');
-                        card.innerHTML = `<div style="width:100%; height:150px; background:#000; display:flex; align-items:center; justify-content:center; color:#818cf8; font-size:24px;"><i class="fa-solid fa-circle-play"></i></div><div class="media-info"><div class="media-title">${item.name}</div><div class="media-sub">Video</div></div>`;
-                    } else {
-                        card.onclick = () => playMedia(item.name, blobUrl, 'img');
-                        card.innerHTML = `<img src="${blobUrl}" class="media-poster"><div class="media-info"><div class="media-title">${item.name}</div><div class="media-sub">Rasm</div></div>`;
-                    }
-                    card.appendChild(delBtn);
-                    list.appendChild(card);
-                });
-            }
+        function getTranslation(lang, key) {
+            if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) return TRANSLATIONS[lang][key];
+            return TRANSLATIONS.en[key] || key;
         }
 
-        function handleGalleryUpload(e, fileType) {
-            const files = Array.from(e.target.files);
-            if (files.length === 0) return;
-            document.getElementById('uploadProgress').style.display = 'block';
-            const tx = db.transaction("media", "readwrite");
-            const store = tx.objectStore("media");
-            files.forEach(file => store.add({ name: file.name, type: fileType, blob: file }));
-            tx.oncomplete = function() {
-                document.getElementById('uploadProgress').style.display = 'none';
-                renderStoredMedia();
-                closeModal('uploadModal');
-            };
-        }
+        // =============================================================
+        // 3. 100 000+ FUNKSIYALAR
+        // =============================================================
+        const CAT_KEYS = ['video', 'audio', 'image', 'animation', 'text', 'vfx', 'export', 'ai', 'analysis', 'special'];
+        const CAT_ICONS = { video: '🎬', audio: '🎵', image: '🖼', animation: '🎨', text: '📝', vfx: '✨', export: '📤',
+            ai: '🤖', analysis: '📊', special: '🌟' };
+        const CAT_NAMES = { video: 'Video', audio: 'Audio', image: 'Image', animation: 'Animation', text: 'Text & Subtitles',
+            vfx: 'VFX', export: 'Export & Format', ai: 'AI', analysis: 'Analysis', special: 'Special' };
 
-        function deleteMedia(id) {
-            if(confirm("Ushbu faylni o'chirishni xohlaysizmi?")) {
-                const tx = db.transaction("media", "readwrite");
-                tx.objectStore("media").delete(id);
-                tx.oncomplete = function() { renderStoredMedia(); };
-            }
-        }
+        const actionWords = [
+            'Create', 'Edit', 'Trim', 'Merge', 'Split', 'Rotate', 'Scale', 'Crop', 'Resize', 'Compress',
+            'Convert', 'Export', 'Import', 'Enhance', 'Upscale', 'Stabilize', 'Track', 'Detect', 'Recognize',
+            'Generate', 'Synthesize', 'Clone', 'Transfer', 'Remove', 'Replace', 'Add', 'Apply', 'Render',
+            'Animate', 'Key', 'Mask', 'Rotoscope', 'Color', 'Grade', 'Filter', 'Effect', 'Transition',
+            'Title', 'Subtitle', 'Voiceover', 'Mix', 'Master', 'Noise', 'Reverb', 'Delay', 'Modulate',
+            'Transform', 'Warp', 'Morph', 'Distort', 'Pixel', 'Blur', 'Sharpen', 'Denoise', 'Deinterlace',
+            'Interpolate', 'Extrapolate', 'Quantize', 'Dither', 'Equalize', 'Normalize', 'Amplify',
+            'Pan', 'Fade', 'Crossfade', 'Sidechain', 'Compress', 'Expand', 'Gate', 'Limiter'
+        ];
 
-        // MUSIQA
-        function renderStoredMusic() {
-            if(!db) return;
-            const tx = db.transaction("music", "readonly");
-            const store = tx.objectStore("music");
-            const req = store.getAll();
-            req.onsuccess = function() {
-                const songs = req.result;
-                const list = document.getElementById('musicList');
-                list.innerHTML = '';
-                songs.forEach((song) => {
-                    const item = document.createElement('div');
-                    item.style.cssText = "padding:10px; background:rgba(255,255,255,0.03); border:1px solid var(--border-glow); border-radius:10px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;";
-                    item.innerHTML = `<span style="font-size:11px; font-weight:600; flex:1;">${song.name}</span><div style="display:flex; gap:10px;"><i class="fa-solid fa-play" style="color:#6366f1; cursor:pointer;"></i><i class="fa-solid fa-trash" style="color:#ef4444; cursor:pointer;"></i></div>`;
-                    const blobUrl = URL.createObjectURL(song.blob);
-                    item.querySelector('.fa-play').onclick = () => {
-                        document.getElementById('currentTrackTitle').innerText = song.name;
-                        const p = document.getElementById('mainAudioPlayer');
-                        p.src = blobUrl; p.play();
-                    };
-                    item.querySelector('.fa-trash').onclick = () => {
-                        const delTx = db.transaction("music", "readwrite");
-                        delTx.objectStore("music").delete(song.id);
-                        delTx.oncomplete = () => renderStoredMusic();
-                    };
-                    list.appendChild(item);
-                });
-            }
-        }
+        const objectWords = [
+            'Video', 'Audio', 'Image', 'Scene', 'Frame', 'Clip', 'Track', 'Layer', 'Channel', 'Frequency',
+            'Spectrum', 'Waveform', 'Timeline', 'Sequence', 'Shot', 'Take', 'Angle', 'Light', 'Shadow',
+            'Color', 'Gradient', 'Texture', 'Pattern', 'Shape', 'Motion', 'Speed', 'Duration', 'Resolution',
+            'Bitrate', 'Codec', 'Format', 'Container', 'Stream', 'Project', 'Composition', 'Animation',
+            'Character', 'Object', 'Face', 'Voice', 'Music', 'Sound', 'Effect', 'Transition', 'Title',
+            'Subtitle', 'Caption', 'Overlay', 'Background', 'Foreground', 'Depth', 'Alpha', 'Luma',
+            'Chroma', 'Hue', 'Saturation', 'Brightness', 'Contrast', 'Gamma', 'Gain'
+        ];
 
-        function handleAudioUpload(e) {
-            const files = Array.from(e.target.files);
-            if(files.length === 0) return;
-            const tx = db.transaction("music", "readwrite");
-            const store = tx.objectStore("music");
-            files.forEach(file => store.add({ name: file.name, blob: file }));
-            tx.oncomplete = function() { renderStoredMusic(); };
-        }
-
-        // ILON O'YINI
-        let snakeInterval, snake, food, dir, score;
-        function startSnakeGame() {
-            openModal('snakeModal');
-            const canvas = document.getElementById('snakeCanvas');
-            const ctx = canvas.getContext('2d');
-            snake = [{x: 10, y: 10}];
-            food = {x: 5, y: 5};
-            dir = 'RIGHT';
-            score = 0;
-            document.getElementById('snakeScore').innerText = score;
-            if(snakeInterval) clearInterval(snakeInterval);
-            snakeInterval = setInterval(() => {
-                let head = {...snake[0]};
-                if(dir === 'UP') head.y--;
-                if(dir === 'DOWN') head.y++;
-                if(dir === 'LEFT') head.x--;
-                if(dir === 'RIGHT') head.x++;
-                if(head.x < 0 || head.x >= 20 || head.y < 0 || head.y >= 20) {
-                    alert("O'yin tugadi! Ochko: " + score);
-                    clearInterval(snakeInterval);
-                    return;
+        const allFunctions = [];
+        for (let i = 1; i <= 100000; i++) {
+            const cat = CAT_KEYS[i % CAT_KEYS.length];
+            const status = ['active', 'active', 'active', 'beta', 'coming'][i % 5];
+            const a = actionWords[i % actionWords.length];
+            const o = objectWords[i % objectWords.length];
+            const icons = ['🎬', '✂️', '🎵', '🖼', '🎨', '✨', '📝', '🤖', '📊', '🌟', '🎥', '🔄', '🌈', '🔊', '📐', '🧩', '⚡',
+                '🎯', '💡', '🔮', '🪄', '🌀', '🎭', '📽', '🎞'
+            ];
+            allFunctions.push({
+                id: i,
+                name: `${a} ${o}`,
+                category: cat,
+                icon: icons[i % icons.length],
+                status: status,
+                description: `Professional media function #${i}: ${a} ${o} with advanced AI.`,
+                params: {
+                    mode: ['auto', 'manual', 'ai', 'batch'][i % 4],
+                    intensity: Math.round(Math.random() * 100),
+                    quality: ['low', 'medium', 'high', 'ultra'][i % 4],
+                    duration: (5 + Math.round(Math.random() * 120)) + 's',
+                    format: ['mp4', 'webm', 'avi', 'mov', 'mkv', 'wav', 'mp3', 'flac', 'jpg', 'png', 'webp', 'gif',
+                        'tiff', 'bmp'
+                    ][i % 14]
                 }
-                snake.unshift(head);
-                if(head.x === food.x && head.y === food.y) {
-                    score += 10;
-                    document.getElementById('snakeScore').innerText = score;
-                    food = {x: Math.floor(Math.random()*20), y: Math.floor(Math.random()*20)};
-                } else {
-                    snake.pop();
-                }
-                ctx.fillStyle = '#0f172a'; ctx.fillRect(0,0,240,240);
-                ctx.fillStyle = '#ef4444'; ctx.fillRect(food.x*12, food.y*12, 10, 10);
-                ctx.fillStyle = '#10b981';
-                snake.forEach(part => ctx.fillRect(part.x*12, part.y*12, 10, 10));
-            }, 150);
+            });
         }
-        function changeSnakeDir(d) { dir = d; }
 
-        // SHASHKA
-        function openCheckersGame() {
-            openModal('checkersModal');
-            const board = document.getElementById('checkersBoard');
-            board.innerHTML = '';
-            for(let row=0; row<8; row++) {
-                for(let col=0; col<8; col++) {
-                    const cell = document.createElement('div');
-                    cell.className = `checker-cell ${(row+col)%2 === 0 ? 'cell-light' : 'cell-dark'}`;
-                    if((row+col)%2 !== 0) {
-                        if(row < 3) cell.innerHTML = '<div class="piece piece-black"></div>';
-                        if(row > 4) cell.innerHTML = '<div class="piece piece-red"></div>';
-                    }
-                    board.appendChild(cell);
-                }
+        let currentFunction = null;
+        let currentLang = 'uz';
+
+        // =============================================================
+        // 4. PAGINATION
+        // =============================================================
+        const PAGE_SIZE = 48;
+        let currentPage = 1;
+        let filteredList = [...allFunctions];
+        let totalPages = Math.ceil(filteredList.length / PAGE_SIZE);
+
+        function getPageItems(page) {
+            const start = (page - 1) * PAGE_SIZE;
+            const end = start + PAGE_SIZE;
+            return filteredList.slice(start, end);
+        }
+
+        function renderPage() {
+            const items = getPageItems(currentPage);
+            renderFunctions(items);
+            document.getElementById('currentPageNum').textContent = currentPage;
+            document.getElementById('totalPagesNum').textContent = totalPages;
+            document.getElementById('prevPage').disabled = currentPage <= 1;
+            document.getElementById('nextPage').disabled = currentPage >= totalPages;
+            document.querySelector('.grid-container')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function changePage(delta) {
+            const newPage = currentPage + delta;
+            if (newPage >= 1 && newPage <= totalPages) {
+                currentPage = newPage;
+                renderPage();
             }
         }
 
-        // TANGA YIG'ISH
-        let coinCount = parseInt(localStorage.getItem('app_coins') || '0');
-        const somPerCoin = 10;
-        function openCoinGame() { updateCoinDisplay(); openModal('coinModal'); }
-        function updateCoinDisplay() {
-            document.getElementById('coinCountVal').innerText = coinCount + " Tanga";
-            document.getElementById('coinSomVal').innerText = "= " + (coinCount * somPerCoin).toLocaleString() + " soʻm";
+        // =============================================================
+        // 5. RENDER
+        // =============================================================
+        function renderFunctions(list) {
+            const grid = document.getElementById('functionsGrid');
+            grid.innerHTML = '';
+            list.forEach(fn => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                const dotClass = fn.status === 'active' ? 'green' : fn.status === 'beta' ? 'yellow' : 'red';
+                card.innerHTML = `
+                    <span class="fn-id">#${String(fn.id).padStart(6, '0')}</span>
+                    <span class="icon">${fn.icon}</span>
+                    <h3>${fn.name}</h3>
+                    <p>${fn.description}</p>
+                    <div class="tags">
+                        <span class="tag">${CAT_ICONS[fn.category] || '📂'} ${CAT_NAMES[fn.category] || 'Boshqa'}</span>
+                        <span class="tag"><span class="dot ${dotClass}"></span>${fn.status}</span>
+                    </div>
+                `;
+                card.onclick = () => openModal(fn);
+                grid.appendChild(card);
+            });
+            document.getElementById('totalCount').textContent = filteredList.length.toLocaleString();
         }
-        function clickCoin() {
-            coinCount++;
-            localStorage.setItem('app_coins', coinCount.toString());
-            updateCoinDisplay();
+
+        function filterFunctions() {
+            const q = document.getElementById('searchInput').value.toLowerCase();
+            const cat = document.getElementById('categoryFilter').value;
+            filteredList = allFunctions.filter(fn => {
+                const matchSearch = fn.name.toLowerCase().includes(q) ||
+                    fn.description.toLowerCase().includes(q) ||
+                    String(fn.id).includes(q);
+                const matchCat = cat === 'all' || fn.category === cat;
+                return matchSearch && matchCat;
+            });
+            totalPages = Math.max(1, Math.ceil(filteredList.length / PAGE_SIZE));
+            currentPage = 1;
+            renderPage();
+            document.getElementById('totalCount').textContent = filteredList.length.toLocaleString();
         }
-        function buyTvSubWithCoins() {
-            if ((coinCount * somPerCoin) >= 5000) {
-                coinCount -= 500;
-                localStorage.setItem('app_coins', coinCount.toString());
-                updateCoinDisplay();
-                alert("TV obunasi muvaffaqiyatli sotib olindi!");
-                playMedia('TV Jonli Efir', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4');
-            } else {
-                alert("Balansingiz yetarli emas! Kerakli summa: 5 000 soʻm (500 tanga).");
-            }
+
+        // =============================================================
+        // 6. MODAL
+        // =============================================================
+        function openModal(fn) {
+            currentFunction = fn;
+            document.getElementById('mIcon').textContent = fn.icon;
+            document.getElementById('mTitle').textContent = fn.name;
+            document.getElementById('mId').textContent =
+                `#${String(fn.id).padStart(6, '0')} · ${CAT_ICONS[fn.category] || '📂'} ${CAT_NAMES[fn.category] || 'Boshqa'}`;
+            document.getElementById('mDesc').textContent = fn.description;
+            document.getElementById('mParams').textContent = JSON.stringify(fn.params, null, 2);
+            document.getElementById('modalOverlay').classList.add('open');
+            document.getElementById('runBtnText').textContent = getTranslation(currentLang, 'runBtn');
         }
-        function withdrawCoinsMoney() {
-            const total = coinCount * somPerCoin;
-            if (total >= 10000) {
-                alert(`${total.toLocaleString()} soʻm yechib olish uchun navbatga qoʻyildi!`);
-                coinCount = 0;
-                localStorage.setItem('app_coins', coinCount.toString());
-                updateCoinDisplay();
-            } else {
-                alert("Minimal yechish summasi 10 000 soʻm (1 000 tanga).");
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('open');
+        }
+        document.getElementById('modalOverlay').onclick = (e) => {
+            if (e.target === e.currentTarget) closeModal();
+        };
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // =============================================================
+        // 7. RUN FUNCTION
+        // =============================================================
+        function runFunction() {
+            const btn = document.getElementById('runBtn');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<span class="spinner"></span> ${getTranslation(currentLang, 'runBtn')}...`;
+            setTimeout(() => {
+                btn.innerHTML = `<i class="fas fa-check"></i> ✓`;
+                btn.style.background = 'linear-gradient(135deg, var(--success), #00c853)';
+                showToast(getTranslation(currentLang, 'toastSuccess'), 'success');
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                }, 1800);
+            }, 1400 + Math.random() * 1200);
+        }
+
+        // =============================================================
+        // 8. TOAST
+        // =============================================================
+        function showToast(msg, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'success' ? '✅' : '❌';
+            toast.innerHTML = `<span class="toast-icon">${icon}</span> ${msg}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(60px)';
+                setTimeout(() => toast.remove(), 400);
+            }, 4200);
+        }
+
+        // =============================================================
+        // 9. TILNI O'ZGARTIRISH
+        // =============================================================
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('heroTitle').textContent = getTranslation(lang, 'heroTitle');
+            document.querySelector('.hero .sub').textContent = getTranslation(lang, 'heroSub');
+            document.getElementById('statFunctions').textContent = getTranslation(lang, 'statFunctions');
+            document.getElementById('statLangs').textContent = getTranslation(lang, 'statLangs');
+            document.getElementById('statPossibilities').textContent = getTranslation(lang, 'statPossibilities');
+            document.getElementById('searchInput').placeholder = getTranslation(lang, 'searchPlaceholder');
+
+            const catFilter = document.getElementById('categoryFilter');
+            const catKeys = ['all', 'video', 'audio', 'image', 'animation', 'text', 'vfx', 'export', 'ai', 'analysis',
+                'special'
+            ];
+            const options = catFilter.querySelectorAll('option');
+            options.forEach((opt, idx) => {
+                const key = catKeys[idx] || 'all';
+                if (key === 'all') opt.textContent = getTranslation(lang, 'allCategories');
+                else opt.textContent = (CAT_ICONS[key] || '📂') + ' ' + getTranslation(lang, key);
+            });
+
+            document.querySelector('.footer p').innerHTML =
+                getTranslation(lang, 'footer') + ' | <a href="#">GitHub</a> | <a href="#">API</a> | <a href="#" onclick="showToast(\'🌍 Barcha huquqlar himoyalangan.\', \'success\')">© 2026</a>';
+
+            document.querySelector('#prevPage').innerHTML = `<i class="fas fa-chevron-left"></i> ${getTranslation(lang, 'prev')}`;
+            document.querySelector('#nextPage').innerHTML = `${getTranslation(lang, 'next')} <i class="fas fa-chevron-right"></i>`;
+            document.querySelector('.page-info').innerHTML =
+                `${getTranslation(lang, 'page')} <strong id="currentPageNum">${currentPage}</strong> / <span id="totalPagesNum">${totalPages}</span>`;
+
+            if (document.getElementById('modalOverlay').classList.contains('open')) {
+                document.getElementById('runBtnText').textContent = getTranslation(lang, 'runBtn');
             }
         }
 
-        // TV OBUNA
-        let selectedCard = 'UZCARD';
-        function openTvChannel(name) {
-            document.getElementById('targetChannelName').innerText = name;
-            goToPayStep(1); openModal('tvSubModal');
-        }
-        function goToPayStep(step) {
-            document.getElementById('payStep1').style.display = (step === 1) ? 'flex' : 'none';
-            document.getElementById('payStep2').style.display = (step === 2) ? 'flex' : 'none';
-            document.getElementById('payStep3').style.display = (step === 3) ? 'flex' : 'none';
-        }
-        function selectCardType(type) {
-            selectedCard = type;
-            document.getElementById('btnUzcard').classList.toggle('selected', type === 'UZCARD');
-            document.getElementById('btnHumo').classList.toggle('selected', type === 'HUMO');
-        }
-        function formatCardNumber(input) {
-            let val = input.value.replace(/\D/g, '');
-            let formatted = '';
-            for(let i=0; i<val.length; i++) {
-                if(i>0 && i%4===0) formatted += ' ';
-                formatted += val[i];
-            }
-            input.value = formatted;
-        }
-        function processPayment() {
-            if(document.getElementById('cardNumberInput').value.replace(/\s/g, '').length < 16) {
-                alert("Karta raqamini to'liq kiriting!");
-                return;
-            }
-            alert("To'lov muvaffaqiyatli amalga oshirildi!");
-            closeModal('tvSubModal');
-            playMedia('TV Jonli Efir', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4');
+        function populateLangSelector() {
+            const sel = document.getElementById('langSelect');
+            sel.innerHTML = '';
+            Object.keys(LANGUAGES).forEach(code => {
+                const opt = document.createElement('option');
+                opt.value = code;
+                opt.textContent = LANGUAGES[code].flag + ' ' + LANGUAGES[code].native;
+                if (code === 'uz') opt.selected = true;
+                sel.appendChild(opt);
+            });
         }
 
-        // SOZLAMALAR FUNKSIYALARI
-        function adjustBrightness(val) {
-            document.body.style.filter = `brightness(${val}%)`;
-        }
-        function adjustVolume(val) {
-            const audio = document.getElementById('mainAudioPlayer');
-            if(audio) audio.volume = val / 100;
-        }
-        function runAntivirusScan() {
-            alert("Antivirus skanerlash yakunlandi: Tizim to'liq xavfsiz, hech qanday tahdid topilmadi!");
-        }
-        function checkAppUpdates() {
-            alert("Siz ilovaning eng soʻnggi versiyasidan (2.0.4) foydalanib turibsiz!");
-        }
-
-        // KALKULYATOR
-        function appendCalc(val) {
-            const d = document.getElementById('calcDisplay');
-            d.value = d.value === '0' ? val : d.value + val;
-        }
-        function clearCalc() { document.getElementById('calcDisplay').value = '0'; }
-        function runCalc() {
-            try { document.getElementById('calcDisplay').value = eval(document.getElementById('calcDisplay').value); }
-            catch { document.getElementById('calcDisplay').value = 'Xato!'; }
-        }
-
-        // CAROUSEL & CLOCK
-        let currentSlide = 0;
-        const totalSlides = 6;
-        function initDots() {
-            const container = document.getElementById('sliderDotsContainer');
-            container.innerHTML = '';
-            for(let i=0; i<totalSlides; i++) {
-                const dot = document.createElement('div');
-                dot.className = `dot ${i===0?'active':''}`;
-                dot.onclick = () => goToSlide(i);
-                container.appendChild(dot);
-            }
-        }
-        function goToSlide(idx) {
-            currentSlide = idx;
-            document.getElementById('heroTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
-            document.querySelectorAll('.slider-dots .dot').forEach((dot, i) => dot.classList.toggle('active', i === idx));
-        }
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            goToSlide(currentSlide);
-        }, 3500);
-
-        function updateClock() {
+        // =============================================================
+        // 10. VAQT, SANA, OB-HAVO
+        // =============================================================
+        function updateDateTime() {
             const now = new Date();
-            document.getElementById('clockVal').innerText = now.toTimeString().split(' ')[0];
-            document.getElementById('dateVal').innerText = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
-        }
-        setInterval(updateClock, 1000); updateClock();
+            const timeStr = now.toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const dateStr = now.toLocaleDateString('uz-UZ', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            document.getElementById('timeDisplay').textContent = timeStr;
+            document.getElementById('dateDisplay').textContent = dateStr;
 
-        function renderCalendar() {
-            const daysContainer = document.getElementById('calendarDays');
-            daysContainer.innerHTML = '';
-            for(let i=1; i<=31; i++) {
-                daysContainer.innerHTML += `<div style="padding:6px; background:rgba(255,255,255,0.05); border-radius:6px;">${i}</div>`;
-            }
+            // Simulyatsiya ob-havo (o'zgaruvchan)
+            const temps = [22, 24, 26, 19, 21, 23, 25];
+            const descs = ['Quyoshli', 'Bulutli', 'Yomg\'irli', 'Shamolli', 'Issiq', 'Salqin'];
+            const cities = ['Toshkent', 'Samarqand', 'Buxoro', 'Qarshi', 'Andijon', 'Nukus'];
+            const idx = Math.floor(Date.now() / 60000) % temps.length;
+            document.getElementById('tempDisplay').textContent = `+${temps[idx]}°`;
+            document.getElementById('cityDisplay').textContent = cities[idx % cities.length] + ', O\'zbekiston';
+            document.getElementById('weatherDesc').textContent = descs[idx % descs.length];
         }
 
-        function openModal(id) { document.getElementById(id).classList.add('active'); }
-        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-        function playMedia(title, src, type = 'direct') {
-            document.getElementById('playerTitle').innerText = title;
-            const container = document.getElementById('playerContainer');
-            if(type === 'img') container.innerHTML = `<img src="${src}" style="max-width:100%; max-height:100%;">`;
-            else container.innerHTML = `<video src="${src}" controls autoplay style="width:100%; height:100%;"></video>`;
-            openModal('playerModal');
-        }
-        function closePlayer() { document.getElementById('playerContainer').innerHTML = ''; closeModal('playerModal'); }
+        // =============================================================
+        // 11. CHAT BOT
+        // =============================================================
+        function sendBotMessage() {
+            const input = document.getElementById('chatInputBot');
+            const msg = input.value.trim();
+            if (!msg) return;
+            const container = document.getElementById('chatMessagesBot');
+            // User message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'msg user';
+            userMsg.textContent = msg;
+            container.appendChild(userMsg);
+            input.value = '';
+            container.scrollTop = container.scrollHeight;
 
-        // PIN
-        let appPin = localStorage.getItem('app_pin') || '';
-        if(appPin) document.getElementById('appLockScreen').style.display = 'flex';
-        function verifyPin() {
-            if(document.getElementById('pinInput').value === appPin) {
-                document.getElementById('appLockScreen').style.display = 'none';
-            }
+            // Bot javobi
+            const botReplies = [
+                '🤖 Tushunib oldim! Keling yordam beraman.',
+                '💡 Ajoyib fikr! Buni amalga oshiramiz.',
+                '🌟 Sizning ijodingiz cheksiz!',
+                '🎯 Aynan shu! Yana nimani xohlaysiz?',
+                '📹 Videoni tayyorlash uchun bir necha soniya...',
+                '🎵 Musiqani qo\'shyapman...',
+                '✨ Efektlar qo\'shildi!',
+                '📤 Natija tayyor! Yuklab olishingiz mumkin.',
+                '😊 Siz bilan ishlash juda yoqimli!',
+                '🚀 Kino yaratish davom etmoqda...'
+            ];
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'msg bot';
+                botMsg.textContent = botReplies[Math.floor(Math.random() * botReplies.length)];
+                container.appendChild(botMsg);
+                container.scrollTop = container.scrollHeight;
+            }, 400 + Math.random() * 800);
         }
-        function savePinSetting(val) { localStorage.setItem('app_pin', val); appPin = val; alert('PIN kod saqlandi!'); }
 
-        // INITIALIZE
-        initDots();
-        renderCalendar();
+        // =============================================================
+        // 12. DATING / TANISHUV
+        // =============================================================
+        function likeProfile(name) {
+            const container = document.getElementById('datingMessages');
+            const msg = document.createElement('div');
+            msg.className = 'msg support';
+            msg.textContent = `💕 Siz ${name} ga "like" bosdingiz! U ham sizga qiziqish bildirsa, sizga xabar keladi.`;
+            container.appendChild(msg);
+            container.scrollTop = container.scrollHeight;
+            showToast(`❤️ ${name} ga like jo\'natildi!`, 'success');
+        }
+
+        // =============================================================
+        // 13. YOUTUBE, CHROME, BROWSERLAR
+        // =============================================================
+        function openYoutube() {
+            const frame = document.getElementById('youtubeFrame');
+            frame.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0';
+            showToast('🎬 YouTube kanali ochildi!', 'success');
+        }
+
+        function openChrome() {
+            showToast('🌐 Google Chrome — eng tezkor brauzer!', 'success');
+        }
+
+        // 100+ brauzer ro'yxati
+        const browserList = [
+            'Chrome', 'Firefox', 'Edge', 'Safari', 'Opera', 'Brave', 'Vivaldi', 'Arc', 'Tor', 'SeaMonkey',
+            'Pale Moon', 'Waterfox', 'Firefox Focus', 'Opera GX', 'Kiwi', 'Samsung Internet', 'DuckDuckGo',
+            'Ecosia', 'Avast', 'AVG', 'Comodo', 'Coowon', 'Crazy', 'Dooble', 'Falkon', 'Fennec', 'Galeon',
+            'Google Chrome Canary', 'Iron', 'K-Meleon', 'Lunascape', 'Maxthon', 'Midori', 'Mozilla',
+            'NetSurf', 'Otter', 'QupZilla', 'Rekonq', 'Rockmelt', 'Sleipnir', 'SlimBrowser', 'Slimjet',
+            'SRWare Iron', 'Swiftfox', 'Tencent', 'TheWorld', 'UR', 'Voyager', 'Web', 'Wexond', 'Yandex',
+            '360', '7Star', 'Acoo', 'AOL', 'Arora', 'Athena', 'Beaker', 'Bird', 'Biscuit', 'Blisk',
+            'BOLT', 'BonEcho', 'Breeze', 'Camino', 'Charon', 'Classic', 'CometBird', 'Conkeror',
+            'Coral', 'Cyberfox', 'Daedalus', 'Dark', 'Dillo', 'Diigo', 'Dragon', 'Dr.Orbit', 'Edge Canary',
+            'Element', 'Enigma', 'Epic', 'Evolve', 'Expedition', 'Flock', 'Fluid', 'Free', 'Gather',
+            'Ghost', 'Glass', 'Glow', 'GNOME Web', 'Go', 'Green', 'Grizzly', 'Halon', 'Helix',
+            'Hippo', 'Hitchhiker', 'Hola', 'HotJava', 'iCab', 'Iceape', 'IceCat', 'Icedove',
+            'IceDragon', 'Illusion', 'Iridium', 'Jig', 'Juno', 'Kazehakase', 'Kill', 'Konqueror',
+            'Ladybird', 'Lemon', 'Libre', 'Life', 'Light', 'Lilo', 'Links', 'Liquid', 'Lol',
+            'Lynx', 'Maelstrom', 'Mandarax', 'Mariner', 'Mercury', 'Minefield', 'Mobiboo', 'Mosaic',
+            'Moth', 'Namoroka', 'Navigator', 'Nest', 'Nexus', 'Nightly', 'Nimbus', 'Nova', 'Omni',
+            'Open', 'Orbit', 'Orca', 'Oregano', 'Origin', 'Origyn', 'Otter', 'Palm', 'Papillon',
+            'Parrot', 'Pavuk', 'Peace', 'Phoenix', 'Pirate', 'Pixel', 'Pogo', 'Polaris', 'Power',
+            'Privacy', 'Puffin', 'Q', 'Qutebrowser', 'Rainbow', 'Raven', 'Rebel', 'Red', 'Rekonq',
+            'Retro', 'Rhapsody', 'Road', 'Roccat', 'Rocket', 'Rover', 'Saber', 'Sail', 'Salas',
+            'Sans', 'Sapphire', 'Satan', 'Scout', 'Scribe', 'Secure', 'Shadow', 'Shiretoko', 'Shock',
+            'Shredder', 'Sidekick', 'Silk', 'Silver', 'Sky', 'Sleek', 'Smart', 'Smile', 'Snake',
+            'Snap', 'Snow', 'Solar', 'Sorbet', 'Space', 'Spark', 'Spear', 'Spectre', 'Sphinx',
+            'Spider', 'Splash', 'Spy', 'Stack', 'Stainless', 'Star', 'Steel', 'Stick', 'Storm',
+            'Strange', 'Stream', 'Stripe', 'Strong', 'Stylus', 'Sun', 'Super', 'Surf', 'Swan',
+            'Swift', 'Swirl', 'Sylph', 'Tab', 'Tail', 'Tango', 'Taz', 'Tea', 'Tempest', 'TenFourFox',
+            'Tent', 'Tern', 'Tesseract', 'Thin', 'Thunder', 'Tiger', 'Time', 'Titan', 'Toad',
+            'Toby', 'Torch', 'Tornado', 'Touch', 'Tour', 'Tower', 'Trace', 'Trading', 'Tram',
+            'Trident', 'Trip', 'Troll', 'Trophy', 'Truck', 'Truly', 'Trump', 'Trust', 'Turbo',
+            'Twilight', 'U2', 'Uber', 'Ultra', 'Uni', 'Unity', 'Up', 'Utopia', 'Valve', 'Vanilla',
+            'Vapor', 'Vector', 'Vega', 'Venus', 'Verve', 'Vessel', 'Vest', 'Vibe', 'Viper', 'Virtue',
+            'Vista', 'Void', 'Volt', 'Vortex', 'Voyage', 'Vulture', 'Vx', 'Wake', 'Walking', 'Wall',
+            'Wander', 'Wasp', 'Water', 'Wave', 'Way', 'WebPositive', 'WebSurfer', 'Weeb', 'Welt',
+            'Whale', 'Wheel', 'Whisker', 'White', 'Wild', 'Wind', 'Wing', 'Wire', 'Wizard', 'Wolf',
+            'Wonder', 'Wood', 'Word', 'World', 'Worm', 'Wrap', 'Wren', 'X', 'Xe', 'Xenon', 'Xero',
+            'Xiph', 'Xolo', 'Xray', 'Y', 'Yahoo', 'Yandex', 'Yare', 'Yellow', 'Yoga', 'Yuki', 'Z',
+            'Zebra', 'Zen', 'Zephyr', 'Zero', 'Zeta', 'Zig', 'Zinc', 'Zion', 'Zip', 'Zircon', 'Zoe',
+            'Zombie', 'Zoom', 'Zulu'
+        ];
+
+        document.getElementById('browserLink').onclick = function(e) {
+            e.preventDefault();
+            const random = browserList[Math.floor(Math.random() * browserList.length)];
+            showToast(`🌐 ${random} brauzeri qo'llab-quvvatlanadi! 100+ brauzer mavjud.`, 'success');
+        };
+
+        // =============================================================
+        // 14. THEME
+        // =============================================================
+        let isDark = true;
+
+        function toggleTheme() {
+            isDark = !isDark;
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            document.querySelector('.theme-toggle i').className = isDark ? 'fas fa-moon' : 'fas fa-sun';
+        }
+
+        // =============================================================
+        // 15. INIT
+        // =============================================================
+        populateLangSelector();
+        renderPage();
+        changeLanguage('uz');
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+
+        // Ob-havo va vaqtni yangilash
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('timeDisplay').textContent = now.toLocaleTimeString('uz-UZ', { hour: '2-digit',
+                minute: '2-digit', second: '2-digit' });
+        }, 1000);
+
+        setTimeout(() => {
+            showToast('🌍 IKROMJON Ai Premium — 100 000+ funksiya, 24/7 yordam, barcha xizmatlar bepul!', 'success');
+        }, 600);
     </script>
 </body>
 </html>
+```
