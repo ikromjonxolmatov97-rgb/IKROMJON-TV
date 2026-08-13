@@ -1,2819 +1,2207 @@
-```html
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-    <title>IKROMJON Ai — Canva + 100K funksiya</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <style>
-        /* ============================================================
-           GLOBAL
-           ============================================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        :root {
-            --bg-primary: #05050c;
-            --bg-secondary: #0b0b18;
-            --bg-card: #10102a;
-            --bg-card-hover: #18183a;
-            --bg-glass: rgba(16, 16, 42, 0.6);
-            --border-glass: rgba(255, 255, 255, 0.05);
-            --border-card: rgba(255, 255, 255, 0.04);
-            --text-primary: #f0f0ff;
-            --text-secondary: #9898c8;
-            --text-muted: #6868a0;
-            --accent-1: #7c4dff;
-            --accent-2: #b388ff;
-            --accent-3: #ff6ec7;
-            --accent-glow: rgba(124, 77, 255, 0.2);
-            --success: #00e676;
-            --warning: #ffd740;
-            --danger: #ff5252;
-            --radius: 16px;
-            --radius-sm: 10px;
-            --transition: 0.25s ease;
-            --shadow-card: 0 6px 32px rgba(0, 0, 0, 0.5);
-            --snow-color: #ffffff;
-        }
-        [data-theme="light"] {
-            --bg-primary: #f0f0fa;
-            --bg-secondary: #e4e4f2;
-            --bg-card: #ffffff;
-            --bg-card-hover: #f5f5ff;
-            --bg-glass: rgba(255, 255, 255, 0.7);
-            --border-glass: rgba(0, 0, 0, 0.04);
-            --border-card: rgba(0, 0, 0, 0.05);
-            --text-primary: #0c0c1a;
-            --text-secondary: #4a4a7a;
-            --text-muted: #8888b0;
-            --shadow-card: 0 6px 32px rgba(0, 0, 0, 0.06);
-            --snow-color: #a0c4ff;
-        }
-        [data-theme="newyear"] {
-            --bg-primary: #0a0005;
-            --bg-secondary: #1a000a;
-            --bg-card: #2a0015;
-            --bg-card-hover: #3a0020;
-            --accent-1: #ff1744;
-            --accent-2: #ff6d00;
-            --accent-3: #ffea00;
-            --text-primary: #fff5f5;
-            --text-secondary: #ffb3b3;
-            --text-muted: #cc8888;
-            --accent-glow: rgba(255, 23, 68, 0.3);
-            --snow-color: #ffffff;
-        }
-        [data-theme="spring"] {
-            --bg-primary: #0a0f05;
-            --bg-secondary: #121f0a;
-            --bg-card: #1a2f10;
-            --bg-card-hover: #2a3f1a;
-            --accent-1: #4caf50;
-            --accent-2: #8bc34a;
-            --accent-3: #ffeb3b;
-            --text-primary: #f0fff0;
-            --text-secondary: #b3e5b3;
-            --text-muted: #88aa88;
-            --accent-glow: rgba(76, 175, 80, 0.3);
-            --snow-color: #c8e6c9;
-        }
-        [data-theme="summer"] {
-            --bg-primary: #0a0500;
-            --bg-secondary: #1a0f00;
-            --bg-card: #2a1a00;
-            --bg-card-hover: #3a2a0a;
-            --accent-1: #ff9800;
-            --accent-2: #ffc107;
-            --accent-3: #f44336;
-            --text-primary: #fff8f0;
-            --text-secondary: #ffd9b3;
-            --text-muted: #ccaa88;
-            --accent-glow: rgba(255, 152, 0, 0.3);
-            --snow-color: #ffecb3;
-        }
-        [data-theme="autumn"] {
-            --bg-primary: #0a0505;
-            --bg-secondary: #1a0f0a;
-            --bg-card: #2a1a10;
-            --bg-card-hover: #3a2a1a;
-            --accent-1: #e65100;
-            --accent-2: #ff6f00;
-            --accent-3: #ffab00;
-            --text-primary: #fff5ee;
-            --text-secondary: #ffccb3;
-            --text-muted: #ccaa99;
-            --accent-glow: rgba(230, 81, 0, 0.3);
-            --snow-color: #ffe0b2;
-        }
-        [data-theme="winter"] {
-            --bg-primary: #050a12;
-            --bg-secondary: #0a1520;
-            --bg-card: #102030;
-            --bg-card-hover: #1a3040;
-            --accent-1: #42a5f5;
-            --accent-2: #64b5f6;
-            --accent-3: #90caf9;
-            --text-primary: #f0f8ff;
-            --text-secondary: #b3d9ff;
-            --text-muted: #88aacc;
-            --accent-glow: rgba(66, 165, 245, 0.3);
-            --snow-color: #e3f2fd;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070b18">
+<title>IKROMJON AI</title>
 
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            min-height: 100vh;
-            transition: background 0.5s, color 0.4s;
-            line-height: 1.5;
-            overflow-x: hidden;
-        }
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent-1);
-            border-radius: 20px;
-        }
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Inter,Arial,sans-serif;
+}
 
-        /* ============================================================
-           SNOW
-           ============================================================ */
-        #snowCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9998;
-            opacity: 0.6;
-        }
+:root{
+    --bg:#070b18;
+    --panel:#10172b;
+    --panel2:#151e36;
+    --text:#fff;
+    --muted:#9aa7bf;
+    --line:rgba(255,255,255,.10);
+    --blue:#00d9ff;
+    --purple:#7657ff;
+    --pink:#ff3cac;
+    --green:#00e676;
+}
 
-        /* ============================================================
-           SPLASH — PROGRESS
-           ============================================================ */
-        #splash {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: #05050c;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
-            opacity: 1;
-            visibility: visible;
-        }
-        #splash.hide {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-        #splash .logo-text {
-            font-size: 44px;
-            font-weight: 900;
-            background: linear-gradient(135deg, #7c4dff, #ff6ec7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: pulseGlow 1.8s ease-in-out infinite;
-        }
-        #splash .logo-icon {
-            font-size: 64px;
-            margin-bottom: 8px;
-            animation: floatIcon 2.2s ease-in-out infinite;
-            filter: drop-shadow(0 0 60px rgba(124, 77, 255, 0.3));
-        }
-        #splash .sub-text {
-            margin-top: 12px;
-            color: #6868a0;
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-        #splash .progress-wrap {
-            margin-top: 24px;
-            width: 280px;
-            max-width: 80%;
-        }
-        #splash .progress-bar-bg {
-            width: 100%;
-            height: 6px;
-            background: rgba(124, 77, 255, 0.15);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        #splash .progress-bar-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #7c4dff, #ff6ec7);
-            border-radius: 20px;
-            transition: width 0.3s ease;
-        }
-        #splash .progress-text {
-            margin-top: 8px;
-            color: #9898c8;
-            font-size: 16px;
-            font-weight: 700;
-            text-align: center;
-        }
-        #splash .progress-text .percent {
-            color: #7c4dff;
-        }
-        @keyframes pulseGlow {
-            0%,
-            100% {
-                transform: scale(1);
-                filter: brightness(1);
-            }
-            50% {
-                transform: scale(1.04);
-                filter: brightness(1.25);
-            }
-        }
-        @keyframes floatIcon {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-12px);
-            }
-        }
+body{
+    background:
+      radial-gradient(circle at 10% 0%,#063b52 0,transparent 25%),
+      radial-gradient(circle at 90% 10%,#32155c 0,transparent 28%),
+      var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
 
-        /* ============================================================
-           NAVBAR
-           ============================================================ */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: var(--bg-glass);
-            backdrop-filter: blur(20px) saturate(1.4);
-            border-bottom: 1px solid var(--border-glass);
-            padding: 6px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 6px;
-            transition: background 0.3s;
-        }
-        .navbar .logo {
-            font-size: 18px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            letter-spacing: -0.3px;
-        }
-        .navbar .logo i {
-            -webkit-text-fill-color: var(--accent-1);
-            font-size: 20px;
-        }
-        .navbar .logo .badge {
-            background: linear-gradient(135deg, #00e676, #00bcd4);
-            color: #fff;
-            font-size: 7px;
-            font-weight: 700;
-            padding: 1px 10px;
-            border-radius: 40px;
-            -webkit-text-fill-color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-        .navbar .right {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-        .navbar .datetime {
-            color: var(--text-secondary);
-            font-size: 10px;
-            font-weight: 500;
-            background: var(--bg-card);
-            padding: 3px 10px;
-            border-radius: 40px;
-            border: 1px solid var(--border-card);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            white-space: nowrap;
-        }
-        .navbar .datetime i {
-            font-size: 10px;
-        }
-        .lang-selector {
-            background: var(--bg-card);
-            border: 1px solid var(--border-card);
-            border-radius: 40px;
-            padding: 3px 8px 3px 12px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            transition: var(--transition);
-        }
-        .lang-selector:hover {
-            border-color: var(--accent-1);
-        }
-        .lang-selector select {
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            font-size: 11px;
-            font-weight: 500;
-            cursor: pointer;
-            outline: none;
-            padding: 2px 0;
-            font-family: 'Inter', sans-serif;
-            max-width: 100px;
-        }
-        .lang-selector select option {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-        }
-        .theme-toggle,
-        .settings-toggle {
-            background: var(--bg-card);
-            border: 1px solid var(--border-card);
-            color: var(--text-secondary);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 13px;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .theme-toggle:hover,
-        .settings-toggle:hover {
-            border-color: var(--accent-1);
-            color: var(--text-primary);
-        }
+button,input,select{
+    font:inherit;
+}
 
-        /* ============================================================
-           TOP BAR
-           ============================================================ */
-        .top-bar {
-            margin-top: 62px;
-            padding: 6px 16px;
-            background: var(--bg-glass);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-glass);
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 6px;
-            transition: background 0.3s;
-        }
-        .top-bar .weather {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--text-secondary);
-            font-size: 12px;
-            font-weight: 500;
-        }
-        .top-bar .weather i {
-            font-size: 18px;
-            color: var(--warning);
-        }
-        .top-bar .weather .temp {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-        .top-bar .weather .city {
-            color: var(--text-muted);
-            font-size: 11px;
-        }
-        .top-bar .region-select {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            background: var(--bg-card);
-            padding: 3px 10px;
-            border-radius: 40px;
-            border: 1px solid var(--border-card);
-        }
-        .top-bar .region-select i {
-            color: var(--text-muted);
-            font-size: 11px;
-        }
-        .top-bar .region-select select {
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            font-size: 11px;
-            font-weight: 500;
-            cursor: pointer;
-            outline: none;
-            padding: 3px 0;
-            font-family: 'Inter', sans-serif;
-            max-width: 120px;
-        }
-        .top-bar .region-select select option {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-        }
+button{
+    cursor:pointer;
+}
 
-        /* ============================================================
-           AD BANNER
-           ============================================================ */
-        .ad-banner {
-            background: var(--bg-card);
-            border-bottom: 1px solid var(--border-card);
-            padding: 6px 0;
-            overflow: hidden;
-            position: relative;
-        }
-        .ad-banner .ad-track {
-            display: flex;
-            animation: scrollAds 22s linear infinite;
-            width: max-content;
-        }
-        .ad-banner .ad-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 0 28px;
-            font-weight: 600;
-            font-size: 13px;
-            white-space: nowrap;
-            color: var(--text-secondary);
-        }
-        .ad-banner .ad-item i {
-            font-size: 20px;
-        }
-        .ad-banner .ad-item .ad-label {
-            background: var(--accent-1);
-            color: #fff;
-            font-size: 8px;
-            padding: 1px 10px;
-            border-radius: 40px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        @keyframes scrollAds {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
+/* LOADING */
 
-        /* ============================================================
-           MAIN
-           ============================================================ */
-        .main {
-            padding: 10px 14px 20px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+#loader{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#050816;
+    transition:.4s;
+}
 
-        /* ============================================================
-           HERO
-           ============================================================ */
-        .hero {
-            text-align: center;
-            padding: 18px 12px 16px;
-            background: radial-gradient(ellipse at 30% 20%, var(--bg-secondary), transparent 70%);
-            border-radius: var(--radius);
-            border: 1px solid var(--border-glass);
-            margin-bottom: 18px;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero h1 {
-            font-size: 28px;
-            font-weight: 900;
-            background: linear-gradient(135deg, #fff 20%, var(--accent-1), var(--accent-3));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
-            display: inline-block;
-        }
-        .hero h1 .snow-badge {
-            font-size: 14px;
-            -webkit-text-fill-color: var(--snow-color);
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2px 12px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-left: 6px;
-            animation: snowPulse 2s ease-in-out infinite;
-        }
-        @keyframes snowPulse {
-            0%,
-            100% {
-                opacity: 0.6;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.05);
-            }
-        }
-        .hero .sub {
-            color: var(--text-secondary);
-            font-size: 13px;
-            max-width: 500px;
-            margin: 4px auto 10px;
-        }
-        .hero .stats {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-        .hero .stats .item {
-            text-align: center;
-        }
-        .hero .stats .item .num {
-            font-size: 24px;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero .stats .item .lbl {
-            color: var(--text-muted);
-            font-size: 11px;
-            font-weight: 500;
-        }
+#loader.hide{
+    opacity:0;
+    visibility:hidden;
+}
 
-        /* ============================================================
-           TOOLBAR
-           ============================================================ */
-        .toolbar {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 14px;
-        }
-        .toolbar input,
-        .toolbar select {
-            flex: 1 1 140px;
-            padding: 8px 14px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-card);
-            border-radius: var(--radius-sm);
-            color: var(--text-primary);
-            font-size: 13px;
-            font-family: 'Inter', sans-serif;
-            transition: var(--transition);
-            min-width: 100px;
-            outline: none;
-        }
-        .toolbar input:focus,
-        .toolbar select:focus {
-            border-color: var(--accent-1);
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-        .toolbar input::placeholder {
-            color: var(--text-muted);
-        }
-        .toolbar select option {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-        }
+.loaderBox{
+    width:min(390px,90%);
+    text-align:center;
+}
 
-        /* ============================================================
-           GRID — 7 columns with background images (Canva style)
-           ============================================================ */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        .card {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            border: 1px solid var(--border-card);
-            overflow: hidden;
-            transition: var(--transition);
-            cursor: pointer;
-            position: relative;
-            aspect-ratio: 1 / 1;
-            background-size: cover;
-            background-position: center;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-        }
-        .card:hover {
-            transform: translateY(-4px) scale(1.02);
-            border-color: var(--accent-1);
-            box-shadow: var(--shadow-card), 0 0 28px var(--accent-glow);
-            z-index: 2;
-        }
-        .card .card-overlay {
-            background: rgba(0, 0, 0, 0.55);
-            backdrop-filter: blur(2px);
-            width: 100%;
-            height: 100%;
-            padding: 14px 12px 12px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            transition: background 0.3s;
-        }
-        .card:hover .card-overlay {
-            background: rgba(0, 0, 0, 0.4);
-        }
-        .card .fn-id {
-            position: absolute;
-            top: 6px;
-            right: 8px;
-            font-size: 8px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.8);
-            background: rgba(0, 0, 0, 0.5);
-            padding: 1px 8px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1;
-        }
-        .card .icon {
-            font-size: 28px;
-            margin-bottom: 4px;
-            display: block;
-            z-index: 1;
-            position: relative;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
-        }
-        .card h3 {
-            font-size: 12px;
-            font-weight: 700;
-            margin-bottom: 2px;
-            z-index: 1;
-            position: relative;
-            line-height: 1.3;
-            color: #fff;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-        }
-        .card p {
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.8);
-            z-index: 1;
-            position: relative;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            line-height: 1.3;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
-        }
-        .card .tags {
-            margin-top: 6px;
-            display: flex;
-            gap: 3px;
-            flex-wrap: wrap;
-            justify-content: center;
-            z-index: 1;
-            position: relative;
-        }
-        .card .tags .tag {
-            font-size: 8px;
-            font-weight: 600;
-            padding: 1px 8px;
-            border-radius: 40px;
-            background: rgba(124, 77, 255, 0.8);
-            color: #fff;
-            opacity: 0.9;
-            display: flex;
-            align-items: center;
-            gap: 2px;
-            backdrop-filter: blur(4px);
-        }
-        .card .tags .tag .dot {
-            display: inline-block;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            margin-right: 2px;
-        }
-        .dot.green {
-            background: var(--success);
-        }
-        .dot.yellow {
-            background: var(--warning);
-        }
-        .dot.red {
-            background: var(--danger);
-        }
+.aiLogo{
+    width:105px;
+    height:105px;
+    margin:auto;
+    display:grid;
+    place-items:center;
+    font-size:52px;
+    border-radius:28px;
+    background:linear-gradient(
+        135deg,
+        var(--blue),
+        var(--purple),
+        var(--pink)
+    );
+    box-shadow:0 0 60px #00d9ff66;
+    animation:pulse 1.2s infinite alternate;
+}
 
-        /* ============================================================
-           CANVA TEMPLATES SECTION
-           ============================================================ */
-        .canva-section {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            border: 1px solid var(--border-card);
-            padding: 16px;
-            margin: 18px 0;
-        }
-        .canva-section .canva-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .canva-section .canva-header h3 {
-            font-size: 18px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .canva-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 14px;
-        }
-        .canva-item {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-sm);
-            overflow: hidden;
-            cursor: pointer;
-            transition: var(--transition);
-            border: 1px solid var(--border-card);
-            position: relative;
-        }
-        .canva-item:hover {
-            transform: scale(1.04);
-            border-color: var(--accent-1);
-            box-shadow: 0 0 24px var(--accent-glow);
-        }
-        .canva-item img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            display: block;
-        }
-        .canva-item .canva-label {
-            padding: 6px 10px;
-            font-weight: 600;
-            font-size: 12px;
-            text-align: center;
-            color: var(--text-secondary);
-            background: var(--bg-card);
-        }
-        .canva-item .canva-badge {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            background: var(--accent-1);
-            color: #fff;
-            font-size: 8px;
-            padding: 1px 10px;
-            border-radius: 40px;
-            font-weight: 700;
-            opacity: 0.8;
-        }
+@keyframes pulse{
+    to{
+        transform:scale(1.06) rotate(3deg);
+    }
+}
 
-        /* ============================================================
-           UPLOAD SECTION
-           ============================================================ */
-        .upload-section {
-            margin: 16px 0;
-            padding: 16px;
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            border: 1px solid var(--border-card);
-        }
-        .upload-section h4 {
-            font-size: 15px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-        .upload-section input[type="file"] {
-            display: block;
-            margin: 8px 0;
-            padding: 8px;
-            background: var(--bg-secondary);
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-card);
-            color: var(--text-primary);
-            width: 100%;
-            font-family: 'Inter', sans-serif;
-            font-size: 13px;
-            cursor: pointer;
-        }
-        .upload-section input[type="file"]::file-selector-button {
-            background: var(--accent-1);
-            color: #fff;
-            border: none;
-            padding: 4px 16px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 12px;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            margin-right: 12px;
-            transition: var(--transition);
-        }
-        .upload-section input[type="file"]::file-selector-button:hover {
-            background: var(--accent-2);
-            transform: scale(1.04);
-        }
-        .preview-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 8px;
-        }
-        .preview-container .preview-item {
-            width: 100px;
-            height: 100px;
-            border-radius: var(--radius-sm);
-            overflow: hidden;
-            border: 2px solid var(--border-card);
-            position: relative;
-            transition: var(--transition);
-        }
-        .preview-container .preview-item:hover {
-            border-color: var(--accent-1);
-            transform: scale(1.05);
-        }
-        .preview-container .preview-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .preview-container .preview-item .remove-btn {
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            background: rgba(255, 0, 0, 0.7);
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            font-size: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-        .preview-container .preview-item .remove-btn:hover {
-            background: #ff1744;
-            transform: scale(1.1);
-        }
+.loaderTitle{
+    margin-top:20px;
+    font-size:34px;
+    font-weight:900;
+    background:linear-gradient(
+        90deg,
+        var(--blue),
+        var(--purple),
+        var(--pink)
+    );
+    -webkit-background-clip:text;
+    color:transparent;
+}
 
-        /* ============================================================
-           TV CHANNELS
-           ============================================================ */
-        .tv-section {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            border: 1px solid var(--border-card);
-            padding: 16px;
-            margin: 18px 0;
-        }
-        .tv-section .tv-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .tv-section .tv-header h3 {
-            font-size: 18px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .tv-section .tv-header .tv-count {
-            font-size: 12px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-        .tv-section .tv-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 10px;
-        }
-        .tv-section .tv-channel {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-sm);
-            padding: 10px 8px;
-            text-align: center;
-            border: 1px solid var(--border-card);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-        .tv-section .tv-channel:hover {
-            border-color: var(--accent-1);
-            transform: translateY(-3px);
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-        .tv-section .tv-channel .tv-icon {
-            font-size: 28px;
-            display: block;
-            margin-bottom: 2px;
-        }
-        .tv-section .tv-channel .tv-name {
-            font-size: 11px;
-            font-weight: 600;
-        }
-        .tv-section .tv-channel .tv-country {
-            font-size: 9px;
-            color: var(--text-muted);
-        }
+.loaderSub{
+    color:var(--blue);
+    font-size:10px;
+    letter-spacing:3px;
+    margin-top:6px;
+}
 
-        /* ============================================================
-           PAGINATION
-           ============================================================ */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin: 8px 0 16px;
-        }
-        .pagination button {
-            background: var(--bg-card);
-            border: 1px solid var(--border-card);
-            color: var(--text-secondary);
-            padding: 5px 14px;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 12px;
-            transition: var(--transition);
-            font-family: 'Inter', sans-serif;
-        }
-        .pagination button:hover:not(:disabled) {
-            border-color: var(--accent-1);
-            color: var(--text-primary);
-            box-shadow: 0 0 16px var(--accent-glow);
-        }
-        .pagination button:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-        .pagination .page-info {
-            color: var(--text-muted);
-            font-size: 12px;
-            font-weight: 500;
-            padding: 0 6px;
-        }
+.loaderText{
+    color:var(--muted);
+    margin-top:30px;
+}
 
-        /* ============================================================
-           SETTINGS PANEL
-           ============================================================ */
-        .settings-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(14px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-        }
-        .settings-overlay.open {
-            display: flex;
-        }
-        .settings-panel {
-            background: var(--bg-glass);
-            backdrop-filter: blur(40px);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius);
-            max-width: 480px;
-            width: 100%;
-            padding: 24px 22px;
-            max-height: 85vh;
-            overflow-y: auto;
-            animation: modalIn 0.3s ease;
-            box-shadow: var(--shadow-card), 0 0 60px var(--accent-glow);
-        }
-        @keyframes modalIn {
-            from {
-                transform: translateY(30px) scale(0.96);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
-        }
-        .settings-panel .close {
-            float: right;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 24px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .settings-panel .close:hover {
-            color: var(--text-primary);
-            transform: rotate(90deg);
-        }
-        .settings-panel h2 {
-            font-size: 22px;
-            font-weight: 800;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .settings-panel .setting-group {
-            margin-bottom: 18px;
-        }
-        .settings-panel .setting-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 6px;
-        }
-        .settings-panel .setting-group .theme-options {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .settings-panel .setting-group .theme-options .theme-btn {
-            padding: 6px 16px;
-            border-radius: var(--radius-sm);
-            border: 2px solid var(--border-card);
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 12px;
-            transition: var(--transition);
-            font-family: 'Inter', sans-serif;
-        }
-        .settings-panel .setting-group .theme-options .theme-btn:hover {
-            border-color: var(--accent-1);
-            color: var(--text-primary);
-        }
-        .settings-panel .setting-group .theme-options .theme-btn.active {
-            border-color: var(--accent-1);
-            background: var(--accent-1);
-            color: #fff;
-        }
-        .settings-panel .setting-group .theme-options .theme-btn .emoji {
-            margin-right: 4px;
-        }
-        .settings-panel .setting-group select {
-            width: 100%;
-            padding: 10px 14px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-card);
-            border-radius: var(--radius-sm);
-            color: var(--text-primary);
-            font-size: 14px;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            cursor: pointer;
-        }
-        .settings-panel .setting-group select:focus {
-            border-color: var(--accent-1);
-        }
-        .settings-panel .setting-group select option {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-        }
-        .settings-panel .setting-group .toggle-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 6px 0;
-            border-bottom: 1px solid var(--border-card);
-        }
-        .settings-panel .setting-group .toggle-row span {
-            font-size: 14px;
-        }
-        .settings-panel .setting-group .toggle-switch {
-            width: 44px;
-            height: 24px;
-            background: var(--bg-secondary);
-            border-radius: 40px;
-            cursor: pointer;
-            position: relative;
-            transition: var(--transition);
-            border: 1px solid var(--border-card);
-        }
-        .settings-panel .setting-group .toggle-switch.active {
-            background: var(--accent-1);
-            border-color: var(--accent-1);
-        }
-        .settings-panel .setting-group .toggle-switch .toggle-knob {
-            width: 18px;
-            height: 18px;
-            background: #fff;
-            border-radius: 50%;
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            transition: var(--transition);
-        }
-        .settings-panel .setting-group .toggle-switch.active .toggle-knob {
-            left: 22px;
-        }
-        .settings-panel .setting-group .time-format {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .settings-panel .setting-group .time-format label {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            cursor: pointer;
-        }
-        .settings-panel .setting-group .time-format input[type="radio"] {
-            accent-color: var(--accent-1);
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-        }
+.progress{
+    height:9px;
+    margin-top:13px;
+    background:#ffffff12;
+    border-radius:20px;
+    overflow:hidden;
+}
 
-        /* ============================================================
-           ABOUT SECTION
-           ============================================================ */
-        .about-section {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            border: 1px solid var(--border-card);
-            padding: 20px 18px;
-            margin: 20px 0 10px;
-            text-align: center;
-        }
-        .about-section .about-icon {
-            font-size: 48px;
-            margin-bottom: 6px;
-        }
-        .about-section h3 {
-            font-size: 20px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .about-section p {
-            color: var(--text-secondary);
-            font-size: 14px;
-            max-width: 600px;
-            margin: 6px auto 0;
-            line-height: 1.6;
-        }
-        .about-section .about-stats {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            flex-wrap: wrap;
-            margin-top: 12px;
-        }
-        .about-section .about-stats .as-item {
-            text-align: center;
-        }
-        .about-section .about-stats .as-item .as-num {
-            font-size: 22px;
-            font-weight: 900;
-            color: var(--accent-2);
-        }
-        .about-section .about-stats .as-item .as-lbl {
-            font-size: 11px;
-            color: var(--text-muted);
-        }
+.progressBar{
+    width:0;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        var(--blue),
+        var(--purple),
+        var(--pink)
+    );
+    transition:.06s;
+}
 
-        /* ============================================================
-           MODAL
-           ============================================================ */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            z-index: 2001;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-        }
-        .modal-overlay.open {
-            display: flex;
-        }
-        .modal {
-            background: var(--bg-glass);
-            backdrop-filter: blur(32px);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius);
-            max-width: 500px;
-            width: 100%;
-            padding: 22px 20px;
-            max-height: 80vh;
-            overflow-y: auto;
-            animation: modalIn 0.3s ease;
-            box-shadow: var(--shadow-card), 0 0 60px var(--accent-glow);
-        }
-        .modal .close {
-            float: right;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 24px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .modal .close:hover {
-            color: var(--text-primary);
-            transform: rotate(90deg);
-        }
-        .modal .m-icon {
-            font-size: 40px;
-            margin-bottom: 4px;
-        }
-        .modal .m-icon-img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 6px;
-            border: 3px solid var(--accent-1);
-        }
-        .modal h2 {
-            font-size: 20px;
-            font-weight: 800;
-        }
-        .modal .m-id {
-            color: var(--text-muted);
-            font-size: 12px;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-        .modal .m-desc {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 12px;
-            font-size: 14px;
-        }
-        .modal .m-params {
-            background: var(--bg-card);
-            border-radius: var(--radius-sm);
-            padding: 12px 14px;
-            margin-bottom: 14px;
-            border: 1px solid var(--border-card);
-        }
-        .modal .m-params h4 {
-            color: var(--text-muted);
-            font-size: 11px;
-            font-weight: 600;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-        .modal .m-params code {
-            color: var(--accent-2);
-            font-size: 12px;
-            word-break: break-all;
-            font-family: 'Inter', monospace;
-        }
-        .modal .run-btn {
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            color: #fff;
-            border: none;
-            padding: 10px;
-            border-radius: var(--radius-sm);
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            width: 100%;
-            transition: var(--transition);
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-        .modal .run-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 40px var(--accent-glow);
-        }
-        .modal .run-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        .modal .run-btn .spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
+.percent{
+    margin-top:12px;
+    font-size:19px;
+    font-weight:bold;
+}
 
-        /* ============================================================
-           TOAST
-           ============================================================ */
-        .toast-container {
-            position: fixed;
-            bottom: 16px;
-            right: 16px;
-            z-index: 3000;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            max-width: 300px;
-        }
-        .toast {
-            background: var(--bg-glass);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius-sm);
-            padding: 10px 16px;
-            animation: toastIn 0.4s ease;
-            box-shadow: var(--shadow-card);
-            font-weight: 500;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border-left: 4px solid var(--accent-1);
-        }
-        .toast.success {
-            border-left-color: var(--success);
-        }
-        .toast.error {
-            border-left-color: var(--danger);
-        }
-        @keyframes toastIn {
-            from {
-                transform: translateX(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
+/* HEADER */
 
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
-        @media (max-width: 1200px) {
-            .grid {
-                grid-template-columns: repeat(5, 1fr);
-            }
-        }
-        @media (max-width: 900px) {
-            .grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-        @media (max-width: 700px) {
-            .grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 8px;
-            }
-            .card .card-overlay {
-                padding: 10px 8px;
-            }
-            .card .icon {
-                font-size: 22px;
-            }
-            .card h3 {
-                font-size: 11px;
-            }
-            .card p {
-                font-size: 9px;
-                -webkit-line-clamp: 1;
-            }
-            .hero h1 {
-                font-size: 22px;
-            }
-            .navbar .datetime {
-                font-size: 9px;
-                padding: 2px 8px;
-            }
-            .canva-grid {
-                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            }
-            .tv-section .tv-grid {
-                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            }
-            .settings-panel {
-                padding: 18px 16px;
-            }
-            .top-bar {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 4px;
-            }
-            .top-bar .weather {
-                justify-content: center;
-            }
-            .top-bar .region-select {
-                justify-content: center;
-            }
-            .ad-banner .ad-item {
-                font-size: 11px;
-                padding: 0 16px;
-            }
-        }
-        @media (max-width: 450px) {
-            .grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 6px;
-            }
-            .card .card-overlay {
-                padding: 8px 6px;
-            }
-            .card .icon {
-                font-size: 18px;
-            }
-            .card h3 {
-                font-size: 10px;
-            }
-            .card p {
-                display: none;
-            }
-            .card .fn-id {
-                font-size: 7px;
-                padding: 1px 6px;
-            }
-            .hero h1 {
-                font-size: 18px;
-            }
-            .hero .stats .item .num {
-                font-size: 18px;
-            }
-            .tv-section .tv-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .tv-section .tv-channel .tv-icon {
-                font-size: 20px;
-            }
-            .tv-section .tv-channel .tv-name {
-                font-size: 9px;
-            }
-            .settings-panel .setting-group .theme-options .theme-btn {
-                font-size: 10px;
-                padding: 4px 12px;
-            }
-            #splash .logo-text {
-                font-size: 30px;
-            }
-            #splash .progress-wrap {
-                width: 200px;
-            }
-            .canva-item img {
-                height: 90px;
-            }
-            .preview-container .preview-item {
-                width: 70px;
-                height: 70px;
-            }
-        }
-    </style>
+header{
+    position:sticky;
+    top:0;
+    z-index:5000;
+    background:#070b18dd;
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--line);
+}
+
+.nav{
+    width:min(1450px,95%);
+    min-height:72px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.brandLogo{
+    width:45px;
+    height:45px;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    background:linear-gradient(
+        135deg,
+        var(--blue),
+        var(--purple),
+        var(--pink)
+    );
+    font-size:24px;
+}
+
+.brandName{
+    font-weight:900;
+}
+
+.brandName small{
+    display:block;
+    color:var(--blue);
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+.navActions{
+    display:flex;
+    gap:7px;
+}
+
+.iconBtn{
+    width:43px;
+    height:43px;
+    border:1px solid var(--line);
+    background:var(--panel);
+    color:white;
+    border-radius:10px;
+    font-size:19px;
+}
+
+/* MAIN */
+
+.container{
+    width:min(1450px,95%);
+    margin:auto;
+}
+
+.hero{
+    padding:55px 10px 35px;
+    text-align:center;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 14px;
+    border:1px solid #00d9ff44;
+    color:var(--blue);
+    background:#00d9ff0c;
+    border-radius:30px;
+    font-size:12px;
+}
+
+.hero h1{
+    font-size:clamp(42px,7vw,82px);
+    font-weight:1000;
+    letter-spacing:-4px;
+    margin-top:15px;
+    background:linear-gradient(
+        90deg,
+        var(--blue),
+        var(--purple),
+        var(--pink)
+    );
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:760px;
+    margin:18px auto;
+    color:var(--muted);
+    line-height:1.7;
+}
+
+.search{
+    max-width:720px;
+    margin:25px auto 0;
+}
+
+.search input{
+    width:100%;
+    padding:16px 20px;
+    border:1px solid var(--line);
+    background:var(--panel);
+    color:white;
+    outline:none;
+    border-radius:12px;
+}
+
+/* SECTION */
+
+.section{
+    margin:42px 0;
+}
+
+.sectionTitle{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    margin-bottom:16px;
+}
+
+.sectionTitle h2{
+    font-size:24px;
+}
+
+.sectionTitle span{
+    color:var(--muted);
+    font-size:12px;
+}
+
+/* 7 COLUMNS */
+
+.functionGrid{
+    display:grid;
+    grid-template-columns:repeat(7,minmax(0,1fr));
+    gap:10px;
+}
+
+.functionCard{
+    min-height:170px;
+    padding:15px;
+    border-radius:4px;
+    border:1px solid var(--line);
+    background:
+        linear-gradient(
+            145deg,
+            var(--panel),
+            var(--panel2)
+        );
+    transition:.2s;
+}
+
+.functionCard:hover{
+    transform:translateY(-4px);
+    border-color:#00d9ff77;
+    box-shadow:0 12px 35px #0007;
+}
+
+.functionIcon{
+    width:43px;
+    height:43px;
+    display:grid;
+    place-items:center;
+    background:#00d9ff12;
+    border:1px solid #00d9ff22;
+    border-radius:4px;
+    font-size:22px;
+}
+
+.functionCard h3{
+    font-size:14px;
+    margin-top:13px;
+}
+
+.functionCard p{
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.45;
+    margin-top:7px;
+}
+
+.functionCard button{
+    width:100%;
+    padding:8px;
+    margin-top:12px;
+    border:0;
+    border-radius:4px;
+    color:white;
+    background:linear-gradient(
+        90deg,
+        var(--purple),
+        var(--blue)
+    );
+}
+
+/* TV */
+
+.tvGrid{
+    display:grid;
+    grid-template-columns:repeat(7,minmax(0,1fr));
+    gap:10px;
+}
+
+.tvCard{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+}
+
+.tvImage{
+    height:115px;
+    background-size:cover;
+    background-position:center;
+    position:relative;
+}
+
+.live{
+    position:absolute;
+    top:8px;
+    left:8px;
+    background:#e50000;
+    color:white;
+    padding:4px 7px;
+    border-radius:3px;
+    font-size:9px;
+    font-weight:bold;
+}
+
+.tvInfo{
+    padding:12px;
+}
+
+.tvInfo h3{
+    font-size:14px;
+}
+
+.tvInfo p{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:5px;
+}
+
+.tvInfo button{
+    width:100%;
+    margin-top:10px;
+    padding:8px;
+    background:#ffffff08;
+    border:1px solid var(--line);
+    color:white;
+    border-radius:4px;
+}
+
+/* VIDEO */
+
+.videoGrid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:13px;
+}
+
+.videoCard{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:5px;
+    overflow:hidden;
+}
+
+.videoThumb{
+    aspect-ratio:16/9;
+    background-size:cover;
+    background-position:center;
+    position:relative;
+}
+
+.play{
+    position:absolute;
+    inset:0;
+    display:grid;
+    place-items:center;
+    font-size:42px;
+    background:#0005;
+}
+
+.videoInfo{
+    padding:13px;
+}
+
+.videoInfo h3{
+    font-size:14px;
+}
+
+.videoInfo p{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:5px;
+}
+
+/* CANVA */
+
+.editor{
+    display:grid;
+    grid-template-columns:230px 1fr 250px;
+    gap:12px;
+    background:#0b1020;
+    border:1px solid var(--line);
+    padding:12px;
+}
+
+.tools,
+.properties{
+    background:var(--panel);
+    padding:12px;
+}
+
+.tool{
+    width:100%;
+    padding:12px;
+    margin-bottom:8px;
+    border:1px solid var(--line);
+    background:var(--panel2);
+    color:white;
+    text-align:left;
+}
+
+.canvas{
+    min-height:500px;
+    background:white;
+    position:relative;
+    overflow:hidden;
+    background-image:
+      linear-gradient(#ddd 1px,transparent 1px),
+      linear-gradient(90deg,#ddd 1px,transparent 1px);
+    background-size:20px 20px;
+}
+
+.canvasText{
+    position:absolute;
+    left:50px;
+    top:60px;
+    font-size:40px;
+    font-weight:900;
+    color:#111;
+}
+
+.canvasImage{
+    position:absolute;
+    right:50px;
+    bottom:50px;
+    width:220px;
+    height:150px;
+    object-fit:cover;
+}
+
+/* IMAGES */
+
+.imageGrid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.imageCard{
+    aspect-ratio:1/1;
+    background-size:cover;
+    background-position:center;
+    border-radius:4px;
+    border:1px solid var(--line);
+}
+
+/* MENU */
+
+.menu{
+    position:fixed;
+    right:2.5%;
+    top:80px;
+    width:350px;
+    max-height:80vh;
+    overflow:auto;
+    display:none;
+    z-index:8000;
+    background:#10172bf5;
+    border:1px solid var(--line);
+    box-shadow:0 30px 100px #0009;
+    padding:10px;
+}
+
+.menu.show{
+    display:block;
+}
+
+.menu h3{
+    padding:15px;
+}
+
+.menu button{
+    width:100%;
+    padding:14px;
+    border:0;
+    background:transparent;
+    color:white;
+    text-align:left;
+    border-bottom:1px solid #ffffff08;
+}
+
+.menu button:hover{
+    background:#ffffff08;
+}
+
+/* MODAL */
+
+.modalBg{
+    position:fixed;
+    inset:0;
+    z-index:9000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+    background:#000b;
+}
+
+.modalBg.show{
+    display:flex;
+}
+
+.modal{
+    width:min(800px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:22px;
+    border-radius:8px;
+}
+
+.modalTop{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.close{
+    width:38px;
+    height:38px;
+    border:0;
+    background:var(--panel2);
+    color:white;
+}
+
+/* SETTINGS */
+
+.setting{
+    padding:14px;
+    background:var(--panel2);
+    border:1px solid var(--line);
+    margin-bottom:9px;
+}
+
+.setting label{
+    display:block;
+    margin-bottom:7px;
+    font-size:13px;
+}
+
+.setting select,
+.setting input{
+    width:100%;
+    padding:10px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    color:white;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:50px 15px;
+    border-top:1px solid var(--line);
+    color:var(--muted);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1200px){
+    .functionGrid,
+    .tvGrid{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .videoGrid{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:800px){
+    .functionGrid,
+    .tvGrid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .videoGrid,
+    .imageGrid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .editor{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:480px){
+    .functionGrid,
+    .tvGrid,
+    .videoGrid,
+    .imageGrid{
+        grid-template-columns:1fr 1fr;
+        gap:7px;
+    }
+
+    .functionCard{
+        min-height:145px;
+        padding:11px;
+    }
+
+    .functionCard p{
+        display:none;
+    }
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+
+    .menu{
+        width:94%;
+        right:3%;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <!-- =============================================================
-    SNOW
-    ============================================================= -->
-    <canvas id="snowCanvas"></canvas>
+<!-- LOADER -->
 
-    <!-- =============================================================
-    SPLASH
-    ============================================================= -->
-    <div id="splash">
-        <div class="logo-icon">🎬</div>
-        <div class="logo-text">IKROMJON AI</div>
-        <div class="sub-text">🌍 Canva uslubida — 100 000+ funksiya</div>
-        <div class="progress-wrap">
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill" id="progressFill"></div>
-            </div>
-            <div class="progress-text" id="progressText">Yuklanmoqda... <span class="percent" id="percentNum">0%</span></div>
+<div id="loader">
+
+    <div class="loaderBox">
+
+        <div class="aiLogo">🤖</div>
+
+        <div class="loaderTitle">
+            IKROMJON AI
         </div>
+
+        <div class="loaderSub">
+            PREMIUM AI PLATFORM
+        </div>
+
+        <div
+            class="loaderText"
+            id="loaderText">
+            Yuklanmoqda...
+        </div>
+
+        <div class="progress">
+            <div
+                class="progressBar"
+                id="progressBar">
+            </div>
+        </div>
+
+        <div
+            class="percent"
+            id="percent">
+            0%
+        </div>
+
     </div>
 
-    <!-- =============================================================
-    NAVBAR
-    ============================================================= -->
-    <nav class="navbar">
-        <div class="logo">
-            <i class="fas fa-globe-asia"></i> IKROMJON
-            <span class="badge">100K</span>
-            <span style="font-size:12px;-webkit-text-fill-color:var(--snow-color);background:rgba(255,255,255,0.08);padding:0 8px;border-radius:40px;border:1px solid rgba(255,255,255,0.05);">❄️</span>
+</div>
+
+
+<!-- HEADER -->
+
+<header>
+
+<div class="nav">
+
+    <div class="brand">
+
+        <div class="brandLogo">
+            🤖
         </div>
-        <div class="right">
-            <div class="datetime" id="datetimeDisplay">
-                <i class="fas fa-clock"></i> <span id="timeDisplay">00:00:00</span>
-                <span style="margin:0 3px;color:var(--text-muted);">|</span>
-                <i class="fas fa-calendar-alt"></i> <span id="dateDisplay">01.01.2026</span>
-            </div>
-            <div class="lang-selector">
-                <i class="fas fa-language" style="font-size:10px;"></i>
-                <select id="langSelect" onchange="changeLanguage(this.value)"></select>
-            </div>
-            <button class="settings-toggle" onclick="openSettings()" title="Sozlamalar">
-                <i class="fas fa-cog"></i>
+
+        <div class="brandName">
+            IKROMJON AI
+            <small>
+                PREMIUM
+            </small>
+        </div>
+
+    </div>
+
+    <div class="navActions">
+
+        <button
+            class="iconBtn"
+            onclick="toggleTheme()">
+            🌙
+        </button>
+
+        <button
+            class="iconBtn"
+            onclick="openSettings()">
+            ⚙️
+        </button>
+
+        <button
+            class="iconBtn"
+            onclick="toggleMenu()">
+            ⋮
+        </button>
+
+    </div>
+
+</div>
+
+</header>
+
+
+<!-- MENU -->
+
+<div
+    class="menu"
+    id="menu">
+
+    <h3>
+        🤖 IKROMJON AI
+    </h3>
+
+    <button onclick="openSettings()">
+        ⚙️ Yuqori darajadagi sozlamalar
+    </button>
+
+    <button onclick="openLanguages()">
+        🌍 Dunyo tillari
+    </button>
+
+    <button onclick="openSeasons()">
+        🌦️ 4 fasl mavzusi
+    </button>
+
+    <button onclick="go('functions')">
+        🚀 Barcha funksiyalar
+    </button>
+
+    <button onclick="go('tv')">
+        📺 TV kanallar
+    </button>
+
+    <button onclick="go('videos')">
+        🎬 Videolar va kliplar
+    </button>
+
+    <button onclick="go('canva')">
+        🎨 Canva dizayn
+    </button>
+
+    <button onclick="go('images')">
+        🖼️ Rasmlar
+    </button>
+
+    <button onclick="openAbout()">
+        ℹ️ Ilova haqida
+    </button>
+
+</div>
+
+
+<main class="container">
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <span class="badge">
+        ⚡ 9 000 000+ FUNKSIYA
+    </span>
+
+    <h1>
+        IKROMJON AI
+    </h1>
+
+    <p>
+        Sunʼiy intellekt, TV, videolar,
+        kliplar, rasmlar, dizayn,
+        brauzerlar va zamonaviy
+        texnologiyalar bitta platformada.
+    </p>
+
+    <div class="search">
+
+        <input
+            id="search"
+            placeholder="🔍 Funksiya, TV yoki video qidiring..."
+            oninput="searchAll()">
+
+    </div>
+
+</section>
+
+
+<!-- FUNCTIONS -->
+
+<section
+    class="section"
+    id="functions">
+
+    <div class="sectionTitle">
+
+        <h2>
+            🚀 IKROMJON AI funksiyalari
+        </h2>
+
+        <span>
+            7 ustunli
+        </span>
+
+    </div>
+
+    <div
+        class="functionGrid"
+        id="functionGrid">
+    </div>
+
+</section>
+
+
+<!-- TV -->
+
+<section
+    class="section"
+    id="tv">
+
+    <div class="sectionTitle">
+
+        <h2>
+            📺 Dunyo TV kanallari
+        </h2>
+
+        <span>
+            API orqali yangilanadi
+        </span>
+
+    </div>
+
+    <div
+        class="tvGrid"
+        id="tvGrid">
+    </div>
+
+</section>
+
+
+<!-- VIDEOS -->
+
+<section
+    class="section"
+    id="videos">
+
+    <div class="sectionTitle">
+
+        <h2>
+            🎬 Videolar va kliplar
+        </h2>
+
+        <span>
+            Video / Music
+        </span>
+
+    </div>
+
+    <div
+        class="videoGrid"
+        id="videoGrid">
+    </div>
+
+</section>
+
+
+<!-- CANVA -->
+
+<section
+    class="section"
+    id="canva">
+
+    <div class="sectionTitle">
+
+        <h2>
+            🎨 IKROMJON Design Studio
+        </h2>
+
+        <span>
+            Canva-uslubidagi frontend
+        </span>
+
+    </div>
+
+    <div class="editor">
+
+        <div class="tools">
+
+            <button
+                class="tool"
+                onclick="addText()">
+                🔤 Matn qo‘shish
             </button>
-            <button class="theme-toggle" onclick="toggleTheme()" title="Tema">
-                <i class="fas fa-moon"></i>
+
+            <button
+                class="tool"
+                onclick="changeCanvas()">
+                🎨 Fonni o‘zgartirish
             </button>
-        </div>
-    </nav>
 
-    <!-- =============================================================
-    TOP BAR
-    ============================================================= -->
-    <div class="top-bar">
-        <div class="weather" id="weatherWidget">
-            <i class="fas fa-cloud-sun"></i>
-            <span class="temp" id="tempDisplay">+24°</span>
-            <span class="city" id="cityDisplay">Toshkent</span>
-            <span style="color:var(--text-muted);font-size:10px;margin-left:2px;" id="weatherDesc">Quyoshli</span>
+            <button
+                class="tool"
+                onclick="addImage()">
+                🖼️ Rasm qo‘shish
+            </button>
+
+            <button
+                class="tool"
+                onclick="downloadDesign()">
+                💾 Saqlash
+            </button>
+
         </div>
-        <div class="region-select">
-            <i class="fas fa-map-marker-alt"></i>
-            <select id="regionSelect" onchange="changeRegion(this.value)">
-                <option value="Asia/Tashkent">🇺🇿 Toshkent</option>
-                <option value="Asia/Samarkand">🇺🇿 Samarqand</option>
-                <option value="Asia/Baku">🇦🇿 Boku</option>
-                <option value="Asia/Almaty">🇰🇿 Olmaota</option>
-                <option value="Asia/Bishkek">🇰🇬 Bishkek</option>
-                <option value="Asia/Dushanbe">🇹🇯 Dushanbe</option>
-                <option value="Asia/Ashgabat">🇹🇲 Ashxobod</option>
-                <option value="Europe/Moscow">🇷🇺 Moskva</option>
-                <option value="Europe/London">🇬🇧 London</option>
-                <option value="America/New_York">🇺🇸 Nyu-York</option>
-                <option value="America/Los_Angeles">🇺🇸 Los-Anjeles</option>
-                <option value="Asia/Dubai">🇦🇪 Dubay</option>
-                <option value="Asia/Tokyo">🇯🇵 Tokio</option>
-                <option value="Asia/Shanghai">🇨🇳 Shanxay</option>
-                <option value="Europe/Paris">🇫🇷 Parij</option>
-                <option value="Europe/Berlin">🇩🇪 Berlin</option>
-                <option value="Europe/Istanbul">🇹🇷 Istanbul</option>
-                <option value="Asia/Kolkata">🇮🇳 Dehli</option>
-            </select>
+
+
+        <div
+            class="canvas"
+            id="canvas">
+
+            <div
+                class="canvasText"
+                id="canvasText">
+                IKROMJON AI
+            </div>
+
+            <img
+                class="canvasImage"
+                id="canvasImage"
+                src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=700&q=80">
+
         </div>
+
+
+        <div class="properties">
+
+            <h3>
+                🎛️ Dizayn
+            </h3>
+
+            <br>
+
+            <div class="setting">
+
+                <label>
+                    Matn rangi
+                </label>
+
+                <input
+                    type="color"
+                    value="#111111"
+                    onchange="
+                    document
+                    .getElementById('canvasText')
+                    .style.color=this.value">
+
+            </div>
+
+            <div class="setting">
+
+                <label>
+                    Matn o‘lchami
+                </label>
+
+                <input
+                    type="range"
+                    min="20"
+                    max="80"
+                    value="40"
+                    oninput="
+                    document
+                    .getElementById('canvasText')
+                    .style.fontSize=
+                    this.value+'px'">
+
+            </div>
+
+        </div>
+
     </div>
 
-    <!-- =============================================================
-    AD BANNER
-    ============================================================= -->
-    <div class="ad-banner">
-        <div class="ad-track">
-            <div class="ad-item"><i class="fas fa-crown" style="color:#ff1744;"></i> Coca-Cola <span class="ad-label">Yangi</span></div>
-            <div class="ad-item"><i class="fas fa-bolt" style="color:#004d99;"></i> Pepsi <span class="ad-label">Max</span></div>
-            <div class="ad-item"><i class="fas fa-store" style="color:#ff6d00;"></i> Uzum Market <span class="ad-label">Chegirma</span></div>
-            <div class="ad-item"><i class="fas fa-bolt" style="color:#ffab00;"></i> Energetik <span class="ad-label">Charge</span></div>
-            <div class="ad-item"><i class="fas fa-music" style="color:#e040fb;"></i> Spotify Premium <span class="ad-label">Bepul</span></div>
-            <div class="ad-item"><i class="fas fa-film" style="color:#ff6ec7;"></i> IKROMJON TV <span class="ad-label">Live</span></div>
-            <!-- duplicate -->
-            <div class="ad-item"><i class="fas fa-crown" style="color:#ff1744;"></i> Coca-Cola <span class="ad-label">Yangi</span></div>
-            <div class="ad-item"><i class="fas fa-bolt" style="color:#004d99;"></i> Pepsi <span class="ad-label">Max</span></div>
-            <div class="ad-item"><i class="fas fa-store" style="color:#ff6d00;"></i> Uzum Market <span class="ad-label">Chegirma</span></div>
-            <div class="ad-item"><i class="fas fa-bolt" style="color:#ffab00;"></i> Energetik <span class="ad-label">Charge</span></div>
-            <div class="ad-item"><i class="fas fa-music" style="color:#e040fb;"></i> Spotify Premium <span class="ad-label">Bepul</span></div>
-            <div class="ad-item"><i class="fas fa-film" style="color:#ff6ec7;"></i> IKROMJON TV <span class="ad-label">Live</span></div>
-        </div>
+</section>
+
+
+<!-- IMAGES -->
+
+<section
+    class="section"
+    id="images">
+
+    <div class="sectionTitle">
+
+        <h2>
+            🖼️ Rasmlar
+        </h2>
+
+        <span>
+            AI Gallery
+        </span>
+
     </div>
 
-    <!-- =============================================================
-    MAIN
-    ============================================================= -->
-    <div class="main">
+    <div class="imageGrid">
 
-        <!-- HERO -->
-        <section class="hero">
-            <h1>
-                🌍 IKROMJON AI
-                <span class="snow-badge">❄️ Qor yog'moqda</span>
-            </h1>
-            <p class="sub" id="heroSub">150+ til • 24/7 yordam • Premium bepul • Canva uslubi • TV</p>
-            <div class="stats">
-                <div class="item"><div class="num" id="totalCount">100 000</div><div class="lbl">Funksiyalar</div></div>
-                <div class="item"><div class="num">150+</div><div class="lbl">Tillarda</div></div>
-                <div class="item"><div class="num">♾️</div><div class="lbl">Imkoniyatlar</div></div>
-                <div class="item"><div class="num">24/7</div><div class="lbl">Yordam</div></div>
+        <div
+            class="imageCard"
+            style="background-image:url(
+            'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80'
+            )">
+        </div>
+
+        <div
+            class="imageCard"
+            style="background-image:url(
+            'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80'
+            )">
+        </div>
+
+        <div
+            class="imageCard"
+            style="background-image:url(
+            'https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=800&q=80'
+            )">
+        </div>
+
+        <div
+            class="imageCard"
+            style="background-image:url(
+            'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80'
+            )">
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <b>
+        🤖 IKROMJON AI
+    </b>
+
+    <p>
+        Premium AI • TV • Video • Design
+    </p>
+
+    <p>
+        © 2026 IKROMJON AI
+    </p>
+
+</footer>
+
+
+<!-- MODAL -->
+
+<div
+    class="modalBg"
+    id="modalBg">
+
+    <div class="modal">
+
+        <div class="modalTop">
+
+            <h2>
+                IKROMJON AI
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeModal()">
+                ✕
+            </button>
+
+        </div>
+
+        <div id="modalContent"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   LOADING
+========================================= */
+
+let progress=0;
+
+const loadMessages=[
+    "Yuklanmoqda...",
+    "AI tizimi ishga tushmoqda...",
+    "TV katalog tayyorlanmoqda...",
+    "Videolar tayyorlanmoqda...",
+    "Rasmlar yuklanmoqda...",
+    "Dizayn studiyasi tayyorlanmoqda...",
+    "Deyarli tayyor..."
+];
+
+let msg=0;
+
+const loadTimer=setInterval(()=>{
+
+    progress+=Math.floor(Math.random()*5)+3;
+
+    if(progress>=100){
+
+        progress=100;
+
+        clearInterval(loadTimer);
+
+        document.getElementById(
+            "progressBar"
+        ).style.width="100%";
+
+        document.getElementById(
+            "percent"
+        ).textContent="100%";
+
+        document.getElementById(
+            "loaderText"
+        ).textContent=
+        "IKROMJON AI tayyor! 🚀";
+
+        setTimeout(()=>{
+
+            document
+            .getElementById("loader")
+            .classList.add("hide");
+
+        },350);
+
+        return;
+    }
+
+    document.getElementById(
+        "progressBar"
+    ).style.width=progress+"%";
+
+    document.getElementById(
+        "percent"
+    ).textContent=progress+"%";
+
+    if(progress>msg*14 &&
+       msg<loadMessages.length){
+
+        document.getElementById(
+            "loaderText"
+        ).textContent=
+        loadMessages[msg];
+
+        msg++;
+    }
+
+},20);
+
+
+/* =========================================
+   FUNCTIONS
+========================================= */
+
+const functions=[
+
+["🤖","AI Chat","AI bilan suhbat"],
+["🧠","AI Maslahatchi","Aqlli maslahat"],
+["✍️","AI Writer","Matn yaratish"],
+["💻","Code AI","Kod yozish"],
+["🐞","Bug Finder","Kod xatolarini topish"],
+["🎓","AI Teacher","Taʼlim yordamchisi"],
+["🌍","Translator","Tarjima qilish"],
+["🖼️","AI Image","Rasm yaratish"],
+["🎬","AI Video","Video g‘oya"],
+["🎵","AI Music","Musiqa g‘oyalari"],
+["💼","Business AI","Biznes yordamchi"],
+["📊","Analytics","Maʼlumot tahlili"],
+["💰","Finance AI","Hisob-kitob"],
+["📅","Planner","Reja tuzish"],
+["🔍","AI Search","Aqlli qidiruv"],
+["📝","Summarizer","Matn qisqartirish"],
+["🎨","Designer","Dizayn yordamchi"],
+["📱","App Builder","Ilova yaratish"],
+["🗣️","Voice AI","Ovozli yordamchi"],
+["📚","Research","Tadqiqot yordamchisi"],
+["📸","Photo AI","Foto yordamchi"]
+];
+
+
+function renderFunctions(list=functions){
+
+    document.getElementById(
+        "functionGrid"
+    ).innerHTML=list.map(f=>`
+
+        <div class="functionCard">
+
+            <div class="functionIcon">
+                ${f[0]}
             </div>
-        </section>
 
-        <!-- TOOLBAR -->
-        <div class="toolbar">
-            <input type="text" id="searchInput" placeholder="🔍 Funksiya qidirish..." oninput="filterFunctions()" />
-            <select id="categoryFilter" onchange="filterFunctions()">
-                <option value="all">📂 Barcha kategoriyalar</option>
-                <option value="video">🎬 Video</option>
-                <option value="audio">🎵 Audio</option>
-                <option value="image">🖼 Rasm</option>
-                <option value="animation">🎨 Animatsiya</option>
-                <option value="text">📝 Matn</option>
-                <option value="vfx">✨ VFX</option>
-                <option value="export">📤 Eksport</option>
-                <option value="ai">🤖 AI</option>
-                <option value="analysis">📊 Tahlil</option>
-                <option value="special">🌟 Maxsus</option>
-            </select>
-        </div>
+            <h3>
+                ${f[1]}
+            </h3>
 
-        <!-- GRID — 7 columns with Canva-style images -->
-        <div class="grid" id="functionsGrid"></div>
-
-        <!-- PAGINATION -->
-        <div class="pagination" id="pagination">
-            <button id="prevPage" onclick="changePage(-1)"><i class="fas fa-chevron-left"></i> Oldingi</button>
-            <span class="page-info" id="pageInfo">Sahifa <strong id="currentPageNum">1</strong> / <span id="totalPagesNum">1</span></span>
-            <button id="nextPage" onclick="changePage(1)">Keyingi <i class="fas fa-chevron-right"></i></button>
-        </div>
-
-        <!-- =============================================================
-        CANVA TEMPLATES SECTION
-        ============================================================= -->
-        <div class="canva-section">
-            <div class="canva-header">
-                <h3><i class="fas fa-palette" style="color:var(--accent-3);"></i> Canva uslubidagi shablonlar</h3>
-                <span style="font-size:12px;color:var(--text-muted);">Yaratish uchun bosing</span>
-            </div>
-            <div class="canva-grid">
-                <div class="canva-item" onclick="showToast('🎨 Poster shabloni ochildi — tahrirlash mumkin', 'success')">
-                    <img src="https://source.unsplash.com/300x200/?poster,design,creative" loading="lazy" />
-                    <div class="canva-label">Poster</div>
-                    <span class="canva-badge">Pro</span>
-                </div>
-                <div class="canva-item" onclick="showToast('📱 Instagram Story shabloni ochildi', 'success')">
-                    <img src="https://source.unsplash.com/300x200/?instagram,story,colorful" loading="lazy" />
-                    <div class="canva-label">Instagram Story</div>
-                    <span class="canva-badge">Trend</span>
-                </div>
-                <div class="canva-item" onclick="showToast('🎬 YouTube Thumbnail shabloni ochildi', 'success')">
-                    <img src="https://source.unsplash.com/300x200/?youtube,thumbnail,channel" loading="lazy" />
-                    <div class="canva-label">YouTube Thumbnail</div>
-                    <span class="canva-badge">Popular</span>
-                </div>
-                <div class="canva-item" onclick="showToast('📄 Flyer shabloni ochildi — tayyor!', 'success')">
-                    <img src="https://source.unsplash.com/300x200/?flyer,advert,poster" loading="lazy" />
-                    <div class="canva-label">Flyer</div>
-                    <span class="canva-badge">Yangi</span>
-                </div>
-                <div class="canva-item" onclick="showToast('🎞️ Video Intro shabloni ochildi', 'success')">
-                    <img src="https://source.unsplash.com/300x200/?video,intro,animation" loading="lazy" />
-                    <div class="canva-label">Video Intro</div>
-                    <span class="canva-badge">Pro</span>
-                </div>
-                <div class="canva-item" onclick="showToast('📊 Infografika shabloni ochildi', 'success')">
-                    <img src="https://source.unsplash.com/300x200/?infographic,chart,data" loading="lazy" />
-                    <div class="canva-label">Infografika</div>
-                    <span class="canva-badge">Biznes</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- =============================================================
-        IMAGE UPLOAD SECTION (Canva-like)
-        ============================================================= -->
-        <div class="upload-section">
-            <h4><i class="fas fa-upload" style="color:var(--accent-2);"></i> O‘z rasmingizni yuklang (Canva uslubi)</h4>
-            <input type="file" id="fileInput" accept="image/*" multiple />
-            <div class="preview-container" id="previewContainer"></div>
-        </div>
-
-        <!-- =============================================================
-        TV CHANNELS
-        ============================================================= -->
-        <div class="tv-section">
-            <div class="tv-header">
-                <h3><i class="fas fa-satellite-dish" style="color:var(--accent-2);"></i> Dunyo TV Kanallari</h3>
-                <span class="tv-count" id="tvCount">200+ kanal</span>
-            </div>
-            <div class="tv-grid" id="tvGrid"></div>
-        </div>
-
-        <!-- =============================================================
-        ABOUT
-        ============================================================= -->
-        <div class="about-section">
-            <div class="about-icon">🚀</div>
-            <h3>IKROMJON Ai — Dunyodagi eng kuchli AI media platformasi</h3>
             <p>
-                IKROMJON Ai — sun'iy intellekt asosida ishlaydigan eng kuchli media platforma.
-                100 000+ funksiya, 150+ til, 200+ telekanal, 24/7 yordam va barcha
-                premium xizmatlar <strong>bepul</strong>! Canva uslubidagi shablonlar bilan
-                professional dizaynlar yarating.
+                ${f[2]}
             </p>
-            <div class="about-stats">
-                <div class="as-item"><div class="as-num">100K+</div><div class="as-lbl">Funksiyalar</div></div>
-                <div class="as-item"><div class="as-num">150+</div><div class="as-lbl">Tillarda</div></div>
-                <div class="as-item"><div class="as-num">200+</div><div class="as-lbl">Telekanal</div></div>
-                <div class="as-item"><div class="as-num">24/7</div><div class="as-lbl">Yordam</div></div>
-            </div>
-            <p style="font-size:12px;color:var(--text-muted);margin-top:10px;">
-                <i class="fas fa-copyright"></i> 2026 IKROMJON Ai. Barcha huquqlar himoyalangan.
-            </p>
-        </div>
 
-        <!-- FOOTER -->
-        <div class="footer" style="margin-top:12px;padding:12px;text-align:center;border-top:1px solid var(--border-glass);color:var(--text-muted);font-size:11px;font-weight:500;">
-            <p>🚀 IKROMJON Ai Global — Canva uslubi, 100 000+ funksiya, 150+ til, 200+ kanal | <a href="#" onclick="showToast('🌍 IKROMJON Ai — sizning eng yaxshi yordamchingiz!', 'success')">IKROMJON Ai</a></p>
-        </div>
-    </div>
+            <button
+                onclick="
+                useFeature(
+                '${f[1]}'
+                )">
 
-    <!-- =============================================================
-    SETTINGS PANEL
-    ============================================================= -->
-    <div class="settings-overlay" id="settingsOverlay">
-        <div class="settings-panel">
-            <button class="close" onclick="closeSettings()">&times;</button>
-            <h2><i class="fas fa-sliders-h" style="color:var(--accent-2);"></i> Sozlamalar</h2>
-
-            <div class="setting-group">
-                <label>🎨 Tema (Mavzu)</label>
-                <div class="theme-options" id="themeOptions">
-                    <button class="theme-btn active" data-theme="dark" onclick="setTheme('dark')"><span class="emoji">🌙</span> Qorong'i</button>
-                    <button class="theme-btn" data-theme="light" onclick="setTheme('light')"><span class="emoji">☀️</span> Yorug'</button>
-                    <button class="theme-btn" data-theme="newyear" onclick="setTheme('newyear')"><span class="emoji">🎄</span> Yangi Yil</button>
-                    <button class="theme-btn" data-theme="spring" onclick="setTheme('spring')"><span class="emoji">🌸</span> Bahor</button>
-                    <button class="theme-btn" data-theme="summer" onclick="setTheme('summer')"><span class="emoji">🌞</span> Yoz</button>
-                    <button class="theme-btn" data-theme="autumn" onclick="setTheme('autumn')"><span class="emoji">🍂</span> Kuz</button>
-                    <button class="theme-btn" data-theme="winter" onclick="setTheme('winter')"><span class="emoji">❄️</span> Qish</button>
-                </div>
-            </div>
-
-            <div class="setting-group">
-                <label>🌍 Til</label>
-                <select id="settingsLang" onchange="changeLanguage(this.value); document.getElementById('langSelect').value=this.value;">
-                    <option value="uz">🇺🇿 O'zbekcha</option>
-                    <option value="en">🇬🇧 English</option>
-                    <option value="ru">🇷🇺 Русский</option>
-                    <option value="tr">🇹🇷 Türkçe</option>
-                    <option value="ar">🇸🇦 العربية</option>
-                    <option value="zh">🇨🇳 中文</option>
-                    <option value="es">🇪🇸 Español</option>
-                    <option value="fr">🇫🇷 Français</option>
-                    <option value="de">🇩🇪 Deutsch</option>
-                    <option value="ja">🇯🇵 日本語</option>
-                    <option value="ko">🇰🇷 한국어</option>
-                    <option value="hi">🇮🇳 हिन्दी</option>
-                </select>
-            </div>
-
-            <div class="setting-group">
-                <label>🕒 Vaqt formati</label>
-                <div class="time-format">
-                    <label><input type="radio" name="timeFormat" value="24" checked onchange="setTimeFormat('24')" /> 24 soatlik</label>
-                    <label><input type="radio" name="timeFormat" value="12" onchange="setTimeFormat('12')" /> 12 soatlik (AM/PM)</label>
-                </div>
-            </div>
-
-            <div class="setting-group">
-                <label>❄️ Qor yog'ishi</label>
-                <div class="toggle-row">
-                    <span>Qor effekti</span>
-                    <div class="toggle-switch active" id="snowToggle" onclick="toggleSnow()">
-                        <div class="toggle-knob"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="setting-group">
-                <label>📱 Ilova haqida</label>
-                <div style="background:var(--bg-secondary);border-radius:var(--radius-sm);padding:12px;font-size:13px;color:var(--text-secondary);line-height:1.6;">
-                    <strong style="color:var(--text-primary);">IKROMJON Ai v3.0 — Canva Edition</strong><br />
-                    🌍 100 000+ funksiya<br />
-                    🗣 150+ til qo'llab-quvvatlanadi<br />
-                    📺 200+ dunyo telekanallari<br />
-                    🎨 Canva uslubidagi shablonlar<br />
-                    🕒 24/7 mutaxassis yordami<br />
-                    💎 Barcha premium xizmatlar BEPUL<br />
-                    <span style="font-size:11px;color:var(--text-muted);">© 2026 IKROMJON Ai. Barcha huquqlar himoyalangan.</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- =============================================================
-    MODAL
-    ============================================================= -->
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal">
-            <button class="close" onclick="closeModal()">&times;</button>
-            <div id="mIconContainer"><span class="m-icon" id="mIcon">🎬</span></div>
-            <h2 id="mTitle">Funksiya</h2>
-            <div class="m-id" id="mId">#000001</div>
-            <div class="m-desc" id="mDesc">Tavsif</div>
-            <div class="m-params">
-                <h4>⚙️ Parametrlar</h4>
-                <code id="mParams">{ }</code>
-            </div>
-            <button class="run-btn" id="runBtn" onclick="runFunction()">
-                <i class="fas fa-play"></i> <span id="runBtnText">Ishga tushirish</span>
+                Ochish
             </button>
+
         </div>
+
+    `).join("");
+}
+
+renderFunctions();
+
+
+/* =========================================
+   TV DATABASE
+========================================= */
+
+const tvChannels=[
+
+["🇺🇿","Uzbekistan TV","O‘zbekiston",
+"https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=700&q=80"],
+
+["🇬🇧","BBC","United Kingdom",
+"https://images.unsplash.com/photo-1586899028174-e7098604235b?auto=format&fit=crop&w=700&q=80"],
+
+["🇺🇸","News Channel","USA",
+"https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=700&q=80"],
+
+["🇫🇷","France TV","France",
+"https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&w=700&q=80"],
+
+["🇩🇪","Germany TV","Germany",
+"https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=80"],
+
+["🇹🇷","Turkey TV","Türkiye",
+"https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=700&q=80"],
+
+["🇯🇵","Japan TV","Japan",
+"https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=700&q=80"],
+
+["🇰🇷","Korea TV","South Korea",
+"https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=700&q=80"],
+
+["🇷🇺","Russia TV","Russia",
+"https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?auto=format&fit=crop&w=700&q=80"],
+
+["🇮🇳","India TV","India",
+"https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=700&q=80"],
+
+["🇦🇪","Dubai TV","UAE",
+"https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=700&q=80"],
+
+["🇨🇳","China TV","China",
+"https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=700&q=80"],
+
+["🇮🇹","Italy TV","Italy",
+"https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=700&q=80"],
+
+["🇪🇸","Spain TV","Spain",
+"https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=700&q=80"]
+
+];
+
+
+function renderTV(){
+
+    document.getElementById(
+        "tvGrid"
+    ).innerHTML=
+    tvChannels.map((tv,i)=>`
+
+        <div class="tvCard">
+
+            <div
+                class="tvImage"
+                style="
+                background-image:
+                url('${tv[3]}')
+                ">
+
+                <span class="live">
+                    LIVE
+                </span>
+
+            </div>
+
+            <div class="tvInfo">
+
+                <h3>
+                    ${tv[0]} ${tv[1]}
+                </h3>
+
+                <p>
+                    ${tv[2]}
+                </p>
+
+                <button
+                    onclick="
+                    openTV(${i})">
+
+                    ▶ Ko‘rish
+                </button>
+
+            </div>
+
+        </div>
+
+    `).join("");
+}
+
+renderTV();
+
+
+/* =========================================
+   VIDEOS
+========================================= */
+
+const videos=[
+
+["AI Future",
+"https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=80"],
+
+["Technology",
+"https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80"],
+
+["Music",
+"https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=900&q=80"],
+
+["Creative Design",
+"https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=900&q=80"],
+
+["Digital World",
+"https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=900&q=80"],
+
+["Space",
+"https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=900&q=80"],
+
+["Nature",
+"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"],
+
+["City",
+"https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=900&q=80"]
+
+];
+
+
+document.getElementById(
+    "videoGrid"
+).innerHTML=
+videos.map(v=>`
+
+<div class="videoCard">
+
+    <div
+        class="videoThumb"
+        style="
+        background-image:
+        url('${v[1]}')
+        ">
+
+        <div class="play">
+            ▶
+        </div>
+
     </div>
 
-    <!-- =============================================================
-    TOAST
-    ============================================================= -->
-    <div class="toast-container" id="toastContainer"></div>
+    <div class="videoInfo">
 
-    <!-- =============================================================
-    JAVASCRIPT
-    ============================================================= -->
-    <script>
-        // =============================================================
-        // PROGRESS BAR
-        // =============================================================
-        let progress = 0;
-        const progressFill = document.getElementById('progressFill');
-        const percentNum = document.getElementById('percentNum');
+        <h3>
+            ${v[0]}
+        </h3>
 
-        function updateProgress() {
-            if (progress < 100) {
-                progress += Math.random() * 8 + 2;
-                if (progress > 100) progress = 100;
-                progressFill.style.width = progress + '%';
-                percentNum.textContent = Math.round(progress) + '%';
-                setTimeout(updateProgress, 200 + Math.random() * 300);
-            } else {
-                setTimeout(() => {
-                    document.getElementById('splash').classList.add('hide');
-                }, 400);
-            }
-        }
-        updateProgress();
+        <p>
+            🎬 Video / Klip
+        </p>
 
-        // =============================================================
-        // SNOW
-        // =============================================================
-        const snowCanvas = document.getElementById('snowCanvas');
-        const ctx = snowCanvas.getContext('2d');
-        let snowEnabled = true;
-        let snowflakes = [];
+    </div>
 
-        function resizeSnow() {
-            snowCanvas.width = window.innerWidth;
-            snowCanvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeSnow);
-        resizeSnow();
+</div>
 
-        function initSnow(count) {
-            snowflakes = [];
-            for (let i = 0; i < count; i++) {
-                snowflakes.push({
-                    x: Math.random() * snowCanvas.width,
-                    y: Math.random() * snowCanvas.height,
-                    radius: Math.random() * 3 + 1.5,
-                    speed: Math.random() * 1.2 + 0.4,
-                    wind: Math.random() * 0.6 - 0.3,
-                    opacity: Math.random() * 0.7 + 0.3
-                });
-            }
-        }
-        initSnow(120);
+`).join("");
 
-        function drawSnow() {
-            if (!snowEnabled) {
-                ctx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
-                requestAnimationFrame(drawSnow);
-                return;
-            }
-            ctx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
-            const theme = document.documentElement.getAttribute('data-theme') || 'dark';
-            const colors = {
-                dark: 'rgba(255,255,255,',
-                light: 'rgba(160,196,255,',
-                newyear: 'rgba(255,255,255,',
-                spring: 'rgba(200,230,200,',
-                summer: 'rgba(255,236,179,',
-                autumn: 'rgba(255,224,178,',
-                winter: 'rgba(227,242,253,'
-            };
-            const c = colors[theme] || 'rgba(255,255,255,';
 
-            snowflakes.forEach(s => {
-                s.y += s.speed;
-                s.x += s.wind + Math.sin(s.y / 100) * 0.2;
-                if (s.y > snowCanvas.height) {
-                    s.y = -5;
-                    s.x = Math.random() * snowCanvas.width;
-                }
-                if (s.x > snowCanvas.width) s.x = 0;
-                if (s.x < 0) s.x = snowCanvas.width;
-                ctx.beginPath();
-                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-                ctx.fillStyle = c + s.opacity + ')';
-                ctx.fill();
-            });
-            requestAnimationFrame(drawSnow);
-        }
-        drawSnow();
+/* =========================================
+   SEARCH
+========================================= */
 
-        function toggleSnow() {
-            snowEnabled = !snowEnabled;
-            document.getElementById('snowToggle').classList.toggle('active');
-            if (!snowEnabled) ctx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
-            showToast(snowEnabled ? '❄️ Qor yog\'ishi yoqildi' : '❄️ Qor yog\'ishi o\'chirildi', 'success');
-        }
+function searchAll(){
 
-        // =============================================================
-        // TILLAR
-        // =============================================================
-        const LANGUAGES = {
-            uz: { name: "O'zbek", flag: "🇺🇿", native: "O'zbekcha" },
-            ru: { name: "Russian", flag: "🇷🇺", native: "Русский" },
-            en: { name: "English", flag: "🇬🇧", native: "English" },
-            zh: { name: "Chinese", flag: "🇨🇳", native: "中文" },
-            es: { name: "Spanish", flag: "🇪🇸", native: "Español" },
-            fr: { name: "French", flag: "🇫🇷", native: "Français" },
-            de: { name: "German", flag: "🇩🇪", native: "Deutsch" },
-            ar: { name: "Arabic", flag: "🇸🇦", native: "العربية" },
-            hi: { name: "Hindi", flag: "🇮🇳", native: "हिन्दी" },
-            tr: { name: "Turkish", flag: "🇹🇷", native: "Türkçe" },
-            kk: { name: "Kazakh", flag: "🇰🇿", native: "Қазақша" },
-            ky: { name: "Kyrgyz", flag: "🇰🇬", native: "Кыргызча" },
-            tg: { name: "Tajik", flag: "🇹🇯", native: "Тоҷикӣ" },
-            tk: { name: "Turkmen", flag: "🇹🇲", native: "Türkmençe" },
-            az: { name: "Azerbaijani", flag: "🇦🇿", native: "Azərbaycanca" },
-            fa: { name: "Persian", flag: "🇮🇷", native: "فارسی" },
-            ja: { name: "Japanese", flag: "🇯🇵", native: "日本語" },
-            ko: { name: "Korean", flag: "🇰🇷", native: "한국어" },
-            it: { name: "Italian", flag: "🇮🇹", native: "Italiano" },
-            nl: { name: "Dutch", flag: "🇳🇱", native: "Nederlands" },
-            pt: { name: "Portuguese", flag: "🇵🇹", native: "Português" },
-            pl: { name: "Polish", flag: "🇵🇱", native: "Polski" },
-            uk: { name: "Ukrainian", flag: "🇺🇦", native: "Українська" },
-            ro: { name: "Romanian", flag: "🇷🇴", native: "Română" },
-            id: { name: "Indonesian", flag: "🇮🇩", native: "Bahasa Indonesia" },
-            ms: { name: "Malay", flag: "🇲🇾", native: "Bahasa Melayu" },
-            th: { name: "Thai", flag: "🇹🇭", native: "ไทย" },
-            vi: { name: "Vietnamese", flag: "🇻🇳", native: "Tiếng Việt" },
-            el: { name: "Greek", flag: "🇬🇷", native: "Ελληνικά" },
-            he: { name: "Hebrew", flag: "🇮🇱", native: "עברית" },
-            sv: { name: "Swedish", flag: "🇸🇪", native: "Svenska" },
-            no: { name: "Norwegian", flag: "🇳🇴", native: "Norsk" },
-            da: { name: "Danish", flag: "🇩🇰", native: "Dansk" },
-            fi: { name: "Finnish", flag: "🇫🇮", native: "Suomi" },
-            hu: { name: "Hungarian", flag: "🇭🇺", native: "Magyar" },
-            cs: { name: "Czech", flag: "🇨🇿", native: "Čeština" },
-            sk: { name: "Slovak", flag: "🇸🇰", native: "Slovenčina" },
-            bg: { name: "Bulgarian", flag: "🇧🇬", native: "Български" },
-            sr: { name: "Serbian", flag: "🇷🇸", native: "Српски" },
-            hr: { name: "Croatian", flag: "🇭🇷", native: "Hrvatski" },
-            sl: { name: "Slovenian", flag: "🇸🇮", native: "Slovenščina" },
-            et: { name: "Estonian", flag: "🇪🇪", native: "Eesti" },
-            lv: { name: "Latvian", flag: "🇱🇻", native: "Latviešu" },
-            lt: { name: "Lithuanian", flag: "🇱🇹", native: "Lietuvių" },
-            is: { name: "Icelandic", flag: "🇮🇸", native: "Íslenska" },
-            mt: { name: "Maltese", flag: "🇲🇹", native: "Malti" },
-            sq: { name: "Albanian", flag: "🇦🇱", native: "Shqip" },
-            mk: { name: "Macedonian", flag: "🇲🇰", native: "Македонски" },
-            bs: { name: "Bosnian", flag: "🇧🇦", native: "Bosanski" },
-            af: { name: "Afrikaans", flag: "🇿🇦", native: "Afrikaans" },
-            am: { name: "Amharic", flag: "🇪🇹", native: "አማርኛ" },
-            hy: { name: "Armenian", flag: "🇦🇲", native: "Հայերեն" },
-            my: { name: "Burmese", flag: "🇲🇲", native: "မြန်မာစာ" },
-            km: { name: "Khmer", flag: "🇰🇭", native: "ភាសាខ្មែរ" },
-            lo: { name: "Lao", flag: "🇱🇦", native: "ພາສາລາວ" },
-            mn: { name: "Mongolian", flag: "🇲🇳", native: "Монгол" },
-            ne: { name: "Nepali", flag: "🇳🇵", native: "नेपाली" },
-            si: { name: "Sinhala", flag: "🇱🇰", native: "සිංහල" },
-            ta: { name: "Tamil", flag: "🇱🇰", native: "தமிழ்" },
-            te: { name: "Telugu", flag: "🇮🇳", native: "తెలుగు" },
-            ur: { name: "Urdu", flag: "🇵🇰", native: "اردو" },
-            bn: { name: "Bengali", flag: "🇧🇩", native: "বাংলা" },
-            gu: { name: "Gujarati", flag: "🇮🇳", native: "ગુજરાતી" },
-            kn: { name: "Kannada", flag: "🇮🇳", native: "ಕನ್ನಡ" },
-            ml: { name: "Malayalam", flag: "🇮🇳", native: "മലയാളം" },
-            mr: { name: "Marathi", flag: "🇮🇳", native: "मराठी" },
-            pa: { name: "Punjabi", flag: "🇮🇳", native: "ਪੰਜਾਬੀ" },
-            jv: { name: "Javanese", flag: "🇮🇩", native: "Basa Jawa" },
-            su: { name: "Sundanese", flag: "🇮🇩", native: "Basa Sunda" },
-            tl: { name: "Tagalog", flag: "🇵🇭", native: "Tagalog" },
-            ceb: { name: "Cebuano", flag: "🇵🇭", native: "Cebuano" },
-            haw: { name: "Hawaiian", flag: "🇺🇸", native: "ʻŌlelo Hawaiʻi" },
-            mi: { name: "Maori", flag: "🇳🇿", native: "Te Reo Māori" },
-            sm: { name: "Samoan", flag: "🇼🇸", native: "Gagana Sāmoa" },
-            to: { name: "Tongan", flag: "🇹🇴", native: "Lea Faka-Tonga" },
-            fj: { name: "Fijian", flag: "🇫🇯", native: "Na Vosa Vakaviti" },
-            ny: { name: "Chichewa", flag: "🇲🇼", native: "Chichewa" },
-            sn: { name: "Shona", flag: "🇿🇼", native: "chiShona" },
-            zu: { name: "Zulu", flag: "🇿🇦", native: "isiZulu" },
-            xh: { name: "Xhosa", flag: "🇿🇦", native: "isiXhosa" },
-            st: { name: "Sotho", flag: "🇱🇸", native: "Sesotho" },
-            ts: { name: "Tsonga", flag: "🇿🇦", native: "Xitsonga" },
-            ve: { name: "Venda", flag: "🇿🇦", native: "Tshivenḓa" },
-            tn: { name: "Tswana", flag: "🇧🇼", native: "Setswana" },
-            sw: { name: "Swahili", flag: "🇹🇿", native: "Kiswahili" },
-            rw: { name: "Kinyarwanda", flag: "🇷🇼", native: "Ikinyarwanda" },
-            rn: { name: "Kirundi", flag: "🇧🇮", native: "Ikirundi" },
-            lg: { name: "Luganda", flag: "🇺🇬", native: "Luganda" },
-            yo: { name: "Yoruba", flag: "🇳🇬", native: "Yorùbá" },
-            ig: { name: "Igbo", flag: "🇳🇬", native: "Igbo" },
-            ha: { name: "Hausa", flag: "🇳🇬", native: "Hausa" },
-            so: { name: "Somali", flag: "🇸🇴", native: "Soomaali" },
-            ti: { name: "Tigrinya", flag: "🇪🇷", native: "ትግርኛ" },
-            om: { name: "Oromo", flag: "🇪🇹", native: "Oromoo" },
-            ee: { name: "Ewe", flag: "🇬🇭", native: "Eʋegbe" },
-            ak: { name: "Akan", flag: "🇬🇭", native: "Akan" },
-            tw: { name: "Twi", flag: "🇬🇭", native: "Twi" },
-            ff: { name: "Fula", flag: "🇸🇳", native: "Fulfulde" },
-            wo: { name: "Wolof", flag: "🇸🇳", native: "Wolof" },
-            bm: { name: "Bambara", flag: "🇲🇱", native: "Bamanankan" },
-            dje: { name: "Zarma", flag: "🇳🇪", native: "Zarma" },
-            gl: { name: "Galician", flag: "🇪🇸", native: "Galego" },
-            eu: { name: "Basque", flag: "🇪🇸", native: "Euskara" },
-            ca: { name: "Catalan", flag: "🇪🇸", native: "Català" },
-            oc: { name: "Occitan", flag: "🇫🇷", native: "Occitan" },
-            br: { name: "Breton", flag: "🇫🇷", native: "Brezhoneg" },
-            cy: { name: "Welsh", flag: "🏴󠁧󠁢󠁷󠁬󠁳󠁿", native: "Cymraeg" },
-            gd: { name: "Scottish", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", native: "Gàidhlig" },
-            ga: { name: "Irish", flag: "🇮🇪", native: "Gaeilge" },
-            kw: { name: "Cornish", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", native: "Kernewek" },
-            fo: { name: "Faroese", flag: "🇫🇴", native: "Føroyskt" },
-            kl: { name: "Greenlandic", flag: "🇬🇱", native: "Kalaallisut" },
-            smj: { name: "Sami", flag: "🇸🇪", native: "Sámegiella" },
-            se: { name: "Northern Sami", flag: "🇳🇴", native: "Davvisámegiella" }
-        };
+    const q=
+    document.getElementById(
+        "search"
+    ).value.toLowerCase();
 
-        // =============================================================
-        // TARJIMALAR
-        // =============================================================
-        const TRANSLATIONS = {
-            en: {
-                heroSub: "150+ languages • 24/7 support • Premium free • Canva style • TV",
-                statFunctions: "Functions",
-                statLangs: "Languages",
-                statPossibilities: "Possibilities",
-                searchPlaceholder: "🔍 Search functions...",
-                allCategories: "📂 All categories",
-                video: "🎬 Video",
-                audio: "🎵 Audio",
-                image: "🖼 Image",
-                animation: "🎨 Animation",
-                text: "📝 Text",
-                vfx: "✨ VFX",
-                export: "📤 Export",
-                ai: "🤖 AI",
-                analysis: "📊 Analysis",
-                special: "🌟 Special",
-                runBtn: "Run Function",
-                toastSuccess: "✅ Function executed successfully!",
-                prev: "Previous",
-                next: "Next",
-                page: "Page"
-            },
-            uz: {
-                heroSub: "150+ til • 24/7 yordam • Premium bepul • Canva uslubi • TV",
-                statFunctions: "Funksiyalar",
-                statLangs: "Tillarda",
-                statPossibilities: "Imkoniyatlar",
-                searchPlaceholder: "🔍 Funksiya qidirish...",
-                allCategories: "📂 Barcha kategoriyalar",
-                video: "🎬 Video",
-                audio: "🎵 Audio",
-                image: "🖼 Rasm",
-                animation: "🎨 Animatsiya",
-                text: "📝 Matn",
-                vfx: "✨ VFX",
-                export: "📤 Eksport",
-                ai: "🤖 AI",
-                analysis: "📊 Tahlil",
-                special: "🌟 Maxsus",
-                runBtn: "Ishga tushirish",
-                toastSuccess: "✅ Funksiya muvaffaqiyatli bajarildi!",
-                prev: "Oldingi",
-                next: "Keyingi",
-                page: "Sahifa"
-            },
-            ru: {
-                heroSub: "150+ языков • 24/7 поддержка • Премиум бесплатно • Стиль Canva • ТВ",
-                statFunctions: "Функции",
-                statLangs: "Языки",
-                statPossibilities: "Возможности",
-                searchPlaceholder: "🔍 Поиск функций...",
-                allCategories: "📂 Все категории",
-                video: "🎬 Видео",
-                audio: "🎵 Аудио",
-                image: "🖼 Изображение",
-                animation: "🎨 Анимация",
-                text: "📝 Текст",
-                vfx: "✨ Визуальные эффекты",
-                export: "📤 Экспорт",
-                ai: "🤖 ИИ",
-                analysis: "📊 Анализ",
-                special: "🌟 Специальные",
-                runBtn: "Запустить",
-                toastSuccess: "✅ Функция выполнена успешно!",
-                prev: "Назад",
-                next: "Вперед",
-                page: "Страница"
-            },
-            tr: {
-                heroSub: "150+ dil • 24/7 destek • Premium ücretsiz • Canva stili • TV",
-                statFunctions: "Fonksiyonlar",
-                statLangs: "Diller",
-                statPossibilities: "Olasılıklar",
-                searchPlaceholder: "🔍 Fonksiyon ara...",
-                allCategories: "📂 Tüm kategoriler",
-                video: "🎬 Video",
-                audio: "🎵 Ses",
-                image: "🖼 Görüntü",
-                animation: "🎨 Animasyon",
-                text: "📝 Metin",
-                vfx: "✨ Görsel Efektler",
-                export: "📤 Dışa Aktar",
-                ai: "🤖 Yapay Zeka",
-                analysis: "📊 Analiz",
-                special: "🌟 Özel",
-                runBtn: "Çalıştır",
-                toastSuccess: "✅ Fonksiyon başarıyla çalıştı!",
-                prev: "Önceki",
-                next: "Sonraki",
-                page: "Sayfa"
-            }
-        };
+    const result=
+    functions.filter(
+        f=>
+        f[1].toLowerCase().includes(q) ||
+        f[2].toLowerCase().includes(q)
+    );
 
-        function getTranslation(lang, key) {
-            if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) return TRANSLATIONS[lang][key];
-            return TRANSLATIONS.en[key] || key;
-        }
+    renderFunctions(result);
+}
 
-        // =============================================================
-        // 100 000+ FUNKSIYALAR — Canva uslubi uchun rasmlar bilan
-        // =============================================================
-        const CAT_KEYS = ['video', 'audio', 'image', 'animation', 'text', 'vfx', 'export', 'ai', 'analysis', 'special'];
-        const CAT_ICONS = { video: '🎬', audio: '🎵', image: '🖼', animation: '🎨', text: '📝', vfx: '✨', export: '📤',
-            ai: '🤖', analysis: '📊', special: '🌟' };
-        const CAT_NAMES = { video: 'Video', audio: 'Audio', image: 'Image', animation: 'Animation', text: 'Text',
-            vfx: 'VFX', export: 'Export', ai: 'AI', analysis: 'Analysis', special: 'Special' };
 
-        // Kategoriya bo‘yicha Unsplash rasmlari (Canva uslubi)
-        const categoryImages = {
-            video: 'https://source.unsplash.com/400x400/?video,film,camera',
-            audio: 'https://source.unsplash.com/400x400/?music,sound,studio',
-            image: 'https://source.unsplash.com/400x400/?photography,photo',
-            animation: 'https://source.unsplash.com/400x400/?animation,cartoon,draw',
-            text: 'https://source.unsplash.com/400x400/?typography,text,font',
-            vfx: 'https://source.unsplash.com/400x400/?visual,effects,glow',
-            export: 'https://source.unsplash.com/400x400/?download,share,cloud',
-            ai: 'https://source.unsplash.com/400x400/?artificial-intelligence,robot',
-            analysis: 'https://source.unsplash.com/400x400/?data,analytics,chart',
-            special: 'https://source.unsplash.com/400x400/?star,special,magic'
-        };
+/* =========================================
+   MENU
+========================================= */
 
-        const actionWords = [
-            'Create', 'Edit', 'Trim', 'Merge', 'Split', 'Rotate', 'Scale', 'Crop', 'Resize', 'Compress',
-            'Convert', 'Export', 'Import', 'Enhance', 'Upscale', 'Stabilize', 'Track', 'Detect', 'Recognize',
-            'Generate', 'Synthesize', 'Clone', 'Transfer', 'Remove', 'Replace', 'Add', 'Apply', 'Render',
-            'Animate', 'Key', 'Mask', 'Rotoscope', 'Color', 'Grade', 'Filter', 'Effect', 'Transition',
-            'Title', 'Subtitle', 'Voiceover', 'Mix', 'Master', 'Noise', 'Reverb', 'Delay', 'Modulate',
-            'Transform', 'Warp', 'Morph', 'Distort', 'Pixel', 'Blur', 'Sharpen', 'Denoise', 'Deinterlace',
-            'Interpolate', 'Extrapolate', 'Quantize', 'Dither', 'Equalize', 'Normalize', 'Amplify',
-            'Pan', 'Fade', 'Crossfade', 'Sidechain', 'Compress', 'Expand', 'Gate', 'Limiter'
-        ];
-        const objectWords = [
-            'Video', 'Audio', 'Image', 'Scene', 'Frame', 'Clip', 'Track', 'Layer', 'Channel', 'Frequency',
-            'Spectrum', 'Waveform', 'Timeline', 'Sequence', 'Shot', 'Take', 'Angle', 'Light', 'Shadow',
-            'Color', 'Gradient', 'Texture', 'Pattern', 'Shape', 'Motion', 'Speed', 'Duration', 'Resolution',
-            'Bitrate', 'Codec', 'Format', 'Container', 'Stream', 'Project', 'Composition', 'Animation',
-            'Character', 'Object', 'Face', 'Voice', 'Music', 'Sound', 'Effect', 'Transition', 'Title',
-            'Subtitle', 'Caption', 'Overlay', 'Background', 'Foreground', 'Depth', 'Alpha', 'Luma',
-            'Chroma', 'Hue', 'Saturation', 'Brightness', 'Contrast', 'Gamma', 'Gain'
-        ];
+function toggleMenu(){
 
-        const icons = ['🎬', '✂️', '🎵', '🖼', '🎨', '✨', '📝', '🤖', '📊', '🌟', '🎥', '🔄', '🌈', '🔊', '📐', '🧩', '⚡',
-            '🎯', '💡', '🔮', '🪄', '🌀', '🎭', '📽', '🎞'
-        ];
+    document
+    .getElementById("menu")
+    .classList
+    .toggle("show");
+}
 
-        const TOTAL_FUNCTIONS = 10000;
-        const allFunctions = [];
-        for (let i = 1; i <= TOTAL_FUNCTIONS; i++) {
-            const cat = CAT_KEYS[i % CAT_KEYS.length];
-            const status = ['active', 'active', 'active', 'beta', 'coming'][i % 5];
-            const a = actionWords[i % actionWords.length];
-            const o = objectWords[i % objectWords.length];
-            const imgUrl = categoryImages[cat] + `&${i}`; // unique
-            allFunctions.push({
-                id: i,
-                name: `${a} ${o}`,
-                category: cat,
-                icon: icons[i % icons.length],
-                imageUrl: imgUrl,
-                status: status,
-                description: `Professional function #${i}: ${a} ${o}`,
-                params: {
-                    mode: ['auto', 'manual', 'ai', 'batch'][i % 4],
-                    intensity: Math.round(Math.random() * 100),
-                    quality: ['low', 'medium', 'high', 'ultra'][i % 4],
-                    duration: (5 + Math.round(Math.random() * 120)) + 's',
-                    format: ['mp4', 'webm', 'avi', 'mov', 'mkv', 'wav', 'mp3', 'flac', 'jpg', 'png', 'webp', 'gif',
-                        'tiff', 'bmp'
-                    ][i % 14]
-                }
-            });
-        }
+function go(id){
 
-        let currentFunction = null;
-        let currentLang = 'uz';
-        let currentRegion = 'Asia/Tashkent';
-        let timeFormat = '24';
+    document
+    .getElementById("menu")
+    .classList
+    .remove("show");
 
-        // =============================================================
-        // PAGINATION
-        // =============================================================
-        const PAGE_SIZE = 42;
-        let currentPage = 1;
-        let filteredList = [...allFunctions];
-        let totalPages = Math.ceil(filteredList.length / PAGE_SIZE);
+    document
+    .getElementById(id)
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+}
 
-        function getPageItems(page) {
-            const start = (page - 1) * PAGE_SIZE;
-            const end = start + PAGE_SIZE;
-            return filteredList.slice(start, end);
-        }
 
-        function renderPage() {
-            const items = getPageItems(currentPage);
-            renderFunctions(items);
-            document.getElementById('currentPageNum').textContent = currentPage;
-            document.getElementById('totalPagesNum').textContent = totalPages;
-            document.getElementById('prevPage').disabled = currentPage <= 1;
-            document.getElementById('nextPage').disabled = currentPage >= totalPages;
-        }
+/* =========================================
+   MODAL
+========================================= */
 
-        function changePage(delta) {
-            const newPage = currentPage + delta;
-            if (newPage >= 1 && newPage <= totalPages) {
-                currentPage = newPage;
-                renderPage();
-            }
-        }
+function modal(html){
 
-        // =============================================================
-        // RENDER — Canva uslubi (fon rasmlari bilan)
-        // =============================================================
-        function renderFunctions(list) {
-            const grid = document.getElementById('functionsGrid');
-            grid.innerHTML = '';
-            list.forEach(fn => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.style.backgroundImage = `url(${fn.imageUrl})`;
-                const dotClass = fn.status === 'active' ? 'green' : fn.status === 'beta' ? 'yellow' : 'red';
-                card.innerHTML = `
-                    <div class="card-overlay">
-                        <span class="fn-id">#${String(fn.id).padStart(6, '0')}</span>
-                        <span class="icon">${fn.icon}</span>
-                        <h3>${fn.name}</h3>
-                        <p>${fn.description}</p>
-                        <div class="tags">
-                            <span class="tag">${CAT_ICONS[fn.category] || '📂'} ${CAT_NAMES[fn.category] || 'Boshqa'}</span>
-                            <span class="tag"><span class="dot ${dotClass}"></span>${fn.status}</span>
-                        </div>
-                    </div>
-                `;
-                card.onclick = () => openModal(fn);
-                grid.appendChild(card);
-            });
-            document.getElementById('totalCount').textContent = filteredList.length.toLocaleString();
-        }
+    document.getElementById(
+        "modalContent"
+    ).innerHTML=html;
 
-        function filterFunctions() {
-            const q = document.getElementById('searchInput').value.toLowerCase();
-            const cat = document.getElementById('categoryFilter').value;
-            filteredList = allFunctions.filter(fn => {
-                const matchSearch = fn.name.toLowerCase().includes(q) ||
-                    fn.description.toLowerCase().includes(q) ||
-                    String(fn.id).includes(q);
-                const matchCat = cat === 'all' || fn.category === cat;
-                return matchSearch && matchCat;
-            });
-            totalPages = Math.max(1, Math.ceil(filteredList.length / PAGE_SIZE));
-            currentPage = 1;
-            renderPage();
-            document.getElementById('totalCount').textContent = filteredList.length.toLocaleString();
-        }
+    document.getElementById(
+        "modalBg"
+    ).classList.add("show");
+}
 
-        // =============================================================
-        // MODAL
-        // =============================================================
-        function openModal(fn) {
-            currentFunction = fn;
-            const iconContainer = document.getElementById('mIconContainer');
-            if (fn.imageUrl) {
-                iconContainer.innerHTML =
-                    `<img src="${fn.imageUrl}" class="m-icon-img" alt="${fn.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
-                             <span class="m-icon" style="display:none;">${fn.icon}</span>`;
-            } else {
-                iconContainer.innerHTML = `<span class="m-icon">${fn.icon}</span>`;
-            }
-            document.getElementById('mTitle').textContent = fn.name;
-            document.getElementById('mId').textContent =
-                `#${String(fn.id).padStart(6, '0')} · ${CAT_ICONS[fn.category] || '📂'} ${CAT_NAMES[fn.category] || 'Boshqa'}`;
-            document.getElementById('mDesc').textContent = fn.description;
-            document.getElementById('mParams').textContent = JSON.stringify(fn.params, null, 2);
-            document.getElementById('modalOverlay').classList.add('open');
-            document.getElementById('runBtnText').textContent = getTranslation(currentLang, 'runBtn');
-        }
+function closeModal(){
 
-        function closeModal() {
-            document.getElementById('modalOverlay').classList.remove('open');
-        }
-        document.getElementById('modalOverlay').onclick = (e) => {
-            if (e.target === e.currentTarget) closeModal();
-        };
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
-        });
+    document.getElementById(
+        "modalBg"
+    ).classList.remove("show");
+}
 
-        // =============================================================
-        // RUN FUNCTION
-        // =============================================================
-        function runFunction() {
-            const btn = document.getElementById('runBtn');
-            const originalText = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = `<span class="spinner"></span> ${getTranslation(currentLang, 'runBtn')}...`;
-            setTimeout(() => {
-                btn.innerHTML = `<i class="fas fa-check"></i> ✓`;
-                btn.style.background = 'linear-gradient(135deg, var(--success), #00c853)';
-                showToast(getTranslation(currentLang, 'toastSuccess'), 'success');
-                setTimeout(() => {
-                    btn.disabled = false;
-                    btn.innerHTML = originalText;
-                    btn.style.background = '';
-                }, 1600);
-            }, 1000 + Math.random() * 800);
-        }
 
-        // =============================================================
-        // TOAST
-        // =============================================================
-        function showToast(msg, type = 'success') {
-            const container = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.textContent = msg;
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateX(40px)';
-                setTimeout(() => toast.remove(), 300);
-            }, 3500);
-        }
+/* =========================================
+   FEATURE
+========================================= */
 
-        // =============================================================
-        // TILNI O'ZGARTIRISH
-        // =============================================================
-        function changeLanguage(lang) {
-            currentLang = lang;
-            document.getElementById('heroSub').textContent = getTranslation(lang, 'heroSub');
-            document.getElementById('statFunctions').textContent = getTranslation(lang, 'statFunctions');
-            document.getElementById('statLangs').textContent = getTranslation(lang, 'statLangs');
-            document.getElementById('statPossibilities').textContent = getTranslation(lang, 'statPossibilities');
-            document.getElementById('searchInput').placeholder = getTranslation(lang, 'searchPlaceholder');
+function useFeature(name){
 
-            const catFilter = document.getElementById('categoryFilter');
-            const catKeys = ['all', 'video', 'audio', 'image', 'animation', 'text', 'vfx', 'export', 'ai', 'analysis',
-                'special'
-            ];
-            const options = catFilter.querySelectorAll('option');
-            options.forEach((opt, idx) => {
-                const key = catKeys[idx] || 'all';
-                if (key === 'all') opt.textContent = getTranslation(lang, 'allCategories');
-                else opt.textContent = (CAT_ICONS[key] || '📂') + ' ' + getTranslation(lang, key);
-            });
+    modal(`
 
-            document.querySelector('#prevPage').innerHTML = `<i class="fas fa-chevron-left"></i> ${getTranslation(lang, 'prev')}`;
-            document.querySelector('#nextPage').innerHTML = `${getTranslation(lang, 'next')} <i class="fas fa-chevron-right"></i>`;
-            document.querySelector('.page-info').innerHTML =
-                `${getTranslation(lang, 'page')} <strong id="currentPageNum">${currentPage}</strong> / <span id="totalPagesNum">${totalPages}</span>`;
+        <h2>
+            🚀 ${name}
+        </h2>
 
-            if (document.getElementById('modalOverlay').classList.contains('open')) {
-                document.getElementById('runBtnText').textContent = getTranslation(lang, 'runBtn');
-            }
-            document.getElementById('settingsLang').value = lang;
-        }
+        <p style="
+        color:var(--muted);
+        margin-top:15px;
+        line-height:1.7">
 
-        function populateLangSelector() {
-            const sel = document.getElementById('langSelect');
-            sel.innerHTML = '';
-            Object.keys(LANGUAGES).forEach(code => {
-                const opt = document.createElement('option');
-                opt.value = code;
-                opt.textContent = LANGUAGES[code].flag + ' ' + LANGUAGES[code].native;
-                if (code === 'uz') opt.selected = true;
-                sel.appendChild(opt);
-            });
-            const sel2 = document.getElementById('settingsLang');
-            sel2.innerHTML = '';
-            Object.keys(LANGUAGES).forEach(code => {
-                const opt = document.createElement('option');
-                opt.value = code;
-                opt.textContent = LANGUAGES[code].flag + ' ' + LANGUAGES[code].native;
-                if (code === 'uz') opt.selected = true;
-                sel2.appendChild(opt);
-            });
-        }
+        ${name} funksiyasi tanlandi.
 
-        // =============================================================
-        // VAQT, SANA
-        // =============================================================
-        function updateDateTime() {
-            try {
-                const now = new Date();
-                const options = { timeZone: currentRegion, hour: '2-digit', minute: '2-digit', second: '2-digit' };
-                if (timeFormat === '12') options.hour12 = true;
-                else options.hour12 = false;
-                const timeStr = now.toLocaleTimeString('uz-UZ', options);
-                const dateStr = now.toLocaleDateString('uz-UZ', { timeZone: currentRegion, day: '2-digit',
-                    month: '2-digit', year: 'numeric' });
-                document.getElementById('timeDisplay').textContent = timeStr;
-                document.getElementById('dateDisplay').textContent = dateStr;
-            } catch (e) {
-                const now = new Date();
-                document.getElementById('timeDisplay').textContent = now.toLocaleTimeString('uz-UZ');
-                document.getElementById('dateDisplay').textContent = now.toLocaleDateString('uz-UZ');
-            }
-        }
+        </p>
 
-        function setTimeFormat(format) {
-            timeFormat = format;
-            updateDateTime();
-            showToast(`🕒 Vaqt formati: ${format === '24' ? '24 soatlik' : '12 soatlik (AM/PM)'}`, 'success');
-        }
+        <p style="
+        color:var(--muted);
+        margin-top:10px">
 
-        function changeRegion(region) {
-            currentRegion = region;
-            updateDateTime();
-            const temps = [18, 22, 24, 26, 19, 21, 23, 25, 20, 17];
-            const descs = ['Quyoshli', 'Bulutli', 'Yomg\'ir', 'Shamolli', 'Issiq', 'Salqin', 'Musaffo', 'Nam'];
-            const idx = Math.floor(Math.random() * temps.length);
-            document.getElementById('tempDisplay').textContent = `+${temps[idx]}°`;
-            document.getElementById('weatherDesc').textContent = descs[idx % descs.length];
-            const cityNames = {
-                'Asia/Tashkent': 'Toshkent',
-                'Asia/Samarkand': 'Samarqand',
-                'Asia/Baku': 'Boku',
-                'Asia/Almaty': 'Olmaota',
-                'Asia/Bishkek': 'Bishkek',
-                'Asia/Dushanbe': 'Dushanbe',
-                'Asia/Ashgabat': 'Ashxobod',
-                'Europe/Moscow': 'Moskva',
-                'Europe/London': 'London',
-                'America/New_York': 'Nyu-York',
-                'America/Los_Angeles': 'Los-Anjeles',
-                'Asia/Dubai': 'Dubay',
-                'Asia/Tokyo': 'Tokio',
-                'Asia/Shanghai': 'Shanxay',
-                'Europe/Paris': 'Parij',
-                'Europe/Berlin': 'Berlin',
-                'Europe/Istanbul': 'Istanbul',
-                'Asia/Kolkata': 'Dehli'
-            };
-            document.getElementById('cityDisplay').textContent = cityNames[region] || 'Shahar';
-        }
+        Bu frontend tayyor.
+        Haqiqiy AI funksiyasi uchun
+        backend/API ulanishi kerak.
 
-        // =============================================================
-        // THEME
-        // =============================================================
-        function setTheme(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-            document.querySelectorAll('.theme-options .theme-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.theme === theme);
-            });
-            const snowToggle = document.getElementById('snowToggle');
-            if (!snowToggle.classList.contains('active')) {
-                snowToggle.classList.add('active');
-                snowEnabled = true;
-            }
-            showToast(`🎨 Tema: ${theme}`, 'success');
-        }
+        </p>
 
-        function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme') || 'dark';
-            const themes = ['dark', 'light', 'newyear', 'spring', 'summer', 'autumn', 'winter'];
-            const idx = themes.indexOf(current);
-            const next = themes[(idx + 1) % themes.length];
-            setTheme(next);
-            const icon = document.querySelector('.theme-toggle i');
-            if (next === 'light') icon.className = 'fas fa-sun';
-            else icon.className = 'fas fa-moon';
-        }
+    `);
+}
 
-        // =============================================================
-        // SETTINGS
-        // =============================================================
-        function openSettings() {
-            document.getElementById('settingsOverlay').classList.add('open');
-        }
 
-        function closeSettings() {
-            document.getElementById('settingsOverlay').classList.remove('open');
-        }
-        document.getElementById('settingsOverlay').onclick = (e) => {
-            if (e.target === e.currentTarget) closeSettings();
-        };
+/* =========================================
+   TV PLAYER
+========================================= */
 
-        // =============================================================
-        // UPLOAD — Canva uslubi
-        // =============================================================
-        document.getElementById('fileInput').addEventListener('change', function(e) {
-            const container = document.getElementById('previewContainer');
-            for (let file of e.target.files) {
-                const reader = new FileReader();
-                reader.onload = function(ev) {
-                    const div = document.createElement('div');
-                    div.className = 'preview-item';
-                    div.innerHTML = `
-                        <img src="${ev.target.result}" />
-                        <button class="remove-btn" onclick="this.parentElement.remove()">✕</button>
-                    `;
-                    container.appendChild(div);
-                };
-                reader.readAsDataURL(file);
-            }
-            showToast('✅ Rasm yuklandi! Canva uslubida tahrirlash mumkin.', 'success');
-        });
+function openTV(index){
 
-        // =============================================================
-        // TV CHANNELS
-        // =============================================================
-        const tvChannels = [
-            { name: "O'zbekiston 1", icon: "📺", country: "🇺🇿" },
-            { name: "O'zbekiston 2", icon: "📺", country: "🇺🇿" },
-            { name: "O'zbekiston 3", icon: "📺", country: "🇺🇿" },
-            { name: "O'zbekiston 4", icon: "📺", country: "🇺🇿" },
-            { name: "O'zbekiston 5", icon: "📺", country: "🇺🇿" },
-            { name: "O'zbekiston 6", icon: "📺", country: "🇺🇿" },
-            { name: "O'zbekiston 7", icon: "📺", country: "🇺🇿" },
-            { name: "O'zbekiston 8", icon: "📺", country: "🇺🇿" },
-            { name: "O'zbekiston 9", icon: "📺", country: "🇺🇿" },
-            { name: "O'zbekiston 10", icon: "📺", country: "🇺🇿" },
-            { name: "O'zbekiston 11", icon: "📺", country: "🇺🇿" },
-            { name: "O'zbekiston 12", icon: "📺", country: "🇺🇿" },
-            { name: "Milliy TV", icon: "📡", country: "🇺🇿" },
-            { name: "Zor TV", icon: "📡", country: "🇺🇿" },
-            { name: "Sevimli TV", icon: "❤️", country: "🇺🇿" },
-            { name: "UzReport", icon: "📰", country: "🇺🇿" },
-            { name: "Kanal 5", icon: "📺", country: "🇺🇿" },
-            { name: "New Century", icon: "🌟", country: "🇺🇿" },
-            { name: "Toshkent TV", icon: "🏛️", country: "🇺🇿" },
-            { name: "Samarqand TV", icon: "🏛️", country: "🇺🇿" },
-            { name: "Первый канал", icon: "📺", country: "🇷🇺" },
-            { name: "Россия 1", icon: "📺", country: "🇷🇺" },
-            { name: "Россия 2", icon: "📺", country: "🇷🇺" },
-            { name: "Россия 3", icon: "📺", country: "🇷🇺" },
-            { name: "НТВ", icon: "📺", country: "🇷🇺" },
-            { name: "СТС", icon: "📺", country: "🇷🇺" },
-            { name: "ТНТ", icon: "📺", country: "🇷🇺" },
-            { name: "РЕН ТВ", icon: "📺", country: "🇷🇺" },
-            { name: "Матч ТВ", icon: "⚽", country: "🇷🇺" },
-            { name: "ТВ Центр", icon: "📺", country: "🇷🇺" },
-            { name: "Домашний", icon: "🏠", country: "🇷🇺" },
-            { name: "Культура", icon: "🎭", country: "🇷🇺" },
-            { name: "ОТР", icon: "📺", country: "🇷🇺" },
-            { name: "Мир", icon: "🌍", country: "🇷🇺" },
-            { name: "Пятый канал", icon: "📺", country: "🇷🇺" },
-            { name: "CNN", icon: "📰", country: "🇺🇸" },
-            { name: "Fox News", icon: "📰", country: "🇺🇸" },
-            { name: "MSNBC", icon: "📰", country: "🇺🇸" },
-            { name: "ABC", icon: "📺", country: "🇺🇸" },
-            { name: "CBS", icon: "📺", country: "🇺🇸" },
-            { name: "NBC", icon: "📺", country: "🇺🇸" },
-            { name: "PBS", icon: "📺", country: "🇺🇸" },
-            { name: "HBO", icon: "🎬", country: "🇺🇸" },
-            { name: "Showtime", icon: "🎬", country: "🇺🇸" },
-            { name: "ESPN", icon: "⚽", country: "🇺🇸" },
-            { name: "MTV", icon: "🎵", country: "🇺🇸" },
-            { name: "VH1", icon: "🎵", country: "🇺🇸" },
-            { name: "BET", icon: "🎵", country: "🇺🇸" },
-            { name: "TNT", icon: "📺", country: "🇺🇸" },
-            { name: "TBS", icon: "📺", country: "🇺🇸" },
-            { name: "BBC One", icon: "📺", country: "🇬🇧" },
-            { name: "BBC Two", icon: "📺", country: "🇬🇧" },
-            { name: "BBC Three", icon: "📺", country: "🇬🇧" },
-            { name: "BBC Four", icon: "📺", country: "🇬🇧" },
-            { name: "ITV", icon: "📺", country: "🇬🇧" },
-            { name: "Channel 4", icon: "📺", country: "🇬🇧" },
-            { name: "Channel 5", icon: "📺", country: "🇬🇧" },
-            { name: "Sky Sports", icon: "⚽", country: "🇬🇧" },
-            { name: "Sky News", icon: "📰", country: "🇬🇧" },
-            { name: "TRT 1", icon: "📺", country: "🇹🇷" },
-            { name: "TRT 2", icon: "📺", country: "🇹🇷" },
-            { name: "TRT 3", icon: "📺", country: "🇹🇷" },
-            { name: "ATV", icon: "📺", country: "🇹🇷" },
-            { name: "Kanal D", icon: "📺", country: "🇹🇷" },
-            { name: "Show TV", icon: "📺", country: "🇹🇷" },
-            { name: "Star TV", icon: "📺", country: "🇹🇷" },
-            { name: "Fox TV", icon: "📺", country: "🇹🇷" },
-            { name: "TV8", icon: "📺", country: "🇹🇷" },
-            { name: "NTV", icon: "📺", country: "🇹🇷" },
-            { name: "CCTV 1", icon: "📺", country: "🇨🇳" },
-            { name: "CCTV 2", icon: "📺", country: "🇨🇳" },
-            { name: "CCTV 3", icon: "📺", country: "🇨🇳" },
-            { name: "CCTV 4", icon: "📺", country: "🇨🇳" },
-            { name: "CCTV 5", icon: "📺", country: "🇨🇳" },
-            { name: "CCTV 6", icon: "📺", country: "🇨🇳" },
-            { name: "CCTV 7", icon: "📺", country: "🇨🇳" },
-            { name: "CCTV 8", icon: "📺", country: "🇨🇳" },
-            { name: "CCTV 9", icon: "📺", country: "🇨🇳" },
-            { name: "CCTV 10", icon: "📺", country: "🇨🇳" },
-            { name: "NHK", icon: "📺", country: "🇯🇵" },
-            { name: "NTV", icon: "📺", country: "🇯🇵" },
-            { name: "TBS", icon: "📺", country: "🇯🇵" },
-            { name: "Fuji TV", icon: "📺", country: "🇯🇵" },
-            { name: "TV Asahi", icon: "📺", country: "🇯🇵" },
-            { name: "TV Tokyo", icon: "📺", country: "🇯🇵" },
-            { name: "KBS 1", icon: "📺", country: "🇰🇷" },
-            { name: "KBS 2", icon: "📺", country: "🇰🇷" },
-            { name: "MBC", icon: "📺", country: "🇰🇷" },
-            { name: "SBS", icon: "📺", country: "🇰🇷" },
-            { name: "JTBC", icon: "📺", country: "🇰🇷" },
-            { name: "tvN", icon: "📺", country: "🇰🇷" },
-            { name: "DD News", icon: "📰", country: "🇮🇳" },
-            { name: "Star Plus", icon: "📺", country: "🇮🇳" },
-            { name: "Colors", icon: "📺", country: "🇮🇳" },
-            { name: "Zee TV", icon: "📺", country: "🇮🇳" },
-            { name: "Sony TV", icon: "📺", country: "🇮🇳" },
-            { name: "ARD", icon: "📺", country: "🇩🇪" },
-            { name: "ZDF", icon: "📺", country: "🇩🇪" },
-            { name: "RTL", icon: "📺", country: "🇩🇪" },
-            { name: "SAT.1", icon: "📺", country: "🇩🇪" },
-            { name: "ProSieben", icon: "📺", country: "🇩🇪" },
-            { name: "TF1", icon: "📺", country: "🇫🇷" },
-            { name: "France 2", icon: "📺", country: "🇫🇷" },
-            { name: "France 3", icon: "📺", country: "🇫🇷" },
-            { name: "M6", icon: "📺", country: "🇫🇷" },
-            { name: "Al Jazeera", icon: "📰", country: "🇶🇦" },
-            { name: "Al Arabiya", icon: "📰", country: "🇸🇦" },
-            { name: "MBC 1", icon: "📺", country: "🇸🇦" },
-            { name: "MBC 2", icon: "📺", country: "🇸🇦" },
-            { name: "Qazaqstan", icon: "📺", country: "🇰🇿" },
-            { name: "Khabar 24", icon: "📺", country: "🇰🇿" },
-            { name: "KTK", icon: "📺", country: "🇰🇿" },
-            { name: "KTRK", icon: "📺", country: "🇰🇬" },
-            { name: "ElTR", icon: "📺", country: "🇰🇬" },
-            { name: "TV Tojikiston", icon: "📺", country: "🇹🇯" },
-            { name: "Safina", icon: "📺", country: "🇹🇯" },
-            { name: "Altyn Asyr", icon: "📺", country: "🇹🇲" },
-            { name: "Miras", icon: "📺", country: "🇹🇲" },
-            { name: "AzTV", icon: "📺", country: "🇦🇿" },
-            { name: "İTV", icon: "📺", country: "🇦🇿" },
-            { name: "Euronews", icon: "📰", country: "🇪🇺" },
-            { name: "BBC World News", icon: "📰", country: "🇬🇧" },
-            { name: "CNN International", icon: "📰", country: "🇺🇸" },
-            { name: "France 24", icon: "📰", country: "🇫🇷" },
-            { name: "Deutsche Welle", icon: "📰", country: "🇩🇪" },
-            { name: "RT", icon: "📰", country: "🇷🇺" },
-            { name: "NHK World", icon: "📰", country: "🇯🇵" },
-            { name: "CGTN", icon: "📰", country: "🇨🇳" },
-            { name: "TeleSur", icon: "📰", country: "🇻🇪" },
-            { name: "TVE 1", icon: "📺", country: "🇪🇸" },
-            { name: "TVE 2", icon: "📺", country: "🇪🇸" },
-            { name: "Antena 3", icon: "📺", country: "🇪🇸" },
-            { name: "RAI 1", icon: "📺", country: "🇮🇹" },
-            { name: "RAI 2", icon: "📺", country: "🇮🇹" },
-            { name: "Mediaset", icon: "📺", country: "🇮🇹" },
-            { name: "TVP 1", icon: "📺", country: "🇵🇱" },
-            { name: "TVP 2", icon: "📺", country: "🇵🇱" },
-            { name: "UA:Pershiy", icon: "📺", country: "🇺🇦" },
-            { name: "STB", icon: "📺", country: "🇺🇦" },
-            { name: "TVR 1", icon: "📺", country: "🇷🇴" },
-            { name: "Antena 1", icon: "📺", country: "🇷🇴" },
-            { name: "ERT 1", icon: "📺", country: "🇬🇷" },
-            { name: "ERT 2", icon: "📺", country: "🇬🇷" },
-            { name: "Kan 11", icon: "📺", country: "🇮🇱" },
-            { name: "Kan 12", icon: "📺", country: "🇮🇱" },
-            { name: "Egypt TV", icon: "📺", country: "🇪🇬" },
-            { name: "Cairo TV", icon: "📺", country: "🇪🇬" },
-            { name: "Kanal 7", icon: "📺", country: "🇹🇷" },
-            { name: "Ülke TV", icon: "📺", country: "🇹🇷" },
-            { name: "Kazakhstan TV", icon: "📺", country: "🇰🇿" },
-            { name: "Azerbaijan TV", icon: "📺", country: "🇦🇿" },
-            { name: "Türkmenistan TV", icon: "📺", country: "🇹🇲" },
-            { name: "Tajikistan TV", icon: "📺", country: "🇹🇯" },
-            { name: "Kyrgyzstan TV", icon: "📺", country: "🇰🇬" },
-            { name: "Moldova TV", icon: "📺", country: "🇲🇩" },
-            { name: "Georgia TV", icon: "📺", country: "🇬🇪" },
-            { name: "Armenia TV", icon: "📺", country: "🇦🇲" },
-            { name: "Belarus TV", icon: "📺", country: "🇧🇾" },
-            { name: "Lithuania TV", icon: "📺", country: "🇱🇹" },
-            { name: "Latvia TV", icon: "📺", country: "🇱🇻" },
-            { name: "Estonia TV", icon: "📺", country: "🇪🇪" },
-            { name: "Sky News UK", icon: "📰", country: "🇬🇧" },
-            { name: "Bloomberg TV", icon: "📊", country: "🇺🇸" },
-            { name: "CNBC", icon: "📊", country: "🇺🇸" },
-            { name: "Fox Sports", icon: "⚽", country: "🇺🇸" },
-            { name: "NBA TV", icon: "🏀", country: "🇺🇸" },
-            { name: "ESPN 2", icon: "⚽", country: "🇺🇸" },
-            { name: "Disney Channel", icon: "🏰", country: "🇺🇸" },
-            { name: "Cartoon Network", icon: "🖌️", country: "🇺🇸" },
-            { name: "Nickelodeon", icon: "🧽", country: "🇺🇸" },
-            { name: "Discovery", icon: "🔍", country: "🇺🇸" },
-            { name: "Animal Planet", icon: "🐾", country: "🇺🇸" },
-            { name: "National Geographic", icon: "🌍", country: "🇺🇸" },
-            { name: "History Channel", icon: "📜", country: "🇺🇸" },
-            { name: "TLC", icon: "📺", country: "🇺🇸" },
-            { name: "Bravo", icon: "📺", country: "🇺🇸" },
-            { name: "E!", icon: "📺", country: "🇺🇸" },
-            { name: "Comedy Central", icon: "😂", country: "🇺🇸" },
-            { name: "AMC", icon: "🎬", country: "🇺🇸" },
-            { name: "FX", icon: "🎬", country: "🇺🇸" },
-            { name: "Syfy", icon: "👽", country: "🇺🇸" },
-            { name: "BBC Earth", icon: "🌍", country: "🇬🇧" },
-            { name: "BBC Lifestyle", icon: "🌟", country: "🇬🇧" },
-            { name: "CBeebies", icon: "🧸", country: "🇬🇧" },
-            { name: "CBBC", icon: "🧸", country: "🇬🇧" },
-            { name: "Boomerang", icon: "🔄", country: "🇺🇸" },
-            { name: "NTV (Russia)", icon: "📺", country: "🇷🇺" },
-            { name: "REN TV (Russia)", icon: "📺", country: "🇷🇺" },
-            { name: "TVK (Kazakh)", icon: "📺", country: "🇰🇿" }
-        ];
+    const tv=tvChannels[index];
 
-        function renderTVChannels() {
-            const grid = document.getElementById('tvGrid');
-            grid.innerHTML = '';
-            tvChannels.forEach(ch => {
-                const div = document.createElement('div');
-                div.className = 'tv-channel';
-                div.innerHTML = `
-                    <span class="tv-icon">${ch.icon}</span>
-                    <div class="tv-name">${ch.name}</div>
-                    <div class="tv-country">${ch.country}</div>
-                `;
-                div.onclick = () => showToast(`📺 ${ch.name} (${ch.country}) — Translyatsiya boshlandi!`, 'success');
-                grid.appendChild(div);
-            });
-            document.getElementById('tvCount').textContent = tvChannels.length + '+ kanal';
-        }
+    modal(`
 
-        // =============================================================
-        // INIT
-        // =============================================================
-        populateLangSelector();
-        renderTVChannels();
-        renderPage();
-        changeLanguage('uz');
-        updateDateTime();
-        setInterval(updateDateTime, 1000);
-        document.getElementById('regionSelect').value = 'Asia/Tashkent';
-        changeRegion('Asia/Tashkent');
-        document.documentElement.setAttribute('data-theme', 'dark');
-        document.querySelector('input[name="timeFormat"][value="24"]').checked = true;
+        <h2>
+            ${tv[0]} ${tv[1]}
+        </h2>
 
-        setTimeout(() => {
-            showToast('🚀 IKROMJON Ai — Canva uslubi, 100 000+ funksiya, 200+ kanal tayyor!', 'success');
-        }, 2000);
-    </script>
+        <p style="
+        color:var(--muted);
+        margin:10px 0 18px">
+
+        ${tv[2]}
+
+        </p>
+
+        <div style="
+        aspect-ratio:16/9;
+        background:#000;
+        display:grid;
+        place-items:center;
+        color:#aaa">
+
+            📺
+
+            <br>
+
+            Jonli stream URL
+            backend/API orqali
+            ulanadi.
+
+        </div>
+
+        <p style="
+        color:var(--muted);
+        margin-top:15px;
+        font-size:12px">
+
+        Eslatma: haqiqiy kanal uchun
+        ruxsat etilgan HLS/DASH stream
+        manzilini backend orqali berish kerak.
+
+        </p>
+
+    `);
+}
+
+
+/* =========================================
+   SETTINGS
+========================================= */
+
+function openSettings(){
+
+    document
+    .getElementById("menu")
+    .classList
+    .remove("show");
+
+    modal(`
+
+        <h3>
+            ⚙️ Yuqori darajadagi sozlamalar
+        </h3>
+
+        <br>
+
+        <div class="setting">
+
+            <label>
+                🌦️ Mavsum
+            </label>
+
+            <select
+            onchange="
+            setSeason(this.value)">
+
+                <option value="auto">
+                    Avtomatik
+                </option>
+
+                <option value="spring">
+                    🌸 Bahor
+                </option>
+
+                <option value="summer">
+                    ☀️ Yoz
+                </option>
+
+                <option value="autumn">
+                    🍂 Kuz
+                </option>
+
+                <option value="winter">
+                    ❄️ Qish
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="setting">
+
+            <label>
+                🌍 Til
+            </label>
+
+            <select
+            onchange="
+            changeLanguage(this.value)">
+
+                <option>O‘zbekcha</option>
+                <option>English</option>
+                <option>Русский</option>
+                <option>Türkçe</option>
+                <option>العربية</option>
+                <option>中文</option>
+                <option>日本語</option>
+                <option>한국어</option>
+                <option>Deutsch</option>
+                <option>Français</option>
+                <option>Español</option>
+                <option>Italiano</option>
+                <option>Português</option>
+                <option>हिन्दी</option>
+                <option>فارسی</option>
+                <option>Қазақша</option>
+                <option>Кыргызча</option>
+                <option>Azərbaycan</option>
+
+            </select>
+
+        </div>
+
+        <div class="setting">
+            🔔 Bildirishnomalar
+            <input type="checkbox" checked>
+        </div>
+
+        <div class="setting">
+            ⚡ Tezkor rejim
+            <input type="checkbox" checked>
+        </div>
+
+        <div class="setting">
+            🔐 Xavfsizlik
+            <input type="checkbox" checked>
+        </div>
+
+        <div class="setting">
+            ☁️ Cloud sinxronizatsiya
+            <input type="checkbox">
+        </div>
+
+    `);
+}
+
+
+/* =========================================
+   LANGUAGES
+========================================= */
+
+function openLanguages(){
+
+    modal(`
+
+        <h2>
+            🌍 Dunyo tillari
+        </h2>
+
+        <div class="setting" style="margin-top:15px">
+
+            🇺🇿 O‘zbekcha<br><br>
+            🇬🇧 English<br><br>
+            🇷🇺 Русский<br><br>
+            🇹🇷 Türkçe<br><br>
+            🇸🇦 العربية<br><br>
+            🇨🇳 中文<br><br>
+            🇯🇵 日本語<br><br>
+            🇰🇷 한국어<br><br>
+            🇩🇪 Deutsch<br><br>
+            🇫🇷 Français<br><br>
+            🇪🇸 Español<br><br>
+            🇮🇹 Italiano<br><br>
+            🇵🇹 Português<br><br>
+            🇮🇳 हिन्दी<br><br>
+            🇮🇷 فارسی<br><br>
+            🇰🇿 Қазақша<br><br>
+            🇰🇬 Кыргызча<br><br>
+            🇦🇿 Azərbaycan
+
+        </div>
+
+    `);
+}
+
+
+/* =========================================
+   SEASONS
+========================================= */
+
+function openSeasons(){
+
+    modal(`
+
+        <h2>
+            🌦️ 4 fasl
+        </h2>
+
+        <br>
+
+        <button
+        class="tool"
+        onclick="
+        setSeason('spring');
+        closeModal()">
+        🌸 Bahor
+        </button>
+
+        <button
+        class="tool"
+        onclick="
+        setSeason('summer');
+        closeModal()">
+        ☀️ Yoz
+        </button>
+
+        <button
+        class="tool"
+        onclick="
+        setSeason('autumn');
+        closeModal()">
+        🍂 Kuz
+        </button>
+
+        <button
+        class="tool"
+        onclick="
+        setSeason('winter');
+        closeModal()">
+        ❄️ Qish
+        </button>
+
+    `);
+}
+
+
+/* =========================================
+   SEASON EFFECT
+========================================= */
+
+function setSeason(season){
+
+    if(season==="auto"){
+
+        const m=
+        new Date().getMonth()+1;
+
+        if(m>=3 && m<=5)
+            season="spring";
+
+        else if(m>=6 && m<=8)
+            season="summer";
+
+        else if(m>=9 && m<=11)
+            season="autumn";
+
+        else
+            season="winter";
+    }
+
+    document.body.dataset.season=
+    season;
+
+    let symbol="❄️";
+
+    if(season==="spring")
+        symbol="🌸";
+
+    if(season==="summer")
+        symbol="☀️";
+
+    if(season==="autumn")
+        symbol="🍂";
+
+    createWeather(symbol);
+}
+
+
+function createWeather(symbol){
+
+    document
+    .querySelectorAll(".weather")
+    .forEach(x=>x.remove());
+
+    for(let i=0;i<35;i++){
+
+        const e=
+        document.createElement("div");
+
+        e.className="weather";
+
+        e.textContent=symbol;
+
+        e.style.position="fixed";
+        e.style.top="-30px";
+        e.style.left=
+        Math.random()*100+"%";
+        e.style.zIndex="100";
+        e.style.pointerEvents="none";
+        e.style.fontSize=
+        12+Math.random()*15+"px";
+        e.style.animation=
+        `weatherFall ${5+Math.random()*8}s linear infinite`;
+        e.style.animationDelay=
+        -Math.random()*10+"s";
+
+        document.body.appendChild(e);
+    }
+}
+
+
+/* =========================================
+   WEATHER CSS
+========================================= */
+
+const weatherStyle=
+document.createElement("style");
+
+weatherStyle.textContent=`
+
+@keyframes weatherFall{
+
+from{
+transform:translateY(-30px) rotate(0deg);
+}
+
+to{
+transform:translateY(110vh) rotate(360deg);
+}
+
+}
+
+`;
+
+document.head.appendChild(weatherStyle);
+
+
+/* =========================================
+   THEME
+========================================= */
+
+function toggleTheme(){
+
+    if(
+        document.body.style.background
+    ){
+
+        document.body.style.background="";
+
+    }else{
+
+        document.body.style.background=
+        "linear-gradient(135deg,#10182e,#32165b)";
+    }
+}
+
+
+/* =========================================
+   CANVA TOOLS
+========================================= */
+
+function addText(){
+
+    const text=
+    prompt(
+        "Matnni kiriting:",
+        "IKROMJON AI"
+    );
+
+    if(text){
+
+        document.getElementById(
+            "canvasText"
+        ).textContent=text;
+    }
+}
+
+
+function changeCanvas(){
+
+    const colors=[
+        "#ffffff",
+        "#e8f7ff",
+        "#f4e8ff",
+        "#fff0f5",
+        "#e9ffe9",
+        "#111827"
+    ];
+
+    const canvas=
+    document.getElementById("canvas");
+
+    canvas.style.background=
+    colors[
+        Math.floor(
+            Math.random()*colors.length
+        )
+    ];
+}
+
+
+function addImage(){
+
+    const url=
+    prompt(
+        "Rasm URL manzilini kiriting:"
+    );
+
+    if(url){
+
+        document.getElementById(
+            "canvasImage"
+        ).src=url;
+    }
+}
+
+
+function downloadDesign(){
+
+    alert(
+        "Dizaynni eksport qilish backend/Canvas renderer bilan ulanadi."
+    );
+}
+
+
+/* =========================================
+   ABOUT
+========================================= */
+
+function openAbout(){
+
+    document
+    .getElementById("menu")
+    .classList
+    .remove("show");
+
+    modal(`
+
+        <h2>
+            ℹ️ IKROMJON AI
+        </h2>
+
+        <p style="
+        color:var(--muted);
+        line-height:1.8;
+        margin-top:15px">
+
+        IKROMJON AI — AI, TV,
+        videolar, kliplar, rasmlar,
+        dizayn va boshqa raqamli
+        xizmatlarni bitta interfeysda
+        birlashtirish uchun yaratilgan
+        platforma.
+
+        </p>
+
+        <br>
+
+        <div class="setting">
+            🚀 9 000 000+ funksiya katalogi
+        </div>
+
+        <div class="setting">
+            📺 TV katalog
+        </div>
+
+        <div class="setting">
+            🎬 Video va kliplar
+        </div>
+
+        <div class="setting">
+            🎨 Design Studio
+        </div>
+
+        <div class="setting">
+            🖼️ AI Gallery
+        </div>
+
+        <div class="setting">
+            🌍 Ko‘p tilli interfeys
+        </div>
+
+    `);
+}
+
+
+/* =========================================
+   LANGUAGE DEMO
+========================================= */
+
+function changeLanguage(value){
+
+    const map={
+        "English":
+        "Artificial intelligence, TV, video, design and digital tools in one platform.",
+
+        "Русский":
+        "Искусственный интеллект, ТВ, видео, дизайн и цифровые инструменты на одной платформе.",
+
+        "Türkçe":
+        "Yapay zeka, TV, video, tasarım ve dijital araçlar tek platformda."
+    };
+
+    if(map[value]){
+
+        document.querySelector(
+            ".hero p"
+        ).textContent=map[value];
+
+    }
+}
+
+
+/* =========================================
+   CLOSE MODAL OUTSIDE
+========================================= */
+
+document
+.getElementById("modalBg")
+.addEventListener(
+"click",
+e=>{
+
+    if(e.target.id==="modalBg")
+        closeModal();
+
+});
+
+
+/* =========================================
+   INITIAL SEASON
+========================================= */
+
+setSeason("auto");
+
+
+/* =========================================
+   BACKEND CONFIG
+========================================= */
+
+/*
+    Keyingi bosqichda backend manzili:
+
+    const API_BASE =
+    "https://your-domain.com/api";
+
+    Masalan:
+
+    GET  /api/tv
+    GET  /api/videos
+    GET  /api/functions
+    POST /api/upload
+    POST /api/design
+    POST /api/ai/chat
+
+    TV uchun backend ruxsat berilgan
+    HLS/DASH stream URLlarini qaytaradi.
+*/
+
+const API_BASE="/api";
+
+
+async function loadFromBackend(){
+
+    try{
+
+        const response=
+        await fetch(
+            API_BASE+"/tv"
+        );
+
+        if(!response.ok)
+            return;
+
+        const data=
+        await response.json();
+
+        console.log(
+            "Backend TV:",
+            data
+        );
+
+    }catch(error){
+
+        console.log(
+            "Demo rejim:",
+            error.message
+        );
+    }
+}
+
+</script>
 
 </body>
 </html>
-```
