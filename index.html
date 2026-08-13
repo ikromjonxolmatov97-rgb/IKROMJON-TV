@@ -1,270 +1,2663 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ikromjon AI</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>IKROMJON Ai — 12M funksiya + 2000 kanal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
-        body { background: #0d0d1a; color: white; overflow-x: hidden; }
-        
-        /* Qor effekti */
-        #snow-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
-        
-        /* Header */
-        header { text-align: center; padding: 15px; position: relative; background: rgba(13, 13, 26, 0.95); border-bottom: 1px solid #1c1c3c; }
-        h1 { font-size: 22px; margin-bottom: 8px; background: linear-gradient(45deg, #00dbde, #fc00ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .music-box button { background: #1c1c3c; color: white; border: 1px solid #4a4ae2; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 13px; }
+        /* ============================================================
+           GLOBAL
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --bg-primary: #05050c;
+            --bg-secondary: #0b0b18;
+            --bg-card: #10102a;
+            --bg-card-hover: #18183a;
+            --bg-glass: rgba(16, 16, 42, 0.6);
+            --border-glass: rgba(255, 255, 255, 0.05);
+            --border-card: rgba(255, 255, 255, 0.04);
+            --text-primary: #f0f0ff;
+            --text-secondary: #9898c8;
+            --text-muted: #6868a0;
+            --accent-1: #7c4dff;
+            --accent-2: #b388ff;
+            --accent-3: #ff6ec7;
+            --accent-glow: rgba(124, 77, 255, 0.2);
+            --success: #00e676;
+            --warning: #ffd740;
+            --danger: #ff5252;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: 0.25s ease;
+            --shadow-card: 0 6px 32px rgba(0, 0, 0, 0.5);
+            --snow-color: #ffffff;
+        }
+        [data-theme="light"] {
+            --bg-primary: #f0f0fa;
+            --bg-secondary: #e4e4f2;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f5f5ff;
+            --bg-glass: rgba(255, 255, 255, 0.7);
+            --border-glass: rgba(0, 0, 0, 0.04);
+            --border-card: rgba(0, 0, 0, 0.05);
+            --text-primary: #0c0c1a;
+            --text-secondary: #4a4a7a;
+            --text-muted: #8888b0;
+            --shadow-card: 0 6px 32px rgba(0, 0, 0, 0.06);
+            --snow-color: #a0c4ff;
+        }
+        [data-theme="newyear"] {
+            --bg-primary: #0a0005;
+            --bg-secondary: #1a000a;
+            --bg-card: #2a0015;
+            --bg-card-hover: #3a0020;
+            --accent-1: #ff1744;
+            --accent-2: #ff6d00;
+            --accent-3: #ffea00;
+            --text-primary: #fff5f5;
+            --text-secondary: #ffb3b3;
+            --text-muted: #cc8888;
+            --accent-glow: rgba(255, 23, 68, 0.3);
+            --snow-color: #ffffff;
+        }
+        [data-theme="spring"] {
+            --bg-primary: #0a0f05;
+            --bg-secondary: #121f0a;
+            --bg-card: #1a2f10;
+            --bg-card-hover: #2a3f1a;
+            --accent-1: #4caf50;
+            --accent-2: #8bc34a;
+            --accent-3: #ffeb3b;
+            --text-primary: #f0fff0;
+            --text-secondary: #b3e5b3;
+            --text-muted: #88aa88;
+            --accent-glow: rgba(76, 175, 80, 0.3);
+            --snow-color: #c8e6c9;
+        }
+        [data-theme="summer"] {
+            --bg-primary: #0a0500;
+            --bg-secondary: #1a0f00;
+            --bg-card: #2a1a00;
+            --bg-card-hover: #3a2a0a;
+            --accent-1: #ff9800;
+            --accent-2: #ffc107;
+            --accent-3: #f44336;
+            --text-primary: #fff8f0;
+            --text-secondary: #ffd9b3;
+            --text-muted: #ccaa88;
+            --accent-glow: rgba(255, 152, 0, 0.3);
+            --snow-color: #ffecb3;
+        }
+        [data-theme="autumn"] {
+            --bg-primary: #0a0505;
+            --bg-secondary: #1a0f0a;
+            --bg-card: #2a1a10;
+            --bg-card-hover: #3a2a1a;
+            --accent-1: #e65100;
+            --accent-2: #ff6f00;
+            --accent-3: #ffab00;
+            --text-primary: #fff5ee;
+            --text-secondary: #ffccb3;
+            --text-muted: #ccaa99;
+            --accent-glow: rgba(230, 81, 0, 0.3);
+            --snow-color: #ffe0b2;
+        }
+        [data-theme="winter"] {
+            --bg-primary: #050a12;
+            --bg-secondary: #0a1520;
+            --bg-card: #102030;
+            --bg-card-hover: #1a3040;
+            --accent-1: #42a5f5;
+            --accent-2: #64b5f6;
+            --accent-3: #90caf9;
+            --text-primary: #f0f8ff;
+            --text-secondary: #b3d9ff;
+            --text-muted: #88aacc;
+            --accent-glow: rgba(66, 165, 245, 0.3);
+            --snow-color: #e3f2fd;
+        }
 
-        /* Sahifalar uchun umumiy qism */
-        .page { display: none; padding: 15px; padding-bottom: 80px; }
-        .page.active { display: block; }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: background 0.5s, color 0.4s;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-1);
+            border-radius: 20px;
+        }
 
-        /* Asosiy Video */
-        .video-container { width: 100%; max-width: 400px; margin: 0 auto 15px auto; border-radius: 12px; overflow: hidden; border: 2px solid #2a2a4a; }
-        video { width: 100%; display: block; }
+        /* ============================================================
+           SNOW
+           ============================================================ */
+        #snowCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.6;
+        }
 
-        /* 8 ta Navigatsiya tugmalari gridi */
-        .nav-8 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 10px 15px; }
-        .nav-btn { background: #1c1c3c; padding: 12px 5px; border-radius: 10px; text-align: center; cursor: pointer; font-size: 12px; border: 1px solid #2a2a4a; transition: 0.3s; }
-        .nav-btn:hover { background: #2a2a6a; }
+        /* ============================================================
+           SPLASH
+           ============================================================ */
+        #splash {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #05050c;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+            opacity: 1;
+            visibility: visible;
+        }
+        #splash.hide {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #splash .logo-text {
+            font-size: 44px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #7c4dff, #ff6ec7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulseGlow 1.8s ease-in-out infinite;
+        }
+        #splash .logo-icon {
+            font-size: 64px;
+            margin-bottom: 8px;
+            animation: floatIcon 2.2s ease-in-out infinite;
+            filter: drop-shadow(0 0 60px rgba(124, 77, 255, 0.3));
+        }
+        #splash .sub-text {
+            margin-top: 12px;
+            color: #6868a0;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        #splash .progress-wrap {
+            margin-top: 24px;
+            width: 280px;
+            max-width: 80%;
+        }
+        #splash .progress-bar-bg {
+            width: 100%;
+            height: 6px;
+            background: rgba(124, 77, 255, 0.15);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        #splash .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #7c4dff, #ff6ec7);
+            border-radius: 20px;
+            transition: width 0.3s ease;
+        }
+        #splash .progress-text {
+            margin-top: 8px;
+            color: #9898c8;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+        }
+        #splash .progress-text .percent {
+            color: #7c4dff;
+        }
+        @keyframes pulseGlow {
+            0%,
+            100% {
+                transform: scale(1);
+                filter: brightness(1);
+            }
+            50% {
+                transform: scale(1.04);
+                filter: brightness(1.25);
+            }
+        }
+        @keyframes floatIcon {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
 
-        /* Reklama karuseli */
-        .carousel-title { padding: 5px 15px; font-size: 14px; color: #a0a0c0; }
-        .carousel { display: flex; overflow-x: auto; gap: 12px; padding: 10px 15px; scroll-snap-type: x mandatory; }
-        .carousel::-webkit-scrollbar { display: none; }
-        .ad-item { min-width: 120px; height: 75px; background: #1c1c3c; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13px; border: 1px solid #3a3a6a; flex-shrink: 0; }
+        /* ============================================================
+           NAVBAR
+           ============================================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px) saturate(1.4);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 6px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            transition: background 0.3s;
+        }
+        .navbar .logo {
+            font-size: 18px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: -0.3px;
+        }
+        .navbar .logo i {
+            -webkit-text-fill-color: var(--accent-1);
+            font-size: 20px;
+        }
+        .navbar .logo .badge {
+            background: linear-gradient(135deg, #00e676, #00bcd4);
+            color: #fff;
+            font-size: 7px;
+            font-weight: 700;
+            padding: 1px 10px;
+            border-radius: 40px;
+            -webkit-text-fill-color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .navbar .right {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .navbar .datetime {
+            color: var(--text-secondary);
+            font-size: 10px;
+            font-weight: 500;
+            background: var(--bg-card);
+            padding: 3px 10px;
+            border-radius: 40px;
+            border: 1px solid var(--border-card);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+        .navbar .datetime i {
+            font-size: 10px;
+        }
+        .lang-selector {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 40px;
+            padding: 3px 8px 3px 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: var(--transition);
+        }
+        .lang-selector:hover {
+            border-color: var(--accent-1);
+        }
+        .lang-selector select {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            outline: none;
+            padding: 2px 0;
+            font-family: 'Inter', sans-serif;
+            max-width: 100px;
+        }
+        .lang-selector select option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        .theme-toggle,
+        .settings-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            color: var(--text-secondary);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 13px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .theme-toggle:hover,
+        .settings-toggle:hover {
+            border-color: var(--accent-1);
+            color: var(--text-primary);
+        }
 
-        /* Chat oynasi dizayni */
-        .chat-box { background: #13132b; border-radius: 10px; height: 350px; border: 1px solid #2a2a4a; display: flex; flex-direction: column; justify-content: space-between; padding: 10px; }
-        .chat-messages { overflow-y: auto; flex-grow: 1; padding: 5px; font-size: 14px; }
-        .message { background: #1c1c3c; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; width: fit-content; max-width: 80%; }
-        .message.ai { background: #2a2a5a; }
-        .chat-input-area { display: flex; gap: 8px; margin-top: 10px; }
-        .chat-input-area input { flex-grow: 1; background: #0d0d1a; border: 1px solid #3a3a6a; padding: 10px; border-radius: 8px; color: white; outline: none; }
-        .chat-input-area button { background: #4a4ae2; color: white; border: none; padding: 0 15px; border-radius: 8px; cursor: pointer; }
+        /* ============================================================
+           TOP BAR
+           ============================================================ */
+        .top-bar {
+            margin-top: 62px;
+            padding: 6px 16px;
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-glass);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.3s;
+        }
+        .top-bar .weather {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .top-bar .weather i {
+            font-size: 18px;
+            color: var(--warning);
+        }
+        .top-bar .weather .temp {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .top-bar .weather .city {
+            color: var(--text-muted);
+            font-size: 11px;
+        }
+        .top-bar .region-select {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--bg-card);
+            padding: 3px 10px;
+            border-radius: 40px;
+            border: 1px solid var(--border-card);
+        }
+        .top-bar .region-select i {
+            color: var(--text-muted);
+            font-size: 11px;
+        }
+        .top-bar .region-select select {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            outline: none;
+            padding: 3px 0;
+            font-family: 'Inter', sans-serif;
+            max-width: 120px;
+        }
+        .top-bar .region-select select option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
 
-        /* Til va Sozlamalar ro'yxati */
-        .list-group { display: flex; flex-direction: column; gap: 10px; }
-        .list-item { background: #1c1c3c; padding: 12px 15px; border-radius: 8px; border: 1px solid #2a2a4a; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        /* ============================================================
+           AD BANNER
+           ============================================================ */
+        .ad-banner {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-card);
+            padding: 6px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .ad-banner .ad-track {
+            display: flex;
+            animation: scrollAds 22s linear infinite;
+            width: max-content;
+        }
+        .ad-banner .ad-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 28px;
+            font-weight: 600;
+            font-size: 13px;
+            white-space: nowrap;
+            color: var(--text-secondary);
+        }
+        .ad-banner .ad-item i {
+            font-size: 20px;
+        }
+        .ad-banner .ad-item .ad-label {
+            background: var(--accent-1);
+            color: #fff;
+            font-size: 8px;
+            padding: 1px 10px;
+            border-radius: 40px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        @keyframes scrollAds {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* ============================================================
+           MAIN
+           ============================================================ */
+        .main {
+            padding: 10px 14px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ============================================================
+           HERO
+           ============================================================ */
+        .hero {
+            text-align: center;
+            padding: 18px 12px 16px;
+            background: radial-gradient(ellipse at 30% 20%, var(--bg-secondary), transparent 70%);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-glass);
+            margin-bottom: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero h1 {
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 20%, var(--accent-1), var(--accent-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            display: inline-block;
+        }
+        .hero h1 .snow-badge {
+            font-size: 14px;
+            -webkit-text-fill-color: var(--snow-color);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 12px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-left: 6px;
+            animation: snowPulse 2s ease-in-out infinite;
+        }
+        @keyframes snowPulse {
+            0%,
+            100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+        .hero .sub {
+            color: var(--text-secondary);
+            font-size: 13px;
+            max-width: 500px;
+            margin: 4px auto 10px;
+        }
+        .hero .stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .hero .stats .item {
+            text-align: center;
+        }
+        .hero .stats .item .num {
+            font-size: 24px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero .stats .item .lbl {
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        /* ============================================================
+           TOOLBAR
+           ============================================================ */
+        .toolbar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+        .toolbar input,
+        .toolbar select {
+            flex: 1 1 140px;
+            padding: 8px 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+            min-width: 100px;
+            outline: none;
+        }
+        .toolbar input:focus,
+        .toolbar select:focus {
+            border-color: var(--accent-1);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+        .toolbar input::placeholder {
+            color: var(--text-muted);
+        }
+        .toolbar select option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        /* ============================================================
+           GRID — 7 columns
+           ============================================================ */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-card);
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            aspect-ratio: 1 / 1;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+        }
+        .card:hover {
+            transform: translateY(-4px) scale(1.02);
+            border-color: var(--accent-1);
+            box-shadow: var(--shadow-card), 0 0 28px var(--accent-glow);
+            z-index: 2;
+        }
+        .card .card-overlay {
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(2px);
+            width: 100%;
+            height: 100%;
+            padding: 14px 12px 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        .card:hover .card-overlay {
+            background: rgba(0, 0, 0, 0.4);
+        }
+        .card .fn-id {
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            font-size: 8px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1px 8px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+        .card .icon {
+            font-size: 28px;
+            margin-bottom: 4px;
+            display: block;
+            z-index: 1;
+            position: relative;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+        }
+        .card h3 {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 2px;
+            z-index: 1;
+            position: relative;
+            line-height: 1.3;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+        }
+        .card p {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            z-index: 1;
+            position: relative;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.3;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+        }
+        .card .tags {
+            margin-top: 6px;
+            display: flex;
+            gap: 3px;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 1;
+            position: relative;
+        }
+        .card .tags .tag {
+            font-size: 8px;
+            font-weight: 600;
+            padding: 1px 8px;
+            border-radius: 40px;
+            background: rgba(124, 77, 255, 0.8);
+            color: #fff;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            backdrop-filter: blur(4px);
+        }
+        .card .tags .tag .dot {
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            margin-right: 2px;
+        }
+        .dot.green {
+            background: var(--success);
+        }
+        .dot.yellow {
+            background: var(--warning);
+        }
+        .dot.red {
+            background: var(--danger);
+        }
+
+        /* ============================================================
+           CANVA TEMPLATES
+           ============================================================ */
+        .canva-section {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-card);
+            padding: 16px;
+            margin: 18px 0;
+        }
+        .canva-section .canva-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .canva-section .canva-header h3 {
+            font-size: 18px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .canva-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 14px;
+        }
+        .canva-item {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid var(--border-card);
+            position: relative;
+        }
+        .canva-item:hover {
+            transform: scale(1.04);
+            border-color: var(--accent-1);
+            box-shadow: 0 0 24px var(--accent-glow);
+        }
+        .canva-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            display: block;
+        }
+        .canva-item .canva-label {
+            padding: 6px 10px;
+            font-weight: 600;
+            font-size: 12px;
+            text-align: center;
+            color: var(--text-secondary);
+            background: var(--bg-card);
+        }
+        .canva-item .canva-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: var(--accent-1);
+            color: #fff;
+            font-size: 8px;
+            padding: 1px 10px;
+            border-radius: 40px;
+            font-weight: 700;
+            opacity: 0.8;
+        }
+
+        /* ============================================================
+           UPLOAD
+           ============================================================ */
+        .upload-section {
+            margin: 16px 0;
+            padding: 16px;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-card);
+        }
+        .upload-section h4 {
+            font-size: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .upload-section input[type="file"] {
+            display: block;
+            margin: 8px 0;
+            padding: 8px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-card);
+            color: var(--text-primary);
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .upload-section input[type="file"]::file-selector-button {
+            background: var(--accent-1);
+            color: #fff;
+            border: none;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            margin-right: 12px;
+            transition: var(--transition);
+        }
+        .upload-section input[type="file"]::file-selector-button:hover {
+            background: var(--accent-2);
+            transform: scale(1.04);
+        }
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 8px;
+        }
+        .preview-container .preview-item {
+            width: 100px;
+            height: 100px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 2px solid var(--border-card);
+            position: relative;
+            transition: var(--transition);
+        }
+        .preview-container .preview-item:hover {
+            border-color: var(--accent-1);
+            transform: scale(1.05);
+        }
+        .preview-container .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .preview-container .preview-item .remove-btn {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: rgba(255, 0, 0, 0.7);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        .preview-container .preview-item .remove-btn:hover {
+            background: #ff1744;
+            transform: scale(1.1);
+        }
+
+        /* ============================================================
+           TV / RADIO STATIONS (2000 ta)
+           ============================================================ */
+        .tv-section {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-card);
+            padding: 16px;
+            margin: 18px 0;
+        }
+        .tv-section .tv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tv-section .tv-header h3 {
+            font-size: 18px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tv-section .tv-header .tv-count {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .tv-section .tv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+        .tv-section .tv-grid::-webkit-scrollbar {
+            width: 4px;
+        }
+        .tv-section .tv-grid::-webkit-scrollbar-thumb {
+            background: var(--accent-1);
+            border-radius: 20px;
+        }
+        .tv-section .tv-channel {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-sm);
+            padding: 10px 8px;
+            text-align: center;
+            border: 1px solid var(--border-card);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .tv-section .tv-channel:hover {
+            border-color: var(--accent-1);
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+        .tv-section .tv-channel .tv-icon {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .tv-section .tv-channel .tv-name {
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .tv-section .tv-channel .tv-country {
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+        .tv-section .tv-channel .tv-type {
+            font-size: 8px;
+            background: var(--accent-1);
+            color: #fff;
+            padding: 1px 8px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-top: 2px;
+            opacity: 0.7;
+        }
+
+        /* ============================================================
+           PAGINATION
+           ============================================================ */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 8px 0 16px;
+        }
+        .pagination button {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            color: var(--text-secondary);
+            padding: 5px 14px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+        .pagination button:hover:not(:disabled) {
+            border-color: var(--accent-1);
+            color: var(--text-primary);
+            box-shadow: 0 0 16px var(--accent-glow);
+        }
+        .pagination button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        .pagination .page-info {
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 500;
+            padding: 0 6px;
+        }
+
+        /* ============================================================
+           SETTINGS PANEL
+           ============================================================ */
+        .settings-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(14px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .settings-overlay.open {
+            display: flex;
+        }
+        .settings-panel {
+            background: var(--bg-glass);
+            backdrop-filter: blur(40px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            max-width: 480px;
+            width: 100%;
+            padding: 24px 22px;
+            max-height: 85vh;
+            overflow-y: auto;
+            animation: modalIn 0.3s ease;
+            box-shadow: var(--shadow-card), 0 0 60px var(--accent-glow);
+        }
+        @keyframes modalIn {
+            from {
+                transform: translateY(30px) scale(0.96);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+        .settings-panel .close {
+            float: right;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .settings-panel .close:hover {
+            color: var(--text-primary);
+            transform: rotate(90deg);
+        }
+        .settings-panel h2 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .settings-panel .setting-group {
+            margin-bottom: 18px;
+        }
+        .settings-panel .setting-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+        .settings-panel .setting-group .theme-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .settings-panel .setting-group .theme-options .theme-btn {
+            padding: 6px 16px;
+            border-radius: var(--radius-sm);
+            border: 2px solid var(--border-card);
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+        .settings-panel .setting-group .theme-options .theme-btn:hover {
+            border-color: var(--accent-1);
+            color: var(--text-primary);
+        }
+        .settings-panel .setting-group .theme-options .theme-btn.active {
+            border-color: var(--accent-1);
+            background: var(--accent-1);
+            color: #fff;
+        }
+        .settings-panel .setting-group .theme-options .theme-btn .emoji {
+            margin-right: 4px;
+        }
+        .settings-panel .setting-group select {
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            cursor: pointer;
+        }
+        .settings-panel .setting-group select:focus {
+            border-color: var(--accent-1);
+        }
+        .settings-panel .setting-group select option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        .settings-panel .setting-group .toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border-card);
+        }
+        .settings-panel .setting-group .toggle-row span {
+            font-size: 14px;
+        }
+        .settings-panel .setting-group .toggle-switch {
+            width: 44px;
+            height: 24px;
+            background: var(--bg-secondary);
+            border-radius: 40px;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+            border: 1px solid var(--border-card);
+        }
+        .settings-panel .setting-group .toggle-switch.active {
+            background: var(--accent-1);
+            border-color: var(--accent-1);
+        }
+        .settings-panel .setting-group .toggle-switch .toggle-knob {
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: var(--transition);
+        }
+        .settings-panel .setting-group .toggle-switch.active .toggle-knob {
+            left: 22px;
+        }
+        .settings-panel .setting-group .time-format {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .settings-panel .setting-group .time-format label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+        .settings-panel .setting-group .time-format input[type="radio"] {
+            accent-color: var(--accent-1);
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        /* ============================================================
+           ABOUT
+           ============================================================ */
+        .about-section {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-card);
+            padding: 20px 18px;
+            margin: 20px 0 10px;
+            text-align: center;
+        }
+        .about-section .about-icon {
+            font-size: 48px;
+            margin-bottom: 6px;
+        }
+        .about-section h3 {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .about-section p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            max-width: 600px;
+            margin: 6px auto 0;
+            line-height: 1.6;
+        }
+        .about-section .about-stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        .about-section .about-stats .as-item {
+            text-align: center;
+        }
+        .about-section .about-stats .as-item .as-num {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--accent-2);
+        }
+        .about-section .about-stats .as-item .as-lbl {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* ============================================================
+           MODAL
+           ============================================================ */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            z-index: 2001;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .modal-overlay.open {
+            display: flex;
+        }
+        .modal {
+            background: var(--bg-glass);
+            backdrop-filter: blur(32px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            max-width: 500px;
+            width: 100%;
+            padding: 22px 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: modalIn 0.3s ease;
+            box-shadow: var(--shadow-card), 0 0 60px var(--accent-glow);
+        }
+        .modal .close {
+            float: right;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .modal .close:hover {
+            color: var(--text-primary);
+            transform: rotate(90deg);
+        }
+        .modal .m-icon {
+            font-size: 40px;
+            margin-bottom: 4px;
+        }
+        .modal .m-icon-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 6px;
+            border: 3px solid var(--accent-1);
+        }
+        .modal h2 {
+            font-size: 20px;
+            font-weight: 800;
+        }
+        .modal .m-id {
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        .modal .m-desc {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .modal .m-params {
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            padding: 12px 14px;
+            margin-bottom: 14px;
+            border: 1px solid var(--border-card);
+        }
+        .modal .m-params h4 {
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .modal .m-params code {
+            color: var(--accent-2);
+            font-size: 12px;
+            word-break: break-all;
+            font-family: 'Inter', monospace;
+        }
+        .modal .run-btn {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .modal .run-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+        .modal .run-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .modal .run-btn .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ============================================================
+           TOAST
+           ============================================================ */
+        .toast-container {
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-width: 300px;
+        }
+        .toast {
+            background: var(--bg-glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-sm);
+            padding: 10px 16px;
+            animation: toastIn 0.4s ease;
+            box-shadow: var(--shadow-card);
+            font-weight: 500;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-left: 4px solid var(--accent-1);
+        }
+        .toast.success {
+            border-left-color: var(--success);
+        }
+        .toast.error {
+            border-left-color: var(--danger);
+        }
+        @keyframes toastIn {
+            from {
+                transform: translateX(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 1200px) {
+            .grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        @media (max-width: 700px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            .card .card-overlay {
+                padding: 10px 8px;
+            }
+            .card .icon {
+                font-size: 22px;
+            }
+            .card h3 {
+                font-size: 11px;
+            }
+            .card p {
+                font-size: 9px;
+                -webkit-line-clamp: 1;
+            }
+            .hero h1 {
+                font-size: 22px;
+            }
+            .navbar .datetime {
+                font-size: 9px;
+                padding: 2px 8px;
+            }
+            .canva-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+            .tv-section .tv-grid {
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+                max-height: 300px;
+            }
+            .settings-panel {
+                padding: 18px 16px;
+            }
+            .top-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 4px;
+            }
+            .top-bar .weather {
+                justify-content: center;
+            }
+            .top-bar .region-select {
+                justify-content: center;
+            }
+            .ad-banner .ad-item {
+                font-size: 11px;
+                padding: 0 16px;
+            }
+        }
+        @media (max-width: 450px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+            .card .card-overlay {
+                padding: 8px 6px;
+            }
+            .card .icon {
+                font-size: 18px;
+            }
+            .card h3 {
+                font-size: 10px;
+            }
+            .card p {
+                display: none;
+            }
+            .card .fn-id {
+                font-size: 7px;
+                padding: 1px 6px;
+            }
+            .hero h1 {
+                font-size: 18px;
+            }
+            .hero .stats .item .num {
+                font-size: 18px;
+            }
+            .tv-section .tv-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .tv-section .tv-channel .tv-icon {
+                font-size: 20px;
+            }
+            .tv-section .tv-channel .tv-name {
+                font-size: 9px;
+            }
+            .settings-panel .setting-group .theme-options .theme-btn {
+                font-size: 10px;
+                padding: 4px 12px;
+            }
+            #splash .logo-text {
+                font-size: 30px;
+            }
+            #splash .progress-wrap {
+                width: 200px;
+            }
+            .canva-item img {
+                height: 90px;
+            }
+            .preview-container .preview-item {
+                width: 70px;
+                height: 70px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div id="snow-container"></div>
+    <!-- =============================================================
+    SNOW
+    ============================================================= -->
+    <canvas id="snowCanvas"></canvas>
 
-    <header>
-        <h1>Ikromjon AI</h1>
-        <div class="music-box">
-            <audio id="bg-music" src="background-music.mp3" loop></audio>
-            <button onclick="toggleMusic()">🎵 Sokin musiqa</button>
-        </div>
-    </header>
-
-    <!-- 1. BOSH SAHIFA -->
-    <div id="page-bosh" class="page active">
-        <div class="video-container">
-            <video controls autoplay muted>
-                <source src="1000009038.mp4" type="video/mp4">
-            </video>
-        </div>
-
-        <div class="nav-8">
-            <div class="nav-btn" onclick="switchPage('bosh')">🏠 Bosh</div>
-            <div class="nav-btn" onclick="switchPage('chat')">💬 Chat</div>
-            <div class="nav-btn" onclick="switchPage('kod')">💻 Kod</div>
-            <div class="nav-btn" onclick="switchPage('til')">🌍 Til</div>
-            <div class="nav-btn" onclick="switchPage('yangilik')">📰 Yangilik</div>
-            <div class="nav-btn" onclick="switchPage('profil')">👤 Profil</div>
-            <div class="nav-btn" onclick="switchPage('premium')">⭐ Premium</div>
-            <div class="nav-btn" onclick="switchPage('sozlama')">⚙️ Sozlama</div>
-        </div>
-
-        <div class="carousel-title">Hamkorlar va Brendlar</div>
-        <div class="carousel">
-            <div class="ad-item">Coca-Cola</div>
-            <div class="ad-item">Fanta</div>
-            <div class="ad-item">Nike</div>
-            <div class="ad-item">Adidas</div>
-            <div class="ad-item">Zara</div>
-            <div class="ad-item">H&M</div>
-            <div class="ad-item">Samsung</div>
-            <div class="ad-item">Apple</div>
-            <div class="ad-item">Beeline</div>
-            <div class="ad-item">XM App</div>
-        </div>
-    </div>
-
-    <!-- 2. AI CHAT SAHifasi -->
-    <div id="page-chat" class="page">
-        <h2>Ikromjon AI Chat</h2>
-        <br>
-        <div class="chat-box">
-            <div class="chat-messages" id="chatMessages">
-                <div class="message ai">Assalomu alaykum! Men Ikromjon AI yordamchingizman. Qanday yordam bera olaman?</div>
+    <!-- =============================================================
+    SPLASH
+    ============================================================= -->
+    <div id="splash">
+        <div class="logo-icon">🎬</div>
+        <div class="logo-text">IKROMJON AI</div>
+        <div class="sub-text">🌍 12M funksiya • 2000+ kanal</div>
+        <div class="progress-wrap">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressFill"></div>
             </div>
-            <div class="chat-input-area">
-                <input type="text" id="userInput" placeholder="Xabar yozing...">
-                <button onclick="sendMessage()">Yuborish</button>
+            <div class="progress-text" id="progressText">Yuklanmoqda... <span class="percent" id="percentNum">0%</span></div>
+        </div>
+    </div>
+
+    <!-- =============================================================
+    NAVBAR
+    ============================================================= -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-globe-asia"></i> IKROMJON
+            <span class="badge">12M</span>
+            <span style="font-size:12px;-webkit-text-fill-color:var(--snow-color);background:rgba(255,255,255,0.08);padding:0 8px;border-radius:40px;border:1px solid rgba(255,255,255,0.05);">❄️</span>
+        </div>
+        <div class="right">
+            <div class="datetime" id="datetimeDisplay">
+                <i class="fas fa-clock"></i> <span id="timeDisplay">00:00:00</span>
+                <span style="margin:0 3px;color:var(--text-muted);">|</span>
+                <i class="fas fa-calendar-alt"></i> <span id="dateDisplay">01.01.2026</span>
+            </div>
+            <div class="lang-selector">
+                <i class="fas fa-language" style="font-size:10px;"></i>
+                <select id="langSelect" onchange="changeLanguage(this.value)"></select>
+            </div>
+            <button class="settings-toggle" onclick="openSettings()" title="Sozlamalar">
+                <i class="fas fa-cog"></i>
+            </button>
+            <button class="theme-toggle" onclick="toggleTheme()" title="Tema">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- =============================================================
+    TOP BAR
+    ============================================================= -->
+    <div class="top-bar">
+        <div class="weather" id="weatherWidget">
+            <i class="fas fa-cloud-sun"></i>
+            <span class="temp" id="tempDisplay">+24°</span>
+            <span class="city" id="cityDisplay">Toshkent</span>
+            <span style="color:var(--text-muted);font-size:10px;margin-left:2px;" id="weatherDesc">Quyoshli</span>
+        </div>
+        <div class="region-select">
+            <i class="fas fa-map-marker-alt"></i>
+            <select id="regionSelect" onchange="changeRegion(this.value)">
+                <option value="Asia/Tashkent">🇺🇿 Toshkent</option>
+                <option value="Asia/Samarkand">🇺🇿 Samarqand</option>
+                <option value="Asia/Baku">🇦🇿 Boku</option>
+                <option value="Asia/Almaty">🇰🇿 Olmaota</option>
+                <option value="Asia/Bishkek">🇰🇬 Bishkek</option>
+                <option value="Asia/Dushanbe">🇹🇯 Dushanbe</option>
+                <option value="Asia/Ashgabat">🇹🇲 Ashxobod</option>
+                <option value="Europe/Moscow">🇷🇺 Moskva</option>
+                <option value="Europe/London">🇬🇧 London</option>
+                <option value="America/New_York">🇺🇸 Nyu-York</option>
+                <option value="America/Los_Angeles">🇺🇸 Los-Anjeles</option>
+                <option value="Asia/Dubai">🇦🇪 Dubay</option>
+                <option value="Asia/Tokyo">🇯🇵 Tokio</option>
+                <option value="Asia/Shanghai">🇨🇳 Shanxay</option>
+                <option value="Europe/Paris">🇫🇷 Parij</option>
+                <option value="Europe/Berlin">🇩🇪 Berlin</option>
+                <option value="Europe/Istanbul">🇹🇷 Istanbul</option>
+                <option value="Asia/Kolkata">🇮🇳 Dehli</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- =============================================================
+    AD BANNER
+    ============================================================= -->
+    <div class="ad-banner">
+        <div class="ad-track">
+            <div class="ad-item"><i class="fas fa-crown" style="color:#ff1744;"></i> Coca-Cola <span class="ad-label">Yangi</span></div>
+            <div class="ad-item"><i class="fas fa-bolt" style="color:#004d99;"></i> Pepsi <span class="ad-label">Max</span></div>
+            <div class="ad-item"><i class="fas fa-store" style="color:#ff6d00;"></i> Uzum Market <span class="ad-label">Chegirma</span></div>
+            <div class="ad-item"><i class="fas fa-bolt" style="color:#ffab00;"></i> Energetik <span class="ad-label">Charge</span></div>
+            <div class="ad-item"><i class="fas fa-music" style="color:#e040fb;"></i> Spotify Premium <span class="ad-label">Bepul</span></div>
+            <div class="ad-item"><i class="fas fa-film" style="color:#ff6ec7;"></i> IKROMJON TV <span class="ad-label">Live</span></div>
+            <div class="ad-item"><i class="fas fa-crown" style="color:#ff1744;"></i> Coca-Cola <span class="ad-label">Yangi</span></div>
+            <div class="ad-item"><i class="fas fa-bolt" style="color:#004d99;"></i> Pepsi <span class="ad-label">Max</span></div>
+            <div class="ad-item"><i class="fas fa-store" style="color:#ff6d00;"></i> Uzum Market <span class="ad-label">Chegirma</span></div>
+            <div class="ad-item"><i class="fas fa-bolt" style="color:#ffab00;"></i> Energetik <span class="ad-label">Charge</span></div>
+            <div class="ad-item"><i class="fas fa-music" style="color:#e040fb;"></i> Spotify Premium <span class="ad-label">Bepul</span></div>
+            <div class="ad-item"><i class="fas fa-film" style="color:#ff6ec7;"></i> IKROMJON TV <span class="ad-label">Live</span></div>
+        </div>
+    </div>
+
+    <!-- =============================================================
+    MAIN
+    ============================================================= -->
+    <div class="main">
+
+        <!-- HERO -->
+        <section class="hero">
+            <h1>
+                🌍 IKROMJON AI
+                <span class="snow-badge">❄️ 12M funksiya</span>
+            </h1>
+            <p class="sub" id="heroSub">150+ til • 24/7 yordam • 2000+ kanal • Canva uslubi • TV/Radio</p>
+            <div class="stats">
+                <div class="item"><div class="num">12 000 000</div><div class="lbl">Funksiyalar</div></div>
+                <div class="item"><div class="num">150+</div><div class="lbl">Tillarda</div></div>
+                <div class="item"><div class="num">2000+</div><div class="lbl">Kanal</div></div>
+                <div class="item"><div class="num">24/7</div><div class="lbl">Yordam</div></div>
+            </div>
+        </section>
+
+        <!-- TOOLBAR -->
+        <div class="toolbar">
+            <input type="text" id="searchInput" placeholder="🔍 Funksiya qidirish..." oninput="filterFunctions()" />
+            <select id="categoryFilter" onchange="filterFunctions()">
+                <option value="all">📂 Barcha kategoriyalar</option>
+                <option value="video">🎬 Video</option>
+                <option value="audio">🎵 Audio</option>
+                <option value="image">🖼 Rasm</option>
+                <option value="animation">🎨 Animatsiya</option>
+                <option value="text">📝 Matn</option>
+                <option value="vfx">✨ VFX</option>
+                <option value="export">📤 Eksport</option>
+                <option value="ai">🤖 AI</option>
+                <option value="analysis">📊 Tahlil</option>
+                <option value="special">🌟 Maxsus</option>
+            </select>
+        </div>
+
+        <!-- GRID — 12M funksiya (tartibli) -->
+        <div class="grid" id="functionsGrid"></div>
+
+        <!-- PAGINATION -->
+        <div class="pagination" id="pagination">
+            <button id="prevPage" onclick="changePage(-1)"><i class="fas fa-chevron-left"></i> Oldingi</button>
+            <span class="page-info" id="pageInfo">Sahifa <strong id="currentPageNum">1</strong> / <span id="totalPagesNum">1</span></span>
+            <button id="nextPage" onclick="changePage(1)">Keyingi <i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <!-- CANVA TEMPLATES -->
+        <div class="canva-section">
+            <div class="canva-header">
+                <h3><i class="fas fa-palette" style="color:var(--accent-3);"></i> Canva uslubidagi shablonlar</h3>
+                <span style="font-size:12px;color:var(--text-muted);">Yaratish uchun bosing</span>
+            </div>
+            <div class="canva-grid">
+                <div class="canva-item" onclick="showToast('🎨 Poster shabloni ochildi', 'success')">
+                    <img src="https://source.unsplash.com/300x200/?poster,design,creative" loading="lazy" />
+                    <div class="canva-label">Poster</div>
+                    <span class="canva-badge">Pro</span>
+                </div>
+                <div class="canva-item" onclick="showToast('📱 Instagram Story ochildi', 'success')">
+                    <img src="https://source.unsplash.com/300x200/?instagram,story,colorful" loading="lazy" />
+                    <div class="canva-label">Instagram Story</div>
+                    <span class="canva-badge">Trend</span>
+                </div>
+                <div class="canva-item" onclick="showToast('🎬 YouTube Thumbnail ochildi', 'success')">
+                    <img src="https://source.unsplash.com/300x200/?youtube,thumbnail,channel" loading="lazy" />
+                    <div class="canva-label">YouTube Thumbnail</div>
+                    <span class="canva-badge">Popular</span>
+                </div>
+                <div class="canva-item" onclick="showToast('📄 Flyer shabloni ochildi', 'success')">
+                    <img src="https://source.unsplash.com/300x200/?flyer,advert,poster" loading="lazy" />
+                    <div class="canva-label">Flyer</div>
+                    <span class="canva-badge">Yangi</span>
+                </div>
+                <div class="canva-item" onclick="showToast('🎞️ Video Intro ochildi', 'success')">
+                    <img src="https://source.unsplash.com/300x200/?video,intro,animation" loading="lazy" />
+                    <div class="canva-label">Video Intro</div>
+                    <span class="canva-badge">Pro</span>
+                </div>
+                <div class="canva-item" onclick="showToast('📊 Infografika ochildi', 'success')">
+                    <img src="https://source.unsplash.com/300x200/?infographic,chart,data" loading="lazy" />
+                    <div class="canva-label">Infografika</div>
+                    <span class="canva-badge">Biznes</span>
+                </div>
             </div>
         </div>
-        <br>
-        <button class="nav-btn" style="width: 100%;" onclick="switchPage('bosh')">Orqaga qaytish</button>
-    </div>
 
-    <!-- 3. KOD YARATISH -->
-    <div id="page-kod" class="page">
-        <h2>Dasturlash va Kodlar</h2>
-        <p style="color: #a0a0c0; font-size: 13px; margin: 10px 0;">Python, C++, Java, Flutter va Web loyihalar uchun yordamchi bo'lim.</p>
-        <textarea style="width: 100%; height: 200px; background: #13132b; color: #00dbde; border: 1px solid #2a2a4a; border-radius: 8px; padding: 10px; font-family: monospace;" placeholder="// Bu yerda kodlar yoziladi..."></textarea>
-        <br><br>
-        <button class="nav-btn" style="width: 100%;" onclick="switchPage('bosh')">Orqaga qaytish</button>
-    </div>
-
-    <!-- 4. TIL SEKSIYASI (O'rta Osiyo va Xalqaro) -->
-    <div id="page-til" class="page">
-        <h2>Tilni tanlang</h2>
-        <br>
-        <div class="list-group">
-            <div class="list-item" onclick="alert('O\'zbek tili tanlandi')">🇺🇿 O'zbek tili</div>
-            <div class="list-item" onclick="alert('Qozoq tili tanlandi')">🇰🇿 Qazaq tili</div>
-            <div class="list-item" onclick="alert('Qirg\'iz tili tanlandi')">🇰🇬 Кыргыз тили</div>
-            <div class="list-item" onclick="alert('Tojik tili tanlandi')">🇹🇯 Тоҷикӣ</div>
-            <div class="list-item" onclick="alert('Turkman tili tanlandi')">🇹🇲 Türkmen dili</div>
-            <div class="list-item" onclick="alert('Rus tili tanlandi')">🇷🇺 Русский</div>
-            <div class="list-item" onclick="alert('Ingliz tili tanlandi')">🇬🇧 English</div>
+        <!-- UPLOAD -->
+        <div class="upload-section">
+            <h4><i class="fas fa-upload" style="color:var(--accent-2);"></i> O‘z rasmingizni yuklang</h4>
+            <input type="file" id="fileInput" accept="image/*" multiple />
+            <div class="preview-container" id="previewContainer"></div>
         </div>
-        <br>
-        <button class="nav-btn" style="width: 100%;" onclick="switchPage('bosh')">Orqaga qaytish</button>
-    </div>
 
-    <!-- 5. YANGILIKLAR -->
-    <div id="page-yangilik" class="page">
-        <h2>So'nggi Yangiliklar</h2>
-        <br>
-        <div class="list-group">
-            <div class="list-item">Python dasturlash darslari yangilandi <span>10:30</span></div>
-            <div class="list-item">Ikromjon AI yangi versiyasi chiqdi <span>09:15</span></div>
-            <div class="list-item">Jonli efir vaqti e'lon qilindi <span>KECHA</span></div>
+        <!-- TV / RADIO STATIONS — 2000 ta kanal -->
+        <div class="tv-section">
+            <div class="tv-header">
+                <h3><i class="fas fa-satellite-dish" style="color:var(--accent-2);"></i> TV / Radio kanallari</h3>
+                <span class="tv-count" id="tvCount">2000+ kanal</span>
+            </div>
+            <div class="tv-grid" id="tvGrid"></div>
         </div>
-        <br>
-        <button class="nav-btn" style="width: 100%;" onclick="switchPage('bosh')">Orqaga qaytish</button>
-    </div>
 
-    <!-- 6. PROFIL -->
-    <div id="page-profil" class="page">
-        <h2>Foydalanuvchi Profili</h2>
-        <br>
-        <div style="background: #1c1c3c; padding: 20px; border-radius: 10px; text-align: center;">
-            <h3>Xolmatov Ikromjon</h3>
-            <p style="color: #a0a0c0; font-size: 13px; margin-top: 5px;">Guruh: ITS 23_11 | Sirtqi ta'lim</p>
-            <p style="color: #00dbde; font-size: 13px; margin-top: 10px;">Status: Premium foydalanuvchi</p>
+        <!-- ABOUT -->
+        <div class="about-section">
+            <div class="about-icon">🚀</div>
+            <h3>IKROMJON Ai — 12 000 000 funksiya + 2000 kanal</h3>
+            <p>
+                IKROMJON Ai — sun'iy intellekt asosida ishlaydigan eng kuchli media platforma.
+                <strong>12 000 000+</strong> funksiya, 150+ til, 2000+ TV/radio kanal, 24/7 yordam.
+                Barcha premium xizmatlar <strong>bepul</strong>!
+            </p>
+            <div class="about-stats">
+                <div class="as-item"><div class="as-num">12M+</div><div class="as-lbl">Funksiyalar</div></div>
+                <div class="as-item"><div class="as-num">150+</div><div class="as-lbl">Tillarda</div></div>
+                <div class="as-item"><div class="as-num">2000+</div><div class="as-lbl">Kanal</div></div>
+                <div class="as-item"><div class="as-num">24/7</div><div class="as-lbl">Yordam</div></div>
+            </div>
+            <p style="font-size:12px;color:var(--text-muted);margin-top:10px;">
+                <i class="fas fa-copyright"></i> 2026 IKROMJON Ai. Barcha huquqlar himoyalangan.
+            </p>
         </div>
-        <br>
-        <button class="nav-btn" style="width: 100%;" onclick="switchPage('bosh')">Orqaga qaytish</button>
-    </div>
 
-    <!-- 7. PREMIUM -->
-    <div id="page-premium" class="page">
-        <h2>Ikromjon AI Premium</h2>
-        <br>
-        <div style="background: linear-gradient(135deg, #2a2a5a, #4a4ae2); padding: 20px; border-radius: 10px; text-align: center;">
-            <h3>Cheksiz Imkoniyatlar</h3>
-            <p style="font-size: 13px; margin-top: 10px;">Barcha sun'iy intellekt funksiyalari, tezkor serverlar va eksklyuziv darslar.</p>
-            <br>
-            <button class="nav-btn" style="background: gold; color: black; font-weight: bold; width: 100%; border: none;" onclick="alert('Premium faollashtirildi!')">Obuna bo'lish</button>
+        <!-- FOOTER -->
+        <div class="footer" style="margin-top:12px;padding:12px;text-align:center;border-top:1px solid var(--border-glass);color:var(--text-muted);font-size:11px;font-weight:500;">
+            <p>🚀 IKROMJON Ai — 12M funksiya, 2000+ kanal, 150+ til | <a href="#" onclick="showToast('🌍 IKROMJON Ai — sizning eng yaxshi yordamchingiz!', 'success')">IKROMJON Ai</a></p>
         </div>
-        <br>
-        <button class="nav-btn" style="width: 100%;" onclick="switchPage('bosh')">Orqaga qaytish</button>
     </div>
 
-    <!-- 8. SOZLAMALAR -->
-    <div id="page-sozlama" class="page">
-        <h2>Ilova Sozlamalari</h2>
-        <br>
-        <div class="list-group">
-            <div class="list-item">Qorong'i rejim (Dark Mode) <span>🟢 Yoqilgan</span></div>
-            <div class="list-item">Bildirishnomalar <span>🟢 Yoqilgan</span></div>
-            <div class="list-item">Tilni almashtirish <span>O'zbekcha</span></div>
+    <!-- =============================================================
+    SETTINGS
+    ============================================================= -->
+    <div class="settings-overlay" id="settingsOverlay">
+        <div class="settings-panel">
+            <button class="close" onclick="closeSettings()">&times;</button>
+            <h2><i class="fas fa-sliders-h" style="color:var(--accent-2);"></i> Sozlamalar</h2>
+
+            <div class="setting-group">
+                <label>🎨 Tema</label>
+                <div class="theme-options" id="themeOptions">
+                    <button class="theme-btn active" data-theme="dark" onclick="setTheme('dark')"><span class="emoji">🌙</span> Qorong'i</button>
+                    <button class="theme-btn" data-theme="light" onclick="setTheme('light')"><span class="emoji">☀️</span> Yorug'</button>
+                    <button class="theme-btn" data-theme="newyear" onclick="setTheme('newyear')"><span class="emoji">🎄</span> Yangi Yil</button>
+                    <button class="theme-btn" data-theme="spring" onclick="setTheme('spring')"><span class="emoji">🌸</span> Bahor</button>
+                    <button class="theme-btn" data-theme="summer" onclick="setTheme('summer')"><span class="emoji">🌞</span> Yoz</button>
+                    <button class="theme-btn" data-theme="autumn" onclick="setTheme('autumn')"><span class="emoji">🍂</span> Kuz</button>
+                    <button class="theme-btn" data-theme="winter" onclick="setTheme('winter')"><span class="emoji">❄️</span> Qish</button>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <label>🌍 Til</label>
+                <select id="settingsLang" onchange="changeLanguage(this.value); document.getElementById('langSelect').value=this.value;">
+                    <option value="uz">🇺🇿 O'zbekcha</option>
+                    <option value="en">🇬🇧 English</option>
+                    <option value="ru">🇷🇺 Русский</option>
+                    <option value="tr">🇹🇷 Türkçe</option>
+                    <option value="ar">🇸🇦 العربية</option>
+                    <option value="zh">🇨🇳 中文</option>
+                    <option value="es">🇪🇸 Español</option>
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="de">🇩🇪 Deutsch</option>
+                    <option value="ja">🇯🇵 日本語</option>
+                    <option value="ko">🇰🇷 한국어</option>
+                    <option value="hi">🇮🇳 हिन्दी</option>
+                </select>
+            </div>
+
+            <div class="setting-group">
+                <label>🕒 Vaqt formati</label>
+                <div class="time-format">
+                    <label><input type="radio" name="timeFormat" value="24" checked onchange="setTimeFormat('24')" /> 24 soatlik</label>
+                    <label><input type="radio" name="timeFormat" value="12" onchange="setTimeFormat('12')" /> 12 soatlik (AM/PM)</label>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <label>❄️ Qor yog'ishi</label>
+                <div class="toggle-row">
+                    <span>Qor effekti</span>
+                    <div class="toggle-switch active" id="snowToggle" onclick="toggleSnow()">
+                        <div class="toggle-knob"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <label>📱 Ilova haqida</label>
+                <div style="background:var(--bg-secondary);border-radius:var(--radius-sm);padding:12px;font-size:13px;color:var(--text-secondary);line-height:1.6;">
+                    <strong style="color:var(--text-primary);">IKROMJON Ai v4.0 — 12M Edition</strong><br />
+                    🚀 12 000 000+ funksiya<br />
+                    🗣 150+ til qo'llab-quvvatlanadi<br />
+                    📺 2000+ TV/radio kanallari<br />
+                    🎨 Canva uslubidagi shablonlar<br />
+                    🕒 24/7 mutaxassis yordami<br />
+                    💎 Barcha premium xizmatlar BEPUL<br />
+                    <span style="font-size:11px;color:var(--text-muted);">© 2026 IKROMJON Ai. Barcha huquqlar himoyalangan.</span>
+                </div>
+            </div>
         </div>
-        <br>
-        <button class="nav-btn" style="width: 100%;" onclick="switchPage('bosh')">Orqaga qaytish</button>
     </div>
 
+    <!-- =============================================================
+    MODAL
+    ============================================================= -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="close" onclick="closeModal()">&times;</button>
+            <div id="mIconContainer"><span class="m-icon" id="mIcon">🎬</span></div>
+            <h2 id="mTitle">Funksiya</h2>
+            <div class="m-id" id="mId">#000001</div>
+            <div class="m-desc" id="mDesc">Tavsif</div>
+            <div class="m-params">
+                <h4>⚙️ Parametrlar</h4>
+                <code id="mParams">{ }</code>
+            </div>
+            <button class="run-btn" id="runBtn" onclick="runFunction()">
+                <i class="fas fa-play"></i> <span id="runBtnText">Ishga tushirish</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- =============================================================
+    TOAST
+    ============================================================= -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- =============================================================
+    JAVASCRIPT — 12M FUNKSIYA + 2000 KANAL
+    ============================================================= -->
     <script>
-        // Sahifalararo o'tish funksiyasi
-        function switchPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-_' + pageId).classList.add('active'); // Fixed selector logic below
+        // =============================================================
+        // PROGRESS BAR
+        // =============================================================
+        let progress = 0;
+        const progressFill = document.getElementById('progressFill');
+        const percentNum = document.getElementById('percentNum');
+
+        function updateProgress() {
+            if (progress < 100) {
+                progress += Math.random() * 8 + 2;
+                if (progress > 100) progress = 100;
+                progressFill.style.width = progress + '%';
+                percentNum.textContent = Math.round(progress) + '%';
+                setTimeout(updateProgress, 200 + Math.random() * 300);
+            } else {
+                setTimeout(() => {
+                    document.getElementById('splash').classList.add('hide');
+                }, 400);
+            }
         }
-        
-        // To'g'rilangan sahifa almashtirish funksiyasi
-        window.switchPage = function(name) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-' + name).classList.add('active');
+        updateProgress();
+
+        // =============================================================
+        // SNOW
+        // =============================================================
+        const snowCanvas = document.getElementById('snowCanvas');
+        const ctx = snowCanvas.getContext('2d');
+        let snowEnabled = true;
+        let snowflakes = [];
+
+        function resizeSnow() {
+            snowCanvas.width = window.innerWidth;
+            snowCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeSnow);
+        resizeSnow();
+
+        function initSnow(count) {
+            snowflakes = [];
+            for (let i = 0; i < count; i++) {
+                snowflakes.push({
+                    x: Math.random() * snowCanvas.width,
+                    y: Math.random() * snowCanvas.height,
+                    radius: Math.random() * 3 + 1.5,
+                    speed: Math.random() * 1.2 + 0.4,
+                    wind: Math.random() * 0.6 - 0.3,
+                    opacity: Math.random() * 0.7 + 0.3
+                });
+            }
+        }
+        initSnow(120);
+
+        function drawSnow() {
+            if (!snowEnabled) {
+                ctx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
+                requestAnimationFrame(drawSnow);
+                return;
+            }
+            ctx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
+            const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+            const colors = {
+                dark: 'rgba(255,255,255,',
+                light: 'rgba(160,196,255,',
+                newyear: 'rgba(255,255,255,',
+                spring: 'rgba(200,230,200,',
+                summer: 'rgba(255,236,179,',
+                autumn: 'rgba(255,224,178,',
+                winter: 'rgba(227,242,253,'
+            };
+            const c = colors[theme] || 'rgba(255,255,255,';
+
+            snowflakes.forEach(s => {
+                s.y += s.speed;
+                s.x += s.wind + Math.sin(s.y / 100) * 0.2;
+                if (s.y > snowCanvas.height) {
+                    s.y = -5;
+                    s.x = Math.random() * snowCanvas.width;
+                }
+                if (s.x > snowCanvas.width) s.x = 0;
+                if (s.x < 0) s.x = snowCanvas.width;
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                ctx.fillStyle = c + s.opacity + ')';
+                ctx.fill();
+            });
+            requestAnimationFrame(drawSnow);
+        }
+        drawSnow();
+
+        function toggleSnow() {
+            snowEnabled = !snowEnabled;
+            document.getElementById('snowToggle').classList.toggle('active');
+            if (!snowEnabled) ctx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
+            showToast(snowEnabled ? '❄️ Qor yog\'ishi yoqildi' : '❄️ Qor yog\'ishi o\'chirildi', 'success');
         }
 
-        // Musiqa pleyeri
-        function toggleMusic() {
-            let audio = document.getElementById("bg-music");
-            if (audio.paused) {
-                audio.play();
-                event.target.innerText = "🔇 Musiqani to'xtatish";
-            } else {
-                audio.pause();
-                event.target.innerText = "🎵 Sokin musiqa";
+        // =============================================================
+        // TILLAR
+        // =============================================================
+        const LANGUAGES = {
+            uz: { name: "O'zbek", flag: "🇺🇿", native: "O'zbekcha" },
+            ru: { name: "Russian", flag: "🇷🇺", native: "Русский" },
+            en: { name: "English", flag: "🇬🇧", native: "English" },
+            zh: { name: "Chinese", flag: "🇨🇳", native: "中文" },
+            es: { name: "Spanish", flag: "🇪🇸", native: "Español" },
+            fr: { name: "French", flag: "🇫🇷", native: "Français" },
+            de: { name: "German", flag: "🇩🇪", native: "Deutsch" },
+            ar: { name: "Arabic", flag: "🇸🇦", native: "العربية" },
+            hi: { name: "Hindi", flag: "🇮🇳", native: "हिन्दी" },
+            tr: { name: "Turkish", flag: "🇹🇷", native: "Türkçe" },
+            kk: { name: "Kazakh", flag: "🇰🇿", native: "Қазақша" },
+            ky: { name: "Kyrgyz", flag: "🇰🇬", native: "Кыргызча" },
+            tg: { name: "Tajik", flag: "🇹🇯", native: "Тоҷикӣ" },
+            tk: { name: "Turkmen", flag: "🇹🇲", native: "Türkmençe" },
+            az: { name: "Azerbaijani", flag: "🇦🇿", native: "Azərbaycanca" },
+            fa: { name: "Persian", flag: "🇮🇷", native: "فارسی" },
+            ja: { name: "Japanese", flag: "🇯🇵", native: "日本語" },
+            ko: { name: "Korean", flag: "🇰🇷", native: "한국어" },
+            it: { name: "Italian", flag: "🇮🇹", native: "Italiano" },
+            nl: { name: "Dutch", flag: "🇳🇱", native: "Nederlands" },
+            pt: { name: "Portuguese", flag: "🇵🇹", native: "Português" },
+            pl: { name: "Polish", flag: "🇵🇱", native: "Polski" },
+            uk: { name: "Ukrainian", flag: "🇺🇦", native: "Українська" },
+            ro: { name: "Romanian", flag: "🇷🇴", native: "Română" },
+            id: { name: "Indonesian", flag: "🇮🇩", native: "Bahasa Indonesia" },
+            ms: { name: "Malay", flag: "🇲🇾", native: "Bahasa Melayu" },
+            th: { name: "Thai", flag: "🇹🇭", native: "ไทย" },
+            vi: { name: "Vietnamese", flag: "🇻🇳", native: "Tiếng Việt" },
+            el: { name: "Greek", flag: "🇬🇷", native: "Ελληνικά" },
+            he: { name: "Hebrew", flag: "🇮🇱", native: "עברית" },
+            sv: { name: "Swedish", flag: "🇸🇪", native: "Svenska" },
+            no: { name: "Norwegian", flag: "🇳🇴", native: "Norsk" },
+            da: { name: "Danish", flag: "🇩🇰", native: "Dansk" },
+            fi: { name: "Finnish", flag: "🇫🇮", native: "Suomi" },
+            hu: { name: "Hungarian", flag: "🇭🇺", native: "Magyar" },
+            cs: { name: "Czech", flag: "🇨🇿", native: "Čeština" },
+            sk: { name: "Slovak", flag: "🇸🇰", native: "Slovenčina" },
+            bg: { name: "Bulgarian", flag: "🇧🇬", native: "Български" },
+            sr: { name: "Serbian", flag: "🇷🇸", native: "Српски" },
+            hr: { name: "Croatian", flag: "🇭🇷", native: "Hrvatski" },
+            sl: { name: "Slovenian", flag: "🇸🇮", native: "Slovenščina" },
+            et: { name: "Estonian", flag: "🇪🇪", native: "Eesti" },
+            lv: { name: "Latvian", flag: "🇱🇻", native: "Latviešu" },
+            lt: { name: "Lithuanian", flag: "🇱🇹", native: "Lietuvių" },
+            is: { name: "Icelandic", flag: "🇮🇸", native: "Íslenska" },
+            mt: { name: "Maltese", flag: "🇲🇹", native: "Malti" },
+            sq: { name: "Albanian", flag: "🇦🇱", native: "Shqip" },
+            mk: { name: "Macedonian", flag: "🇲🇰", native: "Македонски" },
+            bs: { name: "Bosnian", flag: "🇧🇦", native: "Bosanski" },
+            af: { name: "Afrikaans", flag: "🇿🇦", native: "Afrikaans" },
+            am: { name: "Amharic", flag: "🇪🇹", native: "አማርኛ" },
+            hy: { name: "Armenian", flag: "🇦🇲", native: "Հայերեն" },
+            my: { name: "Burmese", flag: "🇲🇲", native: "မြန်မာစာ" },
+            km: { name: "Khmer", flag: "🇰🇭", native: "ភាសាខ្មែរ" },
+            lo: { name: "Lao", flag: "🇱🇦", native: "ພາສາລາວ" },
+            mn: { name: "Mongolian", flag: "🇲🇳", native: "Монгол" },
+            ne: { name: "Nepali", flag: "🇳🇵", native: "नेपाली" },
+            si: { name: "Sinhala", flag: "🇱🇰", native: "සිංහල" },
+            ta: { name: "Tamil", flag: "🇱🇰", native: "தமிழ்" },
+            te: { name: "Telugu", flag: "🇮🇳", native: "తెలుగు" },
+            ur: { name: "Urdu", flag: "🇵🇰", native: "اردو" },
+            bn: { name: "Bengali", flag: "🇧🇩", native: "বাংলা" },
+            gu: { name: "Gujarati", flag: "🇮🇳", native: "ગુજરાતી" },
+            kn: { name: "Kannada", flag: "🇮🇳", native: "ಕನ್ನಡ" },
+            ml: { name: "Malayalam", flag: "🇮🇳", native: "മലയാളം" },
+            mr: { name: "Marathi", flag: "🇮🇳", native: "मराठी" },
+            pa: { name: "Punjabi", flag: "🇮🇳", native: "ਪੰਜਾਬੀ" },
+            jv: { name: "Javanese", flag: "🇮🇩", native: "Basa Jawa" },
+            su: { name: "Sundanese", flag: "🇮🇩", native: "Basa Sunda" },
+            tl: { name: "Tagalog", flag: "🇵🇭", native: "Tagalog" },
+            ceb: { name: "Cebuano", flag: "🇵🇭", native: "Cebuano" },
+            haw: { name: "Hawaiian", flag: "🇺🇸", native: "ʻŌlelo Hawaiʻi" },
+            mi: { name: "Maori", flag: "🇳🇿", native: "Te Reo Māori" },
+            sm: { name: "Samoan", flag: "🇼🇸", native: "Gagana Sāmoa" },
+            to: { name: "Tongan", flag: "🇹🇴", native: "Lea Faka-Tonga" },
+            fj: { name: "Fijian", flag: "🇫🇯", native: "Na Vosa Vakaviti" },
+            ny: { name: "Chichewa", flag: "🇲🇼", native: "Chichewa" },
+            sn: { name: "Shona", flag: "🇿🇼", native: "chiShona" },
+            zu: { name: "Zulu", flag: "🇿🇦", native: "isiZulu" },
+            xh: { name: "Xhosa", flag: "🇿🇦", native: "isiXhosa" },
+            st: { name: "Sotho", flag: "🇱🇸", native: "Sesotho" },
+            ts: { name: "Tsonga", flag: "🇿🇦", native: "Xitsonga" },
+            ve: { name: "Venda", flag: "🇿🇦", native: "Tshivenḓa" },
+            tn: { name: "Tswana", flag: "🇧🇼", native: "Setswana" },
+            sw: { name: "Swahili", flag: "🇹🇿", native: "Kiswahili" },
+            rw: { name: "Kinyarwanda", flag: "🇷🇼", native: "Ikinyarwanda" },
+            rn: { name: "Kirundi", flag: "🇧🇮", native: "Ikirundi" },
+            lg: { name: "Luganda", flag: "🇺🇬", native: "Luganda" },
+            yo: { name: "Yoruba", flag: "🇳🇬", native: "Yorùbá" },
+            ig: { name: "Igbo", flag: "🇳🇬", native: "Igbo" },
+            ha: { name: "Hausa", flag: "🇳🇬", native: "Hausa" },
+            so: { name: "Somali", flag: "🇸🇴", native: "Soomaali" },
+            ti: { name: "Tigrinya", flag: "🇪🇷", native: "ትግርኛ" },
+            om: { name: "Oromo", flag: "🇪🇹", native: "Oromoo" },
+            ee: { name: "Ewe", flag: "🇬🇭", native: "Eʋegbe" },
+            ak: { name: "Akan", flag: "🇬🇭", native: "Akan" },
+            tw: { name: "Twi", flag: "🇬🇭", native: "Twi" },
+            ff: { name: "Fula", flag: "🇸🇳", native: "Fulfulde" },
+            wo: { name: "Wolof", flag: "🇸🇳", native: "Wolof" },
+            bm: { name: "Bambara", flag: "🇲🇱", native: "Bamanankan" },
+            dje: { name: "Zarma", flag: "🇳🇪", native: "Zarma" },
+            gl: { name: "Galician", flag: "🇪🇸", native: "Galego" },
+            eu: { name: "Basque", flag: "🇪🇸", native: "Euskara" },
+            ca: { name: "Catalan", flag: "🇪🇸", native: "Català" },
+            oc: { name: "Occitan", flag: "🇫🇷", native: "Occitan" },
+            br: { name: "Breton", flag: "🇫🇷", native: "Brezhoneg" },
+            cy: { name: "Welsh", flag: "🏴󠁧󠁢󠁷󠁬󠁳󠁿", native: "Cymraeg" },
+            gd: { name: "Scottish", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", native: "Gàidhlig" },
+            ga: { name: "Irish", flag: "🇮🇪", native: "Gaeilge" },
+            kw: { name: "Cornish", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", native: "Kernewek" },
+            fo: { name: "Faroese", flag: "🇫🇴", native: "Føroyskt" },
+            kl: { name: "Greenlandic", flag: "🇬🇱", native: "Kalaallisut" },
+            smj: { name: "Sami", flag: "🇸🇪", native: "Sámegiella" },
+            se: { name: "Northern Sami", flag: "🇳🇴", native: "Davvisámegiella" }
+        };
+
+        // =============================================================
+        // TARJIMALAR
+        // =============================================================
+        const TRANSLATIONS = {
+            en: {
+                heroSub: "150+ languages • 24/7 support • 2000+ channels • Canva style • TV/Radio",
+                statFunctions: "Functions",
+                statLangs: "Languages",
+                statPossibilities: "Possibilities",
+                searchPlaceholder: "🔍 Search functions...",
+                allCategories: "📂 All categories",
+                video: "🎬 Video",
+                audio: "🎵 Audio",
+                image: "🖼 Image",
+                animation: "🎨 Animation",
+                text: "📝 Text",
+                vfx: "✨ VFX",
+                export: "📤 Export",
+                ai: "🤖 AI",
+                analysis: "📊 Analysis",
+                special: "🌟 Special",
+                runBtn: "Run Function",
+                toastSuccess: "✅ Function executed successfully!",
+                prev: "Previous",
+                next: "Next",
+                page: "Page"
+            },
+            uz: {
+                heroSub: "150+ til • 24/7 yordam • 2000+ kanal • Canva uslubi • TV/Radio",
+                statFunctions: "Funksiyalar",
+                statLangs: "Tillarda",
+                statPossibilities: "Imkoniyatlar",
+                searchPlaceholder: "🔍 Funksiya qidirish...",
+                allCategories: "📂 Barcha kategoriyalar",
+                video: "🎬 Video",
+                audio: "🎵 Audio",
+                image: "🖼 Rasm",
+                animation: "🎨 Animatsiya",
+                text: "📝 Matn",
+                vfx: "✨ VFX",
+                export: "📤 Eksport",
+                ai: "🤖 AI",
+                analysis: "📊 Tahlil",
+                special: "🌟 Maxsus",
+                runBtn: "Ishga tushirish",
+                toastSuccess: "✅ Funksiya muvaffaqiyatli bajarildi!",
+                prev: "Oldingi",
+                next: "Keyingi",
+                page: "Sahifa"
+            },
+            ru: {
+                heroSub: "150+ языков • 24/7 поддержка • 2000+ каналов • Стиль Canva • ТВ/Радио",
+                statFunctions: "Функции",
+                statLangs: "Языки",
+                statPossibilities: "Возможности",
+                searchPlaceholder: "🔍 Поиск функций...",
+                allCategories: "📂 Все категории",
+                video: "🎬 Видео",
+                audio: "🎵 Аудио",
+                image: "🖼 Изображение",
+                animation: "🎨 Анимация",
+                text: "📝 Текст",
+                vfx: "✨ Визуальные эффекты",
+                export: "📤 Экспорт",
+                ai: "🤖 ИИ",
+                analysis: "📊 Анализ",
+                special: "🌟 Специальные",
+                runBtn: "Запустить",
+                toastSuccess: "✅ Функция выполнена успешно!",
+                prev: "Назад",
+                next: "Вперед",
+                page: "Страница"
+            },
+            tr: {
+                heroSub: "150+ dil • 24/7 destek • 2000+ kanal • Canva stili • TV/Radyo",
+                statFunctions: "Fonksiyonlar",
+                statLangs: "Diller",
+                statPossibilities: "Olasılıklar",
+                searchPlaceholder: "🔍 Fonksiyon ara...",
+                allCategories: "📂 Tüm kategoriler",
+                video: "🎬 Video",
+                audio: "🎵 Ses",
+                image: "🖼 Görüntü",
+                animation: "🎨 Animasyon",
+                text: "📝 Metin",
+                vfx: "✨ Görsel Efektler",
+                export: "📤 Dışa Aktar",
+                ai: "🤖 Yapay Zeka",
+                analysis: "📊 Analiz",
+                special: "🌟 Özel",
+                runBtn: "Çalıştır",
+                toastSuccess: "✅ Fonksiyon başarıyla çalıştı!",
+                prev: "Önceki",
+                next: "Sonraki",
+                page: "Sayfa"
+            }
+        };
+
+        function getTranslation(lang, key) {
+            if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) return TRANSLATIONS[lang][key];
+            return TRANSLATIONS.en[key] || key;
+        }
+
+        // =============================================================
+        // 12 000 000 FUNKSIYALAR (tartibli)
+        // =============================================================
+        const CAT_KEYS = ['video', 'audio', 'image', 'animation', 'text', 'vfx', 'export', 'ai', 'analysis', 'special'];
+        const CAT_ICONS = { video: '🎬', audio: '🎵', image: '🖼', animation: '🎨', text: '📝', vfx: '✨', export: '📤',
+            ai: '🤖', analysis: '📊', special: '🌟' };
+        const CAT_NAMES = { video: 'Video', audio: 'Audio', image: 'Image', animation: 'Animation', text: 'Text',
+            vfx: 'VFX', export: 'Export', ai: 'AI', analysis: 'Analysis', special: 'Special' };
+
+        const categoryImages = {
+            video: 'https://source.unsplash.com/400x400/?video,film,camera',
+            audio: 'https://source.unsplash.com/400x400/?music,sound,studio',
+            image: 'https://source.unsplash.com/400x400/?photography,photo',
+            animation: 'https://source.unsplash.com/400x400/?animation,cartoon,draw',
+            text: 'https://source.unsplash.com/400x400/?typography,text,font',
+            vfx: 'https://source.unsplash.com/400x400/?visual,effects,glow',
+            export: 'https://source.unsplash.com/400x400/?download,share,cloud',
+            ai: 'https://source.unsplash.com/400x400/?artificial-intelligence,robot',
+            analysis: 'https://source.unsplash.com/400x400/?data,analytics,chart',
+            special: 'https://source.unsplash.com/400x400/?star,special,magic'
+        };
+
+        const actionWords = [
+            'Create', 'Edit', 'Trim', 'Merge', 'Split', 'Rotate', 'Scale', 'Crop', 'Resize', 'Compress',
+            'Convert', 'Export', 'Import', 'Enhance', 'Upscale', 'Stabilize', 'Track', 'Detect', 'Recognize',
+            'Generate', 'Synthesize', 'Clone', 'Transfer', 'Remove', 'Replace', 'Add', 'Apply', 'Render',
+            'Animate', 'Key', 'Mask', 'Rotoscope', 'Color', 'Grade', 'Filter', 'Effect', 'Transition',
+            'Title', 'Subtitle', 'Voiceover', 'Mix', 'Master', 'Noise', 'Reverb', 'Delay', 'Modulate',
+            'Transform', 'Warp', 'Morph', 'Distort', 'Pixel', 'Blur', 'Sharpen', 'Denoise', 'Deinterlace',
+            'Interpolate', 'Extrapolate', 'Quantize', 'Dither', 'Equalize', 'Normalize', 'Amplify',
+            'Pan', 'Fade', 'Crossfade', 'Sidechain', 'Compress', 'Expand', 'Gate', 'Limiter'
+        ];
+        const objectWords = [
+            'Video', 'Audio', 'Image', 'Scene', 'Frame', 'Clip', 'Track', 'Layer', 'Channel', 'Frequency',
+            'Spectrum', 'Waveform', 'Timeline', 'Sequence', 'Shot', 'Take', 'Angle', 'Light', 'Shadow',
+            'Color', 'Gradient', 'Texture', 'Pattern', 'Shape', 'Motion', 'Speed', 'Duration', 'Resolution',
+            'Bitrate', 'Codec', 'Format', 'Container', 'Stream', 'Project', 'Composition', 'Animation',
+            'Character', 'Object', 'Face', 'Voice', 'Music', 'Sound', 'Effect', 'Transition', 'Title',
+            'Subtitle', 'Caption', 'Overlay', 'Background', 'Foreground', 'Depth', 'Alpha', 'Luma',
+            'Chroma', 'Hue', 'Saturation', 'Brightness', 'Contrast', 'Gamma', 'Gain'
+        ];
+
+        const icons = ['🎬', '✂️', '🎵', '🖼', '🎨', '✨', '📝', '🤖', '📊', '🌟', '🎥', '🔄', '🌈', '🔊', '📐', '🧩', '⚡',
+            '🎯', '💡', '🔮', '🪄', '🌀', '🎭', '📽', '🎞'
+        ];
+
+        // 12 000 000 funksiya (simulyatsiya — 12000 ta generatsiya)
+        const TOTAL_FUNCTIONS = 12000;
+        const allFunctions = [];
+        for (let i = 1; i <= TOTAL_FUNCTIONS; i++) {
+            const cat = CAT_KEYS[i % CAT_KEYS.length];
+            const status = ['active', 'active', 'active', 'beta', 'coming'][i % 5];
+            const a = actionWords[i % actionWords.length];
+            const o = objectWords[i % objectWords.length];
+            const imgUrl = categoryImages[cat] + `&${i}`;
+            allFunctions.push({
+                id: i,
+                name: `${a} ${o}`,
+                category: cat,
+                icon: icons[i % icons.length],
+                imageUrl: imgUrl,
+                status: status,
+                description: `Professional function #${i}: ${a} ${o}`,
+                params: {
+                    mode: ['auto', 'manual', 'ai', 'batch'][i % 4],
+                    intensity: Math.round(Math.random() * 100),
+                    quality: ['low', 'medium', 'high', 'ultra'][i % 4],
+                    duration: (5 + Math.round(Math.random() * 120)) + 's',
+                    format: ['mp4', 'webm', 'avi', 'mov', 'mkv', 'wav', 'mp3', 'flac', 'jpg', 'png', 'webp', 'gif',
+                        'tiff', 'bmp'
+                    ][i % 14]
+                }
+            });
+        }
+
+        let currentFunction = null;
+        let currentLang = 'uz';
+        let currentRegion = 'Asia/Tashkent';
+        let timeFormat = '24';
+
+        // =============================================================
+        // PAGINATION
+        // =============================================================
+        const PAGE_SIZE = 42;
+        let currentPage = 1;
+        let filteredList = [...allFunctions];
+        let totalPages = Math.ceil(filteredList.length / PAGE_SIZE);
+
+        function getPageItems(page) {
+            const start = (page - 1) * PAGE_SIZE;
+            const end = start + PAGE_SIZE;
+            return filteredList.slice(start, end);
+        }
+
+        function renderPage() {
+            const items = getPageItems(currentPage);
+            renderFunctions(items);
+            document.getElementById('currentPageNum').textContent = currentPage;
+            document.getElementById('totalPagesNum').textContent = totalPages;
+            document.getElementById('prevPage').disabled = currentPage <= 1;
+            document.getElementById('nextPage').disabled = currentPage >= totalPages;
+        }
+
+        function changePage(delta) {
+            const newPage = currentPage + delta;
+            if (newPage >= 1 && newPage <= totalPages) {
+                currentPage = newPage;
+                renderPage();
             }
         }
 
-        // Chat xabar yuborish
-        function sendMessage() {
-            let input = document.getElementById('userInput');
-            let messages = document.getElementById('chatMessages');
-            if(input.value.trim() === '') return;
-            
-            let userMsg = document.createElement('div');
-            userMsg.className = 'message';
-            userMsg.style.marginLeft = 'auto';
-            userMsg.style.background = '#4a4ae2';
-            userMsg.innerText = input.value;
-            messages.appendChild(userMsg);
-            
-            let query = input.value;
-            input.value = '';
-            
-            setTimeout(() => {
-                let aiMsg = document.createElement('div');
-                aiMsg.className = 'message ai';
-                aiMsg.innerText = "Tushunarli: '" + query + "'. Bu bo'yicha sizga qanday yordam bera olaman?";
-                messages.appendChild(aiMsg);
-                messages.scrollTop = messages.scrollHeight;
-            }, 600);
+        // =============================================================
+        // RENDER
+        // =============================================================
+        function renderFunctions(list) {
+            const grid = document.getElementById('functionsGrid');
+            grid.innerHTML = '';
+            list.forEach(fn => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.style.backgroundImage = `url(${fn.imageUrl})`;
+                const dotClass = fn.status === 'active' ? 'green' : fn.status === 'beta' ? 'yellow' : 'red';
+                card.innerHTML = `
+                    <div class="card-overlay">
+                        <span class="fn-id">#${String(fn.id).padStart(6, '0')}</span>
+                        <span class="icon">${fn.icon}</span>
+                        <h3>${fn.name}</h3>
+                        <p>${fn.description}</p>
+                        <div class="tags">
+                            <span class="tag">${CAT_ICONS[fn.category] || '📂'} ${CAT_NAMES[fn.category] || 'Boshqa'}</span>
+                            <span class="tag"><span class="dot ${dotClass}"></span>${fn.status}</span>
+                        </div>
+                    </div>
+                `;
+                card.onclick = () => openModal(fn);
+                grid.appendChild(card);
+            });
+            document.getElementById('totalCount').textContent = filteredList.length.toLocaleString();
         }
 
-        // Qor yog'ish effekti
-        function createSnow() {
-            let snow = document.createElement('div');
-            snow.innerHTML = '❄';
-            snow.style.position = 'absolute';
-            snow.style.left = Math.random() * 100 + 'vw';
-            snow.style.top = '-10px';
-            snow.style.fontSize = (Math.random() * 12 + 8) + 'px';
-            snow.style.opacity = Math.random();
-            document.getElementById('snow-container').appendChild(snow);
-            
-            let fallSpeed = Math.random() * 2 + 1.5;
-            let currentTop = -10;
-            
-            let fallInterval = setInterval(() => {
-                currentTop += fallSpeed;
-                snow.style.top = currentTop + 'px';
-                if (currentTop > window.innerHeight) {
-                    snow.remove();
-                    clearInterval(fallInterval);
-                }
-            }, 50);
+        function filterFunctions() {
+            const q = document.getElementById('searchInput').value.toLowerCase();
+            const cat = document.getElementById('categoryFilter').value;
+            filteredList = allFunctions.filter(fn => {
+                const matchSearch = fn.name.toLowerCase().includes(q) ||
+                    fn.description.toLowerCase().includes(q) ||
+                    String(fn.id).includes(q);
+                const matchCat = cat === 'all' || fn.category === cat;
+                return matchSearch && matchCat;
+            });
+            totalPages = Math.max(1, Math.ceil(filteredList.length / PAGE_SIZE));
+            currentPage = 1;
+            renderPage();
+            document.getElementById('totalCount').textContent = filteredList.length.toLocaleString();
         }
-        setInterval(createSnow, 300);
+
+        // =============================================================
+        // MODAL
+        // =============================================================
+        function openModal(fn) {
+            currentFunction = fn;
+            const iconContainer = document.getElementById('mIconContainer');
+            if (fn.imageUrl) {
+                iconContainer.innerHTML =
+                    `<img src="${fn.imageUrl}" class="m-icon-img" alt="${fn.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+                             <span class="m-icon" style="display:none;">${fn.icon}</span>`;
+            } else {
+                iconContainer.innerHTML = `<span class="m-icon">${fn.icon}</span>`;
+            }
+            document.getElementById('mTitle').textContent = fn.name;
+            document.getElementById('mId').textContent =
+                `#${String(fn.id).padStart(6, '0')} · ${CAT_ICONS[fn.category] || '📂'} ${CAT_NAMES[fn.category] || 'Boshqa'}`;
+            document.getElementById('mDesc').textContent = fn.description;
+            document.getElementById('mParams').textContent = JSON.stringify(fn.params, null, 2);
+            document.getElementById('modalOverlay').classList.add('open');
+            document.getElementById('runBtnText').textContent = getTranslation(currentLang, 'runBtn');
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('open');
+        }
+        document.getElementById('modalOverlay').onclick = (e) => {
+            if (e.target === e.currentTarget) closeModal();
+        };
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // =============================================================
+        // RUN FUNCTION
+        // =============================================================
+        function runFunction() {
+            const btn = document.getElementById('runBtn');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<span class="spinner"></span> ${getTranslation(currentLang, 'runBtn')}...`;
+            setTimeout(() => {
+                btn.innerHTML = `<i class="fas fa-check"></i> ✓`;
+                btn.style.background = 'linear-gradient(135deg, var(--success), #00c853)';
+                showToast(getTranslation(currentLang, 'toastSuccess'), 'success');
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                }, 1600);
+            }, 1000 + Math.random() * 800);
+        }
+
+        // =============================================================
+        // TOAST
+        // =============================================================
+        function showToast(msg, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(40px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // =============================================================
+        // TIL
+        // =============================================================
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('heroSub').textContent = getTranslation(lang, 'heroSub');
+            document.getElementById('statFunctions').textContent = getTranslation(lang, 'statFunctions');
+            document.getElementById('statLangs').textContent = getTranslation(lang, 'statLangs');
+            document.getElementById('statPossibilities').textContent = getTranslation(lang, 'statPossibilities');
+            document.getElementById('searchInput').placeholder = getTranslation(lang, 'searchPlaceholder');
+
+            const catFilter = document.getElementById('categoryFilter');
+            const catKeys = ['all', 'video', 'audio', 'image', 'animation', 'text', 'vfx', 'export', 'ai', 'analysis',
+                'special'
+            ];
+            const options = catFilter.querySelectorAll('option');
+            options.forEach((opt, idx) => {
+                const key = catKeys[idx] || 'all';
+                if (key === 'all') opt.textContent = getTranslation(lang, 'allCategories');
+                else opt.textContent = (CAT_ICONS[key] || '📂') + ' ' + getTranslation(lang, key);
+            });
+
+            document.querySelector('#prevPage').innerHTML = `<i class="fas fa-chevron-left"></i> ${getTranslation(lang, 'prev')}`;
+            document.querySelector('#nextPage').innerHTML = `${getTranslation(lang, 'next')} <i class="fas fa-chevron-right"></i>`;
+            document.querySelector('.page-info').innerHTML =
+                `${getTranslation(lang, 'page')} <strong id="currentPageNum">${currentPage}</strong> / <span id="totalPagesNum">${totalPages}</span>`;
+
+            if (document.getElementById('modalOverlay').classList.contains('open')) {
+                document.getElementById('runBtnText').textContent = getTranslation(lang, 'runBtn');
+            }
+            document.getElementById('settingsLang').value = lang;
+        }
+
+        function populateLangSelector() {
+            const sel = document.getElementById('langSelect');
+            sel.innerHTML = '';
+            Object.keys(LANGUAGES).forEach(code => {
+                const opt = document.createElement('option');
+                opt.value = code;
+                opt.textContent = LANGUAGES[code].flag + ' ' + LANGUAGES[code].native;
+                if (code === 'uz') opt.selected = true;
+                sel.appendChild(opt);
+            });
+            const sel2 = document.getElementById('settingsLang');
+            sel2.innerHTML = '';
+            Object.keys(LANGUAGES).forEach(code => {
+                const opt = document.createElement('option');
+                opt.value = code;
+                opt.textContent = LANGUAGES[code].flag + ' ' + LANGUAGES[code].native;
+                if (code === 'uz') opt.selected = true;
+                sel2.appendChild(opt);
+            });
+        }
+
+        // =============================================================
+        // VAQT
+        // =============================================================
+        function updateDateTime() {
+            try {
+                const now = new Date();
+                const options = { timeZone: currentRegion, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+                if (timeFormat === '12') options.hour12 = true;
+                else options.hour12 = false;
+                const timeStr = now.toLocaleTimeString('uz-UZ', options);
+                const dateStr = now.toLocaleDateString('uz-UZ', { timeZone: currentRegion, day: '2-digit',
+                    month: '2-digit', year: 'numeric' });
+                document.getElementById('timeDisplay').textContent = timeStr;
+                document.getElementById('dateDisplay').textContent = dateStr;
+            } catch (e) {
+                const now = new Date();
+                document.getElementById('timeDisplay').textContent = now.toLocaleTimeString('uz-UZ');
+                document.getElementById('dateDisplay').textContent = now.toLocaleDateString('uz-UZ');
+            }
+        }
+
+        function setTimeFormat(format) {
+            timeFormat = format;
+            updateDateTime();
+            showToast(`🕒 Vaqt formati: ${format === '24' ? '24 soatlik' : '12 soatlik (AM/PM)'}`, 'success');
+        }
+
+        function changeRegion(region) {
+            currentRegion = region;
+            updateDateTime();
+            const temps = [18, 22, 24, 26, 19, 21, 23, 25, 20, 17];
+            const descs = ['Quyoshli', 'Bulutli', 'Yomg\'ir', 'Shamolli', 'Issiq', 'Salqin', 'Musaffo', 'Nam'];
+            const idx = Math.floor(Math.random() * temps.length);
+            document.getElementById('tempDisplay').textContent = `+${temps[idx]}°`;
+            document.getElementById('weatherDesc').textContent = descs[idx % descs.length];
+            const cityNames = {
+                'Asia/Tashkent': 'Toshkent',
+                'Asia/Samarkand': 'Samarqand',
+                'Asia/Baku': 'Boku',
+                'Asia/Almaty': 'Olmaota',
+                'Asia/Bishkek': 'Bishkek',
+                'Asia/Dushanbe': 'Dushanbe',
+                'Asia/Ashgabat': 'Ashxobod',
+                'Europe/Moscow': 'Moskva',
+                'Europe/London': 'London',
+                'America/New_York': 'Nyu-York',
+                'America/Los_Angeles': 'Los-Anjeles',
+                'Asia/Dubai': 'Dubay',
+                'Asia/Tokyo': 'Tokio',
+                'Asia/Shanghai': 'Shanxay',
+                'Europe/Paris': 'Parij',
+                'Europe/Berlin': 'Berlin',
+                'Europe/Istanbul': 'Istanbul',
+                'Asia/Kolkata': 'Dehli'
+            };
+            document.getElementById('cityDisplay').textContent = cityNames[region] || 'Shahar';
+        }
+
+        // =============================================================
+        // THEME
+        // =============================================================
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            document.querySelectorAll('.theme-options .theme-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.theme === theme);
+            });
+            const snowToggle = document.getElementById('snowToggle');
+            if (!snowToggle.classList.contains('active')) {
+                snowToggle.classList.add('active');
+                snowEnabled = true;
+            }
+            showToast(`🎨 Tema: ${theme}`, 'success');
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            const themes = ['dark', 'light', 'newyear', 'spring', 'summer', 'autumn', 'winter'];
+            const idx = themes.indexOf(current);
+            const next = themes[(idx + 1) % themes.length];
+            setTheme(next);
+            const icon = document.querySelector('.theme-toggle i');
+            if (next === 'light') icon.className = 'fas fa-sun';
+            else icon.className = 'fas fa-moon';
+        }
+
+        // =============================================================
+        // SETTINGS
+        // =============================================================
+        function openSettings() {
+            document.getElementById('settingsOverlay').classList.add('open');
+        }
+
+        function closeSettings() {
+            document.getElementById('settingsOverlay').classList.remove('open');
+        }
+        document.getElementById('settingsOverlay').onclick = (e) => {
+            if (e.target === e.currentTarget) closeSettings();
+        };
+
+        // =============================================================
+        // UPLOAD
+        // =============================================================
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const container = document.getElementById('previewContainer');
+            for (let file of e.target.files) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    const div = document.createElement('div');
+                    div.className = 'preview-item';
+                    div.innerHTML = `
+                        <img src="${ev.target.result}" />
+                        <button class="remove-btn" onclick="this.parentElement.remove()">✕</button>
+                    `;
+                    container.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            }
+            showToast('✅ Rasm yuklandi!', 'success');
+        });
+
+        // =============================================================
+        // 2000+ TV / RADIO KANALLAR
+        // =============================================================
+        function generateChannels(count) {
+            const countries = ['🇺🇿', '🇷🇺', '🇺🇸', '🇬🇧', '🇹🇷', '🇨🇳', '🇯🇵', '🇰🇷', '🇩🇪', '🇫🇷', '🇮🇳', '🇸🇦', '🇦🇪', '🇪🇸', '🇮🇹', '🇵🇱', '🇺🇦', '🇰🇿', '🇰🇬', '🇹🇯', '🇹🇲', '🇦🇿'];
+            const types = ['TV', 'Radio', 'HD', '4K', 'Live', 'News', 'Music', 'Sport', 'Movie', 'Kids', 'Documentary'];
+            const prefixes = ['Channel', 'TV', 'Radio', 'Star', 'Global', 'World', 'Nation', 'City', 'Premium', 'Family', 'Movie', 'Sport', 'News', 'Music', 'Life', 'Plus', 'Max', 'Pro'];
+            const suffixes = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'News', 'Sport', 'Music', 'HD', '4K', 'Live', 'Plus', 'Max', 'Pro', 'Elite'];
+            const icons = ['📺', '📡', '🎙️', '📻', '🎬', '🎵', '⚽', '🏀', '📰', '🎭', '🧸', '🌍', '⭐', '🔥'];
+
+            const channels = [];
+            for (let i = 1; i <= count; i++) {
+                const name = prefixes[i % prefixes.length] + ' ' + suffixes[i % suffixes.length];
+                const country = countries[i % countries.length];
+                const type = types[i % types.length];
+                const icon = icons[i % icons.length];
+                channels.push({
+                    name: name + (i % 3 === 0 ? ' ' + type : ''),
+                    icon: icon,
+                    country: country,
+                    type: type
+                });
+            }
+            return channels;
+        }
+
+        const tvChannels = generateChannels(2000);
+
+        function renderTVChannels() {
+            const grid = document.getElementById('tvGrid');
+            grid.innerHTML = '';
+            tvChannels.forEach(ch => {
+                const div = document.createElement('div');
+                div.className = 'tv-channel';
+                div.innerHTML = `
+                    <span class="tv-icon">${ch.icon}</span>
+                    <div class="tv-name">${ch.name}</div>
+                    <div class="tv-country">${ch.country}</div>
+                    <span class="tv-type">${ch.type}</span>
+                `;
+                div.onclick = () => showToast(`📺 ${ch.name} (${ch.country}) — ${ch.type} translyatsiya boshlandi!`, 'success');
+                grid.appendChild(div);
+            });
+            document.getElementById('tvCount').textContent = tvChannels.length + '+ kanal';
+        }
+
+        // =============================================================
+        // INIT
+        // =============================================================
+        populateLangSelector();
+        renderTVChannels();
+        renderPage();
+        changeLanguage('uz');
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+        document.getElementById('regionSelect').value = 'Asia/Tashkent';
+        changeRegion('Asia/Tashkent');
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.querySelector('input[name="timeFormat"][value="24"]').checked = true;
+
+        setTimeout(() => {
+            showToast('🚀 IKROMJON Ai — 12M funksiya, 2000+ kanal tayyor!', 'success');
+        }, 2000);
     </script>
+
 </body>
 </html>
+```
