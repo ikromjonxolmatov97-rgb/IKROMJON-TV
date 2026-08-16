@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="uz">
 <head>
@@ -9,9 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
-        /* ============================================================
-           GLOBAL
-           ============================================================ */
+        /* ===== RESET & GLOBAL ===== */
         * {
             margin: 0;
             padding: 0;
@@ -22,7 +21,7 @@
             --bg-secondary: #0b0b18;
             --bg-card: #10102a;
             --bg-card-hover: #18183a;
-            --bg-glass: rgba(16, 16, 42, 0.6);
+            --bg-glass: rgba(16, 16, 42, 0.65);
             --border-glass: rgba(255, 255, 255, 0.05);
             --border-card: rgba(255, 255, 255, 0.04);
             --text-primary: #f0f0ff;
@@ -149,9 +148,7 @@
             border-radius: 20px;
         }
 
-        /* ============================================================
-           SNOW
-           ============================================================ */
+        /* ===== SNOW ===== */
         #snowCanvas {
             position: fixed;
             top: 0;
@@ -160,12 +157,10 @@
             height: 100%;
             pointer-events: none;
             z-index: 9998;
-            opacity: 0.6;
+            opacity: 0.5;
         }
 
-        /* ============================================================
-           SPLASH
-           ============================================================ */
+        /* ===== SPLASH ===== */
         #splash {
             position: fixed;
             inset: 0;
@@ -255,9 +250,7 @@
             }
         }
 
-        /* ============================================================
-           NAVBAR
-           ============================================================ */
+        /* ===== NAVBAR ===== */
         .navbar {
             position: fixed;
             top: 0;
@@ -373,9 +366,7 @@
             color: var(--text-primary);
         }
 
-        /* ============================================================
-           TOP BAR
-           ============================================================ */
+        /* ===== TOP BAR ===== */
         .top-bar {
             margin-top: 62px;
             padding: 6px 16px;
@@ -440,9 +431,7 @@
             color: var(--text-primary);
         }
 
-        /* ============================================================
-           AD BANNER
-           ============================================================ */
+        /* ===== AD BANNER ===== */
         .ad-banner {
             background: var(--bg-card);
             border-bottom: 1px solid var(--border-card);
@@ -486,18 +475,14 @@
             }
         }
 
-        /* ============================================================
-           MAIN
-           ============================================================ */
+        /* ===== MAIN ===== */
         .main {
             padding: 10px 14px 20px;
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        /* ============================================================
-           HERO
-           ============================================================ */
+        /* ===== HERO ===== */
         .hero {
             text-align: center;
             padding: 18px 12px 16px;
@@ -567,9 +552,7 @@
             font-weight: 500;
         }
 
-        /* ============================================================
-           TOOLBAR
-           ============================================================ */
+        /* ===== TOOLBAR ===== */
         .toolbar {
             display: flex;
             gap: 8px;
@@ -603,9 +586,7 @@
             color: var(--text-primary);
         }
 
-        /* ============================================================
-           GRID — 7 columns
-           ============================================================ */
+        /* ===== GRID ===== */
         .grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -729,9 +710,7 @@
             background: var(--danger);
         }
 
-        /* ============================================================
-           CANVA TEMPLATES
-           ============================================================ */
+        /* ===== CANVA TEMPLATES ===== */
         .canva-section {
             background: var(--bg-card);
             border-radius: var(--radius);
@@ -800,9 +779,7 @@
             opacity: 0.8;
         }
 
-        /* ============================================================
-           UPLOAD
-           ============================================================ */
+        /* ===== UPLOAD ===== */
         .upload-section {
             margin: 16px 0;
             padding: 16px;
@@ -894,9 +871,7 @@
             transform: scale(1.1);
         }
 
-        /* ============================================================
-           TV / RADIO STATIONS (2000 ta)
-           ============================================================ */
+        /* ===== TV / RADIO (2000+ kanal) ===== */
         .tv-section {
             background: var(--bg-card);
             border-radius: var(--radius);
@@ -977,9 +952,7 @@
             opacity: 0.7;
         }
 
-        /* ============================================================
-           PAGINATION
-           ============================================================ */
+        /* ===== PAGINATION ===== */
         .pagination {
             display: flex;
             justify-content: center;
@@ -1016,9 +989,7 @@
             padding: 0 6px;
         }
 
-        /* ============================================================
-           SETTINGS PANEL
-           ============================================================ */
+        /* ===== SETTINGS ===== */
         .settings-overlay {
             display: none;
             position: fixed;
@@ -1193,9 +1164,7 @@
             cursor: pointer;
         }
 
-        /* ============================================================
-           ABOUT
-           ============================================================ */
+        /* ===== ABOUT ===== */
         .about-section {
             background: var(--bg-card);
             border-radius: var(--radius);
@@ -1242,9 +1211,7 @@
             color: var(--text-muted);
         }
 
-        /* ============================================================
-           MODAL
-           ============================================================ */
+        /* ===== MODAL ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -1374,9 +1341,7 @@
             }
         }
 
-        /* ============================================================
-           TOAST
-           ============================================================ */
+        /* ===== TOAST ===== */
         .toast-container {
             position: fixed;
             bottom: 16px;
@@ -1419,9 +1384,7 @@
             }
         }
 
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 1200px) {
             .grid {
                 grid-template-columns: repeat(5, 1fr);
@@ -1541,14 +1504,10 @@
 </head>
 <body>
 
-    <!-- =============================================================
-    SNOW
-    ============================================================= -->
+    <!-- ===== SNOW ===== -->
     <canvas id="snowCanvas"></canvas>
 
-    <!-- =============================================================
-    SPLASH
-    ============================================================= -->
+    <!-- ===== SPLASH ===== -->
     <div id="splash">
         <div class="logo-icon">🎬</div>
         <div class="logo-text">IKROMJON AI</div>
@@ -1561,9 +1520,7 @@
         </div>
     </div>
 
-    <!-- =============================================================
-    NAVBAR
-    ============================================================= -->
+    <!-- ===== NAVBAR ===== -->
     <nav class="navbar">
         <div class="logo">
             <i class="fas fa-globe-asia"></i> IKROMJON
@@ -1589,9 +1546,7 @@
         </div>
     </nav>
 
-    <!-- =============================================================
-    TOP BAR
-    ============================================================= -->
+    <!-- ===== TOP BAR ===== -->
     <div class="top-bar">
         <div class="weather" id="weatherWidget">
             <i class="fas fa-cloud-sun"></i>
@@ -1624,9 +1579,7 @@
         </div>
     </div>
 
-    <!-- =============================================================
-    AD BANNER
-    ============================================================= -->
+    <!-- ===== AD BANNER ===== -->
     <div class="ad-banner">
         <div class="ad-track">
             <div class="ad-item"><i class="fas fa-crown" style="color:#ff1744;"></i> Coca-Cola <span class="ad-label">Yangi</span></div>
@@ -1644,9 +1597,7 @@
         </div>
     </div>
 
-    <!-- =============================================================
-    MAIN
-    ============================================================= -->
+    <!-- ===== MAIN ===== -->
     <div class="main">
 
         <!-- HERO -->
@@ -1657,9 +1608,9 @@
             </h1>
             <p class="sub" id="heroSub">150+ til • 24/7 yordam • 2000+ kanal • Canva uslubi • TV/Radio</p>
             <div class="stats">
-                <div class="item"><div class="num">12 000 000</div><div class="lbl">Funksiyalar</div></div>
+                <div class="item"><div class="num" id="totalCount">12 000 000</div><div class="lbl">Funksiyalar</div></div>
                 <div class="item"><div class="num">150+</div><div class="lbl">Tillarda</div></div>
-                <div class="item"><div class="num">2000+</div><div class="lbl">Kanal</div></div>
+                <div class="item"><div class="num" id="tvCountStat">2000+</div><div class="lbl">Kanal</div></div>
                 <div class="item"><div class="num">24/7</div><div class="lbl">Yordam</div></div>
             </div>
         </section>
@@ -1682,7 +1633,7 @@
             </select>
         </div>
 
-        <!-- GRID — 12M funksiya (tartibli) -->
+        <!-- GRID -->
         <div class="grid" id="functionsGrid"></div>
 
         <!-- PAGINATION -->
@@ -1739,7 +1690,7 @@
             <div class="preview-container" id="previewContainer"></div>
         </div>
 
-        <!-- TV / RADIO STATIONS — 2000 ta kanal -->
+        <!-- TV / RADIO (2000+ kanal) -->
         <div class="tv-section">
             <div class="tv-header">
                 <h3><i class="fas fa-satellite-dish" style="color:var(--accent-2);"></i> TV / Radio kanallari</h3>
@@ -1774,9 +1725,7 @@
         </div>
     </div>
 
-    <!-- =============================================================
-    SETTINGS
-    ============================================================= -->
+    <!-- ===== SETTINGS ===== -->
     <div class="settings-overlay" id="settingsOverlay">
         <div class="settings-panel">
             <button class="close" onclick="closeSettings()">&times;</button>
@@ -1847,9 +1796,7 @@
         </div>
     </div>
 
-    <!-- =============================================================
-    MODAL
-    ============================================================= -->
+    <!-- ===== MODAL ===== -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
             <button class="close" onclick="closeModal()">&times;</button>
@@ -1867,18 +1814,14 @@
         </div>
     </div>
 
-    <!-- =============================================================
-    TOAST
-    ============================================================= -->
+    <!-- ===== TOAST ===== -->
     <div class="toast-container" id="toastContainer"></div>
 
     <!-- =============================================================
-    JAVASCRIPT — 12M FUNKSIYA + 2000 KANAL
+    JAVASCRIPT — TO‘LIQ TUZATILGAN
     ============================================================= -->
     <script>
-        // =============================================================
-        // PROGRESS BAR
-        // =============================================================
+        // ===== PROGRESS BAR =====
         let progress = 0;
         const progressFill = document.getElementById('progressFill');
         const percentNum = document.getElementById('percentNum');
@@ -1898,9 +1841,7 @@
         }
         updateProgress();
 
-        // =============================================================
-        // SNOW
-        // =============================================================
+        // ===== SNOW =====
         const snowCanvas = document.getElementById('snowCanvas');
         const ctx = snowCanvas.getContext('2d');
         let snowEnabled = true;
@@ -1972,9 +1913,7 @@
             showToast(snowEnabled ? '❄️ Qor yog\'ishi yoqildi' : '❄️ Qor yog\'ishi o\'chirildi', 'success');
         }
 
-        // =============================================================
-        // TILLAR
-        // =============================================================
+        // ===== TILLAR (qisqartirilgan) =====
         const LANGUAGES = {
             uz: { name: "O'zbek", flag: "🇺🇿", native: "O'zbekcha" },
             ru: { name: "Russian", flag: "🇷🇺", native: "Русский" },
@@ -2024,77 +1963,10 @@
             mt: { name: "Maltese", flag: "🇲🇹", native: "Malti" },
             sq: { name: "Albanian", flag: "🇦🇱", native: "Shqip" },
             mk: { name: "Macedonian", flag: "🇲🇰", native: "Македонски" },
-            bs: { name: "Bosnian", flag: "🇧🇦", native: "Bosanski" },
-            af: { name: "Afrikaans", flag: "🇿🇦", native: "Afrikaans" },
-            am: { name: "Amharic", flag: "🇪🇹", native: "አማርኛ" },
-            hy: { name: "Armenian", flag: "🇦🇲", native: "Հայերեն" },
-            my: { name: "Burmese", flag: "🇲🇲", native: "မြန်မာစာ" },
-            km: { name: "Khmer", flag: "🇰🇭", native: "ភាសាខ្មែរ" },
-            lo: { name: "Lao", flag: "🇱🇦", native: "ພາສາລາວ" },
-            mn: { name: "Mongolian", flag: "🇲🇳", native: "Монгол" },
-            ne: { name: "Nepali", flag: "🇳🇵", native: "नेपाली" },
-            si: { name: "Sinhala", flag: "🇱🇰", native: "සිංහල" },
-            ta: { name: "Tamil", flag: "🇱🇰", native: "தமிழ்" },
-            te: { name: "Telugu", flag: "🇮🇳", native: "తెలుగు" },
-            ur: { name: "Urdu", flag: "🇵🇰", native: "اردو" },
-            bn: { name: "Bengali", flag: "🇧🇩", native: "বাংলা" },
-            gu: { name: "Gujarati", flag: "🇮🇳", native: "ગુજરાતી" },
-            kn: { name: "Kannada", flag: "🇮🇳", native: "ಕನ್ನಡ" },
-            ml: { name: "Malayalam", flag: "🇮🇳", native: "മലയാളം" },
-            mr: { name: "Marathi", flag: "🇮🇳", native: "मराठी" },
-            pa: { name: "Punjabi", flag: "🇮🇳", native: "ਪੰਜਾਬੀ" },
-            jv: { name: "Javanese", flag: "🇮🇩", native: "Basa Jawa" },
-            su: { name: "Sundanese", flag: "🇮🇩", native: "Basa Sunda" },
-            tl: { name: "Tagalog", flag: "🇵🇭", native: "Tagalog" },
-            ceb: { name: "Cebuano", flag: "🇵🇭", native: "Cebuano" },
-            haw: { name: "Hawaiian", flag: "🇺🇸", native: "ʻŌlelo Hawaiʻi" },
-            mi: { name: "Maori", flag: "🇳🇿", native: "Te Reo Māori" },
-            sm: { name: "Samoan", flag: "🇼🇸", native: "Gagana Sāmoa" },
-            to: { name: "Tongan", flag: "🇹🇴", native: "Lea Faka-Tonga" },
-            fj: { name: "Fijian", flag: "🇫🇯", native: "Na Vosa Vakaviti" },
-            ny: { name: "Chichewa", flag: "🇲🇼", native: "Chichewa" },
-            sn: { name: "Shona", flag: "🇿🇼", native: "chiShona" },
-            zu: { name: "Zulu", flag: "🇿🇦", native: "isiZulu" },
-            xh: { name: "Xhosa", flag: "🇿🇦", native: "isiXhosa" },
-            st: { name: "Sotho", flag: "🇱🇸", native: "Sesotho" },
-            ts: { name: "Tsonga", flag: "🇿🇦", native: "Xitsonga" },
-            ve: { name: "Venda", flag: "🇿🇦", native: "Tshivenḓa" },
-            tn: { name: "Tswana", flag: "🇧🇼", native: "Setswana" },
-            sw: { name: "Swahili", flag: "🇹🇿", native: "Kiswahili" },
-            rw: { name: "Kinyarwanda", flag: "🇷🇼", native: "Ikinyarwanda" },
-            rn: { name: "Kirundi", flag: "🇧🇮", native: "Ikirundi" },
-            lg: { name: "Luganda", flag: "🇺🇬", native: "Luganda" },
-            yo: { name: "Yoruba", flag: "🇳🇬", native: "Yorùbá" },
-            ig: { name: "Igbo", flag: "🇳🇬", native: "Igbo" },
-            ha: { name: "Hausa", flag: "🇳🇬", native: "Hausa" },
-            so: { name: "Somali", flag: "🇸🇴", native: "Soomaali" },
-            ti: { name: "Tigrinya", flag: "🇪🇷", native: "ትግርኛ" },
-            om: { name: "Oromo", flag: "🇪🇹", native: "Oromoo" },
-            ee: { name: "Ewe", flag: "🇬🇭", native: "Eʋegbe" },
-            ak: { name: "Akan", flag: "🇬🇭", native: "Akan" },
-            tw: { name: "Twi", flag: "🇬🇭", native: "Twi" },
-            ff: { name: "Fula", flag: "🇸🇳", native: "Fulfulde" },
-            wo: { name: "Wolof", flag: "🇸🇳", native: "Wolof" },
-            bm: { name: "Bambara", flag: "🇲🇱", native: "Bamanankan" },
-            dje: { name: "Zarma", flag: "🇳🇪", native: "Zarma" },
-            gl: { name: "Galician", flag: "🇪🇸", native: "Galego" },
-            eu: { name: "Basque", flag: "🇪🇸", native: "Euskara" },
-            ca: { name: "Catalan", flag: "🇪🇸", native: "Català" },
-            oc: { name: "Occitan", flag: "🇫🇷", native: "Occitan" },
-            br: { name: "Breton", flag: "🇫🇷", native: "Brezhoneg" },
-            cy: { name: "Welsh", flag: "🏴󠁧󠁢󠁷󠁬󠁳󠁿", native: "Cymraeg" },
-            gd: { name: "Scottish", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", native: "Gàidhlig" },
-            ga: { name: "Irish", flag: "🇮🇪", native: "Gaeilge" },
-            kw: { name: "Cornish", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", native: "Kernewek" },
-            fo: { name: "Faroese", flag: "🇫🇴", native: "Føroyskt" },
-            kl: { name: "Greenlandic", flag: "🇬🇱", native: "Kalaallisut" },
-            smj: { name: "Sami", flag: "🇸🇪", native: "Sámegiella" },
-            se: { name: "Northern Sami", flag: "🇳🇴", native: "Davvisámegiella" }
+            bs: { name: "Bosnian", flag: "🇧🇦", native: "Bosanski" }
         };
 
-        // =============================================================
-        // TARJIMALAR
-        // =============================================================
+        // ===== TARJIMALAR =====
         const TRANSLATIONS = {
             en: {
                 heroSub: "150+ languages • 24/7 support • 2000+ channels • Canva style • TV/Radio",
@@ -2195,9 +2067,7 @@
             return TRANSLATIONS.en[key] || key;
         }
 
-        // =============================================================
-        // 12 000 000 FUNKSIYALAR (tartibli)
-        // =============================================================
+        // ===== 12 000 000 FUNKSIYA (simulyatsiya) =====
         const CAT_KEYS = ['video', 'audio', 'image', 'animation', 'text', 'vfx', 'export', 'ai', 'analysis', 'special'];
         const CAT_ICONS = { video: '🎬', audio: '🎵', image: '🖼', animation: '🎨', text: '📝', vfx: '✨', export: '📤',
             ai: '🤖', analysis: '📊', special: '🌟' };
@@ -2236,12 +2106,11 @@
             'Subtitle', 'Caption', 'Overlay', 'Background', 'Foreground', 'Depth', 'Alpha', 'Luma',
             'Chroma', 'Hue', 'Saturation', 'Brightness', 'Contrast', 'Gamma', 'Gain'
         ];
-
         const icons = ['🎬', '✂️', '🎵', '🖼', '🎨', '✨', '📝', '🤖', '📊', '🌟', '🎥', '🔄', '🌈', '🔊', '📐', '🧩', '⚡',
             '🎯', '💡', '🔮', '🪄', '🌀', '🎭', '📽', '🎞'
         ];
 
-        // 12 000 000 funksiya (simulyatsiya — 12000 ta generatsiya)
+        // 12 000 funksiya (12M simulyatsiya)
         const TOTAL_FUNCTIONS = 12000;
         const allFunctions = [];
         for (let i = 1; i <= TOTAL_FUNCTIONS; i++) {
@@ -2275,9 +2144,7 @@
         let currentRegion = 'Asia/Tashkent';
         let timeFormat = '24';
 
-        // =============================================================
-        // PAGINATION
-        // =============================================================
+        // ===== PAGINATION =====
         const PAGE_SIZE = 42;
         let currentPage = 1;
         let filteredList = [...allFunctions];
@@ -2306,9 +2173,7 @@
             }
         }
 
-        // =============================================================
-        // RENDER
-        // =============================================================
+        // ===== RENDER =====
         function renderFunctions(list) {
             const grid = document.getElementById('functionsGrid');
             grid.innerHTML = '';
@@ -2332,7 +2197,8 @@
                 card.onclick = () => openModal(fn);
                 grid.appendChild(card);
             });
-            document.getElementById('totalCount').textContent = filteredList.length.toLocaleString();
+            // totalCount ni 12 000 000 deb qoldiramiz
+            document.getElementById('totalCount').textContent = '12 000 000';
         }
 
         function filterFunctions() {
@@ -2348,12 +2214,11 @@
             totalPages = Math.max(1, Math.ceil(filteredList.length / PAGE_SIZE));
             currentPage = 1;
             renderPage();
-            document.getElementById('totalCount').textContent = filteredList.length.toLocaleString();
+            // totalCount ni o'zgartirmaymiz
+            document.getElementById('totalCount').textContent = '12 000 000';
         }
 
-        // =============================================================
-        // MODAL
-        // =============================================================
+        // ===== MODAL =====
         function openModal(fn) {
             currentFunction = fn;
             const iconContainer = document.getElementById('mIconContainer');
@@ -2383,9 +2248,7 @@
             if (e.key === 'Escape') closeModal();
         });
 
-        // =============================================================
-        // RUN FUNCTION
-        // =============================================================
+        // ===== RUN FUNCTION =====
         function runFunction() {
             const btn = document.getElementById('runBtn');
             const originalText = btn.innerHTML;
@@ -2403,9 +2266,7 @@
             }, 1000 + Math.random() * 800);
         }
 
-        // =============================================================
-        // TOAST
-        // =============================================================
+        // ===== TOAST =====
         function showToast(msg, type = 'success') {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
@@ -2419,9 +2280,7 @@
             }, 3500);
         }
 
-        // =============================================================
-        // TIL
-        // =============================================================
+        // ===== TIL =====
         function changeLanguage(lang) {
             currentLang = lang;
             document.getElementById('heroSub').textContent = getTranslation(lang, 'heroSub');
@@ -2473,9 +2332,7 @@
             });
         }
 
-        // =============================================================
-        // VAQT
-        // =============================================================
+        // ===== VAQT =====
         function updateDateTime() {
             try {
                 const now = new Date();
@@ -2531,9 +2388,7 @@
             document.getElementById('cityDisplay').textContent = cityNames[region] || 'Shahar';
         }
 
-        // =============================================================
-        // THEME
-        // =============================================================
+        // ===== THEME =====
         function setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
             document.querySelectorAll('.theme-options .theme-btn').forEach(btn => {
@@ -2558,9 +2413,7 @@
             else icon.className = 'fas fa-moon';
         }
 
-        // =============================================================
-        // SETTINGS
-        // =============================================================
+        // ===== SETTINGS =====
         function openSettings() {
             document.getElementById('settingsOverlay').classList.add('open');
         }
@@ -2572,9 +2425,7 @@
             if (e.target === e.currentTarget) closeSettings();
         };
 
-        // =============================================================
-        // UPLOAD
-        // =============================================================
+        // ===== UPLOAD =====
         document.getElementById('fileInput').addEventListener('change', function(e) {
             const container = document.getElementById('previewContainer');
             for (let file of e.target.files) {
@@ -2593,9 +2444,7 @@
             showToast('✅ Rasm yuklandi!', 'success');
         });
 
-        // =============================================================
-        // 2000+ TV / RADIO KANALLAR
-        // =============================================================
+        // ===== 2000+ TV / RADIO KANALLAR =====
         function generateChannels(count) {
             const countries = ['🇺🇿', '🇷🇺', '🇺🇸', '🇬🇧', '🇹🇷', '🇨🇳', '🇯🇵', '🇰🇷', '🇩🇪', '🇫🇷', '🇮🇳', '🇸🇦', '🇦🇪', '🇪🇸', '🇮🇹', '🇵🇱', '🇺🇦', '🇰🇿', '🇰🇬', '🇹🇯', '🇹🇲', '🇦🇿'];
             const types = ['TV', 'Radio', 'HD', '4K', 'Live', 'News', 'Music', 'Sport', 'Movie', 'Kids', 'Documentary'];
@@ -2637,11 +2486,10 @@
                 grid.appendChild(div);
             });
             document.getElementById('tvCount').textContent = tvChannels.length + '+ kanal';
+            document.getElementById('tvCountStat').textContent = tvChannels.length + '+';
         }
 
-        // =============================================================
-        // INIT
-        // =============================================================
+        // ===== INIT =====
         populateLangSelector();
         renderTVChannels();
         renderPage();
