@@ -3,382 +3,720 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IKROMJON AI O‘QUV MARKAZI</title>
+<meta name="theme-color" content="#080b18">
+<meta name="description" content="IKROMJON AI O'QUV MARKAZI — zamonaviy ta'lim va kelajak kasblari platformasi">
+<title>IKROMJON AI — O‘quv Markazi</title>
 
 <style>
+/* =========================
+   GLOBAL
+========================= */
+
+:root{
+    --bg:#060814;
+    --bg2:#0b1022;
+    --card:rgba(18,24,48,.72);
+    --card2:rgba(255,255,255,.06);
+    --text:#ffffff;
+    --muted:#9aa5c6;
+    --line:rgba(255,255,255,.10);
+    --primary:#7657ff;
+    --secondary:#00d9ff;
+    --pink:#ff3cac;
+    --green:#20e3a2;
+    --yellow:#ffd166;
+    --danger:#ff5878;
+    --shadow:0 30px 100px rgba(0,0,0,.45);
+}
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:"Times New Roman", Times, serif !important;
 }
 
-:root{
-    --bg:#f5f7fb;
-    --card:#fff;
-    --text:#172033;
-    --muted:#687386;
-    --primary:#6c4cff;
-    --primary2:#8b5cf6;
-    --border:#e4e7ef;
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    background:var(--bg);
+    min-height:100vh;
     color:var(--text);
-    transition:.3s;
+    background:
+        radial-gradient(circle at 10% 10%,rgba(118,87,255,.20),transparent 30%),
+        radial-gradient(circle at 90% 20%,rgba(0,217,255,.12),transparent 28%),
+        radial-gradient(circle at 50% 100%,rgba(255,60,172,.10),transparent 35%),
+        var(--bg);
+    overflow-x:hidden;
 }
 
-body.dark{
-    --bg:#0d1117;
-    --card:#161b22;
-    --text:#fff;
-    --muted:#aab2c0;
-    --border:#30363d;
+button,
+input,
+select,
+textarea{
+    font-family:"Times New Roman", Times, serif !important;
 }
 
-/* SPLASH */
+button{
+    cursor:pointer;
+    border:0;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+.container{
+    width:min(1400px,92%);
+    margin:auto;
+}
+
+/* =========================
+   3D BACKGROUND
+========================= */
+
+.bg-orb{
+    position:fixed;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:.20;
+    z-index:-2;
+    pointer-events:none;
+}
+
+.orb1{
+    background:#7657ff;
+    top:5%;
+    left:-120px;
+    animation:float1 8s infinite ease-in-out;
+}
+
+.orb2{
+    background:#00d9ff;
+    right:-130px;
+    top:35%;
+    animation:float2 10s infinite ease-in-out;
+}
+
+.orb3{
+    background:#ff3cac;
+    left:30%;
+    bottom:-180px;
+    animation:float3 12s infinite ease-in-out;
+}
+
+@keyframes float1{
+    50%{transform:translate(80px,60px) scale(1.15)}
+}
+
+@keyframes float2{
+    50%{transform:translate(-70px,-40px) scale(1.2)}
+}
+
+@keyframes float3{
+    50%{transform:translate(50px,-70px) scale(1.1)}
+}
+
+/* =========================
+   SPLASH
+========================= */
 
 #splash{
     position:fixed;
     inset:0;
-    background:linear-gradient(135deg,#4f46e5,#7c3aed,#9333ea);
-    z-index:99999;
+    z-index:9999;
+    background:
+        radial-gradient(circle at center,#151b3b,#050711 70%);
     display:flex;
-    justify-content:center;
     align-items:center;
-    color:white;
-    text-align:center;
-    animation:splashOut .8s ease 3.3s forwards;
+    justify-content:center;
+    transition:.8s;
 }
 
 .splash-box{
-    animation:zoom 1s ease;
+    text-align:center;
 }
 
-.robot{
-    width:100px;
-    height:100px;
+.ai-orb{
+    width:150px;
+    height:150px;
     margin:auto;
-    border-radius:30px;
-    background:rgba(255,255,255,.18);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:55px;
-    animation:float 1.5s infinite alternate;
+    border-radius:50%;
+    position:relative;
+    background:
+        radial-gradient(circle at 30% 25%,#fff,#a996ff 8%,#7657ff 30%,#21115c 65%,#080814 75%);
+    box-shadow:
+        0 0 35px #7657ff,
+        0 0 100px rgba(118,87,255,.6),
+        inset -20px -25px 45px rgba(0,0,0,.55);
+    animation:orbPulse 2.2s infinite ease-in-out;
 }
 
-.splash-box h1{
-    margin-top:20px;
-    font-size:35px;
+.ai-orb:before,
+.ai-orb:after{
+    content:"";
+    position:absolute;
+    inset:-20px;
+    border:1px solid rgba(0,217,255,.4);
+    border-radius:50%;
+    transform:rotate(30deg);
 }
 
-.splash-box h1 span{
-    color:#ffd43b;
+.ai-orb:after{
+    inset:-35px;
+    border-color:rgba(255,60,172,.25);
+    transform:rotate(-40deg);
 }
 
-.splash-box h2{
-    margin-top:8px;
-    font-size:20px;
+@keyframes orbPulse{
+    50%{
+        transform:scale(1.08) rotate(8deg);
+        box-shadow:0 0 60px #7657ff,0 0 130px rgba(118,87,255,.7);
+    }
+}
+
+.splash-title{
+    margin-top:35px;
+    font-size:clamp(30px,6vw,65px);
     letter-spacing:3px;
+    font-weight:bold;
+}
+
+.splash-sub{
+    color:var(--secondary);
+    margin-top:10px;
+    font-size:20px;
 }
 
 .loader{
     width:280px;
-    height:8px;
-    background:rgba(255,255,255,.25);
-    border-radius:20px;
+    height:7px;
+    background:#1a2038;
+    border-radius:50px;
     overflow:hidden;
-    margin:25px auto 12px;
+    margin:30px auto 12px;
 }
 
-.loader-line{
-    width:0%;
+.loader-bar{
+    width:0;
     height:100%;
-    background:white;
-    animation:load 3s linear forwards;
+    background:linear-gradient(90deg,var(--primary),var(--secondary),var(--pink));
+    transition:.15s;
 }
 
-#loadText{
-    font-size:14px;
+.percent{
+    color:var(--muted);
+    font-size:17px;
 }
 
-@keyframes load{
-    to{width:100%}
-}
-
-@keyframes splashOut{
-    to{
-        opacity:0;
-        visibility:hidden;
-    }
-}
-
-@keyframes zoom{
-    from{transform:scale(.7);opacity:0}
-    to{transform:scale(1);opacity:1}
-}
-
-@keyframes float{
-    to{transform:translateY(-12px)}
-}
-
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 header{
     position:sticky;
     top:0;
     z-index:1000;
-    background:var(--card);
-    border-bottom:1px solid var(--border);
-    padding:14px 5%;
+    backdrop-filter:blur(20px);
+    background:rgba(5,7,18,.78);
+    border-bottom:1px solid var(--line);
+}
+
+.nav{
+    min-height:76px;
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
+    gap:25px;
 }
 
 .logo{
-    font-weight:900;
-    font-size:20px;
-    color:var(--primary);
-}
-
-.logo span{
-    color:#f59e0b;
-}
-
-nav{
     display:flex;
-    gap:20px;
     align-items:center;
+    gap:12px;
+    font-size:22px;
+    font-weight:bold;
 }
 
-nav a{
-    text-decoration:none;
-    color:var(--text);
-    cursor:pointer;
-    font-weight:600;
+.logo-mark{
+    width:45px;
+    height:45px;
+    border-radius:14px;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg,var(--primary),var(--pink));
+    box-shadow:0 10px 30px rgba(118,87,255,.35);
+    transform:rotate(-5deg);
 }
 
-nav a:hover{
-    color:var(--primary);
+.logo-mark span{
+    transform:rotate(5deg);
+    font-size:20px;
 }
 
-.header-buttons{
+.nav-links{
     display:flex;
-    gap:8px;
+    align-items:center;
+    gap:6px;
+}
+
+.nav-links button{
+    color:var(--muted);
+    background:transparent;
+    padding:11px 14px;
+    border-radius:12px;
+    font-size:15px;
+    transition:.25s;
+}
+
+.nav-links button:hover{
+    color:#fff;
+    background:var(--card2);
+}
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
 .icon-btn{
-    border:1px solid var(--border);
-    background:var(--card);
-    color:var(--text);
-    padding:9px 12px;
-    border-radius:10px;
-    cursor:pointer;
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    background:var(--card2);
+    color:#fff;
+    border:1px solid var(--line);
+    font-size:18px;
 }
 
-/* HERO */
-
-.hero{
-    min-height:530px;
-    padding:80px 7%;
+.profile-mini{
     display:flex;
     align-items:center;
-    justify-content:space-between;
-    gap:40px;
-    background:
-    radial-gradient(circle at 90% 20%,rgba(108,76,255,.2),transparent 35%),
-    var(--bg);
+    gap:10px;
+    padding:5px 10px 5px 5px;
+    background:var(--card2);
+    border:1px solid var(--line);
+    border-radius:15px;
 }
 
-.hero-content{
-    max-width:650px;
+.avatar{
+    width:38px;
+    height:38px;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    background:linear-gradient(135deg,var(--secondary),var(--primary));
+    font-weight:bold;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    padding:80px 0 60px;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    align-items:center;
+    gap:50px;
 }
 
 .badge{
-    display:inline-block;
-    padding:8px 14px;
-    background:#ede9fe;
-    color:#6d28d9;
-    border-radius:30px;
-    font-weight:bold;
-    margin-bottom:18px;
-}
-
-.hero h1{
-    font-size:48px;
-    line-height:1.1;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:9px 15px;
+    border:1px solid rgba(0,217,255,.25);
+    background:rgba(0,217,255,.07);
+    border-radius:50px;
+    color:var(--secondary);
     margin-bottom:20px;
 }
 
-.hero h1 span{
-    color:var(--primary);
+.hero h1{
+    font-size:clamp(42px,6vw,80px);
+    line-height:.98;
+    margin-bottom:25px;
+}
+
+.gradient-text{
+    background:linear-gradient(90deg,#fff,var(--secondary),#c19cff,var(--pink));
+    -webkit-background-clip:text;
+    color:transparent;
 }
 
 .hero p{
+    max-width:700px;
     color:var(--muted);
-    font-size:18px;
+    font-size:21px;
     line-height:1.6;
 }
 
 .hero-buttons{
-    margin-top:30px;
     display:flex;
-    gap:12px;
+    gap:14px;
+    margin-top:30px;
     flex-wrap:wrap;
 }
 
 .btn{
-    border:0;
-    border-radius:12px;
-    padding:13px 20px;
-    cursor:pointer;
-    font-weight:bold;
-    font-size:15px;
+    padding:14px 21px;
+    border-radius:15px;
+    font-size:17px;
+    transition:.25s;
 }
 
-.primary{
-    background:var(--primary);
+.btn-primary{
     color:white;
+    background:linear-gradient(135deg,var(--primary),var(--pink));
+    box-shadow:0 15px 35px rgba(118,87,255,.25);
 }
 
-.secondary{
-    background:var(--card);
-    color:var(--text);
-    border:1px solid var(--border);
+.btn-secondary{
+    color:white;
+    background:var(--card2);
+    border:1px solid var(--line);
 }
 
-.hero-art{
-    width:350px;
-    height:350px;
-    border-radius:40px;
-    background:linear-gradient(135deg,#6c4cff,#a855f7);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:150px;
-    box-shadow:0 30px 70px rgba(108,76,255,.3);
+.btn:hover{
+    transform:translateY(-3px);
 }
 
-/* STATS */
+/* 3D HERO */
+
+.hero-3d{
+    min-height:480px;
+    position:relative;
+    display:grid;
+    place-items:center;
+    perspective:1000px;
+}
+
+.cube{
+    width:250px;
+    height:250px;
+    position:relative;
+    transform-style:preserve-3d;
+    animation:rotateCube 15s infinite linear;
+}
+
+.face{
+    position:absolute;
+    width:250px;
+    height:250px;
+    border:1px solid rgba(255,255,255,.2);
+    background:linear-gradient(135deg,rgba(118,87,255,.35),rgba(0,217,255,.10));
+    backdrop-filter:blur(10px);
+    display:grid;
+    place-items:center;
+    font-size:70px;
+    box-shadow:inset 0 0 50px rgba(255,255,255,.05);
+}
+
+.front{transform:translateZ(125px)}
+.back{transform:rotateY(180deg) translateZ(125px)}
+.right{transform:rotateY(90deg) translateZ(125px)}
+.left{transform:rotateY(-90deg) translateZ(125px)}
+.top{transform:rotateX(90deg) translateZ(125px)}
+.bottom{transform:rotateX(-90deg) translateZ(125px)}
+
+@keyframes rotateCube{
+    from{transform:rotateX(-15deg) rotateY(0deg)}
+    to{transform:rotateX(-15deg) rotateY(360deg)}
+}
+
+.floating-card{
+    position:absolute;
+    padding:14px 18px;
+    background:rgba(16,20,42,.8);
+    border:1px solid var(--line);
+    border-radius:16px;
+    backdrop-filter:blur(15px);
+    box-shadow:var(--shadow);
+    animation:floatCard 4s infinite ease-in-out;
+}
+
+.fc1{top:10%;left:0}
+.fc2{right:0;top:25%;animation-delay:1s}
+.fc3{bottom:10%;left:5%;animation-delay:2s}
+
+@keyframes floatCard{
+    50%{transform:translateY(-18px) rotateY(8deg)}
+}
+
+/* =========================
+   STATS
+========================= */
 
 .stats{
-    padding:25px 7%;
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:15px;
+    gap:18px;
+    margin:20px 0 70px;
 }
 
 .stat{
+    padding:24px;
     background:var(--card);
-    border:1px solid var(--border);
-    padding:25px;
-    border-radius:18px;
-    text-align:center;
+    border:1px solid var(--line);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    transform-style:preserve-3d;
+    transition:.3s;
 }
 
-.stat strong{
-    display:block;
-    font-size:30px;
-    color:var(--primary);
+.stat:hover{
+    transform:perspective(700px) rotateX(4deg) rotateY(-4deg) translateY(-5px);
 }
 
-.stat span{
+.stat-icon{
+    font-size:28px;
+}
+
+.stat-number{
+    margin-top:10px;
+    font-size:32px;
+    font-weight:bold;
+}
+
+.stat-label{
     color:var(--muted);
+    margin-top:4px;
 }
 
-/* SECTION */
+/* =========================
+   SECTIONS
+========================= */
 
-section{
-    padding:70px 7%;
+.section{
+    padding:70px 0;
 }
 
 .section-title{
-    text-align:center;
-    margin-bottom:40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:20px;
+    margin-bottom:30px;
 }
 
 .section-title h2{
-    font-size:32px;
+    font-size:42px;
 }
 
 .section-title p{
     color:var(--muted);
-    margin-top:10px;
-}
-
-/* COURSES */
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:25px;
-    transition:.3s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 15px 35px rgba(0,0,0,.08);
-}
-
-.course-icon{
-    font-size:50px;
-}
-
-.card h3{
-    margin:15px 0 8px;
-}
-
-.card p{
-    color:var(--muted);
+    max-width:650px;
     line-height:1.5;
 }
 
-.progress{
-    margin:18px 0;
-    height:8px;
-    background:#e5e7eb;
-    border-radius:20px;
+.search-box{
+    display:flex;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.search-box input{
+    flex:1;
+    min-width:0;
+    padding:16px 18px;
+    border-radius:15px;
+    border:1px solid var(--line);
+    background:var(--card2);
+    color:white;
+    outline:none;
+    font-size:17px;
+}
+
+.filters{
+    display:flex;
+    gap:9px;
+    overflow:auto;
+    padding-bottom:10px;
+    margin-bottom:25px;
+}
+
+.filter{
+    white-space:nowrap;
+    padding:10px 15px;
+    border-radius:50px;
+    background:var(--card2);
+    color:var(--muted);
+    border:1px solid var(--line);
+}
+
+.filter.active{
+    color:#fff;
+    background:linear-gradient(135deg,var(--primary),var(--pink));
+}
+
+/* =========================
+   COURSES
+========================= */
+
+.course-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.course{
+    position:relative;
     overflow:hidden;
+    min-height:300px;
+    padding:25px;
+    border-radius:25px;
+    background:linear-gradient(145deg,rgba(23,30,58,.9),rgba(10,14,30,.85));
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
+    transform-style:preserve-3d;
+    transition:.35s;
+}
+
+.course:hover{
+    transform:perspective(900px) rotateX(5deg) rotateY(-5deg) translateY(-8px);
+}
+
+.course:before{
+    content:"";
+    position:absolute;
+    width:150px;
+    height:150px;
+    right:-60px;
+    top:-60px;
+    background:var(--primary);
+    filter:blur(70px);
+    opacity:.35;
+}
+
+.course-icon{
+    width:65px;
+    height:65px;
+    display:grid;
+    place-items:center;
+    border-radius:19px;
+    background:linear-gradient(135deg,rgba(118,87,255,.25),rgba(0,217,255,.12));
+    border:1px solid var(--line);
+    font-size:32px;
+    margin-bottom:18px;
+}
+
+.course h3{
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+.course p{
+    color:var(--muted);
+    line-height:1.5;
+    min-height:70px;
+}
+
+.course-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:15px 0;
+}
+
+.tag{
+    font-size:13px;
+    color:#cbd2ed;
+    padding:7px 10px;
+    border-radius:9px;
+    background:var(--card2);
+}
+
+.progress{
+    height:7px;
+    border-radius:20px;
+    background:#1b2138;
+    overflow:hidden;
+    margin:12px 0;
 }
 
 .progress-bar{
     height:100%;
-    background:linear-gradient(90deg,#6c4cff,#a855f7);
-    width:0%;
+    background:linear-gradient(90deg,var(--primary),var(--secondary));
 }
 
-/* LESSONS */
+/* =========================
+   CATEGORIES
+========================= */
 
-.lesson-card{
+.category-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.category{
+    padding:24px;
+    border-radius:22px;
+    border:1px solid var(--line);
+    background:var(--card);
+    transition:.3s;
+}
+
+.category:hover{
+    transform:translateY(-7px) scale(1.02);
+}
+
+.category-icon{
+    font-size:40px;
+    margin-bottom:12px;
+}
+
+.category h3{
+    font-size:21px;
+}
+
+.category p{
+    color:var(--muted);
+    margin-top:6px;
+}
+
+/* =========================
+   LESSONS
+========================= */
+
+.lesson-list{
+    display:grid;
+    gap:13px;
+}
+
+.lesson{
     display:flex;
     align-items:center;
-    gap:15px;
+    gap:16px;
     padding:18px;
-    margin-bottom:12px;
-    border:1px solid var(--border);
-    border-radius:15px;
     background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    transition:.25s;
+}
+
+.lesson:hover{
+    transform:translateX(6px);
+    border-color:rgba(118,87,255,.5);
 }
 
 .lesson-number{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#ede9fe;
-    color:#6d28d9;
+    width:45px;
+    height:45px;
+    display:grid;
+    place-items:center;
+    border-radius:13px;
+    background:rgba(118,87,255,.15);
+    color:#b9aaff;
     font-weight:bold;
 }
 
@@ -386,145 +724,183 @@ section{
     flex:1;
 }
 
-.lesson-info h4{
+.lesson-info h3{
     margin-bottom:5px;
 }
 
 .lesson-info span{
     color:var(--muted);
-    font-size:13px;
 }
 
-/* DASHBOARD */
+/* =========================
+   AI
+========================= */
 
-.dashboard{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:25px;
-    padding:30px;
+.ai-section{
+    padding:35px;
+    border-radius:30px;
+    background:
+        linear-gradient(135deg,rgba(118,87,255,.15),rgba(0,217,255,.07)),
+        var(--card);
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
 }
 
-.user-box{
-    display:flex;
+.ai-grid{
+    display:grid;
+    grid-template-columns:.8fr 1.2fr;
+    gap:30px;
     align-items:center;
-    gap:20px;
 }
 
-.avatar{
-    width:70px;
-    height:70px;
-    background:linear-gradient(135deg,#6c4cff,#a855f7);
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+.ai-visual{
+    min-height:350px;
+    display:grid;
+    place-items:center;
+    perspective:800px;
+}
+
+.ai-core{
+    width:180px;
+    height:180px;
     border-radius:50%;
-    font-size:30px;
+    background:
+        radial-gradient(circle at 30% 25%,#fff,#a997ff 7%,#7657ff 28%,#251060 62%,#070711 76%);
+    box-shadow:
+        0 0 40px #7657ff,
+        0 0 100px rgba(0,217,255,.3);
+    animation:aiCore 3s infinite ease-in-out;
 }
 
-.course-progress{
-    margin-top:25px;
+@keyframes aiCore{
+    50%{transform:translateY(-15px) rotateY(20deg) scale(1.06)}
 }
 
-.course-progress-row{
-    margin-bottom:20px;
-}
-
-.course-progress-row div:first-child{
+.chat{
+    height:350px;
     display:flex;
-    justify-content:space-between;
-    margin-bottom:7px;
+    flex-direction:column;
+    background:rgba(0,0,0,.18);
+    border-radius:20px;
+    border:1px solid var(--line);
+    overflow:hidden;
 }
 
-/* AI */
-
-.ai-box{
-    max-width:800px;
-    margin:auto;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:25px;
-    padding:25px;
-}
-
-.ai-messages{
-    min-height:180px;
-    max-height:350px;
+.chat-messages{
+    flex:1;
+    padding:18px;
     overflow:auto;
-    margin-bottom:15px;
 }
 
 .message{
+    max-width:80%;
     padding:12px 15px;
-    border-radius:14px;
     margin-bottom:10px;
-    max-width:85%;
-    line-height:1.5;
+    border-radius:14px;
+    line-height:1.45;
 }
 
-.bot{
-    background:#ede9fe;
-    color:#3b2a72;
+.message.ai{
+    background:rgba(118,87,255,.15);
+    border:1px solid rgba(118,87,255,.2);
 }
 
-.user{
-    background:var(--primary);
-    color:white;
+.message.user{
     margin-left:auto;
+    background:linear-gradient(135deg,var(--primary),#543bc4);
 }
 
-.ai-input{
+.chat-input{
     display:flex;
-    gap:10px;
+    gap:8px;
+    padding:12px;
+    border-top:1px solid var(--line);
 }
 
-.ai-input input{
+.chat-input input{
     flex:1;
-    padding:14px;
+    background:var(--card2);
+    color:white;
+    border:1px solid var(--line);
+    padding:12px;
     border-radius:12px;
-    border:1px solid var(--border);
-    background:var(--bg);
-    color:var(--text);
+    outline:none;
 }
 
-/* CONTACT */
+/* =========================
+   ACHIEVEMENTS
+========================= */
 
-.contact{
+.achievement-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.achievement{
+    text-align:center;
+    padding:25px 15px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:22px;
+}
+
+.achievement-icon{
+    font-size:45px;
+    margin-bottom:10px;
+}
+
+.achievement p{
+    color:var(--muted);
+    margin-top:5px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:50px;
+    padding:50px 0 100px;
+    border-top:1px solid var(--line);
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr;
     gap:30px;
 }
 
-.form{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
+.footer p{
+    color:var(--muted);
+    line-height:1.6;
+    margin-top:12px;
 }
 
-.form input,
-.form textarea{
-    padding:14px;
-    border-radius:12px;
-    border:1px solid var(--border);
-    background:var(--card);
-    color:var(--text);
+.footer h3{
+    margin-bottom:15px;
 }
 
-.form textarea{
-    min-height:130px;
+.footer-links{
+    display:grid;
+    gap:10px;
+    color:var(--muted);
 }
 
-/* MODAL */
+/* =========================
+   MODAL
+========================= */
 
 .modal{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.7);
     z-index:5000;
     display:none;
     align-items:center;
     justify-content:center;
-    padding:15px;
+    padding:20px;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(12px);
 }
 
 .modal.show{
@@ -532,164 +908,284 @@ section{
 }
 
 .modal-box{
-    width:100%;
-    max-width:900px;
+    width:min(800px,100%);
     max-height:90vh;
     overflow:auto;
-    background:var(--card);
-    color:var(--text);
-    border-radius:22px;
-    padding:25px;
-    position:relative;
+    padding:30px;
+    border-radius:28px;
+    background:#0d1226;
+    border:1px solid var(--line);
+    box-shadow:0 40px 120px rgba(0,0,0,.7);
+    animation:modalIn .35s ease;
+}
+
+@keyframes modalIn{
+    from{opacity:0;transform:translateY(30px) scale(.95)}
+    to{opacity:1;transform:none}
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    align-items:center;
+    margin-bottom:20px;
 }
 
 .close{
-    position:absolute;
-    right:20px;
-    top:15px;
-    border:0;
-    background:transparent;
-    color:var(--text);
-    font-size:28px;
-    cursor:pointer;
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    background:var(--card2);
+    color:#fff;
+    font-size:20px;
 }
 
-.video{
-    width:100%;
-    aspect-ratio:16/9;
-    background:#080808;
-    border-radius:15px;
-    margin:20px 0;
-    overflow:hidden;
+.video-box{
+    height:280px;
+    border-radius:20px;
+    background:
+        radial-gradient(circle at center,rgba(118,87,255,.3),transparent 45%),
+        #080b17;
+    border:1px solid var(--line);
+    display:grid;
+    place-items:center;
+    font-size:60px;
+    margin:15px 0;
 }
 
-.video video{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-}
-
-.lesson-text{
-    line-height:1.7;
+.modal-text{
     color:var(--muted);
-    margin:20px 0;
+    line-height:1.7;
 }
 
-.quiz-question{
-    padding:18px;
-    border:1px solid var(--border);
-    border-radius:15px;
+/* =========================
+   FORM
+========================= */
+
+.form-group{
     margin-bottom:15px;
 }
 
+.form-group label{
+    display:block;
+    margin-bottom:7px;
+    color:var(--muted);
+}
+
+.form-group input{
+    width:100%;
+    padding:14px;
+    background:var(--card2);
+    border:1px solid var(--line);
+    border-radius:12px;
+    color:#fff;
+    outline:none;
+}
+
+/* =========================
+   QUIZ
+========================= */
+
 .quiz-option{
     display:block;
-    padding:12px;
-    margin-top:8px;
-    border:1px solid var(--border);
-    border-radius:10px;
-    cursor:pointer;
+    width:100%;
+    text-align:left;
+    padding:15px;
+    margin:10px 0;
+    border-radius:13px;
+    background:var(--card2);
+    color:white;
+    border:1px solid var(--line);
 }
 
 .quiz-option:hover{
-    background:#ede9fe;
+    border-color:var(--secondary);
 }
 
-/* CERTIFICATE */
+/* =========================
+   CERTIFICATE
+========================= */
 
 .certificate{
-    border:12px solid #6c4cff;
-    padding:50px;
+    padding:45px;
     text-align:center;
-    background:white;
-    color:#111;
+    border:10px double #7657ff;
+    background:
+        radial-gradient(circle at center,rgba(118,87,255,.12),transparent 60%),
+        #10152d;
 }
 
 .certificate h1{
-    font-size:40px;
-    color:#6c4cff;
+    font-size:45px;
+    margin:15px 0;
 }
 
-.certificate .name{
-    font-size:32px;
-    margin:25px;
+.certificate .student{
+    font-size:30px;
     font-weight:bold;
+    margin:25px 0;
 }
 
-.certificate .course{
-    font-size:23px;
-    margin:15px;
+.certificate p{
+    font-size:18px;
+    line-height:1.7;
+    color:#d5d9e9;
 }
 
-footer{
-    padding:35px 7%;
-    background:#111827;
-    color:white;
-    text-align:center;
+/* =========================
+   TOAST
+========================= */
+
+#toast{
+    position:fixed;
+    right:20px;
+    bottom:25px;
+    z-index:9000;
+    padding:15px 20px;
+    border-radius:14px;
+    background:#171d37;
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
+    transform:translateY(100px);
+    opacity:0;
+    transition:.35s;
 }
 
-/* MOBILE */
+#toast.show{
+    transform:none;
+    opacity:1;
+}
 
-@media(max-width:900px){
-    nav{
-        display:none;
+/* =========================
+   MOBILE
+========================= */
+
+.mobile-nav{
+    display:none;
+}
+
+@media(max-width:1000px){
+
+    .hero-grid,
+    .ai-grid{
+        grid-template-columns:1fr;
     }
 
-    .hero{
-        flex-direction:column;
-        text-align:center;
-        padding-top:50px;
+    .course-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .hero h1{
-        font-size:36px;
-    }
-
-    .hero-art{
-        width:270px;
-        height:270px;
-        font-size:110px;
+    .category-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
     .stats{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .grid{
-        grid-template-columns:1fr;
+    .achievement-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .contact{
-        grid-template-columns:1fr;
+    .nav-links{
+        display:none;
+    }
+
+    .mobile-nav{
+        display:flex;
+        position:fixed;
+        bottom:0;
+        left:0;
+        right:0;
+        z-index:2000;
+        padding:10px;
+        background:rgba(7,9,20,.92);
+        backdrop-filter:blur(20px);
+        border-top:1px solid var(--line);
+        justify-content:space-around;
+    }
+
+    .mobile-nav button{
+        background:transparent;
+        color:var(--muted);
+        font-size:12px;
+    }
+
+    .mobile-nav span{
+        display:block;
+        font-size:21px;
+        margin-bottom:3px;
     }
 }
 
-@media(max-width:500px){
-    section{
-        padding:50px 5%;
+@media(max-width:650px){
+
+    .container{
+        width:94%;
     }
 
-    .stats{
-        padding:20px 5%;
-        grid-template-columns:1fr 1fr;
+    .hero{
+        padding-top:45px;
     }
 
-    .stat{
-        padding:18px 8px;
+    .hero h1{
+        font-size:44px;
     }
 
-    .hero-buttons{
-        justify-content:center;
+    .hero p{
+        font-size:18px;
     }
 
-    .splash-box h1{
-        font-size:28px;
+    .hero-3d{
+        min-height:370px;
     }
+
+    .cube{
+        width:180px;
+        height:180px;
+    }
+
+    .face{
+        width:180px;
+        height:180px;
+        font-size:50px;
+    }
+
+    .front{transform:translateZ(90px)}
+    .back{transform:rotateY(180deg) translateZ(90px)}
+    .right{transform:rotateY(90deg) translateZ(90px)}
+    .left{transform:rotateY(-90deg) translateZ(90px)}
+    .top{transform:rotateX(90deg) translateZ(90px)}
+    .bottom{transform:rotateX(-90deg) translateZ(90px)}
+
+    .stats,
+    .course-grid,
+    .category-grid,
+    .achievement-grid,
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section-title{
+        display:block;
+    }
+
+    .section-title h2{
+        font-size:32px;
+        margin-bottom:10px;
+    }
+
+    .floating-card{
+        transform:scale(.8);
+    }
+
+    .fc1{left:-20px}
+    .fc2{right:-25px}
 }
-
-/* PRINT */
 
 @media print{
+
     body *{
         visibility:hidden;
     }
@@ -707,8 +1203,8 @@ footer{
     }
 
     .modal-box{
-        max-width:none;
         box-shadow:none;
+        max-width:none;
     }
 
     .close,
@@ -721,1225 +1217,1442 @@ footer{
 
 <body>
 
-<!-- SPLASH -->
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
+<div class="bg-orb orb3"></div>
 
+<!-- SPLASH -->
 <div id="splash">
     <div class="splash-box">
-        <div class="robot">🤖</div>
-        <h1>IKROMJON <span>AI</span></h1>
-        <h2>O‘QUV MARKAZI</h2>
+        <div class="ai-orb"></div>
+        <div class="splash-title">IKROMJON AI</div>
+        <div class="splash-sub">O‘QUV MARKAZI</div>
 
         <div class="loader">
-            <div class="loader-line"></div>
+            <div class="loader-bar" id="loaderBar"></div>
         </div>
 
-        <p id="loadText">Yuklanmoqda... 0%</p>
+        <div class="percent" id="percent">0%</div>
     </div>
 </div>
 
 <!-- HEADER -->
-
 <header>
-    <div class="logo">IKROMJON <span>AI</span></div>
+    <div class="container nav">
 
-    <nav>
-        <a onclick="go('home')">Bosh sahifa</a>
-        <a onclick="go('courses')">Kurslar</a>
-        <a onclick="go('lessons')">Darsliklar</a>
-        <a onclick="go('dashboard')">Kabinet</a>
-        <a onclick="go('ai')">AI yordamchi</a>
-    </nav>
+        <div class="logo">
+            <div class="logo-mark">
+                <span>AI</span>
+            </div>
+            <div>
+                IKROMJON AI
+                <small style="display:block;color:var(--muted);font-size:12px;">
+                    O‘quv Markazi
+                </small>
+            </div>
+        </div>
 
-    <div class="header-buttons">
-        <button class="icon-btn" onclick="toggleDark()">🌙</button>
-        <button class="icon-btn" onclick="login()">👤</button>
+        <nav class="nav-links">
+            <button onclick="go('home')">Bosh sahifa</button>
+            <button onclick="go('courses')">Kurslar</button>
+            <button onclick="go('directions')">Yo‘nalishlar</button>
+            <button onclick="go('lessons')">Darslar</button>
+            <button onclick="go('ai')">AI Ustoz</button>
+        </nav>
+
+        <div class="header-actions">
+            <button class="icon-btn" onclick="toggleTheme()">☀️</button>
+
+            <div class="profile-mini" onclick="openProfile()">
+                <div class="avatar" id="avatar">IK</div>
+                <span id="userName">O‘quvchi</span>
+            </div>
+        </div>
+
     </div>
 </header>
 
+<main>
+
 <!-- HERO -->
+<section class="hero" id="home">
+<div class="container hero-grid">
 
-<div class="hero" id="home">
-    <div class="hero-content">
-
-        <span class="badge">🚀 Zamonaviy ta'lim platformasi</span>
+    <div>
+        <div class="badge">✨ Yangi avlod ta’lim platformasi</div>
 
         <h1>
-            Kelajagingizni
-            <span>IKROMJON AI</span>
-            bilan yarating
+            <span class="gradient-text">Kelajak</span>
+            kasblarini
+            <br>
+            bugundan o‘rganing.
         </h1>
 
         <p>
-            Dasturlash, sun'iy intellekt va zamonaviy IT
-            texnologiyalarini o‘rganing. Darslarni bajaring,
-            test topshiring va sertifikat oling.
+            <b>IKROMJON AI O‘QUV MARKAZI</b> —
+            dasturlash, sun’iy intellekt, dizayn, biznes,
+            kiberxavfsizlik va zamonaviy texnologiyalarni
+            o‘rganish uchun innovatsion ta’lim platformasi.
         </p>
 
         <div class="hero-buttons">
-            <button class="btn primary" onclick="go('courses')">
-                📚 Kurslarni ko‘rish
+            <button class="btn btn-primary" onclick="go('courses')">
+                🎓 Kurslarni boshlash
             </button>
 
-            <button class="btn secondary" onclick="login()">
-                👨‍🎓 O‘quvchi kabineti
+            <button class="btn btn-secondary" onclick="go('directions')">
+                🚀 Yo‘nalishlarni ko‘rish
             </button>
+        </div>
+    </div>
+
+    <div class="hero-3d">
+
+        <div class="floating-card fc1">
+            🤖 <b>AI Ta’lim</b>
+        </div>
+
+        <div class="floating-card fc2">
+            🏆 <b>100+ imkoniyat</b>
+        </div>
+
+        <div class="floating-card fc3">
+            📚 <b>Amaliy darslar</b>
+        </div>
+
+        <div class="cube">
+            <div class="face front">🤖</div>
+            <div class="face back">💻</div>
+            <div class="face right">🚀</div>
+            <div class="face left">📚</div>
+            <div class="face top">🧠</div>
+            <div class="face bottom">🎓</div>
         </div>
 
     </div>
 
-    <div class="hero-art">
-        🤖
-    </div>
 </div>
+</section>
 
 <!-- STATS -->
-
-<div class="stats">
+<section>
+<div class="container stats">
 
     <div class="stat">
-        <strong>100+</strong>
-        <span>Video darslar</span>
+        <div class="stat-icon">🎓</div>
+        <div class="stat-number">120+</div>
+        <div class="stat-label">Ta’lim yo‘nalishi</div>
     </div>
 
     <div class="stat">
-        <strong>10+</strong>
-        <span>Kurslar</span>
+        <div class="stat-icon">📚</div>
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Dars va mavzular</div>
     </div>
 
     <div class="stat">
-        <strong>24/7</strong>
-        <span>AI yordamchi</span>
+        <div class="stat-icon">🤖</div>
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">AI yordamchi</div>
     </div>
 
     <div class="stat">
-        <strong>100%</strong>
-        <span>Amaliy ta'lim</span>
+        <div class="stat-icon">🏆</div>
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Rivojlanish imkoniyati</div>
     </div>
 
 </div>
+</section>
 
-<!-- COURSES -->
-
-<section id="courses">
+<!-- DIRECTIONS -->
+<section class="section" id="directions">
+<div class="container">
 
     <div class="section-title">
-        <h2>🎓 Bizning kurslar</h2>
-        <p>O‘zingizga mos yo‘nalishni tanlang</p>
+        <div>
+            <h2>🎓 Ta’lim yo‘nalishlari</h2>
+            <p>
+                Zamonaviy kasblar va raqamli texnologiyalar
+                bo‘yicha keng qamrovli ta’lim yo‘nalishlari.
+            </p>
+        </div>
     </div>
 
-    <div class="grid">
+    <div class="category-grid">
 
-        <div class="card">
-            <div class="course-icon">🌐</div>
-            <h3>Frontend Dasturlash</h3>
-            <p>HTML, CSS va JavaScript orqali zamonaviy saytlar yarating.</p>
-
-            <div class="progress">
-                <div class="progress-bar" id="progress-frontend"></div>
-            </div>
-
-            <button class="btn primary" onclick="openCourse('frontend')">
-                Darslarni boshlash
-            </button>
+        <div class="category">
+            <div class="category-icon">💻</div>
+            <h3>Dasturlash va IT</h3>
+            <p>Web, Python, JavaScript, Java, C++, Backend, Frontend va boshqa yo‘nalishlar.</p>
         </div>
 
-        <div class="card">
-            <div class="course-icon">🐍</div>
-            <h3>Python</h3>
-            <p>Python dasturlash tilini noldan professional darajagacha o‘rganing.</p>
-
-            <div class="progress">
-                <div class="progress-bar" id="progress-python"></div>
-            </div>
-
-            <button class="btn primary" onclick="openCourse('python')">
-                Darslarni boshlash
-            </button>
-        </div>
-
-        <div class="card">
-            <div class="course-icon">🤖</div>
+        <div class="category">
+            <div class="category-icon">🤖</div>
             <h3>Sun’iy intellekt</h3>
-            <p>AI, ChatGPT, prompt engineering va AI vositalarini o‘rganing.</p>
-
-            <div class="progress">
-                <div class="progress-bar" id="progress-ai"></div>
-            </div>
-
-            <button class="btn primary" onclick="openCourse('ai')">
-                Darslarni boshlash
-            </button>
+            <p>AI, Machine Learning, Prompt Engineering, AI Agent va Generativ AI.</p>
         </div>
 
-        <div class="card">
-            <div class="course-icon">📱</div>
+        <div class="category">
+            <div class="category-icon">📱</div>
             <h3>Mobil dasturlash</h3>
-            <p>Mobil ilovalar yaratish asoslarini o‘rganing.</p>
-
-            <div class="progress">
-                <div class="progress-bar" id="progress-mobile"></div>
-            </div>
-
-            <button class="btn primary" onclick="openCourse('mobile')">
-                Darslarni boshlash
-            </button>
+            <p>Android, iOS, Flutter, React Native, Kotlin va Swift.</p>
         </div>
 
-        <div class="card">
-            <div class="course-icon">🎨</div>
-            <h3>Web Design</h3>
-            <p>Chiroyli va zamonaviy UI/UX dizayn yaratishni o‘rganing.</p>
-
-            <div class="progress">
-                <div class="progress-bar" id="progress-design"></div>
-            </div>
-
-            <button class="btn primary" onclick="openCourse('design')">
-                Darslarni boshlash
-            </button>
+        <div class="category">
+            <div class="category-icon">🎨</div>
+            <h3>Dizayn</h3>
+            <p>Figma, Photoshop, UI/UX, 3D Design, Motion Design va grafik dizayn.</p>
         </div>
 
-        <div class="card">
-            <div class="course-icon">💻</div>
-            <h3>Kompyuter savodxonligi</h3>
-            <p>Kompyuter va internetdan professional foydalanishni o‘rganing.</p>
+        <div class="category">
+            <div class="category-icon">🛡️</div>
+            <h3>Kiberxavfsizlik</h3>
+            <p>Internet xavfsizligi, Network Security, Ethical Hacking va Cybersecurity.</p>
+        </div>
 
-            <div class="progress">
-                <div class="progress-bar" id="progress-computer"></div>
-            </div>
+        <div class="category">
+            <div class="category-icon">📊</div>
+            <h3>Data va analitika</h3>
+            <p>Data Science, Data Analytics, Excel, SQL, Power BI va statistik tahlil.</p>
+        </div>
 
-            <button class="btn primary" onclick="openCourse('computer')">
-                Darslarni boshlash
-            </button>
+        <div class="category">
+            <div class="category-icon">🎬</div>
+            <h3>Media va kontent</h3>
+            <p>Video montaj, SMM, Reels, YouTube, Copywriting va kontent yaratish.</p>
+        </div>
+
+        <div class="category">
+            <div class="category-icon">💼</div>
+            <h3>Biznes</h3>
+            <p>Digital Marketing, E-commerce, Startap, Freelancing va biznes asoslari.</p>
+        </div>
+
+        <div class="category">
+            <div class="category-icon">☁️</div>
+            <h3>Cloud & DevOps</h3>
+            <p>Linux, Cloud Computing, Docker, Kubernetes, DevOps va CI/CD.</p>
+        </div>
+
+        <div class="category">
+            <div class="category-icon">🦾</div>
+            <h3>Robototexnika</h3>
+            <p>Arduino, IoT, robototexnika va avtomatlashtirish asoslari.</p>
+        </div>
+
+        <div class="category">
+            <div class="category-icon">🌍</div>
+            <h3>Xorijiy tillar</h3>
+            <p>Ingliz, rus, koreys, nemis, turk, arab va IT English.</p>
+        </div>
+
+        <div class="category">
+            <div class="category-icon">👦</div>
+            <h3>Bolalar ta’limi</h3>
+            <p>Scratch, dasturlash, robototexnika, mantiqiy fikrlash va kompyuter savodxonligi.</p>
         </div>
 
     </div>
+</div>
+</section>
 
+<!-- COURSES -->
+<section class="section" id="courses">
+<div class="container">
+
+    <div class="section-title">
+        <div>
+            <h2>🔥 Mashhur kurslar</h2>
+            <p>
+                Boshlang‘ich darajadan professional darajagacha
+                bosqichma-bosqich ta’lim.
+            </p>
+        </div>
+    </div>
+
+    <div class="search-box">
+        <input
+            id="courseSearch"
+            type="search"
+            placeholder="🔎 Kurs nomini qidiring..."
+            oninput="renderCourses()"
+        >
+    </div>
+
+    <div class="filters">
+        <button class="filter active" onclick="setFilter('all',this)">Barchasi</button>
+        <button class="filter" onclick="setFilter('it',this)">💻 IT</button>
+        <button class="filter" onclick="setFilter('ai',this)">🤖 AI</button>
+        <button class="filter" onclick="setFilter('design',this)">🎨 Dizayn</button>
+        <button class="filter" onclick="setFilter('business',this)">💼 Biznes</button>
+    </div>
+
+    <div class="course-grid" id="courseGrid"></div>
+
+</div>
 </section>
 
 <!-- LESSONS -->
-
-<section id="lessons">
-
-    <div class="section-title">
-        <h2>📚 Darsliklar</h2>
-        <p>Kursni tanlang va darslarni boshlang</p>
-    </div>
-
-    <div class="grid">
-
-        <div class="card">
-            <h3>🌐 HTML & CSS</h3>
-            <p>Web sahifa yaratish</p>
-            <button class="btn primary" onclick="openCourse('frontend')">
-                Darslikni ochish
-            </button>
-        </div>
-
-        <div class="card">
-            <h3>🐍 Python</h3>
-            <p>Dasturlash asoslari</p>
-            <button class="btn primary" onclick="openCourse('python')">
-                Darslikni ochish
-            </button>
-        </div>
-
-        <div class="card">
-            <h3>🤖 AI</h3>
-            <p>Sun’iy intellekt</p>
-            <button class="btn primary" onclick="openCourse('ai')">
-                Darslikni ochish
-            </button>
-        </div>
-
-        <div class="card">
-            <h3>📱 Mobil</h3>
-            <p>Mobil ilovalar</p>
-            <button class="btn primary" onclick="openCourse('mobile')">
-                Darslikni ochish
-            </button>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- DASHBOARD -->
-
-<section id="dashboard">
+<section class="section" id="lessons">
+<div class="container">
 
     <div class="section-title">
-        <h2>👨‍🎓 O‘quvchi kabineti</h2>
-        <p>O‘qish jarayoningizni kuzating</p>
+        <div>
+            <h2>📚 Darslar</h2>
+            <p>
+                Har bir mavzuni video, nazariya, amaliyot va
+                test orqali o‘zlashtiring.
+            </p>
+        </div>
     </div>
 
-    <div class="dashboard">
+    <div class="lesson-list" id="lessonList"></div>
 
-        <div class="user-box">
-
-            <div class="avatar" id="avatar">
-                👤
-            </div>
-
-            <div>
-                <h2 id="studentName">Mehmon o‘quvchi</h2>
-                <p style="color:var(--muted)">
-                    IKROMJON AI o‘quvchisi
-                </p>
-            </div>
-
-        </div>
-
-        <div class="course-progress">
-
-            <div class="course-progress-row">
-                <div>
-                    <b>Frontend</b>
-                    <span id="dashFrontend">0%</span>
-                </div>
-
-                <div class="progress">
-                    <div class="progress-bar" id="dashFrontendBar"></div>
-                </div>
-            </div>
-
-            <div class="course-progress-row">
-                <div>
-                    <b>Python</b>
-                    <span id="dashPython">0%</span>
-                </div>
-
-                <div class="progress">
-                    <div class="progress-bar" id="dashPythonBar"></div>
-                </div>
-            </div>
-
-            <div class="course-progress-row">
-                <div>
-                    <b>AI</b>
-                    <span id="dashAi">0%</span>
-                </div>
-
-                <div class="progress">
-                    <div class="progress-bar" id="dashAiBar"></div>
-                </div>
-            </div>
-
-        </div>
-
-        <button class="btn primary" onclick="showCertificate()">
-            🎓 Sertifikatim
-        </button>
-
-    </div>
-
+</div>
 </section>
 
 <!-- AI -->
+<section class="section" id="ai">
+<div class="container">
 
-<section id="ai">
+    <div class="ai-section">
 
-    <div class="section-title">
-        <h2>🤖 IKROMJON AI yordamchi</h2>
-        <p>Savolingizni yozing</p>
-    </div>
+        <div class="ai-grid">
 
-    <div class="ai-box">
+            <div>
+                <div class="badge">🤖 IKROMJON AI</div>
 
-        <div class="ai-messages" id="aiMessages">
+                <h2 style="font-size:42px;margin-bottom:15px;">
+                    Sizning raqamli AI ustozingiz
+                </h2>
 
-            <div class="message bot">
-                👋 Assalomu alaykum! Men IKROMJON AI yordamchisiman.
-                Dasturlash, HTML, CSS, Python yoki AI haqida savol bering.
+                <p style="color:var(--muted);line-height:1.7;font-size:18px;">
+                    Savol bering, mavzuni tushuntirishni so‘rang,
+                    dasturlash bo‘yicha yordam oling yoki o‘zingiz
+                    uchun yangi o‘quv rejasini tuzing.
+                </p>
+
+                <div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;">
+                    <button class="filter" onclick="aiQuick('HTML nima?')">HTML nima?</button>
+                    <button class="filter" onclick="aiQuick('Python haqida ayting')">Python</button>
+                    <button class="filter" onclick="aiQuick('AI nima?')">AI</button>
+                    <button class="filter" onclick="aiQuick('Dasturlashni qanday boshlayman?')">Boshlash</button>
+                </div>
+            </div>
+
+            <div class="ai-visual">
+                <div class="ai-core"></div>
             </div>
 
         </div>
 
-        <div class="ai-input">
-            <input
-                id="aiInput"
-                placeholder="Savolingizni yozing..."
-                onkeydown="if(event.key==='Enter') askAI()"
-            >
+        <div class="chat">
 
-            <button class="btn primary" onclick="askAI()">
-                Yuborish
-            </button>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai">
+                    Assalomu alaykum! Men IKROMJON AI yordamchisiman.
+                    Ta’lim bo‘yicha savolingizni yozishingiz mumkin. 🤖
+                </div>
+            </div>
+
+            <div class="chat-input">
+                <input
+                    id="aiInput"
+                    placeholder="Savolingizni yozing..."
+                    onkeydown="if(event.key==='Enter') sendAI()"
+                >
+                <button class="btn btn-primary" onclick="sendAI()">Yuborish</button>
+            </div>
+
         </div>
 
     </div>
 
+</div>
 </section>
 
-<!-- CONTACT -->
-
-<section>
+<!-- ACHIEVEMENTS -->
+<section class="section">
+<div class="container">
 
     <div class="section-title">
-        <h2>📞 Biz bilan bog‘laning</h2>
-        <p>O‘quv markazimiz haqida ma'lumot oling</p>
-    </div>
-
-    <div class="contact">
-
-        <div class="card">
-            <h2>IKROMJON AI</h2>
-
-            <p style="margin-top:15px">
-                🚀 Zamonaviy IT ta'lim markazi
-            </p>
-
-            <p style="margin-top:10px">
-                📚 Dasturlash kurslari
-            </p>
-
-            <p style="margin-top:10px">
-                🤖 AI texnologiyalari
-            </p>
-
-            <p style="margin-top:10px">
-                🎓 Sertifikat
+        <div>
+            <h2>🏆 Yutuqlar tizimi</h2>
+            <p>
+                Har bir qadamni nishonlang va yangi darajalarni oching.
             </p>
         </div>
-
-        <form class="form" onsubmit="sendMessage(event)">
-
-            <input id="contactName" placeholder="Ismingiz" required>
-
-            <input id="contactPhone" placeholder="Telefon raqamingiz" required>
-
-            <textarea id="contactText" placeholder="Xabaringiz"></textarea>
-
-            <button class="btn primary">
-                📩 Xabar yuborish
-            </button>
-
-        </form>
-
     </div>
 
+    <div class="achievement-grid">
+
+        <div class="achievement">
+            <div class="achievement-icon">🌱</div>
+            <h3>Birinchi qadam</h3>
+            <p>Birinchi darsni yakunlang.</p>
+        </div>
+
+        <div class="achievement">
+            <div class="achievement-icon">🔥</div>
+            <h3>Faol o‘quvchi</h3>
+            <p>7 kun ketma-ket ta’lim oling.</p>
+        </div>
+
+        <div class="achievement">
+            <div class="achievement-icon">🎯</div>
+            <h3>Bilim sinovi</h3>
+            <p>10 ta testni muvaffaqiyatli bajaring.</p>
+        </div>
+
+        <div class="achievement">
+            <div class="achievement-icon">🏆</div>
+            <h3>Professional</h3>
+            <p>Birinchi kursni yakunlang.</p>
+        </div>
+
+    </div>
+</div>
 </section>
 
+</main>
+
+<!-- FOOTER -->
 <footer>
-    <h3>IKROMJON AI O‘QUV MARKAZI</h3>
-    <p style="margin-top:10px">
-        © 2026 Barcha huquqlar himoyalangan
-    </p>
-</footer>
+<div class="container footer-grid">
 
-<!-- COURSE MODAL -->
+    <div>
+        <div class="logo">
+            <div class="logo-mark"><span>AI</span></div>
+            IKROMJON AI
+        </div>
 
-<div class="modal" id="courseModal">
-
-    <div class="modal-box">
-
-        <button class="close" onclick="closeModal('courseModal')">
-            ×
-        </button>
-
-        <h2 id="courseTitle"></h2>
-
-        <p id="courseDescription" style="color:var(--muted);margin-top:8px"></p>
-
-        <div id="lessonList" style="margin-top:25px"></div>
-
-        <button class="btn primary" onclick="openQuiz()">
-            📝 Kurs testini topshirish
-        </button>
-
+        <p>
+            Zamonaviy bilim, raqamli texnologiyalar va kelajak
+            kasblarini o‘rganish uchun innovatsion ta’lim platformasi.
+        </p>
     </div>
 
+    <div>
+        <h3>Ta’lim</h3>
+        <div class="footer-links">
+            <a href="#courses">Kurslar</a>
+            <a href="#directions">Yo‘nalishlar</a>
+            <a href="#lessons">Darslar</a>
+            <a href="#ai">AI Ustoz</a>
+        </div>
+    </div>
+
+    <div>
+        <h3>Bizning shior</h3>
+        <p>
+            <b>“Kelajak kasblarini bugundan o‘rganing!”</b>
+        </p>
+    </div>
+
+</div>
+</footer>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+    <button onclick="go('home')">
+        <span>🏠</span>
+        Bosh sahifa
+    </button>
+
+    <button onclick="go('courses')">
+        <span>🎓</span>
+        Kurslar
+    </button>
+
+    <button onclick="go('directions')">
+        <span>🚀</span>
+        Yo‘nalishlar
+    </button>
+
+    <button onclick="go('ai')">
+        <span>🤖</span>
+        AI
+    </button>
+
+    <button onclick="openProfile()">
+        <span>👤</span>
+        Profil
+    </button>
+</div>
+
+<!-- COURSE MODAL -->
+<div class="modal" id="courseModal">
+    <div class="modal-box">
+
+        <div class="modal-head">
+            <div>
+                <h2 id="courseModalTitle"></h2>
+                <p id="courseModalSubtitle" style="color:var(--muted);"></p>
+            </div>
+
+            <button class="close" onclick="closeModal('courseModal')">×</button>
+        </div>
+
+        <div id="courseModalBody"></div>
+
+    </div>
 </div>
 
 <!-- LESSON MODAL -->
-
 <div class="modal" id="lessonModal">
-
     <div class="modal-box">
 
-        <button class="close" onclick="closeModal('lessonModal')">
-            ×
-        </button>
-
-        <h2 id="lessonTitle"></h2>
-
-        <div class="video">
-            <video id="lessonVideo" controls>
-                <source id="videoSource" src="">
-                Brauzeringiz video formatini qo‘llab-quvvatlamaydi.
-            </video>
+        <div class="modal-head">
+            <h2 id="lessonTitle">Dars</h2>
+            <button class="close" onclick="closeModal('lessonModal')">×</button>
         </div>
 
-        <p id="videoMessage" style="color:var(--muted)">
-            🎬 Bu darsga video URL manzilini JavaScriptdagi
-            <b>video</b> qatoriga qo‘shishingiz mumkin.
-        </p>
+        <div class="video-box">▶️</div>
 
-        <div class="lesson-text" id="lessonText"></div>
+        <div class="modal-text" id="lessonText"></div>
 
-        <button class="btn secondary" onclick="openPDF()">
-            📄 PDF material
-        </button>
+        <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;">
+            <button class="btn btn-primary" onclick="completeLesson()">
+                ✅ Darsni yakunlash
+            </button>
 
-        <button class="btn primary" onclick="completeLesson()">
-            ✅ Darsni tugatdim
-        </button>
+            <button class="btn btn-secondary" onclick="openQuiz()">
+                📝 Testni boshlash
+            </button>
+        </div>
 
     </div>
-
 </div>
 
-<!-- QUIZ -->
-
+<!-- QUIZ MODAL -->
 <div class="modal" id="quizModal">
-
     <div class="modal-box">
 
-        <button class="close" onclick="closeModal('quizModal')">
-            ×
+        <div class="modal-head">
+            <h2>📝 Bilim testi</h2>
+            <button class="close" onclick="closeModal('quizModal')">×</button>
+        </div>
+
+        <p style="margin-bottom:15px;">
+            HTML sahifasining asosiy tuzilmasini qaysi teg belgilaydi?
+        </p>
+
+        <button class="quiz-option" onclick="quizAnswer(this,false)">
+            A) &lt;style&gt;
         </button>
 
-        <h2>📝 Kurs testi</h2>
+        <button class="quiz-option" onclick="quizAnswer(this,true)">
+            B) &lt;html&gt;
+        </button>
 
-        <div id="quizContent" style="margin-top:20px"></div>
+        <button class="quiz-option" onclick="quizAnswer(this,false)">
+            C) &lt;script&gt;
+        </button>
 
-        <button class="btn primary" onclick="submitQuiz()">
-            Testni yakunlash
+        <button class="quiz-option" onclick="quizAnswer(this,false)">
+            D) &lt;link&gt;
+        </button>
+
+        <div id="quizResult" style="margin-top:15px;font-size:18px;"></div>
+
+    </div>
+</div>
+
+<!-- PROFILE -->
+<div class="modal" id="profileModal">
+    <div class="modal-box">
+
+        <div class="modal-head">
+            <h2>👤 O‘quvchi profili</h2>
+            <button class="close" onclick="closeModal('profileModal')">×</button>
+        </div>
+
+        <div class="form-group">
+            <label>Ism-familiya</label>
+            <input id="profileName" placeholder="Ism va familiyangiz">
+        </div>
+
+        <div class="form-group">
+            <label>Kasbiy yo‘nalish</label>
+            <input id="profileDirection" placeholder="Masalan: Dasturlash">
+        </div>
+
+        <button class="btn btn-primary" onclick="saveProfile()">
+            💾 Saqlash
+        </button>
+
+        <button class="btn btn-secondary" onclick="openCertificate()">
+            📜 Sertifikat
         </button>
 
     </div>
-
 </div>
 
 <!-- CERTIFICATE -->
-
 <div class="modal" id="certificateModal">
-
     <div class="modal-box">
 
-        <button class="close" onclick="closeModal('certificateModal')">
-            ×
-        </button>
+        <div class="modal-head">
+            <h2>📜 Sertifikat</h2>
+            <button class="close" onclick="closeModal('certificateModal')">×</button>
+        </div>
 
-        <div class="certificate">
+        <div class="certificate" id="certificate">
 
-            <h1>🎓 SERTIFIKAT</h1>
+            <div style="font-size:20px;">
+                IKROMJON AI O‘QUV MARKAZI
+            </div>
 
-            <p style="margin-top:25px">
-                Ushbu sertifikat
-            </p>
+            <h1>SERTIFIKAT</h1>
 
-            <div class="name" id="certificateName">
-                O‘quvchi
+            <p>Ushbu sertifikat</p>
+
+            <div class="student" id="certificateName">
+                O‘QUVCHI
             </div>
 
             <p>
-                IKROMJON AI O‘QUV MARKAZI
-                kursini muvaffaqiyatli tamomlaganini tasdiqlaydi.
+                <b>Web dasturlash va zamonaviy texnologiyalar</b>
+                o‘quv dasturini muvaffaqiyatli o‘zlashtirgani,
+                nazariy bilim va amaliy ko‘nikmalarni egallagani
+                uchun taqdim etiladi.
             </p>
 
-            <div class="course">
-                Frontend / Python / AI
-            </div>
+            <br>
 
-            <p id="certificateDate"></p>
+            <p>
+                Berilgan sana: <span id="certificateDate"></span>
+            </p>
+
+            <p>
+                Sertifikat raqami: <b>IA-000001</b>
+            </p>
+
+            <br>
+
+            <p>
+                <b>“Bilim — kelajak sari eng ishonchli investitsiya.”</b>
+            </p>
 
         </div>
 
-        <button class="btn primary print-btn" onclick="window.print()">
-            🖨 Sertifikatni chiqarish
+        <button
+            class="btn btn-primary print-btn"
+            style="margin-top:20px;"
+            onclick="window.print()">
+            🖨️ Chop etish
         </button>
 
     </div>
-
 </div>
+
+<!-- TOAST -->
+<div id="toast"></div>
 
 <script>
 
-/* SPLASH */
+/* =========================
+   SPLASH
+========================= */
 
-let percent=0;
+let percent = 0;
 
-let loading=setInterval(()=>{
+const loader = setInterval(() => {
 
-    percent++;
+    percent += 2;
 
-    document.getElementById("loadText").innerText=
-        "Yuklanmoqda... "+percent+"%";
+    document.getElementById("loaderBar").style.width = percent + "%";
+    document.getElementById("percent").textContent = percent + "%";
 
-    if(percent>=100){
-        clearInterval(loading);
+    if(percent >= 100){
+
+        clearInterval(loader);
+
+        setTimeout(() => {
+
+            document.getElementById("splash").style.opacity = "0";
+            document.getElementById("splash").style.pointerEvents = "none";
+
+            setTimeout(() => {
+                document.getElementById("splash").style.display = "none";
+            },800);
+
+        },400);
     }
 
 },30);
 
 
-/* DATA */
+/* =========================
+   DATA
+========================= */
 
-const courses={
+const courses = [
 
-frontend:{
-    title:"🌐 Frontend Dasturlash",
-    description:"HTML, CSS va JavaScript asoslarini o‘rganing.",
-    lessons:[
-        ["HTML asoslari","HTML nima? Teglar, sahifa tuzilishi va asosiy elementlar."],
-        ["HTML strukturasi","DOCTYPE, head, body va sahifa tuzilishi."],
-        ["CSS asoslari","Rang, shrift, margin, padding va border."],
-        ["Flexbox","Elementlarni zamonaviy joylashtirish."],
-        ["Responsive Design","Telefon va kompyuterga mos sayt."],
-        ["JavaScript","O‘zgaruvchi, funksiya va hodisalar."],
-        ["DOM","HTML elementlarini JavaScript orqali boshqarish."],
-        ["Mini loyiha","O‘zingizning birinchi web loyihangiz."]
-    ]
+{
+id:"html",
+icon:"🌐",
+title:"HTML & CSS",
+category:"it",
+level:"Boshlang‘ich",
+lessons:20,
+duration:"25 soat",
+desc:"Web sahifalarni noldan yaratish va professional dizayn qilishni o‘rganing."
 },
 
-python:{
-    title:"🐍 Python dasturlash",
-    description:"Python dasturlash tilini noldan o‘rganing.",
-    lessons:[
-        ["Python nima?","Python haqida umumiy tushuncha."],
-        ["O‘zgaruvchilar","String, number va boolean."],
-        ["If / Else","Shart operatorlari."],
-        ["For loop","Takrorlanish operatorlari."],
-        ["While","While sikli."],
-        ["Funksiyalar","Python funksiyalarini yaratish."],
-        ["List","Ro‘yxatlar bilan ishlash."],
-        ["Mini loyiha","Oddiy Python dasturi."]
-    ]
+{
+id:"javascript",
+icon:"⚡",
+title:"JavaScript",
+category:"it",
+level:"O‘rta",
+lessons:30,
+duration:"40 soat",
+desc:"Interaktiv va zamonaviy web-ilovalar yaratishni o‘rganing."
 },
 
-ai:{
-    title:"🤖 Sun’iy intellekt",
-    description:"AI va zamonaviy sun’iy intellekt texnologiyalarini o‘rganing.",
-    lessons:[
-        ["AI nima?","Sun’iy intellekt tushunchasi."],
-        ["Machine Learning","Mashinali o‘rganish asoslari."],
-        ["ChatGPT","AI yordamchilaridan foydalanish."],
-        ["Prompt Engineering","To‘g‘ri prompt yozish."],
-        ["AI rasmlar","AI orqali tasvir yaratish."],
-        ["AI video","AI video texnologiyalari."],
-        ["AI biznesda","Biznesda AI foydalanish."],
-        ["AI loyiha","Shaxsiy AI loyihangiz."]
-    ]
+{
+id:"python",
+icon:"🐍",
+title:"Python",
+category:"it",
+level:"Boshlang‘ich",
+lessons:35,
+duration:"45 soat",
+desc:"Python dasturlash tilini amaliy loyihalar orqali egallang."
 },
 
-mobile:{
-    title:"📱 Mobil dasturlash",
-    description:"Mobil ilovalar yaratish asoslarini o‘rganing.",
-    lessons:[
-        ["Mobil ilova nima?","Mobil dasturlashga kirish."],
-        ["UI dizayn","Mobil interfeys yaratish."],
-        ["Navigation","Sahifalar orasida o'tish."],
-        ["Formalar","Input va buttonlar."],
-        ["API","Server bilan bog‘lanish."],
-        ["Database","Ma’lumotlarni saqlash."],
-        ["Login","Kirish tizimi."],
-        ["Mini loyiha","Mobil ilova yaratish."]
-    ]
+{
+id:"ai",
+icon:"🤖",
+title:"Sun’iy intellekt",
+category:"ai",
+level:"O‘rta",
+lessons:25,
+duration:"35 soat",
+desc:"AI, Generative AI, Prompt Engineering va zamonaviy AI vositalari."
 },
 
-design:{
-    title:"🎨 Web Design",
-    description:"Zamonaviy UI/UX dizayn yaratishni o‘rganing.",
-    lessons:[
-        ["UI nima?","Foydalanuvchi interfeysi."],
-        ["UX nima?","Foydalanuvchi tajribasi."],
-        ["Ranglar","Ranglar uyg‘unligi."],
-        ["Typography","Shriftlar bilan ishlash."],
-        ["Grid","Elementlarni tartiblash."],
-        ["Mobile Design","Mobil dizayn."],
-        ["Prototype","Prototip yaratish."],
-        ["Mini loyiha","Web dizayn loyiha."]
-    ]
+{
+id:"frontend",
+icon:"💻",
+title:"Frontend Pro",
+category:"it",
+level:"Professional",
+lessons:45,
+duration:"60 soat",
+desc:"Professional frontend dasturchi bo‘lish uchun kompleks kurs."
 },
 
-computer:{
-    title:"💻 Kompyuter savodxonligi",
-    description:"Kompyuter va internetdan foydalanishni o‘rganing.",
-    lessons:[
-        ["Kompyuter asoslari","Kompyuter qismlari."],
-        ["Windows","Operatsion tizim."],
-        ["Fayllar","Fayl va papkalar."],
-        ["Internet","Internet asoslari."],
-        ["Email","Elektron pochta."],
-        ["Word","Matn bilan ishlash."],
-        ["Excel","Jadvallar bilan ishlash."],
-        ["Xavfsizlik","Internet xavfsizligi."]
-    ]
+{
+id:"mobile",
+icon:"📱",
+title:"Mobil dasturlash",
+category:"it",
+level:"O‘rta",
+lessons:30,
+duration:"50 soat",
+desc:"Android va iOS uchun zamonaviy mobil ilovalar yarating."
+},
+
+{
+id:"design",
+icon:"🎨",
+title:"Grafik dizayn",
+category:"design",
+level:"Boshlang‘ich",
+lessons:25,
+duration:"30 soat",
+desc:"Figma, Photoshop va zamonaviy grafik dizayn asoslarini o‘rganing."
+},
+
+{
+id:"cyber",
+icon:"🛡️",
+title:"Kiberxavfsizlik",
+category:"it",
+level:"O‘rta",
+lessons:28,
+duration:"40 soat",
+desc:"Raqamli xavfsizlik va kiberxavfsizlik asoslarini o‘rganing."
+},
+
+{
+id:"data",
+icon:"📊",
+title:"Data Analytics",
+category:"it",
+level:"O‘rta",
+lessons:25,
+duration:"35 soat",
+desc:"Ma’lumotlarni tahlil qilish, Excel, SQL va Power BI."
+},
+
+{
+id:"marketing",
+icon:"📢",
+title:"Digital Marketing",
+category:"business",
+level:"Boshlang‘ich",
+lessons:20,
+duration:"25 soat",
+desc:"Internet marketing, reklama, SMM va SEO asoslarini o‘rganing."
+},
+
+{
+id:"business",
+icon:"💼",
+title:"Biznes asoslari",
+category:"business",
+level:"Boshlang‘ich",
+lessons:18,
+duration:"22 soat",
+desc:"Biznes g‘oyadan amaliy loyihagacha bo‘lgan jarayonni o‘rganing."
+},
+
+{
+id:"english",
+icon:"🇬🇧",
+title:"IT English",
+category:"business",
+level:"Boshlang‘ich",
+lessons:30,
+duration:"35 soat",
+desc:"IT sohasi uchun zarur bo‘lgan ingliz tili bilimlarini rivojlantiring."
 }
 
-};
+];
+
+const lessons = [
+
+{
+title:"HTML bilan tanishuv",
+course:"HTML & CSS",
+icon:"🌐",
+text:"HTML web sahifaning asosiy tuzilmasini yaratish uchun ishlatiladigan belgilash tilidir."
+},
+
+{
+title:"CSS asoslari",
+course:"HTML & CSS",
+icon:"🎨",
+text:"CSS yordamida web sahifalarning ranglari, shriftlari, joylashuvi va dizayni boshqariladi."
+},
+
+{
+title:"JavaScript nima?",
+course:"JavaScript",
+icon:"⚡",
+text:"JavaScript web sahifalarni interaktiv va dinamik qilish imkonini beradi."
+},
+
+{
+title:"Python dasturlashga kirish",
+course:"Python",
+icon:"🐍",
+text:"Python sodda sintaksisga ega bo‘lgan kuchli dasturlash tilidir."
+},
+
+{
+title:"Sun’iy intellekt nima?",
+course:"AI",
+icon:"🤖",
+text:"Sun’iy intellekt kompyuter tizimlariga ma’lumotlardan foydalanib vazifalarni bajarish imkonini beradi."
+},
+
+{
+title:"Prompt Engineering",
+course:"AI",
+icon:"🧠",
+text:"Prompt Engineering AI tizimlariga aniq va samarali topshiriqlar berish san’atidir."
+},
+
+{
+title:"Mobil dasturlash asoslari",
+course:"Mobile",
+icon:"📱",
+text:"Mobil dasturlash yordamida smartfon va planshetlar uchun zamonaviy ilovalar yaratiladi."
+},
+
+{
+title:"UI/UX dizayn",
+course:"Design",
+icon:"🎨",
+text:"UI/UX foydalanuvchi uchun qulay, chiroyli va tushunarli raqamli mahsulot yaratishga yordam beradi."
+}
+
+];
 
 
-/* QUIZ */
-
-const quizzes={
-
-frontend:[
-    {
-        q:"HTML nimani anglatadi?",
-        options:["HyperText Markup Language","HighText Machine Language","Home Tool Markup Language"],
-        answer:0
-    },
-    {
-        q:"CSS nima uchun ishlatiladi?",
-        options:["Dizayn uchun","Server uchun","Database uchun"],
-        answer:0
-    },
-    {
-        q:"JavaScript nima?",
-        options:["Dasturlash tili","Operatsion tizim","Brauzer"],
-        answer:0
-    }
-],
-
-python:[
-    {
-        q:"Python qanday til?",
-        options:["Dasturlash tili","Grafik dastur","Brauzer"],
-        answer:0
-    },
-    {
-        q:"Python fayli kengaytmasi?",
-        options:[".py",".html",".css"],
-        answer:0
-    },
-    {
-        q:"print() nima qiladi?",
-        options:["Ma'lumot chiqaradi","Fayl o‘chiradi","Kompyuterni o‘chiradi"],
-        answer:0
-    }
-],
-
-ai:[
-    {
-        q:"AI nima?",
-        options:["Sun’iy intellekt","Audio internet","Application interface"],
-        answer:0
-    },
-    {
-        q:"Prompt nima?",
-        options:["AI ga beriladigan topshiriq","Kompyuter","Video"],
-        answer:0
-    },
-    {
-        q:"ChatGPT nima?",
-        options:["AI yordamchi","Printer","Operatsion tizim"],
-        answer:0
-    }
-]
-
-};
-
-
-/* VARIABLES */
-
-let currentCourse="";
-let currentLesson=0;
-
-
-/* NAVIGATION */
+/* =========================
+   NAVIGATION
+========================= */
 
 function go(id){
-    document.getElementById(id).scrollIntoView({
-        behavior:"smooth"
-    });
-}
 
+    const el = document.getElementById(id);
 
-/* DARK MODE */
-
-function toggleDark(){
-
-    document.body.classList.toggle("dark");
-
-    localStorage.setItem(
-        "darkMode",
-        document.body.classList.contains("dark")
-    );
-}
-
-if(localStorage.getItem("darkMode")==="true"){
-    document.body.classList.add("dark");
-}
-
-
-/* LOGIN */
-
-function login(){
-
-    let old=localStorage.getItem("studentName") || "";
-
-    let name=prompt(
-        "O‘quvchi ismingizni kiriting:",
-        old
-    );
-
-    if(name){
-
-        localStorage.setItem("studentName",name);
-
-        updateDashboard();
-
-        alert(
-            "Xush kelibsiz, "+name+"! 👋"
-        );
+    if(el){
+        el.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
     }
 }
 
 
-/* DASHBOARD */
+/* =========================
+   THEME
+========================= */
 
-function updateDashboard(){
+function toggleTheme(){
 
-    let name=
-        localStorage.getItem("studentName")
-        || "Mehmon o‘quvchi";
+    const light = document.body.classList.toggle("light");
 
-    document.getElementById("studentName").innerText=name;
+    if(light){
 
-    document.getElementById("certificateName").innerText=name;
+        document.documentElement.style.setProperty("--bg","#f4f6ff");
+        document.documentElement.style.setProperty("--bg2","#ffffff");
+        document.documentElement.style.setProperty("--card","rgba(255,255,255,.85)");
+        document.documentElement.style.setProperty("--card2","rgba(0,0,0,.05)");
+        document.documentElement.style.setProperty("--text","#11152a");
+        document.documentElement.style.setProperty("--muted","#606983");
+        document.documentElement.style.setProperty("--line","rgba(0,0,0,.10)");
 
-    let coursesToShow=["frontend","python","ai"];
+        localStorage.setItem("theme","light");
 
-    coursesToShow.forEach(c=>{
+    }else{
 
-        let p=getProgress(c);
+        location.reload();
 
-        let el=document.getElementById("progress-"+c);
-
-        if(el){
-            el.style.width=p+"%";
-        }
-    });
-
-    let f=getProgress("frontend");
-    let py=getProgress("python");
-    let ai=getProgress("ai");
-
-    document.getElementById("dashFrontend").innerText=f+"%";
-    document.getElementById("dashFrontendBar").style.width=f+"%";
-
-    document.getElementById("dashPython").innerText=py+"%";
-    document.getElementById("dashPythonBar").style.width=py+"%";
-
-    document.getElementById("dashAi").innerText=ai+"%";
-    document.getElementById("dashAiBar").style.width=ai+"%";
+    }
 }
 
-updateDashboard();
+
+/* =========================
+   FILTER
+========================= */
+
+let currentFilter = "all";
+
+function setFilter(filter,button){
+
+    currentFilter = filter;
+
+    document.querySelectorAll(".filter").forEach(x=>{
+        x.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    renderCourses();
+}
 
 
-/* OPEN COURSE */
+/* =========================
+   COURSES
+========================= */
 
-function openCourse(course){
+function renderCourses(){
 
-    currentCourse=course;
+    const grid = document.getElementById("courseGrid");
 
-    let data=courses[course];
+    const search = document
+        .getElementById("courseSearch")
+        .value
+        .toLowerCase();
 
-    document.getElementById("courseTitle").innerText=data.title;
+    const filtered = courses.filter(course => {
 
-    document.getElementById("courseDescription").innerText=
-        data.description;
+        const matchesSearch =
+            course.title.toLowerCase().includes(search) ||
+            course.desc.toLowerCase().includes(search);
 
-    let list=document.getElementById("lessonList");
+        const matchesFilter =
+            currentFilter === "all" ||
+            course.category === currentFilter;
 
-    list.innerHTML="";
+        return matchesSearch && matchesFilter;
 
-    data.lessons.forEach((lesson,index)=>{
+    });
 
-        let completed=
-            isCompleted(course,index);
+    grid.innerHTML = filtered.map(course => `
 
-        list.innerHTML+=`
+        <div class="course">
 
-        <div class="lesson-card">
+            <div class="course-icon">${course.icon}</div>
+
+            <h3>${course.title}</h3>
+
+            <p>${course.desc}</p>
+
+            <div class="course-meta">
+
+                <span class="tag">${course.level}</span>
+                <span class="tag">📚 ${course.lessons} dars</span>
+                <span class="tag">⏱️ ${course.duration}</span>
+
+            </div>
+
+            <div style="display:flex;justify-content:space-between;">
+                <small style="color:var(--muted);">
+                    O‘zlashtirish
+                </small>
+
+                <small style="color:var(--secondary);">
+                    0%
+                </small>
+            </div>
+
+            <div class="progress">
+                <div class="progress-bar" style="width:0%"></div>
+            </div>
+
+            <button
+                class="btn btn-primary"
+                style="width:100%;margin-top:10px;"
+                onclick="openCourse('${course.id}')">
+
+                Kursni ko‘rish →
+
+            </button>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+/* =========================
+   COURSE MODAL
+========================= */
+
+function openCourse(id){
+
+    const course = courses.find(x=>x.id === id);
+
+    if(!course) return;
+
+    document.getElementById("courseModalTitle").textContent =
+        course.icon + " " + course.title;
+
+    document.getElementById("courseModalSubtitle").textContent =
+        course.level + " • " + course.duration;
+
+    document.getElementById("courseModalBody").innerHTML = `
+
+        <div class="video-box">
+            ${course.icon}
+        </div>
+
+        <p class="modal-text">
+            ${course.desc}
+        </p>
+
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:10px;
+            margin:20px 0;
+        ">
+
+            <div class="tag">📚 ${course.lessons} ta dars</div>
+            <div class="tag">🎥 Video</div>
+            <div class="tag">📝 Test</div>
+
+        </div>
+
+        <h3 style="margin-bottom:12px;">
+            Kurs dasturi
+        </h3>
+
+        <div class="lesson-list">
+
+            <div class="lesson">
+                <div class="lesson-number">01</div>
+                <div class="lesson-info">
+                    <h3>Kirish</h3>
+                    <span>Asosiy tushunchalar</span>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <div class="lesson-number">02</div>
+                <div class="lesson-info">
+                    <h3>Nazariy bilimlar</h3>
+                    <span>Mavzuni chuqur o‘rganish</span>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <div class="lesson-number">03</div>
+                <div class="lesson-info">
+                    <h3>Amaliy mashg‘ulot</h3>
+                    <span>Real topshiriqlar</span>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <div class="lesson-number">04</div>
+                <div class="lesson-info">
+                    <h3>Yakuniy loyiha</h3>
+                    <span>Mustaqil loyiha</span>
+                </div>
+            </div>
+
+        </div>
+
+        <button
+            class="btn btn-primary"
+            style="width:100%;margin-top:20px;"
+            onclick="toast('Kurs o‘qish ro‘yxatingizga qo‘shildi!')">
+
+            🚀 Kursni boshlash
+
+        </button>
+    `;
+
+    openModal("courseModal");
+}
+
+
+/* =========================
+   LESSONS
+========================= */
+
+function renderLessons(){
+
+    const list = document.getElementById("lessonList");
+
+    list.innerHTML = lessons.map((lesson,index)=>`
+
+        <div class="lesson">
 
             <div class="lesson-number">
-                ${completed?"✓":index+1}
+                ${String(index+1).padStart(2,"0")}
             </div>
 
             <div class="lesson-info">
 
-                <h4>${lesson[0]}</h4>
+                <h3>
+                    ${lesson.icon}
+                    ${lesson.title}
+                </h3>
 
                 <span>
-                    ${completed?"✅ Tugatilgan":"📖 Dars"}
+                    ${lesson.course} • Video • Material • Test
                 </span>
 
             </div>
 
             <button
-                class="btn primary"
-                onclick="openLesson('${course}',${index})"
-            >
-                ${completed?"Qayta o‘qish":"Boshlash"}
+                class="btn btn-secondary"
+                onclick="openLesson(${index})">
+
+                O‘qish →
+
             </button>
 
         </div>
 
-        `;
+    `).join("");
 
-    });
-
-    document.getElementById("courseModal").classList.add("show");
 }
 
 
-/* OPEN LESSON */
+function openLesson(index){
 
-function openLesson(course,index){
+    const lesson = lessons[index];
 
-    currentCourse=course;
-    currentLesson=index;
+    document.getElementById("lessonTitle").textContent =
+        lesson.icon + " " + lesson.title;
 
-    let lesson=courses[course].lessons[index];
+    document.getElementById("lessonText").innerHTML = `
 
-    document.getElementById("lessonTitle").innerText=
-        lesson[0];
+        <h3 style="color:white;margin-bottom:10px;">
+            ${lesson.course}
+        </h3>
 
-    document.getElementById("lessonText").innerText=
-        lesson[1]+
-        "\n\n📌 Amaliy topshiriq:\n"+
-        "Ushbu mavzu bo‘yicha o‘zingiz kichik loyiha yarating.";
+        <p>${lesson.text}</p>
 
-    let video="";
+        <br>
 
-    document.getElementById("videoSource").src=video;
+        <p>
+            Ushbu darsda mavzuning asosiy tushunchalari
+            o‘rganiladi va amaliy topshiriq orqali
+            bilimlar mustahkamlanadi.
+        </p>
 
-    document.getElementById("lessonVideo").load();
+    `;
 
-    if(video){
-        document.getElementById("videoMessage").style.display="none";
-    }else{
-        document.getElementById("videoMessage").style.display="block";
-    }
-
-    closeModal("courseModal");
-
-    document.getElementById("lessonModal").classList.add("show");
+    openModal("lessonModal");
 }
 
-
-/* COMPLETE LESSON */
 
 function completeLesson(){
 
-    let key=
-        "completed_"+currentCourse;
-
-    let arr=
-        JSON.parse(localStorage.getItem(key)||"[]");
-
-    if(!arr.includes(currentLesson)){
-        arr.push(currentLesson);
-    }
-
-    localStorage.setItem(
-        key,
-        JSON.stringify(arr)
-    );
-
-    alert("🎉 Dars muvaffaqiyatli tugatildi!");
-
     closeModal("lessonModal");
 
-    updateDashboard();
-
-    openCourse(currentCourse);
-}
-
-
-/* PROGRESS */
-
-function isCompleted(course,index){
-
-    let arr=
-        JSON.parse(
-            localStorage.getItem("completed_"+course)||"[]"
-        );
-
-    return arr.includes(index);
-}
-
-function getProgress(course){
-
-    let total=courses[course].lessons.length;
-
-    let arr=
-        JSON.parse(
-            localStorage.getItem("completed_"+course)||"[]"
-        );
-
-    return Math.round(
-        arr.length/total*100
-    );
-}
-
-
-/* PDF */
-
-function openPDF(){
-
-    alert(
-        "📄 PDF material hali ulanmagan.\n\n"+
-        "index.html ichidagi openPDF() funksiyasiga "+
-        "o‘zingizning PDF fayl manzilingizni qo‘shishingiz mumkin."
-    );
+    toast("🎉 Dars muvaffaqiyatli yakunlandi! +100 XP");
 
 }
 
 
-/* QUIZ */
+/* =========================
+   QUIZ
+========================= */
 
 function openQuiz(){
 
-    let questions=
-        quizzes[currentCourse] || quizzes.frontend;
+    closeModal("lessonModal");
 
-    let html="";
+    document.getElementById("quizResult").textContent = "";
 
-    questions.forEach((item,index)=>{
+    openModal("quizModal");
 
-        html+=`
-
-        <div class="quiz-question">
-
-            <b>${index+1}. ${item.q}</b>
-
-            ${item.options.map((option,i)=>`
-
-                <label class="quiz-option">
-
-                    <input
-                        type="radio"
-                        name="q${index}"
-                        value="${i}"
-                    >
-
-                    ${option}
-
-                </label>
-
-            `).join("")}
-
-        </div>
-
-        `;
-
-    });
-
-    document.getElementById("quizContent").innerHTML=html;
-
-    closeModal("courseModal");
-
-    document.getElementById("quizModal").classList.add("show");
 }
 
+function quizAnswer(button,correct){
 
-/* SUBMIT QUIZ */
+    document.querySelectorAll(".quiz-option")
+        .forEach(x=>x.disabled=true);
 
-function submitQuiz(){
+    if(correct){
 
-    let questions=
-        quizzes[currentCourse] || quizzes.frontend;
+        button.style.borderColor = "var(--green)";
+        document.getElementById("quizResult").innerHTML =
+            "🎉 <b>To‘g‘ri javob!</b> Sizga +100 XP berildi.";
 
-    let score=0;
-
-    questions.forEach((q,index)=>{
-
-        let answer=
-            document.querySelector(
-                `input[name="q${index}"]:checked`
-            );
-
-        if(answer &&
-            Number(answer.value)===q.answer){
-
-            score++;
-        }
-
-    });
-
-    let percent=
-        Math.round(score/questions.length*100);
-
-    if(percent>=70){
-
-        alert(
-            "🎉 Tabriklaymiz!\n\n"+
-            "Natija: "+percent+"%\n"+
-            "Testdan muvaffaqiyatli o‘tdingiz!"
-        );
-
-        localStorage.setItem(
-            "quiz_"+currentCourse,
-            percent
-        );
+        toast("🏆 Test muvaffaqiyatli!");
 
     }else{
 
-        alert(
-            "Natija: "+percent+"%\n\n"+
-            "❌ 70% dan yuqori natija olishga harakat qiling."
-        );
+        button.style.borderColor = "var(--danger)";
+        document.getElementById("quizResult").innerHTML =
+            "❌ Javob noto‘g‘ri. Mavzuni yana bir bor ko‘rib chiqing.";
+
     }
 
-    closeModal("quizModal");
 }
 
 
-/* CERTIFICATE */
+/* =========================
+   AI
+========================= */
 
-function showCertificate(){
+function addMessage(text,type){
 
-    let name=
-        localStorage.getItem("studentName");
+    const box = document.getElementById("chatMessages");
 
-    if(!name){
+    const div = document.createElement("div");
 
-        alert(
-            "Avval 👤 tugmasini bosib ismingizni kiriting."
-        );
+    div.className = "message " + type;
 
-        return;
-    }
+    div.textContent = text;
 
-    document.getElementById("certificateName").innerText=
-        name;
+    box.appendChild(div);
 
-    document.getElementById("certificateDate").innerText=
-        "Berilgan sana: "+
-        new Date().toLocaleDateString("uz-UZ");
-
-    document.getElementById(
-        "certificateModal"
-    ).classList.add("show");
+    box.scrollTop = box.scrollHeight;
 }
 
 
-/* AI ASSISTANT */
+function sendAI(){
 
-function askAI(){
+    const input = document.getElementById("aiInput");
 
-    let input=
-        document.getElementById("aiInput");
+    const text = input.value.trim();
 
-    let text=input.value.trim();
+    if(!text) return;
 
-    if(!text)return;
+    addMessage(text,"user");
 
-    let box=
-        document.getElementById("aiMessages");
-
-    box.innerHTML+=`
-        <div class="message user">
-            ${escapeHTML(text)}
-        </div>
-    `;
-
-    input.value="";
-
-    let answer=
-        "Savolingiz qabul qilindi. ";
-
-    let lower=text.toLowerCase();
-
-    if(lower.includes("html")){
-        answer=
-        "HTML — web sahifaning tuzilishini yaratish uchun ishlatiladi. Masalan: h1, p, img va button teglaridan foydalaniladi.";
-    }
-    else if(lower.includes("css")){
-        answer=
-        "CSS — web sahifaning ko‘rinishini boshqaradi: rang, shrift, o‘lcham, joylashuv va animatsiyalar.";
-    }
-    else if(lower.includes("python")){
-        answer=
-        "Python — o‘rganish oson va kuchli dasturlash tili. Uni web, AI, avtomatlashtirish va boshqa sohalarda ishlatish mumkin.";
-    }
-    else if(
-        lower.includes("ai") ||
-        lower.includes("sun'iy")
-    ){
-        answer=
-        "AI — ma'lumotlardan foydalanib vazifalarni bajarishga yordam beradigan texnologiyalar majmuasi.";
-    }
-    else if(lower.includes("javascript")){
-        answer=
-        "JavaScript web sahifaga interaktivlik qo‘shadi. Masalan, tugma bosilganda modal oynani ochish mumkin.";
-    }
-    else{
-        answer=
-        "Bu IKROMJON AI demo yordamchisi. Aniqroq savol bering: HTML, CSS, JavaScript, Python yoki AI.";
-    }
+    input.value = "";
 
     setTimeout(()=>{
 
-        box.innerHTML+=`
-            <div class="message bot">
-                🤖 ${answer}
-            </div>
-        `;
+        let answer =
+        "Savolingiz qabul qilindi. IKROMJON AI sizga bu mavzuni bosqichma-bosqich o‘rganishda yordam beradi. 📚";
 
-        box.scrollTop=box.scrollHeight;
+        const q = text.toLowerCase();
 
-    },500);
+        if(q.includes("html")){
+            answer =
+            "HTML — web sahifaning tuzilmasini yaratish uchun ishlatiladigan belgilash tili. Uni o‘rganishni <html>, <head> va <body> teglaridan boshlash mumkin.";
+        }
+
+        else if(q.includes("python")){
+            answer =
+            "Python — sodda sintaksisga ega kuchli dasturlash tili. Uni o‘rganishni o‘zgaruvchilar, shart operatorlari, sikllar va funksiyalardan boshlash tavsiya etiladi.";
+        }
+
+        else if(q.includes("ai") || q.includes("sun’iy")){
+            answer =
+            "Sun’iy intellekt — kompyuter tizimlariga ma’lumotlarni tahlil qilish, o‘rganish va ayrim vazifalarni inson kabi bajarish imkonini beruvchi texnologiyalar majmuasidir.";
+        }
+
+        else if(q.includes("dasturlash")){
+            answer =
+            "Dasturlashni boshlash uchun avvalo kompyuter asoslarini o‘rganing. Keyin HTML/CSS, JavaScript yoki Python kabi yo‘nalishlardan birini tanlab, muntazam amaliyot qiling.";
+        }
+
+        addMessage(answer,"ai");
+
+    },700);
 }
 
 
-/* HTML SECURITY */
+function aiQuick(text){
 
-function escapeHTML(str){
+    document.getElementById("aiInput").value = text;
 
-    return str
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+    sendAI();
+
 }
 
 
-/* CONTACT */
+/* =========================
+   PROFILE
+========================= */
 
-function sendMessage(e){
+function initials(name){
 
-    e.preventDefault();
+    return name
+        .split(" ")
+        .map(x=>x[0])
+        .join("")
+        .slice(0,2)
+        .toUpperCase();
 
-    let name=
-        document.getElementById("contactName").value;
-
-    alert(
-        "✅ Rahmat, "+name+"!\n"+
-        "Xabaringiz qabul qilindi."
-    );
-
-    e.target.reset();
 }
 
 
-/* CLOSE */
+function openProfile(){
+
+    const name =
+        localStorage.getItem("studentName") || "";
+
+    const direction =
+        localStorage.getItem("studentDirection") || "";
+
+    document.getElementById("profileName").value = name;
+
+    document.getElementById("profileDirection").value = direction;
+
+    openModal("profileModal");
+
+}
+
+
+function saveProfile(){
+
+    const name =
+        document.getElementById("profileName").value.trim() ||
+        "O‘quvchi";
+
+    const direction =
+        document.getElementById("profileDirection").value.trim();
+
+    localStorage.setItem("studentName",name);
+    localStorage.setItem("studentDirection",direction);
+
+    document.getElementById("userName").textContent = name;
+
+    document.getElementById("avatar").textContent = initials(name);
+
+    closeModal("profileModal");
+
+    toast("✅ Profil muvaffaqiyatli saqlandi!");
+
+}
+
+
+/* =========================
+   CERTIFICATE
+========================= */
+
+function openCertificate(){
+
+    closeModal("profileModal");
+
+    const name =
+        localStorage.getItem("studentName") ||
+        "O‘QUVCHI";
+
+    document.getElementById("certificateName").textContent =
+        name.toUpperCase();
+
+    document.getElementById("certificateDate").textContent =
+        new Date().toLocaleDateString("uz-UZ");
+
+    openModal("certificateModal");
+
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+function openModal(id){
+
+    document.getElementById(id).classList.add("show");
+
+}
+
 
 function closeModal(id){
 
-    document
-        .getElementById(id)
-        .classList.remove("show");
+    document.getElementById(id).classList.remove("show");
+
 }
 
 
-/* ESC */
+/* =========================
+   TOAST
+========================= */
 
-document.addEventListener("keydown",e=>{
+let toastTimer;
 
-    if(e.key==="Escape"){
+function toast(message){
 
-        document
-        .querySelectorAll(".modal")
-        .forEach(m=>m.classList.remove("show"));
+    const box = document.getElementById("toast");
+
+    box.textContent = message;
+
+    box.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(()=>{
+        box.classList.remove("show");
+    },3000);
+
+}
+
+
+/* =========================
+   INIT
+========================= */
+
+window.addEventListener("load",()=>{
+
+    const savedName =
+        localStorage.getItem("studentName");
+
+    if(savedName){
+
+        document.getElementById("userName").textContent =
+            savedName;
+
+        document.getElementById("avatar").textContent =
+            initials(savedName);
 
     }
+
+    renderCourses();
+    renderLessons();
 
 });
 
