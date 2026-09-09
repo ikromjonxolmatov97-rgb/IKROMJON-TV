@@ -1,982 +1,1947 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IKROMJON APP BUILDER</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      background: #0b1020;
-      color: white;
-      min-height: 100vh;
-    }
-
-    header {
-      height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 25px;
-      background: rgba(15, 23, 42, .95);
-      border-bottom: 1px solid #26324d;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
-    }
-
-    .logo span {
-      color: #7c3aed;
-    }
-
-    .top-buttons {
-      display: flex;
-      gap: 10px;
-    }
-
-    button {
-      border: none;
-      border-radius: 10px;
-      padding: 11px 16px;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-      background: #334155;
-      transition: .2s;
-    }
-
-    button:hover {
-      transform: translateY(-2px);
-      opacity: .9;
-    }
-
-    .primary {
-      background: #7c3aed;
-    }
-
-    .success {
-      background: #16a34a;
-    }
-
-    .danger {
-      background: #dc2626;
-    }
-
-    .container {
-      display: grid;
-      grid-template-columns: 300px 1fr 350px;
-      min-height: calc(100vh - 70px);
-    }
-
-    .sidebar {
-      background: #111827;
-      padding: 20px;
-      border-right: 1px solid #26324d;
-    }
-
-    .sidebar h2 {
-      margin-bottom: 20px;
-      font-size: 18px;
-    }
-
-    .field {
-      margin-bottom: 17px;
-    }
-
-    .field label {
-      display: block;
-      margin-bottom: 7px;
-      color: #cbd5e1;
-      font-size: 14px;
-    }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-      padding: 12px;
-      border-radius: 9px;
-      border: 1px solid #334155;
-      background: #0f172a;
-      color: white;
-      outline: none;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 90px;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: #7c3aed;
-    }
-
-    .editor {
-      padding: 25px;
-      overflow: auto;
-    }
-
-    .editor-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .editor-header h1 {
-      font-size: 24px;
-    }
-
-    .components {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .component {
-      padding: 18px 10px;
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 12px;
-      text-align: center;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .component:hover {
-      border-color: #7c3aed;
-      background: #273449;
-    }
-
-    .canvas {
-      min-height: 500px;
-      padding: 25px;
-      background: #0f172a;
-      border: 2px dashed #334155;
-      border-radius: 15px;
-    }
-
-    .canvas-empty {
-      text-align: center;
-      color: #64748b;
-      padding: 100px 20px;
-    }
-
-    .element {
-      padding: 15px;
-      margin-bottom: 12px;
-      border-radius: 10px;
-      position: relative;
-    }
-
-    .element:hover {
-      outline: 2px solid #7c3aed;
-    }
-
-    .delete-element {
-      position: absolute;
-      right: 7px;
-      top: 7px;
-      background: #dc2626;
-      padding: 5px 8px;
-      font-size: 11px;
-    }
-
-    .preview-area {
-      background: #111827;
-      border-left: 1px solid #26324d;
-      padding: 25px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .preview-title {
-      width: 100%;
-      margin-bottom: 20px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .phone {
-      width: 290px;
-      height: 570px;
-      background: white;
-      border: 9px solid #020617;
-      border-radius: 35px;
-      overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0,0,0,.5);
-    }
-
-    .phone-screen {
-      width: 100%;
-      height: 100%;
-      overflow-y: auto;
-      color: #111827;
-      padding: 20px;
-    }
-
-    .phone-screen h2 {
-      margin-bottom: 12px;
-    }
-
-    .preview-button {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      border-radius: 9px;
-      border: none;
-      color: white;
-      margin: 10px 0;
-    }
-
-    .code-box {
-      margin-top: 20px;
-      background: #020617;
-      border-radius: 12px;
-      padding: 15px;
-      width: 100%;
-    }
-
-    .code-box h3 {
-      margin-bottom: 10px;
-    }
-
-    #codeOutput {
-      width: 100%;
-      height: 160px;
-      font-family: monospace;
-      font-size: 12px;
-      background: #020617;
-      color: #a7f3d0;
-      border: 1px solid #334155;
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: #16a34a;
-      color: white;
-      padding: 14px 20px;
-      border-radius: 10px;
-      display: none;
-      z-index: 100;
-    }
-
-    @media(max-width: 1000px) {
-      .container {
-        grid-template-columns: 260px 1fr;
-      }
-
-      .preview-area {
-        display: none;
-      }
-    }
-
-    @media(max-width: 700px) {
-      header {
-        padding: 0 12px;
-      }
-
-      .logo {
-        font-size: 17px;
-      }
-
-      .top-buttons button {
-        padding: 8px;
-        font-size: 12px;
-      }
-
-      .container {
-        display: block;
-      }
-
-      .sidebar {
-        border-right: none;
-        border-bottom: 1px solid #26324d;
-      }
-
-      .components {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .editor {
-        padding: 15px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-<header>
-  <div class="logo">
-    IKROMJON <span>APP BUILDER</span>
-  </div>
-
-  <div class="top-buttons">
-    <button onclick="saveProject()">💾 Saqlash</button>
-    <button class="primary" onclick="generateCode()">⚡ Kod yaratish</button>
-  </div>
-</header>
-
-<div class="container">
-
-  <!-- LEFT SIDEBAR -->
-  <aside class="sidebar">
-
-    <h2>⚙️ Ilova sozlamalari</h2>
-
-    <div class="field">
-      <label>Ilova nomi</label>
-      <input
-        id="appName"
-        type="text"
-        value="Mening Ilovam"
-        oninput="updatePreview()"
-      >
-    </div>
-
-    <div class="field">
-      <label>Asosiy rang</label>
-      <input
-        id="appColor"
-        type="color"
-        value="#7c3aed"
-        onchange="updatePreview()"
-      >
-    </div>
-
-    <div class="field">
-      <label>Fon rangi</label>
-      <input
-        id="bgColor"
-        type="color"
-        value="#ffffff"
-        onchange="updatePreview()"
-      >
-    </div>
-
-    <div class="field">
-      <label>Bosh sahifa matni</label>
-      <textarea
-        id="appText"
-        oninput="updatePreview()"
-      >IKROMJON APP BUILDER ilovasiga xush kelibsiz!</textarea>
-    </div>
-
-    <button
-      class="success"
-      style="width:100%;"
-      onclick="newProject()"
-    >
-      ➕ Yangi loyiha
-    </button>
-
-  </aside>
-
-
-  <!-- EDITOR -->
-  <main class="editor">
-
-    <div class="editor-header">
-      <h1>🎨 Ilova muharriri</h1>
-    </div>
-
-    <div class="components">
-
-      <div
-        class="component"
-        onclick="addElement('text')"
-      >
-        📝<br>Text
-      </div>
-
-      <div
-        class="component"
-        onclick="addElement('button')"
-      >
-        🔘<br>Button
-      </div>
-
-      <div
-        class="component"
-        onclick="addElement('image')"
-      >
-        🖼️<br>Image
-      </div>
-
-      <div
-        class="component"
-        onclick="addElement('card')"
-      >
-        🗂️<br>Card
-      </div>
-
-      <div
-        class="component"
-        onclick="addElement('input')"
-      >
-        ✏️<br>Input
-      </div>
-
-      <div
-        class="component"
-        onclick="addElement('menu')"
-      >
-        ☰<br>Menu
-      </div>
-
-    </div>
-
-    <div id="canvas" class="canvas">
-
-      <div class="canvas-empty" id="emptyMessage">
-        Yuqoridagi elementlardan birini tanlang
-        <br>
-        va ilovangizni yaratishni boshlang.
-      </div>
-
-    </div>
-
-    <div class="code-box">
-
-      <h3>💻 Generatsiya qilingan kod</h3>
-
-      <textarea
-        id="codeOutput"
-        readonly
-        placeholder="Kod shu yerda paydo bo‘ladi..."
-      ></textarea>
-
-      <button
-        style="margin-top:10px;"
-        onclick="copyCode()"
-      >
-        📋 Kodni nusxalash
-      </button>
-
-    </div>
-
-  </main>
-
-
-  <!-- PHONE PREVIEW -->
-  <aside class="preview-area">
-
-    <div class="preview-title">
-      📱 Live Preview
-    </div>
-
-    <div class="phone">
-
-      <div
-        class="phone-screen"
-        id="phoneScreen"
-      >
-
-        <h2 id="previewName">
-          Mening Ilovam
-        </h2>
-
-        <p id="previewText">
-          IKROMJON APP BUILDER ilovasiga xush kelibsiz!
-        </p>
-
-      </div>
-
-    </div>
-
-  </aside>
-
-</div>
-
-
-<div class="toast" id="toast">
-  Saqlandi!
-</div>
-
-
-<script>
-
-  let elements = [];
-
-
-  function updatePreview() {
-
-    const name =
-      document.getElementById("appName").value;
-
-    const text =
-      document.getElementById("appText").value;
-
-    const color =
-      document.getElementById("appColor").value;
-
-    const bg =
-      document.getElementById("bgColor").value;
-
-    document.getElementById("previewName").innerText =
-      name;
-
-    document.getElementById("previewText").innerText =
-      text;
-
-    const screen =
-      document.getElementById("phoneScreen");
-
-    screen.style.background = bg;
-
-    document.getElementById("previewName").style.color =
-      color;
-
-  }
-
-
-  function addElement(type) {
-
-    document.getElementById("emptyMessage").style.display =
-      "none";
-
-    const id =
-      Date.now();
-
-    let html = "";
-
-    if(type === "text") {
-
-      html = `
-        <div class="element">
-          <button class="delete-element"
-            onclick="removeElement(${id})">
-            X
-          </button>
-
-          <h3>Yangi matn</h3>
-          <p>Bu yerga o'zingiz xohlagan matnni yozishingiz mumkin.</p>
-        </div>
-      `;
-
-    }
-
-    if(type === "button") {
-
-      html = `
-        <div class="element">
-          <button class="delete-element"
-            onclick="removeElement(${id})">
-            X
-          </button>
-
-          <button
-            class="preview-button"
-            style="background:#7c3aed;"
-            onclick="alert('Tugma ishladi!')">
-            Bosish
-          </button>
-        </div>
-      `;
-
-    }
-
-    if(type === "image") {
-
-      html = `
-        <div class="element">
-          <button class="delete-element"
-            onclick="removeElement(${id})">
-            X
-          </button>
-
-          <div style="
-            background:#e2e8f0;
-            padding:40px 10px;
-            text-align:center;
-            border-radius:10px;
-          ">
-            🖼️ Rasm joyi
-          </div>
-        </div>
-      `;
-
-    }
-
-    if(type === "card") {
-
-      html = `
-        <div class="element">
-          <button class="delete-element"
-            onclick="removeElement(${id})">
-            X
-          </button>
-
-          <div style="
-            padding:20px;
-            background:#f1f5f9;
-            color:#111827;
-            border-radius:12px;
-          ">
-            <h3>Mahsulot kartasi</h3>
-            <p>Mahsulot haqida ma'lumot</p>
-            <strong>100 000 so'm</strong>
-          </div>
-        </div>
-      `;
-
-    }
-
-    if(type === "input") {
-
-      html = `
-        <div class="element">
-          <button class="delete-element"
-            onclick="removeElement(${id})">
-            X
-          </button>
-
-          <input
-            type="text"
-            placeholder="Ma'lumot kiriting..."
-            style="
-              background:white;
-              color:#111827;
-            "
-          >
-        </div>
-      `;
-
-    }
-
-    if(type === "menu") {
-
-      html = `
-        <div class="element">
-          <button class="delete-element"
-            onclick="removeElement(${id})">
-            X
-          </button>
-
-          <div style="
-            display:flex;
-            gap:8px;
-            flex-wrap:wrap;
-          ">
-            <button>🏠 Bosh sahifa</button>
-            <button>ℹ️ Biz haqimizda</button>
-            <button>📞 Aloqa</button>
-          </div>
-        </div>
-      `;
-
-    }
-
-
-    const wrapper =
-      document.createElement("div");
-
-    wrapper.id =
-      "element-" + id;
-
-    wrapper.innerHTML =
-      html;
-
-    document
-      .getElementById("canvas")
-      .appendChild(wrapper);
-
-    elements.push({
-      id:id,
-      type:type
-    });
-
-    updatePhone();
-  }
-
-
-  function removeElement(id) {
-
-    const element =
-      document.getElementById("element-" + id);
-
-    if(element) {
-      element.remove();
-    }
-
-    elements =
-      elements.filter(
-        e => e.id !== id
-      );
-
-    updatePhone();
-  }
-
-
-  function updatePhone() {
-
-    const screen =
-      document.getElementById("phoneScreen");
-
-    const canvas =
-      document.getElementById("canvas");
-
-    const content =
-      canvas.cloneNode(true);
-
-    content.querySelectorAll(".delete-element")
-      .forEach(btn => btn.remove());
-
-    const empty =
-      content.querySelector(".canvas-empty");
-
-    if(empty) {
-      empty.remove();
-    }
-
-    screen.innerHTML = `
-      <h2 id="previewName">
-        ${escapeHTML(
-          document.getElementById("appName").value
-        )}
-      </h2>
-
-      <p>
-        ${escapeHTML(
-          document.getElementById("appText").value
-        )}
-      </p>
-    `;
-
-    screen.appendChild(content);
-
-    screen.style.background =
-      document.getElementById("bgColor").value;
-
-  }
-
-
-  function generateCode() {
-
-    const name =
-      document.getElementById("appName").value;
-
-    const text =
-      document.getElementById("appText").value;
-
-    const color =
-      document.getElementById("appColor").value;
-
-    const bg =
-      document.getElementById("bgColor").value;
-
-    const code = `<!DOCTYPE html>
-<html lang="uz">
-<head>
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>${escapeHTML(name)}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IKROMJON AI O‘QUV MARKAZI</title>
 
 <style>
-
-body {
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:${bg};
-  color:#111827;
-  padding:30px;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
 }
 
-h1 {
-  color:${color};
+:root{
+    --bg:#f5f7fb;
+    --card:#fff;
+    --text:#172033;
+    --muted:#687386;
+    --primary:#6c4cff;
+    --primary2:#8b5cf6;
+    --border:#e4e7ef;
 }
 
-button {
-  background:${color};
-  color:white;
-  border:0;
-  padding:12px 20px;
-  border-radius:10px;
+body{
+    background:var(--bg);
+    color:var(--text);
+    transition:.3s;
 }
 
+body.dark{
+    --bg:#0d1117;
+    --card:#161b22;
+    --text:#fff;
+    --muted:#aab2c0;
+    --border:#30363d;
+}
+
+/* SPLASH */
+
+#splash{
+    position:fixed;
+    inset:0;
+    background:linear-gradient(135deg,#4f46e5,#7c3aed,#9333ea);
+    z-index:99999;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    text-align:center;
+    animation:splashOut .8s ease 3.3s forwards;
+}
+
+.splash-box{
+    animation:zoom 1s ease;
+}
+
+.robot{
+    width:100px;
+    height:100px;
+    margin:auto;
+    border-radius:30px;
+    background:rgba(255,255,255,.18);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:55px;
+    animation:float 1.5s infinite alternate;
+}
+
+.splash-box h1{
+    margin-top:20px;
+    font-size:35px;
+}
+
+.splash-box h1 span{
+    color:#ffd43b;
+}
+
+.splash-box h2{
+    margin-top:8px;
+    font-size:20px;
+    letter-spacing:3px;
+}
+
+.loader{
+    width:280px;
+    height:8px;
+    background:rgba(255,255,255,.25);
+    border-radius:20px;
+    overflow:hidden;
+    margin:25px auto 12px;
+}
+
+.loader-line{
+    width:0%;
+    height:100%;
+    background:white;
+    animation:load 3s linear forwards;
+}
+
+#loadText{
+    font-size:14px;
+}
+
+@keyframes load{
+    to{width:100%}
+}
+
+@keyframes splashOut{
+    to{
+        opacity:0;
+        visibility:hidden;
+    }
+}
+
+@keyframes zoom{
+    from{transform:scale(.7);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+@keyframes float{
+    to{transform:translateY(-12px)}
+}
+
+/* HEADER */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+    padding:14px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-weight:900;
+    font-size:20px;
+    color:var(--primary);
+}
+
+.logo span{
+    color:#f59e0b;
+}
+
+nav{
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+nav a{
+    text-decoration:none;
+    color:var(--text);
+    cursor:pointer;
+    font-weight:600;
+}
+
+nav a:hover{
+    color:var(--primary);
+}
+
+.header-buttons{
+    display:flex;
+    gap:8px;
+}
+
+.icon-btn{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    padding:9px 12px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+    min-height:530px;
+    padding:80px 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:40px;
+    background:
+    radial-gradient(circle at 90% 20%,rgba(108,76,255,.2),transparent 35%),
+    var(--bg);
+}
+
+.hero-content{
+    max-width:650px;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 14px;
+    background:#ede9fe;
+    color:#6d28d9;
+    border-radius:30px;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:48px;
+    line-height:1.1;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:var(--primary);
+}
+
+.hero p{
+    color:var(--muted);
+    font-size:18px;
+    line-height:1.6;
+}
+
+.hero-buttons{
+    margin-top:30px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:0;
+    border-radius:12px;
+    padding:13px 20px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.primary{
+    background:var(--primary);
+    color:white;
+}
+
+.secondary{
+    background:var(--card);
+    color:var(--text);
+    border:1px solid var(--border);
+}
+
+.hero-art{
+    width:350px;
+    height:350px;
+    border-radius:40px;
+    background:linear-gradient(135deg,#6c4cff,#a855f7);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:150px;
+    box-shadow:0 30px 70px rgba(108,76,255,.3);
+}
+
+/* STATS */
+
+.stats{
+    padding:25px 7%;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.stat{
+    background:var(--card);
+    border:1px solid var(--border);
+    padding:25px;
+    border-radius:18px;
+    text-align:center;
+}
+
+.stat strong{
+    display:block;
+    font-size:30px;
+    color:var(--primary);
+}
+
+.stat span{
+    color:var(--muted);
+}
+
+/* SECTION */
+
+section{
+    padding:70px 7%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.section-title h2{
+    font-size:32px;
+}
+
+.section-title p{
+    color:var(--muted);
+    margin-top:10px;
+}
+
+/* COURSES */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:25px;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.course-icon{
+    font-size:50px;
+}
+
+.card h3{
+    margin:15px 0 8px;
+}
+
+.card p{
+    color:var(--muted);
+    line-height:1.5;
+}
+
+.progress{
+    margin:18px 0;
+    height:8px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    background:linear-gradient(90deg,#6c4cff,#a855f7);
+    width:0%;
+}
+
+/* LESSONS */
+
+.lesson-card{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:18px;
+    margin-bottom:12px;
+    border:1px solid var(--border);
+    border-radius:15px;
+    background:var(--card);
+}
+
+.lesson-number{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#ede9fe;
+    color:#6d28d9;
+    font-weight:bold;
+}
+
+.lesson-info{
+    flex:1;
+}
+
+.lesson-info h4{
+    margin-bottom:5px;
+}
+
+.lesson-info span{
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:30px;
+}
+
+.user-box{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.avatar{
+    width:70px;
+    height:70px;
+    background:linear-gradient(135deg,#6c4cff,#a855f7);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:50%;
+    font-size:30px;
+}
+
+.course-progress{
+    margin-top:25px;
+}
+
+.course-progress-row{
+    margin-bottom:20px;
+}
+
+.course-progress-row div:first-child{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:7px;
+}
+
+/* AI */
+
+.ai-box{
+    max-width:800px;
+    margin:auto;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:25px;
+}
+
+.ai-messages{
+    min-height:180px;
+    max-height:350px;
+    overflow:auto;
+    margin-bottom:15px;
+}
+
+.message{
+    padding:12px 15px;
+    border-radius:14px;
+    margin-bottom:10px;
+    max-width:85%;
+    line-height:1.5;
+}
+
+.bot{
+    background:#ede9fe;
+    color:#3b2a72;
+}
+
+.user{
+    background:var(--primary);
+    color:white;
+    margin-left:auto;
+}
+
+.ai-input{
+    display:flex;
+    gap:10px;
+}
+
+.ai-input input{
+    flex:1;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:var(--bg);
+    color:var(--text);
+}
+
+/* CONTACT */
+
+.contact{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+}
+
+.form{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.form input,
+.form textarea{
+    padding:14px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+}
+
+.form textarea{
+    min-height:130px;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    z-index:5000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:900px;
+    max-height:90vh;
+    overflow:auto;
+    background:var(--card);
+    color:var(--text);
+    border-radius:22px;
+    padding:25px;
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    right:20px;
+    top:15px;
+    border:0;
+    background:transparent;
+    color:var(--text);
+    font-size:28px;
+    cursor:pointer;
+}
+
+.video{
+    width:100%;
+    aspect-ratio:16/9;
+    background:#080808;
+    border-radius:15px;
+    margin:20px 0;
+    overflow:hidden;
+}
+
+.video video{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+.lesson-text{
+    line-height:1.7;
+    color:var(--muted);
+    margin:20px 0;
+}
+
+.quiz-question{
+    padding:18px;
+    border:1px solid var(--border);
+    border-radius:15px;
+    margin-bottom:15px;
+}
+
+.quiz-option{
+    display:block;
+    padding:12px;
+    margin-top:8px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.quiz-option:hover{
+    background:#ede9fe;
+}
+
+/* CERTIFICATE */
+
+.certificate{
+    border:12px solid #6c4cff;
+    padding:50px;
+    text-align:center;
+    background:white;
+    color:#111;
+}
+
+.certificate h1{
+    font-size:40px;
+    color:#6c4cff;
+}
+
+.certificate .name{
+    font-size:32px;
+    margin:25px;
+    font-weight:bold;
+}
+
+.certificate .course{
+    font-size:23px;
+    margin:15px;
+}
+
+footer{
+    padding:35px 7%;
+    background:#111827;
+    color:white;
+    text-align:center;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+    nav{
+        display:none;
+    }
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+        padding-top:50px;
+    }
+
+    .hero h1{
+        font-size:36px;
+    }
+
+    .hero-art{
+        width:270px;
+        height:270px;
+        font-size:110px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .contact{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:500px){
+    section{
+        padding:50px 5%;
+    }
+
+    .stats{
+        padding:20px 5%;
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stat{
+        padding:18px 8px;
+    }
+
+    .hero-buttons{
+        justify-content:center;
+    }
+
+    .splash-box h1{
+        font-size:28px;
+    }
+}
+
+/* PRINT */
+
+@media print{
+    body *{
+        visibility:hidden;
+    }
+
+    #certificateModal,
+    #certificateModal *{
+        visibility:visible;
+    }
+
+    #certificateModal{
+        position:absolute;
+        inset:0;
+        display:block;
+        background:white;
+    }
+
+    .modal-box{
+        max-width:none;
+        box-shadow:none;
+    }
+
+    .close,
+    .print-btn{
+        display:none;
+    }
+}
 </style>
 </head>
 
 <body>
 
-<h1>${escapeHTML(name)}</h1>
+<!-- SPLASH -->
 
-<p>${escapeHTML(text)}</p>
+<div id="splash">
+    <div class="splash-box">
+        <div class="robot">🤖</div>
+        <h1>IKROMJON <span>AI</span></h1>
+        <h2>O‘QUV MARKAZI</h2>
 
-<button onclick="alert('Salom!')">
-  Bosish
-</button>
+        <div class="loader">
+            <div class="loader-line"></div>
+        </div>
 
-</body>
-</html>`;
+        <p id="loadText">Yuklanmoqda... 0%</p>
+    </div>
+</div>
 
-    document.getElementById("codeOutput").value =
-      code;
+<!-- HEADER -->
 
-    showToast("Kod yaratildi!");
+<header>
+    <div class="logo">IKROMJON <span>AI</span></div>
 
-  }
+    <nav>
+        <a onclick="go('home')">Bosh sahifa</a>
+        <a onclick="go('courses')">Kurslar</a>
+        <a onclick="go('lessons')">Darsliklar</a>
+        <a onclick="go('dashboard')">Kabinet</a>
+        <a onclick="go('ai')">AI yordamchi</a>
+    </nav>
+
+    <div class="header-buttons">
+        <button class="icon-btn" onclick="toggleDark()">🌙</button>
+        <button class="icon-btn" onclick="login()">👤</button>
+    </div>
+</header>
+
+<!-- HERO -->
+
+<div class="hero" id="home">
+    <div class="hero-content">
+
+        <span class="badge">🚀 Zamonaviy ta'lim platformasi</span>
+
+        <h1>
+            Kelajagingizni
+            <span>IKROMJON AI</span>
+            bilan yarating
+        </h1>
+
+        <p>
+            Dasturlash, sun'iy intellekt va zamonaviy IT
+            texnologiyalarini o‘rganing. Darslarni bajaring,
+            test topshiring va sertifikat oling.
+        </p>
+
+        <div class="hero-buttons">
+            <button class="btn primary" onclick="go('courses')">
+                📚 Kurslarni ko‘rish
+            </button>
+
+            <button class="btn secondary" onclick="login()">
+                👨‍🎓 O‘quvchi kabineti
+            </button>
+        </div>
+
+    </div>
+
+    <div class="hero-art">
+        🤖
+    </div>
+</div>
+
+<!-- STATS -->
+
+<div class="stats">
+
+    <div class="stat">
+        <strong>100+</strong>
+        <span>Video darslar</span>
+    </div>
+
+    <div class="stat">
+        <strong>10+</strong>
+        <span>Kurslar</span>
+    </div>
+
+    <div class="stat">
+        <strong>24/7</strong>
+        <span>AI yordamchi</span>
+    </div>
+
+    <div class="stat">
+        <strong>100%</strong>
+        <span>Amaliy ta'lim</span>
+    </div>
+
+</div>
+
+<!-- COURSES -->
+
+<section id="courses">
+
+    <div class="section-title">
+        <h2>🎓 Bizning kurslar</h2>
+        <p>O‘zingizga mos yo‘nalishni tanlang</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="course-icon">🌐</div>
+            <h3>Frontend Dasturlash</h3>
+            <p>HTML, CSS va JavaScript orqali zamonaviy saytlar yarating.</p>
+
+            <div class="progress">
+                <div class="progress-bar" id="progress-frontend"></div>
+            </div>
+
+            <button class="btn primary" onclick="openCourse('frontend')">
+                Darslarni boshlash
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="course-icon">🐍</div>
+            <h3>Python</h3>
+            <p>Python dasturlash tilini noldan professional darajagacha o‘rganing.</p>
+
+            <div class="progress">
+                <div class="progress-bar" id="progress-python"></div>
+            </div>
+
+            <button class="btn primary" onclick="openCourse('python')">
+                Darslarni boshlash
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="course-icon">🤖</div>
+            <h3>Sun’iy intellekt</h3>
+            <p>AI, ChatGPT, prompt engineering va AI vositalarini o‘rganing.</p>
+
+            <div class="progress">
+                <div class="progress-bar" id="progress-ai"></div>
+            </div>
+
+            <button class="btn primary" onclick="openCourse('ai')">
+                Darslarni boshlash
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="course-icon">📱</div>
+            <h3>Mobil dasturlash</h3>
+            <p>Mobil ilovalar yaratish asoslarini o‘rganing.</p>
+
+            <div class="progress">
+                <div class="progress-bar" id="progress-mobile"></div>
+            </div>
+
+            <button class="btn primary" onclick="openCourse('mobile')">
+                Darslarni boshlash
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="course-icon">🎨</div>
+            <h3>Web Design</h3>
+            <p>Chiroyli va zamonaviy UI/UX dizayn yaratishni o‘rganing.</p>
+
+            <div class="progress">
+                <div class="progress-bar" id="progress-design"></div>
+            </div>
+
+            <button class="btn primary" onclick="openCourse('design')">
+                Darslarni boshlash
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="course-icon">💻</div>
+            <h3>Kompyuter savodxonligi</h3>
+            <p>Kompyuter va internetdan professional foydalanishni o‘rganing.</p>
+
+            <div class="progress">
+                <div class="progress-bar" id="progress-computer"></div>
+            </div>
+
+            <button class="btn primary" onclick="openCourse('computer')">
+                Darslarni boshlash
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- LESSONS -->
+
+<section id="lessons">
+
+    <div class="section-title">
+        <h2>📚 Darsliklar</h2>
+        <p>Kursni tanlang va darslarni boshlang</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>🌐 HTML & CSS</h3>
+            <p>Web sahifa yaratish</p>
+            <button class="btn primary" onclick="openCourse('frontend')">
+                Darslikni ochish
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>🐍 Python</h3>
+            <p>Dasturlash asoslari</p>
+            <button class="btn primary" onclick="openCourse('python')">
+                Darslikni ochish
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>🤖 AI</h3>
+            <p>Sun’iy intellekt</p>
+            <button class="btn primary" onclick="openCourse('ai')">
+                Darslikni ochish
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>📱 Mobil</h3>
+            <p>Mobil ilovalar</p>
+            <button class="btn primary" onclick="openCourse('mobile')">
+                Darslikni ochish
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- DASHBOARD -->
+
+<section id="dashboard">
+
+    <div class="section-title">
+        <h2>👨‍🎓 O‘quvchi kabineti</h2>
+        <p>O‘qish jarayoningizni kuzating</p>
+    </div>
+
+    <div class="dashboard">
+
+        <div class="user-box">
+
+            <div class="avatar" id="avatar">
+                👤
+            </div>
+
+            <div>
+                <h2 id="studentName">Mehmon o‘quvchi</h2>
+                <p style="color:var(--muted)">
+                    IKROMJON AI o‘quvchisi
+                </p>
+            </div>
+
+        </div>
+
+        <div class="course-progress">
+
+            <div class="course-progress-row">
+                <div>
+                    <b>Frontend</b>
+                    <span id="dashFrontend">0%</span>
+                </div>
+
+                <div class="progress">
+                    <div class="progress-bar" id="dashFrontendBar"></div>
+                </div>
+            </div>
+
+            <div class="course-progress-row">
+                <div>
+                    <b>Python</b>
+                    <span id="dashPython">0%</span>
+                </div>
+
+                <div class="progress">
+                    <div class="progress-bar" id="dashPythonBar"></div>
+                </div>
+            </div>
+
+            <div class="course-progress-row">
+                <div>
+                    <b>AI</b>
+                    <span id="dashAi">0%</span>
+                </div>
+
+                <div class="progress">
+                    <div class="progress-bar" id="dashAiBar"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="btn primary" onclick="showCertificate()">
+            🎓 Sertifikatim
+        </button>
+
+    </div>
+
+</section>
+
+<!-- AI -->
+
+<section id="ai">
+
+    <div class="section-title">
+        <h2>🤖 IKROMJON AI yordamchi</h2>
+        <p>Savolingizni yozing</p>
+    </div>
+
+    <div class="ai-box">
+
+        <div class="ai-messages" id="aiMessages">
+
+            <div class="message bot">
+                👋 Assalomu alaykum! Men IKROMJON AI yordamchisiman.
+                Dasturlash, HTML, CSS, Python yoki AI haqida savol bering.
+            </div>
+
+        </div>
+
+        <div class="ai-input">
+            <input
+                id="aiInput"
+                placeholder="Savolingizni yozing..."
+                onkeydown="if(event.key==='Enter') askAI()"
+            >
+
+            <button class="btn primary" onclick="askAI()">
+                Yuborish
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section>
+
+    <div class="section-title">
+        <h2>📞 Biz bilan bog‘laning</h2>
+        <p>O‘quv markazimiz haqida ma'lumot oling</p>
+    </div>
+
+    <div class="contact">
+
+        <div class="card">
+            <h2>IKROMJON AI</h2>
+
+            <p style="margin-top:15px">
+                🚀 Zamonaviy IT ta'lim markazi
+            </p>
+
+            <p style="margin-top:10px">
+                📚 Dasturlash kurslari
+            </p>
+
+            <p style="margin-top:10px">
+                🤖 AI texnologiyalari
+            </p>
+
+            <p style="margin-top:10px">
+                🎓 Sertifikat
+            </p>
+        </div>
+
+        <form class="form" onsubmit="sendMessage(event)">
+
+            <input id="contactName" placeholder="Ismingiz" required>
+
+            <input id="contactPhone" placeholder="Telefon raqamingiz" required>
+
+            <textarea id="contactText" placeholder="Xabaringiz"></textarea>
+
+            <button class="btn primary">
+                📩 Xabar yuborish
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<footer>
+    <h3>IKROMJON AI O‘QUV MARKAZI</h3>
+    <p style="margin-top:10px">
+        © 2026 Barcha huquqlar himoyalangan
+    </p>
+</footer>
+
+<!-- COURSE MODAL -->
+
+<div class="modal" id="courseModal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal('courseModal')">
+            ×
+        </button>
+
+        <h2 id="courseTitle"></h2>
+
+        <p id="courseDescription" style="color:var(--muted);margin-top:8px"></p>
+
+        <div id="lessonList" style="margin-top:25px"></div>
+
+        <button class="btn primary" onclick="openQuiz()">
+            📝 Kurs testini topshirish
+        </button>
+
+    </div>
+
+</div>
+
+<!-- LESSON MODAL -->
+
+<div class="modal" id="lessonModal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal('lessonModal')">
+            ×
+        </button>
+
+        <h2 id="lessonTitle"></h2>
+
+        <div class="video">
+            <video id="lessonVideo" controls>
+                <source id="videoSource" src="">
+                Brauzeringiz video formatini qo‘llab-quvvatlamaydi.
+            </video>
+        </div>
+
+        <p id="videoMessage" style="color:var(--muted)">
+            🎬 Bu darsga video URL manzilini JavaScriptdagi
+            <b>video</b> qatoriga qo‘shishingiz mumkin.
+        </p>
+
+        <div class="lesson-text" id="lessonText"></div>
+
+        <button class="btn secondary" onclick="openPDF()">
+            📄 PDF material
+        </button>
+
+        <button class="btn primary" onclick="completeLesson()">
+            ✅ Darsni tugatdim
+        </button>
+
+    </div>
+
+</div>
+
+<!-- QUIZ -->
+
+<div class="modal" id="quizModal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal('quizModal')">
+            ×
+        </button>
+
+        <h2>📝 Kurs testi</h2>
+
+        <div id="quizContent" style="margin-top:20px"></div>
+
+        <button class="btn primary" onclick="submitQuiz()">
+            Testni yakunlash
+        </button>
+
+    </div>
+
+</div>
+
+<!-- CERTIFICATE -->
+
+<div class="modal" id="certificateModal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal('certificateModal')">
+            ×
+        </button>
+
+        <div class="certificate">
+
+            <h1>🎓 SERTIFIKAT</h1>
+
+            <p style="margin-top:25px">
+                Ushbu sertifikat
+            </p>
+
+            <div class="name" id="certificateName">
+                O‘quvchi
+            </div>
+
+            <p>
+                IKROMJON AI O‘QUV MARKAZI
+                kursini muvaffaqiyatli tamomlaganini tasdiqlaydi.
+            </p>
+
+            <div class="course">
+                Frontend / Python / AI
+            </div>
+
+            <p id="certificateDate"></p>
+
+        </div>
+
+        <button class="btn primary print-btn" onclick="window.print()">
+            🖨 Sertifikatni chiqarish
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+/* SPLASH */
+
+let percent=0;
+
+let loading=setInterval(()=>{
+
+    percent++;
+
+    document.getElementById("loadText").innerText=
+        "Yuklanmoqda... "+percent+"%";
+
+    if(percent>=100){
+        clearInterval(loading);
+    }
+
+},30);
 
 
-  function copyCode() {
+/* DATA */
 
-    const code =
-      document.getElementById("codeOutput");
+const courses={
 
-    code.select();
+frontend:{
+    title:"🌐 Frontend Dasturlash",
+    description:"HTML, CSS va JavaScript asoslarini o‘rganing.",
+    lessons:[
+        ["HTML asoslari","HTML nima? Teglar, sahifa tuzilishi va asosiy elementlar."],
+        ["HTML strukturasi","DOCTYPE, head, body va sahifa tuzilishi."],
+        ["CSS asoslari","Rang, shrift, margin, padding va border."],
+        ["Flexbox","Elementlarni zamonaviy joylashtirish."],
+        ["Responsive Design","Telefon va kompyuterga mos sayt."],
+        ["JavaScript","O‘zgaruvchi, funksiya va hodisalar."],
+        ["DOM","HTML elementlarini JavaScript orqali boshqarish."],
+        ["Mini loyiha","O‘zingizning birinchi web loyihangiz."]
+    ]
+},
 
-    navigator.clipboard
-      .writeText(code.value);
+python:{
+    title:"🐍 Python dasturlash",
+    description:"Python dasturlash tilini noldan o‘rganing.",
+    lessons:[
+        ["Python nima?","Python haqida umumiy tushuncha."],
+        ["O‘zgaruvchilar","String, number va boolean."],
+        ["If / Else","Shart operatorlari."],
+        ["For loop","Takrorlanish operatorlari."],
+        ["While","While sikli."],
+        ["Funksiyalar","Python funksiyalarini yaratish."],
+        ["List","Ro‘yxatlar bilan ishlash."],
+        ["Mini loyiha","Oddiy Python dasturi."]
+    ]
+},
 
-    showToast("Kod nusxalandi!");
+ai:{
+    title:"🤖 Sun’iy intellekt",
+    description:"AI va zamonaviy sun’iy intellekt texnologiyalarini o‘rganing.",
+    lessons:[
+        ["AI nima?","Sun’iy intellekt tushunchasi."],
+        ["Machine Learning","Mashinali o‘rganish asoslari."],
+        ["ChatGPT","AI yordamchilaridan foydalanish."],
+        ["Prompt Engineering","To‘g‘ri prompt yozish."],
+        ["AI rasmlar","AI orqali tasvir yaratish."],
+        ["AI video","AI video texnologiyalari."],
+        ["AI biznesda","Biznesda AI foydalanish."],
+        ["AI loyiha","Shaxsiy AI loyihangiz."]
+    ]
+},
 
-  }
+mobile:{
+    title:"📱 Mobil dasturlash",
+    description:"Mobil ilovalar yaratish asoslarini o‘rganing.",
+    lessons:[
+        ["Mobil ilova nima?","Mobil dasturlashga kirish."],
+        ["UI dizayn","Mobil interfeys yaratish."],
+        ["Navigation","Sahifalar orasida o'tish."],
+        ["Formalar","Input va buttonlar."],
+        ["API","Server bilan bog‘lanish."],
+        ["Database","Ma’lumotlarni saqlash."],
+        ["Login","Kirish tizimi."],
+        ["Mini loyiha","Mobil ilova yaratish."]
+    ]
+},
+
+design:{
+    title:"🎨 Web Design",
+    description:"Zamonaviy UI/UX dizayn yaratishni o‘rganing.",
+    lessons:[
+        ["UI nima?","Foydalanuvchi interfeysi."],
+        ["UX nima?","Foydalanuvchi tajribasi."],
+        ["Ranglar","Ranglar uyg‘unligi."],
+        ["Typography","Shriftlar bilan ishlash."],
+        ["Grid","Elementlarni tartiblash."],
+        ["Mobile Design","Mobil dizayn."],
+        ["Prototype","Prototip yaratish."],
+        ["Mini loyiha","Web dizayn loyiha."]
+    ]
+},
+
+computer:{
+    title:"💻 Kompyuter savodxonligi",
+    description:"Kompyuter va internetdan foydalanishni o‘rganing.",
+    lessons:[
+        ["Kompyuter asoslari","Kompyuter qismlari."],
+        ["Windows","Operatsion tizim."],
+        ["Fayllar","Fayl va papkalar."],
+        ["Internet","Internet asoslari."],
+        ["Email","Elektron pochta."],
+        ["Word","Matn bilan ishlash."],
+        ["Excel","Jadvallar bilan ishlash."],
+        ["Xavfsizlik","Internet xavfsizligi."]
+    ]
+}
+
+};
 
 
-  function saveProject() {
+/* QUIZ */
 
-    const project = {
+const quizzes={
 
-      name:
-        document.getElementById("appName").value,
+frontend:[
+    {
+        q:"HTML nimani anglatadi?",
+        options:["HyperText Markup Language","HighText Machine Language","Home Tool Markup Language"],
+        answer:0
+    },
+    {
+        q:"CSS nima uchun ishlatiladi?",
+        options:["Dizayn uchun","Server uchun","Database uchun"],
+        answer:0
+    },
+    {
+        q:"JavaScript nima?",
+        options:["Dasturlash tili","Operatsion tizim","Brauzer"],
+        answer:0
+    }
+],
 
-      text:
-        document.getElementById("appText").value,
+python:[
+    {
+        q:"Python qanday til?",
+        options:["Dasturlash tili","Grafik dastur","Brauzer"],
+        answer:0
+    },
+    {
+        q:"Python fayli kengaytmasi?",
+        options:[".py",".html",".css"],
+        answer:0
+    },
+    {
+        q:"print() nima qiladi?",
+        options:["Ma'lumot chiqaradi","Fayl o‘chiradi","Kompyuterni o‘chiradi"],
+        answer:0
+    }
+],
 
-      color:
-        document.getElementById("appColor").value,
+ai:[
+    {
+        q:"AI nima?",
+        options:["Sun’iy intellekt","Audio internet","Application interface"],
+        answer:0
+    },
+    {
+        q:"Prompt nima?",
+        options:["AI ga beriladigan topshiriq","Kompyuter","Video"],
+        answer:0
+    },
+    {
+        q:"ChatGPT nima?",
+        options:["AI yordamchi","Printer","Operatsion tizim"],
+        answer:0
+    }
+]
 
-      background:
-        document.getElementById("bgColor").value,
+};
 
-      elements:
-        elements
 
-    };
+/* VARIABLES */
+
+let currentCourse="";
+let currentLesson=0;
+
+
+/* NAVIGATION */
+
+function go(id){
+    document.getElementById(id).scrollIntoView({
+        behavior:"smooth"
+    });
+}
+
+
+/* DARK MODE */
+
+function toggleDark(){
+
+    document.body.classList.toggle("dark");
 
     localStorage.setItem(
-      "ikromjonProject",
-      JSON.stringify(project)
+        "darkMode",
+        document.body.classList.contains("dark")
+    );
+}
+
+if(localStorage.getItem("darkMode")==="true"){
+    document.body.classList.add("dark");
+}
+
+
+/* LOGIN */
+
+function login(){
+
+    let old=localStorage.getItem("studentName") || "";
+
+    let name=prompt(
+        "O‘quvchi ismingizni kiriting:",
+        old
     );
 
-    showToast("Loyiha saqlandi!");
+    if(name){
 
-  }
+        localStorage.setItem("studentName",name);
 
+        updateDashboard();
 
-  function loadProject() {
-
-    const saved =
-      localStorage.getItem(
-        "ikromjonProject"
-      );
-
-    if(!saved) return;
-
-    const project =
-      JSON.parse(saved);
-
-    document.getElementById("appName").value =
-      project.name;
-
-    document.getElementById("appText").value =
-      project.text;
-
-    document.getElementById("appColor").value =
-      project.color;
-
-    document.getElementById("bgColor").value =
-      project.background;
-
-    updatePreview();
-
-  }
+        alert(
+            "Xush kelibsiz, "+name+"! 👋"
+        );
+    }
+}
 
 
-  function newProject() {
+/* DASHBOARD */
 
-    if(!confirm(
-      "Yangi loyiha yaratilsinmi?"
-    )) return;
+function updateDashboard(){
 
-    document.getElementById("appName").value =
-      "Mening Ilovam";
+    let name=
+        localStorage.getItem("studentName")
+        || "Mehmon o‘quvchi";
 
-    document.getElementById("appText").value =
-      "Yangi ilovangizga xush kelibsiz!";
+    document.getElementById("studentName").innerText=name;
 
-    document.getElementById("canvas").innerHTML = `
-      <div class="canvas-empty" id="emptyMessage">
-        Yuqoridagi elementlardan birini tanlang
-        <br>
-        va ilovangizni yaratishni boshlang.
-      </div>
+    document.getElementById("certificateName").innerText=name;
+
+    let coursesToShow=["frontend","python","ai"];
+
+    coursesToShow.forEach(c=>{
+
+        let p=getProgress(c);
+
+        let el=document.getElementById("progress-"+c);
+
+        if(el){
+            el.style.width=p+"%";
+        }
+    });
+
+    let f=getProgress("frontend");
+    let py=getProgress("python");
+    let ai=getProgress("ai");
+
+    document.getElementById("dashFrontend").innerText=f+"%";
+    document.getElementById("dashFrontendBar").style.width=f+"%";
+
+    document.getElementById("dashPython").innerText=py+"%";
+    document.getElementById("dashPythonBar").style.width=py+"%";
+
+    document.getElementById("dashAi").innerText=ai+"%";
+    document.getElementById("dashAiBar").style.width=ai+"%";
+}
+
+updateDashboard();
+
+
+/* OPEN COURSE */
+
+function openCourse(course){
+
+    currentCourse=course;
+
+    let data=courses[course];
+
+    document.getElementById("courseTitle").innerText=data.title;
+
+    document.getElementById("courseDescription").innerText=
+        data.description;
+
+    let list=document.getElementById("lessonList");
+
+    list.innerHTML="";
+
+    data.lessons.forEach((lesson,index)=>{
+
+        let completed=
+            isCompleted(course,index);
+
+        list.innerHTML+=`
+
+        <div class="lesson-card">
+
+            <div class="lesson-number">
+                ${completed?"✓":index+1}
+            </div>
+
+            <div class="lesson-info">
+
+                <h4>${lesson[0]}</h4>
+
+                <span>
+                    ${completed?"✅ Tugatilgan":"📖 Dars"}
+                </span>
+
+            </div>
+
+            <button
+                class="btn primary"
+                onclick="openLesson('${course}',${index})"
+            >
+                ${completed?"Qayta o‘qish":"Boshlash"}
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById("courseModal").classList.add("show");
+}
+
+
+/* OPEN LESSON */
+
+function openLesson(course,index){
+
+    currentCourse=course;
+    currentLesson=index;
+
+    let lesson=courses[course].lessons[index];
+
+    document.getElementById("lessonTitle").innerText=
+        lesson[0];
+
+    document.getElementById("lessonText").innerText=
+        lesson[1]+
+        "\n\n📌 Amaliy topshiriq:\n"+
+        "Ushbu mavzu bo‘yicha o‘zingiz kichik loyiha yarating.";
+
+    let video="";
+
+    document.getElementById("videoSource").src=video;
+
+    document.getElementById("lessonVideo").load();
+
+    if(video){
+        document.getElementById("videoMessage").style.display="none";
+    }else{
+        document.getElementById("videoMessage").style.display="block";
+    }
+
+    closeModal("courseModal");
+
+    document.getElementById("lessonModal").classList.add("show");
+}
+
+
+/* COMPLETE LESSON */
+
+function completeLesson(){
+
+    let key=
+        "completed_"+currentCourse;
+
+    let arr=
+        JSON.parse(localStorage.getItem(key)||"[]");
+
+    if(!arr.includes(currentLesson)){
+        arr.push(currentLesson);
+    }
+
+    localStorage.setItem(
+        key,
+        JSON.stringify(arr)
+    );
+
+    alert("🎉 Dars muvaffaqiyatli tugatildi!");
+
+    closeModal("lessonModal");
+
+    updateDashboard();
+
+    openCourse(currentCourse);
+}
+
+
+/* PROGRESS */
+
+function isCompleted(course,index){
+
+    let arr=
+        JSON.parse(
+            localStorage.getItem("completed_"+course)||"[]"
+        );
+
+    return arr.includes(index);
+}
+
+function getProgress(course){
+
+    let total=courses[course].lessons.length;
+
+    let arr=
+        JSON.parse(
+            localStorage.getItem("completed_"+course)||"[]"
+        );
+
+    return Math.round(
+        arr.length/total*100
+    );
+}
+
+
+/* PDF */
+
+function openPDF(){
+
+    alert(
+        "📄 PDF material hali ulanmagan.\n\n"+
+        "index.html ichidagi openPDF() funksiyasiga "+
+        "o‘zingizning PDF fayl manzilingizni qo‘shishingiz mumkin."
+    );
+
+}
+
+
+/* QUIZ */
+
+function openQuiz(){
+
+    let questions=
+        quizzes[currentCourse] || quizzes.frontend;
+
+    let html="";
+
+    questions.forEach((item,index)=>{
+
+        html+=`
+
+        <div class="quiz-question">
+
+            <b>${index+1}. ${item.q}</b>
+
+            ${item.options.map((option,i)=>`
+
+                <label class="quiz-option">
+
+                    <input
+                        type="radio"
+                        name="q${index}"
+                        value="${i}"
+                    >
+
+                    ${option}
+
+                </label>
+
+            `).join("")}
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById("quizContent").innerHTML=html;
+
+    closeModal("courseModal");
+
+    document.getElementById("quizModal").classList.add("show");
+}
+
+
+/* SUBMIT QUIZ */
+
+function submitQuiz(){
+
+    let questions=
+        quizzes[currentCourse] || quizzes.frontend;
+
+    let score=0;
+
+    questions.forEach((q,index)=>{
+
+        let answer=
+            document.querySelector(
+                `input[name="q${index}"]:checked`
+            );
+
+        if(answer &&
+            Number(answer.value)===q.answer){
+
+            score++;
+        }
+
+    });
+
+    let percent=
+        Math.round(score/questions.length*100);
+
+    if(percent>=70){
+
+        alert(
+            "🎉 Tabriklaymiz!\n\n"+
+            "Natija: "+percent+"%\n"+
+            "Testdan muvaffaqiyatli o‘tdingiz!"
+        );
+
+        localStorage.setItem(
+            "quiz_"+currentCourse,
+            percent
+        );
+
+    }else{
+
+        alert(
+            "Natija: "+percent+"%\n\n"+
+            "❌ 70% dan yuqori natija olishga harakat qiling."
+        );
+    }
+
+    closeModal("quizModal");
+}
+
+
+/* CERTIFICATE */
+
+function showCertificate(){
+
+    let name=
+        localStorage.getItem("studentName");
+
+    if(!name){
+
+        alert(
+            "Avval 👤 tugmasini bosib ismingizni kiriting."
+        );
+
+        return;
+    }
+
+    document.getElementById("certificateName").innerText=
+        name;
+
+    document.getElementById("certificateDate").innerText=
+        "Berilgan sana: "+
+        new Date().toLocaleDateString("uz-UZ");
+
+    document.getElementById(
+        "certificateModal"
+    ).classList.add("show");
+}
+
+
+/* AI ASSISTANT */
+
+function askAI(){
+
+    let input=
+        document.getElementById("aiInput");
+
+    let text=input.value.trim();
+
+    if(!text)return;
+
+    let box=
+        document.getElementById("aiMessages");
+
+    box.innerHTML+=`
+        <div class="message user">
+            ${escapeHTML(text)}
+        </div>
     `;
 
-    elements = [];
+    input.value="";
 
-    updatePreview();
+    let answer=
+        "Savolingiz qabul qilindi. ";
 
-    showToast("Yangi loyiha yaratildi!");
+    let lower=text.toLowerCase();
 
-  }
+    if(lower.includes("html")){
+        answer=
+        "HTML — web sahifaning tuzilishini yaratish uchun ishlatiladi. Masalan: h1, p, img va button teglaridan foydalaniladi.";
+    }
+    else if(lower.includes("css")){
+        answer=
+        "CSS — web sahifaning ko‘rinishini boshqaradi: rang, shrift, o‘lcham, joylashuv va animatsiyalar.";
+    }
+    else if(lower.includes("python")){
+        answer=
+        "Python — o‘rganish oson va kuchli dasturlash tili. Uni web, AI, avtomatlashtirish va boshqa sohalarda ishlatish mumkin.";
+    }
+    else if(
+        lower.includes("ai") ||
+        lower.includes("sun'iy")
+    ){
+        answer=
+        "AI — ma'lumotlardan foydalanib vazifalarni bajarishga yordam beradigan texnologiyalar majmuasi.";
+    }
+    else if(lower.includes("javascript")){
+        answer=
+        "JavaScript web sahifaga interaktivlik qo‘shadi. Masalan, tugma bosilganda modal oynani ochish mumkin.";
+    }
+    else{
+        answer=
+        "Bu IKROMJON AI demo yordamchisi. Aniqroq savol bering: HTML, CSS, JavaScript, Python yoki AI.";
+    }
+
+    setTimeout(()=>{
+
+        box.innerHTML+=`
+            <div class="message bot">
+                🤖 ${answer}
+            </div>
+        `;
+
+        box.scrollTop=box.scrollHeight;
+
+    },500);
+}
 
 
-  function showToast(message) {
+/* HTML SECURITY */
 
-    const toast =
-      document.getElementById("toast");
+function escapeHTML(str){
 
-    toast.innerText =
-      message;
-
-    toast.style.display =
-      "block";
-
-    setTimeout(() => {
-      toast.style.display =
-        "none";
-    }, 2000);
-
-  }
+    return str
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
 
 
-  function escapeHTML(text) {
+/* CONTACT */
 
-    return text
-      .replace(/&/g,"&amp;")
-      .replace(/</g,"&lt;")
-      .replace(/>/g,"&gt;")
-      .replace(/"/g,"&quot;")
-      .replace(/'/g,"&#039;");
+function sendMessage(e){
 
-  }
+    e.preventDefault();
+
+    let name=
+        document.getElementById("contactName").value;
+
+    alert(
+        "✅ Rahmat, "+name+"!\n"+
+        "Xabaringiz qabul qilindi."
+    );
+
+    e.target.reset();
+}
 
 
-  updatePreview();
+/* CLOSE */
 
-  loadProject();
+function closeModal(id){
+
+    document
+        .getElementById(id)
+        .classList.remove("show");
+}
+
+
+/* ESC */
+
+document.addEventListener("keydown",e=>{
+
+    if(e.key==="Escape"){
+
+        document
+        .querySelectorAll(".modal")
+        .forEach(m=>m.classList.remove("show"));
+
+    }
+
+});
 
 </script>
 
