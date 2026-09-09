@@ -2,39 +2,50 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#070914">
-<meta name="description" content="IKROMJON AI O'QUV MARKAZI — 3D/4D zamonaviy ta'lim platformasi">
-<title>IKROMJON AI — O‘QUV MARKAZI</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#070b18">
+<meta name="description" content="IKROMJON AI O'QUV MARKAZI — zamonaviy ta'lim platformasi">
+<title>IKROMJON AI O‘QUV MARKAZI</title>
 
 <style>
 /* =========================================================
-   IKROMJON AI O'QUV MARKAZI — PREMIUM 3D / 4D UI
-   ========================================================= */
-
-:root{
-    --bg:#050611;
-    --bg2:#0a0d1c;
-    --panel:rgba(16,21,43,.72);
-    --panel2:rgba(255,255,255,.055);
-    --text:#fff;
-    --muted:#9da8c8;
-    --line:rgba(255,255,255,.11);
-    --purple:#7857ff;
-    --cyan:#00d9ff;
-    --pink:#ff36aa;
-    --green:#18e6a0;
-    --yellow:#ffd166;
-    --red:#ff5277;
-    --shadow:0 30px 100px rgba(0,0,0,.48);
-    --radius:24px;
-}
+   IKROMJON AI O'QUV MARKAZI
+   PERFORMANCE-FIRST SINGLE FILE
+========================================================= */
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:"Times New Roman",Times,serif !important;
+    font-family:"Times New Roman",Times,serif;
+}
+
+:root{
+    --bg:#050713;
+    --bg2:#0a0f21;
+    --card:rgba(15,22,46,.78);
+    --card2:rgba(255,255,255,.065);
+    --text:#ffffff;
+    --muted:#aab3ce;
+    --line:rgba(255,255,255,.12);
+    --primary:#785cff;
+    --primary2:#00d9ff;
+    --pink:#ff3cab;
+    --green:#26e0a7;
+    --yellow:#ffd166;
+    --danger:#ff5577;
+    --shadow:0 18px 55px rgba(0,0,0,.35);
+}
+
+body.light{
+    --bg:#edf2ff;
+    --bg2:#ffffff;
+    --card:rgba(255,255,255,.88);
+    --card2:rgba(30,40,80,.06);
+    --text:#11182d;
+    --muted:#606a83;
+    --line:rgba(30,40,80,.12);
+    --shadow:0 15px 45px rgba(30,45,100,.13);
 }
 
 html{
@@ -44,437 +55,442 @@ html{
 body{
     min-height:100vh;
     color:var(--text);
-    overflow-x:hidden;
     background:
-        radial-gradient(circle at 10% 5%,rgba(120,87,255,.22),transparent 28%),
-        radial-gradient(circle at 90% 15%,rgba(0,217,255,.13),transparent 25%),
-        radial-gradient(circle at 50% 100%,rgba(255,54,170,.12),transparent 35%),
+        radial-gradient(circle at 8% 10%,rgba(120,92,255,.18),transparent 30%),
+        radial-gradient(circle at 90% 15%,rgba(0,217,255,.12),transparent 28%),
+        radial-gradient(circle at 50% 100%,rgba(255,60,171,.09),transparent 35%),
         var(--bg);
+    overflow-x:hidden;
+    transition:background .3s,color .3s;
 }
 
-body.light{
-    --bg:#eef2ff;
-    --bg2:#fff;
-    --panel:rgba(255,255,255,.76);
-    --panel2:rgba(20,30,70,.055);
-    --text:#11152b;
-    --muted:#59627c;
-    --line:rgba(20,30,70,.12);
+body.light header{
+    background:rgba(255,255,255,.82);
 }
 
-button,input,select,textarea{
-    font-family:"Times New Roman",Times,serif !important;
+button,
+input,
+select,
+textarea{
+    font-family:"Times New Roman",Times,serif;
 }
 
 button{
     cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
 }
 
-a{
-    color:inherit;
-    text-decoration:none;
+button:active{
+    transform:scale(.97);
 }
 
-::-webkit-scrollbar{
-    width:8px;
+input,
+select,
+textarea{
+    outline:none;
 }
 
-::-webkit-scrollbar-track{
-    background:rgba(255,255,255,.03);
+img{
+    max-width:100%;
 }
 
-::-webkit-scrollbar-thumb{
-    background:linear-gradient(var(--purple),var(--cyan));
-    border-radius:20px;
+.hidden{
+    display:none!important;
 }
 
-/* BACKGROUND 4D ORBS */
+/* =========================================================
+   BACKGROUND
+========================================================= */
 
-.bg-orb{
+.bgOrb{
     position:fixed;
     border-radius:50%;
-    filter:blur(4px);
     pointer-events:none;
-    z-index:-2;
-    animation:float4d 12s ease-in-out infinite;
+    z-index:-5;
+    filter:blur(55px);
+    opacity:.28;
 }
 
-.orb1{
-    width:340px;
-    height:340px;
-    left:-130px;
-    top:15%;
-    background:radial-gradient(circle,var(--purple),transparent 68%);
-    opacity:.25;
+.bgOrb1{
+    width:280px;
+    height:280px;
+    left:-120px;
+    top:160px;
+    background:#7657ff;
 }
 
-.orb2{
-    width:300px;
-    height:300px;
-    right:-100px;
-    top:35%;
-    background:radial-gradient(circle,var(--cyan),transparent 68%);
-    opacity:.18;
-    animation-delay:-4s;
+.bgOrb2{
+    width:260px;
+    height:260px;
+    right:-120px;
+    top:420px;
+    background:#00dcff;
 }
 
-.orb3{
-    width:380px;
-    height:380px;
-    left:35%;
-    bottom:-200px;
-    background:radial-gradient(circle,var(--pink),transparent 68%);
-    opacity:.13;
-    animation-delay:-7s;
+.bgOrb3{
+    width:320px;
+    height:320px;
+    left:40%;
+    bottom:-220px;
+    background:#ff3cac;
 }
 
-@keyframes float4d{
-    0%,100%{
-        transform:translate3d(0,0,0) scale(1) rotate(0deg);
-    }
-    25%{
-        transform:translate3d(30px,-35px,80px) scale(1.08) rotate(10deg);
-    }
-    50%{
-        transform:translate3d(-20px,25px,120px) scale(.94) rotate(-10deg);
-    }
-    75%{
-        transform:translate3d(45px,15px,60px) scale(1.04) rotate(7deg);
-    }
-}
+/* =========================================================
+   SEASON PARTICLES
+========================================================= */
 
-/* PARTICLES */
-
-#particles{
+#seasonLayer{
     position:fixed;
     inset:0;
-    z-index:-1;
     pointer-events:none;
+    overflow:hidden;
+    z-index:999;
 }
 
-.particle{
+.seasonParticle{
     position:absolute;
-    width:2px;
-    height:2px;
-    background:white;
-    border-radius:50%;
-    opacity:.5;
-    animation:particleMove linear infinite;
+    top:-60px;
+    user-select:none;
+    will-change:transform,opacity;
+    animation:seasonFall linear infinite;
 }
 
-@keyframes particleMove{
-    from{
-        transform:translate3d(0,100vh,0);
+@keyframes seasonFall{
+    0%{
+        transform:translate3d(0,-60px,0) rotate(0deg);
+        opacity:0;
     }
-    to{
-        transform:translate3d(80px,-20vh,0);
+
+    12%{
+        opacity:.95;
+    }
+
+    85%{
+        opacity:.85;
+    }
+
+    100%{
+        transform:
+            translate3d(var(--drift),110vh,0)
+            rotate(360deg);
+        opacity:0;
     }
 }
 
-/* SPLASH */
+/* =========================================================
+   SPLASH
+========================================================= */
 
 #splash{
     position:fixed;
     inset:0;
-    z-index:99999;
+    z-index:10000;
     display:flex;
     align-items:center;
     justify-content:center;
-    flex-direction:column;
     background:
-        radial-gradient(circle at 50% 45%,rgba(120,87,255,.22),transparent 35%),
-        #04050d;
-    transition:.8s;
+        radial-gradient(circle at center,#211d55 0%,#090c1b 42%,#02030a 100%);
+    transition:opacity .55s ease;
 }
 
-.splash-logo{
-    width:130px;
-    height:130px;
-    border-radius:38px;
+.splashContent{
+    width:min(92%,650px);
+    text-align:center;
+}
+
+.splashLogo{
+    width:145px;
+    height:145px;
+    margin:auto;
     display:grid;
     place-items:center;
-    font-size:42px;
+    border-radius:35px;
+    font-size:40px;
     font-weight:bold;
-    background:linear-gradient(135deg,var(--purple),var(--pink),var(--cyan));
+    background:
+        linear-gradient(135deg,#7657ff,#00dcff,#ff3cac);
     box-shadow:
-        0 0 40px rgba(120,87,255,.6),
-        0 0 100px rgba(0,217,255,.25);
-    transform-style:preserve-3d;
-    animation:splash3d 3s ease-in-out infinite;
+        0 0 35px rgba(118,87,255,.65),
+        0 0 90px rgba(0,220,255,.2);
+    animation:splashFloat 3s ease-in-out infinite;
 }
 
-@keyframes splash3d{
+@keyframes splashFloat{
     0%,100%{
-        transform:rotateX(0) rotateY(0) translateZ(0);
+        transform:perspective(800px) rotateX(0) rotateY(0) translateY(0);
     }
     50%{
-        transform:rotateX(180deg) rotateY(180deg) translateZ(40px);
+        transform:perspective(800px) rotateX(12deg) rotateY(20deg) translateY(-12px);
     }
 }
 
-.splash-title{
-    margin-top:28px;
-    font-size:34px;
-    text-align:center;
-    letter-spacing:2px;
+.splashTitle{
+    margin-top:25px;
+    font-size:clamp(30px,7vw,58px);
+    font-weight:900;
 }
 
-.splash-sub{
-    color:var(--muted);
+.splashSub{
     margin-top:8px;
-    text-align:center;
-}
-
-.loader{
-    width:min(420px,80%);
-    height:8px;
-    background:rgba(255,255,255,.08);
-    border-radius:50px;
-    overflow:hidden;
-    margin-top:30px;
-}
-
-.loader-bar{
-    width:0;
-    height:100%;
-    background:linear-gradient(90deg,var(--purple),var(--pink),var(--cyan));
-    box-shadow:0 0 20px var(--cyan);
-    transition:.15s;
-}
-
-#loadText{
-    margin-top:12px;
-    color:var(--cyan);
+    color:#aeb8d6;
     font-size:20px;
 }
 
-/* HEADER */
+.splashLoader{
+    width:min(90%,430px);
+    height:9px;
+    margin:30px auto 0;
+    overflow:hidden;
+    border-radius:20px;
+    background:rgba(255,255,255,.1);
+}
+
+.splashBar{
+    width:0;
+    height:100%;
+    background:linear-gradient(90deg,#7657ff,#00dcff,#ff3cac);
+    transition:width .12s linear;
+}
+
+.splashPercent{
+    margin-top:12px;
+    color:#00dcff;
+    font-weight:bold;
+    font-size:18px;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 header{
     position:sticky;
     top:0;
-    z-index:1000;
-    height:76px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 5%;
-    background:rgba(5,6,17,.65);
-    backdrop-filter:blur(22px);
+    z-index:500;
     border-bottom:1px solid var(--line);
+    background:rgba(5,8,20,.72);
+    backdrop-filter:blur(18px);
 }
 
-body.light header{
-    background:rgba(255,255,255,.72);
+.headerInner{
+    width:min(1450px,100%);
+    min-height:76px;
+    margin:auto;
+    padding:10px 18px;
+    display:flex;
+    align-items:center;
+    gap:18px;
 }
 
 .logo{
+    min-width:220px;
     display:flex;
     align-items:center;
-    gap:12px;
-    font-size:21px;
-    font-weight:bold;
+    gap:11px;
 }
 
-.logo-box{
-    width:44px;
-    height:44px;
-    border-radius:14px;
+.logoMark{
+    width:48px;
+    height:48px;
+    border-radius:15px;
     display:grid;
     place-items:center;
-    background:linear-gradient(135deg,var(--purple),var(--cyan));
-    box-shadow:0 0 25px rgba(120,87,255,.45);
-    transform-style:preserve-3d;
-    animation:logoSpin 8s linear infinite;
+    font-weight:bold;
+    background:linear-gradient(135deg,#7657ff,#00dcff);
+    box-shadow:0 0 22px rgba(118,87,255,.4);
 }
 
-@keyframes logoSpin{
-    0%{transform:rotateY(0)}
-    100%{transform:rotateY(360deg)}
+.logoText strong{
+    display:block;
+    font-size:19px;
+}
+
+.logoText small{
+    color:var(--muted);
 }
 
 .nav{
+    flex:1;
     display:flex;
-    align-items:center;
-    gap:8px;
+    justify-content:center;
+    gap:5px;
 }
 
 .nav button,
-.header-btn{
-    border:0;
-    color:var(--muted);
+.iconButton{
+    border:1px solid transparent;
+    border-radius:11px;
+    padding:9px 11px;
+    color:var(--text);
     background:transparent;
-    padding:10px 12px;
-    border-radius:12px;
-    font-size:15px;
-    transition:.25s;
 }
 
 .nav button:hover,
-.header-btn:hover{
-    color:white;
-    background:var(--panel2);
-    transform:translateY(-2px);
+.iconButton:hover{
+    background:var(--card2);
+    border-color:var(--line);
 }
 
-.header-actions{
+.headerTools{
     display:flex;
     align-items:center;
-    gap:8px;
+    gap:6px;
 }
 
-.icon-btn{
-    width:42px;
-    height:42px;
+.langSelect{
     border:1px solid var(--line);
-    border-radius:14px;
+    border-radius:10px;
+    padding:8px 9px;
     color:var(--text);
-    background:var(--panel2);
-    transition:.25s;
+    background:var(--card2);
 }
 
-.icon-btn:hover{
-    transform:translateY(-3px) rotateX(8deg);
-    border-color:var(--cyan);
-    box-shadow:0 10px 30px rgba(0,217,255,.16);
-}
-
-.profile-mini{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    border:1px solid var(--line);
-    border-radius:16px;
-    padding:5px 10px 5px 5px;
-    background:var(--panel2);
-    cursor:pointer;
-}
-
-.avatar{
-    width:34px;
-    height:34px;
-    border-radius:12px;
-    display:grid;
-    place-items:center;
-    background:linear-gradient(135deg,var(--purple),var(--pink));
-    font-weight:bold;
-}
-
-/* LAYOUT */
+/* =========================================================
+   MAIN
+========================================================= */
 
 main{
-    width:min(1450px,92%);
+    width:min(1450px,100%);
     margin:auto;
+    padding:20px 18px 110px;
 }
 
 section{
-    padding:70px 0;
-    scroll-margin-top:90px;
+    margin:42px 0;
 }
 
-/* HERO */
-
 .hero{
-    min-height:calc(100vh - 76px);
+    min-height:610px;
     display:grid;
-    grid-template-columns:1.05fr .95fr;
-    gap:50px;
+    grid-template-columns:1.1fr .9fr;
+    gap:30px;
     align-items:center;
 }
 
 .badge{
     display:inline-flex;
     align-items:center;
-    gap:8px;
-    padding:9px 14px;
-    border-radius:999px;
-    border:1px solid rgba(0,217,255,.25);
-    background:rgba(0,217,255,.07);
-    color:var(--cyan);
-    margin-bottom:20px;
+    padding:8px 13px;
+    border-radius:30px;
+    border:1px solid rgba(120,92,255,.35);
+    color:#c8c0ff;
+    background:rgba(120,92,255,.13);
 }
 
 .hero h1{
-    font-size:clamp(46px,7vw,92px);
-    line-height:.94;
-    letter-spacing:-3px;
+    margin:20px 0;
+    font-size:clamp(44px,6.5vw,84px);
+    line-height:.98;
 }
 
-.gradient-text{
-    background:linear-gradient(90deg,var(--purple),var(--pink),var(--cyan));
+.gradient{
+    background:linear-gradient(90deg,#927dff,#00dcff,#ff3cac);
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
 }
 
-.hero p{
-    margin-top:25px;
+.heroDescription{
+    max-width:720px;
     color:var(--muted);
     font-size:20px;
-    line-height:1.7;
-    max-width:760px;
+    line-height:1.65;
 }
 
-.hero-buttons{
+.buttons{
     display:flex;
-    gap:12px;
     flex-wrap:wrap;
-    margin-top:30px;
+    gap:10px;
+    margin-top:22px;
 }
 
 .btn{
     border:1px solid var(--line);
-    border-radius:15px;
-    padding:13px 18px;
+    border-radius:12px;
+    padding:12px 17px;
     color:var(--text);
-    background:var(--panel2);
+    background:var(--card2);
     font-size:16px;
-    transition:.25s;
 }
 
 .btn:hover{
-    transform:translateY(-4px);
-    box-shadow:0 15px 40px rgba(0,0,0,.2);
+    background:rgba(255,255,255,.1);
 }
 
-.btn-primary{
+.btnPrimary{
     border:0;
-    color:white;
-    background:linear-gradient(135deg,var(--purple),var(--pink));
-    box-shadow:0 12px 35px rgba(120,87,255,.3);
+    background:linear-gradient(135deg,#7657ff,#009fdf);
+    box-shadow:0 10px 28px rgba(118,87,255,.22);
 }
 
-.btn-secondary{
-    border-color:rgba(0,217,255,.3);
+/* =========================================================
+   CLOCK WEATHER
+========================================================= */
+
+.infoBar{
+    max-width:720px;
+    margin-top:25px;
+    padding:13px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    border:1px solid var(--line);
+    border-radius:17px;
+    background:var(--card);
+    box-shadow:var(--shadow);
 }
 
-.btn-green{
-    background:linear-gradient(135deg,#12bb84,#00d9ff);
-    color:white;
-    border:0;
+.weatherIcon{
+    font-size:34px;
 }
 
-.btn-danger{
-    background:linear-gradient(135deg,#ff5277,#ff2c55);
-    color:white;
-    border:0;
+.weatherInfo{
+    min-width:0;
 }
 
-/* 3D HERO OBJECT */
+.weatherRegion{
+    font-weight:bold;
+}
 
-.scene{
-    height:520px;
-    perspective:1200px;
+.weatherText{
+    color:var(--muted);
+    margin-top:3px;
+}
+
+.clockBox{
+    margin-left:auto;
+    text-align:right;
+}
+
+.clock{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.date{
+    margin-top:3px;
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* =========================================================
+   3D SCENE
+========================================================= */
+
+.scene3d{
+    height:500px;
+    position:relative;
     display:grid;
     place-items:center;
+    perspective:1000px;
 }
 
 .cube{
-    width:260px;
-    height:260px;
+    width:225px;
+    height:225px;
     position:relative;
     transform-style:preserve-3d;
-    animation:cube4d 14s linear infinite;
+    animation:cubeRotate 15s linear infinite;
 }
 
 .face{
@@ -482,283 +498,225 @@ section{
     inset:0;
     display:grid;
     place-items:center;
-    border:1px solid rgba(255,255,255,.18);
+    text-align:center;
+    border:1px solid rgba(255,255,255,.24);
     background:
-        linear-gradient(135deg,rgba(120,87,255,.35),rgba(0,217,255,.10)),
-        rgba(10,15,35,.65);
-    backdrop-filter:blur(8px);
-    box-shadow:
-        inset 0 0 50px rgba(255,255,255,.04),
-        0 0 60px rgba(120,87,255,.15);
-    font-size:52px;
+        linear-gradient(135deg,
+            rgba(118,87,255,.34),
+            rgba(0,220,255,.1));
+    box-shadow:inset 0 0 35px rgba(255,255,255,.06);
+    font-size:27px;
     font-weight:bold;
+    backface-visibility:visible;
 }
 
-.front{transform:translateZ(130px)}
-.back{transform:rotateY(180deg) translateZ(130px)}
-.right{transform:rotateY(90deg) translateZ(130px)}
-.left{transform:rotateY(-90deg) translateZ(130px)}
-.top{transform:rotateX(90deg) translateZ(130px)}
-.bottom{transform:rotateX(-90deg) translateZ(130px)}
+.faceFront{transform:translateZ(112px)}
+.faceBack{transform:rotateY(180deg) translateZ(112px)}
+.faceRight{transform:rotateY(90deg) translateZ(112px)}
+.faceLeft{transform:rotateY(-90deg) translateZ(112px)}
+.faceTop{transform:rotateX(90deg) translateZ(112px)}
+.faceBottom{transform:rotateX(-90deg) translateZ(112px)}
 
-@keyframes cube4d{
-    0%{
-        transform:rotateX(-15deg) rotateY(0deg) rotateZ(0deg);
+@keyframes cubeRotate{
+    from{
+        transform:rotateX(-12deg) rotateY(0deg);
     }
-    25%{
-        transform:rotateX(45deg) rotateY(90deg) rotateZ(20deg);
-    }
-    50%{
-        transform:rotateX(130deg) rotateY(190deg) rotateZ(-25deg);
-    }
-    75%{
-        transform:rotateX(250deg) rotateY(280deg) rotateZ(15deg);
-    }
-    100%{
-        transform:rotateX(345deg) rotateY(360deg) rotateZ(0deg);
-    }
-}
-
-.hologram{
-    position:absolute;
-    width:380px;
-    height:380px;
-    border-radius:50%;
-    border:1px solid rgba(0,217,255,.2);
-    box-shadow:
-        0 0 80px rgba(0,217,255,.12),
-        inset 0 0 80px rgba(120,87,255,.12);
-    animation:holo 8s linear infinite;
-}
-
-.hologram::before,
-.hologram::after{
-    content:"";
-    position:absolute;
-    inset:40px;
-    border:1px dashed rgba(255,54,170,.2);
-    border-radius:50%;
-}
-
-.hologram::after{
-    inset:85px;
-    border-color:rgba(0,217,255,.3);
-}
-
-@keyframes holo{
     to{
-        transform:rotateZ(360deg) rotateX(70deg);
+        transform:rotateX(348deg) rotateY(360deg);
     }
 }
 
-/* STATS */
+.ring{
+    position:absolute;
+    width:370px;
+    height:370px;
+    border:1px solid rgba(0,220,255,.28);
+    border-radius:50%;
+    transform:rotateX(70deg);
+    animation:ringRotate 6s linear infinite;
+    box-shadow:0 0 35px rgba(0,220,255,.15);
+}
+
+.ring2{
+    width:310px;
+    height:310px;
+    border-color:rgba(255,60,172,.2);
+    animation-duration:8s;
+    animation-direction:reverse;
+}
+
+@keyframes ringRotate{
+    to{
+        transform:rotateX(70deg) rotateZ(360deg);
+    }
+}
+
+/* =========================================================
+   STATS
+========================================================= */
 
 .stats{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:16px;
+    gap:14px;
 }
 
-.stat{
-    padding:25px;
+.statCard{
+    padding:24px;
     border:1px solid var(--line);
-    border-radius:var(--radius);
-    background:var(--panel);
-    backdrop-filter:blur(20px);
+    border-radius:19px;
+    background:var(--card);
     box-shadow:var(--shadow);
-    transform-style:preserve-3d;
-    transition:.3s;
 }
 
-.stat:hover{
-    transform:perspective(800px) rotateX(6deg) rotateY(-5deg) translateY(-8px);
-}
-
-.stat-icon{
-    font-size:28px;
-}
-
-.stat strong{
+.statCard strong{
     display:block;
     font-size:38px;
-    margin-top:12px;
 }
 
-.stat span{
+.statCard span{
     color:var(--muted);
 }
 
-/* SECTION TITLE */
+/* =========================================================
+   SECTION HEADER
+========================================================= */
 
-.section-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-    gap:25px;
-    margin-bottom:30px;
-}
-
-.section-head h2{
-    font-size:42px;
-}
-
-.section-head p{
-    color:var(--muted);
-    margin-top:8px;
-}
-
-/* UNIVERSITY */
-
-.university-section{
-    padding-top:30px;
-}
-
-.uni-top{
+.sectionHeader{
     display:flex;
     align-items:end;
     justify-content:space-between;
     gap:20px;
-    margin-bottom:24px;
+    margin-bottom:20px;
 }
 
-.uni-badge{
-    display:inline-block;
-    padding:8px 13px;
-    border-radius:999px;
-    background:rgba(255,209,102,.08);
-    color:var(--yellow);
-    border:1px solid rgba(255,209,102,.2);
+.sectionHeader h2{
+    margin-top:9px;
+    font-size:36px;
 }
 
-.uni-top h2{
-    font-size:42px;
-    margin-top:10px;
-}
-
-.uni-top h2 span{
-    background:linear-gradient(90deg,var(--yellow),var(--pink),var(--cyan));
-    -webkit-background-clip:text;
-    color:transparent;
-}
-
-.uni-top p{
+.sectionHeader p{
     color:var(--muted);
-    margin-top:8px;
+    margin-top:6px;
 }
 
-.uni-controls{
+/* =========================================================
+   UNIVERSITY SLIDER
+========================================================= */
+
+.uniSlider{
     display:flex;
-    gap:8px;
-}
-
-.uni-controls button{
-    width:48px;
-    height:48px;
-    border:1px solid var(--line);
-    border-radius:14px;
-    background:var(--panel);
-    color:var(--text);
-    font-size:28px;
-}
-
-.uni-slider{
-    display:flex;
-    gap:18px;
+    gap:16px;
     overflow-x:auto;
-    scroll-behavior:smooth;
     scroll-snap-type:x mandatory;
-    padding:10px 2px 25px;
     scrollbar-width:none;
+    padding:4px 2px 18px;
 }
 
-.uni-slider::-webkit-scrollbar{
+.uniSlider::-webkit-scrollbar{
     display:none;
 }
 
-.uni-card{
-    flex:0 0 min(420px,86vw);
-    min-height:280px;
+.uniCard{
+    min-width:390px;
+    flex:0 0 390px;
+    min-height:270px;
+    padding:21px;
     scroll-snap-align:start;
     border:1px solid var(--line);
-    border-radius:28px;
-    padding:24px;
-    display:flex;
-    gap:18px;
+    border-radius:23px;
     background:
-        linear-gradient(135deg,rgba(120,87,255,.13),rgba(0,217,255,.05)),
-        var(--panel);
-    backdrop-filter:blur(20px);
+        linear-gradient(145deg,
+            rgba(118,87,255,.17),
+            rgba(255,255,255,.035)),
+        var(--card);
     box-shadow:var(--shadow);
-    transform-style:preserve-3d;
-    transition:.35s;
-    position:relative;
-    overflow:hidden;
 }
 
-.uni-card::after{
-    content:"";
-    position:absolute;
-    width:150px;
-    height:150px;
-    right:-70px;
-    top:-70px;
-    border-radius:50%;
-    background:var(--cyan);
-    opacity:.08;
-    filter:blur(20px);
+.uniTop{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
-.uni-card:hover{
-    transform:perspective(900px) rotateX(5deg) rotateY(-5deg) translateY(-8px);
-    border-color:rgba(0,217,255,.35);
-}
-
-.uni-logo{
-    flex:0 0 92px;
-    width:92px;
-    height:92px;
-    border-radius:25px;
+.uniLogo{
+    width:68px;
+    height:68px;
     display:grid;
     place-items:center;
-    text-align:center;
+    border-radius:17px;
     font-weight:bold;
+    font-size:15px;
+    background:linear-gradient(135deg,#7657ff,#00dcff);
+}
+
+.uniRank{
+    padding:6px 10px;
+    border-radius:20px;
+    color:#ffd166;
+    background:rgba(255,209,102,.11);
+}
+
+.uniCard h3{
+    margin:17px 0 8px;
     font-size:21px;
-    color:white;
-    background:linear-gradient(135deg,var(--purple),var(--pink),var(--cyan));
-    box-shadow:0 15px 40px rgba(120,87,255,.25);
 }
 
-.uni-content{
-    flex:1;
-}
-
-.uni-label{
-    color:var(--cyan);
-    font-size:12px;
-    letter-spacing:1px;
-}
-
-.uni-content h3{
-    font-size:23px;
-    margin:9px 0;
-}
-
-.uni-content p{
+.uniCard p{
     color:var(--muted);
-    line-height:1.55;
-    min-height:74px;
+    line-height:1.5;
 }
 
-.uni-content button{
-    margin-top:14px;
-    padding:10px 14px;
-    border:0;
+.uniDots{
+    display:flex;
+    justify-content:center;
+    gap:7px;
+}
+
+.uniDot{
+    width:8px;
+    height:8px;
+    border-radius:10px;
+    background:#545d79;
+}
+
+.uniDot.active{
+    width:23px;
+    background:#7657ff;
+}
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.toolbar{
+    display:flex;
+    gap:9px;
+    flex-wrap:wrap;
+    margin:20px 0;
+}
+
+.searchInput{
+    flex:1;
+    min-width:230px;
+    padding:13px 15px;
+    border:1px solid var(--line);
     border-radius:12px;
-    background:rgba(0,217,255,.09);
-    color:var(--cyan);
+    background:var(--card);
+    color:var(--text);
 }
 
-/* CATEGORIES */
+.filterSelect{
+    padding:13px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--card);
+    color:var(--text);
+}
+
+/* =========================================================
+   CARD GRID
+========================================================= */
 
 .grid{
     display:grid;
@@ -766,568 +724,269 @@ section{
     gap:16px;
 }
 
-.category{
-    min-height:180px;
+.card{
+    padding:19px;
     border:1px solid var(--line);
-    border-radius:22px;
-    padding:23px;
-    background:var(--panel);
-    backdrop-filter:blur(20px);
-    transition:.3s;
-    transform-style:preserve-3d;
-}
-
-.category:hover{
-    transform:perspective(800px) rotateX(5deg) rotateY(-5deg) translateY(-7px);
-    border-color:rgba(120,87,255,.4);
-}
-
-.category .big-icon{
-    font-size:38px;
-}
-
-.category h3{
-    margin-top:15px;
-    font-size:21px;
-}
-
-.category p{
-    color:var(--muted);
-    margin-top:8px;
-    line-height:1.45;
-}
-
-/* FILTERS */
-
-.filters{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-bottom:25px;
-}
-
-.search{
-    flex:1 1 260px;
-    padding:14px 17px;
-    border-radius:15px;
-    border:1px solid var(--line);
-    background:var(--panel);
-    color:var(--text);
-    outline:none;
-}
-
-.search:focus{
-    border-color:var(--cyan);
-    box-shadow:0 0 0 3px rgba(0,217,255,.07);
-}
-
-.filter-btn{
-    padding:12px 15px;
-    border-radius:14px;
-    border:1px solid var(--line);
-    background:var(--panel2);
-    color:var(--muted);
-}
-
-.filter-btn.active{
-    background:linear-gradient(135deg,var(--purple),var(--pink));
-    color:white;
-    border-color:transparent;
-}
-
-/* COURSE */
-
-.course-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-.course{
-    border:1px solid var(--line);
-    border-radius:25px;
-    padding:22px;
-    background:var(--panel);
-    backdrop-filter:blur(18px);
-    transition:.3s;
-    transform-style:preserve-3d;
-}
-
-.course:hover{
-    transform:perspective(900px) rotateX(4deg) rotateY(-4deg) translateY(-8px);
-    box-shadow:0 25px 70px rgba(0,0,0,.3);
-}
-
-.course-icon{
-    width:62px;
-    height:62px;
     border-radius:19px;
-    display:grid;
-    place-items:center;
-    font-size:31px;
-    background:linear-gradient(135deg,rgba(120,87,255,.25),rgba(0,217,255,.12));
-}
-
-.course h3{
-    font-size:25px;
-    margin-top:17px;
-}
-
-.course p{
-    color:var(--muted);
-    line-height:1.55;
-    margin:10px 0 17px;
-}
-
-.meta{
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
-    margin-bottom:17px;
-}
-
-.meta span{
-    font-size:13px;
-    padding:6px 9px;
-    border-radius:999px;
-    background:var(--panel2);
-    color:var(--muted);
-}
-
-/* LESSONS */
-
-.lesson-list{
-    display:grid;
-    gap:12px;
-}
-
-.lesson{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    border:1px solid var(--line);
-    border-radius:18px;
-    padding:17px;
-    background:var(--panel);
-    transition:.25s;
-}
-
-.lesson:hover{
-    transform:translateX(5px);
-    border-color:rgba(0,217,255,.3);
-}
-
-.lesson-icon{
-    width:52px;
-    height:52px;
-    display:grid;
-    place-items:center;
-    border-radius:16px;
-    background:var(--panel2);
-    font-size:24px;
-}
-
-.lesson-main{
-    flex:1;
-}
-
-.lesson-main h3{
-    font-size:19px;
-}
-
-.lesson-main p{
-    color:var(--muted);
-    margin-top:5px;
-}
-
-/* DASHBOARD */
-
-.dashboard{
-    display:grid;
-    grid-template-columns:1.4fr .8fr;
-    gap:18px;
-}
-
-.panel{
-    border:1px solid var(--line);
-    border-radius:25px;
-    padding:23px;
-    background:var(--panel);
-    backdrop-filter:blur(20px);
+    background:var(--card);
     box-shadow:var(--shadow);
 }
 
-.progress-wrap{
-    height:11px;
-    background:rgba(255,255,255,.07);
-    border-radius:50px;
-    overflow:hidden;
-    margin-top:15px;
-}
-
-.progress{
-    height:100%;
-    background:linear-gradient(90deg,var(--purple),var(--pink),var(--cyan));
-    border-radius:50px;
-    transition:1s;
-}
-
-.xp{
-    font-size:45px;
-    font-weight:bold;
-}
-
-.small{
-    color:var(--muted);
-}
-
-/* ACHIEVEMENTS */
-
-.achievements{
+.cardIcon{
+    width:54px;
+    height:54px;
     display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:14px;
+    place-items:center;
+    margin-bottom:14px;
+    border-radius:15px;
+    background:var(--card2);
+    font-size:26px;
 }
 
-.achievement{
-    padding:20px;
-    text-align:center;
-    border:1px solid var(--line);
-    border-radius:20px;
-    background:var(--panel);
+.card h3{
+    margin-bottom:8px;
 }
 
-.achievement .medal{
-    font-size:40px;
+.card p{
+    color:var(--muted);
+    line-height:1.5;
 }
 
-.achievement.locked{
-    opacity:.4;
-    filter:grayscale(1);
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin:13px 0;
 }
 
-/* AI */
+.tag{
+    padding:5px 8px;
+    border-radius:8px;
+    font-size:13px;
+    color:var(--muted);
+    background:var(--card2);
+}
 
-.ai-box{
+/* =========================================================
+   AI
+========================================================= */
+
+.aiGrid{
     display:grid;
     grid-template-columns:.8fr 1.2fr;
-    gap:20px;
+    gap:18px;
 }
 
-.ai-orb{
-    min-height:450px;
+.aiVisual{
+    min-height:440px;
     display:grid;
     place-items:center;
-    position:relative;
-    overflow:hidden;
-    border-radius:30px;
     border:1px solid var(--line);
-    background:radial-gradient(circle at center,rgba(120,87,255,.25),transparent 50%),var(--panel);
+    border-radius:23px;
+    background:
+        radial-gradient(circle at center,
+            rgba(118,87,255,.27),
+            transparent 45%),
+        var(--card);
 }
 
-.ai-core{
-    width:180px;
-    height:180px;
+.aiOrb{
+    width:175px;
+    height:175px;
     border-radius:50%;
-    display:grid;
-    place-items:center;
-    font-size:60px;
-    background:conic-gradient(var(--purple),var(--pink),var(--cyan),var(--purple));
+    background:
+        radial-gradient(circle at 30% 25%,#fff,transparent 7%),
+        linear-gradient(135deg,#7657ff,#00dcff,#ff3cac);
     box-shadow:
-        0 0 40px rgba(120,87,255,.5),
-        0 0 100px rgba(0,217,255,.25);
-    animation:aiCore 5s linear infinite;
+        0 0 35px rgba(118,87,255,.8),
+        0 0 90px rgba(0,220,255,.22);
+    animation:orbPulse 4s ease-in-out infinite;
 }
 
-@keyframes aiCore{
-    to{
-        transform:rotate(360deg) scale(1.06);
+@keyframes orbPulse{
+    0%,100%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.08);
     }
 }
 
 .chat{
+    height:440px;
     display:flex;
     flex-direction:column;
-    min-height:450px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:23px;
+    background:var(--card);
 }
 
-.messages{
+.chatMessages{
     flex:1;
-    max-height:350px;
-    overflow:auto;
-    padding:5px;
+    overflow-y:auto;
+    padding:17px;
 }
 
-.msg{
-    max-width:80%;
-    padding:12px 15px;
-    border-radius:16px;
-    margin:9px 0;
+.message{
+    max-width:82%;
+    padding:11px 14px;
+    margin-bottom:9px;
+    border-radius:14px;
     line-height:1.5;
 }
 
-.msg.ai{
-    background:rgba(120,87,255,.12);
-    border:1px solid rgba(120,87,255,.18);
+.messageAI{
+    background:var(--card2);
 }
 
-.msg.user{
+.messageUser{
     margin-left:auto;
-    background:rgba(0,217,255,.1);
-    border:1px solid rgba(0,217,255,.16);
+    background:linear-gradient(135deg,#7657ff,#4d88ff);
 }
 
-.chat-input{
+.chatInput{
     display:flex;
-    gap:8px;
-    margin-top:10px;
-}
-
-.chat-input input{
-    flex:1;
-    padding:14px;
-    border-radius:14px;
-    border:1px solid var(--line);
-    background:var(--panel2);
-    color:var(--text);
-    outline:none;
-}
-
-.quick{
-    display:flex;
-    flex-wrap:wrap;
     gap:7px;
-    margin-top:10px;
+    padding:11px;
+    border-top:1px solid var(--line);
 }
 
-.quick button{
+.chatInput input{
+    flex:1;
+    min-width:0;
+    padding:12px;
     border:1px solid var(--line);
-    border-radius:12px;
-    padding:8px 10px;
-    background:var(--panel2);
-    color:var(--muted);
-}
-
-/* PLAN */
-
-.plan{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    gap:9px;
-}
-
-.day{
-    padding:15px 8px;
-    text-align:center;
-    border:1px solid var(--line);
-    border-radius:15px;
-    background:var(--panel);
-}
-
-.day.active{
-    background:linear-gradient(135deg,rgba(120,87,255,.3),rgba(0,217,255,.12));
-    border-color:rgba(0,217,255,.4);
-}
-
-.day strong{
-    display:block;
-    font-size:22px;
-    margin:6px 0;
-}
-
-.day span{
-    color:var(--muted);
-    font-size:12px;
-}
-
-/* GLOBAL SEARCH */
-
-.global-search{
-    position:fixed;
-    inset:0;
-    z-index:5000;
-    background:rgba(0,0,0,.75);
-    backdrop-filter:blur(15px);
-    display:none;
-    align-items:flex-start;
-    justify-content:center;
-    padding-top:100px;
-}
-
-.global-search.show{
-    display:flex;
-}
-
-.search-box{
-    width:min(750px,90%);
-    background:var(--bg2);
-    border:1px solid var(--line);
-    border-radius:25px;
-    padding:20px;
-    box-shadow:var(--shadow);
-}
-
-.search-box input{
-    width:100%;
-    padding:17px;
-    font-size:20px;
-    border:1px solid var(--line);
-    border-radius:15px;
-    background:var(--panel2);
+    border-radius:11px;
     color:var(--text);
-    outline:none;
+    background:var(--card2);
 }
 
-/* MODAL */
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progressTrack{
+    height:8px;
+    overflow:hidden;
+    border-radius:20px;
+    background:rgba(255,255,255,.08);
+}
+
+.progressFill{
+    width:0;
+    height:100%;
+    background:linear-gradient(90deg,#7657ff,#00dcff);
+}
+
+/* =========================================================
+   SEASON
+========================================================= */
+
+.seasonGrid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
+
+.seasonButton{
+    min-height:105px;
+    border:1px solid var(--line);
+    border-radius:17px;
+    color:var(--text);
+    background:var(--card);
+    font-size:27px;
+}
+
+.seasonButton small{
+    display:block;
+    margin-top:8px;
+    color:var(--muted);
+    font-size:16px;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
 
 .modal{
     position:fixed;
     inset:0;
-    z-index:4000;
+    z-index:8000;
     display:none;
     align-items:center;
     justify-content:center;
-    padding:20px;
+    padding:14px;
     background:rgba(0,0,0,.72);
-    backdrop-filter:blur(12px);
+    backdrop-filter:blur(10px);
 }
 
 .modal.show{
     display:flex;
 }
 
-.modal-box{
-    width:min(850px,96vw);
+.modalBox{
+    width:min(900px,100%);
     max-height:90vh;
-    overflow:auto;
+    overflow-y:auto;
+    padding:23px;
     border:1px solid var(--line);
-    border-radius:28px;
-    padding:25px;
-    background:
-        linear-gradient(135deg,rgba(120,87,255,.08),rgba(0,217,255,.04)),
-        var(--bg2);
-    box-shadow:0 40px 120px rgba(0,0,0,.55);
-    animation:modalIn .35s ease;
+    border-radius:24px;
+    background:var(--bg2);
+    box-shadow:0 30px 100px rgba(0,0,0,.55);
 }
 
-@keyframes modalIn{
-    from{
-        transform:perspective(1000px) rotateX(-15deg) scale(.92);
-        opacity:0;
-    }
-    to{
-        transform:perspective(1000px) rotateX(0) scale(1);
-        opacity:1;
-    }
-}
-
-.modal-head{
+.modalHeader{
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    gap:20px;
-    margin-bottom:20px;
+    align-items:center;
+    gap:15px;
+    margin-bottom:18px;
 }
 
-.close{
+.closeButton{
     width:40px;
     height:40px;
+    flex:none;
     border:1px solid var(--line);
-    border-radius:12px;
+    border-radius:11px;
     color:var(--text);
-    background:var(--panel2);
+    background:var(--card2);
 }
 
-.modal-content{
-    line-height:1.7;
-}
+/* =========================================================
+   PROFILE
+========================================================= */
 
-.modal-content h3{
-    margin:20px 0 8px;
-}
-
-.modal-content p{
-    color:var(--muted);
-}
-
-.quiz-question{
-    padding:18px;
-    border:1px solid var(--line);
-    border-radius:18px;
-    background:var(--panel);
-    margin-bottom:14px;
-}
-
-.quiz-options{
+.avatar{
+    width:90px;
+    height:90px;
     display:grid;
-    gap:8px;
-    margin-top:12px;
-}
-
-.quiz-options button{
-    text-align:left;
-    border:1px solid var(--line);
-    border-radius:13px;
-    padding:12px;
-    color:var(--text);
-    background:var(--panel2);
-}
-
-.quiz-options button.correct{
-    background:rgba(24,230,160,.18);
-    border-color:var(--green);
-}
-
-.quiz-options button.wrong{
-    background:rgba(255,82,119,.18);
-    border-color:var(--red);
-}
-
-/* CERTIFICATE */
-
-.certificate{
-    background:
-        linear-gradient(135deg,rgba(120,87,255,.12),rgba(0,217,255,.08)),
-        #0c1024;
-    border:4px double rgba(255,255,255,.25);
-    padding:50px 35px;
-    text-align:center;
-    border-radius:10px;
-}
-
-.certificate h1{
-    font-size:48px;
-    background:linear-gradient(90deg,var(--yellow),var(--pink),var(--cyan));
-    -webkit-background-clip:text;
-    color:transparent;
-}
-
-.certificate .student{
+    place-items:center;
+    border-radius:50%;
     font-size:30px;
-    margin:25px 0 10px;
+    font-weight:bold;
+    background:linear-gradient(135deg,#7657ff,#00dcff);
 }
 
-.certificate p{
-    color:#c8cee6;
-    line-height:1.7;
-}
-
-/* TOAST */
+/* =========================================================
+   TOAST
+========================================================= */
 
 #toast{
     position:fixed;
-    right:22px;
-    bottom:90px;
-    z-index:9000;
-    transform:translateY(30px);
-    opacity:0;
-    pointer-events:none;
-    padding:14px 18px;
-    border-radius:15px;
-    background:rgba(15,20,40,.94);
-    border:1px solid rgba(0,217,255,.25);
+    right:18px;
+    bottom:22px;
+    z-index:12000;
+    max-width:350px;
+    padding:13px 16px;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:13px;
+    background:#151c39;
     box-shadow:var(--shadow);
-    transition:.3s;
+    transform:translateY(90px);
+    opacity:0;
+    transition:.25s;
 }
 
 #toast.show{
@@ -1335,190 +994,169 @@ section{
     opacity:1;
 }
 
-/* MOBILE NAV */
+/* =========================================================
+   MOBILE NAV
+========================================================= */
 
-.mobile-nav{
+.mobileNav{
     display:none;
 }
 
-/* RESPONSIVE */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
-@media(max-width:1100px){
-    .hero{
-        grid-template-columns:1fr;
-    }
-
-    .scene{
-        height:420px;
-    }
+@media(max-width:1150px){
 
     .grid{
         grid-template-columns:repeat(3,1fr);
     }
 
-    .course-grid{
-        grid-template-columns:repeat(2,1fr);
+    .hero{
+        grid-template-columns:1fr;
     }
 
-    .achievements{
-        grid-template-columns:repeat(3,1fr);
+    .aiGrid{
+        grid-template-columns:1fr;
     }
+}
+
+@media(max-width:850px){
 
     .nav{
         display:none;
     }
-}
 
-@media(max-width:760px){
-    main{
-        width:94%;
+    .logo{
+        min-width:auto;
     }
 
-    header{
-        padding:0 3%;
-    }
-
-    .header-actions .header-btn{
+    .logoText{
         display:none;
     }
 
-    .hero{
-        padding-top:45px;
-    }
-
-    .hero h1{
-        font-size:48px;
-    }
-
-    .hero p{
-        font-size:17px;
-    }
-
-    .scene{
-        height:350px;
-    }
-
-    .cube{
-        width:180px;
-        height:180px;
-    }
-
-    .front{transform:translateZ(90px)}
-    .back{transform:rotateY(180deg) translateZ(90px)}
-    .right{transform:rotateY(90deg) translateZ(90px)}
-    .left{transform:rotateY(-90deg) translateZ(90px)}
-    .top{transform:rotateX(90deg) translateZ(90px)}
-    .bottom{transform:rotateX(-90deg) translateZ(90px)}
-
-    .hologram{
-        width:280px;
-        height:280px;
+    .headerInner{
+        justify-content:space-between;
     }
 
     .stats{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .grid,
-    .course-grid{
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .mobileNav{
+        position:fixed;
+        left:0;
+        right:0;
+        bottom:0;
+        z-index:700;
+        display:grid;
+        grid-template-columns:repeat(5,1fr);
+        padding:7px;
+        background:rgba(5,8,20,.92);
+        border-top:1px solid var(--line);
+        backdrop-filter:blur(18px);
+    }
+
+    .mobileNav button{
+        border:0;
+        padding:7px 2px;
+        color:#fff;
+        background:transparent;
+        font-size:12px;
+    }
+}
+
+@media(max-width:570px){
+
+    main{
+        padding:12px 12px 100px;
+    }
+
+    section{
+        margin:32px 0;
+    }
+
+    .hero{
+        min-height:auto;
+        padding:35px 0;
+    }
+
+    .hero h1{
+        font-size:43px;
+    }
+
+    .heroDescription{
+        font-size:18px;
+    }
+
+    .scene3d{
+        height:350px;
+    }
+
+    .cube{
+        width:170px;
+        height:170px;
+    }
+
+    .faceFront{transform:translateZ(85px)}
+    .faceBack{transform:rotateY(180deg) translateZ(85px)}
+    .faceRight{transform:rotateY(90deg) translateZ(85px)}
+    .faceLeft{transform:rotateY(-90deg) translateZ(85px)}
+    .faceTop{transform:rotateX(90deg) translateZ(85px)}
+    .faceBottom{transform:rotateX(-90deg) translateZ(85px)}
+
+    .ring{
+        width:285px;
+        height:285px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .grid{
         grid-template-columns:1fr;
     }
 
-    .section-head,
-    .uni-top{
+    .uniCard{
+        min-width:87vw;
+        flex-basis:87vw;
+    }
+
+    .sectionHeader{
         align-items:flex-start;
         flex-direction:column;
     }
 
-    .section-head h2,
-    .uni-top h2{
-        font-size:32px;
+    .sectionHeader h2{
+        font-size:30px;
     }
 
-    .dashboard,
-    .ai-box{
-        grid-template-columns:1fr;
+    .infoBar{
+        align-items:flex-start;
     }
 
-    .achievements{
-        grid-template-columns:repeat(2,1fr);
+    .clockBox{
+        margin-left:auto;
     }
 
-    .plan{
-        grid-template-columns:repeat(4,1fr);
-    }
-
-    .mobile-nav{
-        display:flex;
-        position:fixed;
-        z-index:2000;
-        left:10px;
-        right:10px;
-        bottom:10px;
-        height:64px;
-        border:1px solid var(--line);
-        border-radius:20px;
-        background:rgba(10,14,30,.86);
-        backdrop-filter:blur(22px);
-        justify-content:space-around;
-        align-items:center;
-        box-shadow:0 20px 60px rgba(0,0,0,.45);
-    }
-
-    body.light .mobile-nav{
-        background:rgba(255,255,255,.9);
-    }
-
-    .mobile-nav button{
-        border:0;
-        background:transparent;
-        color:var(--muted);
-        font-size:12px;
-    }
-
-    .mobile-nav button span{
-        display:block;
-        font-size:20px;
-        margin-bottom:2px;
-    }
-
-    section{
-        padding:50px 0;
-    }
-
-    .uni-card{
-        flex-basis:88vw;
+    .seasonGrid{
+        grid-template-columns:1fr 1fr;
     }
 }
 
-/* PRINT */
+@media(prefers-reduced-motion:reduce){
 
-@media print{
-    body *{
-        visibility:hidden !important;
-    }
-
-    #certificateModal,
-    #certificateModal *{
-        visibility:visible !important;
-    }
-
-    #certificateModal{
-        position:absolute !important;
-        inset:0 !important;
-        display:block !important;
-        background:white !important;
-    }
-
-    .modal-box{
-        box-shadow:none !important;
-        max-height:none !important;
-        width:100% !important;
-    }
-
-    .modal-head,
-    .certificate-actions{
-        display:none !important;
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        scroll-behavior:auto!important;
     }
 }
 </style>
@@ -1526,351 +1164,631 @@ section{
 
 <body>
 
-<div id="particles"></div>
+<div class="bgOrb bgOrb1"></div>
+<div class="bgOrb bgOrb2"></div>
+<div class="bgOrb bgOrb3"></div>
 
-<div class="bg-orb orb1"></div>
-<div class="bg-orb orb2"></div>
-<div class="bg-orb orb3"></div>
+<div id="seasonLayer"></div>
 
-<!-- SPLASH -->
+<!-- =======================================================
+     SPLASH
+======================================================= -->
+
 <div id="splash">
-    <div class="splash-logo">AI</div>
-    <div class="splash-title">IKROMJON AI</div>
-    <div class="splash-sub">O‘QUV MARKAZI • PREMIUM 3D / 4D</div>
-    <div class="loader">
-        <div class="loader-bar" id="loaderBar"></div>
+
+    <div class="splashContent">
+
+        <div class="splashLogo">
+            AI
+        </div>
+
+        <div class="splashTitle">
+            IKROMJON AI
+        </div>
+
+        <div class="splashSub">
+            O‘QUV MARKAZI
+        </div>
+
+        <div class="splashLoader">
+            <div class="splashBar" id="splashBar"></div>
+        </div>
+
+        <div class="splashPercent" id="splashPercent">
+            0%
+        </div>
+
     </div>
-    <div id="loadText">0%</div>
+
 </div>
 
-<!-- HEADER -->
+
+<!-- =======================================================
+     HEADER
+======================================================= -->
+
 <header>
-    <div class="logo">
-        <div class="logo-box">AI</div>
-        <span>IKROMJON AI</span>
-    </div>
 
-    <nav class="nav">
-        <button onclick="go('home')">Bosh sahifa</button>
-        <button onclick="go('universities')">Universitetlar</button>
-        <button onclick="go('directions')">Yo‘nalishlar</button>
-        <button onclick="go('courses')">Kurslar</button>
-        <button onclick="go('lessons')">Darslar</button>
-        <button onclick="go('ai')">AI Ustoz</button>
-    </nav>
+    <div class="headerInner">
 
-    <div class="header-actions">
-        <button class="icon-btn" onclick="openGlobalSearch()">⌕</button>
-        <button class="icon-btn" onclick="toggleTheme()" id="themeBtn">☀</button>
-        <button class="icon-btn" onclick="showNotifications()">🔔</button>
+        <div class="logo">
 
-        <div class="profile-mini" onclick="openProfile()">
-            <div class="avatar" id="avatarMini">I</div>
-            <span id="nameMini">O‘quvchi</span>
+            <div class="logoMark">
+                AI
+            </div>
+
+            <div class="logoText">
+                <strong>IKROMJON AI</strong>
+                <small>O‘QUV MARKAZI</small>
+            </div>
+
         </div>
+
+        <nav class="nav">
+
+            <button onclick="goTo('home')">
+                Bosh sahifa
+            </button>
+
+            <button onclick="goTo('universities')">
+                Universitetlar
+            </button>
+
+            <button onclick="goTo('directions')">
+                Yo‘nalishlar
+            </button>
+
+            <button onclick="goTo('courses')">
+                Kurslar
+            </button>
+
+            <button onclick="goTo('lessons')">
+                Darslar
+            </button>
+
+            <button onclick="goTo('ai')">
+                AI Ustoz
+            </button>
+
+        </nav>
+
+        <div class="headerTools">
+
+            <select
+                id="languageSelect"
+                class="langSelect"
+                onchange="changeLanguage(this.value)"
+                aria-label="Til">
+
+                <option value="uz">UZ</option>
+                <option value="ru">RU</option>
+                <option value="eng">ENG</option>
+                <option value="tj">TJ</option>
+                <option value="kz">KZ</option>
+
+            </select>
+
+            <button
+                class="iconButton"
+                onclick="openWeatherSettings()"
+                title="Ob-havo">
+                🌤️
+            </button>
+
+            <button
+                class="iconButton"
+                onclick="openSeason()"
+                title="Fasl">
+                🌸
+            </button>
+
+            <button
+                class="iconButton"
+                onclick="toggleTheme()"
+                title="Tema">
+                🌙
+            </button>
+
+            <button
+                class="iconButton"
+                onclick="openProfile()"
+                title="Profil">
+                👤
+            </button>
+
+        </div>
+
     </div>
+
 </header>
+
+
+<!-- =======================================================
+     MAIN
+======================================================= -->
 
 <main>
 
-<!-- HERO -->
+
+<!-- HOME -->
+
 <section id="home" class="hero">
 
     <div>
-        <div class="badge">✦ YANGI AVLOD TA’LIM PLATFORMASI</div>
+
+        <span class="badge">
+            🚀 PREMIUM EDTECH • 3D / 4D MOTION
+        </span>
 
         <h1>
-            Kelajakni
-            <span class="gradient-text">bugundan</span>
-            yarating.
+            <span class="gradient">
+                IKROMJON AI
+            </span>
+            <br>
+            O‘QUV MARKAZI
         </h1>
 
-        <p>
-            IKROMJON AI O‘QUV MARKAZI — dasturlash, sun’iy intellekt,
-            kiberxavfsizlik, dizayn, biznes va kelajak kasblarini
-            amaliy tarzda o‘rganish uchun zamonaviy 3D/4D ta’lim platformasi.
+        <p class="heroDescription">
+            Zamonaviy dasturlash, sun’iy intellekt, dizayn,
+            kiberxavfsizlik, biznes va kelajak kasblarini
+            amaliy tarzda o‘rganing.
+            Bilim oling. Amaliyot qiling. Rivojlaning.
         </p>
 
-        <div class="hero-buttons">
-            <button class="btn btn-primary" onclick="go('courses')">
-                🚀 Ta’limni boshlash
+        <div class="buttons">
+
+            <button
+                class="btn btnPrimary"
+                onclick="goTo('courses')">
+                📚 Kurslarni boshlash
             </button>
 
-            <button class="btn btn-secondary" onclick="go('ai')">
-                🤖 AI Ustoz bilan suhbat
+            <button
+                class="btn"
+                onclick="openSeason()">
+                🌸 4 fasl
             </button>
 
-            <button class="btn" onclick="openAbout()">
-                ℹ️ Markaz haqida
+            <button
+                class="btn"
+                onclick="speakText('IKROMJON AI O‘quv Markazi. Zamonaviy bilim va kelajak kasblarini bugundan o‘rganing.')">
+                🔊 O‘qib berish
             </button>
+
         </div>
+
+
+        <!-- CLOCK + WEATHER -->
+
+        <div class="infoBar">
+
+            <div
+                class="weatherIcon"
+                id="weatherIcon">
+                🌤️
+            </div>
+
+            <div class="weatherInfo">
+
+                <div
+                    class="weatherRegion"
+                    id="weatherRegion">
+                    Toshkent
+                </div>
+
+                <div
+                    class="weatherText"
+                    id="weatherText">
+                    Ob-havo yuklanmoqda...
+                </div>
+
+            </div>
+
+            <div class="clockBox">
+
+                <div
+                    class="clock"
+                    id="clock">
+                    00:00:00
+                </div>
+
+                <div
+                    class="date"
+                    id="date">
+                    --
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="scene">
-        <div class="hologram"></div>
+
+    <!-- 3D -->
+
+    <div class="scene3d">
+
+        <div class="ring"></div>
+        <div class="ring ring2"></div>
 
         <div class="cube">
-            <div class="face front">AI</div>
-            <div class="face back">∞</div>
-            <div class="face right">JS</div>
-            <div class="face left">PY</div>
-            <div class="face top">IT</div>
-            <div class="face bottom">4D</div>
+
+            <div class="face faceFront">
+                IKROMJON<br>AI
+            </div>
+
+            <div class="face faceBack">
+                4D<br>EDU
+            </div>
+
+            <div class="face faceRight">
+                AI<br>USTOZ
+            </div>
+
+            <div class="face faceLeft">
+                CODE
+            </div>
+
+            <div class="face faceTop">
+                LEARN
+            </div>
+
+            <div class="face faceBottom">
+                GROW
+            </div>
+
         </div>
+
     </div>
 
 </section>
+
 
 <!-- STATS -->
-<section>
-    <div class="stats">
-        <div class="stat">
-            <div class="stat-icon">🎓</div>
-            <strong>120+</strong>
-            <span>Ta’lim yo‘nalishlari</span>
-        </div>
 
-        <div class="stat">
-            <div class="stat-icon">📚</div>
-            <strong>500+</strong>
-            <span>Amaliy darslar</span>
-        </div>
+<section class="stats">
 
-        <div class="stat">
-            <div class="stat-icon">🤖</div>
-            <strong>24/7</strong>
-            <span>AI Ustoz</span>
-        </div>
-
-        <div class="stat">
-            <div class="stat-icon">🏆</div>
-            <strong>∞</strong>
-            <span>Rivojlanish imkoniyati</span>
-        </div>
+    <div class="statCard">
+        <strong>120+</strong>
+        <span>Ta’lim yo‘nalishlari</span>
     </div>
+
+    <div class="statCard">
+        <strong>500+</strong>
+        <span>Amaliy darslar</span>
+    </div>
+
+    <div class="statCard">
+        <strong>24/7</strong>
+        <span>AI Ustoz</span>
+    </div>
+
+    <div class="statCard">
+        <strong>∞</strong>
+        <span>Rivojlanish</span>
+    </div>
+
 </section>
 
-<!-- UNIVERSITIES -->
-<section id="universities" class="university-section">
 
-    <div class="uni-top">
+<!-- =======================================================
+     UNIVERSITIES
+======================================================= -->
+
+<section id="universities">
+
+    <div class="sectionHeader">
+
         <div>
-            <span class="uni-badge">🎓 OLIY TA’LIM</span>
+
+            <span class="badge">
+                🎓 OLIY TA’LIM
+            </span>
+
             <h2>
                 Toshkentdagi
-                <span>yetakchi OTMlar</span>
+                <span class="gradient">
+                    TOP universitetlar
+                </span>
             </h2>
+
             <p>
-                Universitetlar haqidagi ma’lumotlarni ko‘rib chiqing va
-                o‘zingizga mos ta’lim yo‘nalishini tanlang.
+                Tanlangan 10 ta universitet vitrinasini ko‘ring.
             </p>
+
         </div>
 
-        <div class="uni-controls">
-            <button onclick="uniPrev()">‹</button>
-            <button onclick="uniNext()">›</button>
+        <div class="buttons">
+
+            <button
+                class="btn"
+                onclick="uniPrev()">
+                ‹
+            </button>
+
+            <button
+                class="btn"
+                onclick="uniNext()">
+                ›
+            </button>
+
         </div>
+
     </div>
 
-    <div class="uni-slider" id="uniSlider"></div>
 
-    <div style="display:flex;justify-content:center;gap:7px;margin-top:5px" id="uniDots"></div>
+    <div
+        class="uniSlider"
+        id="uniSlider">
+
+    </div>
+
+    <div
+        class="uniDots"
+        id="uniDots">
+    </div>
 
 </section>
 
-<!-- DIRECTIONS -->
+
+<!-- =======================================================
+     DIRECTIONS
+======================================================= -->
+
 <section id="directions">
 
-    <div class="section-head">
+    <div class="sectionHeader">
+
         <div>
-            <h2>🚀 120+ <span class="gradient-text">yo‘nalish</span></h2>
-            <p>Kelajak kasblarini bir platformada o‘rganing.</p>
+
+            <span class="badge">
+                📚 AKADEMIYA
+            </span>
+
+            <h2>
+                Ta’lim
+                <span class="gradient">
+                    yo‘nalishlari
+                </span>
+            </h2>
+
+            <p>
+                120+ yo‘nalishdan o‘zingizga mosini tanlang.
+            </p>
+
         </div>
+
     </div>
 
-    <div class="grid" id="directionGrid"></div>
+
+    <div class="toolbar">
+
+        <input
+            id="directionSearch"
+            class="searchInput"
+            type="search"
+            placeholder="🔎 Yo‘nalish qidirish..."
+            oninput="renderDirections()">
+
+    </div>
+
+
+    <div
+        class="grid"
+        id="directionGrid">
+    </div>
 
 </section>
 
-<!-- COURSES -->
+
+<!-- =======================================================
+     COURSES
+======================================================= -->
+
 <section id="courses">
 
-    <div class="section-head">
+    <div class="sectionHeader">
+
         <div>
-            <h2>📚 Premium <span class="gradient-text">kurslar</span></h2>
-            <p>Nazariya + amaliyot + test + loyiha.</p>
+
+            <span class="badge">
+                🎯 KURSLAR
+            </span>
+
+            <h2>
+                Professional
+                <span class="gradient">
+                    kurslar
+                </span>
+            </h2>
+
+            <p>
+                Noldan professional darajagacha.
+            </p>
+
         </div>
+
     </div>
 
-    <div class="filters">
+
+    <div class="toolbar">
+
         <input
-            class="search"
             id="courseSearch"
+            class="searchInput"
+            type="search"
             placeholder="🔎 Kurs qidirish..."
-            oninput="renderCourses()"
-        >
+            oninput="renderCourses()">
 
-        <button class="filter-btn active" onclick="setCourseFilter('all',this)">Barchasi</button>
-        <button class="filter-btn" onclick="setCourseFilter('it',this)">IT</button>
-        <button class="filter-btn" onclick="setCourseFilter('ai',this)">AI</button>
-        <button class="filter-btn" onclick="setCourseFilter('design',this)">Dizayn</button>
-        <button class="filter-btn" onclick="setCourseFilter('business',this)">Biznes</button>
+        <select
+            id="courseCategory"
+            class="filterSelect"
+            onchange="renderCourses()">
+
+            <option value="all">
+                Barcha kategoriyalar
+            </option>
+
+            <option value="it">
+                IT
+            </option>
+
+            <option value="ai">
+                AI
+            </option>
+
+            <option value="design">
+                Dizayn
+            </option>
+
+            <option value="business">
+                Biznes
+            </option>
+
+        </select>
+
+
+        <select
+            id="courseLevel"
+            class="filterSelect"
+            onchange="renderCourses()">
+
+            <option value="all">
+                Barcha darajalar
+            </option>
+
+            <option value="Boshlang‘ich">
+                Boshlang‘ich
+            </option>
+
+            <option value="O‘rta">
+                O‘rta
+            </option>
+
+            <option value="Professional">
+                Professional
+            </option>
+
+        </select>
+
     </div>
 
-    <div class="course-grid" id="courseGrid"></div>
+
+    <div
+        class="grid"
+        id="courseGrid">
+    </div>
 
 </section>
 
-<!-- LESSONS -->
+
+<!-- =======================================================
+     LESSONS
+======================================================= -->
+
 <section id="lessons">
 
-    <div class="section-head">
+    <div class="sectionHeader">
+
         <div>
-            <h2>🎬 Interaktiv <span class="gradient-text">darslar</span></h2>
-            <p>Video, material, amaliy topshiriq va test.</p>
-        </div>
-    </div>
 
-    <div class="filters">
-        <input
-            class="search"
-            id="lessonSearch"
-            placeholder="🔎 Dars qidirish..."
-            oninput="renderLessons()"
-        >
-    </div>
+            <span class="badge">
+                📖 DARSLAR
+            </span>
 
-    <div class="lesson-list" id="lessonList"></div>
+            <h2>
+                Interaktiv
+                <span class="gradient">
+                    darslar
+                </span>
+            </h2>
 
-</section>
-
-<!-- DASHBOARD -->
-<section id="dashboard">
-
-    <div class="section-head">
-        <div>
-            <h2>📊 Shaxsiy <span class="gradient-text">kabinet</span></h2>
-            <p>O‘qish jarayoningizni kuzating.</p>
-        </div>
-    </div>
-
-    <div class="dashboard">
-
-        <div class="panel">
-            <div class="small">Umumiy XP</div>
-            <div class="xp" id="xpValue">0 XP</div>
-
-            <div style="display:flex;justify-content:space-between;margin-top:12px">
-                <span id="levelText">1-daraja</span>
-                <span id="xpNext">100 XP</span>
-            </div>
-
-            <div class="progress-wrap">
-                <div class="progress" id="xpProgress" style="width:0%"></div>
-            </div>
-
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:25px">
-                <div class="stat">
-                    <strong style="font-size:25px" id="completedLessons">0</strong>
-                    <span>Dars</span>
-                </div>
-
-                <div class="stat">
-                    <strong style="font-size:25px" id="quizScore">0</strong>
-                    <span>Test</span>
-                </div>
-
-                <div class="stat">
-                    <strong style="font-size:25px" id="streakValue">1 🔥</strong>
-                    <span>Kun</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="panel">
-            <h3>🎯 Bugungi reja</h3>
-            <p class="small" style="margin-top:8px">
-                Bugun kamida 30 daqiqa bilim olishga harakat qiling.
+            <p>
+                Darsni o‘qing, tinglang va testni bajaring.
             </p>
 
-            <div style="margin-top:25px">
-                <div style="display:flex;justify-content:space-between">
-                    <span>O‘qish rejasi</span>
-                    <strong id="dailyPercent">0%</strong>
-                </div>
-
-                <div class="progress-wrap">
-                    <div class="progress" id="dailyProgress" style="width:0%"></div>
-                </div>
-            </div>
-
-            <button class="btn btn-primary" style="margin-top:22px;width:100%"
-                    onclick="completeDailyPlan()">
-                ✅ Bugungi rejani bajarish
-            </button>
         </div>
 
     </div>
 
-</section>
 
-<!-- WEEK PLAN -->
-<section>
-
-    <div class="section-head">
-        <div>
-            <h2>🗓️ Haftalik <span class="gradient-text">o‘quv rejasi</span></h2>
-            <p>Har kuni ozgina bo‘lsa ham rivojlaning.</p>
-        </div>
+    <div
+        class="grid"
+        id="lessonGrid">
     </div>
 
-    <div class="plan" id="weekPlan"></div>
-
 </section>
 
-<!-- AI -->
+
+<!-- =======================================================
+     AI USTOZ
+======================================================= -->
+
 <section id="ai">
 
-    <div class="section-head">
+    <div class="sectionHeader">
+
         <div>
-            <h2>🤖 IKROMJON <span class="gradient-text">AI Ustoz</span></h2>
-            <p>O‘qish, dasturlash va kasb tanlash bo‘yicha yordamchi.</p>
+
+            <span class="badge">
+                🤖 AI USTOZ • DEMO
+            </span>
+
+            <h2>
+                IKROMJON
+                <span class="gradient">
+                    AI Ustoz
+                </span>
+            </h2>
+
+            <p>
+                Dasturlash va texnologiyalar bo‘yicha savol bering.
+            </p>
+
         </div>
+
     </div>
 
-    <div class="ai-box">
 
-        <div class="ai-orb">
-            <div class="ai-core">AI</div>
+    <div class="aiGrid">
+
+        <div class="aiVisual">
+
+            <div class="aiOrb"></div>
+
         </div>
 
-        <div class="panel chat">
 
-            <div class="messages" id="messages">
-                <div class="msg ai">
-                    👋 Assalomu alaykum! Men IKROMJON AI Ustozman.
-                    Sizga dasturlash, AI, IT va ta’lim bo‘yicha yordam beraman.
+        <div class="chat">
+
+            <div
+                class="chatMessages"
+                id="chatMessages">
+
+                <div class="message messageAI">
+                    👋 Assalomu alaykum!
+                    Men IKROMJON AI Ustozman.
+                    Savolingizni yozing.
                 </div>
+
             </div>
 
-            <div class="quick">
-                <button onclick="aiQuick('Pythonni qanday boshlash kerak?')">🐍 Python</button>
-                <button onclick="aiQuick('HTML nima?')">🌐 HTML</button>
-                <button onclick="aiQuick('AI nima?')">🤖 AI</button>
-                <button onclick="aiQuick('Qaysi IT kasbini tanlashim kerak?')">💼 Kasb</button>
-            </div>
 
-            <div class="chat-input">
+            <div class="chatInput">
+
                 <input
                     id="aiInput"
+                    type="text"
                     placeholder="Savolingizni yozing..."
-                    onkeydown="if(event.key==='Enter')sendAI()"
-                >
-                <button class="btn btn-primary" onclick="sendAI()">Yuborish</button>
-            </div>
+                    onkeydown="if(event.key==='Enter') sendAI()">
 
-            <div class="small" style="margin-top:8px">
-                ⚠️ AI Ustoz hozircha demo rejimda ishlaydi.
+                <button
+                    class="btn btnPrimary"
+                    onclick="sendAI()">
+                    Yuborish
+                </button>
+
             </div>
 
         </div>
@@ -1879,1640 +1797,2918 @@ section{
 
 </section>
 
-<!-- ACHIEVEMENTS -->
+
+<!-- =======================================================
+     RESULTS
+======================================================= -->
+
 <section>
 
-    <div class="section-head">
+    <div class="sectionHeader">
+
         <div>
-            <h2>🏆 <span class="gradient-text">Yutuqlar</span></h2>
-            <p>Faolligingiz uchun medallar va XP oling.</p>
+
+            <span class="badge">
+                🏆 NATIJALAR
+            </span>
+
+            <h2>
+                Sizning
+                <span class="gradient">
+                    rivojlanishingiz
+                </span>
+            </h2>
+
         </div>
+
     </div>
 
-    <div class="achievements" id="achievements"></div>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <div class="cardIcon">
+                ⭐
+            </div>
+
+            <h3>
+                XP
+            </h3>
+
+            <p id="xpText">
+                0 XP
+            </p>
+
+            <div
+                class="progressTrack"
+                style="margin-top:15px">
+
+                <div
+                    class="progressFill"
+                    id="xpBar">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="cardIcon">
+                🔥
+            </div>
+
+            <h3>
+                Streak
+            </h3>
+
+            <p id="streakText">
+                1 kun
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="cardIcon">
+                🏅
+            </div>
+
+            <h3>
+                Yutuqlar
+            </h3>
+
+            <p id="achievementText">
+                0 ta
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="cardIcon">
+                🎓
+            </div>
+
+            <h3>
+                Sertifikat
+            </h3>
+
+            <button
+                class="btn btnPrimary"
+                style="margin-top:15px"
+                onclick="openCertificate()">
+                Ochish
+            </button>
+
+        </div>
+
+    </div>
 
 </section>
-
-<!-- FOOTER -->
-<footer style="
-    padding:55px 0 110px;
-    border-top:1px solid var(--line);
-    margin-top:30px;
-">
-    <div style="
-        display:flex;
-        justify-content:space-between;
-        gap:30px;
-        flex-wrap:wrap;
-    ">
-        <div>
-            <h2>IKROMJON AI</h2>
-            <p class="small" style="margin-top:8px">
-                Zamonaviy bilim. Amaliy ko‘nikma. Yorqin kelajak.
-            </p>
-        </div>
-
-        <div class="small">
-            © 2026 IKROMJON AI O‘QUV MARKAZI
-        </div>
-    </div>
-</footer>
 
 </main>
 
-<!-- MOBILE NAV -->
-<div class="mobile-nav">
-    <button onclick="go('home')">
-        <span>⌂</span>Bosh sahifa
+
+<!-- =======================================================
+     MOBILE NAV
+======================================================= -->
+
+<div class="mobileNav">
+
+    <button onclick="goTo('home')">
+        🏠<br>Bosh
     </button>
 
-    <button onclick="go('courses')">
-        <span>📚</span>Kurslar
+    <button onclick="goTo('universities')">
+        🎓<br>OTM
     </button>
 
-    <button onclick="go('ai')">
-        <span>🤖</span>AI
+    <button onclick="goTo('courses')">
+        📚<br>Kurs
     </button>
 
-    <button onclick="go('dashboard')">
-        <span>📊</span>Kabinet
+    <button onclick="goTo('lessons')">
+        📖<br>Dars
     </button>
 
-    <button onclick="openProfile()">
-        <span>👤</span>Profil
+    <button onclick="goTo('ai')">
+        🤖<br>AI
     </button>
+
 </div>
 
-<!-- GLOBAL SEARCH -->
-<div class="global-search" id="globalSearch" onclick="if(event.target===this)closeGlobalSearch()">
-    <div class="search-box">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
-            <h2>🔎 Global qidiruv</h2>
-            <button class="close" onclick="closeGlobalSearch()">✕</button>
-        </div>
 
-        <input
-            id="globalInput"
-            placeholder="Kurs, dars, yo‘nalish..."
-            oninput="globalSearch(this.value)"
-        >
+<!-- MODAL -->
 
-        <div id="globalResults" style="margin-top:15px"></div>
+<div
+    class="modal"
+    id="mainModal">
+
+    <div
+        class="modalBox"
+        id="modalContent">
     </div>
+
 </div>
 
-<!-- MODALS -->
-<div class="modal" id="courseModal">
-    <div class="modal-box" id="courseModalBox"></div>
-</div>
-
-<div class="modal" id="lessonModal">
-    <div class="modal-box" id="lessonModalBox"></div>
-</div>
-
-<div class="modal" id="quizModal">
-    <div class="modal-box" id="quizModalBox"></div>
-</div>
-
-<div class="modal" id="profileModal">
-    <div class="modal-box" id="profileModalBox"></div>
-</div>
-
-<div class="modal" id="certificateModal">
-    <div class="modal-box">
-        <div class="modal-head">
-            <h2>🏆 Sertifikat</h2>
-            <button class="close" onclick="closeModal('certificateModal')">✕</button>
-        </div>
-
-        <div class="certificate">
-            <h1>SERTIFIKAT</h1>
-            <p>IKROMJON AI O‘QUV MARKAZI</p>
-
-            <div class="student" id="certificateName">
-                O‘QUVCHI
-            </div>
-
-            <p>
-                Ushbu sertifikat egasi
-                <strong id="certificateCourse">IKROMJON AI</strong>
-                o‘quv dasturini muvaffaqiyatli o‘zlashtirgani,
-                nazariy bilim va amaliy ko‘nikmalarni egallagani
-                uchun taqdim etiladi.
-            </p>
-
-            <p style="margin-top:25px">
-                Berilgan sana:
-                <strong id="certificateDate"></strong>
-            </p>
-
-            <p>
-                Sertifikat raqami:
-                <strong id="certificateNumber"></strong>
-            </p>
-        </div>
-
-        <div class="certificate-actions" style="display:flex;gap:10px;margin-top:18px">
-            <button class="btn btn-primary" onclick="window.print()">🖨️ Chop etish</button>
-            <button class="btn" onclick="closeModal('certificateModal')">Yopish</button>
-        </div>
-    </div>
-</div>
 
 <div id="toast"></div>
 
+
 <script>
-/* =========================================================
-   DATA
-   ========================================================= */
-
-const universities = [
-    {
-        id:"uzmu",
-        short:"O‘zMU",
-        icon:"🎓",
-        label:"MILLIY UNIVERSITET",
-        name:"O‘zbekiston Milliy universiteti",
-        text:"Ko‘plab fanlar, tabiiy fanlar, matematika, IT, iqtisodiyot, filologiya va boshqa yo‘nalishlarni qamrab oluvchi yirik OTM."
-    },
-    {
-        id:"tuit",
-        short:"TUIT",
-        icon:"💻",
-        label:"AXBOROT TEXNOLOGIYALARI",
-        name:"Muhammad al-Xorazmiy nomidagi TUIT",
-        text:"Dasturlash, kompyuter injiniringi, axborot xavfsizligi, telekommunikatsiya va raqamli texnologiyalar."
-    },
-    {
-        id:"tdtu",
-        short:"TDTU",
-        icon:"⚙️",
-        label:"TEXNIKA",
-        name:"Toshkent davlat texnika universiteti",
-        text:"Muhandislik, energetika, mexanika, avtomatika, elektronika, neft-gaz va zamonaviy texnologiyalar."
-    },
-    {
-        id:"tsue",
-        short:"TDIU",
-        icon:"💼",
-        label:"IQTISODIYOT",
-        name:"Toshkent davlat iqtisodiyot universiteti",
-        text:"Iqtisodiyot, biznes, moliya, menejment, marketing va zamonaviy biznes yo‘nalishlari."
-    },
-    {
-        id:"tiiame",
-        short:"TIIAME",
-        icon:"🌱",
-        label:"MUHANDISLIK / TADQIQOT",
-        name:"TIIAME Milliy tadqiqot universiteti",
-        text:"Muhandislik, suv resurslari, ekologiya, avtomatlashtirish, qishloq xo‘jaligi va ilmiy tadqiqotlar."
-    },
-    {
-        id:"wiut",
-        short:"WIUT",
-        icon:"🌍",
-        label:"XALQARO TA’LIM",
-        name:"Westminster International University in Tashkent",
-        text:"Xalqaro ta’lim muhiti, ingliz tilidagi dasturlar, Computer Science, Business va Economics yo‘nalishlari."
-    },
-    {
-        id:"tstu",
-        short:"TDTU-T",
-        icon:"🚆",
-        label:"TRANSPORT",
-        name:"Toshkent davlat transport universiteti",
-        text:"Transport, logistika, yo‘l muhandisligi, temir yo‘l va transport texnologiyalari."
-    },
-    {
-        id:"uwed",
-        short:"JIDU",
-        icon:"🌐",
-        label:"XALQARO MUNOSABATLAR",
-        name:"Jahon iqtisodiyoti va diplomatiya universiteti",
-        text:"Xalqaro munosabatlar, jahon iqtisodiyoti, diplomatiya, huquq va xalqaro siyosat yo‘nalishlari."
-    },
-    {
-        id:"tsuos",
-        short:"TSUOS",
-        icon:"🏛️",
-        label:"SHARQSHUNOSLIK",
-        name:"Toshkent davlat sharqshunoslik universiteti",
-        text:"Sharq mamlakatlari tillari, tarixi, madaniyati, xalqaro aloqalar va mintaqashunoslik."
-    },
-    {
-        id:"tdau",
-        short:"TDAU",
-        icon:"🌾",
-        label:"AGRAR",
-        name:"Toshkent davlat agrar universiteti",
-        text:"Agrar texnologiyalar, qishloq xo‘jaligi, agrotexnologiya, iqtisodiyot va zamonaviy agrar tadqiqotlar."
-    }
-];
-
-const directions = [
-    ["💻","Dasturlash","Web, dastur va algoritmlar"],
-    ["🤖","Sun’iy intellekt","AI va Generative AI"],
-    ["🧠","Machine Learning","ML modellari va ma’lumotlar"],
-    ["📊","Data Science","Ma’lumotlar tahlili"],
-    ["🛡️","Kiberxavfsizlik","Raqamli xavfsizlik"],
-    ["🌐","Web dasturlash","Frontend va Backend"],
-    ["⚡","JavaScript","Interaktiv web"],
-    ["🐍","Python","Dasturlash va AI"],
-    ["☕","Java","Professional dasturlash"],
-    ["📱","Mobil dasturlash","Android va iOS"],
-    ["🎨","Grafik dizayn","Vizual dizayn"],
-    ["🖌️","UI/UX","Foydalanuvchi tajribasi"],
-    ["🧩","Figma","Interfeys prototiplash"],
-    ["🎬","Video montaj","Professional video"],
-    ["📷","Foto ishlov","Rasm tahrirlash"],
-    ["🎙️","Media","Kontent yaratish"],
-    ["📢","Digital Marketing","Internet marketing"],
-    ["📱","SMM","Ijtimoiy tarmoqlar"],
-    ["🔎","SEO","Qidiruv optimizatsiyasi"],
-    ["💼","Biznes","Biznes asoslari"],
-    ["💰","Moliya","Moliyaviy savodxonlik"],
-    ["📈","Investitsiya","Investitsiya asoslari"],
-    ["🧑‍💼","Menejment","Boshqaruv"],
-    ["🚀","Startup","Startap yaratish"],
-    ["☁️","Cloud","Bulut texnologiyalari"],
-    ["⚙️","DevOps","CI/CD va infratuzilma"],
-    ["🐳","Docker","Container texnologiyasi"],
-    ["☸️","Kubernetes","Cloud orchestration"],
-    ["🗄️","SQL","Ma’lumotlar bazasi"],
-    ["🐘","PostgreSQL","Professional database"],
-    ["🍃","MongoDB","NoSQL database"],
-    ["🔗","API","Backend integratsiya"],
-    ["🔐","Ethical Hacking","Himoya va audit"],
-    ["🧪","Penetration Testing","Security testing"],
-    ["🔑","Cryptography","Shifrlash"],
-    ["🧬","Blockchain","Web3 texnologiyalari"],
-    ["₿","Crypto","Raqamli aktivlar"],
-    ["🎮","Game Development","O‘yin yaratish"],
-    ["🕹️","Unity","Game engine"],
-    ["🧱","Unreal Engine","3D game development"],
-    ["🥽","VR","Virtual reality"],
-    ["👓","AR","Augmented reality"],
-    ["🧊","3D Modeling","3D modellashtirish"],
-    ["✨","Motion Design","Animatsiya"],
-    ["🎞️","Animation","2D/3D animatsiya"],
-    ["📐","Architecture","Raqamli arxitektura"],
-    ["🏗️","AutoCAD","Chizma va loyihalash"],
-    ["🌍","GIS","Geografik axborot tizimlari"],
-    ["🛰️","Remote Sensing","Masofadan zondlash"],
-    ["📡","Telecom","Telekommunikatsiya"],
-    ["🔌","IoT","Internet of Things"],
-    ["🤖","Robotics","Robototexnika"],
-    ["⚡","Arduino","Elektronika"],
-    ["🔧","Embedded","Embedded systems"],
-    ["🧮","Algorithms","Algoritmlar"],
-    ["🧠","Problem Solving","Muammo yechish"],
-    ["📚","IT English","IT ingliz tili"],
-    ["🇬🇧","English","Ingliz tili"],
-    ["🇷🇺","Russian","Rus tili"],
-    ["🇰🇷","Korean","Koreys tili"],
-    ["🇩🇪","German","Nemis tili"],
-    ["🇨🇳","Chinese","Xitoy tili"],
-    ["🗣️","Speaking","Nutq rivoji"],
-    ["✍️","Writing","Professional yozuv"],
-    ["📖","Academic Writing","Akademik yozuv"],
-    ["🧑‍🏫","Pedagogika","Ta’lim metodikasi"],
-    ["🎓","Abituriyent","Universitetga tayyorgarlik"],
-    ["📝","Test tayyorgarlik","Imtihon tayyorgarligi"],
-    ["🔢","Matematika","Matematika asoslari"],
-    ["⚛️","Fizika","Fizika"],
-    ["🧪","Kimyo","Kimyo"],
-    ["🧬","Biologiya","Biologiya"],
-    ["🗺️","Geografiya","Geografiya"],
-    ["📜","Tarix","Tarix"],
-    ["⚖️","Huquq","Huquq asoslari"],
-    ["🏦","Banking","Bank sohasi"],
-    ["💳","Fintech","Moliyaviy texnologiyalar"],
-    ["🧾","Buxgalteriya","Hisob-kitob"],
-    ["📊","Excel","Elektron jadvallar"],
-    ["📉","Power BI","Business Intelligence"],
-    ["🧮","Statistics","Statistika"],
-    ["🔬","Research","Ilmiy tadqiqot"],
-    ["📰","Copywriting","Reklama matnlari"],
-    ["📣","PR","Jamoatchilik bilan aloqa"],
-    ["🎯","Branding","Brend yaratish"],
-    ["🛒","E-commerce","Onlayn savdo"],
-    ["📦","Marketplace","Marketplace biznesi"],
-    ["💬","Sales","Sotuv"],
-    ["🤝","Negotiation","Muzokara"],
-    ["🧠","Psychology","Psixologiya asoslari"],
-    ["⏱️","Time Management","Vaqt boshqaruvi"],
-    ["🔥","Leadership","Liderlik"],
-    ["💡","Creativity","Ijodkorlik"],
-    ["📋","Project Management","Loyiha boshqaruvi"],
-    ["🧰","Git","Versiyalar nazorati"],
-    ["🐙","GitHub","Kod hamkorligi"],
-    ["🧪","Testing","Software testing"],
-    ["🔍","QA","Sifat nazorati"],
-    ["🖥️","Linux","Linux"],
-    ["⌨️","Terminal","CLI"],
-    ["🌐","Networking","Kompyuter tarmoqlari"],
-    ["📡","CCNA","Network fundamentals"],
-    ["🗃️","Database","Database engineering"],
-    ["🧱","Backend","Server dasturlash"],
-    ["⚛️","React","Frontend framework"],
-    ["🟢","Node.js","JavaScript backend"],
-    ["🟣","Vue.js","Frontend"],
-    ["🔷","TypeScript","Typed JavaScript"],
-    ["🟠","Django","Python web"],
-    ["🔴","FastAPI","Python API"],
-    ["🟡","Laravel","PHP framework"],
-    ["🐘","PHP","Web backend"],
-    ["🦀","Rust","System programming"],
-    ["🔵","C++","Professional programming"],
-    ["🟦","C#","Application development"],
-    ["☕","Kotlin","Android"],
-    ["🍎","Swift","iOS"],
-    ["🧑‍🚀","Career","Karyera rivoji"],
-    ["📄","CV","Professional CV"],
-    ["🎤","Interview","Suhbatga tayyorgarlik"],
-    ["💼","Freelance","Mustaqil ishlash"],
-    ["🌍","Remote Work","Masofaviy ish"],
-    ["💻","Portfolio","Professional portfolio"],
-    ["🏆","Certification","Sertifikatlar"],
-    ["🤖","Prompt Engineering","AI bilan ishlash"],
-    ["🧠","LLM","Large Language Models"],
-    ["🎨","AI Design","AI dizayn"],
-    ["🎬","AI Video","AI video"],
-    ["🎵","AI Music","AI musiqa"],
-    ["🗣️","AI Voice","AI ovoz"],
-    ["🖼️","AI Image","AI tasvir"],
-    ["📱","AI App","AI ilovalar"],
-    ["⚙️","Automation","Avtomatlashtirish"],
-    ["🔄","No-Code","Kodsiz dasturlash"],
-    ["🧩","Low-Code","Low-code"],
-    ["🌎","Digital Skills","Raqamli savodxonlik"],
-    ["👨‍💻","Computer Science","Kompyuter ilmlari"]
-];
-
-const courses = [
-    {
-        id:"html",
-        icon:"🌐",
-        title:"HTML & CSS",
-        category:"it",
-        level:"Boshlang‘ich",
-        lessons:20,
-        duration:"25 soat",
-        desc:"Web sahifalarni noldan yaratish va professional dizayn qilishni o‘rganing."
-    },
-    {
-        id:"javascript",
-        icon:"⚡",
-        title:"JavaScript",
-        category:"it",
-        level:"O‘rta",
-        lessons:30,
-        duration:"40 soat",
-        desc:"Interaktiv va zamonaviy web-ilovalar yaratishni o‘rganing."
-    },
-    {
-        id:"python",
-        icon:"🐍",
-        title:"Python",
-        category:"it",
-        level:"Boshlang‘ich",
-        lessons:35,
-        duration:"45 soat",
-        desc:"Python dasturlash tilini amaliy loyihalar orqali egallang."
-    },
-    {
-        id:"ai",
-        icon:"🤖",
-        title:"Sun’iy intellekt",
-        category:"ai",
-        level:"O‘rta",
-        lessons:25,
-        duration:"35 soat",
-        desc:"AI, Generative AI, LLM va Prompt Engineering."
-    },
-    {
-        id:"frontend",
-        icon:"💻",
-        title:"Frontend Pro",
-        category:"it",
-        level:"Professional",
-        lessons:45,
-        duration:"60 soat",
-        desc:"Professional frontend dasturchi bo‘lish uchun kompleks kurs."
-    },
-    {
-        id:"mobile",
-        icon:"📱",
-        title:"Mobil dasturlash",
-        category:"it",
-        level:"O‘rta",
-        lessons:30,
-        duration:"50 soat",
-        desc:"Android va iOS uchun zamonaviy mobil ilovalar yarating."
-    },
-    {
-        id:"design",
-        icon:"🎨",
-        title:"Grafik dizayn",
-        category:"design",
-        level:"Boshlang‘ich",
-        lessons:25,
-        duration:"30 soat",
-        desc:"Figma, Photoshop va zamonaviy grafik dizayn asoslari."
-    },
-    {
-        id:"cyber",
-        icon:"🛡️",
-        title:"Kiberxavfsizlik",
-        category:"it",
-        level:"O‘rta",
-        lessons:28,
-        duration:"40 soat",
-        desc:"Raqamli xavfsizlik va kiberxavfsizlik asoslari."
-    },
-    {
-        id:"data",
-        icon:"📊",
-        title:"Data Analytics",
-        category:"it",
-        level:"O‘rta",
-        lessons:25,
-        duration:"35 soat",
-        desc:"Excel, SQL, statistika va Power BI."
-    },
-    {
-        id:"marketing",
-        icon:"📢",
-        title:"Digital Marketing",
-        category:"business",
-        level:"Boshlang‘ich",
-        lessons:20,
-        duration:"25 soat",
-        desc:"SMM, SEO, reklama va internet marketing."
-    },
-    {
-        id:"business",
-        icon:"💼",
-        title:"Biznes asoslari",
-        category:"business",
-        level:"Boshlang‘ich",
-        lessons:18,
-        duration:"22 soat",
-        desc:"Biznes g‘oyadan amaliy loyihagacha."
-    },
-    {
-        id:"english",
-        icon:"🇬🇧",
-        title:"IT English",
-        category:"business",
-        level:"Boshlang‘ich",
-        lessons:30,
-        duration:"35 soat",
-        desc:"IT sohasi uchun zarur ingliz tili."
-    }
-];
-
-const lessons = [
-    ["HTML bilan tanishuv","HTML & CSS","🌐","HTML web sahifaning asosiy tuzilmasini yaratish uchun ishlatiladi."],
-    ["HTML teglar","HTML & CSS","🏷️","Sarlavha, paragraf, havola, rasm va ro‘yxatlar."],
-    ["CSS asoslari","HTML & CSS","🎨","Rang, shrift, o‘lcham va joylashuv."],
-    ["Flexbox","HTML & CSS","📐","Elementlarni professional joylashtirish."],
-    ["JavaScript nima?","JavaScript","⚡","JavaScript web sahifalarni interaktiv qiladi."],
-    ["O‘zgaruvchilar","JavaScript","📦","let, const va ma’lumot turlari."],
-    ["Funksiyalar","JavaScript","🧩","Qayta ishlatiladigan kod yaratish."],
-    ["DOM bilan ishlash","JavaScript","🌐","HTML elementlarini JavaScript orqali boshqarish."],
-    ["Python dasturlashga kirish","Python","🐍","Python sintaksisi va dasturlash muhiti."],
-    ["Python o‘zgaruvchilari","Python","📦","String, number, boolean va boshqa turlar."],
-    ["Python list","Python","📋","Ro‘yxatlar va ular bilan ishlash."],
-    ["Python funksiyalar","Python","🧩","Funksiya yaratish va chaqirish."],
-    ["Sun’iy intellekt nima?","AI","🤖","AI tushunchasi va real hayotdagi qo‘llanilishi."],
-    ["Prompt Engineering","AI","🧠","AI'ga samarali topshiriq berish."],
-    ["LLM nima?","AI","🧠","Large Language Models haqida."],
-    ["AI xavfsizligi","AI","🛡️","AI'dan xavfsiz va mas’uliyatli foydalanish."],
-    ["Kiberxavfsizlik asoslari","Kibersecurity","🛡️","Raqamli xavfsizlik tushunchalari."],
-    ["Phishing","Kibersecurity","🎣","Firibgar xabarlarni aniqlash."],
-    ["SQL SELECT","Data Analytics","📊","Ma’lumotlarni SQL orqali olish."],
-    ["Excel asoslari","Data Analytics","📈","Jadvallar va formulalar."],
-    ["Figma bilan tanishuv","Design","🎨","Interfeys dizayni."],
-    ["UI va UX","Design","🧩","Foydalanuvchi tajribasi."],
-    ["Digital Marketing","Marketing","📢","Raqamli marketing asoslari."],
-    ["SEO nima?","Marketing","🔎","Qidiruv tizimlari optimizatsiyasi."],
-    ["SMM","Marketing","📱","Ijtimoiy tarmoqlarda marketing."]
-];
-
-const quizzes = {
-    html:[
-        ["HTML nimani anglatadi?",["Hyper Text Markup Language","High Tech Machine Language","Home Tool Markup Language","Hyperlink Text Machine"],0],
-        ["CSS nima uchun ishlatiladi?",["Dastur kompilyatsiyasi","Web dizayn","Database","Server"],1],
-        ["Havola uchun qaysi teg ishlatiladi?",["<p>","<a>","<div>","<img>"],1],
-        ["Rasm qo‘yish uchun qaysi teg?",["<img>","<picturetext>","<photo>","<src>"],0],
-        ["Flexbox nimaga yordam beradi?",["Audio yozishga","Elementlarni joylashtirishga","Database yaratishga","Video montajga"],1]
-    ],
-    javascript:[
-        ["JavaScript nima?",["Dasturlash tili","Operatsion tizim","Database","Grafik dastur"],0],
-        ["O‘zgarmas qiymat uchun?",["let","var","const","fixed"],2],
-        ["Array nima?",["Ro‘yxat","Server","Rasm","Font"],0],
-        ["DOM nimani boshqaradi?",["Web sahifa elementlarini","Wi-Fi","Printer","GPU"],0],
-        ["Funksiya qanday e’lon qilinadi?",["function","methodonly","defonly","funcx"],0]
-    ],
-    python:[
-        ["Python qanday til?",["Dasturlash tili","Grafik karta","OS","Browser"],0],
-        ["List qaysi belgida?",["{}","[]","()","<>"],1],
-        ["Dictionary qaysi belgida?",["[]","{}","()","//"],1],
-        ["Funksiya yaratish?",["function","def","fun","create"],1],
-        ["Python bloklari nima bilan ajratiladi?",["Indentatsiya","Nuqta","Vergul","HTML"],0]
-    ],
-    ai:[
-        ["Prompt nima?",["AI'ga beriladigan topshiriq","Video formati","Database","Printer"],0],
-        ["LLM nimani anglatadi?",["Large Language Model","Local Logic Machine","Low Level Memory","Language Link Mode"],0],
-        ["AI hallucination nima?",["AI noto‘g‘ri ma’lumot yaratishi","AI o‘chishi","Video buzilishi","Internet uzilishi"],0],
-        ["AI bilan ishlashda muhim narsa?",["Maxfiylik","Parolni hammaga berish","Tekshirmaslik","Har narsaga ishonish"],0],
-        ["Generative AI nima qiladi?",["Yangi kontent yaratishi mumkin","Faqat kalkulyator","Faqat printer","Faqat antivirus"],0]
-    ],
-    cyber:[
-        ["Phishing nima?",["Aldov orqali ma’lumot olish","Antivirus","Server","Backup"],0],
-        ["MFA nimani oshiradi?",["Hisob xavfsizligini","Internet tezligini","Monitor sifatini","Printer tezligini"],0],
-        ["Kuchli parol qanday?",["Uzun va murakkab","123456","password","ism123"],0],
-        ["Firewall nima?",["Tarmoq xavfsizligi vositasi","Video player","Editor","Browser"],0],
-        ["Shubhali link bilan nima qilish kerak?",["Tekshirmasdan bosmaslik","Hammaga yuborish","Parol kiritish","Yuklab olish"],0]
-    ],
-    data:[
-        ["SQL SELECT nima qiladi?",["Ma’lumot olish","Monitor yoqish","Video yaratish","Email yuborish"],0],
-        ["Excel nima?",["Elektron jadval dasturi","OS","Browser","Antivirus"],0],
-        ["Median nima?",["Markaziy qiymat","Eng katta qiymat","Eng kichik qiymat","Tasodifiy son"],0],
-        ["Power BI nima uchun?",["Data visualization","Video montaj","Audio","Chat"],0],
-        ["Database nima?",["Ma’lumotlar to‘plami","Printer","Kamera","Monitor"],0]
-    ],
-    design:[
-        ["Figma nima?",["Dizayn/prototiplash vositasi","Database","OS","Antivirus"],0],
-        ["UX nimani anglatadi?",["User Experience","User XML","Ultra Extension","User Export"],0],
-        ["Typography nima?",["Matn/shrift dizayni","Database","Audio","Video"],0],
-        ["Contrast nima?",["Elementlar farqini kuchaytirish","Kod kompilyatsiyasi","Server","Email"],0],
-        ["Prototype nima?",["Mahsulotning sinov modeli","Parol","Database","Printer"],0]
-    ],
-    marketing:[
-        ["SEO nima?",["Search Engine Optimization","Server Engine Output","Social Email Office","Search Export Option"],0],
-        ["CTA nima?",["Call To Action","Code To App","Click To Audio","Content Type API"],0],
-        ["SMM nima?",["Social Media Marketing","System Media Machine","Search Market Mode","Social Mail Manager"],0],
-        ["Conversion nima?",["Kerakli harakatga aylanish","Video sifati","Server tezligi","Font"],0],
-        ["Target reklama nima?",["Muayyan auditoriyaga yo‘naltirilgan reklama","Random reklama","Faqat TV","Email"],0]
-    ],
-    mobile:[
-        ["APK nima?",["Android ilova paketi","Apple video","Database","Server"],0],
-        ["UI nima?",["User Interface","Universal Internet","User Input only","Upload Image"],0],
-        ["API nima?",["Dasturlar o‘rtasidagi aloqa interfeysi","Audio","Rasm","Printer"],0],
-        ["Responsive nima?",["Turli ekranlarga moslashish","Server o‘chishi","Audio","Database"],0],
-        ["Android qaysi kompaniya bilan bog‘liq?",["Google","Adobe","Microsoft Word","Figma"],0]
-    ],
-    english:[
-        ["'Developer' nima?",["Dasturchi","Dizayner","O‘qituvchi","Shifokor"],0],
-        ["'Database' nima?",["Ma’lumotlar bazasi","Brauzer","Kamera","Printer"],0],
-        ["'Website' nima?",["Veb-sayt","Telefon","Server kabeli","Font"],0],
-        ["'Computer' nima?",["Kompyuter","Kamera","Printer","Router"],0],
-        ["'Programming' nima?",["Dasturlash","Rasm","Sotuv","Transport"],0]
-    ]
-};
+"use strict";
 
 /* =========================================================
    STATE
-   ========================================================= */
+========================================================= */
 
-let state = JSON.parse(localStorage.getItem("ikromjon_state") || "null") || {
-    name:"O‘quvchi",
-    xp:0,
-    level:1,
-    completed:[],
-    quiz:0,
-    streak:1,
-    daily:false,
-    theme:"dark"
+const state = {
+
+    theme:
+        localStorage.getItem("ikrom_theme") || "dark",
+
+    lang:
+        localStorage.getItem("ikrom_lang") || "uz",
+
+    season:
+        localStorage.getItem("ikrom_season") || "spring",
+
+    xp:
+        Number(localStorage.getItem("ikrom_xp") || 0),
+
+    streak:
+        Number(localStorage.getItem("ikrom_streak") || 1),
+
+    completed:
+        Number(localStorage.getItem("ikrom_completed") || 0),
+
+    region:
+        localStorage.getItem("ikrom_region") || "tashkent",
+
+    profile:
+        safeJSON(
+            localStorage.getItem("ikrom_profile"),
+            {}
+        )
+
 };
 
-let courseFilter="all";
-let uniIndex=0;
-let currentQuiz=[];
-let quizIndex=0;
-let quizCorrect=0;
 
 /* =========================================================
-   BASIC
-   ========================================================= */
+   SAFE JSON
+========================================================= */
 
-function saveState(){
-    localStorage.setItem("ikromjon_state",JSON.stringify(state));
-}
+function safeJSON(value,fallback){
 
-function go(id){
-    const el=document.getElementById(id);
-    if(el)el.scrollIntoView({behavior:"smooth",block:"start"});
-}
-
-function openModal(id){
-    document.getElementById(id).classList.add("show");
-}
-
-function closeModal(id){
-    document.getElementById(id).classList.remove("show");
-}
-
-function toast(message){
-    const t=document.getElementById("toast");
-    t.textContent=message;
-    t.classList.add("show");
-
-    clearTimeout(window.toastTimer);
-
-    window.toastTimer=setTimeout(()=>{
-        t.classList.remove("show");
-    },2600);
-}
-
-function toggleTheme(){
-    state.theme=state.theme==="dark"?"light":"dark";
-
-    document.body.classList.toggle("light",state.theme==="light");
-
-    document.getElementById("themeBtn").textContent=
-        state.theme==="dark"?"☀":"🌙";
-
-    saveState();
-}
-
-function addXP(amount){
-    state.xp+=amount;
-
-    const newLevel=Math.floor(state.xp/100)+1;
-
-    if(newLevel>state.level){
-        state.level=newLevel;
-        toast("🎉 Tabriklaymiz! "+state.level+"-darajaga chiqdingiz!");
+    try{
+        return value ? JSON.parse(value) : fallback;
+    }catch(error){
+        return fallback;
     }
 
-    saveState();
-    updateDashboard();
 }
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+if(state.theme==="light"){
+    document.body.classList.add("light");
+}
+
+
+/* =========================================================
+   LANGUAGE SELECT
+========================================================= */
+
+const languageSelect=
+    document.getElementById("languageSelect");
+
+if(languageSelect){
+    languageSelect.value=state.lang;
+}
+
 
 /* =========================================================
    SPLASH
-   ========================================================= */
+========================================================= */
 
-let load=0;
+(function startSplash(){
 
-const loadTimer=setInterval(()=>{
-    load+=2;
+    let progress=0;
 
-    if(load>100)load=100;
+    const bar=
+        document.getElementById("splashBar");
 
-    document.getElementById("loaderBar").style.width=load+"%";
-    document.getElementById("loadText").textContent=load+"%";
+    const percent=
+        document.getElementById("splashPercent");
 
-    if(load>=100){
-        clearInterval(loadTimer);
+    const timer=setInterval(()=>{
 
-        setTimeout(()=>{
-            document.getElementById("splash").style.opacity="0";
-            document.getElementById("splash").style.pointerEvents="none";
+        progress+=5;
+
+        if(progress>100)
+            progress=100;
+
+        bar.style.width=progress+"%";
+        percent.textContent=progress+"%";
+
+        if(progress>=100){
+
+            clearInterval(timer);
 
             setTimeout(()=>{
-                document.getElementById("splash").style.display="none";
-            },800);
-        },400);
-    }
-},30);
+
+                const splash=
+                    document.getElementById("splash");
+
+                splash.style.opacity="0";
+
+                setTimeout(()=>{
+
+                    splash.style.display="none";
+
+                },600);
+
+            },250);
+
+        }
+
+    },40);
+
+})();
+
 
 /* =========================================================
-   PARTICLES
-   ========================================================= */
+   NAVIGATION
+========================================================= */
 
-function createParticles(){
-    const box=document.getElementById("particles");
+function goTo(id){
 
-    for(let i=0;i<80;i++){
-        const p=document.createElement("div");
-        p.className="particle";
+    const element=
+        document.getElementById(id);
 
-        p.style.left=Math.random()*100+"%";
-        p.style.animationDuration=(8+Math.random()*15)+"s";
-        p.style.animationDelay=(-Math.random()*15)+"s";
-        p.style.opacity=(.2+Math.random()*.6);
+    if(!element) return;
 
-        box.appendChild(p);
-    }
+    element.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+    });
+
 }
+
 
 /* =========================================================
-   UNIVERSITIES
-   ========================================================= */
+   CLOCK
+========================================================= */
 
-function renderUniversities(){
+function updateClock(){
 
-    const slider=document.getElementById("uniSlider");
-    const dots=document.getElementById("uniDots");
+    const now=new Date();
 
-    slider.innerHTML="";
-    dots.innerHTML="";
+    const time=
+        now.toLocaleTimeString(
+            "uz-UZ",
+            {
+                hour:"2-digit",
+                minute:"2-digit",
+                second:"2-digit"
+            }
+        );
 
-    universities.forEach((u,i)=>{
+    const date=
+        now.toLocaleDateString(
+            "uz-UZ",
+            {
+                day:"2-digit",
+                month:"long",
+                year:"numeric"
+            }
+        );
 
-        const card=document.createElement("div");
-        card.className="uni-card";
+    document.getElementById("clock")
+        .textContent=time;
 
-        card.innerHTML=`
-            <div class="uni-logo">
-                ${u.short}
-            </div>
+    document.getElementById("date")
+        .textContent=date;
 
-            <div class="uni-content">
-
-                <span class="uni-label">
-                    ${u.icon} ${u.label}
-                </span>
-
-                <h3>${u.name}</h3>
-
-                <p>${u.text}</p>
-
-                <button onclick="openUniversity('${u.id}')">
-                    Batafsil →
-                </button>
-
-            </div>
-        `;
-
-        slider.appendChild(card);
-
-        const dot=document.createElement("button");
-
-        dot.style.width="9px";
-        dot.style.height="9px";
-        dot.style.borderRadius="50%";
-        dot.style.border="0";
-        dot.style.background=i===0?"var(--cyan)":"rgba(255,255,255,.18)";
-        dot.style.padding="0";
-        dot.onclick=()=>{
-
-            uniIndex=i;
-
-            slider.scrollTo({
-                left:slider.children[i].offsetLeft-5,
-                behavior:"smooth"
-            });
-
-            updateUniDots();
-        };
-
-        dots.appendChild(dot);
-    });
 }
 
-function updateUniDots(){
+updateClock();
 
-    [...document.getElementById("uniDots").children]
-        .forEach((d,i)=>{
-            d.style.background=i===uniIndex
-                ?"var(--cyan)"
-                :"rgba(255,255,255,.18)";
-        });
-}
+setInterval(updateClock,1000);
 
-function uniNext(){
-
-    uniIndex++;
-
-    if(uniIndex>=universities.length){
-        uniIndex=0;
-    }
-
-    const slider=document.getElementById("uniSlider");
-
-    slider.scrollTo({
-        left:slider.children[uniIndex].offsetLeft,
-        behavior:"smooth"
-    });
-
-    updateUniDots();
-}
-
-function uniPrev(){
-
-    uniIndex--;
-
-    if(uniIndex<0){
-        uniIndex=universities.length-1;
-    }
-
-    const slider=document.getElementById("uniSlider");
-
-    slider.scrollTo({
-        left:slider.children[uniIndex].offsetLeft,
-        behavior:"smooth"
-    });
-
-    updateUniDots();
-}
-
-function openUniversity(id){
-
-    const u=universities.find(x=>x.id===id);
-
-    if(!u)return;
-
-    const modal=document.createElement("div");
-
-    modal.className="modal show";
-
-    modal.innerHTML=`
-        <div class="modal-box">
-
-            <div class="modal-head">
-                <h2>${u.icon} ${u.short}</h2>
-
-                <button class="close"
-                    onclick="this.closest('.modal').remove()">
-                    ✕
-                </button>
-            </div>
-
-            <div class="panel">
-
-                <div class="uni-logo"
-                     style="width:110px;height:110px;margin-bottom:20px">
-                    ${u.short}
-                </div>
-
-                <h2>${u.name}</h2>
-
-                <p style="margin-top:15px;color:var(--muted);line-height:1.8">
-                    ${u.text}
-                </p>
-
-                <div style="
-                    display:grid;
-                    grid-template-columns:repeat(3,1fr);
-                    gap:10px;
-                    margin-top:25px;
-                ">
-
-                    <div class="stat">
-                        <strong style="font-size:24px">🎓</strong>
-                        <span>Oliy ta’lim</span>
-                    </div>
-
-                    <div class="stat">
-                        <strong style="font-size:24px">🌍</strong>
-                        <span>Toshkent</span>
-                    </div>
-
-                    <div class="stat">
-                        <strong style="font-size:24px">🚀</strong>
-                        <span>Kelajak</span>
-                    </div>
-
-                </div>
-
-                <button class="btn btn-primary"
-                    style="margin-top:20px"
-                    onclick="toast('🎓 Universitet yo‘nalishlari bo‘limi demo rejimda')">
-                    📚 Yo‘nalishlarni ko‘rish
-                </button>
-
-            </div>
-
-        </div>
-    `;
-
-    document.body.appendChild(modal);
-}
-
-setInterval(uniNext,5000);
 
 /* =========================================================
-   DIRECTIONS
-   ========================================================= */
+   WEATHER
+========================================================= */
 
-function renderDirections(){
+const weatherRegions={
 
-    const grid=document.getElementById("directionGrid");
+    tashkent:{
+        name:"Toshkent",
+        lat:41.2995,
+        lon:69.2401
+    },
 
-    grid.innerHTML="";
+    nurafshon:{
+        name:"Nurafshon",
+        lat:41.0333,
+        lon:69.7167
+    },
 
-    directions.forEach(d=>{
+    samarkand:{
+        name:"Samarqand",
+        lat:39.6542,
+        lon:66.9597
+    },
 
-        const el=document.createElement("div");
+    bukhara:{
+        name:"Buxoro",
+        lat:39.7747,
+        lon:64.4286
+    },
 
-        el.className="category";
+    andijan:{
+        name:"Andijon",
+        lat:40.7821,
+        lon:72.3442
+    },
 
-        el.innerHTML=`
-            <div class="big-icon">${d[0]}</div>
-            <h3>${d[1]}</h3>
-            <p>${d[2]}</p>
-        `;
+    namangan:{
+        name:"Namangan",
+        lat:41.0011,
+        lon:71.6683
+    },
 
-        grid.appendChild(el);
-    });
+    fergana:{
+        name:"Farg‘ona",
+        lat:40.3864,
+        lon:71.7864
+    },
+
+    qarshi:{
+        name:"Qarshi",
+        lat:38.861,
+        lon:65.7847
+    },
+
+    nukus:{
+        name:"Nukus",
+        lat:42.46,
+        lon:59.6166
+    },
+
+    jizzakh:{
+        name:"Jizzax",
+        lat:40.1158,
+        lon:67.8422
+    },
+
+    termiz:{
+        name:"Termiz",
+        lat:37.2242,
+        lon:67.2783
+    },
+
+    dushanbe:{
+        name:"Dushanbe",
+        lat:38.5598,
+        lon:68.787
+    },
+
+    almaty:{
+        name:"Almaty",
+        lat:43.2389,
+        lon:76.8897
+    },
+
+    moscow:{
+        name:"Moscow",
+        lat:55.7558,
+        lon:37.6173
+    }
+
+};
+
+
+function weatherIconFromCode(code){
+
+    if(code===0)
+        return "☀️";
+
+    if(code<=3)
+        return "⛅";
+
+    if(code<=48)
+        return "🌫️";
+
+    if(code<=67)
+        return "🌧️";
+
+    if(code<=77)
+        return "❄️";
+
+    if(code<=82)
+        return "🌦️";
+
+    if(code<=86)
+        return "🌨️";
+
+    return "⛈️";
+
 }
 
-/* =========================================================
-   COURSES
-   ========================================================= */
 
-function setCourseFilter(filter,button){
+async function loadWeather(){
 
-    courseFilter=filter;
+    const region=
+        weatherRegions[state.region] ||
+        weatherRegions.tashkent;
 
-    document.querySelectorAll(".filter-btn")
-        .forEach(x=>x.classList.remove("active"));
+    document.getElementById("weatherRegion")
+        .textContent=region.name;
 
-    button.classList.add("active");
+    document.getElementById("weatherText")
+        .textContent="Ob-havo yuklanmoqda...";
 
-    renderCourses();
+    try{
+
+        const url=
+            "https://api.open-meteo.com/v1/forecast"+
+            "?latitude="+region.lat+
+            "&longitude="+region.lon+
+            "&current=temperature_2m,weather_code,wind_speed_10m"+
+            "&timezone=auto";
+
+        const response=
+            await fetch(
+                url,
+                {
+                    cache:"no-store"
+                }
+            );
+
+        if(!response.ok)
+            throw new Error("Weather error");
+
+        const data=
+            await response.json();
+
+        const current=
+            data.current;
+
+        const temp=
+            Math.round(
+                Number(current.temperature_2m)
+            );
+
+        document.getElementById("weatherIcon")
+            .textContent=
+            weatherIconFromCode(
+                Number(current.weather_code)
+            );
+
+        document.getElementById("weatherText")
+            .textContent=
+            temp+
+            "°C • Shamol "+
+            Math.round(
+                Number(current.wind_speed_10m)
+            )+
+            " km/soat";
+
+    }catch(error){
+
+        document.getElementById("weatherIcon")
+            .textContent="🌤️";
+
+        document.getElementById("weatherText")
+            .textContent=
+            "Ob-havo ma’lumoti vaqtincha mavjud emas.";
+
+    }
+
 }
 
-function renderCourses(){
+loadWeather();
 
-    const grid=document.getElementById("courseGrid");
 
-    const search=
-        document.getElementById("courseSearch")
-        .value
-        .toLowerCase();
+function openWeatherSettings(){
 
-    grid.innerHTML="";
+    const options=
+        Object.entries(weatherRegions)
+        .map(([key,value])=>
+            `<option value="${key}"
+                ${key===state.region?"selected":""}>
+                ${value.name}
+            </option>`
+        )
+        .join("");
 
-    const filtered=courses.filter(c=>{
+    openModal(`
 
-        const matchesFilter=
-            courseFilter==="all" ||
-            c.category===courseFilter;
+        <div class="modalHeader">
 
-        const matchesSearch=
-            c.title.toLowerCase().includes(search) ||
-            c.desc.toLowerCase().includes(search);
+            <h2>🌤️ Ob-havo hududi</h2>
 
-        return matchesFilter && matchesSearch;
-    });
-
-    filtered.forEach(c=>{
-
-        const card=document.createElement("div");
-
-        card.className="course";
-
-        card.innerHTML=`
-            <div class="course-icon">${c.icon}</div>
-
-            <h3>${c.title}</h3>
-
-            <p>${c.desc}</p>
-
-            <div class="meta">
-                <span>📚 ${c.lessons} dars</span>
-                <span>⏱️ ${c.duration}</span>
-                <span>🎯 ${c.level}</span>
-            </div>
-
-            <button class="btn btn-primary"
-                onclick="openCourse('${c.id}')">
-                Kursni ochish →
-            </button>
-        `;
-
-        grid.appendChild(card);
-    });
-}
-
-function openCourse(id){
-
-    const c=courses.find(x=>x.id===id);
-
-    if(!c)return;
-
-    const modal=document.getElementById("courseModal");
-
-    document.getElementById("courseModalBox").innerHTML=`
-
-        <div class="modal-head">
-
-            <div>
-                <div style="font-size:40px">${c.icon}</div>
-                <h2 style="margin-top:8px">${c.title}</h2>
-            </div>
-
-            <button class="close"
-                onclick="closeModal('courseModal')">
+            <button
+                class="closeButton"
+                onclick="closeModal()">
                 ✕
             </button>
 
         </div>
 
-        <div class="panel">
+        <div class="card">
 
-            <p style="line-height:1.8">
-                ${c.desc}
+            <p style="color:var(--muted);line-height:1.6">
+                Ob-havo ma’lumoti shu yerda tanlangan
+                shahar yoki hudud bo‘yicha ko‘rsatiladi.
             </p>
 
-            <div class="meta" style="margin-top:18px">
-                <span>🎯 ${c.level}</span>
-                <span>📚 ${c.lessons} dars</span>
-                <span>⏱️ ${c.duration}</span>
-                <span>🏆 Sertifikat</span>
-            </div>
+            <select
+                id="weatherRegionSelect"
+                class="filterSelect"
+                style="width:100%;margin-top:18px">
 
-            <h3>📖 Kurs tarkibi</h3>
+                ${options}
 
-            <div style="display:grid;gap:9px;margin-top:12px">
+            </select>
 
-                <div class="lesson">
-                    <div class="lesson-icon">🎬</div>
-                    <div class="lesson-main">
-                        <h3>Video darslar</h3>
-                        <p>Amaliy tushuntirishlar</p>
-                    </div>
-                </div>
+            <button
+                class="btn btnPrimary"
+                style="margin-top:15px"
+                onclick="saveWeatherRegion()">
 
-                <div class="lesson">
-                    <div class="lesson-icon">📄</div>
-                    <div class="lesson-main">
-                        <h3>O‘quv materiallari</h3>
-                        <p>Konspekt va qo‘llanmalar</p>
-                    </div>
-                </div>
+                💾 Saqlash
 
-                <div class="lesson">
-                    <div class="lesson-icon">🛠️</div>
-                    <div class="lesson-main">
-                        <h3>Amaliy topshiriqlar</h3>
-                        <p>Real loyiha asosida</p>
-                    </div>
-                </div>
-
-                <div class="lesson">
-                    <div class="lesson-icon">📝</div>
-                    <div class="lesson-main">
-                        <h3>Test</h3>
-                        <p>Bilimingizni tekshiring</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px">
-
-                <button class="btn btn-primary"
-                    onclick="startCourse('${c.id}')">
-                    🚀 Kursni boshlash
-                </button>
-
-                <button class="btn"
-                    onclick="closeModal('courseModal');go('lessons')">
-                    🎬 Darslarga o‘tish
-                </button>
-
-            </div>
+            </button>
 
         </div>
-    `;
 
-    openModal("courseModal");
+    `);
+
 }
 
-function startCourse(id){
 
-    closeModal("courseModal");
+function saveWeatherRegion(){
 
-    go("lessons");
+    const select=
+        document.getElementById(
+            "weatherRegionSelect"
+        );
 
-    toast("🚀 Kurs boshlandi! Birinchi darsni tanlang.");
+    if(!select) return;
+
+    state.region=select.value;
+
+    localStorage.setItem(
+        "ikrom_region",
+        state.region
+    );
+
+    closeModal();
+
+    loadWeather();
+
+    toast("🌤️ Hudud yangilandi.");
+
 }
+
 
 /* =========================================================
-   LESSONS
-   ========================================================= */
+   LANGUAGE
+========================================================= */
 
-function renderLessons(){
+const translations={
 
-    const list=document.getElementById("lessonList");
+    uz:{
+        home:"Bosh sahifa",
+        universities:"Universitetlar",
+        directions:"Yo‘nalishlar",
+        courses:"Kurslar",
+        lessons:"Darslar",
+        ai:"AI Ustoz"
+    },
 
-    const search=
-        document.getElementById("lessonSearch")
-        .value
-        .toLowerCase();
+    ru:{
+        home:"Главная",
+        universities:"Университеты",
+        directions:"Направления",
+        courses:"Курсы",
+        lessons:"Уроки",
+        ai:"AI Учитель"
+    },
 
-    list.innerHTML="";
+    eng:{
+        home:"Home",
+        universities:"Universities",
+        directions:"Directions",
+        courses:"Courses",
+        lessons:"Lessons",
+        ai:"AI Teacher"
+    },
 
-    lessons
-        .filter(l=>
-            l[0].toLowerCase().includes(search) ||
-            l[1].toLowerCase().includes(search)
+    tj:{
+        home:"Саҳифаи асосӣ",
+        universities:"Донишгоҳҳо",
+        directions:"Самтҳо",
+        courses:"Курсҳо",
+        lessons:"Дарсҳо",
+        ai:"AI Устод"
+    },
+
+    kz:{
+        home:"Басты бет",
+        universities:"Университеттер",
+        directions:"Бағыттар",
+        courses:"Курстар",
+        lessons:"Сабақтар",
+        ai:"AI Ұстаз"
+    }
+
+};
+
+
+function changeLanguage(lang){
+
+    if(!translations[lang])
+        return;
+
+    state.lang=lang;
+
+    localStorage.setItem(
+        "ikrom_lang",
+        lang
+    );
+
+    toast(
+        "🌐 "+
+        (
+            {
+                uz:"O‘zbek tili",
+                ru:"Русский язык",
+                eng:"English",
+                tj:"Тоҷикӣ",
+                kz:"Қазақ тілі"
+            }[lang] || lang
         )
-        .forEach((l,index)=>{
+    );
 
-            const done=state.completed.includes(index);
+}
 
-            const item=document.createElement("div");
 
-            item.className="lesson";
+/* =========================================================
+   VOICE
+========================================================= */
 
-            item.innerHTML=`
+function speakText(text){
 
-                <div class="lesson-icon">
-                    ${done?"✅":l[2]}
+    try{
+
+        if(!("speechSynthesis" in window)){
+
+            toast(
+                "🔊 Brauzeringiz ovozli o‘qishni qo‘llab-quvvatlamaydi."
+            );
+
+            return;
+        }
+
+        if(!text)
+            return;
+
+        speechSynthesis.cancel();
+
+        const utterance=
+            new SpeechSynthesisUtterance(
+                String(text)
+            );
+
+        const langMap={
+
+            uz:"uz-UZ",
+            ru:"ru-RU",
+            eng:"en-US",
+            tj:"tg-TJ",
+            kz:"kk-KZ"
+
+        };
+
+        utterance.lang=
+            langMap[state.lang] ||
+            "uz-UZ";
+
+        utterance.rate=.9;
+        utterance.pitch=1;
+
+        const voices=
+            speechSynthesis.getVoices();
+
+        const voice=
+            voices.find(v=>
+                v.lang
+                .toLowerCase()
+                .startsWith(
+                    utterance.lang
+                        .substring(0,2)
+                        .toLowerCase()
+                )
+            );
+
+        if(voice)
+            utterance.voice=voice;
+
+        speechSynthesis.speak(
+            utterance
+        );
+
+    }catch(error){
+
+        toast(
+            "🔊 Ovoz funksiyasi ishlamadi."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   READ BUTTON TEXT
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const button=
+            event.target.closest(
+                "button"
+            );
+
+        if(!button)
+            return;
+
+        if(
+            button.dataset.noSpeak==="true" ||
+            button.classList.contains("closeButton")
+        ){
+            return;
+        }
+
+        const custom=
+            button.dataset.speak;
+
+        const text=
+            custom ||
+            button.innerText.trim();
+
+        if(text)
+            speakText(text);
+
+    },
+    {
+        passive:true
+    }
+);
+
+
+/* =========================================================
+   SEASONS
+========================================================= */
+
+const seasons={
+
+    spring:{
+        name:"Bahor",
+        icon:"🌼",
+        particles:["🌼","🌸","🌿","✨"]
+    },
+
+    summer:{
+        name:"Yoz",
+        icon:"🏝️",
+        particles:["☀️","✨","🌴","🌊"]
+    },
+
+    autumn:{
+        name:"Kuz",
+        icon:"🍁",
+        particles:["🍁","🍂","🍃","🌰"]
+    },
+
+    winter:{
+        name:"Qish",
+        icon:"❄️",
+        particles:["❄️","❄","☃️","✨"]
+    }
+
+};
+
+
+function createSeasonParticles(){
+
+    const layer=
+        document.getElementById(
+            "seasonLayer"
+        );
+
+    layer.innerHTML="";
+
+    const season=
+        seasons[state.season] ||
+        seasons.spring;
+
+    /*
+       Faqat 24 ta element.
+       Bu mobil qurilmalarda ham
+       ilovani yengil saqlaydi.
+    */
+
+    const count=24;
+
+    for(let i=0;i<count;i++){
+
+        const particle=
+            document.createElement("div");
+
+        particle.className=
+            "seasonParticle";
+
+        particle.textContent=
+            season.particles[
+                Math.floor(
+                    Math.random()*
+                    season.particles.length
+                )
+            ];
+
+        particle.style.left=
+            (Math.random()*100)+"%";
+
+        particle.style.fontSize=
+            (12+Math.random()*15)+"px";
+
+        particle.style.animationDuration=
+            (7+Math.random()*7)+"s";
+
+        particle.style.animationDelay=
+            (-Math.random()*12)+"s";
+
+        particle.style.setProperty(
+            "--drift",
+            ((Math.random()-.5)*180)+"px"
+        );
+
+        layer.appendChild(particle);
+    }
+
+}
+
+
+function setSeason(season){
+
+    if(!seasons[season])
+        return;
+
+    state.season=season;
+
+    localStorage.setItem(
+        "ikrom_season",
+        season
+    );
+
+    createSeasonParticles();
+
+    toast(
+        seasons[season].icon+
+        " "+
+        seasons[season].name+
+        " atmosferasi yoqildi!"
+    );
+
+}
+
+
+function openSeason(){
+
+    openModal(`
+
+        <div class="modalHeader">
+
+            <h2>
+                🌍 4 Fasl — 4D atmosfera
+            </h2>
+
+            <button
+                class="closeButton"
+                onclick="closeModal()">
+                ✕
+            </button>
+
+        </div>
+
+        <p style="
+            color:var(--muted);
+            line-height:1.6;
+            margin-bottom:18px
+        ">
+            Faslni tanlang. Ilovada mos
+            animatsion zarrachalar paydo bo‘ladi.
+        </p>
+
+        <div class="seasonGrid">
+
+            <button
+                class="seasonButton"
+                onclick="setSeason('spring');closeModal()">
+                🌼
+                <small>Bahor</small>
+            </button>
+
+            <button
+                class="seasonButton"
+                onclick="setSeason('summer');closeModal()">
+                🏝️
+                <small>Yoz</small>
+            </button>
+
+            <button
+                class="seasonButton"
+                onclick="setSeason('autumn');closeModal()">
+                🍁
+                <small>Kuz</small>
+            </button>
+
+            <button
+                class="seasonButton"
+                onclick="setSeason('winter');closeModal()">
+                ❄️
+                <small>Qish</small>
+            </button>
+
+        </div>
+
+    `);
+
+}
+
+createSeasonParticles();
+
+
+/* =========================================================
+   UNIVERSITIES
+========================================================= */
+
+const universities=[
+
+    {
+        id:"tiiame",
+        short:"TIIAME",
+        name:"TIIAME Milliy tadqiqot universiteti",
+        type:"TOP",
+        text:"Muhandislik, suv xo‘jaligi, ekologiya va ilmiy tadqiqot yo‘nalishlariga ixtisoslashgan universitet."
+    },
+
+    {
+        id:"uzmu",
+        short:"O‘zMU",
+        name:"O‘zbekiston Milliy universiteti",
+        type:"TOP",
+        text:"O‘zbekistondagi yirik universitetlardan biri bo‘lib, ko‘plab fan va ta’lim yo‘nalishlarini qamrab oladi."
+    },
+
+    {
+        id:"tdtu",
+        short:"TDTU",
+        name:"Toshkent davlat texnika universiteti",
+        type:"TOP",
+        text:"Muhandislik, texnika, energetika va zamonaviy texnologiyalar yo‘nalishlariga ixtisoslashgan."
+    },
+
+    {
+        id:"tdiu",
+        short:"TDIU",
+        name:"Toshkent davlat iqtisodiyot universiteti",
+        type:"TOP",
+        text:"Iqtisodiyot, biznes, moliya, menejment va marketing yo‘nalishlarida ta’lim beradi."
+    },
+
+    {
+        id:"transport",
+        short:"TSTU",
+        name:"Toshkent davlat transport universiteti",
+        type:"TOP",
+        text:"Transport, logistika, muhandislik va zamonaviy transport texnologiyalari yo‘nalishlari."
+    },
+
+    {
+        id:"tuit",
+        short:"TUIT",
+        name:"Muhammad al-Xorazmiy nomidagi Toshkent axborot texnologiyalari universiteti",
+        type:"IT",
+        text:"Axborot texnologiyalari, dasturlash, telekommunikatsiya va raqamli texnologiyalar."
+    },
+
+    {
+        id:"wiut",
+        short:"WIUT",
+        name:"Westminster International University in Tashkent",
+        type:"INTL",
+        text:"Ingliz tilidagi xalqaro ta’lim muhitiga ega universitet. Computer Science, Business va Economics kabi yo‘nalishlar mavjud."
+    },
+
+    {
+        id:"uwed",
+        short:"UWED",
+        name:"Jahon iqtisodiyoti va diplomatiya universiteti",
+        type:"INTL",
+        text:"Xalqaro munosabatlar, diplomatiya, jahon iqtisodiyoti va huquq yo‘nalishlari."
+    },
+
+    {
+        id:"tdshu",
+        short:"TDSHU",
+        name:"Toshkent davlat sharqshunoslik universiteti",
+        type:"LANG",
+        text:"Sharq tillari, xalqaro munosabatlar, tarix va mintaqashunoslik yo‘nalishlari."
+    },
+
+    {
+        id:"tdau",
+        short:"TDAU",
+        name:"Toshkent davlat agrar universiteti",
+        type:"AGRAR",
+        text:"Qishloq xo‘jaligi, agrar texnologiyalar, iqtisodiyot va zamonaviy agrotexnologiyalar."
+    }
+
+];
+
+
+let uniIndex=0;
+
+
+function renderUniversities(){
+
+    const slider=
+        document.getElementById(
+            "uniSlider"
+        );
+
+    slider.innerHTML="";
+
+    universities.forEach(
+        (u,index)=>{
+
+            const card=
+                document.createElement("div");
+
+            card.className="uniCard";
+
+            card.innerHTML=`
+
+                <div class="uniTop">
+
+                    <div class="uniLogo">
+                        ${u.short}
+                    </div>
+
+                    <span class="uniRank">
+                        ${String(index+1).padStart(2,"0")}
+                        • ${u.type}
+                    </span>
+
                 </div>
 
-                <div class="lesson-main">
-                    <h3>${l[0]}</h3>
-                    <p>${l[1]} • ${done?"Tugallangan":"Boshlash mumkin"}</p>
-                </div>
+                <h3>
+                    ${u.name}
+                </h3>
 
-                <button class="btn"
-                    onclick="openLesson(${index})">
-                    ${done?"Qayta ko‘rish":"Ochish →"}
+                <p>
+                    ${u.text}
+                </p>
+
+                <button
+                    class="btn btnPrimary"
+                    style="margin-top:15px"
+                    onclick="openUniversity('${u.id}')">
+
+                    Batafsil →
+
                 </button>
 
             `;
 
-            list.appendChild(item);
-        });
+            slider.appendChild(card);
+
+        }
+    );
+
+    createUniversityDots();
+
 }
+
+
+function createUniversityDots(){
+
+    const dots=
+        document.getElementById(
+            "uniDots"
+        );
+
+    dots.innerHTML="";
+
+    universities.forEach(
+        (_,index)=>{
+
+            const dot=
+                document.createElement("div");
+
+            dot.className=
+                "uniDot"+
+                (
+                    index===0
+                    ?" active"
+                    :""
+                );
+
+            dots.appendChild(dot);
+
+        }
+    );
+
+}
+
+
+function updateUniversityDots(){
+
+    document
+        .querySelectorAll(".uniDot")
+        .forEach(
+            (dot,index)=>{
+
+                dot.classList.toggle(
+                    "active",
+                    index===uniIndex
+                );
+
+            }
+        );
+
+}
+
+
+function uniNext(){
+
+    const slider=
+        document.getElementById(
+            "uniSlider"
+        );
+
+    const amount=
+        slider.clientWidth*.86;
+
+    slider.scrollBy({
+        left:amount,
+        behavior:"smooth"
+    });
+
+    uniIndex++;
+
+    if(uniIndex>=universities.length)
+        uniIndex=0;
+
+    updateUniversityDots();
+
+}
+
+
+function uniPrev(){
+
+    const slider=
+        document.getElementById(
+            "uniSlider"
+        );
+
+    const amount=
+        slider.clientWidth*.86;
+
+    slider.scrollBy({
+        left:-amount,
+        behavior:"smooth"
+    });
+
+    uniIndex--;
+
+    if(uniIndex<0)
+        uniIndex=universities.length-1;
+
+    updateUniversityDots();
+
+}
+
+
+renderUniversities();
+
+
+/*
+   Avtomatik slider.
+   Faqat tab ochiq bo‘lganda ishlaydi.
+*/
+
+setInterval(()=>{
+
+    if(document.hidden)
+        return;
+
+    uniNext();
+
+},6500);
+
+
+function openUniversity(id){
+
+    const university=
+        universities.find(
+            u=>u.id===id
+        );
+
+    if(!university)
+        return;
+
+    openModal(`
+
+        <div class="modalHeader">
+
+            <h2>
+                🎓 ${university.short}
+            </h2>
+
+            <button
+                class="closeButton"
+                onclick="closeModal()">
+                ✕
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <div class="uniLogo">
+                ${university.short}
+            </div>
+
+            <h2 style="margin-top:18px">
+                ${university.name}
+            </h2>
+
+            <p
+                style="
+                    margin-top:14px;
+                    line-height:1.7
+                "
+                onclick="speakText(this.innerText)">
+
+                ${university.text}
+
+            </p>
+
+            <div class="buttons">
+
+                <button
+                    class="btn btnPrimary"
+                    onclick="speakText('${escapeQuotes(university.name)}. ${escapeQuotes(university.text)}')">
+
+                    🔊 O‘qib berish
+
+                </button>
+
+                <button
+                    class="btn"
+                    onclick="closeModal()">
+
+                    Yopish
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `);
+
+}
+
+
+/* =========================================================
+   DIRECTIONS
+========================================================= */
+
+const directions=[
+
+["💻","Web dasturlash","IT"],
+["⚡","JavaScript","IT"],
+["🐍","Python","IT"],
+["☕","Java","IT"],
+["C#","C# dasturlash","IT"],
+["C++","C++ dasturlash","IT"],
+["🟦","TypeScript","IT"],
+["⚛️","React","IT"],
+["🟢","Node.js","IT"],
+["▲","Next.js","IT"],
+["📱","Android","IT"],
+["🍎","iOS","IT"],
+["📲","Flutter","IT"],
+["🎮","Game Development","IT"],
+["🧠","Sun’iy intellekt","AI"],
+["🤖","Machine Learning","AI"],
+["🔮","Deep Learning","AI"],
+["🗣️","Prompt Engineering","AI"],
+["👁️","Computer Vision","AI"],
+["💬","NLP","AI"],
+["📊","Data Science","AI"],
+["📈","Data Analytics","IT"],
+["🗄️","SQL","IT"],
+["☁️","Cloud Computing","IT"],
+["🐳","Docker","IT"],
+["☸️","Kubernetes","IT"],
+["🔧","DevOps","IT"],
+["🔐","Kiberxavfsizlik","IT"],
+["🛡️","Ethical Hacking","IT"],
+["🔎","Penetration Testing","IT"],
+["🎨","Grafik dizayn","Design"],
+["🖌️","UI Design","Design"],
+["🧩","UX Design","Design"],
+["🖥️","Figma","Design"],
+["📷","Photoshop","Design"],
+["🎬","Video montaj","Design"],
+["🎞️","Motion Design","Design"],
+["🎥","Video Production","Media"],
+["🎙️","Podkast yaratish","Media"],
+["📺","Media Production","Media"],
+["📢","SMM","Business"],
+["📣","Digital Marketing","Business"],
+["🔍","SEO","Business"],
+["💼","Biznes","Business"],
+["💰","Moliya","Business"],
+["📊","Menejment","Business"],
+["🛒","E-commerce","Business"],
+["🏪","Online savdo","Business"],
+["🌍","IT English","Language"],
+["🇷🇺","Rus tili","Language"],
+["🇬🇧","English","Language"],
+["🇹🇯","Tojik tili","Language"],
+["🇰🇿","Qozoq tili","Language"],
+["🧮","Matematika","Education"],
+["🔬","Fizika","Education"],
+["🧪","Kimyo","Education"],
+["🧬","Biologiya","Education"],
+["📚","Tarix","Education"],
+["✍️","Ona tili","Education"],
+["📝","Imtihonga tayyorgarlik","Education"],
+["🎓","Universitetga tayyorgarlik","Education"],
+["👶","Bolalar IT","Education"],
+["🧒","Scratch","Education"],
+["🧱","Arduino","IT"],
+["🤖","Robototexnika","IT"],
+["🌐","Internet texnologiyalari","IT"],
+["🖧","Kompyuter tarmoqlari","IT"],
+["⚙️","System Administration","IT"],
+["🐧","Linux","IT"],
+["🪟","Windows Administration","IT"],
+["🔒","Information Security","IT"],
+["🧾","Excel","Business"],
+["📊","Power BI","Business"],
+["📐","AutoCAD","Design"],
+["🏗️","3D Modeling","Design"],
+["🌎","Blender","Design"],
+["✨","3D Animation","Design"],
+["🎵","Musiqa texnologiyalari","Media"],
+["🎹","Musiqa ishlab chiqarish","Media"],
+["📱","Mobil UI/UX","Design"],
+["🧑‍💻","Freelancing","Business"],
+["💻","Remote Work","Business"],
+["📄","CV yaratish","Career"],
+["🎤","Intervyu tayyorgarligi","Career"],
+["🚀","Startap","Business"],
+["💡","Biznes g‘oya","Business"],
+["📦","Mahsulot menejmenti","Business"],
+["👨‍💼","Project Management","Business"],
+["🧠","Soft Skills","Career"],
+["🗣️","Public Speaking","Career"],
+["🤝","Jamoada ishlash","Career"],
+["⏱️","Time Management","Career"],
+["💎","Personal Branding","Career"],
+["📱","Telegram Bot","IT"],
+["🤖","AI Bot","AI"],
+["🌐","API yaratish","IT"],
+["🔗","REST API","IT"],
+["🧩","Git","IT"],
+["🐙","GitHub","IT"],
+["🧪","Testing","IT"],
+["🔍","QA Engineering","IT"],
+["📐","Software Architecture","IT"],
+["🏛️","System Design","IT"],
+["🧠","Algorithms","IT"],
+["🗃️","Data Structures","IT"],
+["⚛️","Frontend Pro","IT"],
+["🖥️","Backend Pro","IT"],
+["☁️","AWS","IT"],
+["☁️","Google Cloud","IT"],
+["☁️","Azure","IT"],
+["🔐","Cyber Defense","IT"],
+["🚨","SOC Analyst","IT"],
+["📡","Network Security","IT"],
+["🔑","Cryptography","IT"],
+["📊","Business Analytics","Business"],
+["💹","Trading Basics","Business"],
+["📈","Investment Basics","Business"],
+["🏦","Banking Technology","Business"],
+["💳","FinTech","Business"],
+["💻","EdTech","Business"],
+["🤖","AI for Business","AI"],
+["🎓","AI for Education","AI"],
+["🧠","Generative AI","AI"],
+["🖼️","AI Image","AI"],
+["🎬","AI Video","AI"],
+["🎵","AI Music","AI"],
+["📝","AI Writing","AI"],
+["🔊","AI Voice","AI"]
+
+];
+
+
+function renderDirections(){
+
+    const grid=
+        document.getElementById(
+            "directionGrid"
+        );
+
+    const input=
+        document.getElementById(
+            "directionSearch"
+        );
+
+    const search=
+        input.value
+        .trim()
+        .toLowerCase();
+
+    grid.innerHTML="";
+
+    const fragment=
+        document.createDocumentFragment();
+
+    directions
+        .filter(d=>
+            d[1]
+            .toLowerCase()
+            .includes(search)
+        )
+        .forEach(d=>{
+
+            const card=
+                document.createElement("div");
+
+            card.className="card";
+
+            card.innerHTML=`
+
+                <div class="cardIcon">
+                    ${d[0]}
+                </div>
+
+                <h3>
+                    ${d[1]}
+                </h3>
+
+                <div class="tags">
+
+                    <span class="tag">
+                        ${d[2]}
+                    </span>
+
+                </div>
+
+                <button
+                    class="btn"
+                    onclick="startDirection('${escapeQuotes(d[1])}')">
+
+                    O‘rganish →
+
+                </button>
+
+            `;
+
+            fragment.appendChild(card);
+
+        });
+
+    grid.appendChild(fragment);
+
+}
+
+
+function startDirection(name){
+
+    addXP(5);
+
+    toast(
+        "📚 "+name+
+        " yo‘nalishi tanlandi."
+    );
+
+}
+
+
+renderDirections();
+
+
+/* =========================================================
+   COURSES
+========================================================= */
+
+const courses=[
+
+{
+    id:"html",
+    icon:"🌐",
+    title:"HTML & CSS",
+    category:"it",
+    level:"Boshlang‘ich",
+    lessons:20,
+    duration:"25 soat",
+    desc:"Web sahifalarni noldan yaratish va professional dizayn qilish."
+},
+
+{
+    id:"javascript",
+    icon:"⚡",
+    title:"JavaScript",
+    category:"it",
+    level:"O‘rta",
+    lessons:30,
+    duration:"40 soat",
+    desc:"Interaktiv va zamonaviy web-ilovalar yaratish."
+},
+
+{
+    id:"python",
+    icon:"🐍",
+    title:"Python",
+    category:"it",
+    level:"Boshlang‘ich",
+    lessons:35,
+    duration:"45 soat",
+    desc:"Python dasturlash tilini amaliy loyihalar orqali o‘rganish."
+},
+
+{
+    id:"ai",
+    icon:"🤖",
+    title:"Sun’iy intellekt",
+    category:"ai",
+    level:"O‘rta",
+    lessons:25,
+    duration:"35 soat",
+    desc:"AI, Generative AI va Prompt Engineering."
+},
+
+{
+    id:"frontend",
+    icon:"💻",
+    title:"Frontend Pro",
+    category:"it",
+    level:"Professional",
+    lessons:45,
+    duration:"60 soat",
+    desc:"Professional frontend dasturchi bo‘lish uchun kompleks kurs."
+},
+
+{
+    id:"mobile",
+    icon:"📱",
+    title:"Mobil dasturlash",
+    category:"it",
+    level:"O‘rta",
+    lessons:30,
+    duration:"50 soat",
+    desc:"Android va iOS uchun zamonaviy mobil ilovalar."
+},
+
+{
+    id:"design",
+    icon:"🎨",
+    title:"Grafik dizayn",
+    category:"design",
+    level:"Boshlang‘ich",
+    lessons:25,
+    duration:"30 soat",
+    desc:"Figma, Photoshop va grafik dizayn."
+},
+
+{
+    id:"cyber",
+    icon:"🛡️",
+    title:"Kiberxavfsizlik",
+    category:"it",
+    level:"O‘rta",
+    lessons:28,
+    duration:"40 soat",
+    desc:"Raqamli xavfsizlik va cyber defense."
+},
+
+{
+    id:"data",
+    icon:"📊",
+    title:"Data Analytics",
+    category:"it",
+    level:"O‘rta",
+    lessons:25,
+    duration:"35 soat",
+    desc:"Excel, SQL va Power BI yordamida ma’lumotlar tahlili."
+},
+
+{
+    id:"marketing",
+    icon:"📢",
+    title:"Digital Marketing",
+    category:"business",
+    level:"Boshlang‘ich",
+    lessons:20,
+    duration:"25 soat",
+    desc:"SMM, SEO va internet marketing."
+},
+
+{
+    id:"business",
+    icon:"💼",
+    title:"Biznes asoslari",
+    category:"business",
+    level:"Boshlang‘ich",
+    lessons:18,
+    duration:"22 soat",
+    desc:"Biznes g‘oyadan amaliy loyihagacha."
+},
+
+{
+    id:"english",
+    icon:"🇬🇧",
+    title:"IT English",
+    category:"business",
+    level:"Boshlang‘ich",
+    lessons:30,
+    duration:"35 soat",
+    desc:"IT sohasi uchun ingliz tili."
+}
+
+];
+
+
+function renderCourses(){
+
+    const grid=
+        document.getElementById(
+            "courseGrid"
+        );
+
+    const search=
+        document.getElementById(
+            "courseSearch"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+    const category=
+        document.getElementById(
+            "courseCategory"
+        ).value;
+
+    const level=
+        document.getElementById(
+            "courseLevel"
+        ).value;
+
+    grid.innerHTML="";
+
+    const fragment=
+        document.createDocumentFragment();
+
+    courses
+        .filter(c=>
+            (
+                category==="all" ||
+                c.category===category
+            ) &&
+            (
+                level==="all" ||
+                c.level===level
+            ) &&
+            (
+                c.title.toLowerCase().includes(search) ||
+                c.desc.toLowerCase().includes(search)
+            )
+        )
+        .forEach(c=>{
+
+            const card=
+                document.createElement("div");
+
+            card.className="card";
+
+            card.innerHTML=`
+
+                <div class="cardIcon">
+                    ${c.icon}
+                </div>
+
+                <h3>
+                    ${c.title}
+                </h3>
+
+                <p>
+                    ${c.desc}
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">
+                        ${c.level}
+                    </span>
+
+                    <span class="tag">
+                        ${c.lessons} dars
+                    </span>
+
+                    <span class="tag">
+                        ${c.duration}
+                    </span>
+
+                </div>
+
+                <button
+                    class="btn btnPrimary"
+                    onclick="openCourse('${c.id}')">
+
+                    Kursni ochish →
+
+                </button>
+
+            `;
+
+            fragment.appendChild(card);
+
+        });
+
+    grid.appendChild(fragment);
+
+}
+
+
+renderCourses();
+
+
+function openCourse(id){
+
+    const course=
+        courses.find(c=>c.id===id);
+
+    if(!course)
+        return;
+
+    openModal(`
+
+        <div class="modalHeader">
+
+            <h2>
+                ${course.icon}
+                ${course.title}
+            </h2>
+
+            <button
+                class="closeButton"
+                onclick="closeModal()">
+                ✕
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <p style="
+                font-size:18px;
+                line-height:1.7
+            ">
+                ${course.desc}
+            </p>
+
+            <div class="tags">
+
+                <span class="tag">
+                    ${course.level}
+                </span>
+
+                <span class="tag">
+                    ${course.lessons} dars
+                </span>
+
+                <span class="tag">
+                    ${course.duration}
+                </span>
+
+            </div>
+
+            <h3 style="margin-top:18px">
+                📚 O‘quv dasturi
+            </h3>
+
+            <ul style="
+                margin:14px 0 0 22px;
+                color:var(--muted);
+                line-height:2
+            ">
+
+                <li>Nazariy bilimlar</li>
+                <li>Video darslar</li>
+                <li>Amaliy topshiriqlar</li>
+                <li>Interaktiv testlar</li>
+                <li>Yakuniy imtihon</li>
+                <li>Sertifikat</li>
+
+            </ul>
+
+            <div class="buttons">
+
+                <button
+                    class="btn btnPrimary"
+                    onclick="addXP(20);closeModal();toast('🚀 Kurs boshlandi!')">
+
+                    🚀 Boshlash
+
+                </button>
+
+                <button
+                    class="btn"
+                    onclick="speakText('${escapeQuotes(course.title)}. ${escapeQuotes(course.desc)}')">
+
+                    🔊 O‘qib berish
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `);
+
+}
+
+
+/* =========================================================
+   LESSONS
+========================================================= */
+
+const lessons=[
+
+{
+    title:"HTML bilan tanishuv",
+    course:"HTML & CSS",
+    icon:"🌐",
+    text:"HTML web sahifaning asosiy tuzilmasini yaratish uchun ishlatiladigan belgilash tilidir.",
+    quiz:[
+        {
+            question:"HTML nima?",
+            options:[
+                "Web sahifa tuzilmasini yaratish tili",
+                "Rasm tahrirlash dasturi",
+                "Operatsion tizim"
+            ],
+            answer:0
+        },
+        {
+            question:"HTML fayl kengaytmasi qaysi?",
+            options:[
+                ".html",
+                ".exe",
+                ".mp3"
+            ],
+            answer:0
+        },
+        {
+            question:"Sarlavha uchun qaysi teg ishlatiladi?",
+            options:[
+                "<h1>",
+                "<img>",
+                "<audio>"
+            ],
+            answer:0
+        },
+        {
+            question:"Havola uchun qaysi teg?",
+            options:[
+                "<a>",
+                "<p>",
+                "<table>"
+            ],
+            answer:0
+        },
+        {
+            question:"Rasm qo‘yish uchun qaysi teg?",
+            options:[
+                "<img>",
+                "<h1>",
+                "<form>"
+            ],
+            answer:0
+        }
+    ]
+},
+
+{
+    title:"CSS asoslari",
+    course:"HTML & CSS",
+    icon:"🎨",
+    text:"CSS yordamida web sahifaning ranglari, shriftlari, joylashuvi va dizayni boshqariladi.",
+    quiz:[
+        {
+            question:"CSS nima uchun kerak?",
+            options:[
+                "Web dizayn uchun",
+                "Musiqa tinglash uchun",
+                "Video yozish uchun"
+            ],
+            answer:0
+        },
+        {
+            question:"Matn rangini qaysi property o‘zgartiradi?",
+            options:[
+                "color",
+                "width",
+                "display"
+            ],
+            answer:0
+        },
+        {
+            question:"Fon rangini o‘zgartirish?",
+            options:[
+                "background",
+                "font-size",
+                "border"
+            ],
+            answer:0
+        },
+        {
+            question:"Flexbox nima?",
+            options:[
+                "Joylashuv tizimi",
+                "Database",
+                "Audio format"
+            ],
+            answer:0
+        },
+        {
+            question:"CSS fayli odatda qaysi kengaytmada?",
+            options:[
+                ".css",
+                ".js",
+                ".py"
+            ],
+            answer:0
+        }
+    ]
+},
+
+{
+    title:"JavaScript nima?",
+    course:"JavaScript",
+    icon:"⚡",
+    text:"JavaScript web sahifalarni interaktiv va dinamik qilish imkonini beradi.",
+    quiz:[
+        {
+            question:"JavaScript nima?",
+            options:[
+                "Dasturlash tili",
+                "Rasm formati",
+                "Operatsion tizim"
+            ],
+            answer:0
+        },
+        {
+            question:"O‘zgaruvchi yaratishning zamonaviy usuli?",
+            options:[
+                "let",
+                "html",
+                "css"
+            ],
+            answer:0
+        },
+        {
+            question:"DOM nimani anglatadi?",
+            options:[
+                "Document Object Model",
+                "Data Online Machine",
+                "Digital Output Mode"
+            ],
+            answer:0
+        },
+        {
+            question:"Massiv qaysi belgilar bilan yoziladi?",
+            options:[
+                "[]",
+                "{}",
+                "()"
+            ],
+            answer:0
+        },
+        {
+            question:"Funksiya yaratish keywordi?",
+            options:[
+                "function",
+                "style",
+                "classNameOnly"
+            ],
+            answer:0
+        }
+    ]
+},
+
+{
+    title:"Python dasturlashga kirish",
+    course:"Python",
+    icon:"🐍",
+    text:"Python sodda sintaksisga ega kuchli dasturlash tilidir.",
+    quiz:[
+        {
+            question:"Python nima?",
+            options:[
+                "Dasturlash tili",
+                "Brauzer",
+                "Operatsion tizim"
+            ],
+            answer:0
+        },
+        {
+            question:"Python ro‘yxat turi?",
+            options:[
+                "list",
+                "html",
+                "css"
+            ],
+            answer:0
+        },
+        {
+            question:"Funksiya yaratish keywordi?",
+            options:[
+                "def",
+                "function-css",
+                "make"
+            ],
+            answer:0
+        },
+        {
+            question:"Shart operatori?",
+            options:[
+                "if",
+                "forOnly",
+                "html"
+            ],
+            answer:0
+        },
+        {
+            question:"Python fayl kengaytmasi?",
+            options:[
+                ".py",
+                ".html",
+                ".jpg"
+            ],
+            answer:0
+        }
+    ]
+},
+
+{
+    title:"Sun’iy intellekt nima?",
+    course:"AI",
+    icon:"🤖",
+    text:"Sun’iy intellekt kompyuter tizimlariga ma’lumotlardan foydalanib vazifalarni bajarish imkonini beradi.",
+    quiz:[
+        {
+            question:"AI nimani anglatadi?",
+            options:[
+                "Artificial Intelligence",
+                "Automatic Internet",
+                "Advanced Image"
+            ],
+            answer:0
+        },
+        {
+            question:"Prompt nima?",
+            options:[
+                "AI ga beriladigan topshiriq",
+                "Rasm fayli",
+                "Kompyuter kabeli"
+            ],
+            answer:0
+        },
+        {
+            question:"LLM nima?",
+            options:[
+                "Large Language Model",
+                "Local Link Machine",
+                "Light Learning Mode"
+            ],
+            answer:0
+        },
+        {
+            question:"AI bilan ishlashda muhim narsa?",
+            options:[
+                "Aniq topshiriq",
+                "Tasodifiy matn",
+                "Noto‘g‘ri ma’lumot"
+            ],
+            answer:0
+        },
+        {
+            question:"Generative AI nima qiladi?",
+            options:[
+                "Yangi kontent yaratishi mumkin",
+                "Faqat kompyuterni o‘chiradi",
+                "Faqat kalkulyator bo‘ladi"
+            ],
+            answer:0
+        }
+    ]
+},
+
+{
+    title:"Prompt Engineering",
+    course:"AI",
+    icon:"🧠",
+    text:"Prompt Engineering AI tizimlariga aniq va samarali topshiriqlar berish usullarini o‘rgatadi.",
+    quiz:[
+        {
+            question:"Yaxshi prompt qanday bo‘ladi?",
+            options:[
+                "Aniq va tushunarli",
+                "Juda noaniq",
+                "Bo‘sh"
+            ],
+            answer:0
+        },
+        {
+            question:"Kontekst nima uchun kerak?",
+            options:[
+                "Vazifani yaxshiroq tushuntirish uchun",
+                "Kompyuterni o‘chirish uchun",
+                "Internetni uzish uchun"
+            ],
+            answer:0
+        },
+        {
+            question:"Promptda rol berish nima?",
+            options:[
+                "AIga kerakli rolni belgilash",
+                "Telefonni qayta ishga tushirish",
+                "Fayl o‘chirish"
+            ],
+            answer:0
+        },
+        {
+            question:"Natijani yaxshilash uchun nima qilish mumkin?",
+            options:[
+                "Talablarni aniq yozish",
+                "Hech narsa yozmaslik",
+                "Tasodifiy so‘zlar yozish"
+            ],
+            answer:0
+        },
+        {
+            question:"Prompt Engineering nimaga yordam beradi?",
+            options:[
+                "AI bilan samarali ishlashga",
+                "Monitorni ta’mirlashga",
+                "Elektr tokini ishlab chiqarishga"
+            ],
+            answer:0
+        }
+    ]
+},
+
+{
+    title:"Kiberxavfsizlik asoslari",
+    course:"Cyber",
+    icon:"🛡️",
+    text:"Kiberxavfsizlik tizimlar, tarmoqlar va ma’lumotlarni raqamli tahdidlardan himoya qilishga qaratilgan.",
+    quiz:[
+        {
+            question:"MFA nima?",
+            options:[
+                "Ko‘p bosqichli autentifikatsiya",
+                "Media File Access",
+                "Mobile File App"
+            ],
+            answer:0
+        },
+        {
+            question:"Phishing nima?",
+            options:[
+                "Aldov orqali ma’lumot olish",
+                "Dastur yozish",
+                "Rasm chizish"
+            ],
+            answer:0
+        },
+        {
+            question:"Kuchli parol qanday bo‘ladi?",
+            options:[
+                "Uzun va murakkab",
+                "123456",
+                "password"
+            ],
+            answer:0
+        },
+        {
+            question:"Firewall nima?",
+            options:[
+                "Tarmoq himoya mexanizmi",
+                "Video player",
+                "Grafik muharrir"
+            ],
+            answer:0
+        },
+        {
+            question:"Shubhali havolani bosish kerakmi?",
+            options:[
+                "Yo‘q, avval tekshirish kerak",
+                "Har doim ha",
+                "Faqat tezroq bosish kerak"
+            ],
+            answer:0
+        }
+    ]
+},
+
+{
+    title:"Data Analytics",
+    course:"Data",
+    icon:"📊",
+    text:"Data Analytics ma’lumotlarni yig‘ish, tozalash, tahlil qilish va natijalarni tushunarli ko‘rsatishga yordam beradi.",
+    quiz:[
+        {
+            question:"SQL nima?",
+            options:[
+                "Ma’lumotlar bazasi bilan ishlash tili",
+                "Video format",
+                "Operatsion tizim"
+            ],
+            answer:0
+        },
+        {
+            question:"SELECT nima qiladi?",
+            options:[
+                "Ma’lumot tanlaydi",
+                "Kompyuterni o‘chiradi",
+                "Rasm chizadi"
+            ],
+            answer:0
+        },
+        {
+            question:"Excel nima uchun ishlatiladi?",
+            options:[
+                "Jadval va hisob-kitoblar uchun",
+                "Faqat musiqa uchun",
+                "Faqat video uchun"
+            ],
+            answer:0
+        },
+        {
+            question:"Power BI nima?",
+            options:[
+                "Analitika va vizualizatsiya vositasi",
+                "Brauzer",
+                "Antivirus"
+            ],
+            answer:0
+        },
+        {
+            question:"Data Analytics maqsadi?",
+            options:[
+                "Ma’lumotdan foydali xulosa olish",
+                "Ma’lumotni tasodifiy o‘chirish",
+                "Faqat fayl nomini o‘zgartirish"
+            ],
+            answer:0
+        }
+    ]
+}
+
+];
+
+
+function renderLessons(){
+
+    const grid=
+        document.getElementById(
+            "lessonGrid"
+        );
+
+    grid.innerHTML="";
+
+    const fragment=
+        document.createDocumentFragment();
+
+    lessons.forEach(
+        (lesson,index)=>{
+
+            const card=
+                document.createElement("div");
+
+            card.className="card";
+
+            card.innerHTML=`
+
+                <div class="cardIcon">
+                    ${lesson.icon}
+                </div>
+
+                <h3>
+                    ${lesson.title}
+                </h3>
+
+                <p>
+                    ${lesson.text}
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">
+                        ${lesson.course}
+                    </span>
+
+                    <span class="tag">
+                        🔊 Ovozli
+                    </span>
+
+                    <span class="tag">
+                        🧪 Test
+                    </span>
+
+                </div>
+
+                <button
+                    class="btn btnPrimary"
+                    onclick="openLesson(${index})">
+
+                    Darsni ochish →
+
+                </button>
+
+            `;
+
+            fragment.appendChild(card);
+
+        }
+    );
+
+    grid.appendChild(fragment);
+
+}
+
+
+renderLessons();
+
 
 function openLesson(index){
 
-    const l=lessons[index];
+    const lesson=
+        lessons[index];
 
-    document.getElementById("lessonModalBox").innerHTML=`
+    if(!lesson)
+        return;
 
-        <div class="modal-head">
+    openModal(`
 
-            <div>
-                <span class="badge">${l[2]} ${l[1]}</span>
-                <h2>${l[0]}</h2>
-            </div>
+        <div class="modalHeader">
 
-            <button class="close"
-                onclick="closeModal('lessonModal')">
+            <h2>
+                ${lesson.icon}
+                ${lesson.title}
+            </h2>
+
+            <button
+                class="closeButton"
+                onclick="closeModal()">
                 ✕
             </button>
 
         </div>
 
-        <div class="panel">
+        <div class="card">
 
-            <h3>🎬 Video dars</h3>
+            <h3>
+                📖 Dars matni
+            </h3>
 
-            <div style="
-                height:260px;
-                display:grid;
-                place-items:center;
-                border-radius:20px;
-                margin-top:12px;
-                background:
-                    radial-gradient(circle,rgba(120,87,255,.25),transparent 55%),
-                    #080b19;
-                border:1px solid var(--line);
-            ">
-                <div style="text-align:center">
-                    <div style="font-size:55px">▶️</div>
-                    <p>Video player demo</p>
-                </div>
-            </div>
+            <p
+                style="
+                    font-size:18px;
+                    line-height:1.8;
+                    margin-top:13px
+                "
+                onclick="speakText(this.innerText)">
 
-            <h3>📖 Dars materiali</h3>
+                ${lesson.text}
 
-            <p style="margin-top:8px">
-                ${l[3]}
             </p>
 
-            <h3>🛠️ Amaliy topshiriq</h3>
+            <div class="buttons">
 
-            <p style="margin-top:8px">
-                Ushbu mavzu bo‘yicha kichik amaliy topshiriq bajaring
-                va o‘z bilimingizni mustahkamlang.
-            </p>
+                <button
+                    class="btn btnPrimary"
+                    onclick="speakText('${escapeQuotes(lesson.text)}')">
 
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px">
+                    🔊 Ovoz chiqarib o‘qish
 
-                <button class="btn btn-green"
-                    onclick="completeLesson(${index})">
-                    ✅ Darsni tugatdim
                 </button>
 
-                <button class="btn btn-primary"
-                    onclick="openQuiz('${quizCourseFromLesson(l[1])}')">
-                    📝 Testni boshlash
+                <button
+                    class="btn"
+                    onclick="openQuiz(${index})">
+
+                    🧪 Testni boshlash
+
                 </button>
 
             </div>
 
         </div>
-    `;
 
-    openModal("lessonModal");
+    `);
+
 }
 
-function quizCourseFromLesson(course){
-
-    const map={
-        "HTML & CSS":"html",
-        "JavaScript":"javascript",
-        "Python":"python",
-        "AI":"ai",
-        "Kibersecurity":"cyber",
-        "Data Analytics":"data",
-        "Design":"design",
-        "Marketing":"marketing"
-    };
-
-    return map[course] || "html";
-}
-
-function completeLesson(index){
-
-    if(!state.completed.includes(index)){
-
-        state.completed.push(index);
-
-        addXP(20);
-
-        toast("✅ Dars tugallandi! +20 XP");
-
-    }else{
-
-        toast("ℹ️ Bu dars avval tugallangan.");
-    }
-
-    saveState();
-
-    renderLessons();
-
-    closeModal("lessonModal");
-
-    updateDashboard();
-}
 
 /* =========================================================
    QUIZ
-   ========================================================= */
+========================================================= */
 
-function openQuiz(course){
+function openQuiz(index){
 
-    const bank=quizzes[course] || quizzes.html;
+    const lesson=
+        lessons[index];
 
-    currentQuiz=bank;
-    quizIndex=0;
-    quizCorrect=0;
+    if(!lesson)
+        return;
 
-    renderQuizQuestion();
+    let html=`
 
-    openModal("quizModal");
-}
+        <div class="modalHeader">
 
-function renderQuizQuestion(){
+            <h2>
+                🧪 ${lesson.title}
+            </h2>
 
-    const q=currentQuiz[quizIndex];
-
-    document.getElementById("quizModalBox").innerHTML=`
-
-        <div class="modal-head">
-
-            <div>
-                <span class="badge">📝 TEST</span>
-                <h2>${quizIndex+1} / ${currentQuiz.length}</h2>
-            </div>
-
-            <button class="close"
-                onclick="closeModal('quizModal')">
+            <button
+                class="closeButton"
+                onclick="closeModal()">
                 ✕
             </button>
 
         </div>
 
-        <div class="quiz-question">
+        <form id="quizForm">
 
-            <h3>${q[0]}</h3>
-
-            <div class="quiz-options">
-
-                ${q[1].map((opt,i)=>`
-
-                    <button
-                        onclick="quizAnswer(${i})">
-                        ${String.fromCharCode(65+i)}. ${opt}
-                    </button>
-
-                `).join("")}
-
-            </div>
-
-        </div>
     `;
-}
 
-function quizAnswer(selected){
 
-    const q=currentQuiz[quizIndex];
+    lesson.quiz.forEach(
+        (question,qIndex)=>{
 
-    const buttons=
-        document.querySelectorAll(".quiz-options button");
+            html+=`
 
-    buttons.forEach(b=>b.disabled=true);
+                <div
+                    class="card"
+                    style="margin-bottom:13px">
 
-    if(selected===q[2]){
+                    <h3>
+                        ${qIndex+1}.
+                        ${question.question}
+                    </h3>
 
-        buttons[selected].classList.add("correct");
+            `;
 
-        quizCorrect++;
 
-        addXP(10);
+            question.options.forEach(
+                (option,oIndex)=>{
 
-    }else{
+                    html+=`
 
-        buttons[selected].classList.add("wrong");
+                        <label style="
+                            display:block;
+                            margin-top:11px;
+                            color:var(--muted);
+                            cursor:pointer
+                        ">
 
-        buttons[q[2]].classList.add("correct");
-    }
+                            <input
+                                type="radio"
+                                name="question${qIndex}"
+                                value="${oIndex}">
 
-    setTimeout(()=>{
+                            ${option}
 
-        quizIndex++;
+                        </label>
 
-        if(quizIndex<currentQuiz.length){
+                    `;
 
-            renderQuizQuestion();
+                }
+            );
 
-        }else{
 
-            finishQuiz();
+            html+=`
+
+                </div>
+
+            `;
 
         }
+    );
 
-    },850);
+
+    html+=`
+
+            <button
+                type="button"
+                class="btn btnPrimary"
+                onclick="finishQuiz(${index})">
+
+                🏆 Natijani ko‘rish
+
+            </button>
+
+        </form>
+
+    `;
+
+
+    openModal(html);
+
 }
 
-function finishQuiz(){
+
+function finishQuiz(index){
+
+    const lesson=
+        lessons[index];
+
+    if(!lesson)
+        return;
+
+    let score=0;
+
+    lesson.quiz.forEach(
+        (question,qIndex)=>{
+
+            const selected=
+                document.querySelector(
+                    `input[name="question${qIndex}"]:checked`
+                );
+
+            if(
+                selected &&
+                Number(selected.value)===
+                question.answer
+            ){
+                score++;
+            }
+
+        }
+    );
+
+
+    const total=
+        lesson.quiz.length;
 
     const percent=
-        Math.round((quizCorrect/currentQuiz.length)*100);
+        Math.round(
+            score/total*100
+        );
 
-    state.quiz=Math.max(state.quiz,percent);
 
-    saveState();
+    addXP(score*10);
 
-    document.getElementById("quizModalBox").innerHTML=`
 
-        <div style="text-align:center;padding:30px">
+    const passed=
+        percent>=70;
 
-            <div style="font-size:70px">
-                ${percent>=70?"🏆":"📚"}
-            </div>
 
-            <h2 style="font-size:35px;margin-top:10px">
-                ${percent>=70?"Test muvaffaqiyatli!":"Yana bir bor urinib ko‘ring"}
+    openModal(`
+
+        <div class="modalHeader">
+
+            <h2>
+                ${passed?"🎉":"📚"} Test natijasi
             </h2>
 
-            <p style="color:var(--muted);margin-top:10px">
-                Natija: <strong>${percent}%</strong>
-            </p>
-
-            <p style="margin-top:8px">
-                To‘g‘ri javoblar:
-                ${quizCorrect}/${currentQuiz.length}
-            </p>
-
-            <button class="btn btn-primary"
-                style="margin-top:25px"
-                onclick="closeModal('quizModal')">
-                Davom etish
+            <button
+                class="closeButton"
+                onclick="closeModal()">
+                ✕
             </button>
 
         </div>
-    `;
 
-    updateDashboard();
+        <div
+            class="card"
+            style="text-align:center">
 
-    if(percent>=70){
-        addXP(30);
-        toast("🏆 Testdan o‘tdingiz! +30 XP");
-    }
+            <div style="font-size:65px">
+                ${passed?"🏆":"📖"}
+            </div>
+
+            <h1
+                class="gradient"
+                style="font-size:48px;margin:10px">
+                ${percent}%
+            </h1>
+
+            <p style="color:var(--muted)">
+                ${score} / ${total} to‘g‘ri javob
+            </p>
+
+            <p style="
+                margin-top:15px;
+                line-height:1.6
+            ">
+                ${
+                    passed
+                    ?"Tabriklaymiz! Test muvaffaqiyatli bajarildi."
+                    :"Darsni yana bir bor ko‘rib chiqing va qayta urinib ko‘ring."
+                }
+            </p>
+
+            <button
+                class="btn btnPrimary"
+                style="margin-top:20px"
+                onclick="closeModal()">
+
+                Davom etish
+
+            </button>
+
+        </div>
+
+    `);
+
 }
+
 
 /* =========================================================
-   AI USTOZ
-   ========================================================= */
-
-function addMessage(text,type){
-
-    const box=document.getElementById("messages");
-
-    const div=document.createElement("div");
-
-    div.className="msg "+type;
-
-    div.textContent=text;
-
-    box.appendChild(div);
-
-    box.scrollTop=box.scrollHeight;
-}
-
-function aiQuick(text){
-
-    document.getElementById("aiInput").value=text;
-
-    sendAI();
-}
+   AI
+========================================================= */
 
 function sendAI(){
 
-    const input=document.getElementById("aiInput");
+    const input=
+        document.getElementById(
+            "aiInput"
+        );
 
-    const text=input.value.trim();
+    const text=
+        input.value.trim();
 
-    if(!text)return;
+    if(!text)
+        return;
 
-    addMessage(text,"user");
+    addChatMessage(
+        text,
+        "user"
+    );
 
     input.value="";
 
+
+    /*
+       Demo AI.
+       Keyinchalik API ulash mumkin.
+       API bo‘lmasa ham ilova qotmaydi.
+    */
+
     setTimeout(()=>{
 
-        const answer=getAIAnswer(text);
+        const lower=
+            text.toLowerCase();
 
-        addMessage(answer,"ai");
+        let answer=
+            "Savolingiz juda yaxshi! IKROMJON AI Ustoz Demo rejimida ishlamoqda. Kurslar va darslar bo‘limidan kerakli mavzuni tanlashingiz mumkin.";
 
-    },500);
+        if(
+            lower.includes("python")
+        ){
+
+            answer=
+                "Python — kuchli va tushunarli dasturlash tili. Boshlash uchun o‘zgaruvchilar, if, for, while, list va funksiyalarni o‘rganing.";
+
+        }else if(
+            lower.includes("html")
+        ){
+
+            answer=
+                "HTML web sahifaning tuzilmasini yaratadi. h1, p, a, img va div kabi teglar asosiy elementlardan hisoblanadi.";
+
+        }else if(
+            lower.includes("javascript") ||
+            lower.includes("js")
+        ){
+
+            answer=
+                "JavaScript web sahifaga interaktivlik beradi. O‘zgaruvchilar, funksiyalar, massivlar, DOM va eventlarni o‘rganishdan boshlang.";
+
+        }else if(
+            lower.includes("ai") ||
+            lower.includes("sun'iy") ||
+            lower.includes("sun’iy")
+        ){
+
+            answer=
+                "Sun’iy intellekt bilan ishlashda aniq prompt yozish muhim. Vazifa, kontekst, format va cheklovlarni aniq ko‘rsatish natijani yaxshilaydi.";
+
+        }else if(
+            lower.includes("css")
+        ){
+
+            answer=
+                "CSS web sahifaning dizaynini boshqaradi. color, background, display, flex, grid, margin va padding kabi xususiyatlarni o‘rganing.";
+
+        }
+
+
+        addChatMessage(
+            answer,
+            "ai"
+        );
+
+    },350);
+
 }
 
-function getAIAnswer(text){
 
-    const t=text.toLowerCase();
+function addChatMessage(text,type){
 
-    if(t.includes("python")){
-        return "🐍 Pythonni boshlash uchun: 1) sintaksis, 2) o‘zgaruvchilar, 3) if/else, 4) sikllar, 5) funksiyalar, 6) list/dict, 7) kichik loyihalar. Har kuni kamida 30 daqiqa amaliyot qiling.";
-    }
+    const box=
+        document.getElementById(
+            "chatMessages"
+        );
 
-    if(t.includes("html")){
-        return "🌐 HTML web sahifaning tuzilmasini yaratadi. Avval HTML teglar, keyin CSS, undan so‘ng JavaScriptni o‘rganishingizni tavsiya qilaman.";
-    }
+    const message=
+        document.createElement("div");
 
-    if(t.includes("ai") || t.includes("sun’iy")){
-        return "🤖 AI — ma’lumotlar asosida vazifalarni bajarishga yordam beradigan texnologiyalar sohasi. Boshlash uchun AI asoslari → Prompt Engineering → Python → Machine Learning yo‘nalishini tanlashingiz mumkin.";
-    }
+    message.className=
+        "message "+
+        (
+            type==="ai"
+            ?"messageAI"
+            :"messageUser"
+        );
 
-    if(t.includes("kasb")){
-        return "💼 IT kasbini tanlashda qiziqishingizga qarang: kod yozish yoqsa — Frontend/Backend, matematika yoqsa — Data/AI, dizayn yoqsa — UI/UX, xavfsizlik yoqsa — Cybersecurity.";
-    }
+    message.textContent=text;
 
-    if(t.includes("javascript")){
-        return "⚡ JavaScriptni o‘rganishda o‘zgaruvchilar, funksiyalar, massivlar, obyektlar, DOM, eventlar va API bilan ishlashga e’tibor bering.";
-    }
+    box.appendChild(message);
 
-    return "🧠 Juda yaxshi savol! Demo AI Ustoz sifatida tavsiyam: mavzuni kichik qismlarga bo‘ling, nazariyani o‘rganing va darhol amaliy loyiha bilan mustahkamlang.";
+    box.scrollTop=
+        box.scrollHeight;
+
 }
+
 
 /* =========================================================
-   DASHBOARD
-   ========================================================= */
+   XP
+========================================================= */
 
-function updateDashboard(){
+function addXP(amount){
 
-    const xp=state.xp;
+    const safeAmount=
+        Math.max(
+            0,
+            Number(amount)||0
+        );
 
-    const level=Math.floor(xp/100)+1;
+    state.xp+=safeAmount;
+    state.completed++;
 
-    state.level=level;
+    localStorage.setItem(
+        "ikrom_xp",
+        String(state.xp)
+    );
 
-    const current=xp%100;
+    localStorage.setItem(
+        "ikrom_completed",
+        String(state.completed)
+    );
 
-    document.getElementById("xpValue").textContent=xp+" XP";
+    updateXP();
 
-    document.getElementById("levelText").textContent=
-        level+"-daraja";
-
-    document.getElementById("xpNext").textContent=
-        (100-current)+" XP";
-
-    document.getElementById("xpProgress").style.width=
-        current+"%";
-
-    document.getElementById("completedLessons").textContent=
-        state.completed.length;
-
-    document.getElementById("quizScore").textContent=
-        state.quiz+"%";
-
-    document.getElementById("streakValue").textContent=
-        state.streak+" 🔥";
-
-    const daily=state.daily?100:0;
-
-    document.getElementById("dailyPercent").textContent=
-        daily+"%";
-
-    document.getElementById("dailyProgress").style.width=
-        daily+"%";
-
-    document.getElementById("nameMini").textContent=
-        state.name;
-
-    document.getElementById("avatarMini").textContent=
-        initials(state.name);
-
-    renderAchievements();
-
-    saveState();
 }
 
-function completeDailyPlan(){
 
-    if(!state.daily){
+function updateXP(){
 
-        state.daily=true;
+    document.getElementById(
+        "xpText"
+    ).textContent=
+        state.xp+
+        " XP";
 
-        state.streak++;
+    document.getElementById(
+        "xpBar"
+    ).style.width=
+        Math.min(
+            100,
+            state.xp%100
+        )+"%";
 
-        addXP(25);
+    document.getElementById(
+        "streakText"
+    ).textContent=
+        state.streak+
+        " kun";
 
-        toast("🔥 Bugungi reja bajarildi! +25 XP");
+    document.getElementById(
+        "achievementText"
+    ).textContent=
+        Math.floor(
+            state.xp/100
+        )+
+        " ta yutuq";
 
-    }else{
-
-        toast("✅ Bugungi reja allaqachon bajarilgan.");
-    }
-
-    updateDashboard();
 }
 
-/* =========================================================
-   ACHIEVEMENTS
-   ========================================================= */
+updateXP();
 
-function renderAchievements(){
-
-    const list=[
-        ["🚀","Birinchi qadam",state.xp>=1],
-        ["📚","10 dars",state.completed.length>=10],
-        ["🧠","100 XP",state.xp>=100],
-        ["🏆","500 XP",state.xp>=500],
-        ["🔥","7 kunlik streak",state.streak>=7]
-    ];
-
-    document.getElementById("achievements").innerHTML=
-        list.map(a=>`
-
-            <div class="achievement ${a[2]?"":"locked"}">
-
-                <div class="medal">${a[0]}</div>
-
-                <h3 style="margin-top:10px">${a[1]}</h3>
-
-                <p class="small" style="margin-top:5px">
-                    ${a[2]?"Ochildi":"Qulflangan"}
-                </p>
-
-            </div>
-
-        `).join("");
-}
-
-/* =========================================================
-   WEEK PLAN
-   ========================================================= */
-
-function renderWeek(){
-
-    const names=[
-        ["Du","HTML"],
-        ["Se","Python"],
-        ["Ch","AI"],
-        ["Pa","JS"],
-        ["Ju","Dizayn"],
-        ["Sh","Test"],
-        ["Ya","Dam olish"]
-    ];
-
-    const today=new Date().getDay();
-
-    const map=today===0?6:today-1;
-
-    document.getElementById("weekPlan").innerHTML=
-        names.map((d,i)=>`
-
-            <div class="day ${i===map?"active":""}">
-
-                <span>${d[0]}</span>
-
-                <strong>${i===map?"🔥":"📚"}</strong>
-
-                <span>${d[1]}</span>
-
-            </div>
-
-        `).join("");
-}
 
 /* =========================================================
    PROFILE
-   ========================================================= */
+========================================================= */
+
+function getProfileName(){
+
+    return (
+        state.profile &&
+        state.profile.name
+    ) || "O‘quvchi";
+
+}
+
 
 function initials(name){
 
@@ -3520,447 +4716,489 @@ function initials(name){
         .trim()
         .split(/\s+/)
         .slice(0,2)
-        .map(x=>x[0])
+        .map(word=>word.charAt(0))
         .join("")
-        .toUpperCase() || "I";
+        .toUpperCase();
+
 }
+
 
 function openProfile(){
 
-    document.getElementById("profileModalBox").innerHTML=`
+    const name=
+        getProfileName();
 
-        <div class="modal-head">
+    openModal(`
 
-            <div>
-                <span class="badge">👤 SHAXSIY KABINET</span>
-                <h2>Profil</h2>
-            </div>
+        <div class="modalHeader">
 
-            <button class="close"
-                onclick="closeModal('profileModal')">
+            <h2>
+                👤 Shaxsiy kabinet
+            </h2>
+
+            <button
+                class="closeButton"
+                onclick="closeModal()">
                 ✕
             </button>
 
         </div>
 
-        <div class="panel">
+        <div class="card">
 
-            <div style="
-                width:85px;
-                height:85px;
-                display:grid;
-                place-items:center;
-                border-radius:25px;
-                font-size:30px;
-                background:linear-gradient(135deg,var(--purple),var(--pink));
-            ">
-                ${initials(state.name)}
+            <div class="avatar">
+                ${initials(name)}
             </div>
 
-            <h3 style="margin-top:15px">
-                ${state.name}
-            </h3>
+            <h2 style="margin-top:18px">
+                ${name}
+            </h2>
 
-            <p class="small" style="margin-top:5px">
-                ${state.level}-daraja • ${state.xp} XP
+            <p style="margin-top:7px">
+                IKROMJON AI o‘quvchisi
             </p>
 
-            <label style="display:block;margin-top:25px">
-                Ism-familiya
-            </label>
+            <div class="tags">
 
-            <input
-                id="profileName"
-                class="search"
-                style="width:100%;margin-top:8px"
-                value="${state.name}"
-            >
+                <span class="tag">
+                    ⭐ ${state.xp} XP
+                </span>
 
-            <button class="btn btn-primary"
-                style="margin-top:15px"
-                onclick="saveProfile()">
-                💾 Saqlash
-            </button>
+                <span class="tag">
+                    🔥 ${state.streak} kun
+                </span>
 
-            <button class="btn"
-                style="margin-top:10px"
-                onclick="openCertificate()">
-                🏆 Sertifikat
-            </button>
+                <span class="tag">
+                    🏆 ${Math.floor(state.xp/100)} yutuq
+                </span>
 
-            <button class="btn btn-danger"
-                style="margin-top:10px"
-                onclick="resetProgress()">
-                ♻️ Progressni tozalash
+            </div>
+
+            <div class="buttons">
+
+                <button
+                    class="btn btnPrimary"
+                    onclick="editProfile()">
+
+                    ✏️ Tahrirlash
+
+                </button>
+
+                <button
+                    class="btn"
+                    onclick="openCertificate()">
+
+                    🎓 Sertifikat
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `);
+
+}
+
+
+function editProfile(){
+
+    openModal(`
+
+        <div class="modalHeader">
+
+            <h2>
+                👤 Profilni tahrirlash
+            </h2>
+
+            <button
+                class="closeButton"
+                onclick="closeModal()">
+                ✕
             </button>
 
         </div>
-    `;
 
-    openModal("profileModal");
+        <div class="card">
+
+            <input
+                id="profileNameInput"
+                class="searchInput"
+                style="width:100%"
+                value="${escapeHTML(getProfileName()==="O‘quvchi"?"":getProfileName())}"
+                placeholder="Ism va familiyangiz">
+
+            <button
+                class="btn btnPrimary"
+                style="margin-top:14px"
+                onclick="saveProfile()">
+
+                💾 Saqlash
+
+            </button>
+
+        </div>
+
+    `);
+
 }
+
 
 function saveProfile(){
 
+    const input=
+        document.getElementById(
+            "profileNameInput"
+        );
+
+    if(!input)
+        return;
+
     const name=
-        document.getElementById("profileName")
-        .value.trim();
+        input.value.trim();
 
-    if(name){
+    if(!name){
 
-        state.name=name;
+        toast(
+            "⚠️ Ism kiriting."
+        );
 
-        saveState();
-
-        updateDashboard();
-
-        closeModal("profileModal");
-
-        toast("✅ Profil saqlandi.");
+        return;
     }
+
+    state.profile={
+        name:name
+    };
+
+    localStorage.setItem(
+        "ikrom_profile",
+        JSON.stringify(state.profile)
+    );
+
+    closeModal();
+
+    toast(
+        "👤 Profil saqlandi!"
+    );
+
 }
 
-function resetProgress(){
-
-    if(!confirm("Barcha progressni tozalaysizmi?"))return;
-
-    state.xp=0;
-    state.level=1;
-    state.completed=[];
-    state.quiz=0;
-    state.streak=1;
-    state.daily=false;
-
-    saveState();
-
-    renderLessons();
-    updateDashboard();
-
-    closeModal("profileModal");
-
-    toast("♻️ Progress tozalandi.");
-}
 
 /* =========================================================
    CERTIFICATE
-   ========================================================= */
+========================================================= */
 
 function openCertificate(){
 
-    closeModal("profileModal");
-
-    document.getElementById("certificateName").textContent=
-        state.name;
-
-    document.getElementById("certificateCourse").textContent=
-        "IKROMJON AI O‘QUV DASTURI";
-
-    document.getElementById("certificateDate").textContent=
-        new Date().toLocaleDateString("uz-UZ");
-
-    document.getElementById("certificateNumber").textContent=
-        "IKA-"+Date.now().toString().slice(-8);
-
-    openModal("certificateModal");
-}
-
-/* =========================================================
-   ABOUT
-   ========================================================= */
-
-function openAbout(){
-
-    const modal=document.createElement("div");
-
-    modal.className="modal show";
-
-    modal.innerHTML=`
-
-        <div class="modal-box">
-
-            <div class="modal-head">
-                <h2>🤖 IKROMJON AI O‘QUV MARKAZI</h2>
-                <button class="close"
-                    onclick="this.closest('.modal').remove()">
-                    ✕
-                </button>
-            </div>
-
-            <div class="panel">
-
-                <h3>Zamonaviy bilim. Amaliy ko‘nikma. Yorqin kelajak.</h3>
-
-                <p style="margin-top:15px">
-                    IKROMJON AI O‘QUV MARKAZI — dasturlash,
-                    sun’iy intellekt, raqamli texnologiyalar,
-                    dizayn, biznes va kelajak kasblari bo‘yicha
-                    zamonaviy ta’lim platformasi.
-                </p>
-
-                <h3>🎯 Bizning maqsadimiz</h3>
-
-                <p>
-                    O‘quvchilarga zamonaviy bilim va amaliy
-                    ko‘nikmalar berish hamda ularni raqamli
-                    iqtisodiyotning yangi kasblariga tayyorlash.
-                </p>
-
-                <h3>🚀 Ta’lim modeli</h3>
-
-                <p>
-                    Nazariya → Video → Amaliyot → Test →
-                    Loyiha → Sertifikat.
-                </p>
-
-                <h3>💡 Asosiy imkoniyatlar</h3>
-
-                <p>
-                    120+ yo‘nalish, interaktiv darslar,
-                    AI Ustoz, testlar, XP, darajalar,
-                    yutuqlar, shaxsiy kabinet va sertifikat.
-                </p>
-
-            </div>
-
-        </div>
-    `;
-
-    document.body.appendChild(modal);
-}
-
-/* =========================================================
-   GLOBAL SEARCH
-   ========================================================= */
-
-function openGlobalSearch(){
-
-    document.getElementById("globalSearch")
-        .classList.add("show");
-
-    setTimeout(()=>{
-        document.getElementById("globalInput").focus();
-    },100);
-}
-
-function closeGlobalSearch(){
-
-    document.getElementById("globalSearch")
-        .classList.remove("show");
-}
-
-function globalSearch(value){
-
-    const q=value.toLowerCase().trim();
-
-    const box=document.getElementById("globalResults");
-
-    if(!q){
-
-        box.innerHTML=`
-            <p class="small">
-                Qidiruvni boshlash uchun so‘z yozing.
-            </p>
-        `;
-
-        return;
-    }
-
-    const result=[];
-
-    courses.forEach(c=>{
-        if(
-            c.title.toLowerCase().includes(q) ||
-            c.desc.toLowerCase().includes(q)
-        ){
-            result.push({
-                icon:c.icon,
-                title:c.title,
-                desc:c.desc,
-                action:()=>openCourse(c.id)
-            });
-        }
-    });
-
-    directions.forEach(d=>{
-        if(
-            d[1].toLowerCase().includes(q) ||
-            d[2].toLowerCase().includes(q)
-        ){
-            result.push({
-                icon:d[0],
-                title:d[1],
-                desc:d[2],
-                action:()=>{
-                    closeGlobalSearch();
-                    go("directions");
-                }
-            });
-        }
-    });
-
-    if(!result.length){
-
-        box.innerHTML=`
-            <div class="panel">
-                🔎 Natija topilmadi.
-            </div>
-        `;
-
-        return;
-    }
-
-    box.innerHTML=result.slice(0,10).map((r,i)=>`
-
-        <div class="lesson"
-             onclick="globalResultClick(${i})"
-             style="cursor:pointer">
-
-            <div class="lesson-icon">${r.icon}</div>
-
-            <div class="lesson-main">
-                <h3>${r.title}</h3>
-                <p>${r.desc}</p>
-            </div>
-
-        </div>
-    `).join("");
-
-    window.globalResultData=result.slice(0,10);
-}
-
-function globalResultClick(index){
-
-    const r=window.globalResultData[index];
-
-    if(r)r.action();
-
-    closeGlobalSearch();
-}
-
-/* =========================================================
-   NOTIFICATIONS
-   ========================================================= */
-
-function showNotifications(){
-
-    const modal=document.createElement("div");
-
-    modal.className="modal show";
-
-    modal.innerHTML=`
-
-        <div class="modal-box">
-
-            <div class="modal-head">
-
-                <h2>🔔 Bildirishnomalar</h2>
-
-                <button class="close"
-                    onclick="this.closest('.modal').remove()">
-                    ✕
-                </button>
-
-            </div>
-
-            <div class="lesson">
-                <div class="lesson-icon">🎓</div>
-                <div class="lesson-main">
-                    <h3>Yangi kurslar</h3>
-                    <p>IKROMJON AI platformasida yangi yo‘nalishlar mavjud.</p>
-                </div>
-            </div>
-
-            <div class="lesson">
-                <div class="lesson-icon">🔥</div>
-                <div class="lesson-main">
-                    <h3>Bugungi maqsad</h3>
-                    <p>30 daqiqa o‘qib, streakni davom ettiring.</p>
-                </div>
-            </div>
-
-            <div class="lesson">
-                <div class="lesson-icon">🏆</div>
-                <div class="lesson-main">
-                    <h3>Sertifikat</h3>
-                    <p>Kursni tugatganingizdan keyin sertifikat olishingiz mumkin.</p>
-                </div>
-            </div>
-
-        </div>
-    `;
-
-    document.body.appendChild(modal);
-}
-
-/* =========================================================
-   INIT
-   ========================================================= */
-
-createParticles();
-
-renderUniversities();
-
-renderDirections();
-
-renderCourses();
-
-renderLessons();
-
-renderWeek();
-
-updateDashboard();
-
-document.body.classList.toggle(
-    "light",
-    state.theme==="light"
-);
-
-document.getElementById("themeBtn").textContent=
-    state.theme==="dark"?"☀":"🌙";
-
-/* TOUCH / MOUSE UNIVERSITY DOT SYNC */
-
-document.getElementById("uniSlider")
-.addEventListener("scroll",()=>{
-
-    const slider=document.getElementById("uniSlider");
-
-    const cards=[...slider.children];
-
-    if(!cards.length)return;
-
-    let closest=0;
-    let distance=Infinity;
-
-    cards.forEach((card,i)=>{
-
-        const d=Math.abs(
-            card.offsetLeft-slider.scrollLeft
+    const name=
+        getProfileName();
+
+    const today=
+        new Date()
+        .toLocaleDateString(
+            "uz-UZ"
         );
 
-        if(d<distance){
-            distance=d;
-            closest=i;
+    const number=
+        "IKA-"+Date.now()
+            .toString()
+            .slice(-8);
+
+
+    openModal(`
+
+        <div class="modalHeader">
+
+            <h2>
+                🎓 Sertifikat
+            </h2>
+
+            <button
+                class="closeButton"
+                onclick="closeModal()">
+                ✕
+            </button>
+
+        </div>
+
+        <div
+            class="card"
+            style="
+                text-align:center;
+                padding:38px 20px;
+                border:2px solid #7657ff
+            ">
+
+            <div>
+                IKROMJON AI O‘QUV MARKAZI
+            </div>
+
+            <h1
+                class="gradient"
+                style="
+                    font-size:45px;
+                    margin:24px 0
+                ">
+                SERTIFIKAT
+            </h1>
+
+            <p>
+                Ushbu sertifikat
+            </p>
+
+            <h2 style="margin:15px 0">
+                ${escapeHTML(name)}
+            </h2>
+
+            <p style="
+                color:var(--muted);
+                line-height:1.7
+            ">
+
+                o‘quv dasturini muvaffaqiyatli
+                o‘zlashtirgani, nazariy bilim va
+                amaliy ko‘nikmalarni egallagani
+                uchun taqdim etiladi.
+
+            </p>
+
+            <div style="margin-top:25px">
+
+                Berilgan sana:
+                ${today}
+
+            </div>
+
+            <div style="
+                margin-top:8px;
+                color:var(--muted)
+            ">
+
+                Sertifikat raqami:
+                ${number}
+
+            </div>
+
+            <div class="buttons"
+                 style="justify-content:center">
+
+                <button
+                    class="btn btnPrimary"
+                    onclick="window.print()">
+
+                    🖨️ Chop etish
+
+                </button>
+
+                <button
+                    class="btn"
+                    onclick="speakText('Ushbu sertifikat IKROMJON AI O‘quv Markazi tomonidan taqdim etiladi.')">
+
+                    🔊 O‘qib berish
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `);
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function openModal(html){
+
+    const modal=
+        document.getElementById(
+            "mainModal"
+        );
+
+    const content=
+        document.getElementById(
+            "modalContent"
+        );
+
+    content.innerHTML=html;
+
+    modal.classList.add("show");
+
+    document.body.style.overflow="hidden";
+
+}
+
+
+function closeModal(){
+
+    const modal=
+        document.getElementById(
+            "mainModal"
+        );
+
+    modal.classList.remove("show");
+
+    document.body.style.overflow="";
+
+}
+
+
+document.getElementById(
+    "mainModal"
+).addEventListener(
+    "click",
+    function(event){
+
+        if(event.target===this){
+            closeModal();
         }
-    });
 
-    uniIndex=closest;
-
-    updateUniDots();
-});
-
-/* ESCAPE */
-
-document.addEventListener("keydown",e=>{
-
-    if(e.key==="Escape"){
-
-        document.querySelectorAll(".modal.show")
-            .forEach(m=>m.classList.remove("show"));
-
-        closeGlobalSearch();
     }
-});
+);
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function toggleTheme(){
+
+    const isLight=
+        document.body.classList.toggle(
+            "light"
+        );
+
+    state.theme=
+        isLight
+        ?"light"
+        :"dark";
+
+    localStorage.setItem(
+        "ikrom_theme",
+        state.theme
+    );
+
+    toast(
+        isLight
+        ?"☀️ Light tema"
+        :"🌙 Dark tema"
+    );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer=null;
+
+
+function toast(message){
+
+    const element=
+        document.getElementById(
+            "toast"
+        );
+
+    element.textContent=message;
+
+    element.classList.add("show");
+
+    if(toastTimer)
+        clearTimeout(toastTimer);
+
+    toastTimer=
+        setTimeout(()=>{
+
+            element.classList.remove(
+                "show"
+            );
+
+        },2600);
+
+}
+
+
+/* =========================================================
+   ESCAPE HELPERS
+========================================================= */
+
+function escapeQuotes(text){
+
+    return String(text)
+        .replace(/\\/g,"\\\\")
+        .replace(/'/g,"\\'")
+        .replace(/"/g,'\\"')
+        .replace(/\n/g," ");
+
+}
+
+
+function escapeHTML(text){
+
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key==="Escape"){
+            closeModal();
+        }
+
+    }
+);
+
+
+/* =========================================================
+   PAGE VISIBILITY
+========================================================= */
+
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        /*
+           Sahifa yashirilganda og‘ir animatsiyalar
+           avtomatik ravishda brauzer tomonidan
+           qisqartiriladi.
+        */
+
+        if(document.hidden){
+
+            if(
+                "speechSynthesis" in window
+            ){
+                speechSynthesis.cancel();
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+updateXP();
 
 </script>
 
