@@ -3,394 +3,443 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ikromjon AI — Kelajakni bugundan yarating</title>
+    <title>IKROMJON AI — Modern 3D Learning Platform</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <style>
         :root {
-            --bg-color: #0b0816;
-            --card-bg: #151128;
-            --card-border: rgba(139, 92, 246, 0.2);
-            --accent-blue: #3b82f6;
-            --accent-purple: #8b5cf6;
-            --text-main: #ffffff;
-            --text-sub: #9ca3af;
-            --glow-color: rgba(96, 165, 250, 0.3);
+            --primary: #00f0ff;
+            --secondary: #7000ff;
+            --accent: #ff007f;
+            --bg: #030308;
+            --glass: rgba(15, 15, 30, 0.55);
+            --border: rgba(0, 240, 255, 0.25);
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             user-select: none;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            padding-bottom: 110px;
+            background-color: var(--bg);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
             overflow-x: hidden;
+            height: 100vh;
         }
 
-        /* HEADER & MULTI-LANGUAGE */
-        header {
+        /* 3D Canvas Background */
+        #webgl-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+        }
+
+        /* Glassmorphism Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 14px 18px;
-            background: rgba(17, 13, 34, 0.85);
+            padding: 20px 50px;
+            background: rgba(3, 3, 8, 0.4);
             backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid var(--border);
         }
 
         .logo {
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            background: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 0 0 10px var(--primary);
         }
 
-        .lang-selector {
+        .logo span { color: var(--primary); }
+
+        .nav-links {
             display: flex;
-            gap: 6px;
-            overflow-x: auto;
-            max-width: 60%;
-            scrollbar-width: none;
+            gap: 30px;
+            list-style: none;
         }
 
-        .lang-btn {
-            background: #1c1736;
-            border: 1px solid var(--card-border);
-            color: var(--text-main);
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 11px;
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            font-size: 16px;
+            transition: 0.3s;
         }
 
-        .lang-btn.active, .lang-btn:hover {
-            background: var(--accent-purple);
-            border-color: #a78bfa;
-            box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+        .nav-links a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 8px var(--primary);
         }
 
+        /* Main UI Container */
         .container {
-            padding: 16px;
-            max-width: 600px;
-            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100vh;
+            padding: 0 8%;
+            pointer-events: none;
         }
 
-        /* HERO SECTION */
-        .hero {
-            text-align: center;
-            margin: 15px 0 25px;
+        .hero-text, .glass-card {
+            pointer-events: auto;
+        }
+
+        .hero-text {
+            max-width: 550px;
         }
 
         .badge {
             display: inline-block;
-            padding: 4px 12px;
-            background: rgba(139, 92, 246, 0.15);
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 6px 16px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--primary);
             border-radius: 20px;
-            font-size: 11px;
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 700;
             letter-spacing: 1px;
-            color: #c084fc;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
 
-        .hero h1 {
-            font-size: 26px;
-            font-weight: 800;
-            line-height: 1.3;
-            background: linear-gradient(to right, #93c5fd, #c084fc);
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 48px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #fff 30%, var(--primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
         }
 
-        .hero p {
-            color: var(--text-sub);
-            font-size: 13px;
-            line-height: 1.5;
+        p {
+            font-size: 18px;
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 30px;
         }
 
-        /* CARDS GRID & BACKGROUND IMAGES */
-        .grid-2 {
+        /* Interactive Glass Card Right Side */
+        .glass-card {
+            width: 420px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .card-header {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .course-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: 0.3s;
+        }
+
+        .course-item:hover {
+            border-color: var(--primary);
+            background: rgba(0, 240, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .course-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .course-meta {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.3);
+        }
+
+        .btn-action:hover {
+            box-shadow: 0 10px 35px rgba(112, 0, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Stats Bar */
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 18px;
-            padding: 16px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            transition: transform 0.2s ease;
-        }
-
-        .card:active {
-            transform: scale(0.98);
-        }
-
-        /* Dynamic Image Fetching simulation */
-        .card-bg-api {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-size: cover;
-            background-position: center;
-            opacity: 0.12;
-            z-index: 1;
-        }
-
-        .card-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .card h2 {
-            font-size: 22px;
-            font-weight: 700;
-            color: #60a5fa;
-            margin-bottom: 4px;
-        }
-
-        .card h3 {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .card p {
-            font-size: 12px;
-            color: var(--text-sub);
-        }
-
-        /* AI USTOZ SECTION */
-        .ai-ustoz-card {
-            background: linear-gradient(135deg, #181333 0%, #201745 100%);
-            border: 1px solid #7c3aed;
-            display: flex;
-            align-items: center;
             gap: 15px;
+            margin-top: 25px;
         }
 
-        .ai-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
-            flex-shrink: 0;
-        }
-
-        /* FOOTER BRANDING */
-        .footer-branding {
+        .stat-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 10px;
             text-align: center;
-            padding: 25px 15px 10px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: 20px;
         }
 
-        .footer-branding h4 {
-            font-size: 16px;
-            color: var(--text-main);
-            margin-bottom: 6px;
-        }
-
-        .footer-branding p {
-            font-size: 12px;
-            color: var(--text-sub);
-            line-height: 1.6;
-        }
-
-        /* 3D NAV BAR (BOTTOM) */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            background: rgba(13, 10, 26, 0.92);
-            backdrop-filter: blur(16px);
-            border-top: 1px solid rgba(139, 92, 246, 0.25);
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            padding: 10px 4px 12px;
-            z-index: 1000;
-            box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.5);
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: var(--text-sub);
-            transition: all 0.2s ease;
-        }
-
-        .nav-icon-3d {
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
             font-size: 20px;
-            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-bottom: 3px;
+            color: var(--primary);
+            font-weight: 700;
         }
 
-        .nav-item:hover .nav-icon-3d, .nav-item.active .nav-icon-3d {
-            transform: translateY(-4px) scale(1.15) rotate(5deg);
-        }
-
-        .nav-label {
-            font-size: 9px;
-            font-weight: 600;
-            letter-spacing: -0.2px;
-            white-space: nowrap;
-        }
-
-        .nav-item.active {
-            color: #60a5fa;
+        .stat-label {
+            font-size: 12px;
+            color: #777;
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER & MULTI-LANGUAGE TOGGLE -->
-    <header>
-        <div class="logo">IKROMJON AI</div>
-        <div class="lang-selector">
-            <button class="lang-btn active">UZ</button>
-            <button class="lang-btn">RU</button>
-            <button class="lang-btn">EN</button>
-            <button class="lang-btn">KZ</button>
-            <button class="lang-btn">TJ</button>
-            <button class="lang-btn">TR</button>
-        </div>
-    </header>
+    <!-- 3D Background Canvas -->
+    <canvas id="webgl-canvas"></canvas>
 
-    <div class="container">
-        
-        <!-- HERO SECTION -->
-        <div class="hero">
-            <span class="badge">🤖 AI • 3D • DIGITAL EDUCATION</span>
-            <h1>Ikromjon Ai kelajakni<br>bugundan yarating</h1>
-            <p>Zamonaviy kasblar, dasturlash va sun'iy intellektni bir joyda o'rganing.</p>
-        </div>
-
-        <!-- STATS & DASHBOARD GRID -->
-        <div class="grid-2">
-            <div class="card">
-                <div class="card-bg-api" style="background-image: url('https://picsum.photos/id/1/300/200');"></div>
-                <div class="card-content">
-                    <h2>120+</h2>
-                    <p>Yo'nalishlar</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-bg-api" style="background-image: url('https://picsum.photos/id/160/300/200');"></div>
-                <div class="card-content">
-                    <h2 id="time-widget">15:33</h2>
-                    <p id="location-widget">Toshkent, UZ</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- AI USTOZ CARD -->
-        <div class="card ai-ustoz-card" style="margin-bottom: 16px;">
-            <div class="ai-avatar">🧠</div>
-            <div class="card-content">
-                <h3>Ikromjon AI Ustoz 24/7</h3>
-                <p>Savollaringizga real-vaqt rejimida javob oling va bilimlaringizni oshiring.</p>
-            </div>
-        </div>
-
-        <!-- MAIN COURSES GRID -->
-        <h3 style="margin: 20px 0 12px; font-size: 16px; color: #93c5fd;">🔥 Asosiy Kurslar</h3>
-        <div class="grid-2">
-            <div class="card">
-                <div class="card-bg-api" style="background-image: url('https://picsum.photos/id/180/300/200');"></div>
-                <div class="card-content">
-                    <h3>HTML & CSS</h3>
-                    <p>Web dasturlash asoslari</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-bg-api" style="background-image: url('https://picsum.photos/id/119/300/200');"></div>
-                <div class="card-content">
-                    <h3>JavaScript</h3>
-                    <p>Interaktiv dasturlash</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-bg-api" style="background-image: url('https://picsum.photos/id/0/300/200');"></div>
-                <div class="card-content">
-                    <h3>Python</h3>
-                    <p>AI va Avtomatlashtirish</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-bg-api" style="background-image: url('https://picsum.photos/id/201/300/200');"></div>
-                <div class="card-content">
-                    <h3>Flutter</h3>
-                    <p>Mobil ilovalar yaratish</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- FOOTER BRANDING -->
-        <div class="footer-branding">
-            <h4>Ikromjon aka o‘quv markazi</h4>
-            <p>Aloqa: +998 90 123 45 67 | info@ikromjonai.uz<br>Zamonaviy IT kasblarini o'rgatuvchi innovatsion platforma.</p>
-        </div>
-
-    </div>
-
-    <!-- 8-ITEM 3D NAVIGATION BAR -->
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item active">
-            <span class="nav-icon-3d">🏠</span>
-            <span class="nav-label">Bosh sahifa</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="nav-icon-3d">📚</span>
-            <span class="nav-label">Kurslar</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="nav-icon-3d">📝</span>
-            <span class="nav-label">Testlar</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="nav-icon-3d">🤖</span>
-            <span class="nav-label">AI Ustoz</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="nav-icon-3d">📊</span>
-            <span class="nav-label">Tahlil</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="nav-icon-3d">🎓</span>
-            <span class="nav-label">Sertifikat</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="nav-icon-3d">🛡️</span>
-            <span class="nav-label">Xavfsizlik</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="nav-icon-3d">⚙️</span>
-            <span class="nav-label">Sozlamalar</span>
-        </a>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">IKROMJON <span>AI</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Bosh sahifa</a></li>
+            <li><a href="#">Kurslar</a></li>
+            <li><a href="#">3D Laboratoriya</a></li>
+            <li><a href="#">Biz haqimizda</a></li>
+        </ul>
     </nav>
 
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Left Hero Section -->
+        <div class="hero-text">
+            <span class="badge">NEXT-GEN EDUCATION</span>
+            <h1>Kelajak Texnologiyalarini Biz Bilan O'rganing</h1>
+            <p>IKROMJON AI — Sun'iy intellekt, 3D Web va zamonaviy dasturlash yo'nalishlarida chuqurlashtirilgan amaliy bilimlarni taqdim etadi.</p>
+        </div>
+
+        <!-- Right Side Glass Panel -->
+        <div class="glass-card">
+            <div class="card-header">
+                <span>FAOL KURSLAR</span>
+                <span style="font-size: 12px; color: var(--accent);">● LIVE API</span>
+            </div>
+
+            <div id="course-list-container">
+                <div style="text-align: center; color: #666; padding: 20px;">Kurslar yuklanmoqda...</div>
+            </div>
+
+            <div class="stats-grid" id="stats-container">
+                <div class="stat-box"><div class="stat-value">1250+</div><div class="stat-label">O'quvchilar</div></div>
+                <div class="stat-box"><div class="stat-value">94%</div><div class="stat-label">Ishga joylashish</div></div>
+            </div>
+
+            <button class="btn-action" onclick="registerModal()">KURSGA YOZILISH</button>
+        </div>
+    </div>
+
+    <!-- 3D Engine Script (Three.js) -->
+    <script>
+        // 1. Scene, Camera, Renderer Setup
+        const canvas = document.getElementById('webgl-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 0, 7);
+
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // 2. 3D Central Glass Object (Icosahedron)
+        const geometry = new THREE.IcosahedronGeometry(1.8, 0);
+        const material = new THREE.MeshPhysicalMaterial({
+            color: 0x00f0ff,
+            emissive: 0x200044,
+            wireframe: true,
+            roughness: 0.1,
+            metalness: 0.9,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.1
+        });
+        const mainCore = new THREE.Mesh(geometry, material);
+        scene.add(mainCore);
+
+        // Inner Glowing Sphere
+        const innerGeo = new THREE.OctahedronGeometry(1.0, 0);
+        const innerMat = new THREE.MeshBasicMaterial({
+            color: 0xff007f,
+            wireframe: true
+        });
+        const innerCore = new THREE.Mesh(innerGeo, innerMat);
+        scene.add(innerCore);
+
+        // 3. Particle System (Koinot Yulduzlari)
+        const particlesCount = 700;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for(let i=0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 20;
+        }
+
+        const particlesGeo = new THREE.BufferGeometry();
+        particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+        const particlesMat = new THREE.PointsMaterial({
+            size: 0.025,
+            color: 0x00f0ff,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
+        scene.add(particlesMesh);
+
+        // 4. Lights
+        const pointLight = new THREE.PointLight(0x00f0ff, 2, 50);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+        scene.add(ambientLight);
+
+        // 5. Mouse Interaction
+        let mouseX = 0, mouseY = 0;
+        window.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
+            mouseY = (event.clientY / window.innerHeight - 0.5) * 2;
+        });
+
+        // 6. Animation Loop
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const elapsedTime = clock.getElapsedTime();
+
+            // Core Rotations
+            mainCore.rotation.x = elapsedTime * 0.2;
+            mainCore.rotation.y = elapsedTime * 0.3;
+
+            innerCore.rotation.x = -elapsedTime * 0.4;
+            innerCore.rotation.y = -elapsedTime * 0.5;
+
+            particlesMesh.rotation.y = elapsedTime * 0.05;
+
+            // Smooth Camera Movement based on Mouse
+            camera.position.x += (mouseX * 1.5 - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY * 1.5 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Screen Resize Handling
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // ==========================================
+        // BACKEND API INTEGRATION (JavaScript Fetch)
+        // ==========================================
+        const API_URL = "http://127.0.0.1:8000/api";
+
+        async function loadCourses() {
+            const container = document.getElementById('course-list-container');
+            try {
+                const response = await fetch(`${API_URL}/courses`);
+                const courses = await response.json();
+
+                container.innerHTML = courses.map(c => `
+                    <div class="course-item">
+                        <div>
+                            <div class="course-title">${c.icon} ${c.title}</div>
+                            <div class="course-meta">Daraja: ${c.level}</div>
+                        </div>
+                        <span style="color: var(--primary); font-weight:700; font-size:13px;">${c.duration}</span>
+                    </div>
+                `).join('');
+            } catch (error) {
+                container.innerHTML = `
+                    <div style="color:#ff4757; font-size:13px; text-align:center; padding:10px;">
+                        Backend bilan aloqa yo'q.<br>(Python serverni ishga tushiring)
+                    </div>
+                `;
+            }
+        }
+
+        async function registerModal() {
+            const name = prompt("Ismingizni kiriting:");
+            const phone = prompt("Telefon raqamingiz:");
+            if(name && phone) {
+                try {
+                    const res = await fetch(`${API_URL}/enroll`, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ name: name, phone: phone, course_id: 1 })
+                    });
+                    const result = await res.json();
+                    alert(result.message);
+                } catch(e) {
+                    alert("So'rov yuborishda xatolik yuz berdi.");
+                }
+            }
+        }
+
+        // Sahifa yuklanganda API-dan ma'lumotlarni olish
+        loadCourses();
+    </script>
 </body>
 </html>
