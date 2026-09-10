@@ -1,1420 +1,396 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#090b18">
-<title>IKROMJON Ai O‘QUV MARKAZI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ikromjon AI — Kelajakni bugundan yarating</title>
+    <style>
+        :root {
+            --bg-color: #0b0816;
+            --card-bg: #151128;
+            --card-border: rgba(139, 92, 246, 0.2);
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --text-main: #ffffff;
+            --text-sub: #9ca3af;
+            --glow-color: rgba(96, 165, 250, 0.3);
+        }
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:"Times New Roman",Times,serif;
-  background:#080a14;color:#fff;overflow-x:hidden;
-  transition:.35s;
-}
-body.light{background:#f4f6ff;color:#11152b}
-button,input,select{font:inherit}
-button{cursor:pointer;border:0}
-a{text-decoration:none;color:inherit}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
 
-:root{
- --bg:#080a14;--card:rgba(18,22,43,.82);--line:rgba(255,255,255,.1);
- --text:#fff;--muted:#aeb5d0;--p:#8b5cf6;--p2:#ec4899;
-}
-body.light{
- --bg:#f4f6ff;--card:rgba(255,255,255,.9);--line:rgba(20,30,80,.12);
- --text:#101426;--muted:#59627c;
-}
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-bottom: 110px;
+            overflow-x: hidden;
+        }
 
-body[data-season="spring"]{--p:#8b5cf6;--p2:#22c55e}
-body[data-season="summer"]{--p:#06b6d4;--p2:#f59e0b}
-body[data-season="autumn"]{--p:#f97316;--p2:#eab308}
-body[data-season="winter"]{--p:#38bdf8;--p2:#a78bfa}
+        /* HEADER & MULTI-LANGUAGE */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            background: rgba(17, 13, 34, 0.85);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
-#seasonCanvas{
- position:fixed;inset:0;width:100%;height:100%;
- pointer-events:none;z-index:20;
-}
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-#splash{
- position:fixed;inset:0;background:#060711;z-index:9999;
- display:flex;align-items:center;justify-content:center;
- transition:.5s;
-}
-.splashBox{text-align:center;width:min(92%,520px)}
-.aiOrb{
- width:150px;height:150px;margin:auto;
- border-radius:50%;
- position:relative;
- display:grid;place-items:center;
- background:radial-gradient(circle at 35% 30%,#fff,#b76cff 12%,#7c3aed 35%,#16112d 70%);
- box-shadow:0 0 35px #8b5cf6,0 0 100px #ec489966;
- animation:orb 3s linear infinite;
-}
-.aiOrb:before,.aiOrb:after{
- content:"";position:absolute;inset:-17px;border:2px solid #9b5cff66;
- border-radius:50%;transform:rotateX(70deg);
-}
-.aiOrb:after{transform:rotateY(70deg)}
-.aiText{font-weight:bold;font-size:32px;text-shadow:0 0 20px #fff}
-.splashTitle{
- font-size:clamp(25px,6vw,48px);margin-top:28px;
- background:linear-gradient(90deg,#fff,#b88cff,#ff72bb);
- -webkit-background-clip:text;color:transparent;
-}
-.splashSub{color:#aeb5d0;margin:10px 0 25px}
-.langStart{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.langStart button{
- padding:9px 14px;border-radius:12px;background:#171a2e;
- color:#fff;border:1px solid #ffffff18;
-}
-.langStart button.active{background:linear-gradient(135deg,var(--p),var(--p2))}
-.progress{
- height:7px;background:#1b1e32;border-radius:20px;
- overflow:hidden;margin-top:25px;
-}
-.progress i{
- display:block;height:100%;width:0%;
- background:linear-gradient(90deg,var(--p),var(--p2));
- transition:width .08s linear;
-}
-#percent{margin-top:10px;color:#bcbfff}
+        .lang-selector {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            max-width: 60%;
+            scrollbar-width: none;
+        }
 
-header{
- position:sticky;top:0;z-index:50;
- background:rgba(7,9,20,.82);
- backdrop-filter:blur(14px);
- border-bottom:1px solid var(--line);
-}
-body.light header{background:rgba(255,255,255,.85)}
-.nav{
- width:min(1400px,94%);margin:auto;min-height:72px;
- display:flex;align-items:center;gap:18px;
-}
-.logo{
- font-size:21px;font-weight:bold;white-space:nowrap;
- background:linear-gradient(90deg,var(--p),var(--p2));
- -webkit-background-clip:text;color:transparent;
-}
-nav{display:flex;gap:7px;flex:1;justify-content:center}
-nav button,.navBtn{
- background:transparent;color:var(--muted);padding:10px 12px;
- border-radius:10px;
-}
-nav button:hover,.navBtn:hover{background:var(--card);color:var(--text)}
-.clock{
- text-align:right;min-width:110px;font-size:13px;color:var(--muted)
-}
-.clock b{display:block;color:var(--text);font-size:16px}
-.iconBtn{
- width:42px;height:42px;border-radius:12px;
- background:var(--card);color:var(--text);border:1px solid var(--line)
-}
+        .lang-btn {
+            background: #1c1736;
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
 
-main{width:min(1400px,94%);margin:auto}
-section{
- padding:65px 0;
- content-visibility:auto;
- contain-intrinsic-size:500px;
-}
-.hero{
- min-height:560px;display:grid;grid-template-columns:1.15fr .85fr;
- align-items:center;gap:35px;
-}
-.badge{
- display:inline-flex;padding:8px 13px;border-radius:30px;
- background:#8b5cf622;border:1px solid #8b5cf644;color:#cbb6ff;
-}
-h1{font-size:clamp(42px,7vw,82px);line-height:.98;margin:20px 0}
-.gradient{
- background:linear-gradient(90deg,var(--p),var(--p2),#38bdf8);
- -webkit-background-clip:text;color:transparent;
-}
-.hero p{font-size:19px;line-height:1.7;color:var(--muted);max-width:700px}
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
-.btn{
- padding:13px 19px;border-radius:13px;color:#fff;
- background:var(--card);border:1px solid var(--line);
- transition:.2s;
-}
-.btn:hover{transform:translateY(-2px)}
-.primary{background:linear-gradient(135deg,var(--p),var(--p2))}
-.scene{
- height:400px;display:grid;place-items:center;
- perspective:900px;
-}
-.cube{
- width:170px;height:170px;position:relative;
- transform-style:preserve-3d;
- animation:cube 13s linear infinite;
-}
-.face{
- position:absolute;inset:0;display:grid;place-items:center;
- background:linear-gradient(135deg,#8b5cf655,#ec489944);
- border:1px solid #fff4;border-radius:25px;
- box-shadow:inset 0 0 40px #ffffff0a,0 0 35px #8b5cf644;
- font-size:45px;font-weight:bold;
-}
-.f1{transform:translateZ(85px)}
-.f2{transform:rotateY(180deg) translateZ(85px)}
-.f3{transform:rotateY(90deg) translateZ(85px)}
-.f4{transform:rotateY(-90deg) translateZ(85px)}
-.f5{transform:rotateX(90deg) translateZ(85px)}
-.f6{transform:rotateX(-90deg) translateZ(85px)}
-.ring{
- position:absolute;width:320px;height:100px;border:2px solid #a78bfa66;
- border-radius:50%;transform:rotateX(70deg);
- animation:ring 5s linear infinite;
-}
+        .lang-btn.active, .lang-btn:hover {
+            background: var(--accent-purple);
+            border-color: #a78bfa;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+        }
 
-.stats{
- display:grid;grid-template-columns:repeat(4,1fr);gap:14px
-}
-.stat,.card,.uniCard{
- background:var(--card);border:1px solid var(--line);
- border-radius:20px;padding:23px;
- box-shadow:0 15px 50px #00000018;
-}
-.stat b{font-size:32px;display:block;color:var(--text)}
-.stat span{color:var(--muted)}
+        .container {
+            padding: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-.title{text-align:center;margin-bottom:30px}
-.title h2{font-size:38px;margin-bottom:8px}
-.title p{color:var(--muted)}
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            margin: 15px 0 25px;
+        }
 
-.uniHeader{
- display:flex;justify-content:space-between;align-items:end;gap:15px;
- margin-bottom:22px;
-}
-.uniSlider{
- display:flex;gap:16px;overflow-x:auto;
- scroll-snap-type:x mandatory;scrollbar-width:none;
- padding:5px;
-}
-.uniSlider::-webkit-scrollbar{display:none}
-.uniCard{
- flex:0 0 330px;scroll-snap-align:start;
- min-height:220px;position:relative;
- overflow:hidden;
-}
-.uniCard:before{
- content:"";position:absolute;width:150px;height:150px;
- right:-50px;top:-50px;border-radius:50%;
- background:var(--p);filter:blur(45px);opacity:.25;
-}
-.rank{color:var(--p);font-size:14px}
-.uniLogo{
- width:64px;height:64px;border-radius:17px;
- display:grid;place-items:center;margin:14px 0;
- font-weight:bold;font-size:17px;
- background:linear-gradient(135deg,var(--p),var(--p2));
-}
-.uniCard h3{font-size:21px;margin-bottom:8px}
-.uniCard p{color:var(--muted);line-height:1.5}
-.uniDots{text-align:center;margin-top:16px}
-.uniDots i{
- display:inline-block;width:8px;height:8px;border-radius:50%;
- background:#555;margin:4px;
-}
-.uniDots i.active{background:var(--p);transform:scale(1.5)}
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 20px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: #c084fc;
+            margin-bottom: 10px;
+        }
 
-.toolbar{
- display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px
-}
-.search,.select{
- padding:13px 15px;border-radius:12px;
- border:1px solid var(--line);background:var(--card);
- color:var(--text);outline:none;
-}
-.search{flex:1;min-width:220px}
-.grid{
- display:grid;grid-template-columns:repeat(3,1fr);gap:15px
-}
-.course h3,.direction h3{margin:10px 0}
-.course p,.direction p,.lesson p{color:var(--muted);line-height:1.5}
-.tag{
- display:inline-block;padding:5px 9px;border-radius:20px;
- background:#8b5cf622;color:#c9b7ff;font-size:13px
-}
-.more{text-align:center;margin-top:20px}
+        .hero h1 {
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 1.3;
+            background: linear-gradient(to right, #93c5fd, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
 
-.seasons{
- display:flex;justify-content:center;gap:12px;flex-wrap:wrap
-}
-.seasonBtn{
- min-width:130px;padding:15px;border-radius:16px;
- background:var(--card);color:var(--text);
- border:1px solid var(--line);
-}
-.seasonBtn.active{border-color:var(--p);box-shadow:0 0 20px #8b5cf633}
+        .hero p {
+            color: var(--text-sub);
+            font-size: 13px;
+            line-height: 1.5;
+        }
 
-.weather{
- display:flex;align-items:center;gap:15px;
- padding:12px 15px;border:1px solid var(--line);
- background:var(--card);border-radius:15px;
-}
-.weather b{display:block}.weather small{color:var(--muted)}
+        /* CARDS GRID & BACKGROUND IMAGES */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
 
-.chat{
- max-width:850px;margin:auto;
- background:var(--card);border:1px solid var(--line);
- border-radius:22px;overflow:hidden;
-}
-.chatMessages{height:330px;overflow:auto;padding:20px}
-.msg{
- max-width:80%;padding:12px 15px;border-radius:15px;
- margin-bottom:10px;line-height:1.5;
- background:#ffffff0b;
-}
-.msg.ai{border:1px solid #8b5cf633}
-.msg.user{margin-left:auto;background:linear-gradient(135deg,#8b5cf633,#ec489922)}
-.chatForm{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
-.chatForm input{flex:1}
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 16px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease;
+        }
 
-.progressBox{margin-top:15px}
-.bar{height:10px;background:#ffffff12;border-radius:10px;overflow:hidden}
-.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--p),var(--p2))}
+        .card:active {
+            transform: scale(0.98);
+        }
 
-footer{
- padding:40px 3%;border-top:1px solid var(--line);
- text-align:center;color:var(--muted)
-}
+        /* Dynamic Image Fetching simulation */
+        .card-bg-api {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.12;
+            z-index: 1;
+        }
 
-.modal{
- position:fixed;inset:0;z-index:500;
- display:none;place-items:center;padding:20px;
- background:#0009;
-}
-.modal.show{display:grid}
-.modalBox{
- width:min(720px,100%);max-height:90vh;overflow:auto;
- background:#101326;color:#fff;border:1px solid #ffffff18;
- border-radius:24px;padding:24px;
-}
-body.light .modalBox{background:#fff;color:#111}
-.modalHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.close{background:transparent;color:inherit;font-size:25px}
-.question{font-size:22px;line-height:1.5;margin:20px 0}
-.answers{display:grid;gap:10px}
-.answer{text-align:left;padding:14px;border-radius:13px;background:#ffffff0a;color:inherit;border:1px solid #ffffff15}
-.answer.correct{background:#16a34a44;border-color:#22c55e}
-.answer.wrong{background:#dc262644;border-color:#ef4444}
+        .card-content {
+            position: relative;
+            z-index: 2;
+        }
 
-.toast{
- position:fixed;bottom:25px;right:20px;z-index:900;
- background:#11152b;color:#fff;border:1px solid #ffffff22;
- padding:13px 17px;border-radius:13px;
- transform:translateY(100px);opacity:0;transition:.3s;
-}
-.toast.show{transform:translateY(0);opacity:1}
+        .card h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #60a5fa;
+            margin-bottom: 4px;
+        }
 
-.mobileNav{
- display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;
- background:#090b18eF;backdrop-filter:blur(15px);
- border-top:1px solid #ffffff15;
- padding:8px;
-}
-.mobileNav div{display:flex;justify-content:space-around}
-.mobileNav button{background:none;color:#aaa;font-size:12px}
-.mobileNav b{display:block;font-size:20px}
+        .card h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
 
-@keyframes orb{to{transform:rotate(360deg)}}
-@keyframes cube{to{transform:rotateX(360deg) rotateY(360deg)}}
-@keyframes ring{to{transform:rotateX(70deg) rotateZ(360deg)}}
+        .card p {
+            font-size: 12px;
+            color: var(--text-sub);
+        }
 
-@media(max-width:950px){
- nav{display:none}.hero{grid-template-columns:1fr;text-align:center}
- .hero p{margin:auto}.actions{justify-content:center}
- .scene{height:320px}.stats{grid-template-columns:repeat(2,1fr)}
- .grid{grid-template-columns:repeat(2,1fr)}
- .clock{display:none}.mobileNav{display:block}
- main{padding-bottom:70px}
-}
-@media(max-width:600px){
- section{padding:45px 0}
- .stats,.grid{grid-template-columns:1fr}
- .uniCard{flex-basis:85vw}
- h1{font-size:48px}.scene{height:270px}
- .cube{width:125px;height:125px}
- .f1{transform:translateZ(62px)}.f2{transform:rotateY(180deg) translateZ(62px)}
- .f3{transform:rotateY(90deg) translateZ(62px)}.f4{transform:rotateY(-90deg) translateZ(62px)}
- .f5{transform:rotateX(90deg) translateZ(62px)}.f6{transform:rotateX(-90deg) translateZ(62px)}
- .ring{width:240px}.weather{display:none}
-}
-</style>
+        /* AI USTOZ SECTION */
+        .ai-ustoz-card {
+            background: linear-gradient(135deg, #181333 0%, #201745 100%);
+            border: 1px solid #7c3aed;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .ai-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+            flex-shrink: 0;
+        }
+
+        /* FOOTER BRANDING */
+        .footer-branding {
+            text-align: center;
+            padding: 25px 15px 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 20px;
+        }
+
+        .footer-branding h4 {
+            font-size: 16px;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .footer-branding p {
+            font-size: 12px;
+            color: var(--text-sub);
+            line-height: 1.6;
+        }
+
+        /* 3D NAV BAR (BOTTOM) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(13, 10, 26, 0.92);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(139, 92, 246, 0.25);
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            padding: 10px 4px 12px;
+            z-index: 1000;
+            box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-sub);
+            transition: all 0.2s ease;
+        }
+
+        .nav-icon-3d {
+            font-size: 20px;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 3px;
+        }
+
+        .nav-item:hover .nav-icon-3d, .nav-item.active .nav-icon-3d {
+            transform: translateY(-4px) scale(1.15) rotate(5deg);
+        }
+
+        .nav-label {
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            white-space: nowrap;
+        }
+
+        .nav-item.active {
+            color: #60a5fa;
+        }
+    </style>
 </head>
-
-<body data-season="spring">
-
-<canvas id="seasonCanvas"></canvas>
-
-<!-- SPLASH -->
-<div id="splash">
- <div class="splashBox">
-  <div class="aiOrb">
-   <div class="aiText">AI</div>
-  </div>
-
-  <div class="splashTitle">IKROMJON Ai</div>
-  <div class="splashSub" data-i18n="center">O‘QUV MARKAZI</div>
-
-  <div class="langStart">
-   <button data-lang="uz" class="active">UZ</button>
-   <button data-lang="ru">RU</button>
-   <button data-lang="en">ENG</button>
-   <button data-lang="tj">TJ</button>
-   <button data-lang="kz">KZ</button>
-  </div>
-
-  <div class="progress"><i id="loadBar"></i></div>
-  <div id="percent">0%</div>
- </div>
-</div>
-
-<header>
- <div class="nav">
-  <div class="logo">IKROMJON Ai</div>
-
-  <nav>
-   <button data-go="home" data-i18n="home">Bosh sahifa</button>
-   <button data-go="directions" data-i18n="directions">Yo‘nalishlar</button>
-   <button data-go="courses" data-i18n="courses">Kurslar</button>
-   <button data-go="tests" data-i18n="tests">Testlar</button>
-   <button data-go="ai" data-i18n="ai">AI Ustoz</button>
-  </nav>
-
-  <div class="clock">
-   <b id="clockTime">00:00:00</b>
-   <span id="clockDate">--</span>
-  </div>
-
-  <button class="iconBtn no-speak" id="themeBtn">🌙</button>
-  <button class="iconBtn no-speak" id="profileBtn">👤</button>
- </div>
-</header>
-
-<main>
-
-<!-- HERO -->
-<section id="home" class="hero">
- <div>
-  <span class="badge">🤖 AI • 3D • DIGITAL EDUCATION</span>
-  <h1>
-   <span data-i18n="learn">Kelajakni</span><br>
-   <span class="gradient" data-i18n="build">bugundan yarating</span>
-  </h1>
-  <p data-i18n="heroText">
-   Zamonaviy kasblar, dasturlash, sun’iy intellekt va raqamli texnologiyalarni bir joyda o‘rganing.
-  </p>
-
-  <div class="actions">
-   <button class="btn primary" data-go="directions" data-i18n="start">🚀 O‘qishni boshlash</button>
-   <button class="btn" data-go="courses" data-i18n="courses">📚 Kurslarni ko‘rish</button>
-  </div>
- </div>
-
- <div class="scene">
-  <div class="ring"></div>
-  <div class="cube">
-   <div class="face f1">AI</div><div class="face f2">AI</div>
-   <div class="face f3">01</div><div class="face f4">∞</div>
-   <div class="face f5">JS</div><div class="face f6">PY</div>
-  </div>
- </div>
-</section>
-
-<!-- STATS -->
-<section>
- <div class="stats">
-  <div class="stat"><b>120+</b><span data-i18n="directions">Yo‘nalishlar</span></div>
-  <div class="stat"><b>500+</b><span data-i18n="lessons">Darslar</span></div>
-  <div class="stat"><b>24/7</b><span data-i18n="ai">AI Ustoz</span></div>
-  <div class="stat"><b>∞</b><span data-i18n="growth">Rivojlanish</span></div>
- </div>
-</section>
-
-<!-- UNIVERSITIES -->
-<section id="universities">
- <div class="uniHeader">
-  <div>
-   <span class="tag">🎓 OLIY TA’LIM</span>
-   <h2 data-i18n="universities">Toshkentdagi yetakchi OTMlar</h2>
-   <p style="color:var(--muted)" data-i18n="uniText">
-    Tanlangan universitetlar vitrinası.
-   </p>
-  </div>
-  <div class="actions">
-   <button class="iconBtn no-speak" id="uniPrev">‹</button>
-   <button class="iconBtn no-speak" id="uniNext">›</button>
-  </div>
- </div>
-
- <div class="uniSlider" id="uniSlider"></div>
- <div class="uniDots" id="uniDots"></div>
-</section>
-
-<!-- SEASONS -->
-<section>
- <div class="title">
-  <h2 data-i18n="seasons">🌍 4 fasl — 4 kayfiyat</h2>
-  <p data-i18n="seasonText">Ilova ko‘rinishini faslga moslashtiring.</p>
- </div>
-
- <div class="seasons">
-  <button class="seasonBtn" data-season-btn="spring">🌼 <span data-i18n="spring">Bahor</span></button>
-  <button class="seasonBtn" data-season-btn="summer">🏝️ <span data-i18n="summer">Yoz</span></button>
-  <button class="seasonBtn" data-season-btn="autumn">🍁 <span data-i18n="autumn">Kuz</span></button>
-  <button class="seasonBtn" data-season-btn="winter">❄️ <span data-i18n="winter">Qish</span></button>
- </div>
-</section>
-
-<!-- DIRECTIONS -->
-<section id="directions">
- <div class="title">
-  <h2 data-i18n="directionsTitle">120+ ta ta’lim yo‘nalishi</h2>
-  <p data-i18n="directionText">O‘zingizga mos kasb va texnologiyani tanlang.</p>
- </div>
-
- <div class="toolbar">
-  <input class="search" id="directionSearch" placeholder="🔎 Yo‘nalish qidirish...">
-  <select class="select" id="directionCategory">
-   <option value="all">Barchasi</option>
-   <option value="IT">IT</option>
-   <option value="AI">AI</option>
-   <option value="Design">Design</option>
-   <option value="Business">Biznes</option>
-  </select>
- </div>
-
- <div class="grid" id="directionGrid"></div>
- <div class="more">
-  <button class="btn primary" id="moreDirections" data-i18n="more">➕ Yana ko‘rsatish</button>
- </div>
-</section>
-
-<!-- COURSES -->
-<section id="courses">
- <div class="title">
-  <h2 data-i18n="coursesTitle">🔥 Asosiy kurslar</h2>
-  <p data-i18n="courseText">Amaliy loyihalar orqali o‘rganing.</p>
- </div>
-
- <div class="grid" id="courseGrid"></div>
-</section>
-
-<!-- LESSONS -->
-<section id="lessons">
- <div class="title">
-  <h2 data-i18n="lessonsTitle">📚 Darslar</h2>
-  <p data-i18n="lessonText">Bosqichma-bosqich bilim oling.</p>
- </div>
- <div class="grid" id="lessonGrid"></div>
-</section>
-
-<!-- TESTS -->
-<section id="tests">
- <div class="title">
-  <h2 data-i18n="testsTitle">🧠 Interaktiv testlar</h2>
-  <p data-i18n="testText">Bilimingizni tekshiring va XP to‘plang.</p>
- </div>
-
- <div class="grid" id="testGrid"></div>
-</section>
-
-<!-- AI -->
-<section id="ai">
- <div class="title">
-  <h2>🤖 <span data-i18n="aiTeacher">AI Ustoz</span></h2>
-  <p data-i18n="aiText">Savolingizni yozing — AI Ustoz javob beradi.</p>
- </div>
-
- <div class="chat">
-  <div class="chatMessages" id="chatMessages">
-   <div class="msg ai" data-i18n="welcomeAI">
-    Salom! Men IKROMJON Ai Ustozman. Dasturlash, AI va ta’lim bo‘yicha savolingizni yozing.
-   </div>
-  </div>
-  <div class="chatForm">
-   <input class="search" id="chatInput" placeholder="Savolingizni yozing...">
-   <button class="btn primary" id="chatSend">➤</button>
-  </div>
- </div>
-</section>
-
-<!-- PROGRESS -->
-<section id="profile">
- <div class="title">
-  <h2 data-i18n="progressTitle">🏆 Shaxsiy rivojlanish</h2>
-  <p data-i18n="progressText">Natijalaringiz shu qurilmada saqlanadi.</p>
- </div>
-
- <div class="card">
-  <h2 id="userName">O‘quvchi</h2>
-  <p style="color:var(--muted);margin:8px 0">IKROMJON Ai</p>
-
-  <div class="progressBox">
-   <div style="display:flex;justify-content:space-between">
-    <span>XP</span><b id="xpText">0 XP</b>
-   </div>
-   <div class="bar"><i id="xpBar"></i></div>
-  </div>
-
-  <div class="actions">
-   <button class="btn primary" id="editProfile">👤 Profilni tahrirlash</button>
-   <button class="btn" id="certificateBtn">📜 Sertifikat</button>
-  </div>
- </div>
-</section>
-
-</main>
-
-<footer>
- <b>IKROMJON Ai O‘QUV MARKAZI</b>
- <p style="margin-top:10px">Bilim oling. Amaliyot qiling. Rivojlaning.</p>
-</footer>
-
-<div class="mobileNav">
- <div>
-  <button data-go="home"><b>⌂</b><span data-i18n="home">Bosh sahifa</span></button>
-  <button data-go="directions"><b>▦</b><span data-i18n="directions">Yo‘nalishlar</span></button>
-  <button data-go="tests"><b>✓</b><span data-i18n="tests">Testlar</span></button>
-  <button data-go="ai"><b>🤖</b><span>AI</span></button>
- </div>
-</div>
-
-<div class="modal" id="modal">
- <div class="modalBox" id="modalContent"></div>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script>
-"use strict";
-
-/* =========================
-   SAFE STORAGE
-========================= */
-const store={
- get(k,d=""){
-  try{return localStorage.getItem(k) ?? d}catch(e){return d}
- },
- set(k,v){
-  try{localStorage.setItem(k,v)}catch(e){}
- }
-};
-
-const state={
- lang:store.get("ikrom_lang","uz"),
- season:store.get("ikrom_season","spring"),
- theme:store.get("ikrom_theme","dark"),
- xp:Number(store.get("ikrom_xp","0"))||0,
- name:store.get("ikrom_name","O‘quvchi"),
- directionsVisible:24,
- uniIndex:0
-};
-
-document.body.dataset.season=state.season;
-if(state.theme==="light")document.body.classList.add("light");
-
-/* =========================
-   TRANSLATIONS
-========================= */
-const tr={
- uz:{
-  center:"O‘QUV MARKAZI",home:"Bosh sahifa",directions:"Yo‘nalishlar",
-  courses:"Kurslar",tests:"Testlar",ai:"AI Ustoz",lessons:"Darslar",
-  growth:"Rivojlanish",learn:"Kelajakni",build:"bugundan yarating",
-  heroText:"Zamonaviy kasblar, dasturlash, sun’iy intellekt va raqamli texnologiyalarni bir joyda o‘rganing.",
-  start:"🚀 O‘qishni boshlash",universities:"Toshkentdagi yetakchi OTMlar",
-  uniText:"Tanlangan universitetlar vitrinası.",seasons:"🌍 4 fasl — 4 kayfiyat",
-  seasonText:"Ilova ko‘rinishini faslga moslashtiring.",spring:"Bahor",
-  summer:"Yoz",autumn:"Kuz",winter:"Qish",directionsTitle:"120+ ta ta’lim yo‘nalishi",
-  directionText:"O‘zingizga mos kasb va texnologiyani tanlang.",
-  more:"➕ Yana ko‘rsatish",coursesTitle:"🔥 Asosiy kurslar",
-  courseText:"Amaliy loyihalar orqali o‘rganing.",lessonsTitle:"📚 Darslar",
-  lessonText:"Bosqichma-bosqich bilim oling.",testsTitle:"🧠 Interaktiv testlar",
-  testText:"Bilimingizni tekshiring va XP to‘plang.",aiTeacher:"AI Ustoz",
-  aiText:"Savolingizni yozing — AI Ustoz javob beradi.",
-  welcomeAI:"Salom! Men IKROMJON Ai Ustozman. Dasturlash, AI va ta’lim bo‘yicha savolingizni yozing.",
-  progressTitle:"🏆 Shaxsiy rivojlanish",progressText:"Natijalaringiz shu qurilmada saqlanadi."
- },
- ru:{
-  center:"ОБРАЗОВАТЕЛЬНЫЙ ЦЕНТР",home:"Главная",directions:"Направления",
-  courses:"Курсы",tests:"Тесты",ai:"AI Учитель",lessons:"Уроки",
-  growth:"Развитие",learn:"Создавайте",build:"будущее сегодня",
-  heroText:"Изучайте современные профессии, программирование, искусственный интеллект и цифровые технологии.",
-  start:"🚀 Начать обучение",universities:"Ведущие вузы Ташкента",
-  uniText:"Витрина выбранных университетов.",seasons:"🌍 4 сезона — 4 настроения",
-  seasonText:"Настройте приложение под сезон.",spring:"Весна",summer:"Лето",
-  autumn:"Осень",winter:"Зима",directionsTitle:"120+ образовательных направлений",
-  directionText:"Выберите профессию и технологию.",more:"➕ Показать ещё",
-  coursesTitle:"🔥 Основные курсы",courseText:"Учитесь через практические проекты.",
-  lessonsTitle:"📚 Уроки",lessonText:"Получайте знания шаг за шагом.",
-  testsTitle:"🧠 Интерактивные тесты",testText:"Проверяйте знания и получайте XP.",
-  aiTeacher:"AI Учитель",aiText:"Напишите вопрос — AI Учитель ответит.",
-  welcomeAI:"Здравствуйте! Я AI Учитель IKROMJON Ai. Задавайте вопросы о программировании и AI.",
-  progressTitle:"🏆 Личный прогресс",progressText:"Ваши результаты сохраняются на этом устройстве."
- },
- en:{
-  center:"EDUCATION CENTER",home:"Home",directions:"Directions",courses:"Courses",
-  tests:"Tests",ai:"AI Teacher",lessons:"Lessons",growth:"Growth",
-  learn:"Build your",build:"future today",
-  heroText:"Learn modern careers, programming, artificial intelligence and digital technologies in one place.",
-  start:"🚀 Start learning",universities:"Leading universities in Tashkent",
-  uniText:"Selected university showcase.",seasons:"🌍 4 seasons — 4 moods",
-  seasonText:"Customize the app for the season.",spring:"Spring",summer:"Summer",
-  autumn:"Autumn",winter:"Winter",directionsTitle:"120+ learning directions",
-  directionText:"Choose your career and technology.",more:"➕ Show more",
-  coursesTitle:"🔥 Main courses",courseText:"Learn through practical projects.",
-  lessonsTitle:"📚 Lessons",lessonText:"Learn step by step.",
-  testsTitle:"🧠 Interactive tests",testText:"Check your knowledge and earn XP.",
-  aiTeacher:"AI Teacher",aiText:"Ask a question — AI Teacher will answer.",
-  welcomeAI:"Hello! I am IKROMJON Ai Teacher. Ask me about programming, AI and education.",
-  progressTitle:"🏆 Personal progress",progressText:"Your results are saved on this device."
- },
- tj:{
-  center:"МАРКАЗИ ОМӮЗИШӢ",home:"Асосӣ",directions:"Самтҳо",courses:"Курсҳо",
-  tests:"Тестҳо",ai:"AI Устод",lessons:"Дарсҳо",growth:"Рушд",
-  learn:"Ояндаро",build:"имрӯз созед",heroText:"Касбҳои муосир, барномасозӣ, AI ва технологияҳои рақамиро омӯзед.",
-  start:"🚀 Оғози омӯзиш",universities:"Донишгоҳҳои пешсафи Тошканд",
-  uniText:"Намоиши донишгоҳҳои интихобшуда.",seasons:"🌍 4 фасл — 4 ҳолат",
-  seasonText:"Барномаро ба фасл мутобиқ кунед.",spring:"Баҳор",summer:"Тобистон",
-  autumn:"Тирамоҳ",winter:"Зимистон",directionsTitle:"120+ самти омӯзиш",
-  directionText:"Касб ва технологияро интихоб кунед.",more:"➕ Бештар нишон диҳед",
-  coursesTitle:"🔥 Курсҳои асосӣ",courseText:"Тавассути лоиҳаҳои амалӣ омӯзед.",
-  lessonsTitle:"📚 Дарсҳо",lessonText:"Қадам ба қадам омӯзед.",
-  testsTitle:"🧠 Тестҳои интерактивӣ",testText:"Дониши худро санҷед ва XP гиред.",
-  aiTeacher:"AI Устод",aiText:"Савол диҳед — AI Устод ҷавоб медиҳад.",
-  welcomeAI:"Салом! Ман AI Устоди IKROMJON ҳастам.",
-  progressTitle:"🏆 Пешрафти шахсӣ",progressText:"Натиҷаҳо дар дастгоҳ нигоҳ дошта мешаванд."
- },
- kz:{
-  center:"БІЛІМ БЕРУ ОРТАЛЫҒЫ",home:"Басты бет",directions:"Бағыттар",
-  courses:"Курстар",tests:"Тесттер",ai:"AI Ұстаз",lessons:"Сабақтар",
-  growth:"Даму",learn:"Болашағыңызды",build:"бүгін жасаңыз",
-  heroText:"Заманауи мамандықтар, бағдарламалау, жасанды интеллект және цифрлық технологияларды үйреніңіз.",
-  start:"🚀 Оқуды бастау",universities:"Ташкенттегі жетекші ЖОО",
-  uniText:"Таңдалған университеттер көрмесі.",seasons:"🌍 4 мезгіл — 4 көңіл-күй",
-  seasonText:"Қосымшаны мезгілге бейімдеңіз.",spring:"Көктем",summer:"Жаз",
-  autumn:"Күз",winter:"Қыс",directionsTitle:"120+ оқу бағыты",
-  directionText:"Мамандық пен технологияны таңдаңыз.",more:"➕ Тағы көрсету",
-  coursesTitle:"🔥 Негізгі курстар",courseText:"Практикалық жобалар арқылы үйреніңіз.",
-  lessonsTitle:"📚 Сабақтар",lessonText:"Қадам сайын білім алыңыз.",
-  testsTitle:"🧠 Интерактивті тесттер",testText:"Біліміңізді тексеріп, XP жинаңыз.",
-  aiTeacher:"AI Ұстаз",aiText:"Сұрақ қойыңыз — AI Ұстаз жауап береді.",
-  welcomeAI:"Сәлем! Мен IKROMJON Ai Ұстазымын. Бағдарламалау және AI туралы сұрақ қойыңыз.",
-  progressTitle:"🏆 Жеке даму",progressText:"Нәтижелеріңіз осы құрылғыда сақталады."
- }
-};
-
-function t(k){
- return (tr[state.lang]&&tr[state.lang][k])||tr.uz[k]||k;
-}
-
-function applyLanguage(){
- document.documentElement.lang=state.lang==="en"?"en":state.lang;
- document.querySelectorAll("[data-i18n]").forEach(el=>{
-  const key=el.dataset.i18n;
-  if(tr[state.lang]?.[key])el.textContent=tr[state.lang][key];
- });
- document.querySelectorAll("[data-lang]").forEach(b=>{
-  b.classList.toggle("active",b.dataset.lang===state.lang);
- });
- renderCourses();
- renderLessons();
- renderTests();
-}
-
-/* =========================
-   LANGUAGE
-========================= */
-document.querySelectorAll("[data-lang]").forEach(btn=>{
- btn.addEventListener("click",()=>{
-  state.lang=btn.dataset.lang;
-  store.set("ikrom_lang",state.lang);
-  applyLanguage();
-  toast("🌐 "+state.lang.toUpperCase());
- });
-});
-
-/* =========================
-   FAST SPLASH
-========================= */
-let progress=0;
-const bar=document.getElementById("loadBar");
-const percent=document.getElementById("percent");
-
-function fastStart(){
- const start=performance.now();
- function step(now){
-  progress=Math.min(100,Math.round((now-start)/7));
-  bar.style.width=progress+"%";
-  percent.textContent=progress+"%";
-  if(progress<100)requestAnimationFrame(step);
-  else setTimeout(()=>{
-   document.getElementById("splash").style.opacity="0";
-   setTimeout(()=>document.getElementById("splash").remove(),350);
-  },80);
- }
- requestAnimationFrame(step);
-}
-fastStart();
-
-/* =========================
-   CLOCK
-========================= */
-function updateClock(){
- const d=new Date();
- document.getElementById("clockTime").textContent=
-  d.toLocaleTimeString(state.lang==="en"?"en-US":"uz-UZ",{hour12:false});
- document.getElementById("clockDate").textContent=
-  d.toLocaleDateString(state.lang==="en"?"en-US":"uz-UZ",
-  {day:"2-digit",month:"short",year:"numeric"});
-}
-updateClock();
-setInterval(updateClock,1000);
-
-/* =========================
-   BUTTON VOICE
-========================= */
-function speakText(text){
- if(!("speechSynthesis" in window))return;
- try{
-  speechSynthesis.cancel();
-  const map={uz:"uz-UZ",ru:"ru-RU",en:"en-US",tj:"tg-TJ",kz:"kk-KZ"};
-  const u=new SpeechSynthesisUtterance(text);
-  u.lang=map[state.lang]||"uz-UZ";
-  u.rate=.95;
-  speechSynthesis.speak(u);
- }catch(e){}
-}
-
-document.addEventListener("click",e=>{
- const b=e.target.closest("button");
- if(!b||b.disabled||b.classList.contains("no-speak"))return;
- const text=(b.dataset.speak||b.innerText||"").replace(/\s+/g," ").trim();
- if(text && text.length<180)speakText(text);
-});
-
-/* =========================
-   NAVIGATION
-========================= */
-document.addEventListener("click",e=>{
- const b=e.target.closest("[data-go]");
- if(!b)return;
- const target=document.getElementById(b.dataset.go);
- if(target)target.scrollIntoView({behavior:"smooth",block:"start"});
-});
-
-/* =========================
-   THEME
-========================= */
-document.getElementById("themeBtn").addEventListener("click",()=>{
- document.body.classList.toggle("light");
- state.theme=document.body.classList.contains("light")?"light":"dark";
- store.set("ikrom_theme",state.theme);
- document.getElementById("themeBtn").textContent=
-  state.theme==="light"?"☀️":"🌙";
-});
-document.getElementById("themeBtn").textContent=
- state.theme==="light"?"☀️":"🌙";
-
-/* =========================
-   SEASONS CANVAS
-========================= */
-const canvas=document.getElementById("seasonCanvas");
-const ctx=canvas.getContext("2d",{alpha:true});
-let particles=[];
-let raf=0;
-const seasonIcons={
- spring:["🌼","🌸","✨"],
- summer:["🏝️","☀️","🌴","🌊"],
- autumn:["🍁","🍂","🍃"],
- winter:["❄️","❄","✨"]
-};
-
-function resizeCanvas(){
- const ratio=Math.min(devicePixelRatio||1,2);
- canvas.width=innerWidth*ratio;
- canvas.height=innerHeight*ratio;
- canvas.style.width=innerWidth+"px";
- canvas.style.height=innerHeight+"px";
- ctx.setTransform(ratio,0,0,ratio,0,0);
-}
-function seedParticles(){
- const count=innerWidth<600?22:38;
- const icons=seasonIcons[state.season];
- particles=Array.from({length:count},()=>({
-  x:Math.random()*innerWidth,
-  y:Math.random()*innerHeight,
-  s:Math.random()*1.3+.5,
-  size:Math.random()*14+12,
-  a:Math.random()*.6+.25,
-  icon:icons[Math.floor(Math.random()*icons.length)],
-  phase:Math.random()*Math.PI*2
- }));
-}
-function animateParticles(){
- if(document.hidden){raf=0;return}
- ctx.clearRect(0,0,innerWidth,innerHeight);
- particles.forEach(p=>{
-  p.y+=p.s;
-  p.x+=Math.sin(p.phase+p.y*.01)*.25;
-  if(p.y>innerHeight+30){p.y=-30;p.x=Math.random()*innerWidth}
-  ctx.globalAlpha=p.a;
-  ctx.font=p.size+"px serif";
-  ctx.fillText(p.icon,p.x,p.y);
- });
- ctx.globalAlpha=1;
- raf=requestAnimationFrame(animateParticles);
-}
-function startParticles(){
- cancelAnimationFrame(raf);
- seedParticles();
- raf=requestAnimationFrame(animateParticles);
-}
-addEventListener("resize",()=>{resizeCanvas();seedParticles()});
-document.addEventListener("visibilitychange",()=>{
- if(!document.hidden&&!raf)raf=requestAnimationFrame(animateParticles);
-});
-resizeCanvas();
-startParticles();
-
-document.querySelectorAll("[data-season-btn]").forEach(btn=>{
- btn.addEventListener("click",()=>{
-  state.season=btn.dataset.seasonBtn;
-  store.set("ikrom_season",state.season);
-  document.body.dataset.season=state.season;
-  document.querySelectorAll("[data-season-btn]").forEach(x=>
-   x.classList.toggle("active",x===btn)
-  );
-  startParticles();
- });
-});
-document.querySelector(`[data-season-btn="${state.season}"]`)?.classList.add("active");
-
-/* =========================
-   UNIVERSITIES
-========================= */
-const universities=[
- ["01","TIIAME","TIIAME Milliy tadqiqot universiteti","Muhandislik, suv xo‘jaligi, ekologiya va ilmiy tadqiqotlar."],
- ["02","O‘zMU","O‘zbekiston Milliy universiteti","Ko‘plab fan va zamonaviy ta’lim yo‘nalishlari."],
- ["03","TDTU","Toshkent davlat texnika universiteti","Muhandislik, texnika, energetika va texnologiyalar."],
- ["04","TDIU","Toshkent davlat iqtisodiyot universiteti","Iqtisodiyot, biznes, moliya va menejment."],
- ["05","TSTU","Toshkent davlat transport universiteti","Transport, logistika va muhandislik yo‘nalishlari."],
- ["06","TUIT","Muhammad al-Xorazmiy nomidagi TATU","IT, dasturlash, telekommunikatsiya va raqamli texnologiyalar."],
- ["07","WIUT","Westminster International University in Tashkent","Xalqaro ingliz tilidagi ta’lim va biznes/IT dasturlari."],
- ["08","UWED","Jahon iqtisodiyoti va diplomatiya universiteti","Xalqaro munosabatlar, iqtisodiyot va diplomatiya."],
- ["09","TDAU","Toshkent davlat agrar universiteti","Agrar, texnologik va zamonaviy ilmiy yo‘nalishlar."],
- ["10","TSUOS","Toshkent davlat sharqshunoslik universiteti","Sharq tillari, mamlakatshunoslik va xalqaro yo‘nalishlar."]
-];
-
-function renderUniversities(){
- const box=document.getElementById("uniSlider");
- box.innerHTML=universities.map((u,i)=>`
-  <article class="uniCard">
-   <span class="rank">TOP VITRINA ${u[0]}</span>
-   <div class="uniLogo">${u[1]}</div>
-   <h3>${u[2]}</h3>
-   <p>${u[3]}</p>
-   <div class="actions">
-    <button class="btn primary uniOpen" data-index="${i}">🎓 Batafsil</button>
-   </div>
-  </article>
- `).join("");
-
- document.getElementById("uniDots").innerHTML=
-  universities.map((_,i)=>`<i class="${i===0?"active":""}"></i>`).join("");
-}
-renderUniversities();
-
-document.getElementById("uniNext").onclick=()=>{
- document.getElementById("uniSlider").scrollBy({left:345,behavior:"smooth"});
-};
-document.getElementById("uniPrev").onclick=()=>{
- document.getElementById("uniSlider").scrollBy({left:-345,behavior:"smooth"});
-};
-
-document.getElementById("uniSlider").addEventListener("click",e=>{
- const b=e.target.closest(".uniOpen");
- if(!b)return;
- const u=universities[Number(b.dataset.index)];
- openModal(`
-  <div class="modalHead"><h2>🎓 ${u[1]}</h2><button class="close no-speak" onclick="closeModal()">✕</button></div>
-  <div class="uniLogo">${u[1]}</div>
-  <h2>${u[2]}</h2>
-  <p style="color:var(--muted);line-height:1.7;margin:15px 0">${u[3]}</p>
-  <button class="btn primary" onclick="closeModal()">✓ Yopish</button>
- `);
-});
-
-let uniTimer=setInterval(()=>{
- if(document.hidden)return;
- const slider=document.getElementById("uniSlider");
- if(slider)slider.scrollBy({left:345,behavior:"smooth"});
-},5000);
-
-/* =========================
-   DIRECTIONS 120+
-========================= */
-const baseDirections=[
- ["Frontend dasturlash","IT"],["Backend dasturlash","IT"],["Full Stack Developer","IT"],
- ["Python dasturlash","IT"],["Java dasturlash","IT"],["C++ dasturlash","IT"],
- ["C# dasturlash","IT"],["PHP dasturlash","IT"],["Go dasturlash","IT"],
- ["Rust dasturlash","IT"],["JavaScript","IT"],["TypeScript","IT"],
- ["React JS","IT"],["Vue JS","IT"],["Angular","IT"],["Node.js","IT"],
- ["Django","IT"],["Flask","IT"],["Laravel","IT"],["WordPress","IT"],
- ["Mobil dasturlash","IT"],["Android dasturlash","IT"],["iOS dasturlash","IT"],
- ["Flutter","IT"],["React Native","IT"],["DevOps","IT"],["Linux","IT"],
- ["Git va GitHub","IT"],["Cloud Computing","IT"],["AWS","IT"],
- ["Cyber Security","IT"],["Ethical Hacking","IT"],["Network Security","IT"],
- ["Database","IT"],["SQL","IT"],["NoSQL","IT"],["Data Science","IT"],
- ["Data Analytics","IT"],["Big Data","IT"],["Power BI","Business"],
- ["Excel Professional","Business"],["Business Analytics","Business"],
- ["Digital Marketing","Business"],["SMM","Business"],["SEO","Business"],
- ["Google Ads","Business"],["Targeting","Business"],["E-commerce","Business"],
- ["Startup","Business"],["Project Management","Business"],["Finance","Business"],
- ["Accounting","Business"],["HR","Business"],["Sales","Business"],
- ["Artificial Intelligence","AI"],["Generative AI","AI"],["Prompt Engineering","AI"],
- ["Machine Learning","AI"],["Deep Learning","AI"],["Computer Vision","AI"],
- ["NLP","AI"],["AI Agentlar","AI"],["LLM","AI"],["AI Automation","AI"],
- ["Chatbot yaratish","AI"],["AI API","AI"],["Robotics AI","AI"],
- ["3D Design","Design"],["UI/UX Design","Design"],["Figma","Design"],
- ["Photoshop","Design"],["Illustrator","Design"],["Canva","Design"],
- ["Motion Design","Design"],["Graphic Design","Design"],["Web Design","Design"],
- ["Brand Design","Design"],["Logo Design","Design"],["Video Editing","Design"],
- ["After Effects","Design"],["Premiere Pro","Design"],["Blender","Design"],
- ["Cinema 4D","Design"],["Animation","Design"],["Game Design","Design"],
- ["Unity","IT"],["Unreal Engine","IT"],["Game Development","IT"],
- ["Telegram Bot","IT"],["Discord Bot","IT"],["API Development","IT"],
- ["REST API","IT"],["GraphQL","IT"],["WebSocket","IT"],["Testing QA","IT"],
- ["Automation Testing","IT"],["Selenium","IT"],["Cypress","IT"],
- ["Software Architecture","IT"],["System Design","IT"],["Algorithms","IT"],
- ["Data Structures","IT"],["Computer Science","IT"],["English for IT","Business"],
- ["Technical Writing","Business"],["Freelancing","Business"],["Personal Brand","Business"],
- ["Content Creation","Business"],["YouTube","Business"],["Podcasting","Business"],
- ["Copywriting","Business"],["UX Research","Design"],["Product Design","Design"],
- ["Product Management","Business"],["AI Product Management","AI"],["AR/VR","IT"],
- ["IoT","IT"],["Blockchain","IT"],["Web3","IT"],["Smart Contracts","IT"],
- ["Digital Transformation","Business"],["Information Systems","IT"],["IT Support","IT"],
- ["Computer Networks","IT"],["Operating Systems","IT"],["Cyber Law","Business"]
-];
-
-const directions=baseDirections.map((x,i)=>({
- id:i+1,name:x[0],cat:x[1]
-}));
-
-function renderDirections(){
- const search=document.getElementById("directionSearch").value.toLowerCase().trim();
- const cat=document.getElementById("directionCategory").value;
- const filtered=directions.filter(d=>
-  (!search||d.name.toLowerCase().includes(search))&&
-  (cat==="all"||d.cat===cat)
- );
- const list=filtered.slice(0,state.directionsVisible);
-
- document.getElementById("directionGrid").innerHTML=list.map(d=>`
-  <article class="card direction">
-   <span class="tag">${d.cat}</span>
-   <h3>${d.id}. ${d.name}</h3>
-   <p>Zamonaviy ${d.name} bo‘yicha amaliy bilim va ko‘nikmalarni egallang.</p>
-   <div class="actions">
-    <button class="btn primary directionOpen" data-id="${d.id}">📖 O‘rganish</button>
-   </div>
-  </article>
- `).join("");
-
- document.getElementById("moreDirections").style.display=
-  list.length<filtered.length?"inline-block":"none";
-}
-
-renderDirections();
-
-let searchTimer;
-document.getElementById("directionSearch").addEventListener("input",()=>{
- clearTimeout(searchTimer);
- searchTimer=setTimeout(()=>{
-  state.directionsVisible=24;
-  renderDirections();
- },120);
-});
-document.getElementById("directionCategory").addEventListener("change",()=>{
- state.directionsVisible=24;renderDirections();
-});
-document.getElementById("moreDirections").onclick=()=>{
- state.directionsVisible+=24;renderDirections();
-};
-
-document.getElementById("directionGrid").addEventListener("click",e=>{
- const b=e.target.closest(".directionOpen");
- if(!b)return;
- const d=directions.find(x=>x.id==b.dataset.id);
- openModal(`
-  <div class="modalHead"><h2>📚 ${d.name}</h2><button class="close no-speak" onclick="closeModal()">✕</button></div>
-  <span class="tag">${d.cat}</span>
-  <p style="line-height:1.7;color:var(--muted);margin:18px 0">
-   Ushbu yo‘nalishda nazariya, amaliy mashg‘ulotlar va loyihalar orqali
-   zamonaviy ko‘nikmalarni rivojlantirish mumkin.
-  </p>
-  <button class="btn primary" onclick="closeModal()">🚀 Boshlash</button>
- `);
-});
-
-/* =========================
-   COURSES
-========================= */
-const courses=[
- ["HTML & CSS","Web dasturlash asoslari","🌐"],
- ["JavaScript","Interaktiv web dasturlash","⚡"],
- ["Python","Dasturlash va avtomatlashtirish","🐍"],
- ["AI","AI va zamonaviy texnologiyalar","🤖"],
- ["Mobile","Mobil dasturlash asoslari","📱"],
- ["Frontend Pro","Professional web dasturlash","💻"]
-];
-
-function renderCourses(){
- document.getElementById("courseGrid").innerHTML=courses.map((c,i)=>`
-  <article class="card course">
-   <span style="font-size:35px">${c[2]}</span>
-   <h3>${c[0]}</h3>
-   <span class="tag">${c[1]}</span>
-   <p style="margin-top:10px">Amaliy loyihalar orqali ${c[0]} bo‘yicha bilim va ko‘nikmalarni rivojlantiring.</p>
-   <div class="actions">
-    <button class="btn primary courseOpen" data-id="${i}">▶ Boshlash</button>
-   </div>
-  </article>
- `).join("");
-}
-renderCourses();
-
-document.getElementById("courseGrid").addEventListener("click",e=>{
- const b=e.target.closest(".courseOpen");if(!b)return;
- const c=courses[b.dataset.id];
- openModal(`
-  <div class="modalHead"><h2>${c[2]} ${c[0]}</h2><button class="close no-speak" onclick="closeModal()">✕</button></div>
-  <p style="color:var(--muted);line-height:1.7">${c[1]}</p>
-  <div class="card" style="margin:18px 0">
-   <b>1-dars</b><p style="color:var(--muted);margin-top:8px">
-   Kursga kirish va asosiy tushunchalar.</p>
-  </div>
-  <button class="btn primary" onclick="addXP(20);closeModal()">✓ Darsni boshlash</button>
- `);
-});
-
-/* =========================
-   LESSONS
-========================= */
-const lessons=[
- ["HTML asoslari","HTML hujjat tuzilishi"],
- ["CSS asoslari","Rang, shrift va layout"],
- ["JavaScript","O‘zgaruvchi va funksiyalar"],
- ["Python","List, dict va funksiyalar"],
- ["AI","Prompt qanday yoziladi?"],
- ["Cyber Security","Xavfsiz parol va MFA"],
- ["Git","GitHub bilan ishlash"],
- ["SQL","SELECT so‘rovlari"],
- ["Figma","UI dizayn asoslari"],
- ["Mobile","Mobil UI tushunchalari"],
- ["API","REST API asoslari"],
- ["Portfolio","Professional portfolio yaratish"]
-];
-
-function renderLessons(){
- document.getElementById("lessonGrid").innerHTML=lessons.map((x,i)=>`
-  <article class="card lesson">
-   <span class="tag">DARS ${i+1}</span>
-   <h3>${x[0]}</h3><p>${x[1]}</p>
-   <div class="actions"><button class="btn primary lessonOpen" data-id="${i}">▶ O‘qish</button></div>
-  </article>
- `).join("");
-}
-renderLessons();
-
-document.getElementById("lessonGrid").addEventListener("click",e=>{
- const b=e.target.closest(".lessonOpen");if(!b)return;
- const l=lessons[b.dataset.id];
- openModal(`
-  <div class="modalHead"><h2>📖 ${l[0]}</h2><button class="close no-speak" onclick="closeModal()">✕</button></div>
-  <h3>${l[1]}</h3>
-  <p style="line-height:1.8;color:var(--muted);margin:15px 0">
-   Ushbu darsda ${l[1].toLowerCase()} bo‘yicha asosiy tushunchalar,
-   amaliy misollar va mustaqil mashqlarni o‘rganasiz.
-  </p>
-  <button class="btn primary" onclick="addXP(10);closeModal()">✓ Darsni tugatdim</button>
- `);
-});
-
-/* =========================
-   TESTS
-========================= */
-const quizzes={
- html:{
-  title:"HTML & CSS",
-  qs:[
-   ["HTML nima? ",["Dasturlash tili","Markup tili","Operatsion tizim","Database"],1],
-   ["CSS nimaga xizmat qiladi?",["Dizayn","Database","Server","Audio"],0],
-   ["Havola yaratish tegi?",["<p>","<img>","<a>","<div>"],2],
-   ["Flexbox nima?",["Layout usuli","Database","Browser","Server"],0],
-   ["Sarlavha tegi?",["<h1>","<head>","<title>","<strong>"],0]
-  ]
- },
- js:{
-  title:"JavaScript",
-  qs:[
-   ["O‘zgaruvchi e’lon qilish?",["let","html","css","sql"],0],
-   ["Funksiya belgisi?",["function","func","method","def"],0],
-   ["Array qaysi?",["{}","[]","()","<>"],1],
-   ["DOM nima?",["Document Object Model","Data Online Mode","Digital Object Map","Design Object Method"],0],
-   ["Click hodisasi?",["click","pressing","taponly","button"],0]
-  ]
- },
- python:{
-  title:"Python",
-  qs:[
-   ["Python fayli kengaytmasi?",[".html",".py",".js",".css"],1],
-   ["List belgisi?",["[]","{}","()","<>"],0],
-   ["Dictionary belgisi?",["[]","{}","()","//"],1],
-   ["Funksiya kalit so‘zi?",["function","def","func","method"],1],
-   ["Python’da blok nima bilan belgilanadi?",["Indentation","Color","Tag","CSS"],0]
-  ]
- },
- ai:{
-  title:"Artificial Intelligence",
-  qs:[
-   ["Prompt nima?",["AIga berilgan ko‘rsatma","Virus","Database","Browser"],0],
-   ["LLM nima?",["Large Language Model","Local Login Mode","Light Logic Machine","None"],0],
-   ["AI hallucination nima?",["AI noto‘g‘ri ma’lumot yaratishi","Tez ishlash","Login","Update"],0],
-   ["Token nima?",["Matnning qayta ishlanadigan birligi","Virus","Rasm","Monitor"],0],
-   ["AI bilan ishlashda muhim narsa?",["Maxfiylik","Parolni berish","Spam","Virus"],0]
-  ]
- }
-};
-
-function renderTests(){
- document.getElementById("testGrid").innerHTML=Object.entries(quizzes).map(([k,q])=>`
-  <article class="card">
-   <span style="font-size:30px">🧠</span>
-   <h3>${q.title}</h3>
-   <p style="color:var(--muted)">${q.qs.length} ta savol</p>
-   <div class="actions"><button class="btn primary startQuiz" data-key="${k}">▶ Testni boshlash</button></div>
-  </article>
- `).join("");
-}
-renderTests();
-
-let quizState=null;
-
-document.getElementById("testGrid").addEventListener("click",e=>{
- const b=e.target.closest(".startQuiz");if(!b)return;
- startQuiz(b.dataset.key);
-});
-
-function startQuiz(key){
- const q=quizzes[key];
- quizState={key,index:0,score:0};
- renderQuestion();
-}
-
-function renderQuestion(){
- const q=quizzes[quizState.key];
- const item=q.qs[quizState.index];
-
- openModal(`
-  <div class="modalHead">
-   <h2>🧠 ${q.title}</h2>
-   <button class="close no-speak" onclick="closeModal()">✕</button>
-  </div>
-  <p>${quizState.index+1} / ${q.qs.length}</p>
-  <div class="question">${item[0]}</div>
-  <div class="answers">
-   ${item[1].map((a,i)=>`
-    <button class="answer quizAnswer" data-answer="${i}">${String.fromCharCode(65+i)}. ${a}</button>
-   `).join("")}
-  </div>
- `);
-
- document.querySelectorAll(".quizAnswer").forEach(btn=>{
-  btn.onclick=()=>{
-   const answer=Number(btn.dataset.answer);
-   document.querySelectorAll(".quizAnswer").forEach(x=>x.disabled=true);
-
-   if(answer===item[2]){
-    btn.classList.add("correct");
-    quizState.score++;
-   }else{
-    btn.classList.add("wrong");
-    document.querySelectorAll(".quizAnswer")[item[2]].classList.add("correct");
-   }
-
-   setTimeout(()=>{
-    quizState.index++;
-    if(quizState.index<q.qs.length)renderQuestion();
-    else finishQuiz();
-   },650);
-  };
- });
-}
-
-function finishQuiz(){
- const q=quizzes[quizState.key];
- const score=quizState.score;
- const total=q.qs.length;
- const earned=score*20;
- addXP(earned);
-
- openModal(`
-  <div class="modalHead"><h2>🏆 Natija</h2><button class="close no-speak" onclick="closeModal()">✕</button></div>
-  <div style="text-align:center;padding:20px">
-   <div style="font-size:60px">${score>=4?"🏆":"📚"}</div>
-   <h2>${score} / ${total}</h2>
-   <p style="color:var(--muted);margin:10px 0">+${earned} XP</p>
-   <button class="btn primary" onclick="closeModal()">✓ Davom etish</button>
-  </div>
- `);
-}
-
-/* =========================
-   AI TEACHER
-========================= */
-function aiAnswer(text){
- const s=text.toLowerCase();
- if(s.includes("python"))return "Python — sodda sintaksisli dasturlash tili. Boshlash uchun o‘zgaruvchilar, shartlar, sikllar va funksiyalarni o‘rganing.";
- if(s.includes("javascript")||s.includes("js"))return "JavaScript web sahifalarni interaktiv qilish uchun ishlatiladi. Avval variable, function, array, DOM va eventlarni o‘rganing.";
- if(s.includes("html"))return "HTML sahifaning tuzilmasini yaratadi. h1, p, a, img, div va semantic teglarni o‘rganishdan boshlang.";
- if(s.includes("css"))return "CSS web sahifaning ko‘rinishini boshqaradi. Flexbox, Grid, responsive design va animation juda muhim.";
- if(s.includes("ai")||s.includes("sun’iy"))return "AI bilan ishlashda aniq prompt yozing: vazifa + kontekst + talab + natija formatini ko‘rsating.";
- if(s.includes("salom"))return "Salom! 😊 Men IKROMJON Ai Ustozman. Sizga nimani o‘rgatishimni xohlaysiz?";
- return "Qiziqarli savol! IKROMJON Ai’da bu mavzuni bosqichma-bosqich o‘rganishingiz mumkin. Savolni aniqroq yozsangiz, tushuntirib beraman.";
-}
-
-document.getElementById("chatSend").onclick=sendChat;
-document.getElementById("chatInput").addEventListener("keydown",e=>{
- if(e.key==="Enter")sendChat();
-});
-
-function sendChat(){
- const input=document.getElementById("chatInput");
- const text=input.value.trim();
- if(!text)return;
- const box=document.getElementById("chatMessages");
-
- box.insertAdjacentHTML("beforeend",`<div class="msg user">${escapeHTML(text)}</div>`);
- input.value="";
- box.scrollTop=box.scrollHeight;
-
- setTimeout(()=>{
-  const ans=aiAnswer(text);
-  box.insertAdjacentHTML("beforeend",`<div class="msg ai">${ans}</div>`);
-  box.scrollTop=box.scrollHeight;
- },250);
-}
-
-function escapeHTML(s){
- return s.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
-}
-
-/* =========================
-   XP
-========================= */
-function addXP(n){
- state.xp+=Number(n)||0;
- store.set("ikrom_xp",state.xp);
- updateXP();
- toast("⭐ +"+n+" XP");
-}
-function updateXP(){
- document.getElementById("xpText").textContent=state.xp+" XP";
- document.getElementById("xpBar").style.width=(state.xp%100)+"%";
-}
-updateXP();
-document.getElementById("userName").textContent=state.name;
-
-/* =========================
-   PROFILE
-========================= */
-document.getElementById("profileBtn").onclick=
-document.getElementById("editProfile").onclick=()=>{
- openModal(`
-  <div class="modalHead"><h2>👤 Profil</h2><button class="close no-speak" onclick="closeModal()">✕</button></div>
-  <input class="search" id="nameInput" value="${escapeHTML(state.name)}" placeholder="Ism-familiya">
-  <div class="actions">
-   <button class="btn primary" id="saveName">💾 Saqlash</button>
-  </div>
- `);
-
- document.getElementById("saveName").onclick=()=>{
-  const name=document.getElementById("nameInput").value.trim()||"O‘quvchi";
-  state.name=name;
-  store.set("ikrom_name",name);
-  document.getElementById("userName").textContent=name;
-  closeModal();
-  toast("✅ Profil saqlandi");
- };
-};
-
-/* =========================
-   CERTIFICATE
-========================= */
-document.getElementById("certificateBtn").onclick=()=>{
- const today=new Date().toLocaleDateString("uz-UZ");
- openModal(`
-  <div class="modalHead">
-   <h2>📜 SERTIFIKAT</h2>
-   <button class="close no-speak" onclick="closeModal()">✕</button>
-  </div>
-  <div id="certificate" style="
-   padding:35px;text-align:center;border:4px double var(--p);
-   background:linear-gradient(135deg,#8b5cf611,#ec489911);
-  ">
-   <div style="font-size:28px;font-weight:bold">IKROMJON Ai</div>
-   <p style="margin:8px">O‘QUV MARKAZI</p>
-   <h1 style="font-size:36px;margin:25px 0">SERTIFIKAT</h1>
-   <p>Ushbu sertifikat</p>
-   <h2 style="margin:15px 0">${escapeHTML(state.name)}</h2>
-   <p>ta’lim jarayonida faol ishtirok etgani uchun taqdim etiladi.</p>
-   <p style="margin-top:25px">Berilgan sana: ${today}</p>
-   <b>IKROMJON Ai O‘QUV MARKAZI</b>
-  </div>
-  <div class="actions">
-   <button class="btn primary" onclick="window.print()">🖨️ Chop etish</button>
-  </div>
- `);
-};
-
-/* =========================
-   MODAL / TOAST
-========================= */
-function openModal(html){
- const modal=document.getElementById("modal");
- document.getElementById("modalContent").innerHTML=html;
- modal.classList.add("show");
-}
-function closeModal(){
- document.getElementById("modal").classList.remove("show");
-}
-document.getElementById("modal").addEventListener("click",e=>{
- if(e.target.id==="modal")closeModal();
-});
-
-let toastTimer;
-function toast(text){
- const el=document.getElementById("toast");
- el.textContent=text;
- el.classList.add("show");
- clearTimeout(toastTimer);
- toastTimer=setTimeout(()=>el.classList.remove("show"),1800);
-}
-
-/* ESC */
-document.addEventListener("keydown",e=>{
- if(e.key==="Escape")closeModal();
-});
-
-/* INITIAL LANGUAGE */
-applyLanguage();
-</script>
+<body>
+
+    <!-- HEADER & MULTI-LANGUAGE TOGGLE -->
+    <header>
+        <div class="logo">IKROMJON AI</div>
+        <div class="lang-selector">
+            <button class="lang-btn active">UZ</button>
+            <button class="lang-btn">RU</button>
+            <button class="lang-btn">EN</button>
+            <button class="lang-btn">KZ</button>
+            <button class="lang-btn">TJ</button>
+            <button class="lang-btn">TR</button>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- HERO SECTION -->
+        <div class="hero">
+            <span class="badge">🤖 AI • 3D • DIGITAL EDUCATION</span>
+            <h1>Ikromjon Ai kelajakni<br>bugundan yarating</h1>
+            <p>Zamonaviy kasblar, dasturlash va sun'iy intellektni bir joyda o'rganing.</p>
+        </div>
+
+        <!-- STATS & DASHBOARD GRID -->
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-bg-api" style="background-image: url('https://picsum.photos/id/1/300/200');"></div>
+                <div class="card-content">
+                    <h2>120+</h2>
+                    <p>Yo'nalishlar</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-bg-api" style="background-image: url('https://picsum.photos/id/160/300/200');"></div>
+                <div class="card-content">
+                    <h2 id="time-widget">15:33</h2>
+                    <p id="location-widget">Toshkent, UZ</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI USTOZ CARD -->
+        <div class="card ai-ustoz-card" style="margin-bottom: 16px;">
+            <div class="ai-avatar">🧠</div>
+            <div class="card-content">
+                <h3>Ikromjon AI Ustoz 24/7</h3>
+                <p>Savollaringizga real-vaqt rejimida javob oling va bilimlaringizni oshiring.</p>
+            </div>
+        </div>
+
+        <!-- MAIN COURSES GRID -->
+        <h3 style="margin: 20px 0 12px; font-size: 16px; color: #93c5fd;">🔥 Asosiy Kurslar</h3>
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-bg-api" style="background-image: url('https://picsum.photos/id/180/300/200');"></div>
+                <div class="card-content">
+                    <h3>HTML & CSS</h3>
+                    <p>Web dasturlash asoslari</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-bg-api" style="background-image: url('https://picsum.photos/id/119/300/200');"></div>
+                <div class="card-content">
+                    <h3>JavaScript</h3>
+                    <p>Interaktiv dasturlash</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-bg-api" style="background-image: url('https://picsum.photos/id/0/300/200');"></div>
+                <div class="card-content">
+                    <h3>Python</h3>
+                    <p>AI va Avtomatlashtirish</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-bg-api" style="background-image: url('https://picsum.photos/id/201/300/200');"></div>
+                <div class="card-content">
+                    <h3>Flutter</h3>
+                    <p>Mobil ilovalar yaratish</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER BRANDING -->
+        <div class="footer-branding">
+            <h4>Ikromjon aka o‘quv markazi</h4>
+            <p>Aloqa: +998 90 123 45 67 | info@ikromjonai.uz<br>Zamonaviy IT kasblarini o'rgatuvchi innovatsion platforma.</p>
+        </div>
+
+    </div>
+
+    <!-- 8-ITEM 3D NAVIGATION BAR -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <span class="nav-icon-3d">🏠</span>
+            <span class="nav-label">Bosh sahifa</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon-3d">📚</span>
+            <span class="nav-label">Kurslar</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon-3d">📝</span>
+            <span class="nav-label">Testlar</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon-3d">🤖</span>
+            <span class="nav-label">AI Ustoz</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon-3d">📊</span>
+            <span class="nav-label">Tahlil</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon-3d">🎓</span>
+            <span class="nav-label">Sertifikat</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon-3d">🛡️</span>
+            <span class="nav-label">Xavfsizlik</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon-3d">⚙️</span>
+            <span class="nav-label">Sozlamalar</span>
+        </a>
+    </nav>
 
 </body>
 </html>
